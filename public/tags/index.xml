@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Linote</title>
+    <link>http://lichang.tech/tags/</link>
+    <description>Recent content in Tags on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 23 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>context</title>
+      <link>http://lichang.tech/tags/context/</link>
+      <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/context/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GoLang</title>
+      <link>http://lichang.tech/tags/golang/</link>
+      <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>language</title>
+      <link>http://lichang.tech/tags/language/</link>
+      <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reflect</title>
+      <link>http://lichang.tech/tags/reflect/</link>
+      <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/reflect/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>terminal</title>
+      <link>http://lichang.tech/tags/terminal/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/terminal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>http://lichang.tech/tags/tools/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zsh</title>
+      <link>http://lichang.tech/tags/zsh/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/zsh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>效率工具</title>
+      <link>http://lichang.tech/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>美化</title>
+      <link>http://lichang.tech/tags/%E7%BE%8E%E5%8C%96/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E7%BE%8E%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>anaconda</title>
+      <link>http://lichang.tech/tags/anaconda/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/anaconda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deepin</title>
+      <link>http://lichang.tech/tags/deepin/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/deepin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>goroutine</title>
+      <link>http://lichang.tech/tags/goroutine/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/goroutine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>install</title>
+      <link>http://lichang.tech/tags/install/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/install/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://lichang.tech/tags/python/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>command</title>
+      <link>http://lichang.tech/tags/command/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/command/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://lichang.tech/tags/linux/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pool</title>
+      <link>http://lichang.tech/tags/pool/</link>
+      <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/pool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>线程管理</title>
+      <link>http://lichang.tech/tags/%E7%BA%BF%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E7%BA%BF%E7%A8%8B%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>升级</title>
+      <link>http://lichang.tech/tags/%E5%8D%87%E7%BA%A7/</link>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%8D%87%E7%BA%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>branch</title>
+      <link>http://lichang.tech/tags/branch/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/branch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>http://lichang.tech/tags/git/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ft</title>
+      <link>http://lichang.tech/tags/ft/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/ft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nft</title>
+      <link>http://lichang.tech/tags/nft/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/nft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>代币</title>
+      <link>http://lichang.tech/tags/%E4%BB%A3%E5%B8%81/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E4%BB%A3%E5%B8%81/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>加密资产</title>
+      <link>http://lichang.tech/tags/%E5%8A%A0%E5%AF%86%E8%B5%84%E4%BA%A7/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%8A%A0%E5%AF%86%E8%B5%84%E4%BA%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>muti user</title>
+      <link>http://lichang.tech/tags/muti-user/</link>
+      <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/muti-user/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>合并commit</title>
+      <link>http://lichang.tech/tags/%E5%90%88%E5%B9%B6commit/</link>
+      <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%90%88%E5%B9%B6commit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>graphql</title>
+      <link>http://lichang.tech/tags/graphql/</link>
+      <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/graphql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据库描述</title>
+      <link>http://lichang.tech/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%8F%E8%BF%B0/</link>
+      <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%8F%E8%BF%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blockchain</title>
+      <link>http://lichang.tech/tags/blockchain/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/blockchain/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>入门</title>
+      <link>http://lichang.tech/tags/%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%85%A5%E9%97%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>区块链</title>
+      <link>http://lichang.tech/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>channel</title>
+      <link>http://lichang.tech/tags/channel/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/channel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>interview</title>
+      <link>http://lichang.tech/tags/interview/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/interview/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lock</title>
+      <link>http://lichang.tech/tags/lock/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/lock/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>同步</title>
+      <link>http://lichang.tech/tags/%E5%90%8C%E6%AD%A5/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%90%8C%E6%AD%A5/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>锁</title>
+      <link>http://lichang.tech/tags/%E9%94%81/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E9%94%81/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django</title>
+      <link>http://lichang.tech/tags/django/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>web</title>
+      <link>http://lichang.tech/tags/web/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wsgi</title>
+      <link>http://lichang.tech/tags/wsgi/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/wsgi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ORM</title>
+      <link>http://lichang.tech/tags/orm/</link>
+      <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/orm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SQL</title>
+      <link>http://lichang.tech/tags/sql/</link>
+      <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/sql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>http://lichang.tech/tags/redis/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubuntu</title>
+      <link>http://lichang.tech/tags/ubuntu/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>http://lichang.tech/tags/windows/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>通用非即插即用显示器</title>
+      <link>http://lichang.tech/tags/%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>slice</title>
+      <link>http://lichang.tech/tags/slice/</link>
+      <pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/slice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数组</title>
+      <link>http://lichang.tech/tags/%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E6%95%B0%E7%BB%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>interface</title>
+      <link>http://lichang.tech/tags/interface/</link>
+      <pubDate>Sun, 28 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/interface/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reader</title>
+      <link>http://lichang.tech/tags/reader/</link>
+      <pubDate>Sun, 28 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/reader/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>panic</title>
+      <link>http://lichang.tech/tags/panic/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/panic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>recover</title>
+      <link>http://lichang.tech/tags/recover/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/recover/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>http://lichang.tech/tags/hugo/</link>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Latex</title>
+      <link>http://lichang.tech/tags/latex/</link>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/latex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>数据库原理</title>
+      <link>http://lichang.tech/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>复试</title>
+      <link>http://lichang.tech/tags/%E5%A4%8D%E8%AF%95/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%A4%8D%E8%AF%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>考研</title>
+      <link>http://lichang.tech/tags/%E8%80%83%E7%A0%94/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E8%80%83%E7%A0%94/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>英语</title>
+      <link>http://lichang.tech/tags/%E8%8B%B1%E8%AF%AD/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E8%8B%B1%E8%AF%AD/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>443</title>
+      <link>http://lichang.tech/tags/443/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/443/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>http://lichang.tech/tags/github/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>snippets</title>
+      <link>http://lichang.tech/tags/snippets/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/snippets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vscode</title>
+      <link>http://lichang.tech/tags/vscode/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/vscode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Picgo</title>
+      <link>http://lichang.tech/tags/picgo/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/picgo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>图床</title>
+      <link>http://lichang.tech/tags/%E5%9B%BE%E5%BA%8A/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%9B%BE%E5%BA%8A/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>clash</title>
+      <link>http://lichang.tech/tags/clash/</link>
+      <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/clash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>webhook</title>
+      <link>http://lichang.tech/tags/webhook/</link>
+      <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/webhook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>博客建设</title>
+      <link>http://lichang.tech/tags/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+      <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DL&amp;ML</title>
+      <link>http://lichang.tech/tags/dlml/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/dlml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://lichang.tech/tags/docker/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GPT</title>
+      <link>http://lichang.tech/tags/gpt/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/gpt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>http://lichang.tech/tags/java/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MBR</title>
+      <link>http://lichang.tech/tags/mbr/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/mbr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Net</title>
+      <link>http://lichang.tech/tags/net/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vue</title>
+      <link>http://lichang.tech/tags/vue/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/vue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>x86-64</title>
+      <link>http://lichang.tech/tags/x86-64/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/x86-64/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>安装</title>
+      <link>http://lichang.tech/tags/%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E5%AE%89%E8%A3%85/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>指令</title>
+      <link>http://lichang.tech/tags/%E6%8C%87%E4%BB%A4/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E6%8C%87%E4%BB%A4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>汇编</title>
+      <link>http://lichang.tech/tags/%E6%B1%87%E7%BC%96/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E6%B1%87%E7%BC%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>磁盘转换</title>
+      <link>http://lichang.tech/tags/%E7%A3%81%E7%9B%98%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tags/%E7%A3%81%E7%9B%98%E8%BD%AC%E6%8D%A2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

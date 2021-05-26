@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>context on Linote</title>
+    <link>http://lichang.tech/tags/context/</link>
+    <description>Recent content in context on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 23 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/context/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang中context包的使用</title>
+      <link>http://lichang.tech/tem/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>context包定义了Context类型，这个类型在API边界即进程中传递截止日期、同步信号，请求值等相关信息。
+ 1. 对context包的介绍 在服务器的传入请求中应包含context，而对服务器的传出调用应接收一个context。它们之间的调用链必须包含context，或是衍生的WithCancel, WithDeadline, WithTimeout, WithValue。当一个WithCancel Context被“cancel”，那么当前context所派生的所有context也都将被取消。
+WithCancel, WithDeadline, WithTimeout接收一个Context对象（父对象），并返回其父对象的一个携带有cancel/deadline/timeout的一个拷贝（子对象）。调用CancelFunc会取消其子对象及子对象的子对象等，删除父对象对子对象的引用，并停止所有关联的计时器。未能调用CancelFunc将造成父对象结束前或计时器被触发前子对象的泄露。使用go vet工具可以检查所有控制流路径上是否都使用了CancelFunc
+使用context的程序应遵循以下规则，以使各个包之间的接口保持一致，并启用静态分析工具来检查上下文传播：
+ 不要将context存储在结构类型中，而是将context明确传递给需要它的每个函数。Context应该是第一个函数，通常命名为ctx。  func DoSomething(ctx context.Context, arg Arg) error { // ...use ctx... } 不要传递一个值为nil的context，即使一个函数允许这样做。如果你不确定Context的作用那就请传递context.TODO。 只在进程和API间传递请求范围数据时使用context值，不要用于将可选参数传递给函数。 同样的Context可以传递给运行在不同goroutine中的函数，Context是线程安全的。  2. Context接口 type Context interface { Done() &amp;lt;-chan struct{} Err() error Deadline() (deadline time.Time, ok bool) Value(key interface{}) interface{} } Context是一个接口，其定义非常的简单，只包含4个方法：
+  Done() &amp;lt;-chan struct{} Done()方法将一个channel作为取消信号返回给持有context的函数，当该channel被关闭（即Done()被调用），这些函数应该立即停止其工作并返回。
+  Err() error Err()返回一个Error，说明为什么取消context。如果Done()没有被调用，那么Err返回nil。
+  Deadline() (deadline time.Time, ok bool) Deadline()方法返回持有这个context的函数的预期结束时间。如果并没有设置deadline，那么返回的ok将被设置为false。</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Nginx负载均衡配置--简介 | Linote</title>
+<meta name="keywords" content="Linux" />
+<meta name="description" content="Nginx负载均衡配置&ndash;简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。
+ 1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。
+没有负载平衡的Web基础结构可能如下所示：
+在此示例中，用户直接连接到web服务器yourdomain.com。如果此单个Web服务器出现故障，用户将无法再访问该网站。此外，如果许多用户尝试同时访问服务器并且无法处理负载，则可能会遇到加载时间缓慢或根本无法连接的情况。
+通过在后端引入负载均衡器和至少一个额外的Web服务器，可以减轻此单点故障。通常，所有后端服务器都将提供相同的内容，以便用户无论哪个服务器响应都会收到一致的内容。 在上面说明的示例中，用户访问负载均衡器，负载均衡器将用户的请求转发到后端服务器，后端服务器然后直接响应用户的请求。在这种情况下，单点故障现在是负载平衡器本身。这可以通过引入第二个负载均衡器来缓解.
+2. 负载均衡器可以处理什么样的流量   HTTP - 标准HTTP平衡基于标准HTTP机制定向请求。负载均衡器设置X-Forwarded-For，X-Forwarded-Proto以及X-Forwarded-Port头，提供有关原始请求的后端信息。
+  HTTPS - HTTPS平衡功能与HTTP平衡功能相同，但增加了加密功能。加密以两种方式之一处理：使用SSL直通，一直保持加密到后端，或者使用SSL终止，将解密负担放在负载均衡器上，但将未加密的流量发送到后端。
+  TCP - 对于不使用HTTP或HTTPS的应用程序，也可以平衡TCP流量。例如，数据库集群的流量可以分布在所有服务器上。
+  UDP&ndash;最近，一些负载均衡器增加了对使用UDP的核心互联网协议（如DNS和syslogd）的负载平衡的支持。
+  这些转发规则将定义负载均衡器本身的协议和端口，并将它们映射到负载均衡器将用于将流量路由到后端的协议和端口。
+3. 负载均衡器如何选择后端服务器 负载均衡器根据两个因素的组合选择将请求转发到哪个服务器。他们将首先确保他们可以选择的任何服务器实际上对请求做出适当的响应，然后使用预先配置的规则从该健康池中进行选择。
+3.1 健康检查 负载均衡器应仅将流量转发到“健康”的后端服务器。要监视后端服务器的运行状况，运行状况检查会定期尝试使用转发规则定义的协议和端口连接到后端服务器，以确保服务器正在侦听。如果服务器未通过运行状况检查，因此无法提供请求，则会自动将其从池中删除，并且在再次响应运行状况检查之前，流量将不会转发给它。
+3.2 负载平衡算法 使用的负载平衡算法确定将选择后端中的哪些正常服务器。一些常用的算法是：
+  Round Robin - Round Robin意味着将按顺序选择服务器。负载均衡器将在其列表中为第一个请求选择第一个服务器，然后按顺序向下移动列表，当它到达结尾时从顶部开始。
+  least_conn - least_conn意味着负载均衡器将选择连接最少的服务器，并且当流量导致更长的会话时建议使用。
+  ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。
+  hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。
+  管理员可用的算法取决于所使用的特定负载平衡技术。
+3.3 负载平衡器如何处理状态 某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。
+4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://lichang.tech/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://lichang.tech/apple-touch-icon.png">
+<link rel="mask-icon" href="http://lichang.tech/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<meta property="og:title" content="Nginx负载均衡配置--简介" />
+<meta property="og:description" content="Nginx负载均衡配置&ndash;简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。
+ 1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。
+没有负载平衡的Web基础结构可能如下所示：
+在此示例中，用户直接连接到web服务器yourdomain.com。如果此单个Web服务器出现故障，用户将无法再访问该网站。此外，如果许多用户尝试同时访问服务器并且无法处理负载，则可能会遇到加载时间缓慢或根本无法连接的情况。
+通过在后端引入负载均衡器和至少一个额外的Web服务器，可以减轻此单点故障。通常，所有后端服务器都将提供相同的内容，以便用户无论哪个服务器响应都会收到一致的内容。 在上面说明的示例中，用户访问负载均衡器，负载均衡器将用户的请求转发到后端服务器，后端服务器然后直接响应用户的请求。在这种情况下，单点故障现在是负载平衡器本身。这可以通过引入第二个负载均衡器来缓解.
+2. 负载均衡器可以处理什么样的流量   HTTP - 标准HTTP平衡基于标准HTTP机制定向请求。负载均衡器设置X-Forwarded-For，X-Forwarded-Proto以及X-Forwarded-Port头，提供有关原始请求的后端信息。
+  HTTPS - HTTPS平衡功能与HTTP平衡功能相同，但增加了加密功能。加密以两种方式之一处理：使用SSL直通，一直保持加密到后端，或者使用SSL终止，将解密负担放在负载均衡器上，但将未加密的流量发送到后端。
+  TCP - 对于不使用HTTP或HTTPS的应用程序，也可以平衡TCP流量。例如，数据库集群的流量可以分布在所有服务器上。
+  UDP&ndash;最近，一些负载均衡器增加了对使用UDP的核心互联网协议（如DNS和syslogd）的负载平衡的支持。
+  这些转发规则将定义负载均衡器本身的协议和端口，并将它们映射到负载均衡器将用于将流量路由到后端的协议和端口。
+3. 负载均衡器如何选择后端服务器 负载均衡器根据两个因素的组合选择将请求转发到哪个服务器。他们将首先确保他们可以选择的任何服务器实际上对请求做出适当的响应，然后使用预先配置的规则从该健康池中进行选择。
+3.1 健康检查 负载均衡器应仅将流量转发到“健康”的后端服务器。要监视后端服务器的运行状况，运行状况检查会定期尝试使用转发规则定义的协议和端口连接到后端服务器，以确保服务器正在侦听。如果服务器未通过运行状况检查，因此无法提供请求，则会自动将其从池中删除，并且在再次响应运行状况检查之前，流量将不会转发给它。
+3.2 负载平衡算法 使用的负载平衡算法确定将选择后端中的哪些正常服务器。一些常用的算法是：
+  Round Robin - Round Robin意味着将按顺序选择服务器。负载均衡器将在其列表中为第一个请求选择第一个服务器，然后按顺序向下移动列表，当它到达结尾时从顶部开始。
+  least_conn - least_conn意味着负载均衡器将选择连接最少的服务器，并且当流量导致更长的会话时建议使用。
+  ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。
+  hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。
+  管理员可用的算法取决于所使用的特定负载平衡技术。
+3.3 负载平衡器如何处理状态 某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。
+4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://lichang.tech/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/" /><meta property="og:image" content="http://lichang.tech/papermod-cover.png"/><meta property="article:section" content="Tem" />
+<meta property="article:published_time" content="2021-02-25T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-02-25T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://lichang.tech/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Nginx负载均衡配置--简介"/>
+<meta name="twitter:description" content="Nginx负载均衡配置&ndash;简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。
+ 1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。
+没有负载平衡的Web基础结构可能如下所示：
+在此示例中，用户直接连接到web服务器yourdomain.com。如果此单个Web服务器出现故障，用户将无法再访问该网站。此外，如果许多用户尝试同时访问服务器并且无法处理负载，则可能会遇到加载时间缓慢或根本无法连接的情况。
+通过在后端引入负载均衡器和至少一个额外的Web服务器，可以减轻此单点故障。通常，所有后端服务器都将提供相同的内容，以便用户无论哪个服务器响应都会收到一致的内容。 在上面说明的示例中，用户访问负载均衡器，负载均衡器将用户的请求转发到后端服务器，后端服务器然后直接响应用户的请求。在这种情况下，单点故障现在是负载平衡器本身。这可以通过引入第二个负载均衡器来缓解.
+2. 负载均衡器可以处理什么样的流量   HTTP - 标准HTTP平衡基于标准HTTP机制定向请求。负载均衡器设置X-Forwarded-For，X-Forwarded-Proto以及X-Forwarded-Port头，提供有关原始请求的后端信息。
+  HTTPS - HTTPS平衡功能与HTTP平衡功能相同，但增加了加密功能。加密以两种方式之一处理：使用SSL直通，一直保持加密到后端，或者使用SSL终止，将解密负担放在负载均衡器上，但将未加密的流量发送到后端。
+  TCP - 对于不使用HTTP或HTTPS的应用程序，也可以平衡TCP流量。例如，数据库集群的流量可以分布在所有服务器上。
+  UDP&ndash;最近，一些负载均衡器增加了对使用UDP的核心互联网协议（如DNS和syslogd）的负载平衡的支持。
+  这些转发规则将定义负载均衡器本身的协议和端口，并将它们映射到负载均衡器将用于将流量路由到后端的协议和端口。
+3. 负载均衡器如何选择后端服务器 负载均衡器根据两个因素的组合选择将请求转发到哪个服务器。他们将首先确保他们可以选择的任何服务器实际上对请求做出适当的响应，然后使用预先配置的规则从该健康池中进行选择。
+3.1 健康检查 负载均衡器应仅将流量转发到“健康”的后端服务器。要监视后端服务器的运行状况，运行状况检查会定期尝试使用转发规则定义的协议和端口连接到后端服务器，以确保服务器正在侦听。如果服务器未通过运行状况检查，因此无法提供请求，则会自动将其从池中删除，并且在再次响应运行状况检查之前，流量将不会转发给它。
+3.2 负载平衡算法 使用的负载平衡算法确定将选择后端中的哪些正常服务器。一些常用的算法是：
+  Round Robin - Round Robin意味着将按顺序选择服务器。负载均衡器将在其列表中为第一个请求选择第一个服务器，然后按顺序向下移动列表，当它到达结尾时从顶部开始。
+  least_conn - least_conn意味着负载均衡器将选择连接最少的服务器，并且当流量导致更长的会话时建议使用。
+  ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。
+  hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。
+  管理员可用的算法取决于所使用的特定负载平衡技术。
+3.3 负载平衡器如何处理状态 某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。
+4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Tems",
+      "item": "http://lichang.tech/tem/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Nginx负载均衡配置--简介",
+      "item": "http://lichang.tech/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Nginx负载均衡配置--简介",
+  "name": "Nginx负载均衡配置--简介",
+  "description": "Nginx负载均衡配置\u0026ndash;简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。\n 1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。\n没有负载平衡的Web基础结构可能如下所示：\n在此示例中，用户直接连接到web服务器yourdomain.com。如果此单个Web服务器出现故障，用户将无法再访问该网站。此外，如果许多用户尝试同时访问服务器并且无法处理负载，则可能会遇到加载时间缓慢或根本无法连接的情况。\n通过在后端引入负载均衡器和至少一个额外的Web服务器，可以减轻此单点故障。通常，所有后端服务器都将提供相同的内容，以便用户无论哪个服务器响应都会收到一致的内容。 在上面说明的示例中，用户访问负载均衡器，负载均衡器将用户的请求转发到后端服务器，后端服务器然后直接响应用户的请求。在这种情况下，单点故障现在是负载平衡器本身。这可以通过引入第二个负载均衡器来缓解.\n2. 负载均衡器可以处理什么样的流量   HTTP - 标准HTTP平衡基于标准HTTP机制定向请求。负载均衡器设置X-Forwarded-For，X-Forwarded-Proto以及X-Forwarded-Port头，提供有关原始请求的后端信息。\n  HTTPS - HTTPS平衡功能与HTTP平衡功能相同，但增加了加密功能。加密以两种方式之一处理：使用SSL直通，一直保持加密到后端，或者使用SSL终止，将解密负担放在负载均衡器上，但将未加密的流量发送到后端。\n  TCP - 对于不使用HTTP或HTTPS的应用程序，也可以平衡TCP流量。例如，数据库集群的流量可以分布在所有服务器上。\n  UDP\u0026ndash;最近，一些负载均衡器增加了对使用UDP的核心互联网协议（如DNS和syslogd）的负载平衡的支持。\n  这些转发规则将定义负载均衡器本身的协议和端口，并将它们映射到负载均衡器将用于将流量路由到后端的协议和端口。\n3. 负载均衡器如何选择后端服务器 负载均衡器根据两个因素的组合选择将请求转发到哪个服务器。他们将首先确保他们可以选择的任何服务器实际上对请求做出适当的响应，然后使用预先配置的规则从该健康池中进行选择。\n3.1 健康检查 负载均衡器应仅将流量转发到“健康”的后端服务器。要监视后端服务器的运行状况，运行状况检查会定期尝试使用转发规则定义的协议和端口连接到后端服务器，以确保服务器正在侦听。如果服务器未通过运行状况检查，因此无法提供请求，则会自动将其从池中删除，并且在再次响应运行状况检查之前，流量将不会转发给它。\n3.2 负载平衡算法 使用的负载平衡算法确定将选择后端中的哪些正常服务器。一些常用的算法是：\n  Round Robin - Round Robin意味着将按顺序选择服务器。负载均衡器将在其列表中为第一个请求选择第一个服务器，然后按顺序向下移动列表，当它到达结尾时从顶部开始。\n  least_conn - least_conn意味着负载均衡器将选择连接最少的服务器，并且当流量导致更长的会话时建议使用。\n  ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。\n  hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。\n  管理员可用的算法取决于所使用的特定负载平衡技术。\n3.3 负载平衡器如何处理状态 某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。\n4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。",
+  "keywords": [
+    "Linux"
+  ],
+  "articleBody": "Nginx负载均衡配置–简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。\n 1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。\n没有负载平衡的Web基础结构可能如下所示：\n在此示例中，用户直接连接到web服务器yourdomain.com。如果此单个Web服务器出现故障，用户将无法再访问该网站。此外，如果许多用户尝试同时访问服务器并且无法处理负载，则可能会遇到加载时间缓慢或根本无法连接的情况。\n通过在后端引入负载均衡器和至少一个额外的Web服务器，可以减轻此单点故障。通常，所有后端服务器都将提供相同的内容，以便用户无论哪个服务器响应都会收到一致的内容。 在上面说明的示例中，用户访问负载均衡器，负载均衡器将用户的请求转发到后端服务器，后端服务器然后直接响应用户的请求。在这种情况下，单点故障现在是负载平衡器本身。这可以通过引入第二个负载均衡器来缓解.\n2. 负载均衡器可以处理什么样的流量   HTTP - 标准HTTP平衡基于标准HTTP机制定向请求。负载均衡器设置X-Forwarded-For，X-Forwarded-Proto以及X-Forwarded-Port头，提供有关原始请求的后端信息。\n  HTTPS - HTTPS平衡功能与HTTP平衡功能相同，但增加了加密功能。加密以两种方式之一处理：使用SSL直通，一直保持加密到后端，或者使用SSL终止，将解密负担放在负载均衡器上，但将未加密的流量发送到后端。\n  TCP - 对于不使用HTTP或HTTPS的应用程序，也可以平衡TCP流量。例如，数据库集群的流量可以分布在所有服务器上。\n  UDP–最近，一些负载均衡器增加了对使用UDP的核心互联网协议（如DNS和syslogd）的负载平衡的支持。\n  这些转发规则将定义负载均衡器本身的协议和端口，并将它们映射到负载均衡器将用于将流量路由到后端的协议和端口。\n3. 负载均衡器如何选择后端服务器 负载均衡器根据两个因素的组合选择将请求转发到哪个服务器。他们将首先确保他们可以选择的任何服务器实际上对请求做出适当的响应，然后使用预先配置的规则从该健康池中进行选择。\n3.1 健康检查 负载均衡器应仅将流量转发到“健康”的后端服务器。要监视后端服务器的运行状况，运行状况检查会定期尝试使用转发规则定义的协议和端口连接到后端服务器，以确保服务器正在侦听。如果服务器未通过运行状况检查，因此无法提供请求，则会自动将其从池中删除，并且在再次响应运行状况检查之前，流量将不会转发给它。\n3.2 负载平衡算法 使用的负载平衡算法确定将选择后端中的哪些正常服务器。一些常用的算法是：\n  Round Robin - Round Robin意味着将按顺序选择服务器。负载均衡器将在其列表中为第一个请求选择第一个服务器，然后按顺序向下移动列表，当它到达结尾时从顶部开始。\n  least_conn - least_conn意味着负载均衡器将选择连接最少的服务器，并且当流量导致更长的会话时建议使用。\n  ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。\n  hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。\n  管理员可用的算法取决于所使用的特定负载平衡技术。\n3.3 负载平衡器如何处理状态 某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。\n4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。\n这就是使用浮动IP的高可用性基础架构的外观： 使用 1. 一般代理信息 如果您过去仅使用Web服务器进行简单的单服务器配置，您可能想知道为什么需要代理请求。\n从Nginx代理其他服务器的一个原因是能够扩展您的基础架构。构建Nginx是为了同时处理许多并发连接。这使其成为客户联系点的理想选择。服务器可以将请求传递给任意数量的后端服务器，以处理大部分工作，从而在整个基础架构中分散负载。此设计还为您提供了轻松添加后端服务器或根据维护需要将其下载的灵活性。\nhttp代理可能有用的另一个实例是使用可能无法构建的应用程序服务器来直接处理来自生产环境中的客户端的请求。许多框架都包含Web服务器，但大多数框架都不如Nginx等高性能服务器那么强大。将Nginx放在这些服务器之前可以为用户带来更好的体验并提高安全性。\n在Nginx中代理是通过操纵针对Nginx服务器的请求并将其传递给其他服务器以进行实际处理来完成的。请求的结果将传递回Nginx，然后Nginx将信息中继到客户端。此实例中的其他服务器可以是远程计算机，本地服务器，甚至是Nginx中定义的其他虚拟服务器。Nginx代理请求的服务器称为上游服务器。\nNginx可以将请求代理到使用http（s），FastCGI，SCGI和uwsgi或memcached协议通过每种代理类型的单独指令集进行通信的服务器。在本指南中，我们将重点关注http协议。Nginx实例负责传递请求并将任何消息组件按摩成上游服务器可以理解的格式。\n2. 解构基本HTTP代理通行证 最直接的代理类型涉及将请求切换到可以使用http进行通信的单个服务器。这种类型的代理称为通用“代理传递”，由适当命名的proxy_pass指令处理。\n该proxy_pass指令主要在位置上下文中找到。它if在位置上下文和limit_except上下文中的块中也是有效的。当请求与具有proxy_pass指令的位置匹配时，请求将转发到指令给出的URL。\n我们来看一个例子：\n# server context location /match/here { proxy_pass http://example.com; } . . . 在上面的配置代码段中，proxy_pass定义中服务器末尾没有给出URI 。对于符合此模式的定义，客户端请求的URI将按原样传递到上游服务器。\n例如，当/match/here/please此块处理请求时，请求URI将作为发送到example.com服务器http://example.com/match/here/please。\n我们来看看替代方案：\n# server context location /match/here { proxy_pass http://example.com/new/prefix; } . . . 在上面的示例中，代理服务器在end（/new/prefix）上定义了一个URI段。当在proxy_pass定义中给出URI时，在传递期间，请求的与位置定义匹配的部分将被此URI替换。\n例如，/match/here/pleaseNginx服务器上的请求将作为传递给上游服务器http://example.com/new/prefix/please 该/match/here所取代/new/prefix。这是一个要记住的重点。\n有时，这种替换是不可能的。在这些情况下，将proxy_pass忽略定义末尾的URI，并且客户端的原始URI或其他指令修改的URI将传递给上游服务器。\n例如，当使用正则表达式匹配位置时，Nginx无法确定URI的哪个部分与表达式匹配，因此它发送原始客户端请求URI。另一个例子是在同一位置使用重写指令时，导致客户端URI被重写，但仍然在同一个块中处理。在这种情况下，将传递重写的URI。\n3. 了解Nginx如何处理Headers 有一点可能不会立即明确的是，如果您希望上游服务器正确处理请求，则传递的不仅仅是URI。代表客户端来自Nginx的请求与直接来自客户端的请求看起来不同。其中很大一部分是与请求一起出现的标头。\n当Nginx代理请求时，它会自动对从客户端收到的请求标头进行一些调整：\nNginx摆脱任何空头。没有必要将空值传递给另一台服务器; 它只会使请求膨胀。 默认情况下，Nginx会将包含下划线的任何标头视为无效。它将从代理请求中删除它们。如果你希望Nginx将这些解释为有效，你可以将underscores_in_headers指令设置为“on”，否则你的标题永远不会进入后端服务器。 “Host”头被重写为$proxy_host 变量定义的值。这将是上游的IP地址或名称和端口号，直接由proxy_pass指令定义。 “连接”标题更改为“关闭”。该标头用于表示关于双方之间建立的特定连接的信息。在这种情况下，Nginx将其设置为“关闭”以向上游服务器指示一旦原始请求被响应，该连接将被关闭。上游不应期望这种连接是持久的。 我们可以从上面推断的第一点是，您不希望传递的任何头应该设置为空字符串。具有空值的标头将从传递的请求中完全删除。\n从上述信息中收集的下一个要点是，如果您的后端应用程序将处理非标准标头，则必须确保它们没有下划线。如果需要使用下划线的标头，可以underscores_in_headers在配置中将指令设置为“on”（在http上下文或IP地址/端口组合的默认服务器声明的上下文中有效）。如果不这样做，Nginx会将这些标头标记为无效，并在传递给您的上游之前静默删除它们。\n“主机”标头在大多数代理方案中特别重要。如上所述，默认情况下，这将设置为$proxy_host 一个变量的值，该变量将包含直接从proxy_pass定义中获取的域名或IP地址和端口。这是默认情况下选择的，因为它是Nginx可以确定上游服务器响应的唯一地址（因为它是直接从连接信息中提取的）。\n“Host”标头的最常见值如下：\n  $proxy_host：这将“主机”标头设置为从proxy_pass定义中获取的域名或IP地址和端口组合。从Nginx的角度来看，这是默认的“安全”，但通常不是代理服务器正确处理请求所需要的。\n  $http_host： 将“Host”标头设置为客户端请求的“Host”标头。客户端发送的标头始终在Nginx中作为变量提供。变量将以$http_前缀开头，后跟小写的标题名称，任何短划线都用下划线替换。尽管$http_host变量在大多数情况下都有效，但是当客户端请求没有有效的“主机”标头时，这可能会导致传递失败。\n  $host：此变量按优先顺序设置：请求行本身的主机名，客户端请求的“主机”标头或与请求匹配的服务器名称。\n  在大多数情况下，您需要将“Host”标头设置为$host变量。它是最灵活的，通常会为代理服务器提供尽可能准确填写的“主机”标头\n4. 设置或重置标题 要调整或设置代理连接的标头，我们可以使用该proxy_set_header指令。例如，要像我们讨论的那样更改“Host”标头，并添加一些与代理请求相同的其他标头，我们可以使用以下内容：\n# server context location /match/here { proxy_set_header HOST $host; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_pass http://example.com/new/prefix; } . . . 上述请求将“Host”标头设置为$host变量，该变量应包含有关所请求的原始主机的信息的X-Forwarded-Proto报头给出了关于原始客户机请求的架构中的代理的服务器信息（它是否是一个HTTP或HTTPS请求）。\n将X-Real-IP其设置为客户端的IP地址，以便代理可以根据此信息正确地做出决策或记录。该X-Forwarded-For标题是包含每一个客户端已通过代理到这一点的服务器的IP地址的列表。在上面的例子中，我们将其设置为$proxy_add_x_forwarded_for变量。此变量X-Forwarded-For获取从客户端检索的原始标头的值，并将Nginx服务器的IP地址添加到结尾。\n当然，我们可以将proxy_set_header指令移到服务器或http上下文中，允许它在多个位置引用：\n# server context proxy_set_header HOST $host; proxy_set_header X-Forwarded-Proto $scheme; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; location /match/here { proxy_pass http://example.com/new/prefix; } location /different/match { proxy_pass http://example.com; } 5. 为负载平衡代理连接定义上游上下文 在前面的示例中，我们演示了如何对单个后端服务器执行简单的http代理。Nginx允许我们通过指定可以传递请求的整个后端服务器池来轻松扩展此配置。\n我们可以通过使用该upstream指令来定义服务器池来实现此目的。此配置假定所列出的任何一个服务器都能够处理客户端的请求。这使我们可以毫不费力地扩展我们的基础设施。upstream必须在Nginx配置的http上下文中设置该指令。\n我们来看一个简单的例子：\n# http context upstream backend_hosts { server host1.example.com; server host2.example.com; server host3.example.com; } server { listen 80; server_name example.com; location /proxy-me { proxy_pass http://backend_hosts; } } 在上面的例子中，我们设置了一个名为的上游上下文backend_hosts。一旦定义，此名称将可用于代理传递，就像它是常规域名一样。如您所见，在我们的服务器块中，我们将任何请求传递example.com/proxy-me/…给我们上面定义的池。在该池中，通过应用可配置算法来选择主机。默认情况下，这只是一个简单的循环选择过程（每个请求将依次路由到不同的主机）。\n5.1 改变上游平衡算法 您可以通过在上游上下文中包含指令或标志来修改上游池使用的平衡算法：\n（循环法）：如果不存在其他平衡指令，则使用默认的负载平衡算法。在上游上下文中定义的每个服务器依次顺序传递请求。 least_conn：指定应始终为具有最少活动连接数的后端提供新连接。在与后端的连接可能持续一段时间的情况下，这尤其有用。 ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。 hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。 更改平衡算法时，块可能如下所示：\n# http context upstream backend_hosts { least_conn; server host1.example.com; server host2.example.com; server host3.example.com; } . . . 在上面的示例中，将根据哪个连接最少来选择服务器。该ip_hash指令可以以相同的方式设置以获得一定量的会话“粘性”。\n至于hash方法，您必须提供哈希的密钥。这可以是你想要的任何东西：\n# http context upstream backend_hosts { hash $remote_addr$remote_port consistent; server host1.example.com; server host2.example.com; server host3.example.com; } . . . 上面的示例将根据客户端IP地址和端口的值分发请求。我们还添加了可选参数consistent，该参数实现了ketama一致性哈希算法。基本上，这意味着如果您的上游服务器发生更改，则对缓存的影响最小。\n5.2 设置服务器权重以进行平衡 在后端服务器的声明中，默认情况下，每个服务器都是“加权”的。这假设每个服务器可以并且应该处理相同的负载量（考虑到平衡算法的影响）。但是，您还可以在声明期间为服务器设置替代权重：\n# http context upstream backend_hosts { server host1.example.com weight=3; server host2.example.com; server host3.example.com; } . . . 在上面的例子中，host1.example.com将接收三倍于其他两个服务器的流量。默认情况下，为每个服务器分配权重1。\n6. 使用缓冲区释放后端服务器 涉及许多用户的代理问题是向流程添加其他服务器对性能的影响。在大多数情况下，利用Nginx的缓冲和缓存功能可以大大减轻这种影响。\n代理到另一台服务器时，两个不同连接的速度将影响客户端的体验：\n从客户端到Nginx代理的连接。 从Nginx代理到后端服务器的连接。 Nginx能够根据您希望优化的这些连接中的任何一个来调整其行为。\n没有缓冲区，数据从代理服务器发送并立即开始传输到客户端。如果假设客户端速度很快，则可以关闭缓冲，以便尽快将数据传送到客户端。使用缓冲区，Nginx代理将临时存储后端的响应，然后将此数据提供给客户端。如果客户端很慢，这允许Nginx服务器更快地关闭到后端的连接。然后，它可以处理以任何可能的速度将数据分发给客户端。\nNginx默认采用缓冲设计，因为客户端的连接速度往往差异很大。我们可以使用以下指令调整缓冲行为。这些可以在http，服务器或位置上下文中设置。重要的是要记住，每个请求都配置了大小调整指令，因此当有许多客户端请求时，增加它们超出您的需要会影响您的性能：\nproxy_buffering：此指令控制是否启用此上下文和子上下文的缓冲。默认情况下，这是“打开”。 proxy_buffers：此指令控制代理响应的缓冲区的数量（第一个参数）和大小（第二个参数）。默认设置是配置8个大小等于一个内存页面的缓冲区（4k或者8k）。增加缓冲区数量可以让您缓冲更多信息。 proxy_buffer_size：来自后端服务器的响应的初始部分（包含标头）与响应的其余部分分开缓冲。该指令设置响应的这一部分的缓冲区大小。默认情况下，这与大小相同proxy_buffers，但由于这用于标题信息，因此通常可以将其设置为较低的值。 proxy_busy_buffers_size：此指令设置可以标记为“客户端就绪”并因此忙碌的缓冲区的最大大小。虽然客户端一次只能从一个缓冲区读取数据，但缓冲区放在队列中以便以串联形式发送到客户端。该指令控制允许处于此状态的缓冲区空间的大小。 proxy_max_temp_file_size：这是磁盘上临时文件的每个请求的最大大小。这些是在上游响应太大而无法放入缓冲区时创建的。 proxy_temp_file_write_size：这是当代理服务器的响应对于配置的缓冲区而言太大时，Nginx将一次写入临时文件的数据量。 proxy_temp_path：这是磁盘上区域的路径，当上游服务器的响应无法容纳到配置的缓冲区时，Nginx应该存储任何临时文件。 如您所见，Nginx提供了许多不同的指令来调整缓冲行为。大多数情况下，您不必担心大多数这些，但调整其中一些值可能很有用。调整最有用的可能是proxy_buffers和proxy_buffer_size指令。\n增加每个上游请求的可用代理缓冲区数量的示例，同时减少可能存储标头的缓冲区将如下所示：\n# server context proxy_buffering on; proxy_buffer_size 1k; proxy_buffers 24 4k; proxy_busy_buffers_size 8k; proxy_max_temp_file_size 2048m; proxy_temp_file_write_size 32k; location / { proxy_pass http://example.com; } 相反，如果您想要立即向其提供数据的快速客户端，则可以完全关闭缓冲。如果上游比客户端更快，Nginx实际上仍将使用缓冲区，但它会立即尝试将数据刷新到客户端，而不是等待缓冲区池。如果客户端速度很慢，这可能导致上游连接保持打开状态，直到客户端赶上。当缓冲“关闭”时，仅proxy_buffer_size使用指令定义的缓冲区：\n# server context proxy_buffering off; proxy_buffer_size 4k; location / { proxy_pass http://example.com; } 6.1 高可用性（可选） 通过添加一组冗余的负载均衡器，可以使Nginx代理更加健壮，从而创建高可用性基础架构。\n甲高可用性（HA）的设置是无故障的单个点处的基础设施，和你的负载平衡器是该构造的一部分。通过使用多个负载均衡器，可以防止在负载均衡器不可用或需要将其关闭进行维护时可能导致的停机。\n以下是基本高可用性设置的图表： 在此示例中，您有一个静态IP地址后面的多个负载平衡器（一个活动和一个或多个被动），可以从一个服务器重新映射到另一个服务器。客户端请求从静态IP路由到活动负载平衡器，然后路由到后端服务器。要了解更多信息，请阅读如何使用浮动IP的这一节。\n7. 配置代理缓存以减少响应时间 虽然缓冲可以帮助释放后端服务器以处理更多请求，但Nginx还提供了一种从后端服务器缓存内容的方法，从而无需为许多请求连接到上游。\n7.1 配置代理缓存 要设置用于代理内容的缓存，我们可以使用该proxy_cache_path指令。这将创建一个区域，可以保留从代理服务器返回的数据。该proxy_cache_path指令必须在http上下文中设置。\n在下面的示例中，我们将配置此命令和一些相关指令来设置我们的缓存系统。\n# http context proxy_cache_path /var/lib/nginx/cache levels=1:2 keys_zone=backcache:8m max_size=50m; proxy_cache_key \"$scheme$request_method$host$request_uri$is_args$args\"; proxy_cache_valid 200 302 10m; proxy_cache_valid 404 1m; 使用该proxy_cache_path指令，我们已经在文件系统上定义了一个目录，我们希望存储缓存。在这个例子中，我们选择了/var/lib/nginx/cache目录。如果此目录不存在，您可以通过键入以下内容以正确的权限和所有权创建它：\nsudo mkdir -p /var/lib/nginx/cache sudo chown www-data /var/lib/nginx/cache sudo chmod 700 /var/lib/nginx/cache 该levels=参数指定缓存的组织方式。Nginx将通过散列键的值（下面配置）来创建缓存键。我们在上面选择的级别规定将创建一个单个字符目录（这将是散列值的最后一个字符），其中包含一个两个字符的子目录（取自散列值末尾的下两个字符）。您通常不必关心此细节，但它有助于Nginx快速找到相关值。\n该keys_zone=参数定义了我们调用的此缓存区的名称backcache。这也是我们定义要存储多少元数据的地方。在这种情况下，我们存储8 MB的密钥。对于每兆字节，Nginx可以存储大约8000个条目。该max_size参数设置实际缓存数据的最大大小。\n我们上面使用的另一个指令是proxy_cache_key。这用于设置将用于存储缓存值的键。该相同密钥用于检查是否可以从缓存提供请求。我们将此设置为方案（http或https），HTTP请求方法以及请求的主机和URI的组合。\n该proxy_cache_valid指令可以多次指定。它允许我们根据状态代码配置存储值的时间长度。在我们的示例中，我们存储成功和重定向10分钟，并且每分钟使缓存过期404响应。\n现在，我们已经配置了缓存区域，但我们仍然需要告诉Nginx何时使用缓存。\n在我们代理后端的位置，我们可以配置此缓存的使用：\n# server context location /proxy-me { proxy_cache backcache; proxy_cache_bypass $http_cache_control; add_header X-Proxy-Cache $upstream_cache_status; proxy_pass http://backend; } . . . 使用该proxy_cache指令，我们可以指定backcache缓存区域应该用于此上下文。在传递到后端之前，Nginx将在此处检查有效条目。\n该proxy_cache_bypass指令设置为$http_cache_control 变量。这将包含一个指示器，指示客户端是否明确请求资源的新的非缓存版本。设置此指令允许Nginx正确处理这些类型的客户端请求。无需进一步配置。\n我们还添加了一个名为的额外标题X-Proxy-Cache。我们将此标头设置为$upstream_cache_status变量的值。基本上，这会设置一个标头，允许我们查看请求是否导致缓存命中，缓存未命中，或者是否明确绕过了缓存。这对于调试尤其有用，但对于客户端也是有用的信息。\n7.2 有关缓存结果的说明 缓存可以极大地提高代理的性能。但是，配置缓存时必须牢记一些注意事项。\n首先，任何用户相关的数据应该不会被缓存。这可能导致一个用户的数据被呈现给另一个用户。如果您的网站完全是静态的，这可能不是问题。\n如果您的站点有一些动态元素，则必须在后端服务器中对此进行说明。如何处理这取决于处理后端处理的应用程序或服务器。对于私有内容，您应将Cache-Control标头设置为no-cache，no-store或private，具体取决于数据的性质： no-cache：表示如果没有先检查后端的数据是否未更改，则不应再次提供响应。如果数据是动态且重要的，则可以使用此方法。在每个请求上检查ETag散列元数据头，并且如果后端返回相同的散列值，则可以提供先前的值\nno-store ：表示在任何时候都不应该缓存接收到的数据。这是私有数据最安全的选项，因为这意味着每次都必须从服务器检索数据。\nprivate：这表示没有共享缓存空间应该缓存此数据。这可用于指示用户的浏览器可以缓存数据，但代理服务器不应认为此数据对后续请求有效。\npublic：这表示响应是可以在连接中的任何位置缓存的公共数据。\n可以控制此行为的相关标头是max-age标头，它指示应缓存任何资源的秒数。\n正确设置这些标题（取决于内容的敏感性）将有助于您利用缓存，同时保护您的私人数据安全并使您的动态数据保持新鲜。\n如果你的后端也使用Nginx，你可以使用expires指令设置一些，这将设置max-age为Cache-Control：\nlocation / { expires 60m; } location /check-me { expires -1; } 在上面的示例中，第一个块允许将内容缓存一小时。第二个块将Cache-Control标头设置为“no-cache”。要设置其他值，可以使用该add_header指令，如下所示：\nlocation /private { expires -1; add_header Cache-Control \"no-store\"; } 8. 结论 Nginx首先是一个反向代理，它也恰好具有作为Web服务器工作的能力。由于此设计决策，向其他服务器代理请求非常简单。Nginx非常灵活，如果需要，可以对代理配置进行更复杂的控制\n原文地址\n参考\n",
+  "wordCount" : "439",
+  "inLanguage": "en",
+  "datePublished": "2021-02-25T00:00:00Z",
+  "dateModified": "2021-02-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "李昌"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://lichang.tech/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Linote",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://lichang.tech/" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://lichang.tech/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://lichang.tech/">Home</a>&nbsp;»&nbsp;<a href="http://lichang.tech/tem/">Tems</a></div>
+    <h1 class="post-title">
+      Nginx负载均衡配置--简介
+    </h1>
+    <div class="post-meta">February 25, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;李昌
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <div class="details">Table of Contents</div>
+        </summary>
+        <div class="inner"><ul>
+                <li>
+                    <a href="#nginx%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae--%e7%ae%80%e4%bb%8b" aria-label="Nginx负载均衡配置&amp;ndash;简介">Nginx负载均衡配置&ndash;简介</a><ul>
+                        
+                <li>
+                    <a href="#1-%e4%bb%80%e4%b9%88%e6%98%af%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1" aria-label="1. 什么是负载均衡">1. 什么是负载均衡</a></li>
+                <li>
+                    <a href="#2-%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e5%99%a8%e5%8f%af%e4%bb%a5%e5%a4%84%e7%90%86%e4%bb%80%e4%b9%88%e6%a0%b7%e7%9a%84%e6%b5%81%e9%87%8f" aria-label="2. 负载均衡器可以处理什么样的流量">2. 负载均衡器可以处理什么样的流量</a></li>
+                <li>
+                    <a href="#3-%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e5%99%a8%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e5%90%8e%e7%ab%af%e6%9c%8d%e5%8a%a1%e5%99%a8" aria-label="3. 负载均衡器如何选择后端服务器">3. 负载均衡器如何选择后端服务器</a><ul>
+                        
+                <li>
+                    <a href="#31-%e5%81%a5%e5%ba%b7%e6%a3%80%e6%9f%a5" aria-label="3.1 健康检查">3.1 健康检查</a></li>
+                <li>
+                    <a href="#32-%e8%b4%9f%e8%bd%bd%e5%b9%b3%e8%a1%a1%e7%ae%97%e6%b3%95" aria-label="3.2 负载平衡算法">3.2 负载平衡算法</a></li>
+                <li>
+                    <a href="#33-%e8%b4%9f%e8%bd%bd%e5%b9%b3%e8%a1%a1%e5%99%a8%e5%a6%82%e4%bd%95%e5%a4%84%e7%90%86%e7%8a%b6%e6%80%81" aria-label="3.3 负载平衡器如何处理状态">3.3 负载平衡器如何处理状态</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-%e5%86%97%e4%bd%99%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e5%99%a8" aria-label="4. 冗余负载均衡器">4. 冗余负载均衡器</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8" aria-label="使用">使用</a><ul>
+                        
+                <li>
+                    <a href="#1-%e4%b8%80%e8%88%ac%e4%bb%a3%e7%90%86%e4%bf%a1%e6%81%af" aria-label="1. 一般代理信息">1. 一般代理信息</a></li>
+                <li>
+                    <a href="#2-%e8%a7%a3%e6%9e%84%e5%9f%ba%e6%9c%achttp%e4%bb%a3%e7%90%86%e9%80%9a%e8%a1%8c%e8%af%81" aria-label="2. 解构基本HTTP代理通行证">2. 解构基本HTTP代理通行证</a></li>
+                <li>
+                    <a href="#3-%e4%ba%86%e8%a7%a3nginx%e5%a6%82%e4%bd%95%e5%a4%84%e7%90%86headers" aria-label="3. 了解Nginx如何处理Headers">3. 了解Nginx如何处理Headers</a></li>
+                <li>
+                    <a href="#4-%e8%ae%be%e7%bd%ae%e6%88%96%e9%87%8d%e7%bd%ae%e6%a0%87%e9%a2%98" aria-label="4. 设置或重置标题">4. 设置或重置标题</a></li>
+                <li>
+                    <a href="#5-%e4%b8%ba%e8%b4%9f%e8%bd%bd%e5%b9%b3%e8%a1%a1%e4%bb%a3%e7%90%86%e8%bf%9e%e6%8e%a5%e5%ae%9a%e4%b9%89%e4%b8%8a%e6%b8%b8%e4%b8%8a%e4%b8%8b%e6%96%87" aria-label="5. 为负载平衡代理连接定义上游上下文">5. 为负载平衡代理连接定义上游上下文</a><ul>
+                        
+                <li>
+                    <a href="#51-%e6%94%b9%e5%8f%98%e4%b8%8a%e6%b8%b8%e5%b9%b3%e8%a1%a1%e7%ae%97%e6%b3%95" aria-label="5.1 改变上游平衡算法">5.1 改变上游平衡算法</a></li>
+                <li>
+                    <a href="#52-%e8%ae%be%e7%bd%ae%e6%9c%8d%e5%8a%a1%e5%99%a8%e6%9d%83%e9%87%8d%e4%bb%a5%e8%bf%9b%e8%a1%8c%e5%b9%b3%e8%a1%a1" aria-label="5.2 设置服务器权重以进行平衡">5.2 设置服务器权重以进行平衡</a></li></ul>
+                </li>
+                <li>
+                    <a href="#6-%e4%bd%bf%e7%94%a8%e7%bc%93%e5%86%b2%e5%8c%ba%e9%87%8a%e6%94%be%e5%90%8e%e7%ab%af%e6%9c%8d%e5%8a%a1%e5%99%a8" aria-label="6. 使用缓冲区释放后端服务器">6. 使用缓冲区释放后端服务器</a><ul>
+                        
+                <li>
+                    <a href="#61-%e9%ab%98%e5%8f%af%e7%94%a8%e6%80%a7%e5%8f%af%e9%80%89" aria-label="6.1 高可用性（可选）">6.1 高可用性（可选）</a></li></ul>
+                </li>
+                <li>
+                    <a href="#7-%e9%85%8d%e7%bd%ae%e4%bb%a3%e7%90%86%e7%bc%93%e5%ad%98%e4%bb%a5%e5%87%8f%e5%b0%91%e5%93%8d%e5%ba%94%e6%97%b6%e9%97%b4" aria-label="7. 配置代理缓存以减少响应时间">7. 配置代理缓存以减少响应时间</a><ul>
+                        
+                <li>
+                    <a href="#71-%e9%85%8d%e7%bd%ae%e4%bb%a3%e7%90%86%e7%bc%93%e5%ad%98" aria-label="7.1 配置代理缓存">7.1 配置代理缓存</a></li>
+                <li>
+                    <a href="#72-%e6%9c%89%e5%85%b3%e7%bc%93%e5%ad%98%e7%bb%93%e6%9e%9c%e7%9a%84%e8%af%b4%e6%98%8e" aria-label="7.2 有关缓存结果的说明">7.2 有关缓存结果的说明</a></li></ul>
+                </li>
+                <li>
+                    <a href="#8-%e7%bb%93%e8%ae%ba" aria-label="8. 结论">8. 结论</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="nginx负载均衡配置--简介">Nginx负载均衡配置&ndash;简介<a hidden class="anchor" aria-hidden="true" href="#nginx负载均衡配置--简介">#</a></h1>
+<blockquote>
+<p>在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。</p>
+</blockquote>
+<h2 id="1-什么是负载均衡">1. 什么是负载均衡<a hidden class="anchor" aria-hidden="true" href="#1-什么是负载均衡">#</a></h2>
+<p>负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。</p>
+<p>没有负载平衡的Web基础结构可能如下所示：<br>
+<img loading="lazy" src="https://assets.digitalocean.com/articles/HAProxy/web_server.png" alt=""  />
+</p>
+<p>在此示例中，用户直接连接到web服务器yourdomain.com。如果此单个Web服务器出现故障，用户将无法再访问该网站。此外，如果许多用户尝试同时访问服务器并且无法处理负载，则可能会遇到加载时间缓慢或根本无法连接的情况。</p>
+<p>通过在后端引入负载均衡器和至少一个额外的Web服务器，可以减轻此单点故障。通常，所有后端服务器都将提供相同的内容，以便用户无论哪个服务器响应都会收到一致的内容。
+<img loading="lazy" src="https://assets.digitalocean.com/articles/high-availability/Diagram_2.png" alt=""  />
+</p>
+<p>在上面说明的示例中，用户访问负载均衡器，负载均衡器将用户的请求转发到后端服务器，后端服务器然后直接响应用户的请求。在这种情况下，单点故障现在是负载平衡器本身。这可以通过引入第二个负载均衡器来缓解.</p>
+<h2 id="2-负载均衡器可以处理什么样的流量">2. 负载均衡器可以处理什么样的流量<a hidden class="anchor" aria-hidden="true" href="#2-负载均衡器可以处理什么样的流量">#</a></h2>
+<ul>
+<li>
+<p>HTTP - 标准HTTP平衡基于标准HTTP机制定向请求。负载均衡器设置X-Forwarded-For，X-Forwarded-Proto以及X-Forwarded-Port头，提供有关原始请求的后端信息。</p>
+</li>
+<li>
+<p>HTTPS - HTTPS平衡功能与HTTP平衡功能相同，但增加了加密功能。加密以两种方式之一处理：使用SSL直通，一直保持加密到后端，或者使用SSL终止，将解密负担放在负载均衡器上，但将未加密的流量发送到后端。</p>
+</li>
+<li>
+<p>TCP - 对于不使用HTTP或HTTPS的应用程序，也可以平衡TCP流量。例如，数据库集群的流量可以分布在所有服务器上。</p>
+</li>
+<li>
+<p>UDP&ndash;最近，一些负载均衡器增加了对使用UDP的核心互联网协议（如DNS和syslogd）的负载平衡的支持。</p>
+</li>
+</ul>
+<p>这些转发规则将定义负载均衡器本身的协议和端口，并将它们映射到负载均衡器将用于将流量路由到后端的协议和端口。</p>
+<h2 id="3-负载均衡器如何选择后端服务器">3. 负载均衡器如何选择后端服务器<a hidden class="anchor" aria-hidden="true" href="#3-负载均衡器如何选择后端服务器">#</a></h2>
+<p>负载均衡器根据两个因素的组合选择将请求转发到哪个服务器。他们将首先确保他们可以选择的任何服务器实际上对请求做出适当的响应，然后使用预先配置的规则从该健康池中进行选择。</p>
+<h3 id="31-健康检查">3.1 健康检查<a hidden class="anchor" aria-hidden="true" href="#31-健康检查">#</a></h3>
+<p>负载均衡器应仅将流量转发到“健康”的后端服务器。要监视后端服务器的运行状况，运行状况检查会定期尝试使用转发规则定义的协议和端口连接到后端服务器，以确保服务器正在侦听。如果服务器未通过运行状况检查，因此无法提供请求，则会自动将其从池中删除，并且在再次响应运行状况检查之前，流量将不会转发给它。</p>
+<h3 id="32-负载平衡算法">3.2 负载平衡算法<a hidden class="anchor" aria-hidden="true" href="#32-负载平衡算法">#</a></h3>
+<p>使用的负载平衡算法确定将选择后端中的哪些正常服务器。一些常用的算法是：</p>
+<ul>
+<li>
+<p>Round Robin - Round Robin意味着将按顺序选择服务器。负载均衡器将在其列表中为第一个请求选择第一个服务器，然后按顺序向下移动列表，当它到达结尾时从顶部开始。</p>
+</li>
+<li>
+<p>least_conn - least_conn意味着负载均衡器将选择连接最少的服务器，并且当流量导致更长的会话时建议使用。</p>
+</li>
+<li>
+<p>ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。</p>
+</li>
+<li>
+<p>hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。</p>
+</li>
+</ul>
+<p>管理员可用的算法取决于所使用的特定负载平衡技术。</p>
+<h3 id="33-负载平衡器如何处理状态">3.3 负载平衡器如何处理状态<a hidden class="anchor" aria-hidden="true" href="#33-负载平衡器如何处理状态">#</a></h3>
+<p>某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。</p>
+<h2 id="4-冗余负载均衡器">4. 冗余负载均衡器<a hidden class="anchor" aria-hidden="true" href="#4-冗余负载均衡器">#</a></h2>
+<p>要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。<img loading="lazy" src="https://assets.digitalocean.com/articles/high-availability/Diagram_1.png" alt=""  />
+</p>
+<p>如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。</p>
+<p>这就是使用浮动IP的高可用性基础架构的外观：
+<img loading="lazy" src="https://assets.digitalocean.com/articles/high_availability/ha-diagram-animated.gif" alt=""  />
+</p>
+<h1 id="使用">使用<a hidden class="anchor" aria-hidden="true" href="#使用">#</a></h1>
+<h2 id="1-一般代理信息">1. 一般代理信息<a hidden class="anchor" aria-hidden="true" href="#1-一般代理信息">#</a></h2>
+<p>如果您过去仅使用Web服务器进行简单的单服务器配置，您可能想知道为什么需要代理请求。</p>
+<p>从Nginx代理其他服务器的一个原因是能够扩展您的基础架构。构建Nginx是为了同时处理许多并发连接。这使其成为客户联系点的理想选择。服务器可以将请求传递给任意数量的后端服务器，以处理大部分工作，从而在整个基础架构中分散负载。此设计还为您提供了轻松添加后端服务器或根据维护需要将其下载的灵活性。</p>
+<p>http代理可能有用的另一个实例是使用可能无法构建的应用程序服务器来直接处理来自生产环境中的客户端的请求。许多框架都包含Web服务器，但大多数框架都不如Nginx等高性能服务器那么强大。将Nginx放在这些服务器之前可以为用户带来更好的体验并提高安全性。</p>
+<p>在Nginx中代理是通过操纵针对Nginx服务器的请求并将其传递给其他服务器以进行实际处理来完成的。请求的结果将传递回Nginx，然后Nginx将信息中继到客户端。此实例中的其他服务器可以是远程计算机，本地服务器，甚至是Nginx中定义的其他虚拟服务器。Nginx代理请求的服务器称为上游服务器。</p>
+<p>Nginx可以将请求代理到使用http（s），FastCGI，SCGI和uwsgi或memcached协议通过每种代理类型的单独指令集进行通信的服务器。在本指南中，我们将重点关注http协议。Nginx实例负责传递请求并将任何消息组件按摩成上游服务器可以理解的格式。</p>
+<h2 id="2-解构基本http代理通行证">2. 解构基本HTTP代理通行证<a hidden class="anchor" aria-hidden="true" href="#2-解构基本http代理通行证">#</a></h2>
+<p>最直接的代理类型涉及将请求切换到可以使用http进行通信的单个服务器。这种类型的代理称为通用“代理传递”，由适当命名的proxy_pass指令处理。</p>
+<p>该proxy_pass指令主要在位置上下文中找到。它if在位置上下文和limit_except上下文中的块中也是有效的。当请求与具有proxy_pass指令的位置匹配时，请求将转发到指令给出的URL。</p>
+<p>我们来看一个例子：</p>
+<pre><code class="language-conf" data-lang="conf"># server context
+
+location /match/here {
+    proxy_pass http://example.com;
+}
+
+. . .
+</code></pre><p>在上面的配置代码段中，proxy_pass定义中服务器末尾没有给出URI 。对于符合此模式的定义，客户端请求的URI将按原样传递到上游服务器。</p>
+<p>例如，当/match/here/please此块处理请求时，请求URI将作为发送到example.com服务器http://example.com/match/here/please。</p>
+<p>我们来看看替代方案：</p>
+<pre><code class="language-conf" data-lang="conf"># server context
+
+location /match/here {
+    proxy_pass http://example.com/new/prefix;
+}
+
+. . .
+</code></pre><p>在上面的示例中，代理服务器在end（/new/prefix）上定义了一个URI段。当在proxy_pass定义中给出URI时，在传递期间，请求的与位置定义匹配的部分将被此URI替换。</p>
+<p>例如，/match/here/pleaseNginx服务器上的请求将作为传递给上游服务器http://example.com/new/prefix/please 该/match/here所取代/new/prefix。这是一个要记住的重点。</p>
+<p>有时，这种替换是不可能的。在这些情况下，将proxy_pass忽略定义末尾的URI，并且客户端的原始URI或其他指令修改的URI将传递给上游服务器。</p>
+<p>例如，当使用正则表达式匹配位置时，Nginx无法确定URI的哪个部分与表达式匹配，因此它发送原始客户端请求URI。另一个例子是在同一位置使用重写指令时，导致客户端URI被重写，但仍然在同一个块中处理。在这种情况下，将传递重写的URI。</p>
+<h2 id="3-了解nginx如何处理headers">3. 了解Nginx如何处理Headers<a hidden class="anchor" aria-hidden="true" href="#3-了解nginx如何处理headers">#</a></h2>
+<p>有一点可能不会立即明确的是，如果您希望上游服务器正确处理请求，则传递的不仅仅是URI。代表客户端来自Nginx的请求与直接来自客户端的请求看起来不同。其中很大一部分是与请求一起出现的标头。</p>
+<p>当Nginx代理请求时，它会自动对从客户端收到的请求标头进行一些调整：</p>
+<p>Nginx摆脱任何空头。没有必要将空值传递给另一台服务器; 它只会使请求膨胀。
+默认情况下，Nginx会将包含下划线的任何标头视为无效。它将从代理请求中删除它们。如果你希望Nginx将这些解释为有效，你可以将underscores_in_headers指令设置为“on”，否则你的标题永远不会进入后端服务器。
+“Host”头被重写为<code>$proxy_host</code> 变量定义的值。这将是上游的<code>IP</code>地址或名称和端口号，直接由<code>proxy_pass</code>指令定义。
+“连接”标题更改为“关闭”。该标头用于表示关于双方之间建立的特定连接的信息。在这种情况下，Nginx将其设置为“关闭”以向上游服务器指示一旦原始请求被响应，该连接将被关闭。上游不应期望这种连接是持久的。
+我们可以从上面推断的第一点是，您不希望传递的任何头应该设置为空字符串。具有空值的标头将从传递的请求中完全删除。</p>
+<p>从上述信息中收集的下一个要点是，如果您的后端应用程序将处理非标准标头，则必须确保它们没有下划线。如果需要使用下划线的标头，可以underscores_in_headers在配置中将指令设置为“on”（在http上下文或IP地址/端口组合的默认服务器声明的上下文中有效）。如果不这样做，Nginx会将这些标头标记为无效，并在传递给您的上游之前静默删除它们。</p>
+<p>“主机”标头在大多数代理方案中特别重要。如上所述，默认情况下，这将设置为<code>$proxy_host</code> 一个变量的值，该变量将包含直接从proxy_pass定义中获取的域名或IP地址和端口。这是默认情况下选择的，因为它是Nginx可以确定上游服务器响应的唯一地址（因为它是直接从连接信息中提取的）。</p>
+<p>“Host”标头的最常见值如下：</p>
+<ul>
+<li>
+<p><code>$proxy_host</code>：这将“主机”标头设置为从proxy_pass定义中获取的域名或IP地址和端口组合。从Nginx的角度来看，这是默认的“安全”，但通常不是代理服务器正确处理请求所需要的。</p>
+</li>
+<li>
+<p><code>$http_host</code>： 将“Host”标头设置为客户端请求的“Host”标头。客户端发送的标头始终在Nginx中作为变量提供。变量将以<code>$http_</code>前缀开头，后跟小写的标题名称，任何短划线都用下划线替换。尽管<code>$http_host</code>变量在大多数情况下都有效，但是当客户端请求没有有效的“主机”标头时，这可能会导致传递失败。</p>
+</li>
+<li>
+<p><code>$host</code>：此变量按优先顺序设置：请求行本身的主机名，客户端请求的“主机”标头或与请求匹配的服务器名称。</p>
+</li>
+</ul>
+<p>在大多数情况下，您需要将“Host”标头设置为$host变量。它是最灵活的，通常会为代理服务器提供尽可能准确填写的“主机”标头</p>
+<h2 id="4-设置或重置标题">4. 设置或重置标题<a hidden class="anchor" aria-hidden="true" href="#4-设置或重置标题">#</a></h2>
+<p>要调整或设置代理连接的标头，我们可以使用该proxy_set_header指令。例如，要像我们讨论的那样更改“Host”标头，并添加一些与代理请求相同的其他标头，我们可以使用以下内容：</p>
+<pre><code class="language-conf" data-lang="conf"># server context
+
+location /match/here {
+    proxy_set_header HOST $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_pass http://example.com/new/prefix;
+}
+
+. . .
+</code></pre><p>上述请求将“Host”标头设置为<code>$host</code>变量，该变量应包含有关所请求的原始主机的信息的<code>X-Forwarded-Proto</code>报头给出了关于原始客户机请求的架构中的代理的服务器信息（它是否是一个HTTP或HTTPS请求）。</p>
+<p>将X-Real-IP其设置为客户端的IP地址，以便代理可以根据此信息正确地做出决策或记录。该X-Forwarded-For标题是包含每一个客户端已通过代理到这一点的服务器的IP地址的列表。在上面的例子中，我们将其设置为<code>$proxy_add_x_forwarded_for</code>变量。此变量X-Forwarded-For获取从客户端检索的原始标头的值，并将Nginx服务器的IP地址添加到结尾。</p>
+<p>当然，我们可以将proxy_set_header指令移到服务器或http上下文中，允许它在多个位置引用：</p>
+<pre><code class="language-conf" data-lang="conf"># server context
+
+proxy_set_header HOST $host;
+proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+location /match/here {
+    proxy_pass http://example.com/new/prefix;
+}
+
+location /different/match {
+    proxy_pass http://example.com;
+}
+</code></pre><h2 id="5-为负载平衡代理连接定义上游上下文">5. 为负载平衡代理连接定义上游上下文<a hidden class="anchor" aria-hidden="true" href="#5-为负载平衡代理连接定义上游上下文">#</a></h2>
+<p>在前面的示例中，我们演示了如何对单个后端服务器执行简单的http代理。Nginx允许我们通过指定可以传递请求的整个后端服务器池来轻松扩展此配置。</p>
+<p>我们可以通过使用该upstream指令来定义服务器池来实现此目的。此配置假定所列出的任何一个服务器都能够处理客户端的请求。这使我们可以毫不费力地扩展我们的基础设施。upstream必须在Nginx配置的http上下文中设置该指令。</p>
+<p>我们来看一个简单的例子：</p>
+<pre><code class="language-conf" data-lang="conf"># http context
+
+upstream backend_hosts {
+    server host1.example.com;
+    server host2.example.com;
+    server host3.example.com;
+}
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location /proxy-me {
+        proxy_pass http://backend_hosts;
+    }
+}
+</code></pre><p>在上面的例子中，我们设置了一个名为的上游上下文backend_hosts。一旦定义，此名称将可用于代理传递，就像它是常规域名一样。如您所见，在我们的服务器块中，我们将任何请求传递<code>example.com/proxy-me/…</code>给我们上面定义的池。在该池中，通过应用可配置算法来选择主机。默认情况下，这只是一个简单的循环选择过程（每个请求将依次路由到不同的主机）。</p>
+<h3 id="51-改变上游平衡算法">5.1 改变上游平衡算法<a hidden class="anchor" aria-hidden="true" href="#51-改变上游平衡算法">#</a></h3>
+<p>您可以通过在上游上下文中包含指令或标志来修改上游池使用的平衡算法：</p>
+<p>（循环法）：如果不存在其他平衡指令，则使用默认的负载平衡算法。在上游上下文中定义的每个服务器依次顺序传递请求。
+least_conn：指定应始终为具有最少活动连接数的后端提供新连接。在与后端的连接可能持续一段时间的情况下，这尤其有用。
+ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。
+hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。
+更改平衡算法时，块可能如下所示：</p>
+<pre><code class="language-conf" data-lang="conf"># http context
+
+upstream backend_hosts {
+
+    least_conn;
+
+    server host1.example.com;
+    server host2.example.com;
+    server host3.example.com;
+}
+
+. . .
+</code></pre><p>在上面的示例中，将根据哪个连接最少来选择服务器。该ip_hash指令可以以相同的方式设置以获得一定量的会话“粘性”。</p>
+<p>至于hash方法，您必须提供哈希的密钥。这可以是你想要的任何东西：</p>
+<pre><code class="language-conf" data-lang="conf"># http context
+
+upstream backend_hosts {
+
+    hash $remote_addr$remote_port consistent;
+
+    server host1.example.com;
+    server host2.example.com;
+    server host3.example.com;
+}
+
+. . .
+</code></pre><p>上面的示例将根据客户端IP地址和端口的值分发请求。我们还添加了可选参数consistent，该参数实现了ketama一致性哈希算法。基本上，这意味着如果您的上游服务器发生更改，则对缓存的影响最小。</p>
+<h3 id="52-设置服务器权重以进行平衡">5.2 设置服务器权重以进行平衡<a hidden class="anchor" aria-hidden="true" href="#52-设置服务器权重以进行平衡">#</a></h3>
+<p>在后端服务器的声明中，默认情况下，每个服务器都是“加权”的。这假设每个服务器可以并且应该处理相同的负载量（考虑到平衡算法的影响）。但是，您还可以在声明期间为服务器设置替代权重：</p>
+<pre><code># http context
+
+upstream backend_hosts {
+    server host1.example.com weight=3;
+    server host2.example.com;
+    server host3.example.com;
+}
+
+. . .
+</code></pre><p>在上面的例子中，host1.example.com将接收三倍于其他两个服务器的流量。默认情况下，为每个服务器分配权重1。</p>
+<h2 id="6-使用缓冲区释放后端服务器">6. 使用缓冲区释放后端服务器<a hidden class="anchor" aria-hidden="true" href="#6-使用缓冲区释放后端服务器">#</a></h2>
+<p>涉及许多用户的代理问题是向流程添加其他服务器对性能的影响。在大多数情况下，利用Nginx的缓冲和缓存功能可以大大减轻这种影响。</p>
+<p>代理到另一台服务器时，两个不同连接的速度将影响客户端的体验：</p>
+<p>从客户端到Nginx代理的连接。
+从Nginx代理到后端服务器的连接。
+Nginx能够根据您希望优化的这些连接中的任何一个来调整其行为。</p>
+<p>没有缓冲区，数据从代理服务器发送并立即开始传输到客户端。如果假设客户端速度很快，则可以关闭缓冲，以便尽快将数据传送到客户端。使用缓冲区，Nginx代理将临时存储后端的响应，然后将此数据提供给客户端。如果客户端很慢，这允许Nginx服务器更快地关闭到后端的连接。然后，它可以处理以任何可能的速度将数据分发给客户端。</p>
+<p>Nginx默认采用缓冲设计，因为客户端的连接速度往往差异很大。我们可以使用以下指令调整缓冲行为。这些可以在http，服务器或位置上下文中设置。重要的是要记住，每个请求都配置了大小调整指令，因此当有许多客户端请求时，增加它们超出您的需要会影响您的性能：</p>
+<p><code>proxy_buffering</code>：此指令控制是否启用此上下文和子上下文的缓冲。默认情况下，这是“打开”。
+<code>proxy_buffers</code>：此指令控制代理响应的缓冲区的数量（第一个参数）和大小（第二个参数）。默认设置是配置8个大小等于一个内存页面的缓冲区（4k或者8k）。增加缓冲区数量可以让您缓冲更多信息。
+<code>proxy_buffer_size</code>：来自后端服务器的响应的初始部分（包含标头）与响应的其余部分分开缓冲。该指令设置响应的这一部分的缓冲区大小。默认情况下，这与大小相同<code>proxy_buffers</code>，但由于这用于标题信息，因此通常可以将其设置为较低的值。
+<code>proxy_busy_buffers_size</code>：此指令设置可以标记为“客户端就绪”并因此忙碌的缓冲区的最大大小。虽然客户端一次只能从一个缓冲区读取数据，但缓冲区放在队列中以便以串联形式发送到客户端。该指令控制允许处于此状态的缓冲区空间的大小。
+<code>proxy_max_temp_file_size</code>：这是磁盘上临时文件的每个请求的最大大小。这些是在上游响应太大而无法放入缓冲区时创建的。
+<code>proxy_temp_file_write_size</code>：这是当代理服务器的响应对于配置的缓冲区而言太大时，Nginx将一次写入临时文件的数据量。
+<code>proxy_temp_path</code>：这是磁盘上区域的路径，当上游服务器的响应无法容纳到配置的缓冲区时，Nginx应该存储任何临时文件。
+如您所见，Nginx提供了许多不同的指令来调整缓冲行为。大多数情况下，您不必担心大多数这些，但调整其中一些值可能很有用。调整最有用的可能是<code>proxy_buffers</code>和<code>proxy_buffer_size</code>指令。</p>
+<p>增加每个上游请求的可用代理缓冲区数量的示例，同时减少可能存储标头的缓冲区将如下所示：</p>
+<pre><code class="language-conf" data-lang="conf"># server context
+
+proxy_buffering on;
+proxy_buffer_size 1k;
+proxy_buffers 24 4k;
+proxy_busy_buffers_size 8k;
+proxy_max_temp_file_size 2048m;
+proxy_temp_file_write_size 32k;
+
+location / {
+    proxy_pass http://example.com;
+}
+</code></pre><p>相反，如果您想要立即向其提供数据的快速客户端，则可以完全关闭缓冲。如果上游比客户端更快，Nginx实际上仍将使用缓冲区，但它会立即尝试将数据刷新到客户端，而不是等待缓冲区池。如果客户端速度很慢，这可能导致上游连接保持打开状态，直到客户端赶上。当缓冲“关闭”时，仅proxy_buffer_size使用指令定义的缓冲区：</p>
+<pre><code class="language-conf" data-lang="conf"># server context
+
+proxy_buffering off;
+proxy_buffer_size 4k;
+
+location / {
+    proxy_pass http://example.com;
+}
+</code></pre><h3 id="61-高可用性可选">6.1 高可用性（可选）<a hidden class="anchor" aria-hidden="true" href="#61-高可用性可选">#</a></h3>
+<p>通过添加一组冗余的负载均衡器，可以使Nginx代理更加健壮，从而创建高可用性基础架构。</p>
+<p>甲高可用性（HA）的设置是无故障的单个点处的基础设施，和你的负载平衡器是该构造的一部分。通过使用多个负载均衡器，可以防止在负载均衡器不可用或需要将其关闭进行维护时可能导致的停机。</p>
+<p>以下是基本高可用性设置的图表：
+<img loading="lazy" src="https://assets.digitalocean.com/articles/high_availability/ha-diagram-animated.gif" alt=""  />
+</p>
+<p>在此示例中，您有一个静态IP地址后面的多个负载平衡器（一个活动和一个或多个被动），可以从一个服务器重新映射到另一个服务器。客户端请求从静态IP路由到活动负载平衡器，然后路由到后端服务器。要了解更多信息，请阅读如何使用浮动IP的这一节。</p>
+<h2 id="7-配置代理缓存以减少响应时间">7. 配置代理缓存以减少响应时间<a hidden class="anchor" aria-hidden="true" href="#7-配置代理缓存以减少响应时间">#</a></h2>
+<p>虽然缓冲可以帮助释放后端服务器以处理更多请求，但Nginx还提供了一种从后端服务器缓存内容的方法，从而无需为许多请求连接到上游。</p>
+<h3 id="71-配置代理缓存">7.1 配置代理缓存<a hidden class="anchor" aria-hidden="true" href="#71-配置代理缓存">#</a></h3>
+<p>要设置用于代理内容的缓存，我们可以使用该proxy_cache_path指令。这将创建一个区域，可以保留从代理服务器返回的数据。该proxy_cache_path指令必须在http上下文中设置。</p>
+<p>在下面的示例中，我们将配置此命令和一些相关指令来设置我们的缓存系统。</p>
+<pre><code class="language-conf" data-lang="conf"># http context
+
+proxy_cache_path /var/lib/nginx/cache levels=1:2 keys_zone=backcache:8m max_size=50m;
+proxy_cache_key &quot;$scheme$request_method$host$request_uri$is_args$args&quot;;
+proxy_cache_valid 200 302 10m;
+proxy_cache_valid 404 1m;
+</code></pre><p>使用该proxy_cache_path指令，我们已经在文件系统上定义了一个目录，我们希望存储缓存。在这个例子中，我们选择了/var/lib/nginx/cache目录。如果此目录不存在，您可以通过键入以下内容以正确的权限和所有权创建它：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo mkdir -p /var/lib/nginx/cache
+sudo chown www-data /var/lib/nginx/cache
+sudo chmod <span style="color:#ae81ff">700</span> /var/lib/nginx/cache
+</code></pre></div><p>该<code>levels=</code>参数指定缓存的组织方式。Nginx将通过散列键的值（下面配置）来创建缓存键。我们在上面选择的级别规定将创建一个单个字符目录（这将是散列值的最后一个字符），其中包含一个两个字符的子目录（取自散列值末尾的下两个字符）。您通常不必关心此细节，但它有助于Nginx快速找到相关值。</p>
+<p>该<code>keys_zone=</code>参数定义了我们调用的此缓存区的名称backcache。这也是我们定义要存储多少元数据的地方。在这种情况下，我们存储8 MB的密钥。对于每兆字节，Nginx可以存储大约8000个条目。该max_size参数设置实际缓存数据的最大大小。</p>
+<p>我们上面使用的另一个指令是<code>proxy_cache_key</code>。这用于设置将用于存储缓存值的键。该相同密钥用于检查是否可以从缓存提供请求。我们将此设置为方案（http或https），HTTP请求方法以及请求的主机和URI的组合。</p>
+<p>该<code>proxy_cache_valid</code>指令可以多次指定。它允许我们根据状态代码配置存储值的时间长度。在我们的示例中，我们存储成功和重定向10分钟，并且每分钟使缓存过期404响应。</p>
+<p>现在，我们已经配置了缓存区域，但我们仍然需要告诉Nginx何时使用缓存。</p>
+<p>在我们代理后端的位置，我们可以配置此缓存的使用：</p>
+<pre><code class="language-conf" data-lang="conf"># server context
+
+location /proxy-me {
+    proxy_cache backcache;
+    proxy_cache_bypass $http_cache_control;
+    add_header X-Proxy-Cache $upstream_cache_status;
+
+    proxy_pass http://backend;
+}
+
+. . .
+</code></pre><p>使用该<code>proxy_cache</code>指令，我们可以指定<code>backcache</code>缓存区域应该用于此上下文。在传递到后端之前，Nginx将在此处检查有效条目。</p>
+<p>该<code>proxy_cache_bypass</code>指令设置为<code>$http_cache_control</code> 变量。这将包含一个指示器，指示客户端是否明确请求资源的新的非缓存版本。设置此指令允许<code>Nginx</code>正确处理这些类型的客户端请求。无需进一步配置。</p>
+<p>我们还添加了一个名为的额外标题X-Proxy-Cache。我们将此标头设置为<code>$upstream_cache_status</code>变量的值。基本上，这会设置一个标头，允许我们查看请求是否导致缓存命中，缓存未命中，或者是否明确绕过了缓存。这对于调试尤其有用，但对于客户端也是有用的信息。</p>
+<h3 id="72-有关缓存结果的说明">7.2 有关缓存结果的说明<a hidden class="anchor" aria-hidden="true" href="#72-有关缓存结果的说明">#</a></h3>
+<p>缓存可以极大地提高代理的性能。但是，配置缓存时必须牢记一些注意事项。</p>
+<p>首先，任何用户相关的数据应该不会被缓存。这可能导致一个用户的数据被呈现给另一个用户。如果您的网站完全是静态的，这可能不是问题。</p>
+<p>如果您的站点有一些动态元素，则必须在后端服务器中对此进行说明。如何处理这取决于处理后端处理的应用程序或服务器。对于私有内容，您应将<code>Cache-Control</code>标头设置为<code>no-cache</code>，<code>no-store</code>或<code>private</code>，具体取决于数据的性质：
+<code>no-cache</code>：表示如果没有先检查后端的数据是否未更改，则不应再次提供响应。如果数据是动态且重要的，则可以使用此方法。在每个请求上检查ETag散列元数据头，并且如果后端返回相同的散列值，则可以提供先前的值</p>
+<p><code>no-store</code> ：表示在任何时候都不应该缓存接收到的数据。这是私有数据最安全的选项，因为这意味着每次都必须从服务器检索数据。</p>
+<p><code>private</code>：这表示没有共享缓存空间应该缓存此数据。这可用于指示用户的浏览器可以缓存数据，但代理服务器不应认为此数据对后续请求有效。</p>
+<p><code>public</code>：这表示响应是可以在连接中的任何位置缓存的公共数据。</p>
+<p>可以控制此行为的相关标头是<code>max-age</code>标头，它指示应缓存任何资源的秒数。</p>
+<p>正确设置这些标题（取决于内容的敏感性）将有助于您利用缓存，同时保护您的私人数据安全并使您的动态数据保持新鲜。</p>
+<p>如果你的后端也使用Nginx，你可以使用expires指令设置一些，这将设置<code>max-age</code>为<code>Cache-Control</code>：</p>
+<pre><code class="language-conf" data-lang="conf">
+location / {
+    expires 60m;
+}
+
+location /check-me {
+    expires -1;
+}
+</code></pre><p>在上面的示例中，第一个块允许将内容缓存一小时。第二个块将<code>Cache-Control</code>标头设置为“<code>no-cache</code>”。要设置其他值，可以使用该<code>add_header</code>指令，如下所示：</p>
+<pre><code class="language-conf" data-lang="conf">location /private {
+    expires -1;
+    add_header Cache-Control &quot;no-store&quot;;
+}
+</code></pre><h2 id="8-结论">8. 结论<a hidden class="anchor" aria-hidden="true" href="#8-结论">#</a></h2>
+<p>Nginx首先是一个反向代理，它也恰好具有作为Web服务器工作的能力。由于此设计决策，向其他服务器代理请求非常简单。Nginx非常灵活，如果需要，可以对代理配置进行更复杂的控制</p>
+<p><a href="https://www.digitalocean.com/community/tutorials/understanding-nginx-http-proxying-load-balancing-buffering-and-caching">原文地址</a></p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-load-balancing">参考</a></p>
+
+</div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://lichang.tech/tags/linux/">Linux</a></li>
+    </ul>
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Nginx负载均衡配置--简介 on twitter"
+        href="https://twitter.com/intent/tweet/?text=Nginx%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae--%e7%ae%80%e4%bb%8b&amp;url=http%3a%2f%2flichang.tech%2ftem%2flinux%2f%25E8%25B4%259F%25E8%25BD%25BD%25E5%259D%2587%25E8%25A1%25A1%25E5%2585%25A5%25E9%2597%25A8%2f&amp;hashtags=Linux">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Nginx负载均衡配置--简介 on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flichang.tech%2ftem%2flinux%2f%25E8%25B4%259F%25E8%25BD%25BD%25E5%259D%2587%25E8%25A1%25A1%25E5%2585%25A5%25E9%2597%25A8%2f&amp;title=Nginx%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae--%e7%ae%80%e4%bb%8b&amp;summary=Nginx%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae--%e7%ae%80%e4%bb%8b&amp;source=http%3a%2f%2flichang.tech%2ftem%2flinux%2f%25E8%25B4%259F%25E8%25BD%25BD%25E5%259D%2587%25E8%25A1%25A1%25E5%2585%25A5%25E9%2597%25A8%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Nginx负载均衡配置--简介 on reddit"
+        href="https://reddit.com/submit?url=http%3a%2f%2flichang.tech%2ftem%2flinux%2f%25E8%25B4%259F%25E8%25BD%25BD%25E5%259D%2587%25E8%25A1%25A1%25E5%2585%25A5%25E9%2597%25A8%2f&title=Nginx%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae--%e7%ae%80%e4%bb%8b">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Nginx负载均衡配置--简介 on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flichang.tech%2ftem%2flinux%2f%25E8%25B4%259F%25E8%25BD%25BD%25E5%259D%2587%25E8%25A1%25A1%25E5%2585%25A5%25E9%2597%25A8%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Nginx负载均衡配置--简介 on whatsapp"
+        href="https://api.whatsapp.com/send?text=Nginx%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae--%e7%ae%80%e4%bb%8b%20-%20http%3a%2f%2flichang.tech%2ftem%2flinux%2f%25E8%25B4%259F%25E8%25BD%25BD%25E5%259D%2587%25E8%25A1%25A1%25E5%2585%25A5%25E9%2597%25A8%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Nginx负载均衡配置--简介 on telegram"
+        href="https://telegram.me/share/url?text=Nginx%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae--%e7%ae%80%e4%bb%8b&amp;url=http%3a%2f%2flichang.tech%2ftem%2flinux%2f%25E8%25B4%259F%25E8%25BD%25BD%25E5%259D%2587%25E8%25A1%25A1%25E5%2585%25A5%25E9%2597%25A8%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://lichang.tech/">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+	          renderMathInElement(document.body, {
+			                delimiters: [
+						                  {left: "$$", right: "$$", display: true},
+								                    {left: "$", right: "$", display: false}
+					              ]
+							                });
+		      });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

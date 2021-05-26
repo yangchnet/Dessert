@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>对野生Goroutine管理的解决方案及其实现 | Linote</title>
+<meta name="keywords" content="goroutine, pool, 线程管理" />
+<meta name="description" content="1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
+这种线程可能带来一系列问题：
+ 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。
+1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。
+ 线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。
+1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。
+2. 线程池的工作机制 2.1 线程池模型 线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。
+在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：
+ 直接申请线程执行该任务 缓冲到队列中等待线程执行 直接拒绝该任务  线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。
+2.2 线程池的状态 线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。 线程池的状态有5种：
+   运行状态 状态描述     RUNNING 能接受新提交的任务，并且也能处理阻塞队列中的任务   SHUTDOWN 关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务   STOP 不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程   TIDYING 所有的任务都已终止，有效线程数为0   TERMINATED 在terminated()方法执行后进入该状态   其生命周期转换如下图所示：     sequenceDiagram RUNNING-&gt;&gt;SHUTDOWN:shutdown() RUNNING-&gt;&gt;STOP: shutdownNow() SHUTDOWN-&gt;&gt;TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0 STOP-&gt;&gt;TIDYING:线程池中工作线程数为0 TIDYING-&gt;&gt;TERMINATED: terminated() 2.">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://lichang.tech/tem/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://lichang.tech/apple-touch-icon.png">
+<link rel="mask-icon" href="http://lichang.tech/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<meta property="og:title" content="对野生Goroutine管理的解决方案及其实现" />
+<meta property="og:description" content="1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
+这种线程可能带来一系列问题：
+ 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。
+1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。
+ 线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。
+1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。
+2. 线程池的工作机制 2.1 线程池模型 线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。
+在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：
+ 直接申请线程执行该任务 缓冲到队列中等待线程执行 直接拒绝该任务  线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。
+2.2 线程池的状态 线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。 线程池的状态有5种：
+   运行状态 状态描述     RUNNING 能接受新提交的任务，并且也能处理阻塞队列中的任务   SHUTDOWN 关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务   STOP 不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程   TIDYING 所有的任务都已终止，有效线程数为0   TERMINATED 在terminated()方法执行后进入该状态   其生命周期转换如下图所示：     sequenceDiagram RUNNING-&gt;&gt;SHUTDOWN:shutdown() RUNNING-&gt;&gt;STOP: shutdownNow() SHUTDOWN-&gt;&gt;TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0 STOP-&gt;&gt;TIDYING:线程池中工作线程数为0 TIDYING-&gt;&gt;TERMINATED: terminated() 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://lichang.tech/tem/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" /><meta property="og:image" content="http://lichang.tech/papermod-cover.png"/><meta property="article:section" content="Tem" />
+<meta property="article:published_time" content="2021-05-17T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-05-17T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://lichang.tech/papermod-cover.png"/>
+
+<meta name="twitter:title" content="对野生Goroutine管理的解决方案及其实现"/>
+<meta name="twitter:description" content="1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
+这种线程可能带来一系列问题：
+ 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。
+1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。
+ 线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。
+1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。
+2. 线程池的工作机制 2.1 线程池模型 线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。
+在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：
+ 直接申请线程执行该任务 缓冲到队列中等待线程执行 直接拒绝该任务  线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。
+2.2 线程池的状态 线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。 线程池的状态有5种：
+   运行状态 状态描述     RUNNING 能接受新提交的任务，并且也能处理阻塞队列中的任务   SHUTDOWN 关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务   STOP 不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程   TIDYING 所有的任务都已终止，有效线程数为0   TERMINATED 在terminated()方法执行后进入该状态   其生命周期转换如下图所示：     sequenceDiagram RUNNING-&gt;&gt;SHUTDOWN:shutdown() RUNNING-&gt;&gt;STOP: shutdownNow() SHUTDOWN-&gt;&gt;TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0 STOP-&gt;&gt;TIDYING:线程池中工作线程数为0 TIDYING-&gt;&gt;TERMINATED: terminated() 2."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Tems",
+      "item": "http://lichang.tech/tem/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "对野生Goroutine管理的解决方案及其实现",
+      "item": "http://lichang.tech/tem/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "对野生Goroutine管理的解决方案及其实现",
+  "name": "对野生Goroutine管理的解决方案及其实现",
+  "description": "1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。\n这种线程可能带来一系列问题：\n 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。\n1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。\n 线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。\n1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。\n2. 线程池的工作机制 2.1 线程池模型 线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。\n在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：\n 直接申请线程执行该任务 缓冲到队列中等待线程执行 直接拒绝该任务  线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。\n2.2 线程池的状态 线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。 线程池的状态有5种：\n   运行状态 状态描述     RUNNING 能接受新提交的任务，并且也能处理阻塞队列中的任务   SHUTDOWN 关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务   STOP 不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程   TIDYING 所有的任务都已终止，有效线程数为0   TERMINATED 在terminated()方法执行后进入该状态   其生命周期转换如下图所示：     sequenceDiagram RUNNING-\u0026gt;\u0026gt;SHUTDOWN:shutdown() RUNNING-\u0026gt;\u0026gt;STOP: shutdownNow() SHUTDOWN-\u0026gt;\u0026gt;TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0 STOP-\u0026gt;\u0026gt;TIDYING:线程池中工作线程数为0 TIDYING-\u0026gt;\u0026gt;TERMINATED: terminated() 2.",
+  "keywords": [
+    "goroutine", "pool", "线程管理"
+  ],
+  "articleBody": "1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。\n这种线程可能带来一系列问题：\n 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。\n1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。\n 线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。\n1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。\n2. 线程池的工作机制 2.1 线程池模型 线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。\n在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：\n 直接申请线程执行该任务 缓冲到队列中等待线程执行 直接拒绝该任务  线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。\n2.2 线程池的状态 线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。 线程池的状态有5种：\n   运行状态 状态描述     RUNNING 能接受新提交的任务，并且也能处理阻塞队列中的任务   SHUTDOWN 关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务   STOP 不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程   TIDYING 所有的任务都已终止，有效线程数为0   TERMINATED 在terminated()方法执行后进入该状态   其生命周期转换如下图所示：     sequenceDiagram RUNNING-SHUTDOWN:shutdown() RUNNING-STOP: shutdownNow() SHUTDOWN-TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0 STOP-TIDYING:线程池中工作线程数为0 TIDYING-TERMINATED: terminated() 2.3 任务执行机制 2.3.1 任务调度 任务调度是线程池的主要入口，用户提交任务后，这部分将决定任务如何执行。 任务调度的流程图如下：  提交任务后，首先检测运行池状态，若不是RUNNING，则直接拒绝，线程池要保证在RUNNING状态下执行任务。 如果线程数小于核心数，说明系统还没有被充分利用，则可添加线程并执行。若线程数大于核心数，此时再一味增加线程数只会带来调度开销，则将任务放入阻塞队列。 若阻塞队列未满，则将任务放入阻塞队列等待执行，否则进行下一步。 若线程数小于最大线程数，可添加工作线程执行，若线程数已大于等于最大线程数，此时直接拒绝任务，不予执行。  2.3.2 任务缓冲 线程池的本质是对任务和线程的管理，要让二者分别独立运行。如果不使用线程池，一个任务即一个线程，对任务与线程的管理都将陷入混乱。要分别对任务和线程进行管理，则需要将二者进行解耦，不让二者直接关联。线程池以消费者-生产者模型，通过一个阻塞队列实现二者的解耦。阻塞队列缓存任务，工作线程从阻塞队列中获取任务。\n阻塞队列(BlockingQueue)是一个支持两个附加操作的队列。这两个附加的操作是：\n 在队列为空时，获取元素的线程会等待队列变为非空。 当队列满时，存储元素的线程会等待队列可用。 阻塞队列常用于生产者和消费者的场景，生产者是往队列里添加元素的线程，消费者是从队列里拿元素的线程。阻塞队列就是生产者存放元素的容器，而消费者也只从容器里拿元素。 其工作模式如下：   2.3.3 任务申请 从上文任务调度部分可知，任务的执行有两种可能：\n 任务直接由新创建的线程执行 线程从任务队列中获取任务然后执行，执行完任务的空闲进行再次去队列中申请任务执行 第一种情况仅在线程初始创建时出现，多数情况下是第二种情况  线程要从任务缓存模块中不断获取任务执行，定义getTask方法来帮助线程从阻塞队列中获取任务，实现线程管理模块和任务管理模块的通信。其执行流程如下： 这里进行了多次判断，目的在于控制线程的数量，使其符合线程池的状态。如果线程池现在不应该持有那么多线程，则会返回null值。工作线程Worker会不断接收新任务去执行，而当工作线程Worker接收不到任务的时候，就会开始被回收。\n2.3.4 任务拒绝 任务拒绝模块是线程池的保护部分。当线程池的任务缓存队列已满，并且线程数达到设定的最大值，就需要拒绝到来的任务，保护线程池。\n2.4 Worker线程管理 2.4.1 Worker线程 线程池为了掌握线程的状态并维护线程的生命周期，设计了线程池内的工作线程Worker。\nWorker持有一个线程thread和一个初始化的任务firstTask。thread是在Worker创建时创建的线程，可用来执行任务；firstTask保存传入的第一个任务，这个任务可以有也可以为空。如果此值非空，那么Worker会先执行这个任务，再去获取任务执行；如果此值为空，那么Worker直接去阻塞队列中获取任务执行。 线程池需要管理线程的生命周期，需要在线程长时间不运行的时候进行回收。线程池使用一张Hash表去持有线程的引用，这样可以通过添加引用、移除引用这样的操作来控制线程的生命周期。这个时候重要的就是如何判断线程是否在运行。\n​Worker是通过继承AQS，使用AQS来实现独占锁这个功能。没有使用可重入锁ReentrantLock，而是使用AQS，为的就是实现不可重入的特性去反应线程现在的执行状态。\n1.lock方法一旦获取了独占锁，表示当前线程正在执行任务中。 2.如果正在执行任务，则不应该中断线程。 3.如果该线程现在不是独占锁的状态，也就是空闲的状态，说明它没有在处理任务，这时可以对该线程进行中断。 4.线程池在执行shutdown方法或tryTerminate方法时会调用interruptIdleWorkers方法来中断空闲的线程，interruptIdleWorkers方法会使用tryLock方法来判断线程池中的线程是否是空闲状态；如果线程是空闲状态则可以安全回收。\n在线程回收过程中就使用到了这种特性，回收过程如下图所示：\n2.4.2 Worker线程增加 增加线程是通过线程池中的addWorker方法，该方法的功能就是增加一个线程，该方法不考虑线程池是在哪个阶段增加的该线程，这个分配线程的策略是在上个步骤完成的，该步骤仅仅完成增加线程，并使它运行，最后返回是否成功这个结果。addWorker方法有两个参数：firstTask、core。firstTask参数用于指定新增的线程执行的第一个任务，该参数可以为空；core参数为true表示在新增线程时会判断当前活动线程数是否少于corePoolSize，false表示新增线程前需要判断当前活动线程数是否少于maximumPoolSize，其执行流程如下图所示： 2.4.3 Worker线程回收 线程池中线程的销毁依赖JVM自动的回收，线程池做的工作是根据当前线程池的状态维护一定数量的线程引用，防止这部分线程被JVM回收，当线程池决定哪些线程需要回收时，只需要将其引用消除即可。Worker被创建出来后，就会不断地进行轮询，然后获取任务去执行，核心线程可以无限等待获取任务，非核心线程要限时获取任务。当Worker无法获取到任务，也就是获取的任务为空时，循环会结束，Worker会主动消除自身在线程池内的引用。\n事实上，将线程引用移出线程池就已经结束了线程销毁的部分。但由于引起线程销毁的可能性有很多，线程池还要判断是什么引发了这次销毁，是否要改变线程池的现阶段状态，是否要根据新状态，重新分配线程。\n2.4.4 Worker线程执行任务 在Worker类中的run方法调用了runWorker方法来执行任务，runWorker方法的执行过程如下：\n1.while循环不断地通过getTask()方法获取任务。 2.getTask()方法从阻塞队列中取任务。 3.如果线程池正在停止，那么要保证当前线程是中断状态，否则要保证当前线程不是中断状态。 4.执行任务。 5.如果getTask结果为null则跳出循环，执行processWorkerExit()方法，销毁线程。 ",
+  "wordCount" : "115",
+  "inLanguage": "en",
+  "datePublished": "2021-05-17T00:00:00Z",
+  "dateModified": "2021-05-17T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "李昌"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://lichang.tech/tem/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Linote",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://lichang.tech/" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://lichang.tech/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://lichang.tech/">Home</a>&nbsp;»&nbsp;<a href="http://lichang.tech/tem/">Tems</a></div>
+    <h1 class="post-title">
+      对野生Goroutine管理的解决方案及其实现
+    </h1>
+    <div class="post-meta">May 17, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <div class="details">Table of Contents</div>
+        </summary>
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-%e7%ba%bf%e7%a8%8b%e6%b1%a0%e5%9f%ba%e7%a1%80" aria-label="1. 线程池基础">1. 线程池基础</a><ul>
+                        
+                <li>
+                    <a href="#11-%e9%87%8e%e7%94%9f%e7%ba%bf%e7%a8%8b" aria-label="1.1 野生线程">1.1 野生线程</a></li>
+                <li>
+                    <a href="#12-%e4%bb%80%e4%b9%88%e6%98%af%e7%ba%bf%e7%a8%8b%e6%b1%a0" aria-label="1.2 什么是线程池">1.2 什么是线程池</a></li>
+                <li>
+                    <a href="#13-%e4%bd%bf%e7%94%a8%e7%ba%bf%e7%a8%8b%e6%b1%a0%e7%9a%84%e5%a5%bd%e5%a4%84" aria-label="1.3 使用线程池的好处">1.3 使用线程池的好处</a></li></ul>
+                </li>
+                <li>
+                    <a href="#2-%e7%ba%bf%e7%a8%8b%e6%b1%a0%e7%9a%84%e5%b7%a5%e4%bd%9c%e6%9c%ba%e5%88%b6" aria-label="2. 线程池的工作机制">2. 线程池的工作机制</a></li>
+                <li>
+                    <a href="#21-%e7%ba%bf%e7%a8%8b%e6%b1%a0%e6%a8%a1%e5%9e%8b" aria-label="2.1 线程池模型">2.1 线程池模型</a><ul>
+                        
+                <li>
+                    <a href="#22-%e7%ba%bf%e7%a8%8b%e6%b1%a0%e7%9a%84%e7%8a%b6%e6%80%81" aria-label="2.2 线程池的状态">2.2 线程池的状态</a></li>
+                <li>
+                    <a href="#23-%e4%bb%bb%e5%8a%a1%e6%89%a7%e8%a1%8c%e6%9c%ba%e5%88%b6" aria-label="2.3 任务执行机制">2.3 任务执行机制</a><ul>
+                        
+                <li>
+                    <a href="#231-%e4%bb%bb%e5%8a%a1%e8%b0%83%e5%ba%a6" aria-label="2.3.1 任务调度">2.3.1 任务调度</a></li>
+                <li>
+                    <a href="#232-%e4%bb%bb%e5%8a%a1%e7%bc%93%e5%86%b2" aria-label="2.3.2 任务缓冲">2.3.2 任务缓冲</a></li>
+                <li>
+                    <a href="#233-%e4%bb%bb%e5%8a%a1%e7%94%b3%e8%af%b7" aria-label="2.3.3 任务申请">2.3.3 任务申请</a></li>
+                <li>
+                    <a href="#234-%e4%bb%bb%e5%8a%a1%e6%8b%92%e7%bb%9d" aria-label="2.3.4 任务拒绝">2.3.4 任务拒绝</a></li></ul>
+                </li>
+                <li>
+                    <a href="#24-worker%e7%ba%bf%e7%a8%8b%e7%ae%a1%e7%90%86" aria-label="2.4 Worker线程管理">2.4 Worker线程管理</a><ul>
+                        
+                <li>
+                    <a href="#241-worker%e7%ba%bf%e7%a8%8b" aria-label="2.4.1 Worker线程">2.4.1 Worker线程</a></li>
+                <li>
+                    <a href="#242-worker%e7%ba%bf%e7%a8%8b%e5%a2%9e%e5%8a%a0" aria-label="2.4.2 Worker线程增加">2.4.2 Worker线程增加</a></li>
+                <li>
+                    <a href="#243-worker%e7%ba%bf%e7%a8%8b%e5%9b%9e%e6%94%b6" aria-label="2.4.3 Worker线程回收">2.4.3 Worker线程回收</a></li>
+                <li>
+                    <a href="#244-worker%e7%ba%bf%e7%a8%8b%e6%89%a7%e8%a1%8c%e4%bb%bb%e5%8a%a1" aria-label="2.4.4 Worker线程执行任务">2.4.4 Worker线程执行任务</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="1-线程池基础">1. 线程池基础<a hidden class="anchor" aria-hidden="true" href="#1-线程池基础">#</a></h2>
+<h3 id="11-野生线程">1.1 野生线程<a hidden class="anchor" aria-hidden="true" href="#11-野生线程">#</a></h3>
+<p>在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。</p>
+<p>这种线程可能带来一系列问题：</p>
+<ul>
+<li>频繁申请/销毁线程，可能带来巨大的额外消耗</li>
+<li>当内存中存在较多的野生线程，会导致过分调度，降低系统性能</li>
+<li>不能正常退出的线程会导致内存泄露</li>
+<li>系统无法合理管理内部的资源分布，会降低系统的稳定性</li>
+<li>……</li>
+</ul>
+<p>鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。</p>
+<h3 id="12-什么是线程池">1.2 什么是线程池<a hidden class="anchor" aria-hidden="true" href="#12-什么是线程池">#</a></h3>
+<blockquote>
+<p>池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。</p>
+</blockquote>
+<p>线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。</p>
+<h3 id="13-使用线程池的好处">1.3 使用线程池的好处<a hidden class="anchor" aria-hidden="true" href="#13-使用线程池的好处">#</a></h3>
+<ul>
+<li>线程池中的线程可反复利用，减少了线程创建和销毁的开销</li>
+<li>任务无需等待线程创建即可开始运行，提高了系统响应速度</li>
+<li>通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费</li>
+<li>对线程运行进行有效的监视与管理</li>
+</ul>
+<p>通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。</p>
+<h2 id="2-线程池的工作机制">2. 线程池的工作机制<a hidden class="anchor" aria-hidden="true" href="#2-线程池的工作机制">#</a></h2>
+<h2 id="21-线程池模型">2.1 线程池模型<a hidden class="anchor" aria-hidden="true" href="#21-线程池模型">#</a></h2>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210517194704.png" alt="20210517194704"  />
+
+线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。</p>
+<p>在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：</p>
+<ol>
+<li>直接申请线程执行该任务</li>
+<li>缓冲到队列中等待线程执行</li>
+<li>直接拒绝该任务</li>
+</ol>
+<p>线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。</p>
+<h3 id="22-线程池的状态">2.2 线程池的状态<a hidden class="anchor" aria-hidden="true" href="#22-线程池的状态">#</a></h3>
+<p>线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。
+线程池的状态有5种：</p>
+<table>
+<thead>
+<tr>
+<th>运行状态</th>
+<th>状态描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RUNNING</td>
+<td>能接受新提交的任务，并且也能处理阻塞队列中的任务</td>
+</tr>
+<tr>
+<td>SHUTDOWN</td>
+<td>关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务</td>
+</tr>
+<tr>
+<td>STOP</td>
+<td>不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程</td>
+</tr>
+<tr>
+<td>TIDYING</td>
+<td>所有的任务都已终止，有效线程数为0</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td>在terminated()方法执行后进入该状态</td>
+</tr>
+<tr>
+<td>其生命周期转换如下图所示：</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-mermaid" data-lang="mermaid">sequenceDiagram
+    RUNNING-&gt;&gt;SHUTDOWN:shutdown()
+    RUNNING-&gt;&gt;STOP: shutdownNow()
+    SHUTDOWN-&gt;&gt;TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0
+    STOP-&gt;&gt;TIDYING:线程池中工作线程数为0
+    TIDYING-&gt;&gt;TERMINATED: terminated()
+</code></pre><h3 id="23-任务执行机制">2.3 任务执行机制<a hidden class="anchor" aria-hidden="true" href="#23-任务执行机制">#</a></h3>
+<h4 id="231-任务调度">2.3.1 任务调度<a hidden class="anchor" aria-hidden="true" href="#231-任务调度">#</a></h4>
+<p>任务调度是线程池的主要入口，用户提交任务后，这部分将决定任务如何执行。
+任务调度的流程图如下：
+<img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/img%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6.png" alt="线程池任务执行机制"  />
+</p>
+<ol>
+<li>提交任务后，首先检测运行池状态，若不是RUNNING，则直接拒绝，线程池要保证在RUNNING状态下执行任务。</li>
+<li>如果线程数小于核心数，说明系统还没有被充分利用，则可添加线程并执行。若线程数大于核心数，此时再一味增加线程数只会带来调度开销，则将任务放入阻塞队列。</li>
+<li>若阻塞队列未满，则将任务放入阻塞队列等待执行，否则进行下一步。</li>
+<li>若线程数小于最大线程数，可添加工作线程执行，若线程数已大于等于最大线程数，此时直接拒绝任务，不予执行。</li>
+</ol>
+<h4 id="232-任务缓冲">2.3.2 任务缓冲<a hidden class="anchor" aria-hidden="true" href="#232-任务缓冲">#</a></h4>
+<p>线程池的本质是对任务和线程的管理，要让二者分别独立运行。如果不使用线程池，一个任务即一个线程，对任务与线程的管理都将陷入混乱。要分别对任务和线程进行管理，则需要将二者进行解耦，不让二者直接关联。线程池以消费者-生产者模型，通过一个阻塞队列实现二者的解耦。阻塞队列缓存任务，工作线程从阻塞队列中获取任务。</p>
+<p>阻塞队列(BlockingQueue)是一个支持两个附加操作的队列。这两个附加的操作是：</p>
+<ol>
+<li>在队列为空时，获取元素的线程会等待队列变为非空。</li>
+<li>当队列满时，存储元素的线程会等待队列可用。
+阻塞队列常用于生产者和消费者的场景，生产者是往队列里添加元素的线程，消费者是从队列里拿元素的线程。阻塞队列就是生产者存放元素的容器，而消费者也只从容器里拿元素。
+其工作模式如下：
+<img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/img%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97.png" alt="阻塞队列"  />
+</li>
+</ol>
+<h4 id="233-任务申请">2.3.3 任务申请<a hidden class="anchor" aria-hidden="true" href="#233-任务申请">#</a></h4>
+<p>从上文<a href="#231-%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6">任务调度</a>部分可知，任务的执行有两种可能：</p>
+<ol>
+<li>任务直接由新创建的线程执行</li>
+<li>线程从任务队列中获取任务然后执行，执行完任务的空闲进行再次去队列中申请任务执行
+第一种情况仅在线程初始创建时出现，多数情况下是第二种情况</li>
+</ol>
+<p>线程要从任务缓存模块中不断获取任务执行，定义getTask方法来帮助线程从阻塞队列中获取任务，实现线程管理模块和任务管理模块的通信。其执行流程如下：
+<img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/img%E4%BB%BB%E5%8A%A1%E7%94%B3%E8%AF%B7.png" alt="任务申请"  />
+</p>
+<p>这里进行了多次判断，目的在于控制线程的数量，使其符合线程池的状态。如果线程池现在不应该持有那么多线程，则会返回null值。工作线程Worker会不断接收新任务去执行，而当工作线程Worker接收不到任务的时候，就会开始被回收。</p>
+<h4 id="234-任务拒绝">2.3.4 任务拒绝<a hidden class="anchor" aria-hidden="true" href="#234-任务拒绝">#</a></h4>
+<p>任务拒绝模块是线程池的保护部分。当线程池的任务缓存队列已满，并且线程数达到设定的最大值，就需要拒绝到来的任务，保护线程池。</p>
+<h3 id="24-worker线程管理">2.4 Worker线程管理<a hidden class="anchor" aria-hidden="true" href="#24-worker线程管理">#</a></h3>
+<h4 id="241-worker线程">2.4.1 Worker线程<a hidden class="anchor" aria-hidden="true" href="#241-worker线程">#</a></h4>
+<p>线程池为了掌握线程的状态并维护线程的生命周期，设计了线程池内的工作线程Worker。<br>
+Worker持有一个线程thread和一个初始化的任务firstTask。thread是在Worker创建时创建的线程，可用来执行任务；firstTask保存传入的第一个任务，这个任务可以有也可以为空。如果此值非空，那么Worker会先执行这个任务，再去获取任务执行；如果此值为空，那么Worker直接去阻塞队列中获取任务执行。
+<img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/imgWoker%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1.png" alt="Worker执行任务"  />
+</p>
+<p>线程池需要管理线程的生命周期，需要在线程长时间不运行的时候进行回收。线程池使用一张Hash表去持有线程的引用，这样可以通过添加引用、移除引用这样的操作来控制线程的生命周期。这个时候重要的就是如何判断线程是否在运行。</p>
+<p>​Worker是通过继承AQS，使用AQS来实现独占锁这个功能。没有使用可重入锁ReentrantLock，而是使用AQS，为的就是实现不可重入的特性去反应线程现在的执行状态。</p>
+<p>1.lock方法一旦获取了独占锁，表示当前线程正在执行任务中。 2.如果正在执行任务，则不应该中断线程。 3.如果该线程现在不是独占锁的状态，也就是空闲的状态，说明它没有在处理任务，这时可以对该线程进行中断。 4.线程池在执行shutdown方法或tryTerminate方法时会调用interruptIdleWorkers方法来中断空闲的线程，interruptIdleWorkers方法会使用tryLock方法来判断线程池中的线程是否是空闲状态；如果线程是空闲状态则可以安全回收。</p>
+<p>在线程回收过程中就使用到了这种特性，回收过程如下图所示：</p>
+<h4 id="242-worker线程增加">2.4.2 Worker线程增加<a hidden class="anchor" aria-hidden="true" href="#242-worker线程增加">#</a></h4>
+<p>增加线程是通过线程池中的addWorker方法，该方法的功能就是增加一个线程，该方法不考虑线程池是在哪个阶段增加的该线程，这个分配线程的策略是在上个步骤完成的，该步骤仅仅完成增加线程，并使它运行，最后返回是否成功这个结果。addWorker方法有两个参数：firstTask、core。firstTask参数用于指定新增的线程执行的第一个任务，该参数可以为空；core参数为true表示在新增线程时会判断当前活动线程数是否少于corePoolSize，false表示新增线程前需要判断当前活动线程数是否少于maximumPoolSize，其执行流程如下图所示：
+<img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210519194613.png" alt="20210519194613"  />
+</p>
+<h4 id="243-worker线程回收">2.4.3 Worker线程回收<a hidden class="anchor" aria-hidden="true" href="#243-worker线程回收">#</a></h4>
+<p>线程池中线程的销毁依赖JVM自动的回收，线程池做的工作是根据当前线程池的状态维护一定数量的线程引用，防止这部分线程被JVM回收，当线程池决定哪些线程需要回收时，只需要将其引用消除即可。Worker被创建出来后，就会不断地进行轮询，然后获取任务去执行，核心线程可以无限等待获取任务，非核心线程要限时获取任务。当Worker无法获取到任务，也就是获取的任务为空时，循环会结束，Worker会主动消除自身在线程池内的引用。</p>
+<p>事实上，将线程引用移出线程池就已经结束了线程销毁的部分。但由于引起线程销毁的可能性有很多，线程池还要判断是什么引发了这次销毁，是否要改变线程池的现阶段状态，是否要根据新状态，重新分配线程。</p>
+<h4 id="244-worker线程执行任务">2.4.4 Worker线程执行任务<a hidden class="anchor" aria-hidden="true" href="#244-worker线程执行任务">#</a></h4>
+<p>在Worker类中的run方法调用了runWorker方法来执行任务，runWorker方法的执行过程如下：</p>
+<p>1.while循环不断地通过getTask()方法获取任务。 2.getTask()方法从阻塞队列中取任务。 3.如果线程池正在停止，那么要保证当前线程是中断状态，否则要保证当前线程不是中断状态。 4.执行任务。 5.如果getTask结果为null则跳出循环，执行processWorkerExit()方法，销毁线程。
+<img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210519200405.png" alt="20210519200405"  />
+</p>
+
+</div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://lichang.tech/tags/goroutine/">goroutine</a></li>
+      <li><a href="http://lichang.tech/tags/pool/">pool</a></li>
+      <li><a href="http://lichang.tech/tags/%E7%BA%BF%E7%A8%8B%E7%AE%A1%E7%90%86/">线程管理</a></li>
+    </ul>
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 对野生Goroutine管理的解决方案及其实现 on twitter"
+        href="https://twitter.com/intent/tweet/?text=%e5%af%b9%e9%87%8e%e7%94%9fGoroutine%e7%ae%a1%e7%90%86%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%8f%8a%e5%85%b6%e5%ae%9e%e7%8e%b0&amp;url=http%3a%2f%2flichang.tech%2ftem%2f%25E6%259E%25B6%25E6%259E%2584%2f%25E7%25BA%25BF%25E7%25A8%258B%25E6%25B1%25A0%2f&amp;hashtags=goroutine%2cpool%2c%e7%ba%bf%e7%a8%8b%e7%ae%a1%e7%90%86">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 对野生Goroutine管理的解决方案及其实现 on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flichang.tech%2ftem%2f%25E6%259E%25B6%25E6%259E%2584%2f%25E7%25BA%25BF%25E7%25A8%258B%25E6%25B1%25A0%2f&amp;title=%e5%af%b9%e9%87%8e%e7%94%9fGoroutine%e7%ae%a1%e7%90%86%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%8f%8a%e5%85%b6%e5%ae%9e%e7%8e%b0&amp;summary=%e5%af%b9%e9%87%8e%e7%94%9fGoroutine%e7%ae%a1%e7%90%86%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%8f%8a%e5%85%b6%e5%ae%9e%e7%8e%b0&amp;source=http%3a%2f%2flichang.tech%2ftem%2f%25E6%259E%25B6%25E6%259E%2584%2f%25E7%25BA%25BF%25E7%25A8%258B%25E6%25B1%25A0%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 对野生Goroutine管理的解决方案及其实现 on reddit"
+        href="https://reddit.com/submit?url=http%3a%2f%2flichang.tech%2ftem%2f%25E6%259E%25B6%25E6%259E%2584%2f%25E7%25BA%25BF%25E7%25A8%258B%25E6%25B1%25A0%2f&title=%e5%af%b9%e9%87%8e%e7%94%9fGoroutine%e7%ae%a1%e7%90%86%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%8f%8a%e5%85%b6%e5%ae%9e%e7%8e%b0">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 对野生Goroutine管理的解决方案及其实现 on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flichang.tech%2ftem%2f%25E6%259E%25B6%25E6%259E%2584%2f%25E7%25BA%25BF%25E7%25A8%258B%25E6%25B1%25A0%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 对野生Goroutine管理的解决方案及其实现 on whatsapp"
+        href="https://api.whatsapp.com/send?text=%e5%af%b9%e9%87%8e%e7%94%9fGoroutine%e7%ae%a1%e7%90%86%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%8f%8a%e5%85%b6%e5%ae%9e%e7%8e%b0%20-%20http%3a%2f%2flichang.tech%2ftem%2f%25E6%259E%25B6%25E6%259E%2584%2f%25E7%25BA%25BF%25E7%25A8%258B%25E6%25B1%25A0%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share 对野生Goroutine管理的解决方案及其实现 on telegram"
+        href="https://telegram.me/share/url?text=%e5%af%b9%e9%87%8e%e7%94%9fGoroutine%e7%ae%a1%e7%90%86%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88%e5%8f%8a%e5%85%b6%e5%ae%9e%e7%8e%b0&amp;url=http%3a%2f%2flichang.tech%2ftem%2f%25E6%259E%25B6%25E6%259E%2584%2f%25E7%25BA%25BF%25E7%25A8%258B%25E6%25B1%25A0%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://lichang.tech/">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+	          renderMathInElement(document.body, {
+			                delimiters: [
+						                  {left: "$$", right: "$$", display: true},
+								                    {left: "$", right: "$", display: false}
+					              ]
+							                });
+		      });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

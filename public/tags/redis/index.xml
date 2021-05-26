@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>redis on Linote</title>
+    <link>http://lichang.tech/tags/redis/</link>
+    <description>Recent content in redis on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 04 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu18（WSL2）安装redis</title>
+      <link>http://lichang.tech/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
+      <description>1. 安装并对redis进行配置 更新源并安装redis
+sudo apt-get update sudo apt-get install redis-server 将redis设置为systemctl
+sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
+# If you run Redis from upstart or systemd, Redis can interact with your # supervision tree. Options: # supervised no - no supervision interaction # supervised upstart - signal upstart by putting Redis into SIGSTOP mode # supervised systemd - signal systemd by writing READY=1 to $NOTIFY_SOCKET # supervised auto - detect upstart or systemd method based on # UPSTART_JOB or NOTIFY_SOCKET environment variables # Note: these supervision methods only signal &amp;#34;process is ready.</description>
+    </item>
+    
+  </channel>
+</rss>

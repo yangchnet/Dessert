@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>GoLang | Linote</title>
+<meta name="keywords" content="" />
+<meta name="description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://lichang.tech/tags/golang/" />
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://lichang.tech/apple-touch-icon.png">
+<link rel="mask-icon" href="http://lichang.tech/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<link rel="alternate" type="application/rss+xml" href="http://lichang.tech/tags/golang/index.xml">
+<meta property="og:title" content="GoLang" />
+<meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://lichang.tech/tags/golang/" /><meta property="og:image" content="http://lichang.tech/papermod-cover.png"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://lichang.tech/papermod-cover.png"/>
+
+<meta name="twitter:title" content="GoLang"/>
+<meta name="twitter:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"/>
+
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://lichang.tech/" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://lichang.tech/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://lichang.tech/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://lichang.tech/">Home</a>&nbsp;»&nbsp;<a href="http://lichang.tech/tags/">Tags</a></div>
+  <h1>GoLang</h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>golang中context包的使用</h2>
+  </header>
+  <section class="entry-content">
+    <p>context包定义了Context类型，这个类型在API边界即进程中传递截止日期、同步信号，请求值等相关信息。
+ 1. 对context包的介绍 在服务器的传入请求中应包含context，而对服务器的传出调用应接收一个context。它们之间的调用链必须包含context，或是衍生的WithCancel, WithDeadline, WithTimeout, WithValue。当一个WithCancel Context被“cancel”，那么当前context所派生的所有context也都将被取消。
+WithCancel, WithDeadline, WithTimeout接收一个Context对象（父对象），并返回其父对象的一个携带有cancel/deadline/timeout的一个拷贝（子对象）。调用CancelFunc会取消其子对象及子对象的子对象等，删除父对象对子对象的引用，并停止所有关联的计时器。未能调用CancelFunc将造成父对象结束前或计时器被触发前子对象的泄露。使用go vet工具可以检查所有控制流路径上是否都使用了CancelFunc
+使用context的程序应遵循以下规则，以使各个包之间的接口保持一致，并启用静态分析工具来检查上下文传播：
+ 不要将context存储在结构类型中，而是将context明确传递给需要它的每个函数。Context应该是第一个函数，通常命名为ctx。  func DoSomething(ctx context.Context, arg Arg) error { // ...use ctx... } 不要传递一个值为nil的context，即使一个函数允许这样做。如果你不确定Context的作用那就请传递context.TODO。 只在进程和API间传递请求范围数据时使用context值，不要用于将可选参数传递给函数。 同样的Context可以传递给运行在不同goroutine中的函数，Context是线程安全的。  2. Context接口 type Context interface { Done() &lt;-chan struct{} Err() error Deadline() (deadline time.Time, ok bool) Value(key interface{}) interface{} } Context是一个接口，其定义非常的简单，只包含4个方法：
+  Done() &lt;-chan struct{} Done()方法将一个channel作为取消信号返回给持有context的函数，当该channel被关闭（即Done()被调用），这些函数应该立即停止其工作并返回。
+  Err() error Err()返回一个Error，说明为什么取消context。如果Done()没有被调用，那么Err返回nil。
+  Deadline() (deadline time.Time, ok bool) Deadline()方法返回持有这个context的函数的预期结束时间。如果并没有设置deadline，那么返回的ok将被设置为false。...</p>
+  </section>
+  <footer class="entry-footer">May 23, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to golang中context包的使用" href="http://lichang.tech/tem/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Golang中反射reflect的基本使用</h2>
+  </header>
+  <section class="entry-content">
+    <p>在计算机领域，反射是指一类应用，它们能够自描述和自控制。也即是说，这类应用通过采用某种机制来实现对自己行为的描述和监测，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。 反射（reflect）让我们能在运行期探知对象的类型信息和内存结构，这从一定程度上弥(mi)补了静态语言在动态行为上的不足。 反射（reflect）是在计算机程序运行时，访问，检查，修改它自身的一种能力，是元编程的一种形式。 Go语音提供了一种机制在运行时更新变量和检查它们的值、调用它们的方法和它们支持的内在操作，但是在编译时并不知道这些变量的具体类型。这种机制被称为反射。反射也可以让我们将类型本身作为第一类的值类型处理。
+ 1. 为何我们需要反射？ fmt.Fprintf函数提供字符串格式化处理逻辑，它可以对任意类型的值格式化并打印，甚至支持用户自定义的类型。
+让我们也来尝试实现一个类似功能的函数。为了简单起见，我们的函数只接收一个参数，然后返回和fmt.Sprint类似的格式化后的字符串。我们实现的函数名也叫Sprint。 这里我们使用switch类型分支来对不同的类型进行处理。
+func Sprint(x interface{}) string { type stringer interface { String() string } switch x := x.(type) { case stringer: return x.String() case string: return x case int: return strconv.Itoa(x) // ...similar cases for int16, uint32, and so on...  case bool: if x { return &#34;true&#34; } return &#34;false&#34; default: // array, chan, func, map, pointer, slice, struct  return &#34;?...</p>
+  </section>
+  <footer class="entry-footer">May 22, 2021&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Golang中反射reflect的基本使用" href="http://lichang.tech/tem/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>野生Goroutine带来的问题及对应解决方案</h2>
+  </header>
+  <section class="entry-content">
+    <p>1. goroutine中panic无法恢复 正常的函数中panic的recover
+import ( &#34;fmt&#34; ) func main(){ defer func(){ if err := recover(); err != nil{ fmt.Println(err) } }() var bar = []int{1} fmt.Println(bar[1]) } reflect: slice index out of range goroutine中panic的恢复
+func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用recover(),不能捕获panic 	fmt.Println(&#34;catch you, bad guy&#34;) } }() go func(){ fmt.Println(&#34;I&#39;m in a goroutine&#34;) panic(&#34;come to catch me&#34;) }() time.Sleep(10 * time.Second) // 主进程做其他事 } I&#39;m in a goroutine panic: come to catch me goroutine 6 [running]: main....</p>
+  </section>
+  <footer class="entry-footer">May 19, 2021&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to 野生Goroutine带来的问题及对应解决方案" href="http://lichang.tech/tem/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Go中的锁</h2>
+  </header>
+  <section class="entry-content">
+    <p>1. sync.Mutex互斥锁 不同goroutine之间对公共资源进行访问需要使用互斥锁。例如在对银行账户的操作中，如果我们有两种操作，一个是查询余额，一个是存款。其操作如下：
+package bank // 存款余额 var balance int // 存款 func Deposit(amount int) { balance = balance &#43; amount } // 查询 func Balance() int { return balance } // Alice: go func() { bank.Deposit(200) // A1  fmt.Println(&#34;=&#34;, bank.Balance()) // A2 }() // Bob: go bank.Deposit(100) // B 这其中，若把A1分为两个操作，A1r：把余额从内存中读出来；A2w：把修改后的余额写入内存。
+若执行顺序为A1r → B → A1w → A2， 正常情况下，Alice和Bob分别存入了$200，$100，因此最后的存款应该是300，但最后输出结果为200。因为A在计算时是按照A1r读出的数值进行计算，忽略了B的操作，A与B之间发生了数据竞争。
+ 数据竞争：无论任何时候，只要有两个goroutine并发访问同一变量，且至少其中的一个是写操作的时候就会发生数据竞争。
+ 解决此问题的办法之一是使用互斥锁。
+import &#34;sync&#34; var ( mu sync.Mutex // guards balance  balance int ) func Deposit(amount int) { mu....</p>
+  </section>
+  <footer class="entry-footer">April 14, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Go中的锁" href="http://lichang.tech/tem/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>面试题golang</h2>
+  </header>
+  <section class="entry-content">
+    <p>三个goroutine分别输出张三、李四、王五，使其按上述顺序输出5遍。 package main import ( &#34;fmt&#34; &#34;sync&#34; ) var w sync.WaitGroup func main() { w.Add(15) chan1 := make(chan struct{}, 0) chan2 := make(chan struct{}, 0) for i := 0; i &lt; 5; i&#43;&#43; { go func() { defer w.Done() fmt.Println(&#34;张三&#34;) chan1 &lt;- struct{}{} }() go func() { defer w.Done() &lt;- chan1 fmt.Println(&#34;李四&#34;) chan2 &lt;- struct{}{} }() go func() { defer w.Done() &lt;- chan2 fmt.Println(&#34;王五&#34;) }() } w.Wait() } 编写程序输出某目录下的所有文件（包括子目录） package main import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;os&#34; ) func main() { dir := os....</p>
+  </section>
+  <footer class="entry-footer">April 14, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to 面试题golang" href="http://lichang.tech/tem/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Reader和Writer接口</h2>
+  </header>
+  <section class="entry-content">
+    <p>1. Reader接口 type Reader interface { Read(p []byte) (n int, err error) }  接口说明
+ Read 将 len(p) 个字节读取到 p 中。它返回读取的字节数 n（0 &lt;= n &lt;= len(p)） 以及任何遇到的错误。即使 Read 返回的 n &lt; len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。
+当 Read 在成功读取 n &gt; 0 个字节后遇到一个错误或 EOF (end-of-file)，它会返回读取的字节数。它可能会同时在本次的调用中返回一个non-nil错误,或在下一次的调用中返回这个错误（且 n 为 0）。 一般情况下, Reader会返回一个非0字节数n, 若 n = len(p) 个字节从输入源的结尾处由 Read 返回，Read可能返回 err == EOF 或者 err == nil。并且之后的 Read() 都应该返回 (n:0, err:EOF)。...</p>
+  </section>
+  <footer class="entry-footer">March 28, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Reader和Writer接口" href="http://lichang.tech/tem/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>goroutine和线程</h2>
+  </header>
+  <section class="entry-content">
+    <p>1. 线程 在操作系统中，进程是分配资源的基本单位，但当进程作为调度的基本单位时，会造成较大的开销，频繁的进程调度将消耗大量时间。因此引出了线程：线程是处理器调度的基本单位，线程只拥有很小的运行时必要的资源。一个进程可拥有多个线程，同一个进程中的所有线程共享进程获得的主存空间和资源。 线程的实现
+有些系统同时支持用户线程和内核线程，由此产生了不同的多线程模型，即实现用户级线程 和内核级线程的连接方式：多对一模型、一对一模型、多对多模型。
+2. goroutine 在Go语言中，每一个并发的执行单元叫作一个goroutine，是一种轻量级的线程。
+3. 线程与goroutine的区别   运行时栈的大小
+ 每个系统级线程都会有一个固定大小的栈（一般为2MB），主要用于保存函数递归调用时参数和局部变量。这造成了两个问题：  对于某些需要很小的栈空间的线程来说是一个巨大的浪费 对于少数需要巨大栈空间的线程来说又面临栈溢出的风险   goroutine会以一个很小的栈启动（2KB或4KB），当遇到深度递归时导致当前栈空间不足，会根据需要动态的伸缩栈的大小。    调度
+ go的运行时还包括了其自己的调度器，可以在n个操作系统线程上多工调度m个goroutine（类似于多线程模型中的多对多模型）。 go调度器的工作和内核的调度时相似的，但是这个调度器只关注单独的go程序中的goroutine。 goroutinie采用的是半抢占式的协作调度，只有当当前goroutine发生阻塞时才会导致调度。 这种调度发生在用户态，调度器会根据具体函数只保存必要的寄存器，切换的代价比系统线程要低得多。    </p>
+  </section>
+  <footer class="entry-footer">March 27, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to goroutine和线程" href="http://lichang.tech/tem/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>panic和recover</h2>
+  </header>
+  <section class="entry-content">
+    <p>1. Panic异常 func panic(v interface{}) 在通常情况下，函数向其调用方报告错误都是返回一个error类型，但有时会遇到致命（即会让程序崩溃）的错误时，显然无法通过返回error进行处理。这时我们使用panic函数来报告致命错误。
+当panic异常发生时，程序会中断运行，并立即执行在该goroutine中被defer的函数。随后，程序崩溃并输出日志信息（panic value和函数调用的堆栈信息）。在Go的panic机制中，延迟函数的调用在释放堆栈信息之前.
+panic的来源： 1. 运行时panic异常 2. 直接调用内置的panic函数
+例子：
+func main(){ fmt.Println(&#34;main start&#34;) outerFunc() fmt.Println(&#34;main end&#34;) } func outerFunc(){ fmt.Println(&#34;out start&#34;) innerFunc() fmt.Println(&#34;out end&#34;) } func innerFunc(){ panic(errors.New(&#34;an intended fatal error&#34;)) }  输出
+ // 只有start，而没有end，因为程序崩溃了 main start out start panic: an intended fatal error 在这个程序中，当调用innerFunc中的panic时，innerFunc会立即停止执行，紧接着，outerFunc也会被停止，运行时panic沿着调用栈一直反方向进行传播，直至到达当前goroutine的调用栈最顶层。
+2. recover func recover() interface{} 通常来说，不应该对panic异常做任何处理，但有时我们可能需要在程序崩溃前做一些操作。这时，我们可以“从异常中恢复”。
+如果在defer函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。导致panic异常的函数不会继续运行，但能正常返回。在未发生panic时调用recover，recover会返回nil。
+// ...  // 将innerFunc修改为如下 func innerFunc(){ defer func(){ if p := recover(); p !...</p>
+  </section>
+  <footer class="entry-footer">March 27, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to panic和recover" href="http://lichang.tech/tem/golang/panic%E5%92%8Crecover/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>defer用法</h2>
+  </header>
+  <section class="entry-content">
+    <p>defer用法 defer用来延迟对某个语句的调用，常用于处理成对的操作，如打开、关闭、连接、断开连接，加锁、释放锁。通过defer语句，无论函数逻辑多复杂，都能保证在任何代码执行路径下，资源被释放。defer应该直接跟在请求资源的语句后。
+defer语句将函数的调用push到一个列表中，当外层函数返回时，会执行保存的函数列表
+举个例子，这个程序打开两个文件并将一个文件的内容复制到另一个文件的函数
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } dst, err := os.Create(dstName) if err != nil { return } written, err = io.Copy(dst, src) dst.Close() src.Close() return } 这个函数似乎可以正常工作，但其实存在一个bug，如果对os.Create的调用失败，该函数将返回但却不关闭源文件，通过在第二个return语句中调用src.Close可以解决这个问题。但是如果函数更加复杂，问题可能不会那么容易被发现和解决。通过使用defer语句，可以确保始终关闭文件。
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } defer src.Close() dst, err := os....</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to defer用法" href="http://lichang.tech/tem/golang/defer%E7%94%A8%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Flag包的基本用法</h2>
+  </header>
+  <section class="entry-content">
+    <p>Flag包的基本用法  flag包用于处理golang命令行程序中的参数
+ 1. 使用flag包的基本流程 使用flag包涉及三个步骤：
+ 定义变量以捕获标志值 定义Go应用程序将使用的标志 在执行时解析提供给应用程序的标志。  flag软件包中的大多数功能都与定义标志并将其绑定到定义的变量有关。解析阶段由Parse()函数处理。
+一个例子 创建一个程序，该程序定义一个布尔标志，该标志会更改将打印到标准输出的消息。如果-color提供了一个标志，程序将以蓝色打印一条消息。如果未提供标志，则消息将被打印为没有任何颜色。
+// boolean.go import ( &#34;flag&#34; &#34;fmt&#34; ) type Color string // 定义变量以捕获标志值  const ( ColorBlack Color = &#34;\u001b[30m&#34; ColorRed = &#34;\u001b[31m&#34; ColorGreen = &#34;\u001b[32m&#34; ColorYellow = &#34;\u001b[33m&#34; ColorBlue = &#34;\u001b[34m&#34; ColorReset = &#34;\u001b[0m&#34; ) func colorize(color Color, message string) { fmt.Println(string(color), message, string(ColorReset)) } func main() { useColor := flag.Bool(&#34;color&#34;, false, &#34;display colorized output&#34;) // 定义Go应用程序将使用的标志  flag....</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Flag包的基本用法" href="http://lichang.tech/tem/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="http://lichang.tech/tags/golang/page/2/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://lichang.tech/">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+	          renderMathInElement(document.body, {
+			                delimiters: [
+						                  {left: "$$", right: "$$", display: true},
+								                    {left: "$", right: "$", display: false}
+					              ]
+							                });
+		      });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
