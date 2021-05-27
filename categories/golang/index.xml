@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>GoLang on Linote</title>
+    <link>http://lichang.tech/categories/golang/</link>
+    <description>Recent content in GoLang on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 23 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang中context包的使用</title>
+      <link>http://lichang.tech/tem/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>context包定义了Context类型，这个类型在API边界即进程中传递截止日期、同步信号，请求值等相关信息。
+ 1. 对context包的介绍 在服务器的传入请求中应包含context，而对服务器的传出调用应接收一个context。它们之间的调用链必须包含context，或是衍生的WithCancel, WithDeadline, WithTimeout, WithValue。当一个WithCancel Context被“cancel”，那么当前context所派生的所有context也都将被取消。
+WithCancel, WithDeadline, WithTimeout接收一个Context对象（父对象），并返回其父对象的一个携带有cancel/deadline/timeout的一个拷贝（子对象）。调用CancelFunc会取消其子对象及子对象的子对象等，删除父对象对子对象的引用，并停止所有关联的计时器。未能调用CancelFunc将造成父对象结束前或计时器被触发前子对象的泄露。使用go vet工具可以检查所有控制流路径上是否都使用了CancelFunc
+使用context的程序应遵循以下规则，以使各个包之间的接口保持一致，并启用静态分析工具来检查上下文传播：
+ 不要将context存储在结构类型中，而是将context明确传递给需要它的每个函数。Context应该是第一个函数，通常命名为ctx。  func DoSomething(ctx context.Context, arg Arg) error { // ...use ctx... } 不要传递一个值为nil的context，即使一个函数允许这样做。如果你不确定Context的作用那就请传递context.TODO。 只在进程和API间传递请求范围数据时使用context值，不要用于将可选参数传递给函数。 同样的Context可以传递给运行在不同goroutine中的函数，Context是线程安全的。  2. Context接口 type Context interface { Done() &amp;lt;-chan struct{} Err() error Deadline() (deadline time.Time, ok bool) Value(key interface{}) interface{} } Context是一个接口，其定义非常的简单，只包含4个方法：
+  Done() &amp;lt;-chan struct{} Done()方法将一个channel作为取消信号返回给持有context的函数，当该channel被关闭（即Done()被调用），这些函数应该立即停止其工作并返回。
+  Err() error Err()返回一个Error，说明为什么取消context。如果Done()没有被调用，那么Err返回nil。
+  Deadline() (deadline time.Time, ok bool) Deadline()方法返回持有这个context的函数的预期结束时间。如果并没有设置deadline，那么返回的ok将被设置为false。</description>
+    </item>
+    
+    <item>
+      <title>Golang中反射reflect的基本使用</title>
+      <link>http://lichang.tech/tem/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>在计算机领域，反射是指一类应用，它们能够自描述和自控制。也即是说，这类应用通过采用某种机制来实现对自己行为的描述和监测，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。 反射（reflect）让我们能在运行期探知对象的类型信息和内存结构，这从一定程度上弥(mi)补了静态语言在动态行为上的不足。 反射（reflect）是在计算机程序运行时，访问，检查，修改它自身的一种能力，是元编程的一种形式。 Go语音提供了一种机制在运行时更新变量和检查它们的值、调用它们的方法和它们支持的内在操作，但是在编译时并不知道这些变量的具体类型。这种机制被称为反射。反射也可以让我们将类型本身作为第一类的值类型处理。
+ 1. 为何我们需要反射？ fmt.Fprintf函数提供字符串格式化处理逻辑，它可以对任意类型的值格式化并打印，甚至支持用户自定义的类型。
+让我们也来尝试实现一个类似功能的函数。为了简单起见，我们的函数只接收一个参数，然后返回和fmt.Sprint类似的格式化后的字符串。我们实现的函数名也叫Sprint。 这里我们使用switch类型分支来对不同的类型进行处理。
+func Sprint(x interface{}) string { type stringer interface { String() string } switch x := x.(type) { case stringer: return x.String() case string: return x case int: return strconv.Itoa(x) // ...similar cases for int16, uint32, and so on...  case bool: if x { return &amp;#34;true&amp;#34; } return &amp;#34;false&amp;#34; default: // array, chan, func, map, pointer, slice, struct  return &amp;#34;?</description>
+    </item>
+    
+    <item>
+      <title>野生Goroutine带来的问题及对应解决方案</title>
+      <link>http://lichang.tech/tem/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>1. goroutine中panic无法恢复 正常的函数中panic的recover
+import ( &amp;#34;fmt&amp;#34; ) func main(){ defer func(){ if err := recover(); err != nil{ fmt.Println(err) } }() var bar = []int{1} fmt.Println(bar[1]) } reflect: slice index out of range goroutine中panic的恢复
+func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用recover(),不能捕获panic 	fmt.Println(&amp;#34;catch you, bad guy&amp;#34;) } }() go func(){ fmt.Println(&amp;#34;I&amp;#39;m in a goroutine&amp;#34;) panic(&amp;#34;come to catch me&amp;#34;) }() time.Sleep(10 * time.Second) // 主进程做其他事 } I&#39;m in a goroutine panic: come to catch me goroutine 6 [running]: main.</description>
+    </item>
+    
+    <item>
+      <title>Go中的锁</title>
+      <link>http://lichang.tech/tem/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
+      <description>1. sync.Mutex互斥锁 不同goroutine之间对公共资源进行访问需要使用互斥锁。例如在对银行账户的操作中，如果我们有两种操作，一个是查询余额，一个是存款。其操作如下：
+package bank // 存款余额 var balance int // 存款 func Deposit(amount int) { balance = balance + amount } // 查询 func Balance() int { return balance } // Alice: go func() { bank.Deposit(200) // A1  fmt.Println(&amp;#34;=&amp;#34;, bank.Balance()) // A2 }() // Bob: go bank.Deposit(100) // B 这其中，若把A1分为两个操作，A1r：把余额从内存中读出来；A2w：把修改后的余额写入内存。
+若执行顺序为A1r → B → A1w → A2， 正常情况下，Alice和Bob分别存入了$200，$100，因此最后的存款应该是300，但最后输出结果为200。因为A在计算时是按照A1r读出的数值进行计算，忽略了B的操作，A与B之间发生了数据竞争。
+ 数据竞争：无论任何时候，只要有两个goroutine并发访问同一变量，且至少其中的一个是写操作的时候就会发生数据竞争。
+ 解决此问题的办法之一是使用互斥锁。
+import &amp;#34;sync&amp;#34; var ( mu sync.Mutex // guards balance  balance int ) func Deposit(amount int) { mu.</description>
+    </item>
+    
+    <item>
+      <title>面试题golang</title>
+      <link>http://lichang.tech/tem/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+      <description>三个goroutine分别输出张三、李四、王五，使其按上述顺序输出5遍。 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;sync&amp;#34; ) var w sync.WaitGroup func main() { w.Add(15) chan1 := make(chan struct{}, 0) chan2 := make(chan struct{}, 0) for i := 0; i &amp;lt; 5; i++ { go func() { defer w.Done() fmt.Println(&amp;#34;张三&amp;#34;) chan1 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan1 fmt.Println(&amp;#34;李四&amp;#34;) chan2 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan2 fmt.Println(&amp;#34;王五&amp;#34;) }() } w.Wait() } 编写程序输出某目录下的所有文件（包括子目录） package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;os&amp;#34; ) func main() { dir := os.</description>
+    </item>
+    
+    <item>
+      <title>slice和数组的区别</title>
+      <link>http://lichang.tech/tem/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>1. 长度  数组
+ 对于数组来说，它的长度是固定的，并且数组的长度是其类型的一部分，即对于以下两个数组来说，他们是不同的类型。
+var a [5]int var b [6]int fmt.Printf(&amp;#34;%v&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： false 数组的长度必须是常量表达式，因为数组的长度需要在编译阶段确定。
+对于数组来说，由于其长度是固定的，因此不能添加或删除元素。
+ 切片
+ 而对于切片，其长度是不固定的，不同长度的切片，只要其元素类型相同，则它们就是相同的切片类型。
+a := make([]int, 5) b := make([]int, 6) fmt.Printf(&amp;#34;%v\n&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： true 如果切片操作超出cap(s)的上限将导致一个panic异常，但是超出len(s)则是意味着扩展了 slice，因为新slice的长度会变大：
+months := [...]string{1: &amp;#34;January&amp;#34;, /* ... */, 12: &amp;#34;December&amp;#34;} summer := months[6:9] fmt.Println(summer[:20]) // panic: out of range endlessSummer := summer[:5] // extend a slice (within capacity) fmt.Println(endlessSummer) // &amp;#34;[June July August September October]&amp;#34; 2.</description>
+    </item>
+    
+    <item>
+      <title>Reader和Writer接口</title>
+      <link>http://lichang.tech/tem/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Sun, 28 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</guid>
+      <description>1. Reader接口 type Reader interface { Read(p []byte) (n int, err error) }  接口说明
+ Read 将 len(p) 个字节读取到 p 中。它返回读取的字节数 n（0 &amp;lt;= n &amp;lt;= len(p)） 以及任何遇到的错误。即使 Read 返回的 n &amp;lt; len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。
+当 Read 在成功读取 n &amp;gt; 0 个字节后遇到一个错误或 EOF (end-of-file)，它会返回读取的字节数。它可能会同时在本次的调用中返回一个non-nil错误,或在下一次的调用中返回这个错误（且 n 为 0）。 一般情况下, Reader会返回一个非0字节数n, 若 n = len(p) 个字节从输入源的结尾处由 Read 返回，Read可能返回 err == EOF 或者 err == nil。并且之后的 Read() 都应该返回 (n:0, err:EOF)。</description>
+    </item>
+    
+    <item>
+      <title>goroutine和线程</title>
+      <link>http://lichang.tech/tem/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid>
+      <description>1. 线程 在操作系统中，进程是分配资源的基本单位，但当进程作为调度的基本单位时，会造成较大的开销，频繁的进程调度将消耗大量时间。因此引出了线程：线程是处理器调度的基本单位，线程只拥有很小的运行时必要的资源。一个进程可拥有多个线程，同一个进程中的所有线程共享进程获得的主存空间和资源。 线程的实现
+有些系统同时支持用户线程和内核线程，由此产生了不同的多线程模型，即实现用户级线程 和内核级线程的连接方式：多对一模型、一对一模型、多对多模型。
+2. goroutine 在Go语言中，每一个并发的执行单元叫作一个goroutine，是一种轻量级的线程。
+3. 线程与goroutine的区别   运行时栈的大小
+ 每个系统级线程都会有一个固定大小的栈（一般为2MB），主要用于保存函数递归调用时参数和局部变量。这造成了两个问题：  对于某些需要很小的栈空间的线程来说是一个巨大的浪费 对于少数需要巨大栈空间的线程来说又面临栈溢出的风险   goroutine会以一个很小的栈启动（2KB或4KB），当遇到深度递归时导致当前栈空间不足，会根据需要动态的伸缩栈的大小。    调度
+ go的运行时还包括了其自己的调度器，可以在n个操作系统线程上多工调度m个goroutine（类似于多线程模型中的多对多模型）。 go调度器的工作和内核的调度时相似的，但是这个调度器只关注单独的go程序中的goroutine。 goroutinie采用的是半抢占式的协作调度，只有当当前goroutine发生阻塞时才会导致调度。 这种调度发生在用户态，调度器会根据具体函数只保存必要的寄存器，切换的代价比系统线程要低得多。    </description>
+    </item>
+    
+    <item>
+      <title>panic和recover</title>
+      <link>http://lichang.tech/tem/golang/panic%E5%92%8Crecover/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/panic%E5%92%8Crecover/</guid>
+      <description>1. Panic异常 func panic(v interface{}) 在通常情况下，函数向其调用方报告错误都是返回一个error类型，但有时会遇到致命（即会让程序崩溃）的错误时，显然无法通过返回error进行处理。这时我们使用panic函数来报告致命错误。
+当panic异常发生时，程序会中断运行，并立即执行在该goroutine中被defer的函数。随后，程序崩溃并输出日志信息（panic value和函数调用的堆栈信息）。在Go的panic机制中，延迟函数的调用在释放堆栈信息之前.
+panic的来源： 1. 运行时panic异常 2. 直接调用内置的panic函数
+例子：
+func main(){ fmt.Println(&amp;#34;main start&amp;#34;) outerFunc() fmt.Println(&amp;#34;main end&amp;#34;) } func outerFunc(){ fmt.Println(&amp;#34;out start&amp;#34;) innerFunc() fmt.Println(&amp;#34;out end&amp;#34;) } func innerFunc(){ panic(errors.New(&amp;#34;an intended fatal error&amp;#34;)) }  输出
+ // 只有start，而没有end，因为程序崩溃了 main start out start panic: an intended fatal error 在这个程序中，当调用innerFunc中的panic时，innerFunc会立即停止执行，紧接着，outerFunc也会被停止，运行时panic沿着调用栈一直反方向进行传播，直至到达当前goroutine的调用栈最顶层。
+2. recover func recover() interface{} 通常来说，不应该对panic异常做任何处理，但有时我们可能需要在程序崩溃前做一些操作。这时，我们可以“从异常中恢复”。
+如果在defer函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。导致panic异常的函数不会继续运行，但能正常返回。在未发生panic时调用recover，recover会返回nil。
+// ...  // 将innerFunc修改为如下 func innerFunc(){ defer func(){ if p := recover(); p !</description>
+    </item>
+    
+    <item>
+      <title>defer用法</title>
+      <link>http://lichang.tech/tem/golang/defer%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/defer%E7%94%A8%E6%B3%95/</guid>
+      <description>defer用法 defer用来延迟对某个语句的调用，常用于处理成对的操作，如打开、关闭、连接、断开连接，加锁、释放锁。通过defer语句，无论函数逻辑多复杂，都能保证在任何代码执行路径下，资源被释放。defer应该直接跟在请求资源的语句后。
+defer语句将函数的调用push到一个列表中，当外层函数返回时，会执行保存的函数列表
+举个例子，这个程序打开两个文件并将一个文件的内容复制到另一个文件的函数
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } dst, err := os.Create(dstName) if err != nil { return } written, err = io.Copy(dst, src) dst.Close() src.Close() return } 这个函数似乎可以正常工作，但其实存在一个bug，如果对os.Create的调用失败，该函数将返回但却不关闭源文件，通过在第二个return语句中调用src.Close可以解决这个问题。但是如果函数更加复杂，问题可能不会那么容易被发现和解决。通过使用defer语句，可以确保始终关闭文件。
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } defer src.Close() dst, err := os.</description>
+    </item>
+    
+    <item>
+      <title>Flag包的基本用法</title>
+      <link>http://lichang.tech/tem/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+      <description>Flag包的基本用法  flag包用于处理golang命令行程序中的参数
+ 1. 使用flag包的基本流程 使用flag包涉及三个步骤：
+ 定义变量以捕获标志值 定义Go应用程序将使用的标志 在执行时解析提供给应用程序的标志。  flag软件包中的大多数功能都与定义标志并将其绑定到定义的变量有关。解析阶段由Parse()函数处理。
+一个例子 创建一个程序，该程序定义一个布尔标志，该标志会更改将打印到标准输出的消息。如果-color提供了一个标志，程序将以蓝色打印一条消息。如果未提供标志，则消息将被打印为没有任何颜色。
+// boolean.go import ( &amp;#34;flag&amp;#34; &amp;#34;fmt&amp;#34; ) type Color string // 定义变量以捕获标志值  const ( ColorBlack Color = &amp;#34;\u001b[30m&amp;#34; ColorRed = &amp;#34;\u001b[31m&amp;#34; ColorGreen = &amp;#34;\u001b[32m&amp;#34; ColorYellow = &amp;#34;\u001b[33m&amp;#34; ColorBlue = &amp;#34;\u001b[34m&amp;#34; ColorReset = &amp;#34;\u001b[0m&amp;#34; ) func colorize(color Color, message string) { fmt.Println(string(color), message, string(ColorReset)) } func main() { useColor := flag.Bool(&amp;#34;color&amp;#34;, false, &amp;#34;display colorized output&amp;#34;) // 定义Go应用程序将使用的标志  flag.</description>
+    </item>
+    
+    <item>
+      <title>goget没反应</title>
+      <link>http://lichang.tech/tem/golang/go-get-%E6%B2%A1%E5%8F%8D%E5%BA%94/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/go-get-%E6%B2%A1%E5%8F%8D%E5%BA%94/</guid>
+      <description>go get 没反应 修改hosts，然后reboot 添加
+192.30.253.112 github.com 151.101.185.194 github.global.ssl.fastly.net 到/etc/hosts 然后reboot
+go get golang.org 在使用go get golang.org/...时，总是time out（就算fp也一样，fp之后可以访问golang.org），不知道为啥。
+幸好github上存在golang.org的镜像
+例如
+go get -u golang.org/x/net 那么这个包的位置在github上就是github.com/golang/net, 所以，我们可以手动建立golang.org/x/目录，并切换到该目录下，然后使用
+git clone https://github.com/golang/net.git **注意：**要使用git clone命令，直接下载下来复制到目录下会提示找不到版本号。</description>
+    </item>
+    
+    <item>
+      <title>golang中的print系函数详解</title>
+      <link>http://lichang.tech/tem/golang/golang%E4%B9%8Bprint/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/golang%E4%B9%8Bprint/</guid>
+      <description>golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
+ golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析
+import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; &amp;#34;io&amp;#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
+  Arguement
+fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.</description>
+    </item>
+    
+    <item>
+      <title>GOPATH的正确打开方式</title>
+      <link>http://lichang.tech/tem/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</guid>
+      <description>GOPATH的正确打开方式  GOPATH环境变量用于指定$GOROOT以外的目录，其中包含Go项目及其二进制文件的源。
+ GOPATH指定了go项目的位置及其编译得到的二进制文件的位置。GOPAHT可以是一个列表，也就是说可以设置多个GOPATH。
+1.如何查看GOPATH 使用
+go env 命令查看go相关的环境变量
+2. GOPATH的目录结构 GOPATH的目录结构如下：
+. ├── bin ├── pkg └── src └── main └── main.go $GOPATH/bin
+这个目录下存储编译的二进制文件，Linux操作系统使用\$PATH环境变量来查找无需完整路径即可执行的二进制应用程序，我们可以将这个目录添加到$PATH中，这样就可以方便的执行我们的二进制文件。
+$GOPATH/pkg
+Go在该目录中存储了预编译的目标文件，以加快程序的后续编译速度。通常，我们不需要访问该目录。但是如果在编译时遇到问题，可以安全地删除该目录，然后Go会重建它。
+$GOPATH/src
+这里是我们的代码所在位置。
+3. 我应该如何设置GOPATH   设置一个GOPATH
+当设置一个GOPAHT时，我们自行安装的一些包以及我们所有的项目文件，都会在\$GOPATH/src目录下，未免显得太过拥挤。不推荐。
+  设置两个GOPATH
+可以设置两个GOPATH，其中第一个作为从网络获取的包所在位置，第二个存放我们自己的项目，在从网络获取包时，将自动安装在第一个GOPATH下，这样就避免了我们自己的代码和网络上获取的代码挤在一起
+  每个项目设置一个GOPATH
+每个项目设置一个GOPATH，可以在建立项目的目录结构后使用
+  export GOPATH=`pwd` 来添加当前目录到GOPATH，但是下一次在运行这个命令时会将上一次的覆盖掉。这个方法的优点在于每个项目的目录结构变得清晰了，不再是所有项目存在于一个src文件夹下，可以建立在任意位置。但缺点在于每次切换项目都要重新export，同时还需要重新安装一些必要的包。类似于Python中的virtualenv.</description>
+    </item>
+    
+    <item>
+      <title>Go中的标准库</title>
+      <link>http://lichang.tech/tem/golang/%E6%A0%87%E5%87%86%E5%BA%93/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/%E6%A0%87%E5%87%86%E5%BA%93/</guid>
+      <description>Go中的标准库 在Go语言的安装文件里包含了一些可以直接使用的包，即标准库。Go语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含 I/O 操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。
+在 Windows 下，标准库的位置在Go语言根目录下的子目录 pkg\windows_amd64 中；在 Linux 下，标准库在Go语言根目录下的子目录 pkg\linux_amd64 中（如果是安装的是 32 位，则在 linux_386 目录中）。一般情况下，标准包会存放在 $GOROOT/pkg/$GOOS_$GOARCH/ 目录下。
+Go语言的编译器也是标准库的一部分，通过词法器扫描源码，使用语法树获得源码逻辑分支等。Go语言的周边工具也是建立在这些标准库上。在标准库上可以完成几乎大部分的需求。
+Go语言的标准库以包的方式提供支持，下表列出了Go语言标准库中常见的包及其功能。
+ bufio	带缓冲的 I/O 操作 bytes	实现字节操作 container	封装堆、列表和环形列表等容器 crypto	加密算法 database	数据库驱动和接口 debug	各种调试文件格式访问及调试功能 encoding	常见算法如 JSON、XML、Base64 等 flag	命令行解析 fmt	格式化操作 go	Go语言的词法、语法树、类型等。可通过这个包进行代码信息提取和修改 html	HTML 转义及模板系统 image	常见图形格式的访问及生成 io	实现 I/O 原始访问接口及访问封装 math	数学库 net	网络库，支持 Socket、HTTP、邮件、RPC、SMTP 等 os	操作系统平台不依赖平台操作封装 path	兼容各操作系统的路径操作实用函数 plugin	Go 1.7 加入的插件系统。支持将代码编译为插件，按需加载 reflect	语言反射支持。可以动态获得代码中的类型信息，获取和修改变量的值 regexp	正则表达式封装 runtime	运行时接口 sort	排序接口 strings	字符串转换、解析及实用函数 time	时间接口 text	文本模板及 Token 词法器  </description>
+    </item>
+    
+    <item>
+      <title>Go的http包详解</title>
+      <link>http://lichang.tech/tem/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</guid>
+      <description>Go的http包详解 详细地解剖一下 http 包，看它到底是怎样实现整个过程的。
+Go 的 http 有两个核心功能：Conn、ServeMux
+Conn的goroputine 为了实现高并发和高性能，go使用了goroutine来处理Conn的读写事件，这样每个请求都能保持独立，相互不会阻塞，可以高效的相应网络事件。
+go在等待客户端请求中是这样的：
+c, err := srv.newConn(rw) if err != nil { continue } go c.serve() 可以看到，客户端的每次请求都会创建一个Conn，这个Conn里面保存了该次请求的信息，然后再传递到相应的handler，该handler中便可以读取到相应的header信息，这样保证了每个请求的独立性。
+ServeMux的自定义 conn.server内部调用了http包默认的路由器，通过路由器把本次请求的信息传递到了后端的处理函数，那么这个路由器是怎么实现的呢？
+它的结构如下：
+type ServeMux struct{ mu sync.RWMutext // 锁，请求涉及到并发处理，因此需要一个锁机制  m map[string]muxEntry // 路由规则，一个String对应一个mux实体，这里的String就是注册的一个路由表达式  hosts bool // 是否在任意的规则中带有host信息 } 下面看一下muxEntry
+type muxEntry struct { explicit bool // 是否精确匹配  h Handler // 这个路由表达式对应哪个handler  pattern string // 匹配字符串 } 在看一下Handler的定义
+type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 } Handler是一个接口，但是附中的sayhelloName函数中并没有实现ServeHTTP这个接口，为什么能添加呢？这是因为http包里面还定义了一个类型HandlerFunc，定义的函数sayhelloName就是这个HandlerFunc调用之后的结果，这个类型默认就实现了ServeHTTP这个方法，即我们调用了HandlerFunc(f)，强制类型转换f成为HandlerFunc类型，这样f就拥有了ServeHTTP方法。</description>
+    </item>
+    
+    <item>
+      <title>Go语言中值类型与引用类型</title>
+      <link>http://lichang.tech/tem/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</guid>
+      <description>1.值类型与引用类型 值类型：int、float、bool和string这些类型都属于值类型，使用这些类型的变量直接指向存在内存中的值，值类型的变量的值存储在栈中。当使用等号=将一个变量的值赋给另一个变量时，如 j = i ,实际上是在内存中将 i 的值进行了拷贝。可以通过 &amp;amp;i 获取变量 i 的内存地址
+引用类型：特指slice、map、channel这三种预定义类型。引用类型拥有更复杂的存储结构:(1)分配内存 (2)初始化一系列属性等。一个引用类型的变量r1存储的是r1的值所在的内存地址（数字），或内存地址中第一个字所在的位置，这个内存地址被称之为指针，这个指针实际上也被存在另外的某一个字中
+2.值类型与引用类型的区别 值类型在传参时是做拷贝操作，即将原来的数据复制一份，而引用类型是直接传递指针，当参数在函数中被改变时，原数据也将改变。
+2.1.值类型 //先定义一个数组 var a = [5]int{1, 2, 3, 4, 5} //定义一个函数，将数组中的第一个值设为0 func change(a [5]int){ a[0] = 0 fmt.Println(a) } change(a) fmt.Println(a)  输出：
+ [0 2 3 4 5] [1 2 3 4 5] 可以看到，数组在函数内部被变成{0,1,2,3,4}，但当函数结束，还是原来的值没有变。
+2.2 引用类型 // 定义一个map var dit = make(map[string]int) dit[&amp;#34;one&amp;#34;] = 1 fmt.Println(dit) // 传参并做改变 func change(dit map[string]int){ dit[&amp;#34;two&amp;#34;] = 2 fmt.</description>
+    </item>
+    
+    <item>
+      <title>Go语言中的字面量</title>
+      <link>http://lichang.tech/tem/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</guid>
+      <description>Go语言中的字面量  什么是字面量 整型和浮点型的字面值 字符串的字面值 常量的字面值 数组的字面值 Slice的字面值 Map的字面值 结构体的字面值  什么是字面量 在计算机科学中，字面量（literal）是用于表达源代码中一个固定值的表示法（notation）。
+简单的说，字面量或者说字面值就是一个变量的值。
+整型和浮点型的字面值 var i int = 1 var f float64 = 3.14159 字符串的字面值 字符串值也可以用字符串面值方式编写，只要将一系列字节序列包含在双引号即可：
+&amp;#34;Hello 世界&amp;#34; `世界` 世界  一个原生的字符串面值形式是
+`...` 使用反引号代替双引号。在原生的字符串面值中，没有转义操作；全部的内容都是字面的意思，包含退格和换行，因此一个程序中的原生字符串面值可能跨越多行（译注：在原生字符串面值内部是无法直接写```````字符的，可以用八进制或十六进制转义或+&amp;quot;`&amp;quot;链接字符串常量完成）。唯一的特殊处理是会删除回车以保证在所有平台上的值都是一样的，包括那些把回车也放入文本文件的系统（译注：Windows系统会把回车和换行一起放入文本文件中）。
+原生字符串面值用于编写正则表达式会很方便，因为正则表达式往往会包含很多反斜杠。原生字符串面值同时被广泛应用于HTML模板、JSON面值、命令行提示信息以及那些需要扩展到多行的场景。
+const GoUsage = `Go is a tool for managing Go source code. Usage: go command [arguments] ...` GoUsage Go is a tool for managing Go source code. Usage: go command [arguments] ...  常量的字面值 对于常量面值，不同的写法可能会对应不同的类型。例如0、0.</description>
+    </item>
+    
+    <item>
+      <title>Go语言中的错误处理策略</title>
+      <link>http://lichang.tech/tem/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</guid>
+      <description>Go语言中的错误处理策略 0. 错误处理的编码风格 检查某个子函数是否失败后，我们通常将处理失败的逻辑代码放在处理成功的代码之前。如果某个错误会导致函数返回，那么成功的逻辑代码不应该放在else中，而应直接放在函数体中。
+1. 错误传播 函数某个子程序的失败，会变成该函数的失败
+resp, err := http.Get(url) if err != nil{ return nill, err } 或是构造新的错误信息返回给调用者
+doc, err := html.Parse(resp.Body) resp.Body.Close() if err != nil { return nil, fmt.Errorf(&amp;#34;parsing %s as HTML: %v&amp;#34;, url,err) } 一般而言，被调函数f(x)会将调用信息和参数信息作为发生错误时的上下文放在错误信息中并返回给调用者，调用者需要添加一些错误信息中不包含的信息。
+2. 重试失败的操作 如果错误的发生是偶然的，或由不可预知的问题导致的。此时可重新尝试失败的操作，但是在重试时，要限制重试的时间间隔或重试的时间次数，防止无限制的重试。
+func WaitForServer(url string) error { const timeout = 1 * time.Minute deadline := time.Now().Add(timeout) for tries := 0; time.Now().Before(deadline); tries++ { _, err := http.Head(url) if err == nil { return nil // success  } log.</description>
+    </item>
+    
+    <item>
+      <title>http/template</title>
+      <link>http://lichang.tech/tem/golang/template/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/template/</guid>
+      <description>http/template 什么是模板 模板是一种常见的视图，通过它我们可以传递数据以使该视图有意义。可以以任何方式对其进行自定义以获取任何可能的输出。
+模板包 Go中的模板附带两个包text/template和html/template。文本包允许我们使用模板插入文本，而HTML模板通过提供安全的HTML代码来帮助我们。
+Part of template 1. 模板动作 模板动作是主要的控制流程，数据评估功能。这些动作控制最终输出将如何显示
+{{ /* a comment isside template */ }} 2. 控制结构 控制结构确定模板的控制流程，有助于产生结构化的输出，以下是模板中的一些控制结构
+if语句
+{{ if .condition }} {{ else }} {{ end }} 循环块
+{{ range .Items }} {{ end }} 3. 功能 函数也可以在模板内部使用，可以使用管道符|来使用预定义的函数
+ 如何预定义函数
+ 下面的代码创建并分析上面定义的模板templ。注意方法调用链的顺序:template.New先创建并返回一个模板;Funcs方法将daysAgo等自定义函数注册到模板中,并返回模板;最后调用Parse函数分析模板。
+report, err := template.New(&amp;#34;report&amp;#34;).Funcs(template.FuncMap{&amp;#34;daysAgo&amp;#34;: daysAgo}).Parse(templ) if err != nil { log.Fatal(err) } 在Go中解析模板 现在，我们来解析一些文本和HTML模板
+1. 访问数据 要访问传递的数据，使用点.，如下所示：
+{{ .data }} 2. 解析文本模板 现在，来解析一个文本模板</description>
+    </item>
+    
+    <item>
+      <title>RESTfulAPI入门</title>
+      <link>http://lichang.tech/tem/golang/restful-api/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/restful-api/</guid>
+      <description>RESTful API 入门 1. 简介 表现层状态转换（英语：Representational State Transfer，缩写：REST）是Roy Thomas Fielding博士于2000年在他的博士论文中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。表现层状态转换是根基于超文本传输协议（HTTP）之上而确定的一组约束和属性，是一种设计提供万维网络服务的软件构建风格。符合或兼容于这种架构风格（简称为 REST 或 RESTful）的网络服务，允许客户端发出以统一资源标识符访问和操作网络资源的请求，而与预先定义好的无状态操作集一致化。因此表现层状态转换提供了在互联网络的计算系统之间，彼此资源可交互使用的协作性质（interoperability）。相对于其它种类的网络服务，例如SOAP服务，则是以本身所定义的操作集，来访问网络上的资源。
+2. REST 架构约束   客户端－服务器 从本质上讲，这意味着客户端应用程序和服务器应用程序必须能够独立发展而彼此之间没有任何依赖关系。客户端应该只知道资源URI，仅此而已。今天，这是Web开发中的常规做法，因此您不需要任何花哨。把事情简单化。
+ 服务器和客户端也可以独立替换和开发，只要它们之间的接口没有更改即可。
+   无状态
+Roy fielding的灵感来自HTTP，因此它反映了这一约束。使所有客户端-服务器交互都变为无状态。服务器将不存储有关客户端发出的最新HTTP请求的任何内容。它将每个请求视为新请求。没有会议，没有历史。
+如果客户端应用程序需要是最终用户的有状态应用程序，则用户必须登录一次并在此之后执行其他授权操作，则来自客户端的每个请求都应包含服务于该请求的所有必要信息，包括身份验证和授权细节。
+ 请求之间不得在服务器上存储任何客户端上下文。客户端负责管理应用程序的状态。
+   统一的接口 在约束名称本身适用的情况下，您必须为系统内部暴露给API使用者并认真遵循的资源确定API接口。系统中的资源应仅具有一个逻辑URI，并且应提供一种获取相关或附加数据的方式。最好将资源与网页同义。
+任何单个资源都不应太大，并在其表示中包含所有内容。只要相关，资源应包含指向相对URI的链接（HATEOAS），以获取相关信息。
+此外，整个系统上的资源表示应遵循特定的准则，例如命名约定，链接格式或数据格式（XML或/和JSON）。
+所有资源都应通过通用方法（例如HTTP GET）进行访问，并使用一致的方法进行类似的修改。
+ 一旦开发人员熟悉您的一个API，他就应该能够对其他API遵循类似的方法。
+   分层系统
+REST允许您使用分层的系统架构，在该架构中，您可以在服务器A上部署API，并在服务器B上存储数据并在服务器C中对请求进行身份验证。客户端通常无法确定它是直接连接到最终服务器还是中​​间连接。
+  可缓存的
+在当今世界中，缓存数据和响应在任何适用/可能的地方都至关重要。我们阅读的网页也是HTML页面的缓存版本。缓存可以提高客户端的性能，并为服务器提供更好的可伸缩性。
+在REST中，缓存应在适用时应用于资源，然后这些资源必须声明自己可缓存。可以在服务器或客户端上实现缓存。
+ 管理良好的缓存部分或完全消除了某些客户端-服务器交互，从而进一步提高了可伸缩性和性能。
+   按需代码（可选）
+好吧，这个约束是可选的。大多数时候，您将以XML或JSON的形式发送资源的静态表示。但是，如果需要，您可以自由地return executable code支持应用程序的一部分，例如，客户端可以调用您的API来获取UI小部件呈现代码。这是允许的。
+ 以上所有约束条件都可以帮助您构建真正的RESTful API，并且应该遵循它们。不过，有时您可能会发现自己违反了一两个约束。别担心; 您仍在制作RESTful API，但不是“真正的RESTful”。
+   3. REST资源命名指南 在REST中，主要数据表示称为Resource。从长远来看，拥有一个强大且一致的REST资源命名策略–无疑将证明是最佳的设计决策之一。</description>
+    </item>
+    
+    <item>
+      <title>数组越界判定问题</title>
+      <link>http://lichang.tech/tem/golang/%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%88%A4%E5%AE%9A%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%88%A4%E5%AE%9A%E9%97%AE%E9%A2%98/</guid>
+      <description>数组越界判定问题  今天写了一个数组的代码，里面有个函数为数组越界判定，测试的时候没通过，看了答案才发现另有玄机
+ 数组定义 type Array struct{ data []int length uint } 越界判定1 // 判断索引是否越界 func (this *Array)isIndexOutRange1(index uint) bool{ if index &amp;gt; this.length-1{ //这种写法错误  return true } return false } 越界判定2 // 判断索引是否越界 func (this *Array)isIndexOutRange2(index uint) bool{ if index &amp;gt;= uint(cap(this.data)){ return true } return false } 第一种写法根据数组当前长度与要访问的下标进行比较，来判定是否下标越界
+第二种写法根绝数组占用内存大小与下标比较来判定
+二者的区别在哪?
+a := Array{ data: []int{1,2,3}, length: 3, } a.length 3  cap(a.data) 3  a.isIndexOutRange1(2) false  a.</description>
+    </item>
+    
+    <item>
+      <title>类型断言</title>
+      <link>http://lichang.tech/tem/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</guid>
+      <description>类型断言 类型断言是一个使用在接口上的操作，语法上看起来像是x.(T)，因此被称为断言类型，这里x是接口，T是类型。一个类型断言检查它操作对象的动态类型是否和断言的类型匹配。
+这里有两种可能：
+ 如果断言的类型T是一个具体类型
+类型断言检查x的动态类型是否和T相同。如果检查成功了，类型断言的结果是x的动态值，即T。换句话说，具体类型的类型断言从它的操作对象中获得具体的值。如果检查失败，接下来这个操作会panic。  import ( &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; &amp;#34;bytes&amp;#34; &amp;#34;fmt&amp;#34; ) var w io.Writer w = os.Stdout f := w.(*os.File) // 类型检查成功了，所以f的值为os.Stdout f == os.Stdout // true fmt.Printf(&amp;#34;%p&amp;#34;, f)  输出
+ 0xc0004560c0
+ c := w.(*bytes.Buffer) // 类型检查失败  输出
+ interface conversion: &amp;lt;io.Writer&amp;gt; is &amp;lt;*os.File&amp;gt;, not &amp;lt;*bytes.Buffer&amp;gt; 断言的类型T是一个接口类型  t, ok := i.(T) 如果i是类型T（实现了T接口），即检查成功了，那么t将是i的原值，ok为true；如果检查失败了，t将为T类型的零值，ok为false，并且不引发panic。
+对一个接口类型的类型断言改变了类型的表述方式，改变了可以获取的方法集合（通常更大）， 但是它保护了接口值内部的动态类型和值的部分。
+var w io Wirter w = os.Stdout rw := w.</description>
+    </item>
+    
+    <item>
+      <title>鸭子类型</title>
+      <link>http://lichang.tech/tem/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</guid>
+      <description>鸭子类型 1. 什么是鸭子类型 只要走起路来像鸭子，叫起来像鸭子，就可以认为是鸭子。这就是鸭子类型
+2. 鸭子类型有什么作用？ 对应于golang中的接口的概念，一个接口定义了一组操作，这组操作可以看做是鸭子的走路，叫。也就是说，只要任何类型满足了这组方法，那么就可以看做是鸭子&amp;ndash;即满足了这个接口，可以看做是这个接口类型。</description>
+    </item>
+    
+  </channel>
+</rss>

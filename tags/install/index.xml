@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>install on Linote</title>
+    <link>http://lichang.tech/tags/install/</link>
+    <description>Recent content in install on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deepin15安装Anaconda</title>
+      <link>http://lichang.tech/tem/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
+      <description>1. Anaconda下载地址  官方下载地址：https://www.anaconda.com/distribution/#linux 清华大学镜像：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ # 选择你想安装的版本下载  2. 安装 $ bash Anaconda3-2021.05-Linux-x86_64.sh # 中间会有一些选择，按照自己的意愿选择即可  关闭并重新打开你的终端来激活conda
+3. 使用  更新自己  # 更新conda conda update conda conda update anaconda  更新时出现了ValueError: check_hostname requires server_hostname错误，经查发现是代理的问题，可尝试关闭或开启代理再次尝试
+  对包的操作
+ 更新包  conda update --all # 更新所有包  安装包  conda install [包名]   对环境的操作
+ 创建环境  conda create --name [环境名字] # 使用默认的Python版本  激活环境  conda activate [环境名字]  退出环境  conda deactivate  查看环境名字  conda env list # conda info -e  删除环境中某个包  conda remove [环境名] [包名]  修改环境名字  conda create -n [新环境名] --clone [旧环境名] # 克隆旧的 conda remove -n [旧环境名] # 删除旧的  删除环境  conda remove -n [环境名] --all   4.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18（WSL2）安装redis</title>
+      <link>http://lichang.tech/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
+      <description>1. 安装并对redis进行配置 更新源并安装redis
+sudo apt-get update sudo apt-get install redis-server 将redis设置为systemctl
+sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
+# If you run Redis from upstart or systemd, Redis can interact with your # supervision tree. Options: # supervised no - no supervision interaction # supervised upstart - signal upstart by putting Redis into SIGSTOP mode # supervised systemd - signal systemd by writing READY=1 to $NOTIFY_SOCKET # supervised auto - detect upstart or systemd method based on # UPSTART_JOB or NOTIFY_SOCKET environment variables # Note: these supervision methods only signal &amp;#34;process is ready.</description>
+    </item>
+    
+    <item>
+      <title>安装与配置clash</title>
+      <link>http://lichang.tech/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <description>安装与配置clash  参考了这位老哥的博客
+ 0. 来由 阿里云与腾讯云git太慢了。。想快点
+1. 下载安装clash 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
+2. 安装clash 将下载的clash上传到自己的服务器之后，解压之：
+gunzip clash-linux-amd64-v1.4.1.gz 解压结果就是一个可执行文件 重命名：
+mv clash-linux-amd64 clash 赋予运行权限：
+chmod +x clash 移动到bin目录下：
+mv clash /usr/bin 3. 编辑config.yaml文件 config.yaml文件的内容来自你购买的vpn提供商
+mkdir /etc/clash touch /etc/clash/config.yaml ··· # 编辑你的config.yaml 4. 将clash添加为系统服务 cd /etc/systemd/system/ vim clash.service clash.service的内容为：
+[Unit] Description=clash proxy After=network.target [Service] Type=simple ExecStart=/usr/bin/clash -d /etc/clash [Install] WantedBy=multi-user.target  要想深入了解systemctl服务，可前往阮一峰大佬的教程
+ 编辑完成后，重载systemctl
+systemctl daemon-reload 开启clash服务
+systemctl start clash 5. 开启http代理和socks5代理  手动开启代理 export https_proxy=http://127.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>线程管理 on Linote</title>
+    <link>http://lichang.tech/tags/%E7%BA%BF%E7%A8%8B%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 线程管理 on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 17 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/%E7%BA%BF%E7%A8%8B%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>对野生Goroutine管理的解决方案及其实现</title>
+      <link>http://lichang.tech/tem/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+      <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+      <description>1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
+这种线程可能带来一系列问题：
+ 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。
+1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。
+ 线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。
+1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。
+2. 线程池的工作机制 2.1 线程池模型 线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。
+在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：
+ 直接申请线程执行该任务 缓冲到队列中等待线程执行 直接拒绝该任务  线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。
+2.2 线程池的状态 线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。 线程池的状态有5种：
+   运行状态 状态描述     RUNNING 能接受新提交的任务，并且也能处理阻塞队列中的任务   SHUTDOWN 关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务   STOP 不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程   TIDYING 所有的任务都已终止，有效线程数为0   TERMINATED 在terminated()方法执行后进入该状态   其生命周期转换如下图所示：     sequenceDiagram RUNNING-&amp;gt;&amp;gt;SHUTDOWN:shutdown() RUNNING-&amp;gt;&amp;gt;STOP: shutdownNow() SHUTDOWN-&amp;gt;&amp;gt;TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0 STOP-&amp;gt;&amp;gt;TIDYING:线程池中工作线程数为0 TIDYING-&amp;gt;&amp;gt;TERMINATED: terminated() 2.</description>
+    </item>
+    
+  </channel>
+</rss>

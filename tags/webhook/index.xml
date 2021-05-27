@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>webhook on Linote</title>
+    <link>http://lichang.tech/tags/webhook/</link>
+    <description>Recent content in webhook on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/webhook/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>博客建设</title>
+      <link>http://lichang.tech/tem/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+      <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
+      <description>博客建设记 0. 前记 一直想要建设一个属于自己的博客，一开始用python写过一个简单的，可以做到富文本编辑、发布、更新、评论等功能，但那个不是一个单纯的博客，并且界面也不是太友好，因此后来废弃了。后来又用了一段时间的jupyter notebook，很强大，尤其让我喜欢的是可以直接运行代码，曾经有一段时间想过可否把jupyter notebook直接作为我的博客页面，或者是嵌入我的页面内，于是看了看其源代码。。。遂放弃。后来又用了为知笔记，印象笔记，Notion等，但感觉都没jupyter notebook好用。 在用jupyter notebook记了有了一定的数目之后，就想将其发布出来，考虑过CSDN，但感觉上面广告好多，不太喜欢，因此没有使用。后来买了域名和服务器，用wordpress搞了一个，但是不是太满意，也没发布。后来用go语言写了一个，因为某些原因，中间的一些数据通路没有搞通（主要是从jupyter到md再到网站的自动发布），再加上后来考研，所以这个项目也没活到&amp;quot;成站&amp;quot;。 终于，用hugo搞了一个。之所以用hugo，一是因为最近研究go语言，对go语言的项目具有一定的好感，第二是因为看了网上的一些介绍并且发现了一些使用hugo的个人博客。 2021/2/28，记之。
+1. 使用hugo开始自己的网站 1.1 开始 hugo的使用炒鸡简单，你只需要使用
+hugo new site MySite 即可新建一个名为MySite的网站
+1.2 为你的网站选择一个theme 进入到我们刚才建立的网站目录
+cd Mysite/ 从GitHub导入你想应用的主题
+git init git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke 待下载完成后，还需要修改你的配置文件
+echo &amp;#39;theme = &amp;#34;ananke&amp;#34; &amp;#39; &amp;gt;&amp;gt; config.toml 1.3 为你的网站添加一些内容 hugo使用我们上传的md文件来自动生成静态网页，而我们上传的md文件的位置在MySite/content/posts/*, 我们可以直接复制已经编辑好的md文件到这个目录，或者使用如下命令：
+hugo new posts/my-first-post.md 需要注意的一点：为了让hugo知道更多的信息，我们上传的md文件一般会有一个&amp;quot;standand header&amp;quot;, 如下：
+--- title: &amp;#34;My First Post&amp;#34; date: 2019-03-26T08:47:11+01:00 draft: true --- 这里的头部并不是一成不变的，你可以根据需要自行配置。
+1.4 开始让你的网站服务 使用如下命令让你的网站开始服务吧！
+hugo server -D 注意，这个命令只会让你的hugo服务器监听本地访问，也就是127.0.0.1 如果你想要你的hugo服务器为整个网络服务，可以这样：</description>
+    </item>
+    
+  </channel>
+</rss>

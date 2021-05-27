@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>前端 on Linote</title>
+    <link>http://lichang.tech/categories/%E5%89%8D%E7%AB%AF/</link>
+    <description>Recent content in 前端 on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue中的指令介绍</title>
+      <link>http://lichang.tech/tem/%E5%89%8D%E7%AB%AF/vue%E6%8C%87%E4%BB%A4/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/%E5%89%8D%E7%AB%AF/vue%E6%8C%87%E4%BB%A4/</guid>
+      <description>Vue中的指令介绍 指令  解释：指令 (Directives) 是带有 v- 前缀的特殊属性 作用：当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM  v-text 解释：更新元素的 textContent
+&amp;lt;h1 v-text=&amp;#34;msg&amp;#34;&amp;gt;&amp;lt;/h1&amp;gt; v-html 解释：更新元素的 innerHTML
+&amp;lt;h1 v-html=&amp;#34;msg&amp;#34;&amp;gt;&amp;lt;/h1&amp;gt; v-bind 作用：当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM.响应式地更新 HTML attribute： 语法：v-bind:title=&amp;quot;msg&amp;quot; 简写：:title=&amp;quot;msg&amp;quot;
+&amp;lt;!-- 完整语法 --&amp;gt; &amp;lt;a v-bind:href=&amp;#34;url&amp;#34;&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;!-- 缩写 --&amp;gt; &amp;lt;a :href=&amp;#34;url&amp;#34;&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;script&amp;gt; // 2 创建 Vue 的实例对象  var vm = new Vue({ // el 用来指定vue挂载到页面中的元素，值是：选择器  // 理解：用来指定vue管理的HTML区域  el: &amp;#39;#app&amp;#39;, // 数据对象，用来给视图中提供数据的  data: { url: &amp;#39;http://www.baidu.com&amp;#39; } }) &amp;lt;/script&amp;gt; v-on 作用：绑定事件 语法：v-on:click=&amp;quot;say&amp;quot; or v-on:click=&amp;quot;say(&#39;参数&#39;, $event)&amp;quot; 简写：@click=&amp;quot;say&amp;quot; 说明：绑定的事件从methods中获取</description>
+    </item>
+    
+  </channel>
+</rss>

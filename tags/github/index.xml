@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>github on Linote</title>
+    <link>http://lichang.tech/tags/github/</link>
+    <description>Recent content in github on Linote</description>
+    <image>
+      <url>http://lichang.tech/papermod-cover.png</url>
+      <link>http://lichang.tech/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 08 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Failed to connect to github.com port 443</title>
+      <link>http://lichang.tech/tem/git/failed-to-connect-to-github.com-port-443/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/git/failed-to-connect-to-github.com-port-443/</guid>
+      <description>Github 出现 Failed to connect to github.com port 443: Timed out 1. 问题来由 可能是由于使用了全局代理的原因
+2. 解决 取消全局代理： git config --global --unset http.proxy git config --global --unset https.proxy  设置全局代理
+ git config --global http.proxy http://127.0.0.1:1080 git config --global https.proxy http://127.0.0.1:1080 </description>
+    </item>
+    
+    <item>
+      <title>GitHub图床&#43;vscode&#43;Picgo </title>
+      <link>http://lichang.tech/tem/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://lichang.tech/tem/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
+      <description>GitHub图床+vscode+Picgo 0. 来由 用markdown写博客的时候，图片往哪里存地干活？图床里存···
+1. GitHub配置   创建图床仓库 为了不污染我原来的git账号，我决定新建一个git账号，专门用作图床账号。 新建账号之后，new一个repo，啥都不用点，直接create。
+  生成token 点击你GitHub页面右上角的头像，点击settings 在页面左侧找到Developer settings，选择之，再找到Personal access tokens，再选择之，然后generate new tokens 在新弹出的页面中填写note，并选择repo， 然后直接到最下面，Generate token 这样GitHub会为你生成一个token（只会出现这一次），复制它留用。   2. 配置VScode中的Picgo插件 在vscode的插件商店中直接搜索Picgo，然后点击安装 安装完成后，再来配置你的Picgo File&amp;gt;Preferences&amp;gt;settings&amp;gt;Entensions&amp;gt;Picgo找到配置picgo的位置，填写必要的信息 &amp;#34;picgo.picBed.current&amp;#34;: &amp;#34;github&amp;#34;, &amp;#34;picgo.picBed.github.branch&amp;#34;: &amp;#34;master&amp;#34;, &amp;#34;picgo.picBed.github.path&amp;#34;: &amp;#34;&amp;#34;, # 你想要图片存储的路径 &amp;#34;picgo.picBed.github.repo&amp;#34;: &amp;#34;&amp;#34;, # 你的用户名以及repo名，user/REPO_name &amp;#34;picgo.picBed.github.token&amp;#34;: &amp;#34;&amp;#34; # 刚才复制的token，粘贴到这里 3. 使用picgo上传图片 截个图并复制到剪贴板，在vscode里按下&amp;quot;CTRL+ALT+u&amp;quot;，图片就可以十分迅速的上传到你配置的GitHub仓库并为你返回图片链接 （￣︶￣）↗。
+END</description>
+    </item>
+    
+  </channel>
+</rss>
