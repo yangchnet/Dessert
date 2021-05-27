@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/clash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>安装与配置clash</title>
-      <link>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
       <description>安装与配置clash  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
 1. 下载安装clash 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）

@@ -12,10 +12,10 @@
     <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/install/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deepin15安装Anaconda</title>
-      <link>http://yangchnet.github.io/Dessert/tem/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
       <description>1. Anaconda下载地址  官方下载地址：https://www.anaconda.com/distribution/#linux 清华大学镜像：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ # 选择你想安装的版本下载  2. 安装 $ bash Anaconda3-2021.05-Linux-x86_64.sh # 中间会有一些选择，按照自己的意愿选择即可  关闭并重新打开你的终端来激活conda
 3. 使用  更新自己  # 更新conda conda update conda conda update anaconda  更新时出现了ValueError: check_hostname requires server_hostname错误，经查发现是代理的问题，可尝试关闭或开启代理再次尝试
   对包的操作
@@ -25,10 +25,10 @@
     
     <item>
       <title>Ubuntu18（WSL2）安装redis</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
       <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
       <description>1. 安装并对redis进行配置 更新源并安装redis
 sudo apt-get update sudo apt-get install redis-server 将redis设置为systemctl
 sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
@@ -37,10 +37,10 @@ sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
     
     <item>
       <title>安装与配置clash</title>
-      <link>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
       <description>安装与配置clash  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
 1. 下载安装clash 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）

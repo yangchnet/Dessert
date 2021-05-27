@@ -1,101 +1,465 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>ORM简介 | Linote</title><meta name=keywords content="ORM,SQL"><meta name=description content="1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&#34;对象-关系映射&#34;（Object/Relational Mapping） 的缩写。
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ORM简介 | Linote</title>
+<meta name="keywords" content="ORM, SQL" />
+<meta name="description" content="1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&quot;对象-关系映射&quot;（Object/Relational Mapping） 的缩写。
 ORM把数据库映射为对象
- 数据库的表（table） &ndash;> 类（class） 记录（record，行数据）&ndash;> 对象（object） 字段（field）&ndash;> 对象的属性（attribute）
+ 数据库的表（table） &ndash;&gt; 类（class） 记录（record，行数据）&ndash;&gt; 对象（object） 字段（field）&ndash;&gt; 对象的属性（attribute）
  举例来说，下面是一行SQL语句
 SELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：
 res = db.execSql(sql) name = res[0][&#34;FIRST_NAME&#34;] 改成ORM的写法如下：
 p = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。
 总结起来，ORM有如下优点：
- 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2."><meta name=author content="李昌"><link rel=canonical href=http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/><link crossorigin=anonymous href=/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as=style><link rel=preload href=https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png as=image><script defer crossorigin=anonymous src=/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=32x32 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico><link rel=apple-touch-icon href=http://yangchnet.github.io/Dessert/apple-touch-icon.png><link rel=mask-icon href=http://yangchnet.github.io/Dessert/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.81.0"><meta property="og:title" content="ORM简介"><meta property="og:description" content="1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&#34;对象-关系映射&#34;（Object/Relational Mapping） 的缩写。
+ 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2.">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/" />
+<link crossorigin="anonymous" href="/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<script defer crossorigin="anonymous" src="/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://yangchnet.github.io/Dessert/apple-touch-icon.png">
+<link rel="mask-icon" href="http://yangchnet.github.io/Dessert/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<meta property="og:title" content="ORM简介" />
+<meta property="og:description" content="1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&quot;对象-关系映射&quot;（Object/Relational Mapping） 的缩写。
 ORM把数据库映射为对象
- 数据库的表（table） &ndash;> 类（class） 记录（record，行数据）&ndash;> 对象（object） 字段（field）&ndash;> 对象的属性（attribute）
+ 数据库的表（table） &ndash;&gt; 类（class） 记录（record，行数据）&ndash;&gt; 对象（object） 字段（field）&ndash;&gt; 对象的属性（attribute）
  举例来说，下面是一行SQL语句
 SELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：
 res = db.execSql(sql) name = res[0][&#34;FIRST_NAME&#34;] 改成ORM的写法如下：
 p = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。
 总结起来，ORM有如下优点：
- 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2."><meta property="og:type" content="article"><meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/"><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta property="article:section" content="Tem"><meta property="article:published_time" content="2021-04-06T00:00:00+00:00"><meta property="article:modified_time" content="2021-04-06T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta name=twitter:title content="ORM简介"><meta name=twitter:description content="1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&#34;对象-关系映射&#34;（Object/Relational Mapping） 的缩写。
+ 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/" /><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/><meta property="article:section" content="Tem" />
+<meta property="article:published_time" content="2021-04-06T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-04-06T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/>
+
+<meta name="twitter:title" content="ORM简介"/>
+<meta name="twitter:description" content="1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&quot;对象-关系映射&quot;（Object/Relational Mapping） 的缩写。
 ORM把数据库映射为对象
- 数据库的表（table） &ndash;> 类（class） 记录（record，行数据）&ndash;> 对象（object） 字段（field）&ndash;> 对象的属性（attribute）
+ 数据库的表（table） &ndash;&gt; 类（class） 记录（record，行数据）&ndash;&gt; 对象（object） 字段（field）&ndash;&gt; 对象的属性（attribute）
  举例来说，下面是一行SQL语句
 SELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：
 res = db.execSql(sql) name = res[0][&#34;FIRST_NAME&#34;] 改成ORM的写法如下：
 p = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。
 总结起来，ORM有如下优点：
- 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Tems","item":"http://yangchnet.github.io/Dessert/tem/"},{"@type":"ListItem","position":3,"name":"ORM简介","item":"http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"ORM简介","name":"ORM简介","description":"1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是\u0026quot;对象-关系映射\u0026quot;（Object/Relational Mapping） 的缩写。\nORM把数据库映射为对象\n 数据库的表（table） \u0026ndash;\u0026gt; 类（class） 记录（record，行数据）\u0026ndash;\u0026gt; 对象（object） 字段（field）\u0026ndash;\u0026gt; 对象的属性（attribute）\n 举例来说，下面是一行SQL语句\nSELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：\nres = db.execSql(sql) name = res[0][\u0026#34;FIRST_NAME\u0026#34;] 改成ORM的写法如下：\np = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。\n总结起来，ORM有如下优点：\n 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2.","keywords":["ORM","SQL"],"articleBody":"1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是\"对象-关系映射\"（Object/Relational Mapping） 的缩写。\nORM把数据库映射为对象\n 数据库的表（table） – 类（class） 记录（record，行数据）– 对象（object） 字段（field）– 对象的属性（attribute）\n 举例来说，下面是一行SQL语句\nSELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：\nres = db.execSql(sql) name = res[0][\"FIRST_NAME\"] 改成ORM的写法如下：\np = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。\n总结起来，ORM有如下优点：\n 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2. 实例 Django是一个非常著名的python web框架，其提供了简单易用的ORM。\n安装django\npip install django 完成安装后，使用如下命令创建一个新的django项目\ndjango-admin startproject newSite 尝试运行\ncd newSite python manage.py runserver 访问https://127.0.0.1:8000查看是否运行成功。\n2.1 Model 完成了项目的创建后，下一步是要定义一个Model，一般来说，每个Model都映射一张数据库表。\n 每个模型都是一个 Python 的类，这些类继承 django.db.models.Model 模型类的每个属性都相当于一个数据库的字段。 利用这些，Django 提供了一个自动生成访问数据库的 API。  为django项目添加一个新的app\npython manage.py startapp ormTest 切换到ormTest目录下，添加如下代码\n# models.py  from django.db import models class Person(models.Model): first_name = models.CharField(max_length=30) last_name = models.CharField(max_length=30) 以上代码定义了一个 Person 模型，拥有 first_name 和 last_name:first_name 和 last_name 是模型的字段。每个字段都被指定为一个类属性，并且每个属性映射为一个数据库列。 在/newSite/newSite/setting.py中的INSTALLED_APPS添加如下代码，来告诉django你准备使用这个模型。\nINSTALLED_APPS = [ #... 'ormTest.apps.OrmtestConfig', #... ] 使用如下命令生成对应的数据库表\npython manage.py makemigrations ormTest python manage.py migrate 上面的Person模型会创建一个如下的数据库表：\nCREATE TABLE ormTest_person ( \"id\" serial NOT NULL PRIMARY KEY, \"first_name\" varchar(30) NOT NULL, \"last_name\" varchar(30) NOT NULL ); 2.2 CRUD 进入python命令行\npython manage.py shell In [1]: from ormTest.models import Person # Create  In [4]: Person.objects.create(first_name='li', last_name='chang') Out[4]: (1) # Read In [5]: Person.objects.all() Out[5]: [(1)] # Update In [6]: person1 = Person.objects.get(id=1) In [8]: person1.first_name Out[8]: 'li' In [9]: person1.last_name Out[9]: 'chang' In [10]: person1.last_name = 'YANG' In [11]: person1.save() In [14]: person2 = Person.objects.get(id=1) In [15]: person2.last_name Out[15]: 'YANG' # Delete In [16]: person2.delete() Out[16]: (1, {'ormTest.Person': 1}) In [17]: Person.objects.all() Out[17]: [] ","wordCount":"249","inLanguage":"en","datePublished":"2021-04-06T00:00:00Z","dateModified":"2021-04-06T00:00:00Z","author":{"@type":"Person","name":"李昌"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/"},"publisher":{"@type":"Organization","name":"Linote","logo":{"@type":"ImageObject","url":"https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><header class=header><nav class=nav><div class=logo><a href=http://yangchnet.github.io/Dessert accesskey=h title="Linote (Alt + H)">Linote</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=http://yangchnet.github.io/Dessert/archives title=存档><span>存档</span></a></li><li><a href=http://yangchnet.github.io/Dessert/categories/ title=分类><span>分类</span></a></li><li><a href=http://yangchnet.github.io/Dessert/search/ title=搜索><span>搜索</span></a></li><li><a href=http://yangchnet.github.io/Dessert/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=http://yangchnet.github.io/Dessert>Home</a>&nbsp;»&nbsp;<a href=http://yangchnet.github.io/Dessert/tem/>Tems</a></div><h1 class=post-title>ORM简介</h1><div class=post-meta>April 6, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><div class=details>Table of Contents</div></summary><div class=inner><ul><li><a href=#1-orm%e6%98%af%e4%bb%80%e4%b9%88 aria-label="1. ORM是什么">1. ORM是什么</a></li><li><a href=#2-%e5%ae%9e%e4%be%8b aria-label="2. 实例">2. 实例</a><ul><li><a href=#21-model aria-label="2.1 Model">2.1 Model</a></li><li><a href=#22-crud aria-label="2.2 CRUD">2.2 CRUD</a></li></ul></li></ul></div></details></div><div class=post-content><h2 id=1-orm是什么>1. ORM是什么<a hidden class=anchor aria-hidden=true href=#1-orm是什么>#</a></h2><p>面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。
-<img loading=lazy src=https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210406113107.png alt=20210406113107></p><p>简单的说，<strong>ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是"对象-关系映射"（Object/Relational Mapping） 的缩写。</strong><br>ORM把数据库映射为对象</p><blockquote><p>数据库的表（table） &ndash;> 类（class）
-记录（record，行数据）&ndash;> 对象（object）
-字段（field）&ndash;> 对象的属性（attribute）</p></blockquote><p>举例来说，下面是一行SQL语句</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-SQL data-lang=SQL><span style=color:#66d9ef>SELECT</span> id, first_name, last_name, phone, birth_date, sex
- <span style=color:#66d9ef>FROM</span> persons 
- <span style=color:#66d9ef>WHERE</span> id <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>
-</code></pre></div><p>程序直接运行SQL，操作数据库的写法如下：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>res <span style=color:#f92672>=</span> db<span style=color:#f92672>.</span>execSql(sql)
-name <span style=color:#f92672>=</span> res[<span style=color:#ae81ff>0</span>][<span style=color:#e6db74>&#34;FIRST_NAME&#34;</span>]
-</code></pre></div><p>改成ORM的写法如下：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>p <span style=color:#f92672>=</span> Person<span style=color:#f92672>.</span>get(<span style=color:#ae81ff>10</span>)
-name <span style=color:#f92672>=</span> p<span style=color:#f92672>.</span>first_name
-</code></pre></div><p>一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。<br>总结起来，ORM有如下优点：</p><ul><li>数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。</li><li>ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。</li><li>它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。</li><li>基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。</li><li>你不必编写性能不佳的 SQL。
-但是ORM也有很突出的缺点：</li><li>ORM 库不是轻量级工具，需要花很多精力学习和设置。</li><li>对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。</li><li>ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。</li></ul><h2 id=2-实例>2. 实例<a hidden class=anchor aria-hidden=true href=#2-实例>#</a></h2><p>Django是一个非常著名的python web框架，其提供了简单易用的ORM。<br>安装django</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>pip install django
-</code></pre></div><p>完成安装后，使用如下命令创建一个新的django项目</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>django-admin startproject newSite
-</code></pre></div><p>尝试运行</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>cd newSite
+ 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tems",
+      "item": "http://yangchnet.github.io/Dessert/tem/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "ORM简介",
+      "item": "http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ORM简介",
+  "name": "ORM简介",
+  "description": "1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是\u0026quot;对象-关系映射\u0026quot;（Object/Relational Mapping） 的缩写。\nORM把数据库映射为对象\n 数据库的表（table） \u0026ndash;\u0026gt; 类（class） 记录（record，行数据）\u0026ndash;\u0026gt; 对象（object） 字段（field）\u0026ndash;\u0026gt; 对象的属性（attribute）\n 举例来说，下面是一行SQL语句\nSELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：\nres = db.execSql(sql) name = res[0][\u0026#34;FIRST_NAME\u0026#34;] 改成ORM的写法如下：\np = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。\n总结起来，ORM有如下优点：\n 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2.",
+  "keywords": [
+    "ORM", "SQL"
+  ],
+  "articleBody": "1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是\"对象-关系映射\"（Object/Relational Mapping） 的缩写。\nORM把数据库映射为对象\n 数据库的表（table） – 类（class） 记录（record，行数据）– 对象（object） 字段（field）– 对象的属性（attribute）\n 举例来说，下面是一行SQL语句\nSELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：\nres = db.execSql(sql) name = res[0][\"FIRST_NAME\"] 改成ORM的写法如下：\np = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。\n总结起来，ORM有如下优点：\n 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2. 实例 Django是一个非常著名的python web框架，其提供了简单易用的ORM。\n安装django\npip install django 完成安装后，使用如下命令创建一个新的django项目\ndjango-admin startproject newSite 尝试运行\ncd newSite python manage.py runserver 访问https://127.0.0.1:8000查看是否运行成功。\n2.1 Model 完成了项目的创建后，下一步是要定义一个Model，一般来说，每个Model都映射一张数据库表。\n 每个模型都是一个 Python 的类，这些类继承 django.db.models.Model 模型类的每个属性都相当于一个数据库的字段。 利用这些，Django 提供了一个自动生成访问数据库的 API。  为django项目添加一个新的app\npython manage.py startapp ormTest 切换到ormTest目录下，添加如下代码\n# models.py  from django.db import models class Person(models.Model): first_name = models.CharField(max_length=30) last_name = models.CharField(max_length=30) 以上代码定义了一个 Person 模型，拥有 first_name 和 last_name:first_name 和 last_name 是模型的字段。每个字段都被指定为一个类属性，并且每个属性映射为一个数据库列。 在/newSite/newSite/setting.py中的INSTALLED_APPS添加如下代码，来告诉django你准备使用这个模型。\nINSTALLED_APPS = [ #... 'ormTest.apps.OrmtestConfig', #... ] 使用如下命令生成对应的数据库表\npython manage.py makemigrations ormTest python manage.py migrate 上面的Person模型会创建一个如下的数据库表：\nCREATE TABLE ormTest_person ( \"id\" serial NOT NULL PRIMARY KEY, \"first_name\" varchar(30) NOT NULL, \"last_name\" varchar(30) NOT NULL ); 2.2 CRUD 进入python命令行\npython manage.py shell In [1]: from ormTest.models import Person # Create  In [4]: Person.objects.create(first_name='li', last_name='chang') Out[4]: (1) # Read In [5]: Person.objects.all() Out[5]: [(1)] # Update In [6]: person1 = Person.objects.get(id=1) In [8]: person1.first_name Out[8]: 'li' In [9]: person1.last_name Out[9]: 'chang' In [10]: person1.last_name = 'YANG' In [11]: person1.save() In [14]: person2 = Person.objects.get(id=1) In [15]: person2.last_name Out[15]: 'YANG' # Delete In [16]: person2.delete() Out[16]: (1, {'ormTest.Person': 1}) In [17]: Person.objects.all() Out[17]: [] ",
+  "wordCount" : "249",
+  "inLanguage": "en",
+  "datePublished": "2021-04-06T00:00:00Z",
+  "dateModified": "2021-04-06T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "李昌"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Linote",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://yangchnet.github.io/Dessert" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://yangchnet.github.io/Dessert">Home</a>&nbsp;»&nbsp;<a href="http://yangchnet.github.io/Dessert/tem/">Tems</a></div>
+    <h1 class="post-title">
+      ORM简介
+    </h1>
+    <div class="post-meta">April 6, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <div class="details">Table of Contents</div>
+        </summary>
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-orm%e6%98%af%e4%bb%80%e4%b9%88" aria-label="1. ORM是什么">1. ORM是什么</a></li>
+                <li>
+                    <a href="#2-%e5%ae%9e%e4%be%8b" aria-label="2. 实例">2. 实例</a><ul>
+                        
+                <li>
+                    <a href="#21-model" aria-label="2.1 Model">2.1 Model</a></li>
+                <li>
+                    <a href="#22-crud" aria-label="2.2 CRUD">2.2 CRUD</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="1-orm是什么">1. ORM是什么<a hidden class="anchor" aria-hidden="true" href="#1-orm是什么">#</a></h2>
+<p>面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。
+<img loading="lazy" src="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210406113107.png" alt="20210406113107"  />
+</p>
+<p>简单的说，<strong>ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&quot;对象-关系映射&quot;（Object/Relational Mapping） 的缩写。</strong><br>
+ORM把数据库映射为对象</p>
+<blockquote>
+<p>数据库的表（table） &ndash;&gt; 类（class）
+记录（record，行数据）&ndash;&gt; 对象（object）
+字段（field）&ndash;&gt; 对象的属性（attribute）</p>
+</blockquote>
+<p>举例来说，下面是一行SQL语句</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#66d9ef">SELECT</span> id, first_name, last_name, phone, birth_date, sex
+ <span style="color:#66d9ef">FROM</span> persons 
+ <span style="color:#66d9ef">WHERE</span> id <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</code></pre></div><p>程序直接运行SQL，操作数据库的写法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">res <span style="color:#f92672">=</span> db<span style="color:#f92672">.</span>execSql(sql)
+name <span style="color:#f92672">=</span> res[<span style="color:#ae81ff">0</span>][<span style="color:#e6db74">&#34;FIRST_NAME&#34;</span>]
+</code></pre></div><p>改成ORM的写法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">p <span style="color:#f92672">=</span> Person<span style="color:#f92672">.</span>get(<span style="color:#ae81ff">10</span>)
+name <span style="color:#f92672">=</span> p<span style="color:#f92672">.</span>first_name
+</code></pre></div><p>一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。<br>
+总结起来，ORM有如下优点：</p>
+<ul>
+<li>数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。</li>
+<li>ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。</li>
+<li>它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。</li>
+<li>基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。</li>
+<li>你不必编写性能不佳的 SQL。
+但是ORM也有很突出的缺点：</li>
+<li>ORM 库不是轻量级工具，需要花很多精力学习和设置。</li>
+<li>对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。</li>
+<li>ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。</li>
+</ul>
+<h2 id="2-实例">2. 实例<a hidden class="anchor" aria-hidden="true" href="#2-实例">#</a></h2>
+<p>Django是一个非常著名的python web框架，其提供了简单易用的ORM。<br>
+安装django</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install django
+</code></pre></div><p>完成安装后，使用如下命令创建一个新的django项目</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">django-admin startproject newSite
+</code></pre></div><p>尝试运行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd newSite
 python manage.py runserver
-</code></pre></div><p>访问<code>https://127.0.0.1:8000</code>查看是否运行成功。</p><h3 id=21-model>2.1 Model<a hidden class=anchor aria-hidden=true href=#21-model>#</a></h3><p>完成了项目的创建后，下一步是要定义一个Model，一般来说，每个Model都映射一张数据库表。</p><ul><li>每个模型都是一个 Python 的类，这些类继承 django.db.models.Model</li><li>模型类的每个属性都相当于一个数据库的字段。</li><li>利用这些，Django 提供了一个自动生成访问数据库的 API。</li></ul><p>为django项目添加一个新的app</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>python manage.py startapp ormTest
-</code></pre></div><p>切换到<code>ormTest</code>目录下，添加如下代码</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># models.py </span>
-<span style=color:#f92672>from</span> django.db <span style=color:#f92672>import</span> models
+</code></pre></div><p>访问<code>https://127.0.0.1:8000</code>查看是否运行成功。</p>
+<h3 id="21-model">2.1 Model<a hidden class="anchor" aria-hidden="true" href="#21-model">#</a></h3>
+<p>完成了项目的创建后，下一步是要定义一个Model，一般来说，每个Model都映射一张数据库表。</p>
+<ul>
+<li>每个模型都是一个 Python 的类，这些类继承 django.db.models.Model</li>
+<li>模型类的每个属性都相当于一个数据库的字段。</li>
+<li>利用这些，Django 提供了一个自动生成访问数据库的 API。</li>
+</ul>
+<p>为django项目添加一个新的app</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py startapp ormTest
+</code></pre></div><p>切换到<code>ormTest</code>目录下，添加如下代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># models.py </span>
+<span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
 
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Person</span>(models<span style=color:#f92672>.</span>Model):
-    first_name <span style=color:#f92672>=</span> models<span style=color:#f92672>.</span>CharField(max_length<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>)
-    last_name <span style=color:#f92672>=</span> models<span style=color:#f92672>.</span>CharField(max_length<span style=color:#f92672>=</span><span style=color:#ae81ff>30</span>)
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>(models<span style="color:#f92672">.</span>Model):
+    first_name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
+    last_name <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
 </code></pre></div><p>以上代码定义了一个 Person 模型，拥有 first_name 和 last_name:first_name 和 last_name 是模型的字段。每个字段都被指定为一个类属性，并且每个属性映射为一个数据库列。
-在<code>/newSite/newSite/setting.py</code>中的<code>INSTALLED_APPS</code>添加如下代码，来告诉django你准备使用这个模型。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>INSTALLED_APPS <span style=color:#f92672>=</span> [
-    <span style=color:#75715e>#...</span>
-    <span style=color:#e6db74>&#39;ormTest.apps.OrmtestConfig&#39;</span>,
-    <span style=color:#75715e>#...</span>
+在<code>/newSite/newSite/setting.py</code>中的<code>INSTALLED_APPS</code>添加如下代码，来告诉django你准备使用这个模型。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">INSTALLED_APPS <span style="color:#f92672">=</span> [
+    <span style="color:#75715e">#...</span>
+    <span style="color:#e6db74">&#39;ormTest.apps.OrmtestConfig&#39;</span>,
+    <span style="color:#75715e">#...</span>
 ]
-</code></pre></div><p>使用如下命令生成对应的数据库表</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>python manage.py makemigrations ormTest
+</code></pre></div><p>使用如下命令生成对应的数据库表</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py makemigrations ormTest
 python manage.py migrate
-</code></pre></div><p>上面的<code>Person</code>模型会创建一个如下的数据库表：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-SQL data-lang=SQL><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> ormTest_person (
-    <span style=color:#e6db74>&#34;id&#34;</span> serial <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span>,
-    <span style=color:#e6db74>&#34;first_name&#34;</span> varchar(<span style=color:#ae81ff>30</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
-    <span style=color:#e6db74>&#34;last_name&#34;</span> varchar(<span style=color:#ae81ff>30</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>
+</code></pre></div><p>上面的<code>Person</code>模型会创建一个如下的数据库表：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> ormTest_person (
+    <span style="color:#e6db74">&#34;id&#34;</span> serial <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span>,
+    <span style="color:#e6db74">&#34;first_name&#34;</span> varchar(<span style="color:#ae81ff">30</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>,
+    <span style="color:#e6db74">&#34;last_name&#34;</span> varchar(<span style="color:#ae81ff">30</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>
 );
-</code></pre></div><h3 id=22-crud>2.2 CRUD<a hidden class=anchor aria-hidden=true href=#22-crud>#</a></h3><p>进入python命令行</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>python manage.py shell
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>In <span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>: from ormTest.models import Person
+</code></pre></div><h3 id="22-crud">2.2 CRUD<a hidden class="anchor" aria-hidden="true" href="#22-crud">#</a></h3>
+<p>进入python命令行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py shell
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">In <span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: from ormTest.models import Person
 
-<span style=color:#75715e># Create </span>
-In <span style=color:#f92672>[</span>4<span style=color:#f92672>]</span>: Person.objects.create<span style=color:#f92672>(</span>first_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;li&#39;</span>, last_name<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;chang&#39;</span><span style=color:#f92672>)</span>
-Out<span style=color:#f92672>[</span>4<span style=color:#f92672>]</span>: &lt;Person: Person object <span style=color:#f92672>(</span>1<span style=color:#f92672>)</span>&gt;
+<span style="color:#75715e"># Create </span>
+In <span style="color:#f92672">[</span>4<span style="color:#f92672">]</span>: Person.objects.create<span style="color:#f92672">(</span>first_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;li&#39;</span>, last_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;chang&#39;</span><span style="color:#f92672">)</span>
+Out<span style="color:#f92672">[</span>4<span style="color:#f92672">]</span>: &lt;Person: Person object <span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>&gt;
 
-<span style=color:#75715e># Read</span>
-In <span style=color:#f92672>[</span>5<span style=color:#f92672>]</span>: Person.objects.all<span style=color:#f92672>()</span>
-Out<span style=color:#f92672>[</span>5<span style=color:#f92672>]</span>: &lt;QuerySet <span style=color:#f92672>[</span>&lt;Person: Person object <span style=color:#f92672>(</span>1<span style=color:#f92672>)</span>&gt;<span style=color:#f92672>]</span>&gt;
+<span style="color:#75715e"># Read</span>
+In <span style="color:#f92672">[</span>5<span style="color:#f92672">]</span>: Person.objects.all<span style="color:#f92672">()</span>
+Out<span style="color:#f92672">[</span>5<span style="color:#f92672">]</span>: &lt;QuerySet <span style="color:#f92672">[</span>&lt;Person: Person object <span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>&gt;<span style="color:#f92672">]</span>&gt;
 
-<span style=color:#75715e># Update</span>
-In <span style=color:#f92672>[</span>6<span style=color:#f92672>]</span>: person1 <span style=color:#f92672>=</span> Person.objects.get<span style=color:#f92672>(</span>id<span style=color:#f92672>=</span>1<span style=color:#f92672>)</span>
+<span style="color:#75715e"># Update</span>
+In <span style="color:#f92672">[</span>6<span style="color:#f92672">]</span>: person1 <span style="color:#f92672">=</span> Person.objects.get<span style="color:#f92672">(</span>id<span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>
 
-In <span style=color:#f92672>[</span>8<span style=color:#f92672>]</span>: person1.first_name
-Out<span style=color:#f92672>[</span>8<span style=color:#f92672>]</span>: <span style=color:#e6db74>&#39;li&#39;</span>
+In <span style="color:#f92672">[</span>8<span style="color:#f92672">]</span>: person1.first_name
+Out<span style="color:#f92672">[</span>8<span style="color:#f92672">]</span>: <span style="color:#e6db74">&#39;li&#39;</span>
 
-In <span style=color:#f92672>[</span>9<span style=color:#f92672>]</span>: person1.last_name
-Out<span style=color:#f92672>[</span>9<span style=color:#f92672>]</span>: <span style=color:#e6db74>&#39;chang&#39;</span>
+In <span style="color:#f92672">[</span>9<span style="color:#f92672">]</span>: person1.last_name
+Out<span style="color:#f92672">[</span>9<span style="color:#f92672">]</span>: <span style="color:#e6db74">&#39;chang&#39;</span>
 
-In <span style=color:#f92672>[</span>10<span style=color:#f92672>]</span>: person1.last_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;YANG&#39;</span>
+In <span style="color:#f92672">[</span>10<span style="color:#f92672">]</span>: person1.last_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;YANG&#39;</span>
 
-In <span style=color:#f92672>[</span>11<span style=color:#f92672>]</span>: person1.save<span style=color:#f92672>()</span>
+In <span style="color:#f92672">[</span>11<span style="color:#f92672">]</span>: person1.save<span style="color:#f92672">()</span>
 
-In <span style=color:#f92672>[</span>14<span style=color:#f92672>]</span>: person2 <span style=color:#f92672>=</span> Person.objects.get<span style=color:#f92672>(</span>id<span style=color:#f92672>=</span>1<span style=color:#f92672>)</span>
+In <span style="color:#f92672">[</span>14<span style="color:#f92672">]</span>: person2 <span style="color:#f92672">=</span> Person.objects.get<span style="color:#f92672">(</span>id<span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>
 
-In <span style=color:#f92672>[</span>15<span style=color:#f92672>]</span>: person2.last_name
-Out<span style=color:#f92672>[</span>15<span style=color:#f92672>]</span>: <span style=color:#e6db74>&#39;YANG&#39;</span>
+In <span style="color:#f92672">[</span>15<span style="color:#f92672">]</span>: person2.last_name
+Out<span style="color:#f92672">[</span>15<span style="color:#f92672">]</span>: <span style="color:#e6db74">&#39;YANG&#39;</span>
 
-<span style=color:#75715e># Delete</span>
-In <span style=color:#f92672>[</span>16<span style=color:#f92672>]</span>: person2.delete<span style=color:#f92672>()</span>
-Out<span style=color:#f92672>[</span>16<span style=color:#f92672>]</span>: <span style=color:#f92672>(</span>1, <span style=color:#f92672>{</span><span style=color:#e6db74>&#39;ormTest.Person&#39;</span>: 1<span style=color:#f92672>})</span>
+<span style="color:#75715e"># Delete</span>
+In <span style="color:#f92672">[</span>16<span style="color:#f92672">]</span>: person2.delete<span style="color:#f92672">()</span>
+Out<span style="color:#f92672">[</span>16<span style="color:#f92672">]</span>: <span style="color:#f92672">(</span>1, <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;ormTest.Person&#39;</span>: 1<span style="color:#f92672">})</span>
 
-In <span style=color:#f92672>[</span>17<span style=color:#f92672>]</span>: Person.objects.all<span style=color:#f92672>()</span>
-Out<span style=color:#f92672>[</span>17<span style=color:#f92672>]</span>: &lt;QuerySet <span style=color:#f92672>[]</span>&gt;
-</code></pre></div></div><footer class=post-footer><ul class=post-tags><li><a href=http://yangchnet.github.io/Dessert/tags/orm/>ORM</a></li><li><a href=http://yangchnet.github.io/Dessert/tags/sql/>SQL</a></li></ul><div class=share-buttons><div class=bshare-custom><a title=分享到微信 class=bshare-weixin></a><a title=分享到QQ好友 class=bshare-qqim></a><a title=分享到复制网址 class=bshare-clipboard></a><a title=分享到QQ空间 class=bshare-qzone></a><a title=分享到新浪微博 class=bshare-sinaminiblog></a><a title=分享到电子邮件 class=bshare-email></a><a title=更多平台 class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type=text/javascript src="http://static.bshare.cn/b/buttonLite.js#style=-1&uuid=&pophcol=2&lang=zh"></script><script type=text/javascript src=http://static.bshare.cn/b/bshareC0.js></script></div></footer></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+In <span style="color:#f92672">[</span>17<span style="color:#f92672">]</span>: Person.objects.all<span style="color:#f92672">()</span>
+Out<span style="color:#f92672">[</span>17<span style="color:#f92672">]</span>: &lt;QuerySet <span style="color:#f92672">[]</span>&gt;
+</code></pre></div>
+</div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://yangchnet.github.io/Dessert/tags/orm/">ORM</a></li>
+      <li><a href="http://yangchnet.github.io/Dessert/tags/sql/">SQL</a></li>
+    </ul>
+
+<div class="share-buttons">
+    <div class="bshare-custom"><a title="分享到微信" class="bshare-weixin"></a><a title="分享到QQ好友" class="bshare-qqim"></a><a title="分享到复制网址" class="bshare-clipboard"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到电子邮件" class="bshare-email"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    
+</div>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://yangchnet.github.io/Dessert">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

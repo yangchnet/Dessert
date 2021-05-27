@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker 搭建Java环境</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>Docker 搭建Java环境 1. 拉取Ubuntu镜像 docker pull ubuntu 2. 运行docker镜像，并进入 docker run -it -v /home/hadoop/build:/root/build --name ubuntu ubuntu  -i 表示Interaction，交互，开启交互模式
 -t 表示分配一个tty，即控制台
 -v 分配一个共享目录，

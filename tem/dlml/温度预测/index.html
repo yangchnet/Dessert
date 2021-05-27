@@ -1,117 +1,455 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>温度预测 | Linote</title><meta name=keywords content="DL&ML"><meta name=description content="温度预测 1. 观察耶拿天气数据集的数据 import os fname = './data/jena_climate_2009_2016.csv' f = open(fname) data = f.read() f.close() lines = data.split('\n') header = lines[0].split(',') lines = lines[1:] print(header) print(len(lines)) ['&#34;Date Time&#34;', '&#34;p (mbar)&#34;', '&#34;T (degC)&#34;', '&#34;Tpot (K)&#34;', '&#34;Tdew (degC)&#34;', '&#34;rh (%)&#34;', '&#34;VPmax (mbar)&#34;', '&#34;VPact (mbar)&#34;', '&#34;VPdef (mbar)&#34;', '&#34;sh (g/kg)&#34;', '&#34;H2OC (mmol/mol)&#34;', '&#34;rho (g/m**3)&#34;', '&#34;wv (m/s)&#34;', '&#34;max. wv (m/s)&#34;', '&#34;wd (deg)&#34;'] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line."><meta name=author content="李昌"><link rel=canonical href=http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/><link crossorigin=anonymous href=/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as=style><link rel=preload href=https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png as=image><script defer crossorigin=anonymous src=/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=32x32 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico><link rel=apple-touch-icon href=http://yangchnet.github.io/Dessert/apple-touch-icon.png><link rel=mask-icon href=http://yangchnet.github.io/Dessert/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.81.0"><meta property="og:title" content="温度预测"><meta property="og:description" content="温度预测 1. 观察耶拿天气数据集的数据 import os fname = './data/jena_climate_2009_2016.csv' f = open(fname) data = f.read() f.close() lines = data.split('\n') header = lines[0].split(',') lines = lines[1:] print(header) print(len(lines)) ['&#34;Date Time&#34;', '&#34;p (mbar)&#34;', '&#34;T (degC)&#34;', '&#34;Tpot (K)&#34;', '&#34;Tdew (degC)&#34;', '&#34;rh (%)&#34;', '&#34;VPmax (mbar)&#34;', '&#34;VPact (mbar)&#34;', '&#34;VPdef (mbar)&#34;', '&#34;sh (g/kg)&#34;', '&#34;H2OC (mmol/mol)&#34;', '&#34;rho (g/m**3)&#34;', '&#34;wv (m/s)&#34;', '&#34;max. wv (m/s)&#34;', '&#34;wd (deg)&#34;'] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line."><meta property="og:type" content="article"><meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/"><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta property="article:section" content="Tem"><meta property="article:published_time" content="2021-02-25T00:00:00+00:00"><meta property="article:modified_time" content="2021-02-25T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta name=twitter:title content="温度预测"><meta name=twitter:description content="温度预测 1. 观察耶拿天气数据集的数据 import os fname = './data/jena_climate_2009_2016.csv' f = open(fname) data = f.read() f.close() lines = data.split('\n') header = lines[0].split(',') lines = lines[1:] print(header) print(len(lines)) ['&#34;Date Time&#34;', '&#34;p (mbar)&#34;', '&#34;T (degC)&#34;', '&#34;Tpot (K)&#34;', '&#34;Tdew (degC)&#34;', '&#34;rh (%)&#34;', '&#34;VPmax (mbar)&#34;', '&#34;VPact (mbar)&#34;', '&#34;VPdef (mbar)&#34;', '&#34;sh (g/kg)&#34;', '&#34;H2OC (mmol/mol)&#34;', '&#34;rho (g/m**3)&#34;', '&#34;wv (m/s)&#34;', '&#34;max. wv (m/s)&#34;', '&#34;wd (deg)&#34;'] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Tems","item":"http://yangchnet.github.io/Dessert/tem/"},{"@type":"ListItem","position":3,"name":"温度预测","item":"http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"温度预测","name":"温度预测","description":"温度预测 1. 观察耶拿天气数据集的数据 import os fname = \u0026#39;./data/jena_climate_2009_2016.csv\u0026#39; f = open(fname) data = f.read() f.close() lines = data.split(\u0026#39;\\n\u0026#39;) header = lines[0].split(\u0026#39;,\u0026#39;) lines = lines[1:] print(header) print(len(lines)) ['\u0026quot;Date Time\u0026quot;', '\u0026quot;p (mbar)\u0026quot;', '\u0026quot;T (degC)\u0026quot;', '\u0026quot;Tpot (K)\u0026quot;', '\u0026quot;Tdew (degC)\u0026quot;', '\u0026quot;rh (%)\u0026quot;', '\u0026quot;VPmax (mbar)\u0026quot;', '\u0026quot;VPact (mbar)\u0026quot;', '\u0026quot;VPdef (mbar)\u0026quot;', '\u0026quot;sh (g/kg)\u0026quot;', '\u0026quot;H2OC (mmol/mol)\u0026quot;', '\u0026quot;rho (g/m**3)\u0026quot;', '\u0026quot;wv (m/s)\u0026quot;', '\u0026quot;max. wv (m/s)\u0026quot;', '\u0026quot;wd (deg)\u0026quot;'] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line.","keywords":["DL\u0026ML"],"articleBody":"温度预测 1. 观察耶拿天气数据集的数据 import os fname = './data/jena_climate_2009_2016.csv' f = open(fname) data = f.read() f.close() lines = data.split('\\n') header = lines[0].split(',') lines = lines[1:] print(header) print(len(lines)) ['\"Date Time\"', '\"p (mbar)\"', '\"T (degC)\"', '\"Tpot (K)\"', '\"Tdew (degC)\"', '\"rh (%)\"', '\"VPmax (mbar)\"', '\"VPact (mbar)\"', '\"VPdef (mbar)\"', '\"sh (g/kg)\"', '\"H2OC (mmol/mol)\"', '\"rho (g/m**3)\"', '\"wv (m/s)\"', '\"max. wv (m/s)\"', '\"wd (deg)\"'] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line.split(',')[1:]] float_data[i, :] = values # 绘制温度时间序列 from matplotlib import pyplot as plt temp = float_data[:, 1] # 温度（摄氏度） plt.plot(range(len(temp)), temp) plt.show() plt.plot(range(1440), temp[:1440]) []  2. 准备数据 问题描述：一个时间步是10分钟，没steps个时间步采样一次数据，给定过去lookback个时间步之内的数据，能否预测delay个时间步之后的温度？用到的参数如下:\nlookback = 720 # 给定过去5天内的观测数据\nsteps = 6 # 观测数据的采样频率是每小时一个数据点\ndelay = 144 # 目标是未来24小时之后的数据\n数据标准化\nmean = float_data[:200000].mean(axis=0) float_data -= mean std = float_data[:200000].std(axis=0) float_data /= std 下面这个生成器以当前的浮点数数组作为输入，并从最近的数据中生成数据批量，同时生成未来的目标温度。sample是输入数据的一个批量，targets是对应的目标温度数组\ndef generator(data, lookback, delay, min_index, max_index, shuffle=False, batch_size=128, step=6): ''' data:浮点数据组成的原始数组 lookback: 输入数据应该包括过去多少个时间步 delay：目标应该在未来多少个时间后 min_index 和 max_index: data数组中的索引，用于界定需要抽取那些时间步。 shuffle: 是打乱样本，还是按顺序抽取样本 batch_size:每个批量的样本数 step:数据采样的周期。 ''' if max_index is None: max_index = len(data) - delay - 1 i = min_index + lookback while 1: if shuffle: rows = np.random.randint( min_index + lookback, max_index, size=batch_size) else: if i + batch_size = max_index: i = min_index + lookback rows = np.arange(i, min(i + batch_size, max_index)) i += len(rows) samples = np.zeros((len(rows), lookback // step, data.shape[-1])) targets = np.zeros((len(rows),)) for j, row in enumerate(rows): indices = range(rows[j] - lookback, rows[j], step) samples[j] = data[indices] targets[j] = data[rows[j] + delay][1] yield samples, targets 准备训练生成器、验证生成器和测试生成器\nlookback = 1440 step = 6 delay = 144 batch_size = 128 train_gen = generator(float_data, lookback=lookback, delay=delay, min_index=0, max_index=200000, shuffle=True, step=step, batch_size=batch_size) val_gen = generator(float_data, lookback=lookback, delay=delay, min_index=2000001, max_index=3000000, step=step, batch_size=batch_size) test_gen = generator(float_data, lookback=lookback, delay=delay, min_index=3000001, max_index=None, step=step, batch_size=batch_size) val_steps = (300000 - 200001 - lookback) // batch_size # 为了查看整个验证集，需要从val_gen中抽取多少次 test_steps = (len(float_data) - 300001 - lookback) // batch_size # 为了查看整个测试集，需要从test_gen中抽取多少次 3. 一种基本的机器学习方法 在尝试机器学习方法之前，建立一个基于常识的基准方法是很有用的；同样，在开始研究复杂且计算代价很高的模型（如RNN）之前，尝试使用简单且计算代价低的机器学习模型也是很有用的，比如小型的密集连接网络。这可以保证进一步增加问题的复杂度是合理的，并且会带来真正的好处\n# 训练并评估一个密集连接模型 from keras.models import Sequential from keras import layers from keras.optimizers import RMSprop model = Sequential() model.add(layers.Flatten(input_shape=(lookback // step, float_data.shape[-1]))) model.add(layers.Dense(32, activation='relu')) model.add(layers.Dense(1)) model.compile(optimizer=RMSprop(), loss='mae') history = model.fit_generator(train_gen, steps_per_epoch=500, epochs=20, validation_data=val_gen, validation_steps=val_steps) ","wordCount":"345","inLanguage":"en","datePublished":"2021-02-25T00:00:00Z","dateModified":"2021-02-25T00:00:00Z","author":{"@type":"Person","name":"李昌"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/"},"publisher":{"@type":"Organization","name":"Linote","logo":{"@type":"ImageObject","url":"https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><header class=header><nav class=nav><div class=logo><a href=http://yangchnet.github.io/Dessert accesskey=h title="Linote (Alt + H)">Linote</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=http://yangchnet.github.io/Dessert/archives title=存档><span>存档</span></a></li><li><a href=http://yangchnet.github.io/Dessert/categories/ title=分类><span>分类</span></a></li><li><a href=http://yangchnet.github.io/Dessert/search/ title=搜索><span>搜索</span></a></li><li><a href=http://yangchnet.github.io/Dessert/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=http://yangchnet.github.io/Dessert>Home</a>&nbsp;»&nbsp;<a href=http://yangchnet.github.io/Dessert/tem/>Tems</a></div><h1 class=post-title>温度预测</h1><div class=post-meta>February 25, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><div class=details>Table of Contents</div></summary><div class=inner><ul><li><a href=#%e6%b8%a9%e5%ba%a6%e9%a2%84%e6%b5%8b aria-label=温度预测>温度预测</a><ul><li><a href=#1-%e8%a7%82%e5%af%9f%e8%80%b6%e6%8b%bf%e5%a4%a9%e6%b0%94%e6%95%b0%e6%8d%ae%e9%9b%86%e7%9a%84%e6%95%b0%e6%8d%ae aria-label="1. 观察耶拿天气数据集的数据">1. 观察耶拿天气数据集的数据</a></li><li><a href=#2-%e5%87%86%e5%a4%87%e6%95%b0%e6%8d%ae aria-label="2. 准备数据">2. 准备数据</a></li><li><a href=#3-%e4%b8%80%e7%a7%8d%e5%9f%ba%e6%9c%ac%e7%9a%84%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0%e6%96%b9%e6%b3%95 aria-label="3. 一种基本的机器学习方法">3. 一种基本的机器学习方法</a></li></ul></li></ul></div></details></div><div class=post-content><h1 id=温度预测>温度预测<a hidden class=anchor aria-hidden=true href=#温度预测>#</a></h1><h2 id=1-观察耶拿天气数据集的数据>1. 观察耶拿天气数据集的数据<a hidden class=anchor aria-hidden=true href=#1-观察耶拿天气数据集的数据>#</a></h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> os
+<!DOCTYPE html>
+<html lang="en" dir="auto">
 
-fname <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;./data/jena_climate_2009_2016.csv&#39;</span>
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>温度预测 | Linote</title>
+<meta name="keywords" content="DL&amp;ML" />
+<meta name="description" content="温度预测 1. 观察耶拿天气数据集的数据 import os fname = &#39;./data/jena_climate_2009_2016.csv&#39; f = open(fname) data = f.read() f.close() lines = data.split(&#39;\n&#39;) header = lines[0].split(&#39;,&#39;) lines = lines[1:] print(header) print(len(lines)) [&#39;&quot;Date Time&quot;&#39;, &#39;&quot;p (mbar)&quot;&#39;, &#39;&quot;T (degC)&quot;&#39;, &#39;&quot;Tpot (K)&quot;&#39;, &#39;&quot;Tdew (degC)&quot;&#39;, &#39;&quot;rh (%)&quot;&#39;, &#39;&quot;VPmax (mbar)&quot;&#39;, &#39;&quot;VPact (mbar)&quot;&#39;, &#39;&quot;VPdef (mbar)&quot;&#39;, &#39;&quot;sh (g/kg)&quot;&#39;, &#39;&quot;H2OC (mmol/mol)&quot;&#39;, &#39;&quot;rho (g/m**3)&quot;&#39;, &#39;&quot;wv (m/s)&quot;&#39;, &#39;&quot;max. wv (m/s)&quot;&#39;, &#39;&quot;wd (deg)&quot;&#39;] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line.">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/" />
+<link crossorigin="anonymous" href="/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<script defer crossorigin="anonymous" src="/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://yangchnet.github.io/Dessert/apple-touch-icon.png">
+<link rel="mask-icon" href="http://yangchnet.github.io/Dessert/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<meta property="og:title" content="温度预测" />
+<meta property="og:description" content="温度预测 1. 观察耶拿天气数据集的数据 import os fname = &#39;./data/jena_climate_2009_2016.csv&#39; f = open(fname) data = f.read() f.close() lines = data.split(&#39;\n&#39;) header = lines[0].split(&#39;,&#39;) lines = lines[1:] print(header) print(len(lines)) [&#39;&quot;Date Time&quot;&#39;, &#39;&quot;p (mbar)&quot;&#39;, &#39;&quot;T (degC)&quot;&#39;, &#39;&quot;Tpot (K)&quot;&#39;, &#39;&quot;Tdew (degC)&quot;&#39;, &#39;&quot;rh (%)&quot;&#39;, &#39;&quot;VPmax (mbar)&quot;&#39;, &#39;&quot;VPact (mbar)&quot;&#39;, &#39;&quot;VPdef (mbar)&quot;&#39;, &#39;&quot;sh (g/kg)&quot;&#39;, &#39;&quot;H2OC (mmol/mol)&quot;&#39;, &#39;&quot;rho (g/m**3)&quot;&#39;, &#39;&quot;wv (m/s)&quot;&#39;, &#39;&quot;max. wv (m/s)&quot;&#39;, &#39;&quot;wd (deg)&quot;&#39;] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/" /><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/><meta property="article:section" content="Tem" />
+<meta property="article:published_time" content="2021-02-25T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-02-25T00:00:00&#43;00:00" />
 
-f <span style=color:#f92672>=</span> open(fname)
-data <span style=color:#f92672>=</span> f<span style=color:#f92672>.</span>read()
-f<span style=color:#f92672>.</span>close()
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/>
 
-lines <span style=color:#f92672>=</span> data<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#39;</span>)
-header <span style=color:#f92672>=</span> lines[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;,&#39;</span>)
-lines <span style=color:#f92672>=</span> lines[<span style=color:#ae81ff>1</span>:]
+<meta name="twitter:title" content="温度预测"/>
+<meta name="twitter:description" content="温度预测 1. 观察耶拿天气数据集的数据 import os fname = &#39;./data/jena_climate_2009_2016.csv&#39; f = open(fname) data = f.read() f.close() lines = data.split(&#39;\n&#39;) header = lines[0].split(&#39;,&#39;) lines = lines[1:] print(header) print(len(lines)) [&#39;&quot;Date Time&quot;&#39;, &#39;&quot;p (mbar)&quot;&#39;, &#39;&quot;T (degC)&quot;&#39;, &#39;&quot;Tpot (K)&quot;&#39;, &#39;&quot;Tdew (degC)&quot;&#39;, &#39;&quot;rh (%)&quot;&#39;, &#39;&quot;VPmax (mbar)&quot;&#39;, &#39;&quot;VPact (mbar)&quot;&#39;, &#39;&quot;VPdef (mbar)&quot;&#39;, &#39;&quot;sh (g/kg)&quot;&#39;, &#39;&quot;H2OC (mmol/mol)&quot;&#39;, &#39;&quot;rho (g/m**3)&quot;&#39;, &#39;&quot;wv (m/s)&quot;&#39;, &#39;&quot;max. wv (m/s)&quot;&#39;, &#39;&quot;wd (deg)&quot;&#39;] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line."/>
 
-<span style=color:#66d9ef>print</span>(header)
-<span style=color:#66d9ef>print</span>(len(lines))
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tems",
+      "item": "http://yangchnet.github.io/Dessert/tem/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "温度预测",
+      "item": "http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "温度预测",
+  "name": "温度预测",
+  "description": "温度预测 1. 观察耶拿天气数据集的数据 import os fname = \u0026#39;./data/jena_climate_2009_2016.csv\u0026#39; f = open(fname) data = f.read() f.close() lines = data.split(\u0026#39;\\n\u0026#39;) header = lines[0].split(\u0026#39;,\u0026#39;) lines = lines[1:] print(header) print(len(lines)) ['\u0026quot;Date Time\u0026quot;', '\u0026quot;p (mbar)\u0026quot;', '\u0026quot;T (degC)\u0026quot;', '\u0026quot;Tpot (K)\u0026quot;', '\u0026quot;Tdew (degC)\u0026quot;', '\u0026quot;rh (%)\u0026quot;', '\u0026quot;VPmax (mbar)\u0026quot;', '\u0026quot;VPact (mbar)\u0026quot;', '\u0026quot;VPdef (mbar)\u0026quot;', '\u0026quot;sh (g/kg)\u0026quot;', '\u0026quot;H2OC (mmol/mol)\u0026quot;', '\u0026quot;rho (g/m**3)\u0026quot;', '\u0026quot;wv (m/s)\u0026quot;', '\u0026quot;max. wv (m/s)\u0026quot;', '\u0026quot;wd (deg)\u0026quot;'] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line.",
+  "keywords": [
+    "DL\u0026ML"
+  ],
+  "articleBody": "温度预测 1. 观察耶拿天气数据集的数据 import os fname = './data/jena_climate_2009_2016.csv' f = open(fname) data = f.read() f.close() lines = data.split('\\n') header = lines[0].split(',') lines = lines[1:] print(header) print(len(lines)) ['\"Date Time\"', '\"p (mbar)\"', '\"T (degC)\"', '\"Tpot (K)\"', '\"Tdew (degC)\"', '\"rh (%)\"', '\"VPmax (mbar)\"', '\"VPact (mbar)\"', '\"VPdef (mbar)\"', '\"sh (g/kg)\"', '\"H2OC (mmol/mol)\"', '\"rho (g/m**3)\"', '\"wv (m/s)\"', '\"max. wv (m/s)\"', '\"wd (deg)\"'] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line.split(',')[1:]] float_data[i, :] = values # 绘制温度时间序列 from matplotlib import pyplot as plt temp = float_data[:, 1] # 温度（摄氏度） plt.plot(range(len(temp)), temp) plt.show() plt.plot(range(1440), temp[:1440]) []  2. 准备数据 问题描述：一个时间步是10分钟，没steps个时间步采样一次数据，给定过去lookback个时间步之内的数据，能否预测delay个时间步之后的温度？用到的参数如下:\nlookback = 720 # 给定过去5天内的观测数据\nsteps = 6 # 观测数据的采样频率是每小时一个数据点\ndelay = 144 # 目标是未来24小时之后的数据\n数据标准化\nmean = float_data[:200000].mean(axis=0) float_data -= mean std = float_data[:200000].std(axis=0) float_data /= std 下面这个生成器以当前的浮点数数组作为输入，并从最近的数据中生成数据批量，同时生成未来的目标温度。sample是输入数据的一个批量，targets是对应的目标温度数组\ndef generator(data, lookback, delay, min_index, max_index, shuffle=False, batch_size=128, step=6): ''' data:浮点数据组成的原始数组 lookback: 输入数据应该包括过去多少个时间步 delay：目标应该在未来多少个时间后 min_index 和 max_index: data数组中的索引，用于界定需要抽取那些时间步。 shuffle: 是打乱样本，还是按顺序抽取样本 batch_size:每个批量的样本数 step:数据采样的周期。 ''' if max_index is None: max_index = len(data) - delay - 1 i = min_index + lookback while 1: if shuffle: rows = np.random.randint( min_index + lookback, max_index, size=batch_size) else: if i + batch_size = max_index: i = min_index + lookback rows = np.arange(i, min(i + batch_size, max_index)) i += len(rows) samples = np.zeros((len(rows), lookback // step, data.shape[-1])) targets = np.zeros((len(rows),)) for j, row in enumerate(rows): indices = range(rows[j] - lookback, rows[j], step) samples[j] = data[indices] targets[j] = data[rows[j] + delay][1] yield samples, targets 准备训练生成器、验证生成器和测试生成器\nlookback = 1440 step = 6 delay = 144 batch_size = 128 train_gen = generator(float_data, lookback=lookback, delay=delay, min_index=0, max_index=200000, shuffle=True, step=step, batch_size=batch_size) val_gen = generator(float_data, lookback=lookback, delay=delay, min_index=2000001, max_index=3000000, step=step, batch_size=batch_size) test_gen = generator(float_data, lookback=lookback, delay=delay, min_index=3000001, max_index=None, step=step, batch_size=batch_size) val_steps = (300000 - 200001 - lookback) // batch_size # 为了查看整个验证集，需要从val_gen中抽取多少次 test_steps = (len(float_data) - 300001 - lookback) // batch_size # 为了查看整个测试集，需要从test_gen中抽取多少次 3. 一种基本的机器学习方法 在尝试机器学习方法之前，建立一个基于常识的基准方法是很有用的；同样，在开始研究复杂且计算代价很高的模型（如RNN）之前，尝试使用简单且计算代价低的机器学习模型也是很有用的，比如小型的密集连接网络。这可以保证进一步增加问题的复杂度是合理的，并且会带来真正的好处\n# 训练并评估一个密集连接模型 from keras.models import Sequential from keras import layers from keras.optimizers import RMSprop model = Sequential() model.add(layers.Flatten(input_shape=(lookback // step, float_data.shape[-1]))) model.add(layers.Dense(32, activation='relu')) model.add(layers.Dense(1)) model.compile(optimizer=RMSprop(), loss='mae') history = model.fit_generator(train_gen, steps_per_epoch=500, epochs=20, validation_data=val_gen, validation_steps=val_steps) ",
+  "wordCount" : "345",
+  "inLanguage": "en",
+  "datePublished": "2021-02-25T00:00:00Z",
+  "dateModified": "2021-02-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "李昌"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://yangchnet.github.io/Dessert/tem/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Linote",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://yangchnet.github.io/Dessert" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://yangchnet.github.io/Dessert">Home</a>&nbsp;»&nbsp;<a href="http://yangchnet.github.io/Dessert/tem/">Tems</a></div>
+    <h1 class="post-title">
+      温度预测
+    </h1>
+    <div class="post-meta">February 25, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <div class="details">Table of Contents</div>
+        </summary>
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%b8%a9%e5%ba%a6%e9%a2%84%e6%b5%8b" aria-label="温度预测">温度预测</a><ul>
+                        
+                <li>
+                    <a href="#1-%e8%a7%82%e5%af%9f%e8%80%b6%e6%8b%bf%e5%a4%a9%e6%b0%94%e6%95%b0%e6%8d%ae%e9%9b%86%e7%9a%84%e6%95%b0%e6%8d%ae" aria-label="1. 观察耶拿天气数据集的数据">1. 观察耶拿天气数据集的数据</a></li>
+                <li>
+                    <a href="#2-%e5%87%86%e5%a4%87%e6%95%b0%e6%8d%ae" aria-label="2. 准备数据">2. 准备数据</a></li>
+                <li>
+                    <a href="#3-%e4%b8%80%e7%a7%8d%e5%9f%ba%e6%9c%ac%e7%9a%84%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0%e6%96%b9%e6%b3%95" aria-label="3. 一种基本的机器学习方法">3. 一种基本的机器学习方法</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="温度预测">温度预测<a hidden class="anchor" aria-hidden="true" href="#温度预测">#</a></h1>
+<h2 id="1-观察耶拿天气数据集的数据">1. 观察耶拿天气数据集的数据<a hidden class="anchor" aria-hidden="true" href="#1-观察耶拿天气数据集的数据">#</a></h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> os
+
+fname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./data/jena_climate_2009_2016.csv&#39;</span>
+
+f <span style="color:#f92672">=</span> open(fname)
+data <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()
+f<span style="color:#f92672">.</span>close()
+
+lines <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>)
+header <span style="color:#f92672">=</span> lines[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)
+lines <span style="color:#f92672">=</span> lines[<span style="color:#ae81ff">1</span>:]
+
+<span style="color:#66d9ef">print</span>(header)
+<span style="color:#66d9ef">print</span>(len(lines))
 </code></pre></div><pre><code>['&quot;Date Time&quot;', '&quot;p (mbar)&quot;', '&quot;T (degC)&quot;', '&quot;Tpot (K)&quot;', '&quot;Tdew (degC)&quot;', '&quot;rh (%)&quot;', '&quot;VPmax (mbar)&quot;', '&quot;VPact (mbar)&quot;', '&quot;VPdef (mbar)&quot;', '&quot;sh (g/kg)&quot;', '&quot;H2OC (mmol/mol)&quot;', '&quot;rho (g/m**3)&quot;', '&quot;wv (m/s)&quot;', '&quot;max. wv (m/s)&quot;', '&quot;wd (deg)&quot;']
 420551
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 解析数据</span>
-<span style=color:#f92672>import</span> numpy <span style=color:#f92672>as</span> np
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 解析数据</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
 
-float_data <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>zeros((len(lines), len(header) <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>))
-<span style=color:#66d9ef>for</span> i, line <span style=color:#f92672>in</span> enumerate(lines):
-    values <span style=color:#f92672>=</span> [float(x) <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> line<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;,&#39;</span>)[<span style=color:#ae81ff>1</span>:]]
-    float_data[i, :] <span style=color:#f92672>=</span> values
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 绘制温度时间序列</span>
-<span style=color:#f92672>from</span> matplotlib <span style=color:#f92672>import</span> pyplot <span style=color:#66d9ef>as</span> plt
+float_data <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((len(lines), len(header) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))
+<span style="color:#66d9ef">for</span> i, line <span style="color:#f92672">in</span> enumerate(lines):
+    values <span style="color:#f92672">=</span> [float(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> line<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)[<span style="color:#ae81ff">1</span>:]]
+    float_data[i, :] <span style="color:#f92672">=</span> values
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 绘制温度时间序列</span>
+<span style="color:#f92672">from</span> matplotlib <span style="color:#f92672">import</span> pyplot <span style="color:#66d9ef">as</span> plt
 
-temp <span style=color:#f92672>=</span> float_data[:, <span style=color:#ae81ff>1</span>] <span style=color:#75715e># 温度（摄氏度）</span>
-plt<span style=color:#f92672>.</span>plot(range(len(temp)), temp)
-plt<span style=color:#f92672>.</span>show()
-</code></pre></div><p><img loading=lazy src=%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_files/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_4_0.png alt=png></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>plt<span style=color:#f92672>.</span>plot(range(<span style=color:#ae81ff>1440</span>), temp[:<span style=color:#ae81ff>1440</span>])
+temp <span style="color:#f92672">=</span> float_data[:, <span style="color:#ae81ff">1</span>] <span style="color:#75715e"># 温度（摄氏度）</span>
+plt<span style="color:#f92672">.</span>plot(range(len(temp)), temp)
+plt<span style="color:#f92672">.</span>show()
+</code></pre></div><p><img loading="lazy" src="%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_files/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_4_0.png" alt="png"  />
+</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#f92672">.</span>plot(range(<span style="color:#ae81ff">1440</span>), temp[:<span style="color:#ae81ff">1440</span>])
 </code></pre></div><pre><code>[&lt;matplotlib.lines.Line2D at 0x7f596ff56978&gt;]
-</code></pre><p><img loading=lazy src=%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_files/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_5_1.png alt=png></p><h2 id=2-准备数据>2. 准备数据<a hidden class=anchor aria-hidden=true href=#2-准备数据>#</a></h2><p>问题描述：一个时间步是10分钟，没steps个时间步采样一次数据，给定过去lookback个时间步之内的数据，能否预测delay个时间步之后的温度？用到的参数如下:<br>lookback = 720 # 给定过去5天内的观测数据<br>steps = 6 # 观测数据的采样频率是每小时一个数据点<br>delay = 144 # 目标是未来24小时之后的数据</p><p><strong>数据标准化</strong></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>mean <span style=color:#f92672>=</span> float_data[:<span style=color:#ae81ff>200000</span>]<span style=color:#f92672>.</span>mean(axis<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
-float_data <span style=color:#f92672>-=</span> mean
-std <span style=color:#f92672>=</span> float_data[:<span style=color:#ae81ff>200000</span>]<span style=color:#f92672>.</span>std(axis<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>)
-float_data <span style=color:#f92672>/=</span> std
-</code></pre></div><p>下面这个生成器以当前的浮点数数组作为输入，并从最近的数据中生成数据批量，同时生成未来的目标温度。sample是输入数据的一个批量，targets是对应的目标温度数组</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>generator</span>(data, lookback, delay, min_index, max_index, shuffle<span style=color:#f92672>=</span>False, batch_size<span style=color:#f92672>=</span><span style=color:#ae81ff>128</span>, step<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span>):
-    <span style=color:#e6db74>&#39;&#39;&#39;
-</span><span style=color:#e6db74>        data:浮点数据组成的原始数组
-</span><span style=color:#e6db74>        lookback: 输入数据应该包括过去多少个时间步
-</span><span style=color:#e6db74>        delay：目标应该在未来多少个时间后
-</span><span style=color:#e6db74>        min_index 和 max_index: data数组中的索引，用于界定需要抽取那些时间步。
-</span><span style=color:#e6db74>        shuffle: 是打乱样本，还是按顺序抽取样本
-</span><span style=color:#e6db74>        batch_size:每个批量的样本数
-</span><span style=color:#e6db74>        step:数据采样的周期。
-</span><span style=color:#e6db74>    &#39;&#39;&#39;</span>
-    <span style=color:#66d9ef>if</span> max_index <span style=color:#f92672>is</span> None:
-        max_index <span style=color:#f92672>=</span> len(data) <span style=color:#f92672>-</span> delay <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>
-    i <span style=color:#f92672>=</span> min_index <span style=color:#f92672>+</span> lookback
-    <span style=color:#66d9ef>while</span> <span style=color:#ae81ff>1</span>:
-        <span style=color:#66d9ef>if</span> shuffle:
-            rows <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>random<span style=color:#f92672>.</span>randint(
-                min_index <span style=color:#f92672>+</span> lookback, max_index, size<span style=color:#f92672>=</span>batch_size)
-        <span style=color:#66d9ef>else</span>:
-            <span style=color:#66d9ef>if</span> i <span style=color:#f92672>+</span> batch_size <span style=color:#f92672>&gt;=</span> max_index:
-                i <span style=color:#f92672>=</span> min_index <span style=color:#f92672>+</span> lookback
-            rows <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>arange(i, min(i <span style=color:#f92672>+</span> batch_size, max_index))
-            i <span style=color:#f92672>+=</span> len(rows)
-        samples <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>zeros((len(rows), lookback <span style=color:#f92672>//</span> step, data<span style=color:#f92672>.</span>shape[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>]))
-        targets <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>zeros((len(rows),))
-        <span style=color:#66d9ef>for</span> j, row <span style=color:#f92672>in</span> enumerate(rows):
-            indices <span style=color:#f92672>=</span> range(rows[j] <span style=color:#f92672>-</span> lookback, rows[j], step)
-            samples[j] <span style=color:#f92672>=</span> data[indices]
-            targets[j] <span style=color:#f92672>=</span> data[rows[j] <span style=color:#f92672>+</span> delay][<span style=color:#ae81ff>1</span>]
-        <span style=color:#66d9ef>yield</span> samples, targets
-</code></pre></div><p><strong>准备训练生成器、验证生成器和测试生成器</strong></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>lookback <span style=color:#f92672>=</span> <span style=color:#ae81ff>1440</span>
-step <span style=color:#f92672>=</span> <span style=color:#ae81ff>6</span>
-delay <span style=color:#f92672>=</span> <span style=color:#ae81ff>144</span>
-batch_size <span style=color:#f92672>=</span> <span style=color:#ae81ff>128</span>
+</code></pre>
+<p><img loading="lazy" src="%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_files/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B_5_1.png" alt="png"  />
+</p>
+<h2 id="2-准备数据">2. 准备数据<a hidden class="anchor" aria-hidden="true" href="#2-准备数据">#</a></h2>
+<p>问题描述：一个时间步是10分钟，没steps个时间步采样一次数据，给定过去lookback个时间步之内的数据，能否预测delay个时间步之后的温度？用到的参数如下:<br>
+lookback = 720  # 给定过去5天内的观测数据<br>
+steps = 6 # 观测数据的采样频率是每小时一个数据点<br>
+delay = 144  # 目标是未来24小时之后的数据</p>
+<p><strong>数据标准化</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mean <span style="color:#f92672">=</span> float_data[:<span style="color:#ae81ff">200000</span>]<span style="color:#f92672">.</span>mean(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+float_data <span style="color:#f92672">-=</span> mean
+std <span style="color:#f92672">=</span> float_data[:<span style="color:#ae81ff">200000</span>]<span style="color:#f92672">.</span>std(axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+float_data <span style="color:#f92672">/=</span> std
+</code></pre></div><p>下面这个生成器以当前的浮点数数组作为输入，并从最近的数据中生成数据批量，同时生成未来的目标温度。sample是输入数据的一个批量，targets是对应的目标温度数组</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generator</span>(data, lookback, delay, min_index, max_index, shuffle<span style="color:#f92672">=</span>False, batch_size<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>, step<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>):
+    <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">        data:浮点数据组成的原始数组
+</span><span style="color:#e6db74">        lookback: 输入数据应该包括过去多少个时间步
+</span><span style="color:#e6db74">        delay：目标应该在未来多少个时间后
+</span><span style="color:#e6db74">        min_index 和 max_index: data数组中的索引，用于界定需要抽取那些时间步。
+</span><span style="color:#e6db74">        shuffle: 是打乱样本，还是按顺序抽取样本
+</span><span style="color:#e6db74">        batch_size:每个批量的样本数
+</span><span style="color:#e6db74">        step:数据采样的周期。
+</span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
+    <span style="color:#66d9ef">if</span> max_index <span style="color:#f92672">is</span> None:
+        max_index <span style="color:#f92672">=</span> len(data) <span style="color:#f92672">-</span> delay <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    i <span style="color:#f92672">=</span> min_index <span style="color:#f92672">+</span> lookback
+    <span style="color:#66d9ef">while</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">if</span> shuffle:
+            rows <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(
+                min_index <span style="color:#f92672">+</span> lookback, max_index, size<span style="color:#f92672">=</span>batch_size)
+        <span style="color:#66d9ef">else</span>:
+            <span style="color:#66d9ef">if</span> i <span style="color:#f92672">+</span> batch_size <span style="color:#f92672">&gt;=</span> max_index:
+                i <span style="color:#f92672">=</span> min_index <span style="color:#f92672">+</span> lookback
+            rows <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>arange(i, min(i <span style="color:#f92672">+</span> batch_size, max_index))
+            i <span style="color:#f92672">+=</span> len(rows)
+        samples <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((len(rows), lookback <span style="color:#f92672">//</span> step, data<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]))
+        targets <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((len(rows),))
+        <span style="color:#66d9ef">for</span> j, row <span style="color:#f92672">in</span> enumerate(rows):
+            indices <span style="color:#f92672">=</span> range(rows[j] <span style="color:#f92672">-</span> lookback, rows[j], step)
+            samples[j] <span style="color:#f92672">=</span> data[indices]
+            targets[j] <span style="color:#f92672">=</span> data[rows[j] <span style="color:#f92672">+</span> delay][<span style="color:#ae81ff">1</span>]
+        <span style="color:#66d9ef">yield</span> samples, targets
+</code></pre></div><p><strong>准备训练生成器、验证生成器和测试生成器</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">lookback <span style="color:#f92672">=</span> <span style="color:#ae81ff">1440</span>
+step <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+delay <span style="color:#f92672">=</span> <span style="color:#ae81ff">144</span>
+batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">128</span>
 
-train_gen <span style=color:#f92672>=</span> generator(float_data, 
-                     lookback<span style=color:#f92672>=</span>lookback,
-                     delay<span style=color:#f92672>=</span>delay,
-                     min_index<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>,
-                     max_index<span style=color:#f92672>=</span><span style=color:#ae81ff>200000</span>,
-                     shuffle<span style=color:#f92672>=</span>True,
-                     step<span style=color:#f92672>=</span>step,
-                     batch_size<span style=color:#f92672>=</span>batch_size)
+train_gen <span style="color:#f92672">=</span> generator(float_data, 
+                     lookback<span style="color:#f92672">=</span>lookback,
+                     delay<span style="color:#f92672">=</span>delay,
+                     min_index<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,
+                     max_index<span style="color:#f92672">=</span><span style="color:#ae81ff">200000</span>,
+                     shuffle<span style="color:#f92672">=</span>True,
+                     step<span style="color:#f92672">=</span>step,
+                     batch_size<span style="color:#f92672">=</span>batch_size)
 
-val_gen <span style=color:#f92672>=</span> generator(float_data, 
-                   lookback<span style=color:#f92672>=</span>lookback,
-                   delay<span style=color:#f92672>=</span>delay,
-                   min_index<span style=color:#f92672>=</span><span style=color:#ae81ff>2000001</span>, 
-                   max_index<span style=color:#f92672>=</span><span style=color:#ae81ff>3000000</span>,
-                   step<span style=color:#f92672>=</span>step,
-                   batch_size<span style=color:#f92672>=</span>batch_size)
+val_gen <span style="color:#f92672">=</span> generator(float_data, 
+                   lookback<span style="color:#f92672">=</span>lookback,
+                   delay<span style="color:#f92672">=</span>delay,
+                   min_index<span style="color:#f92672">=</span><span style="color:#ae81ff">2000001</span>, 
+                   max_index<span style="color:#f92672">=</span><span style="color:#ae81ff">3000000</span>,
+                   step<span style="color:#f92672">=</span>step,
+                   batch_size<span style="color:#f92672">=</span>batch_size)
 
-test_gen <span style=color:#f92672>=</span> generator(float_data, 
-                    lookback<span style=color:#f92672>=</span>lookback,
-                    delay<span style=color:#f92672>=</span>delay, 
-                    min_index<span style=color:#f92672>=</span><span style=color:#ae81ff>3000001</span>, 
-                    max_index<span style=color:#f92672>=</span>None,
-                    step<span style=color:#f92672>=</span>step,
-                    batch_size<span style=color:#f92672>=</span>batch_size)
+test_gen <span style="color:#f92672">=</span> generator(float_data, 
+                    lookback<span style="color:#f92672">=</span>lookback,
+                    delay<span style="color:#f92672">=</span>delay, 
+                    min_index<span style="color:#f92672">=</span><span style="color:#ae81ff">3000001</span>, 
+                    max_index<span style="color:#f92672">=</span>None,
+                    step<span style="color:#f92672">=</span>step,
+                    batch_size<span style="color:#f92672">=</span>batch_size)
 
-val_steps <span style=color:#f92672>=</span> (<span style=color:#ae81ff>300000</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>200001</span> <span style=color:#f92672>-</span> lookback)  <span style=color:#f92672>//</span> batch_size  <span style=color:#75715e># 为了查看整个验证集，需要从val_gen中抽取多少次</span>
-test_steps <span style=color:#f92672>=</span> (len(float_data) <span style=color:#f92672>-</span> <span style=color:#ae81ff>300001</span> <span style=color:#f92672>-</span> lookback) <span style=color:#f92672>//</span> batch_size  <span style=color:#75715e># 为了查看整个测试集，需要从test_gen中抽取多少次</span>
-</code></pre></div><h2 id=3-一种基本的机器学习方法>3. 一种基本的机器学习方法<a hidden class=anchor aria-hidden=true href=#3-一种基本的机器学习方法>#</a></h2><p>在尝试机器学习方法之前，建立一个基于常识的基准方法是很有用的；同样，在开始研究复杂且计算代价很高的模型（如RNN）之前，尝试使用简单且计算代价低的机器学习模型也是很有用的，比如小型的密集连接网络。这可以保证进一步增加问题的复杂度是合理的，并且会带来真正的好处</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 训练并评估一个密集连接模型</span>
-<span style=color:#f92672>from</span> keras.models <span style=color:#f92672>import</span> Sequential
-<span style=color:#f92672>from</span> keras <span style=color:#f92672>import</span> layers
-<span style=color:#f92672>from</span> keras.optimizers <span style=color:#f92672>import</span> RMSprop
+val_steps <span style="color:#f92672">=</span> (<span style="color:#ae81ff">300000</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">200001</span> <span style="color:#f92672">-</span> lookback)  <span style="color:#f92672">//</span> batch_size  <span style="color:#75715e"># 为了查看整个验证集，需要从val_gen中抽取多少次</span>
+test_steps <span style="color:#f92672">=</span> (len(float_data) <span style="color:#f92672">-</span> <span style="color:#ae81ff">300001</span> <span style="color:#f92672">-</span> lookback) <span style="color:#f92672">//</span> batch_size  <span style="color:#75715e"># 为了查看整个测试集，需要从test_gen中抽取多少次</span>
+</code></pre></div><h2 id="3-一种基本的机器学习方法">3. 一种基本的机器学习方法<a hidden class="anchor" aria-hidden="true" href="#3-一种基本的机器学习方法">#</a></h2>
+<p>在尝试机器学习方法之前，建立一个基于常识的基准方法是很有用的；同样，在开始研究复杂且计算代价很高的模型（如RNN）之前，尝试使用简单且计算代价低的机器学习模型也是很有用的，比如小型的密集连接网络。这可以保证进一步增加问题的复杂度是合理的，并且会带来真正的好处</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 训练并评估一个密集连接模型</span>
+<span style="color:#f92672">from</span> keras.models <span style="color:#f92672">import</span> Sequential
+<span style="color:#f92672">from</span> keras <span style="color:#f92672">import</span> layers
+<span style="color:#f92672">from</span> keras.optimizers <span style="color:#f92672">import</span> RMSprop
 
-model <span style=color:#f92672>=</span> Sequential()
-model<span style=color:#f92672>.</span>add(layers<span style=color:#f92672>.</span>Flatten(input_shape<span style=color:#f92672>=</span>(lookback <span style=color:#f92672>//</span> step, float_data<span style=color:#f92672>.</span>shape[<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>])))
-model<span style=color:#f92672>.</span>add(layers<span style=color:#f92672>.</span>Dense(<span style=color:#ae81ff>32</span>, activation<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;relu&#39;</span>))
-model<span style=color:#f92672>.</span>add(layers<span style=color:#f92672>.</span>Dense(<span style=color:#ae81ff>1</span>))
-model<span style=color:#f92672>.</span>compile(optimizer<span style=color:#f92672>=</span>RMSprop(), loss<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;mae&#39;</span>)
-history <span style=color:#f92672>=</span> model<span style=color:#f92672>.</span>fit_generator(train_gen, steps_per_epoch<span style=color:#f92672>=</span><span style=color:#ae81ff>500</span>, 
-                             epochs<span style=color:#f92672>=</span><span style=color:#ae81ff>20</span>, validation_data<span style=color:#f92672>=</span>val_gen,
-                             validation_steps<span style=color:#f92672>=</span>val_steps)
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>
-</code></pre></div></div><footer class=post-footer><ul class=post-tags><li><a href=http://yangchnet.github.io/Dessert/tags/dlml/>DL&ML</a></li></ul><div class=share-buttons><div class=bshare-custom><a title=分享到微信 class=bshare-weixin></a><a title=分享到QQ好友 class=bshare-qqim></a><a title=分享到复制网址 class=bshare-clipboard></a><a title=分享到QQ空间 class=bshare-qzone></a><a title=分享到新浪微博 class=bshare-sinaminiblog></a><a title=分享到电子邮件 class=bshare-email></a><a title=更多平台 class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type=text/javascript src="http://static.bshare.cn/b/buttonLite.js#style=-1&uuid=&pophcol=2&lang=zh"></script><script type=text/javascript src=http://static.bshare.cn/b/bshareC0.js></script></div></footer></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+model <span style="color:#f92672">=</span> Sequential()
+model<span style="color:#f92672">.</span>add(layers<span style="color:#f92672">.</span>Flatten(input_shape<span style="color:#f92672">=</span>(lookback <span style="color:#f92672">//</span> step, float_data<span style="color:#f92672">.</span>shape[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])))
+model<span style="color:#f92672">.</span>add(layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">32</span>, activation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;relu&#39;</span>))
+model<span style="color:#f92672">.</span>add(layers<span style="color:#f92672">.</span>Dense(<span style="color:#ae81ff">1</span>))
+model<span style="color:#f92672">.</span>compile(optimizer<span style="color:#f92672">=</span>RMSprop(), loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mae&#39;</span>)
+history <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>fit_generator(train_gen, steps_per_epoch<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>, 
+                             epochs<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>, validation_data<span style="color:#f92672">=</span>val_gen,
+                             validation_steps<span style="color:#f92672">=</span>val_steps)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+</div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://yangchnet.github.io/Dessert/tags/dlml/">DL&amp;ML</a></li>
+    </ul>
+
+<div class="share-buttons">
+    <div class="bshare-custom"><a title="分享到微信" class="bshare-weixin"></a><a title="分享到QQ好友" class="bshare-qqim"></a><a title="分享到复制网址" class="bshare-clipboard"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到电子邮件" class="bshare-email"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    
+</div>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://yangchnet.github.io/Dessert">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

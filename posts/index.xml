@@ -1,0 +1,1598 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/posts/</link>
+    <description>Recent content in Posts on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 24 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>errgroup的基本使用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/errgroup%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/errgroup%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang中context包的使用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>context包定义了Context类型，这个类型在API边界即进程中传递截止日期、同步信号，请求值等相关信息。
+ 1. 对context包的介绍 在服务器的传入请求中应包含context，而对服务器的传出调用应接收一个context。它们之间的调用链必须包含context，或是衍生的WithCancel, WithDeadline, WithTimeout, WithValue。当一个WithCancel Context被“cancel”，那么当前context所派生的所有context也都将被取消。
+WithCancel, WithDeadline, WithTimeout接收一个Context对象（父对象），并返回其父对象的一个携带有cancel/deadline/timeout的一个拷贝（子对象）。调用CancelFunc会取消其子对象及子对象的子对象等，删除父对象对子对象的引用，并停止所有关联的计时器。未能调用CancelFunc将造成父对象结束前或计时器被触发前子对象的泄露。使用go vet工具可以检查所有控制流路径上是否都使用了CancelFunc
+使用context的程序应遵循以下规则，以使各个包之间的接口保持一致，并启用静态分析工具来检查上下文传播：
+ 不要将context存储在结构类型中，而是将context明确传递给需要它的每个函数。Context应该是第一个函数，通常命名为ctx。  func DoSomething(ctx context.Context, arg Arg) error { // ...use ctx... } 不要传递一个值为nil的context，即使一个函数允许这样做。如果你不确定Context的作用那就请传递context.TODO。 只在进程和API间传递请求范围数据时使用context值，不要用于将可选参数传递给函数。 同样的Context可以传递给运行在不同goroutine中的函数，Context是线程安全的。  2. Context接口 type Context interface { Done() &amp;lt;-chan struct{} Err() error Deadline() (deadline time.Time, ok bool) Value(key interface{}) interface{} } Context是一个接口，其定义非常的简单，只包含4个方法：
+  Done() &amp;lt;-chan struct{} Done()方法将一个channel作为取消信号返回给持有context的函数，当该channel被关闭（即Done()被调用），这些函数应该立即停止其工作并返回。
+  Err() error Err()返回一个Error，说明为什么取消context。如果Done()没有被调用，那么Err返回nil。
+  Deadline() (deadline time.Time, ok bool) Deadline()方法返回持有这个context的函数的预期结束时间。如果并没有设置deadline，那么返回的ok将被设置为false。</description>
+    </item>
+    
+    <item>
+      <title>Golang中反射reflect的基本使用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>在计算机领域，反射是指一类应用，它们能够自描述和自控制。也即是说，这类应用通过采用某种机制来实现对自己行为的描述和监测，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。 反射（reflect）让我们能在运行期探知对象的类型信息和内存结构，这从一定程度上弥(mi)补了静态语言在动态行为上的不足。 反射（reflect）是在计算机程序运行时，访问，检查，修改它自身的一种能力，是元编程的一种形式。 Go语音提供了一种机制在运行时更新变量和检查它们的值、调用它们的方法和它们支持的内在操作，但是在编译时并不知道这些变量的具体类型。这种机制被称为反射。反射也可以让我们将类型本身作为第一类的值类型处理。
+ 1. 为何我们需要反射？ fmt.Fprintf函数提供字符串格式化处理逻辑，它可以对任意类型的值格式化并打印，甚至支持用户自定义的类型。
+让我们也来尝试实现一个类似功能的函数。为了简单起见，我们的函数只接收一个参数，然后返回和fmt.Sprint类似的格式化后的字符串。我们实现的函数名也叫Sprint。 这里我们使用switch类型分支来对不同的类型进行处理。
+func Sprint(x interface{}) string { type stringer interface { String() string } switch x := x.(type) { case stringer: return x.String() case string: return x case int: return strconv.Itoa(x) // ...similar cases for int16, uint32, and so on...  case bool: if x { return &amp;#34;true&amp;#34; } return &amp;#34;false&amp;#34; default: // array, chan, func, map, pointer, slice, struct  return &amp;#34;?</description>
+    </item>
+    
+    <item>
+      <title>zsh的基本配置</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tools/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tools/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
+      <description>1. 按照Oh my zsh $ sh -c &amp;#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; 2. 配置Oh my zsh  将zsh设置为默认Shell chsh -s /bin/zsh # 不需要使用root权限  更换主题 vim ~/.zshrc 找到ZSH_THEME=&#39;robbyrussell&#39;, 更换为你想要使用的主题，可以在这里找到你想要的主题
+ 安装插件 vim ~/.zshrc 找到plugins=(), 添加插件名称，我这里添加的插件有：
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)  完成 source ~/.zshrc # 启动zsh    推荐主题powerlevel10k
+ </description>
+    </item>
+    
+    <item>
+      <title>Deepin15安装Anaconda</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
+      <description>1. Anaconda下载地址  官方下载地址：https://www.anaconda.com/distribution/#linux 清华大学镜像：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ # 选择你想安装的版本下载  2. 安装 $ bash Anaconda3-2021.05-Linux-x86_64.sh # 中间会有一些选择，按照自己的意愿选择即可  关闭并重新打开你的终端来激活conda
+3. 使用  更新自己  # 更新conda conda update conda conda update anaconda  更新时出现了ValueError: check_hostname requires server_hostname错误，经查发现是代理的问题，可尝试关闭或开启代理再次尝试
+  对包的操作
+ 更新包  conda update --all # 更新所有包  安装包  conda install [包名]   对环境的操作
+ 创建环境  conda create --name [环境名字] # 使用默认的Python版本  激活环境  conda activate [环境名字]  退出环境  conda deactivate  查看环境名字  conda env list # conda info -e  删除环境中某个包  conda remove [环境名] [包名]  修改环境名字  conda create -n [新环境名] --clone [旧环境名] # 克隆旧的 conda remove -n [旧环境名] # 删除旧的  删除环境  conda remove -n [环境名] --all   4.</description>
+    </item>
+    
+    <item>
+      <title>野生Goroutine带来的问题及对应解决方案</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>1. goroutine中panic无法恢复 正常的函数中panic的recover
+import ( &amp;#34;fmt&amp;#34; ) func main(){ defer func(){ if err := recover(); err != nil{ fmt.Println(err) } }() var bar = []int{1} fmt.Println(bar[1]) } reflect: slice index out of range goroutine中panic的恢复
+func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用recover(),不能捕获panic 	fmt.Println(&amp;#34;catch you, bad guy&amp;#34;) } }() go func(){ fmt.Println(&amp;#34;I&amp;#39;m in a goroutine&amp;#34;) panic(&amp;#34;come to catch me&amp;#34;) }() time.Sleep(10 * time.Second) // 主进程做其他事 } I&#39;m in a goroutine panic: come to catch me goroutine 6 [running]: main.</description>
+    </item>
+    
+    <item>
+      <title>Linux程序前台后台切换</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</guid>
+      <description>1. 前后台切换  在Linux终端运行命令的时候，在命令末尾加上 &amp;amp; 符号，就可以让程序在后台运行  $ ./main &amp;amp;  如果程序正在前台运行，可以使用 Ctrl+z 选项把程序暂停，然后用 bg %[number] 命令把这个程序放到后台运行，摁Ctrl+z，然后在最后一行加上bg %number
+  对于所有运行的程序，我们可以用jobs –l 指令查看
+  $ jobs -l 也可以用 fg %[number] 指令把一个程序掉到前台  $ fg %1 也可以直接终止后台运行的程序，使用 kill 命令  $ kill %1 2. fg、bg、jobs、&amp;amp;、nohup、ctrl+z、ctrl+c 命令  &amp;amp; 加在一个命令的最后，可以把这个命令放到后台执行，如  watch -n 10 sh test.sh &amp;amp; #每10s在后台执行一次test.sh脚本  ctrl + z 可以将一个正在前台执行的命令放到后台，并且处于暂停状态。
+  jobs 查看当前有多少在后台运行的命令 jobs -l选项可显示所有任务的PID，jobs的状态可以是running, stopped, Terminated。但是如果任务被终止了（kill），shell 从当前的shell环境已知的列表中删除任务的进程标识。</description>
+    </item>
+    
+    <item>
+      <title>对野生Goroutine管理的解决方案及其实现</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+      <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+      <description>1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
+这种线程可能带来一系列问题：
+ 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。
+1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。
+ 线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。
+1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。
+2. 线程池的工作机制 2.1 线程池模型 线程池的内部实际上可以看做是生产者消费者模型，二者并不直接关联，通过任务队列进行交互，从而可以有效的缓冲任务，复用线程。
+在线程池模型中，扮演生产者角色的是任务管理部分，其接受提交的任务，并判断任务应如何处理：
+ 直接申请线程执行该任务 缓冲到队列中等待线程执行 直接拒绝该任务  线程管理部分是消费者，线程被统一维护在线程池中，当有任务请求到来时，某一线程被分配去执行这个任务，执行完成后继续或许新的任务来执行，最终当线程获取不到任务时，线程就被回收以节省系统资源。
+2.2 线程池的状态 线程池一方面维护自身的状态，另一方面管理线程和任务，使二者良好的结合从而执行并行任务。 线程池的状态有5种：
+   运行状态 状态描述     RUNNING 能接受新提交的任务，并且也能处理阻塞队列中的任务   SHUTDOWN 关闭状态，不再接受新提交的任务，但可以继续处理阻塞队列中已保存的任务   STOP 不能接受新任务，也不处理队列中的任务，会中断正在处理任务的线程   TIDYING 所有的任务都已终止，有效线程数为0   TERMINATED 在terminated()方法执行后进入该状态   其生命周期转换如下图所示：     sequenceDiagram RUNNING-&amp;gt;&amp;gt;SHUTDOWN:shutdown() RUNNING-&amp;gt;&amp;gt;STOP: shutdownNow() SHUTDOWN-&amp;gt;&amp;gt;TIDYING:所有任务都已完成，阻塞队列为空，工作线程数为0 STOP-&amp;gt;&amp;gt;TIDYING:线程池中工作线程数为0 TIDYING-&amp;gt;&amp;gt;TERMINATED: terminated() 2.</description>
+    </item>
+    
+    <item>
+      <title>deepin上升级Python</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/deepin%E4%B8%8A%E5%8D%87%E7%BA%A7python/</link>
+      <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/deepin%E4%B8%8A%E5%8D%87%E7%BA%A7python/</guid>
+      <description>1. 安装高版本的Python  这里要说明，不能删除原来的python2以及python3.5，因为系统是依赖于这两个python版本的，当然你也可以试试，后果自负&amp;hellip;
+  去官网下载最新的Python 我这里下载的是源码，因为没有对应的安装包。（Python3.9） 下载完成后解压到本地 sudo tar -xvf Python-3.9.5.tar.xz -C /opt/python  编译安装 cd /opt/python mv Python-3.9.5 python3.9 sudo ./configure --enable-optimizations # 默认安装到/usr/local/bin, 可用--prefix指定安装目录 make -j8 &amp;amp;&amp;amp; sudo make altinstall sudo make clean  验证安装成功 /usr/local/bin/python3.9  Python 3.9.5 (default, May 13 2021, 09:51:10) [GCC 6.3.0 20170516] on linux Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot; for more information. &amp;gt;&amp;gt;&amp;gt; exit()   2. 设置默认Python版本 2.1 用户级修改 vim ~/.</description>
+    </item>
+    
+    <item>
+      <title>清理本地分支</title>
+      <link>http://yangchnet.github.io/Dessert/posts/git/%E6%B8%85%E7%90%86%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/</link>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/git/%E6%B8%85%E7%90%86%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/</guid>
+      <description>在使用git时，有时某分支已在远程服务器删除，但本地不会同步删除，这个分支依然存在。
+如下命令可以删除本地版本库上那些失效的远程追踪分支，具体用法是，假如你的远程版本库名是 origin,则使用如下命令先查看哪些分支需要清理：
+$ git remote prune origin --dry-run 修剪 origin URL：git@yuhu.github.com:yuhu-tech/grampus-contracts.git * [将删除] origin/cq-2021-0227_refactor * [将删除] origin/lichagn-feat-impl-grc20 * [将删除] origin/lichagn-feat-impl-grc20-em20-em721 * [将删除] origin/lichang-feat-add-some-support-for-ANT * [将删除] origin/lichang-feat-impl-20-and-720 * [将删除] origin/lichang-feat-mdy-20 * [将删除] origin/lichang-feat-mdy-20-and-721 * [将删除] origin/litao-dev * [将删除] origin/runjam-v0.0.2 可以看到， 以上分支已经失效，将被删除，执行
+$ git remote prune origin 修剪 origin URL：git@yuhu.github.com:yuhu-tech/grampus-contracts.git * [已删除] origin/cq-2021-0227_refactor * [已删除] origin/lichagn-feat-impl-grc20 * [已删除] origin/lichagn-feat-impl-grc20-em20-em721 * [已删除] origin/lichang-feat-add-some-support-for-ANT * [已删除] origin/lichang-feat-impl-20-and-720 * [已删除] origin/lichang-feat-mdy-20 * [已删除] origin/lichang-feat-mdy-20-and-721 * [已删除] origin/litao-dev * [已删除] origin/runjam-v0.</description>
+    </item>
+    
+    <item>
+      <title>同质化代币和非同质化代币</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81%E5%92%8C%E9%9D%9E%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81%E5%92%8C%E9%9D%9E%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81/</guid>
+      <description>1. 什么是同质化代币（FT） 同质化代币是一种能够相互替换，具有统一性，可接近无穷拆分的代币。在同质化代币的交易中，只需要关注代币交接的数量即可，其价值可能会根据交换的时间间隔而改变，但其本质没有发生变化。 举例来说，美元，人民币都是同质化代币，虽然每一张美元或人民币的序号不同，但在面额相同的情况下，不同序号的币对持有者来说没有区别。
+2. 什么是非同质化代币(NFT) Non-Fungible Tokens
+非同质化代币包含了记录在其智能合约中的识别信息。这些信息使每种代币具有其独特性，因此不能被另一种代币直接取代。它们不能以一换一，因为没有两个 NFT 是相同的。 此外，非同质化代币也不可分割，就像不能送给别人演唱会门票的一部分一样，门票的一部分并不值钱也不能兑换。 非同质化的独特属性使得它通常与特定资产挂钩，可以用来证明数字物品（如游戏皮肤）的所有权，甚至实物资产的所有权，主要应用于游戏和加密收藏品领域。 FT 和 NFT 的一大区别在于使用了不同的合约接口，前者为 ERC-20，后者为 ERC-721。
+3. 什么是ERC-20? ERC-20 协议是以太坊区块链较早的、比较流行的代币规格协议。若以太坊平台上两种代币都以 ERC-20 发行，则两者之间可以进行自由置换。ERC20 是标准代币接口，规定了其基本功能 , 方便第三方使用。系统开源使得 ERC20 的标准已经简单到可以 5 分钟发行一个 ERC-20 代币。ERC-20 代币听命于同一组代币合约的命令，也就意味着所有 ERC-20 协议中的代币都可轻松实现转移、请求、批准等功能，但其功能因此也具有局限性。
+4. 什么是ERC-721？ 相比于 ERC-20，ERC-721 协议功能更多且技术更先进。该协议是以太坊的针对不可置换代币的 NFT 数字资产的第一个标准，应用于 CryptoKitties、Decentraland 等项目。ERC721 标准正是由 CryptoKitties 的 CTO Dieter Shirley 所创建和发布的，Dieter Shirley 是 NFT 的奠基人之一。
+虽然 ERC-721 较 ERC-20 用例较少，功能还处于探索之用，但 721 协议下的资产——画作、债券、房子或是汽车——的优势在于能保证所有权的安全性、所有权转移的便捷性以及所有权历史的不可更改性和透明性。另外，ERC721 还可以促进追踪、交易和管理真实资 产的交易和管理等等。随着游戏虚拟资产不断流行起来，5G 和 VR 不断普及，搭载区块链技术，721 协议前景一片光明。</description>
+    </item>
+    
+    <item>
+      <title>主机上设置两个git账号</title>
+      <link>http://yangchnet.github.io/Dessert/posts/git/%E4%B8%BB%E6%9C%BA%E4%B8%8A%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AAgit%E8%B4%A6%E5%8F%B7/</link>
+      <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/git/%E4%B8%BB%E6%9C%BA%E4%B8%8A%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AAgit%E8%B4%A6%E5%8F%B7/</guid>
+      <description>ubuntu环境
+ 0. 拉取github仓库的两种方式 在拉取github仓库时，我们常用
+git clone https://github.com/username/repoName.git 的方式，这种方式使用https协议 还可以使用ssh协议，以如下方式拉取仓库
+git clone git@github.com:username/repoName.git 以下介绍的设置方法，基于ssh协议。
+1. 使用SSH连接到GitHub 使用 SSH 协议可以连接远程服务器和服务并向它们验证。 利用 SSH 密钥可以连接 GitHub，而无需在每次访问时都提供用户名和个人访问令牌。
+检查现有SSH秘钥 在生成 SSH 密钥之前，您可以检查是否有任何现有的 SSH 密钥。
+$ ls -al ~/.ssh # Lists the files in your .ssh directory, if they exist 如果你的主机上已有SSH公钥，则其可能是如下：
+id_rsa.pub id_ecdsa.pub id_ed25519.pub 如果你没有现有的公钥和私钥对，或者不想使用现有的秘钥连接到github，则可以生成新的SSH秘钥。
+生成新SSH秘钥 输入如下命令：
+ssh-keygen -t ed25519 -C &amp;#34;your_email@example.com&amp;#34; 会有如下输出：
+Generating public/private ed25519 key pair. Enter file in which to save the key (/home/lc/.</description>
+    </item>
+    
+    <item>
+      <title>将两个commit合并为一个</title>
+      <link>http://yangchnet.github.io/Dessert/posts/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</link>
+      <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</guid>
+      <description>使用git log命令查看git日志文件，假设为如下内容
+commit cc7b5fc7bd2ae6f8d88144cd61c8ffad15d44e41 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 19:40:03 2021 +0800 4-25 commit fbd7265095b4c8989fba830393eb32ef29cd9ee1 Merge: 3ae3c19 6a25204 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 15:04:38 2021 +0800 Merge branch &#39;master&#39; of https://github.com/yangchnet/Tem commit 6a25204187602449bfe4ca8c862c9677e65fed04 Author: yangchnet &amp;lt;30308940+yangchnet@users.noreply.github.com&amp;gt; Date: Thu Apr 22 21:36:05 2021 +0800 Delete CNAME ... 现在想合并最后两个提交，则进行以下步骤：
+ 复制倒数第三个提交的哈希值，即：6a25204187602449bfe4ca8c862c9677e65fed04 使用如下命令进行合并：  git rebase -i 6a25204187602449bfe4ca8c862c9677e65fed04 # 这个哈希值就是你刚才复制的 若有如下提示，请进行第4步，否则直接进行第5步   不能变基：您有未暂存的变更。 请提交或为它们保存进度。
+4. 使用`git stash`暂存修改 ```sh $ git stash 保存工作目录和索引状态 WIP on master: cc7b5fc 4-25 HEAD 现在位于 cc7b5fc 4-25 使用git rebase后，会出现如下内容  pick 3ae3c19 增加graphql介绍 pick cc7b5fc 4-25 # 变基 6a25204.</description>
+    </item>
+    
+    <item>
+      <title>Graphql基本概念</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/graphql/</link>
+      <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/graphql/</guid>
+      <description>1. 什么是Graphql GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的runtime。 GraphQL对你的API中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让API更容易地随着时间推移而演进，还能用于构建强大的开发者工具。
+一个 GraphQL 服务是通过定义类型和类型上的字段来创建的，然后给每个类型上的每个字段提供解析函数。
+简单的说，GraphQL为我们定义数据库提供了更为便捷的方式，你不需要写任何SQL语句，即可完成数据库的创建及迁移等工作。
+2. 概览 例如，一个 GraphQL 服务告诉我们当前登录用户是 me，这个用户的名称可能像这样：
+type Query { me: User } type User { id: ID name: String } 一并的还有每个类型上字段的解析函数：
+function Query_me(request) { return request.auth.user; } function User_name(user) { return user.getName(); } 一旦一个 GraphQL 服务运行起来（通常在 web 服务的一个 URL 上），它就能接收 GraphQL 查询，并验证和执行。接收到的查询首先会被检查确保它只引用了已定义的类型和字段，然后运行指定的解析函数来生成结果。
+例如这个查询：
+{ me { name } } 会产生这样的JSON结果：
+{ &amp;#34;me&amp;#34;: { &amp;#34;name&amp;#34;: &amp;#34;Luke Skywalker&amp;#34; } } 3. Schema 和类型 GraphQL 服务可以用任何语言编写，但并不依赖于任何特定语言的句法句式（譬如 JavaScript）来与 GraphQL schema 沟通，Graphql定义了自己的简单语言，称之为 “GraphQL schema language”。</description>
+    </item>
+    
+    <item>
+      <title>区块链基础入门</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</guid>
+      <description>1. 区块链定义 区块链技术本质上是一个去中心化的数据库，它是比特币的核心技术与基础架构，是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。狭义来讲，区块链是一种按照时间顺序将数据区块以顺序相连的方式组合成的一种链式数据结构，并以密码学方式保证的不可篡改、不可伪造的分布式账本。广义来讲，区块链技术是利用块链式数据结构来验证与存储数据、利用分布式节点共识算法来生成和更新数据、利用密码学方式保证数据传输和访问的安全、利用由自动化脚本代码组成的智能合约来编程和操作数据的一种全新的分布式基础架构与计算范式。
+1.1 区块链的技术特征 区块链上存储的数据需由全网节点共同维护，可以在缺乏信任的节点之间有效地传递价值。相比现有的数据库技术，区块链具有以下技术特征。
+ 块链式数据结构
+区块链利用块链式数据结构来验证和存储数据，通过上文对区块链基本概念的介绍可以知道，每个区块打包记录了一段时间内发生的交易是对当前账本的一次共识，并且通过记录上一个区块的哈希值进行关联，从而形成块链式的数据结构。 分布式共识算法
+区块链系统利用分布式共识算法来生成和更新数据，从技术层面杜绝了非法篡改数据的可能性，从而取代了传统应用中保证信任和交易安全的第三方中介机构，降低了为维护信用而造成的时间成本、人力成本和资源耗用 密码学方式
+区块链系统利用密码学的方式保证数据传输和访问的安全。存储在区块链上的交易信息是公开的，但账户的身份信息是高度加密的。区块链系统集成了对称加密、非对称加密及哈希算法的优点，并使用数字签名技术来保证交易的安全。  1.2 区块链的功能特征 区块链系统的以上技术特征决定了其应用具有如下功能特征。
+  多中心 不同于传统应用的中心化数据管理，区块链网络中有多个机构进行相互监督并实时对账，从而避免了单一记账人造假的可能性，提高了数据的安全性。
+  自动化 区块链系统中的智能合约是可以自动化执行一些预先定义好的规则和条款的一段计算机程序代码，它大大提高了经济活动与契约的自动化程度。
+  可信任 存储在区块链上的交易记录和其他数据是不可篡改并且可溯源的，所以能够很好地解决各方不信任的问题，无需第三方可信中介。
+  2. 区块链的相关概念 区块链以密码学的方式维护一份不可篡改和不可伪造的分布式账本，并通过基于协商一致的规范和协议（共识机制）解决了去中心化的记账系统的一致性问题，其相关概念主要包括以下三个。
+ 交易（Transaction）
+区块链上每一次导致区块状态变化的操作都称为交易，每一次交易对应唯一的交易哈希值，一段时间后便会对交易进行打包。 区块（Block）
+打包记录一段时间内发生的交易和状态结果，是对当前账本的一次共识。每个区块以一个相对平稳的时间间隔加入到链上，在企业级区块链平台中，共识时间可以动态设置。 链（Chain）
+区块按照时间顺序串联起来，通过每个区块记录上一个区块的哈希值关联，是整个状态改变的日志记录。   区块链的主要结构  如何解决交易中的信任和安全问题 区块链技术体系不是通过一个权威的中心化机构来保证交易的可信和安全，而是通过加密和分布式共识机制来解决信任和安全问题，其主要技术创新有以下4点。
+  分布式账本 交易是由分布式系统中的多个节点共同记录的。每一个节点都记录完整的交易记录，因此它们都可以参与监督交易合法性并验证交易的有效性。不同于传统的中心化技术方案，区块链中没有任何一个节点有权限单独记录交易，从而避免了因单一记账人或节点被控制而造假的可能性。另一方面，由于全网节点参与记录，理论上讲，除非所有的节点都被破坏，否则交易记录就不会丢失，从而保证了数据的安全性。
+  加密技术和授权技术 区块链技术很好地集成了当前对称加密、非对称加密和哈希算法的许多优点，并使用了数字签名技术来保证交易的安全性，其中最具代表性的是使用椭圆曲线加密算法生成用户的公私钥对和使用椭圆曲线数字签名算法来保证交易安全。打包在区块上的交易信息对于参与共识的所有节点是公开的，但是账户的身份信息是经过严格加密的。
+  共识机制 共识机制是区块链系统中各个节点达成一致的策略和方法。区块链的共识机制替代了传统应用中保证信任和交易安全的第三方中心机构，能够降低由于各方不信任而产生的第三方信用成本、时间成本和资本耗用。常用的共识机制主要有PoW、PoS、DPoS、Paxos、PBFT等，共识机制既是数据写入的方式，也是防止篡改的手段。
+  智能合约 智能合约是可以自动化执行预先定义规则的一段计算机程序代码，它自己就是一个系统参与者。它能够实现价值的存储、传递、控制和管理，为基于区块链的应用提供了创新性的解决方案。
+  3. 区块链分类 按照节点参与方式的不同，区块链技术可以分为：公有链（Public Blockchain）、联盟链（Consortium Blockchain）和私有链（Private Blockchain）。按照权限的不同，区块链技术可以分为：许可链（Permissioned Blockchain）和非许可链（Permissionless Blockchain）。前述的三大类区块链技术中，联盟链和私有链属于许可链，公有链属于非许可链。</description>
+    </item>
+    
+    <item>
+      <title>Go中的锁</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
+      <description>1. sync.Mutex互斥锁 不同goroutine之间对公共资源进行访问需要使用互斥锁。例如在对银行账户的操作中，如果我们有两种操作，一个是查询余额，一个是存款。其操作如下：
+package bank // 存款余额 var balance int // 存款 func Deposit(amount int) { balance = balance + amount } // 查询 func Balance() int { return balance } // Alice: go func() { bank.Deposit(200) // A1  fmt.Println(&amp;#34;=&amp;#34;, bank.Balance()) // A2 }() // Bob: go bank.Deposit(100) // B 这其中，若把A1分为两个操作，A1r：把余额从内存中读出来；A2w：把修改后的余额写入内存。
+若执行顺序为A1r → B → A1w → A2， 正常情况下，Alice和Bob分别存入了$200，$100，因此最后的存款应该是300，但最后输出结果为200。因为A在计算时是按照A1r读出的数值进行计算，忽略了B的操作，A与B之间发生了数据竞争。
+ 数据竞争：无论任何时候，只要有两个goroutine并发访问同一变量，且至少其中的一个是写操作的时候就会发生数据竞争。
+ 解决此问题的办法之一是使用互斥锁。
+import &amp;#34;sync&amp;#34; var ( mu sync.Mutex // guards balance  balance int ) func Deposit(amount int) { mu.</description>
+    </item>
+    
+    <item>
+      <title>面试题golang</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+      <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+      <description>三个goroutine分别输出张三、李四、王五，使其按上述顺序输出5遍。 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;sync&amp;#34; ) var w sync.WaitGroup func main() { w.Add(15) chan1 := make(chan struct{}, 0) chan2 := make(chan struct{}, 0) for i := 0; i &amp;lt; 5; i++ { go func() { defer w.Done() fmt.Println(&amp;#34;张三&amp;#34;) chan1 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan1 fmt.Println(&amp;#34;李四&amp;#34;) chan2 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan2 fmt.Println(&amp;#34;王五&amp;#34;) }() } w.Wait() } 编写程序输出某目录下的所有文件（包括子目录） package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;os&amp;#34; ) func main() { dir := os.</description>
+    </item>
+    
+    <item>
+      <title>wsgi</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/wsgi/</link>
+      <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/wsgi/</guid>
+      <description>转载自：https://segmentfault.com/a/1190000011365430
+ 1. WSGI介绍 1.1 什么是WSGI 首先介绍几个关于WSGI相关的概念 WSGI：全称是Web Server Gateway Interface，WSGI不是服务器，python 模块，框架，API或者任何软件，只是一种规范，描述web server如何与web application通信的规范。server和application的规范在PEP 3333中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Torando,Flask,Django
+uwsgi:与WSGI一样是一种通信协议，是uWSGI服务器的独占协议，用于定义传输信息的类型(type of information)，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。
+uWSGI：是一个web服务器，实现了WSGI协议、uwsgi协议、http协议等。
+WSGI协议主要包括server和application两部分：
+ WSGI server负责从客户端接收请求，将request转发给application，将application返回的response返回给客户端； WSGI application接收由server转发的request，处理请求，并将处理结果返回给server。application中可以包括多个栈式的中间件(middlewares)，这些中间件需要同时实现server与application，因此可以在WSGI服务器与WSGI应用之间起调节作用：对服务器来说，中间件扮演应用程序，对应用程序来说，中间件扮演服务器。
+ WSGI协议其实是定义了一种server与application解耦的规范，即可以有多个实现WSGI server的服务器，也可以有多个实现WSGI application的框架，那么就可以选择任意的server和applicatiodn组合实现自己的web应用。例如uWSGI和Gunicorn都是实现了WSGI server协议的服务器，Django，Flask是实现了WSGI application协议的web框架，可以根据项目实际情况搭配使用。
+以上介绍了相关的常识，接下来我们来看看如何简单实现WSGI协议。
+1.2 怎么实现WSGI 上文说过，实现WSGI协议必须要有wsgi server和application，因此，我们就来实现这两个东西。
+我们来看看官方WSGI使用WSGI的wsgiref模块实现的小demo
+def demo_app(environ,start_response): from StringIO import StringIO stdout = StringIO() print &amp;gt;&amp;gt;stdout, &amp;#34;Hello world!&amp;#34; print &amp;gt;&amp;gt;stdout h = environ.items(); h.sort() for k,v in h: print &amp;gt;&amp;gt;stdout, k,&amp;#39;=&amp;#39;, repr(v) start_response(&amp;#34;200 OK&amp;#34;, [(&amp;#39;Content-Type&amp;#39;,&amp;#39;text/plain&amp;#39;)]) return [stdout.</description>
+    </item>
+    
+    <item>
+      <title>ORM简介</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</guid>
+      <description>1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&amp;quot;对象-关系映射&amp;quot;（Object/Relational Mapping） 的缩写。
+ORM把数据库映射为对象
+ 数据库的表（table） &amp;ndash;&amp;gt; 类（class） 记录（record，行数据）&amp;ndash;&amp;gt; 对象（object） 字段（field）&amp;ndash;&amp;gt; 对象的属性（attribute）
+ 举例来说，下面是一行SQL语句
+SELECT id, first_name, last_name, phone, birth_date, sex FROM persons WHERE id = 10 程序直接运行SQL，操作数据库的写法如下：
+res = db.execSql(sql) name = res[0][&amp;#34;FIRST_NAME&amp;#34;] 改成ORM的写法如下：
+p = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。
+总结起来，ORM有如下优点：
+ 数据模型都在一个地方定义，更容易更新和维护，也利于重用代码。 ORM 有现成的工具，很多功能都可以自动完成，比如数据消毒、预处理、事务等等。 它迫使你使用 MVC 架构，ORM 就是天然的 Model，最终使代码更清晰。 基于 ORM 的业务代码比较简单，代码量少，语义性好，容易理解。 你不必编写性能不佳的 SQL。 但是ORM也有很突出的缺点： ORM 库不是轻量级工具，需要花很多精力学习和设置。 对于复杂的查询，ORM 要么是无法表达，要么是性能不如原生的 SQL。 ORM 抽象掉了数据库层，开发者无法了解底层的数据库操作，也无法定制一些特殊的 SQL。  2.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu18（WSL2）安装redis</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
+      <description>1. 安装并对redis进行配置 更新源并安装redis
+sudo apt-get update sudo apt-get install redis-server 将redis设置为systemctl
+sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
+# If you run Redis from upstart or systemd, Redis can interact with your # supervision tree. Options: # supervised no - no supervision interaction # supervised upstart - signal upstart by putting Redis into SIGSTOP mode # supervised systemd - signal systemd by writing READY=1 to $NOTIFY_SOCKET # supervised auto - detect upstart or systemd method based on # UPSTART_JOB or NOTIFY_SOCKET environment variables # Note: these supervision methods only signal &amp;#34;process is ready.</description>
+    </item>
+    
+    <item>
+      <title>多出几个通用非即插即用显示器</title>
+      <link>http://yangchnet.github.io/Dessert/posts/os/%E5%A4%9A%E5%87%BA%E5%87%A0%E4%B8%AA%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</link>
+      <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/os/%E5%A4%9A%E5%87%BA%E5%87%A0%E4%B8%AA%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</guid>
+      <description>1. 问题现象 莫名其妙，多出来几个显示器。 从设备管理器中看，也是存在多个通用非即插即用显示器2. 解决办法 重新安装Intel显卡驱动，可以从电脑厂家官网下载。但需要注意的一点是：在重新安装显卡驱动后，需要禁用显卡驱动程序的自动更新，否则还有可能出现这个问题。 打开组策略gpedit.msc，选择计算机配置”-&amp;gt;“管理模板”-&amp;gt;“系统”-&amp;gt;“设备安装”-&amp;gt;“设备安装限制”，找到Intel显卡的类Guid添加到阻止使用与下列设备安装程序类相匹配的驱动程序安装设备中</description>
+    </item>
+    
+    <item>
+      <title>slice和数组的区别</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>1. 长度  数组
+ 对于数组来说，它的长度是固定的，并且数组的长度是其类型的一部分，即对于以下两个数组来说，他们是不同的类型。
+var a [5]int var b [6]int fmt.Printf(&amp;#34;%v&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： false 数组的长度必须是常量表达式，因为数组的长度需要在编译阶段确定。
+对于数组来说，由于其长度是固定的，因此不能添加或删除元素。
+ 切片
+ 而对于切片，其长度是不固定的，不同长度的切片，只要其元素类型相同，则它们就是相同的切片类型。
+a := make([]int, 5) b := make([]int, 6) fmt.Printf(&amp;#34;%v\n&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： true 如果切片操作超出cap(s)的上限将导致一个panic异常，但是超出len(s)则是意味着扩展了 slice，因为新slice的长度会变大：
+months := [...]string{1: &amp;#34;January&amp;#34;, /* ... */, 12: &amp;#34;December&amp;#34;} summer := months[6:9] fmt.Println(summer[:20]) // panic: out of range endlessSummer := summer[:5] // extend a slice (within capacity) fmt.Println(endlessSummer) // &amp;#34;[June July August September October]&amp;#34; 2.</description>
+    </item>
+    
+    <item>
+      <title>Reader和Writer接口</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Sun, 28 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</guid>
+      <description>1. Reader接口 type Reader interface { Read(p []byte) (n int, err error) }  接口说明
+ Read 将 len(p) 个字节读取到 p 中。它返回读取的字节数 n（0 &amp;lt;= n &amp;lt;= len(p)） 以及任何遇到的错误。即使 Read 返回的 n &amp;lt; len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。
+当 Read 在成功读取 n &amp;gt; 0 个字节后遇到一个错误或 EOF (end-of-file)，它会返回读取的字节数。它可能会同时在本次的调用中返回一个non-nil错误,或在下一次的调用中返回这个错误（且 n 为 0）。 一般情况下, Reader会返回一个非0字节数n, 若 n = len(p) 个字节从输入源的结尾处由 Read 返回，Read可能返回 err == EOF 或者 err == nil。并且之后的 Read() 都应该返回 (n:0, err:EOF)。</description>
+    </item>
+    
+    <item>
+      <title>goroutine和线程</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid>
+      <description>1. 线程 在操作系统中，进程是分配资源的基本单位，但当进程作为调度的基本单位时，会造成较大的开销，频繁的进程调度将消耗大量时间。因此引出了线程：线程是处理器调度的基本单位，线程只拥有很小的运行时必要的资源。一个进程可拥有多个线程，同一个进程中的所有线程共享进程获得的主存空间和资源。 线程的实现
+有些系统同时支持用户线程和内核线程，由此产生了不同的多线程模型，即实现用户级线程 和内核级线程的连接方式：多对一模型、一对一模型、多对多模型。
+2. goroutine 在Go语言中，每一个并发的执行单元叫作一个goroutine，是一种轻量级的线程。
+3. 线程与goroutine的区别   运行时栈的大小
+ 每个系统级线程都会有一个固定大小的栈（一般为2MB），主要用于保存函数递归调用时参数和局部变量。这造成了两个问题：  对于某些需要很小的栈空间的线程来说是一个巨大的浪费 对于少数需要巨大栈空间的线程来说又面临栈溢出的风险   goroutine会以一个很小的栈启动（2KB或4KB），当遇到深度递归时导致当前栈空间不足，会根据需要动态的伸缩栈的大小。    调度
+ go的运行时还包括了其自己的调度器，可以在n个操作系统线程上多工调度m个goroutine（类似于多线程模型中的多对多模型）。 go调度器的工作和内核的调度时相似的，但是这个调度器只关注单独的go程序中的goroutine。 goroutinie采用的是半抢占式的协作调度，只有当当前goroutine发生阻塞时才会导致调度。 这种调度发生在用户态，调度器会根据具体函数只保存必要的寄存器，切换的代价比系统线程要低得多。    </description>
+    </item>
+    
+    <item>
+      <title>panic和recover</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/panic%E5%92%8Crecover/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/panic%E5%92%8Crecover/</guid>
+      <description>1. Panic异常 func panic(v interface{}) 在通常情况下，函数向其调用方报告错误都是返回一个error类型，但有时会遇到致命（即会让程序崩溃）的错误时，显然无法通过返回error进行处理。这时我们使用panic函数来报告致命错误。
+当panic异常发生时，程序会中断运行，并立即执行在该goroutine中被defer的函数。随后，程序崩溃并输出日志信息（panic value和函数调用的堆栈信息）。在Go的panic机制中，延迟函数的调用在释放堆栈信息之前.
+panic的来源： 1. 运行时panic异常 2. 直接调用内置的panic函数
+例子：
+func main(){ fmt.Println(&amp;#34;main start&amp;#34;) outerFunc() fmt.Println(&amp;#34;main end&amp;#34;) } func outerFunc(){ fmt.Println(&amp;#34;out start&amp;#34;) innerFunc() fmt.Println(&amp;#34;out end&amp;#34;) } func innerFunc(){ panic(errors.New(&amp;#34;an intended fatal error&amp;#34;)) }  输出
+ // 只有start，而没有end，因为程序崩溃了 main start out start panic: an intended fatal error 在这个程序中，当调用innerFunc中的panic时，innerFunc会立即停止执行，紧接着，outerFunc也会被停止，运行时panic沿着调用栈一直反方向进行传播，直至到达当前goroutine的调用栈最顶层。
+2. recover func recover() interface{} 通常来说，不应该对panic异常做任何处理，但有时我们可能需要在程序崩溃前做一些操作。这时，我们可以“从异常中恢复”。
+如果在defer函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。导致panic异常的函数不会继续运行，但能正常返回。在未发生panic时调用recover，recover会返回nil。
+// ...  // 将innerFunc修改为如下 func innerFunc(){ defer func(){ if p := recover(); p !</description>
+    </item>
+    
+    <item>
+      <title>hugo中的公式问题</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</guid>
+      <description>hugo默认不支持latex公式，为了在我们的博客上显示数学公式，我们需要使用katex.
+使用方法 对于hugo来说，我们只需要为每个页面加上
+&amp;lt;!-- KaTeX --&amp;gt; &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css&amp;#34;&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &amp;#34;$$&amp;#34;, right: &amp;#34;$$&amp;#34;, display: true}, {left: &amp;#34;$&amp;#34;, right: &amp;#34;$&amp;#34;, display: false} ] }); }); &amp;lt;/script&amp;gt; 就行了。
+可以通过在themes/{themeName}/layouts/partials/footer.html中添加来使katex包含到每个页面中。
+书写公式 行内公式可以使用$f(x)= \cos x$来编辑,效果为$f(x)= \cos x$ 行间公式可使用如下格式：
+$$\frac{ x^{2} }{ k+1 }\qquad$$ 效果为： $$\frac{ x^{2} }{ k+1 }\qquad$$</description>
+    </item>
+    
+    <item>
+      <title>数据库原理</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</guid>
+      <description>1. 数据库系统的结构抽象 1.1 三级模式(三级视图)  External Schema &amp;mdash;-（External）View 某一用户能看到与处理的数据的结构描述 (Conceptual) Schema &amp;mdash;- Conceptual View 从全局角度理解/管理的数据的结构描述, 含相应的关联约束。体现在数据之间的内在本质联系 Internal Schema &amp;mdash;- Internal View 存储在介质上的数据的结构描述，含存储路径、存储方式 、索引方式等  1.2 两层映像  E-C Mapping：External Schema-Conceptual Schema Mapping 将外模式映射为概念模式，从而支持实现数据概念视图向外部视图的转换，便于用户观察和使用 C-I Mapping：Conceptual Schema-Internal Schema Mapping 将概念模式映射为内模式，从而支持实现数据概念视图向内部视图的转换，便于计算机进行存储和处理  1.3 两个独立性  逻辑数据独立性 当概念模式变化时，可以不改变外部模式(只需改变E-C Mapping)，从而无需 改变应用程序 物理数据独立性 当内部模式变化时，可以不改变概念模式(只需改变C-I Mapping) ，从而不改 变外部模式  1.4 数据模型  数据模型  规定模式统一描述方式的模型，包括：数据结构、操作和约束 数据模型是对模式本身结构的抽象，模式是对数据本身结构形式的抽象   三大经典数据模型  关系模型：表的形式组织数据 层次模型：树的形式组织数据 网状模型：图的形式组织数据    2.</description>
+    </item>
+    
+    <item>
+      <title>复试英语</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%A4%8D%E8%AF%95%E8%8B%B1%E8%AF%AD/</link>
+      <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%A4%8D%E8%AF%95%E8%8B%B1%E8%AF%AD/</guid>
+      <description>0. 复试英语考试形式  自我介绍+老师提问（popular） 听一段文章内容，听完后回答（少） 小组讨论（少）  1. 自我介绍 一定不要说：我的英语很糟糕, My English is very poor!
+ 目的是： 表达我配上研究生
+  先说姓名（微笑脸），年龄，学校 大学取得的成绩（没有成绩可以编&amp;hellip; 编点无从考证的，比如家教啥的） 再说性格爱好(稍微两句话提提)，尽量和专业联系到一起。 That&amp;rsquo;s all, thanks you very much. If I were admitted, I will go all out to learn my professional knowledge.除了学习①专业知识，我一定会加强我的②实践能力，我还要学会③更好的和导师和同学之间进行合作。Please trusted me.(不要超过三分钟)  2. 老师常问的9个问题  你为什么考研，为什么选择这个专业？  一定不要说本科学校坏话， 不要说我要挣钱.. 也不要说为了中华之崛起.. 我真心喜欢我的专业😊(举个例子怎么感兴趣的) 我遗憾自己以前没有好好学习，在别人选择工作的时候我决定考研提升自己 终极答案是喜欢   你对未来有什么规划？  3年研究生的规划和研究生刚毕业的规划，太远不要说 研究生入校后，一定跟老师好好学习专业知识，协助导师，争取自己早日发表论文，有机会考博，培养自己的实践能力，合作能力，与人相处能力。毕业后找一份自己喜欢的工作，在自己的岗位上做出贡献。（一定要配合导师）   介绍你的家乡  首先要说我爱的家乡（怀有一颗感恩的心） 说点名人和特产（有很多可以such as，然后重点说一个） 最后再说，欢迎老师到我的家乡去旅游   介绍你的家庭  先说几口人 对我的人生产生最大的影响是谁（举个栗子(〃￣︶￣)人）   介绍你的本科学校  一个字，好 学校有历史、就业率好、有名气（老师你可能从来没听过这个名字，但是我非常热爱它） 虽然我的学校不是那么有名气，但是我依然结到了很多朋友，给我了很多温暖   对英语的态度，关于英语你怎么看  喜欢，感兴趣 以前对英语没那么感兴趣，只是一门课 后来发现英语真他娘重要，意识到学英语的重要性 在研究生期间更加专注对英语的学习 我的口语没有那么好，但是我希望在研究生期间可以有长足的进步   你对我们学校和专业了解多少  首先，学校名气大（毋庸置疑） 其次，对我们学院相当有了解，对教授了解（提一下教授的名字） 师资力量，著作   你的优点和缺点  优点可以和专业相关，但是缺点不行 我喜欢交朋友&amp;hellip; 编&amp;hellip;（给爷爬）≡(▔﹏▔)≡   为什么换专业（给跨考）  &amp;hellip;    3.</description>
+    </item>
+    
+    <item>
+      <title>Failed to connect to github.com port 443</title>
+      <link>http://yangchnet.github.io/Dessert/posts/git/failed-to-connect-to-github.com-port-443/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/git/failed-to-connect-to-github.com-port-443/</guid>
+      <description>Github 出现 Failed to connect to github.com port 443: Timed out 1. 问题来由 可能是由于使用了全局代理的原因
+2. 解决 取消全局代理： git config --global --unset http.proxy git config --global --unset https.proxy  设置全局代理
+ git config --global http.proxy http://127.0.0.1:1080 git config --global https.proxy http://127.0.0.1:1080 </description>
+    </item>
+    
+    <item>
+      <title>VsCode Snippets功能的使用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tools/vscode-snippets%E5%8A%9F%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tools/vscode-snippets%E5%8A%9F%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>VsCode Snippets的Snippets功能  snippets是代码片段, 在这里的意思是代码模板. 在使用vscode写代码时，有时需要使用代码模板，一个典型的例子是在写文件头注释时，需要一个固定格式的注释，来表明当前的时间、作者等。
+ 1. 使用内置的snippets vscode中已经为我们内置了许多语言的代码模板，在安装了对应的语言插件后,可直接使用这些snippets. 2. 安装来自marketplace的snippets 按Ctrl+Shift+X打开marketplace, 输入@category:&amp;quot;snippets&amp;quot;,即可下载来自marketplace的snippets 3. 自定义snippets 如果你对内置的或来自marketplace的snippets均不满意,那么你可以自定义你的snippets.
+在File &amp;gt; Preferences &amp;gt; User Snippets选项下,选择你要定义snippets的文件类型
+在选择了文件类型之后,你就可以根据vscode提供的Example自定义snippets了.
+Example: &amp;quot;Print to console&amp;quot;: { &amp;quot;prefix&amp;quot;: &amp;quot;log&amp;quot;, &amp;quot;body&amp;quot;: [ &amp;quot;console.log(&#39;$1&#39;);&amp;quot;, &amp;quot;$2&amp;quot; ], &amp;quot;description&amp;quot;: &amp;quot;Log output to console&amp;quot; &amp;quot;Print to console&amp;quot;是你自定义的snippets的名字,prefix为前缀,在输入了你定义的prefix后,body中的内容就会输出到当前光标的位置.
+在body中,你可以使用&amp;quot;variables&amp;ldquo;来描述你的snippets, 其格式为:
+  ${1:label}: 其中的1表示在body输出后光标会第一个停放在这个位置,而label是对当前variables的描述.
+  ${1|one, two, three|}: 这个语法格式将提醒你选择one, two, three中的一个值.
+  $name或${name:default}: 其中的name为预定义的变量名,可使用default指定其默认值.预定义的变量名有如下:
+ 有关文件与目录的
+ TM_SELECTED_TEXT当前选定的文本或空字符串 TM_CURRENT_LIN当前行的内容 TM_CURRENT_WORD光标下或空字符串下的单词内容 TM_LINE_INDEX基于零指数的行数 TM_LINE_NUMBER基于一个索引的行数 TM_FILENAME当前文档的文件名 TM_FILENAME_BASE没有扩展的当前文档的文件名 TM_DIRECTORY当前文档的目录 TM_FILEPATH当前文档的完整文件路径 CLIPBOARD剪贴板的内容 WORKSPACE_NAME打开的工作区或文件夹的名称 WORKSPACE_FOLDER打开的工作区或文件夹的路径    有关时间的</description>
+    </item>
+    
+    <item>
+      <title>GitHub图床&#43;vscode&#43;Picgo </title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
+      <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
+      <description>GitHub图床+vscode+Picgo 0. 来由 用markdown写博客的时候，图片往哪里存地干活？图床里存···
+1. GitHub配置   创建图床仓库 为了不污染我原来的git账号，我决定新建一个git账号，专门用作图床账号。 新建账号之后，new一个repo，啥都不用点，直接create。
+  生成token 点击你GitHub页面右上角的头像，点击settings 在页面左侧找到Developer settings，选择之，再找到Personal access tokens，再选择之，然后generate new tokens 在新弹出的页面中填写note，并选择repo， 然后直接到最下面，Generate token 这样GitHub会为你生成一个token（只会出现这一次），复制它留用。   2. 配置VScode中的Picgo插件 在vscode的插件商店中直接搜索Picgo，然后点击安装 安装完成后，再来配置你的Picgo File&amp;gt;Preferences&amp;gt;settings&amp;gt;Entensions&amp;gt;Picgo找到配置picgo的位置，填写必要的信息 &amp;#34;picgo.picBed.current&amp;#34;: &amp;#34;github&amp;#34;, &amp;#34;picgo.picBed.github.branch&amp;#34;: &amp;#34;master&amp;#34;, &amp;#34;picgo.picBed.github.path&amp;#34;: &amp;#34;&amp;#34;, # 你想要图片存储的路径 &amp;#34;picgo.picBed.github.repo&amp;#34;: &amp;#34;&amp;#34;, # 你的用户名以及repo名，user/REPO_name &amp;#34;picgo.picBed.github.token&amp;#34;: &amp;#34;&amp;#34; # 刚才复制的token，粘贴到这里 3. 使用picgo上传图片 截个图并复制到剪贴板，在vscode里按下&amp;quot;CTRL+ALT+u&amp;quot;，图片就可以十分迅速的上传到你配置的GitHub仓库并为你返回图片链接 （￣︶￣）↗。
+END</description>
+    </item>
+    
+    <item>
+      <title>安装与配置clash</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <description>安装与配置clash  参考了这位老哥的博客
+ 0. 来由 阿里云与腾讯云git太慢了。。想快点
+1. 下载安装clash 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
+2. 安装clash 将下载的clash上传到自己的服务器之后，解压之：
+gunzip clash-linux-amd64-v1.4.1.gz 解压结果就是一个可执行文件 重命名：
+mv clash-linux-amd64 clash 赋予运行权限：
+chmod +x clash 移动到bin目录下：
+mv clash /usr/bin 3. 编辑config.yaml文件 config.yaml文件的内容来自你购买的vpn提供商
+mkdir /etc/clash touch /etc/clash/config.yaml ··· # 编辑你的config.yaml 4. 将clash添加为系统服务 cd /etc/systemd/system/ vim clash.service clash.service的内容为：
+[Unit] Description=clash proxy After=network.target [Service] Type=simple ExecStart=/usr/bin/clash -d /etc/clash [Install] WantedBy=multi-user.target  要想深入了解systemctl服务，可前往阮一峰大佬的教程
+ 编辑完成后，重载systemctl
+systemctl daemon-reload 开启clash服务
+systemctl start clash 5. 开启http代理和socks5代理  手动开启代理 export https_proxy=http://127.</description>
+    </item>
+    
+    <item>
+      <title>博客建设</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+      <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
+      <description>博客建设记 0. 前记 一直想要建设一个属于自己的博客，一开始用python写过一个简单的，可以做到富文本编辑、发布、更新、评论等功能，但那个不是一个单纯的博客，并且界面也不是太友好，因此后来废弃了。后来又用了一段时间的jupyter notebook，很强大，尤其让我喜欢的是可以直接运行代码，曾经有一段时间想过可否把jupyter notebook直接作为我的博客页面，或者是嵌入我的页面内，于是看了看其源代码。。。遂放弃。后来又用了为知笔记，印象笔记，Notion等，但感觉都没jupyter notebook好用。 在用jupyter notebook记了有了一定的数目之后，就想将其发布出来，考虑过CSDN，但感觉上面广告好多，不太喜欢，因此没有使用。后来买了域名和服务器，用wordpress搞了一个，但是不是太满意，也没发布。后来用go语言写了一个，因为某些原因，中间的一些数据通路没有搞通（主要是从jupyter到md再到网站的自动发布），再加上后来考研，所以这个项目也没活到&amp;quot;成站&amp;quot;。 终于，用hugo搞了一个。之所以用hugo，一是因为最近研究go语言，对go语言的项目具有一定的好感，第二是因为看了网上的一些介绍并且发现了一些使用hugo的个人博客。 2021/2/28，记之。
+1. 使用hugo开始自己的网站 1.1 开始 hugo的使用炒鸡简单，你只需要使用
+hugo new site MySite 即可新建一个名为MySite的网站
+1.2 为你的网站选择一个theme 进入到我们刚才建立的网站目录
+cd Mysite/ 从GitHub导入你想应用的主题
+git init git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke 待下载完成后，还需要修改你的配置文件
+echo &amp;#39;theme = &amp;#34;ananke&amp;#34; &amp;#39; &amp;gt;&amp;gt; config.toml 1.3 为你的网站添加一些内容 hugo使用我们上传的md文件来自动生成静态网页，而我们上传的md文件的位置在MySite/content/posts/*, 我们可以直接复制已经编辑好的md文件到这个目录，或者使用如下命令：
+hugo new posts/my-first-post.md 需要注意的一点：为了让hugo知道更多的信息，我们上传的md文件一般会有一个&amp;quot;standand header&amp;quot;, 如下：
+--- title: &amp;#34;My First Post&amp;#34; date: 2019-03-26T08:47:11+01:00 draft: true --- 这里的头部并不是一成不变的，你可以根据需要自行配置。
+1.4 开始让你的网站服务 使用如下命令让你的网站开始服务吧！
+hugo server -D 注意，这个命令只会让你的hugo服务器监听本地访问，也就是127.0.0.1 如果你想要你的hugo服务器为整个网络服务，可以这样：</description>
+    </item>
+    
+    <item>
+      <title>/usr/bin/env:‘node’:Nosuchfileordirectory</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/nodejs/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/nodejs/</guid>
+      <description>/usr/bin/env: ‘node’: No such file or directory 解决方法 sudo apt-get install nodejs-legacy </description>
+    </item>
+    
+    <item>
+      <title>1、python与其他语言的对比（helloworld）</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/python%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E5%9F%BA%E7%A1%80/</guid>
+      <description>1、python与其他语言的对比（hello world）  C语言
+ include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;#34;hello world&amp;#34;); return 0; }  Java语言
+ public class HelloWorld{ public static void main(String[] args) { System.out.println(&amp;#34;Hello World!&amp;#34;); } }  Python
+ print(&amp;#39;hello world&amp;#39;) 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = &amp;#39;hello&amp;#39; str1_1 = &amp;#34;hello&amp;#34; str2 = &amp;#34;world&amp;#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = &amp;#39;hello \nworld&amp;#39; print(str4) str5 = &amp;#39;hello \\n world&amp;#39; print(str5) # 格式化输出 print(&amp;#39;str1:%s.</description>
+    </item>
+    
+    <item>
+      <title>2016统计学专业数据挖掘实验课程考核</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/2016%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%93%E4%B8%9A%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B%E8%80%83%E6%A0%B8/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/2016%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%93%E4%B8%9A%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B%E8%80%83%E6%A0%B8/</guid>
+      <description>2016统计学专业数据挖掘实验课程考核  此考核预计用时120m, 满分100分
+  姓名： 学号：  1. Wordcount（30分） 计算出下文中每个英文字母出现的次数（不区分大小写, 去除空格与标点符号），并进行输出。
+Our entire class is quaking in its boots. The reason, of course, is the upcoming meeting in which the teachers decide who&amp;rsquo;ll be promoted to the next grade and who&amp;rsquo;ll be kept back. Half the class is making bets. G.Z. and I laugh ourselves sick at the two boys behind us, C.N. and Jacques Kocernoot, who have staked their entire vacation savings on their bet.</description>
+    </item>
+    
+    <item>
+      <title>AutoReserve|使用说明</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/autoreserve%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/autoreserve%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
+      <description>AutoReserve | 使用说明 1. 简介 AutoReserve是一个帮助同学们自动预约图书馆座位的系统，提供每晚代约座位服务，由一位热心同学开发和维护。
+2.访问站点 我们的网站是：http://59.110.140.133/reserve/ ，欢迎访问注册
+3.如何使用 访问网站-&amp;gt;注册账号-&amp;gt;填写表格-&amp;gt;审核通过-&amp;gt;成功加入预约名单
+3.1 访问并注册 访问http://59.110.140.133/reserve/主页
+点击免费注册或上方导航栏里的注册按钮进行注册，跳转到注册页面
+填写表单进行注册
+两次密码不一致会有检查提示
+注册完成后自动重定向到我的预约页面
+页面下方会显示系统数据库中已经被“预约”的位置
+按照提示填写表单后，页面上方会刷新出你的预约信息
+4. Q&amp;amp;A Q： 本系统的用户名必须和预约系统的账号一样吗？
+A： 不一定，你可以选择自己喜欢的用户名，比如：悲伤的雪，等等。在你填写自己的预约信息时要求的账号才是你图书馆预约系统的账号。
+ Q： 可以100%保证我每天都可以约到想要的位置吗？
+A： 不一定，由于本系统也是模拟登录等行为来进行预约，因此也受到比如网络拥塞，系统卡顿等问题，因此不一定每天都可以约到想要的位置，当用户指定的位置未完成预约时，系统将自动预约与其相邻的下一个座位，保证用户有位置可坐。
+ Q： 有时注册提交表单时会出现Internal Error 500,这代表什么意思，是注册失败了吗？
+A： Internal Error 500代表服务器内部错误，由于某些未知的原因，此类错误尚无法预知并排除，出现此类错误时，通常预约已经完成，用户可再次访问网页直接登录。推荐用户在浏览器内打开网址，不建议在QQ，微信环境下直接进入网页。
+ Q： 我填写完表单后，当天就可以约到位置吗？
+A： 系统在每天晚上12点为用户预约“明天”的座位，也就是说，如果用户在1月1日中午填写表单，那么系统将在1月2日的凌晨00:00为其预约1月3日的座位，此后每天晚上都会再次预约。
+ Q： 我今天不想去了，怎么才能取消今天的座位？
+A： 本系统不提供取消座位服务，用户可直接登录官方预约系统微信端（ http://libzwxt.ahnu.edu.cn/SeatWx/login.aspx ） 或网页端（ http://libzwxt.ahnu.edu.cn/SeatManage/ ） 进行取消。
+ Q： 我想换个位置做，可以修改预约信息吗？
+A： 用户可直接登录系统，点击上方我的预约导航按钮，进入我的预约页面修改信息。
+ Q： 一个账号可以提交多个预约信息吗？
+A： 不可以，每个账号只能为一个人预约。
+ Q： 为什么我的座位没有预约成功？
+A： 系统可能存在未知的BUG， 反复出现此问题请联系管理员。</description>
+    </item>
+    
+    <item>
+      <title>CentOS安装Python环境</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</guid>
+      <description>CentOS安装Python环境 吐槽：网上一堆从官网获取安装包然后自己编译的，慢不说，还容易出错
+可使用以下命令安装Python3环境：
+   yum install rh-python36 使用这条命令，安装Python3.6，但是安装后找不到，输入Python3后还是找不到命令
+ scl enable rh-python36 bash
+上面的命令是调用/opt/rh/rh-python36/enable更改shell环境变量的脚本。
+如果再次检查Python版本，你会发现Python 3.6现在是当前shell中的默认版本。 需要指出的是，Python 3.6仅在此shell会话中设置为默认的Python版本。如果退出会话或从另一个终端打开一个新会话，Python 2.7将是默认的Python版本。
+  可使用当前shell窗口建立一个Python3虚拟环境，这样就可以使用Python3
+  #首先，创建项目目录并切换到它： mkdir ~/my_new_project cd ~/my_new_project #使用该scl工具激活Python 3.6 ： sl enable rh-python36 bash # 从项目根目录内部运行以下命令以创建名为的虚拟环境my_project_venv： python -m venv my_project_venv #要首先使用虚拟环境，我们需要输入以下命令来激活它： source my_project_venv/bin/activate #激活环境后，shell提示符将以环境名称作为前缀： (my_project_venv) user@host:~/my_new_project$ </description>
+    </item>
+    
+    <item>
+      <title>defer用法</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</guid>
+      <description>defer用法 defer用来延迟对某个语句的调用，常用于处理成对的操作，如打开、关闭、连接、断开连接，加锁、释放锁。通过defer语句，无论函数逻辑多复杂，都能保证在任何代码执行路径下，资源被释放。defer应该直接跟在请求资源的语句后。
+defer语句将函数的调用push到一个列表中，当外层函数返回时，会执行保存的函数列表
+举个例子，这个程序打开两个文件并将一个文件的内容复制到另一个文件的函数
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } dst, err := os.Create(dstName) if err != nil { return } written, err = io.Copy(dst, src) dst.Close() src.Close() return } 这个函数似乎可以正常工作，但其实存在一个bug，如果对os.Create的调用失败，该函数将返回但却不关闭源文件，通过在第二个return语句中调用src.Close可以解决这个问题。但是如果函数更加复杂，问题可能不会那么容易被发现和解决。通过使用defer语句，可以确保始终关闭文件。
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } defer src.Close() dst, err := os.</description>
+    </item>
+    
+    <item>
+      <title>Did you install mysqlclient?</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</guid>
+      <description>Did you install mysqlclient? 在进行新的django项目时出现了这个错误
+解决方法  确保pymysql和mysqlcient都安装 在和setting.py同级的init.py中加入  import pymysql pymysql.install_as_MySQLdb() </description>
+    </item>
+    
+    <item>
+      <title>Django,Forms</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/django-form/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/django-form/</guid>
+      <description>Django, Forms 使用forms完成了用户登录 1、创建model class User(User): pass  这里使用了django提供的User类，直接继承
+2、创建UserForm类 class SigninFrom(forms.Form): user_name = forms.CharField() user_email = forms.EmailField() user_password = forms.CharField() 3、完成模板 &amp;lt;form action=&amp;#34;{% url &amp;#39;permission:signin&amp;#39; %}&amp;#34; accept-charset=&amp;#34;UTF-8&amp;#34; method=&amp;#34;post&amp;#34;&amp;gt; &amp;lt;input name=&amp;#34;utf8&amp;#34; type=&amp;#34;hidden&amp;#34; value=&amp;#34;&amp;amp;#x2713;&amp;#34;/&amp;gt; {% csrf_token %} &amp;lt;dl class=&amp;#34;form-group mt-0&amp;#34;&amp;gt; &amp;lt;dt class=&amp;#34;input-label&amp;#34;&amp;gt; &amp;lt;label class=&amp;#34;form-label f5&amp;#34; for=&amp;#34;user[login]&amp;#34;&amp;gt;用户名&amp;lt;/label&amp;gt; &amp;lt;/dt&amp;gt; &amp;lt;input type=&amp;#34;text&amp;#34; name=&amp;#34;user_name&amp;#34; id=&amp;#34;user_name&amp;#34; class=&amp;#34;form-control form-control-lg input-block&amp;#34; placeholder=&amp;#34;{{ default_name }}&amp;#34; autofocus&amp;gt; &amp;lt;/dl&amp;gt; &amp;lt;dl class=&amp;#34;form-group&amp;#34;&amp;gt; &amp;lt;dt class=&amp;#34;input-label&amp;#34;&amp;gt; &amp;lt;label class=&amp;#34;form-label f5&amp;#34; for=&amp;#34;user[email]&amp;#34;&amp;gt;Email&amp;lt;/label&amp;gt; &amp;lt;/dt&amp;gt; &amp;lt;dd&amp;gt; &amp;lt;input type=&amp;#34;text&amp;#34; name=&amp;#34;user_email&amp;#34; id=&amp;#34;user_email&amp;#34; class=&amp;#34;form-control form-control-lg input-block js-email-notice-trigger&amp;#34; placeholder=&amp;#34;you@example.</description>
+    </item>
+    
+    <item>
+      <title>django中forms的定义</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%ADform%E7%9A%84%E5%AE%9A%E4%B9%89/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%ADform%E7%9A%84%E5%AE%9A%E4%B9%89/</guid>
+      <description>django中forms的定义 直接定义 class ContactForm(forms.Form): date = DateField(widget=CalendarWidget) name = CharField(max_length=40, widget=OtherWidget) widget参数定义了要使用的小部件，小部件选项可见这里
+通过模型定义 必须继承ModelForm类
+from django.forms import ModelForm class BlogForm(ModelForm): class Meta: model = Blog fields = [&amp;#39;author&amp;#39;, &amp;#39;essay&amp;#39;, &amp;#39;title&amp;#39;, &amp;#39;label&amp;#39;, &amp;#39;cover&amp;#39;] widgets = { &amp;#39;essay&amp;#39;: CKEditorWidget, &amp;#39;cover&amp;#39;: } 通过定义内部类来生命form的属性
+ 常用内部类参数说明：
+model: 说明要继承的模型
+field：说明要在表单中显示的字段，__all__表示所有
+exclude: 要从表单中排除的字段
+widgets: 设置字段的小部件
+（详细文档）
+ </description>
+    </item>
+    
+    <item>
+      <title>django中使用highchart</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%AD%E4%BD%BF%E7%94%A8highchart/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%AD%E4%BD%BF%E7%94%A8highchart/</guid>
+      <description>django中使用highchart 引入js文件  顺序不能错
+ &amp;lt;script src=&amp;#34;https://code.jquery.com/jquery-3.1.1.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;https://code.highcharts.com/highcharts.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; 一点小插曲 在刚开始使用highchart时，由于使用的是继承模板，导致js文件引入的顺序没有把握好，导致不能显示图像，因此将上面两句提到base.html的前面，然后可以显示图像。</description>
+    </item>
+    
+    <item>
+      <title>Django中图像的处理方法</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/%E5%9B%BE%E5%83%8F%E7%9A%84%E4%B8%8A%E4%BC%A0%E4%BF%9D%E5%AD%98%E6%98%BE%E7%A4%BA/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/%E5%9B%BE%E5%83%8F%E7%9A%84%E4%B8%8A%E4%BC%A0%E4%BF%9D%E5%AD%98%E6%98%BE%E7%A4%BA/</guid>
+      <description>Django 中图像的处理方法 图像的上传保存  前端图片的上传：  &amp;lt;form action=&amp;#34;/updateinfo&amp;#34; method=&amp;#34;POST&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;updateImg&amp;#34;&amp;gt; &amp;lt;img src=&amp;#34;{{ account.photo.url }}&amp;#34; alt=&amp;#34;&amp;#34;/&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;input name=&amp;#34;photo&amp;#34; type=&amp;#34;file&amp;#34; id=&amp;#34;exampleInputFile&amp;#34;&amp;gt; &amp;lt;button id=&amp;#34;photo&amp;#34; class=&amp;#34;btn btn-danger&amp;#34; type=&amp;#34;submit&amp;#34;&amp;gt;上传头像&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; 其中input标签的type为file， 2. 图片模型
+models.ImageField(upload_to=&amp;lsquo;path&amp;rsquo;) upload_to的储存路径是相对于MEDIA_ROOT而来的，若MEDIA_ROOT为/media/，upload_to路径为image，则图片上传后的储存路径为/media/image
+在前端显示上传的图片 {% load static %} &amp;lt;body data-media-url=&amp;#34;{% get_media_prefix %}&amp;#34;&amp;gt; 使用get_media_prefxi模板tag，代表MEDIA_URL变量
+&amp;lt;img src=&amp;#34;{% get_media_prefix %}/{{ page.cover }}&amp;#34; alt = &amp;#34;{{ page.cover }}&amp;#34;&amp;gt;  存在的问题  每个用户上传的图片集中在一个文件夹下，容易造成命名冲突，
+可参考这里</description>
+    </item>
+    
+    <item>
+      <title>Docker 搭建Java环境</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>Docker 搭建Java环境 1. 拉取Ubuntu镜像 docker pull ubuntu 2. 运行docker镜像，并进入 docker run -it -v /home/hadoop/build:/root/build --name ubuntu ubuntu  -i 表示Interaction，交互，开启交互模式
+-t 表示分配一个tty，即控制台
+-v 分配一个共享目录，
+&amp;ndash;name 为镜像命名
+ 3. 基本操作  首先更新源，并安装vim  apt-get update apt-get install vim  为保证后面的软件安装速度，进行换源
+打开/etc/apt/sources.list，将其中的内容替换为：  deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse deb http://mirrors.</description>
+    </item>
+    
+    <item>
+      <title>docker常用操作</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker/</guid>
+      <description>docker常用操作  启动docker服务 sudo systemctl start docker 查看本地镜像 sudo docker images 查看正在运行的镜像 sudo docker ps 查看所有镜像 sudo docker ps -a 停止正在运行的镜像 sudo docker stop container_name 开始运行某个镜像 sudo docker start container_name 删除某个镜像 sudo docker rmi container_name 进入某个正在运行的镜像 sudo docker attach container_name 导出容器 sudo docker export container_id &amp;gt; name.tar 导入容器 cat name.tar | sudo docker import -test/buntu:v1.0 从网络导入 sudo docker import http://example.com/exampleimage.tgz example/imagerepo  </description>
+    </item>
+    
+    <item>
+      <title>docker的安装（Ubuntu)</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <description>1、docker的安装（Ubuntu) 1.1、 设置存储库  若是已安装旧版本的docker，
+请卸载：sudo apt-get remove docker docker-engine docker.io containerd runc
+ 1.1.1、更新apt索引 sudo apt-get update 1.1.2、安装依赖 sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg-agent \  software-properties-common 1.1.3、添加docker官方的GPG秘钥 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  在进行此步时，出现了sudo: unable to resolve host iZ2ze4512bfzoapfvch6btZ，这是因为机器不能反向解析
+打开主机上的 /etc/hosts
+添加： 127.0.0.1 【hostname】# 【hostname】用主机名替代
+可在/etc/hostname中修改主机名，sudo shutdown -r now重启过后完成主机名修改
+ 验证添加成功：
+sudo apt-key fingerprint 0EBFCD88 1.1.4、 设置存储库 sudo add-apt-repository &amp;quot;deb [arch=amd64] https://download.</description>
+    </item>
+    
+    <item>
+      <title>Flag包的基本用法</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+      <description>Flag包的基本用法  flag包用于处理golang命令行程序中的参数
+ 1. 使用flag包的基本流程 使用flag包涉及三个步骤：
+ 定义变量以捕获标志值 定义Go应用程序将使用的标志 在执行时解析提供给应用程序的标志。  flag软件包中的大多数功能都与定义标志并将其绑定到定义的变量有关。解析阶段由Parse()函数处理。
+一个例子 创建一个程序，该程序定义一个布尔标志，该标志会更改将打印到标准输出的消息。如果-color提供了一个标志，程序将以蓝色打印一条消息。如果未提供标志，则消息将被打印为没有任何颜色。
+// boolean.go import ( &amp;#34;flag&amp;#34; &amp;#34;fmt&amp;#34; ) type Color string // 定义变量以捕获标志值  const ( ColorBlack Color = &amp;#34;\u001b[30m&amp;#34; ColorRed = &amp;#34;\u001b[31m&amp;#34; ColorGreen = &amp;#34;\u001b[32m&amp;#34; ColorYellow = &amp;#34;\u001b[33m&amp;#34; ColorBlue = &amp;#34;\u001b[34m&amp;#34; ColorReset = &amp;#34;\u001b[0m&amp;#34; ) func colorize(color Color, message string) { fmt.Println(string(color), message, string(ColorReset)) } func main() { useColor := flag.Bool(&amp;#34;color&amp;#34;, false, &amp;#34;display colorized output&amp;#34;) // 定义Go应用程序将使用的标志  flag.</description>
+    </item>
+    
+    <item>
+      <title>GithubAPI问题</title>
+      <link>http://yangchnet.github.io/Dessert/posts/git/api%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/git/api%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98/</guid>
+      <description>Github API问题 使用github的RESTful API 访问https://developer.github.com/v3/来查看帮助文档
+API访问限制 在云服务器上使用git的API时，发现出现message&amp;quot;:&amp;quot;API rate limit exceeded for 59.110.140.133. (But here&#39;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&amp;quot;,&amp;quot;documentation_url&amp;quot;:&amp;quot;https://developer.github.com/v3/#rate-limiting提示信息，显然，这是存在着访问限制。
+查看访问限制 使用curl -i https://api.github.com/rate_limit查看自己的限制信息
+HTTP/1.1 200 OK Content-Type: application/json X-Ratelimit-Limit: 60 X-Ratelimit-Remaining: 59 X-Ratelimit-Reset: 1585470905 Date: Sun, 29 Mar 2020 07:49:35 GMT Content-Length: 482 Accept-Ranges: bytes X-GitHub-Request-Id: BB32:30AB:3EF690:50F336:5E80530E { &amp;#34;resources&amp;#34;: { &amp;#34;core&amp;#34;: { &amp;#34;limit&amp;#34;: 60, &amp;#34;remaining&amp;#34;: 59, &amp;#34;reset&amp;#34;: 1585470905 }, &amp;#34;graphql&amp;#34;: { &amp;#34;limit&amp;#34;: 0, &amp;#34;remaining&amp;#34;: 0, &amp;#34;reset&amp;#34;: 1585471775 }, &amp;#34;integration_manifest&amp;#34;: { &amp;#34;limit&amp;#34;: 5000, &amp;#34;remaining&amp;#34;: 5000, &amp;#34;reset&amp;#34;: 1585471775 }, &amp;#34;search&amp;#34;: { &amp;#34;limit&amp;#34;: 10, &amp;#34;remaining&amp;#34;: 10, &amp;#34;reset&amp;#34;: 1585468235 } }, &amp;#34;rate&amp;#34;: { &amp;#34;limit&amp;#34;: 60, &amp;#34;remaining&amp;#34;: 59, &amp;#34;reset&amp;#34;: 1585470905 } } rate.</description>
+    </item>
+    
+    <item>
+      <title>goget没反应</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go-get-%E6%B2%A1%E5%8F%8D%E5%BA%94/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go-get-%E6%B2%A1%E5%8F%8D%E5%BA%94/</guid>
+      <description>go get 没反应 修改hosts，然后reboot 添加
+192.30.253.112 github.com 151.101.185.194 github.global.ssl.fastly.net 到/etc/hosts 然后reboot
+go get golang.org 在使用go get golang.org/...时，总是time out（就算fp也一样，fp之后可以访问golang.org），不知道为啥。
+幸好github上存在golang.org的镜像
+例如
+go get -u golang.org/x/net 那么这个包的位置在github上就是github.com/golang/net, 所以，我们可以手动建立golang.org/x/目录，并切换到该目录下，然后使用
+git clone https://github.com/golang/net.git **注意：**要使用git clone命令，直接下载下来复制到目录下会提示找不到版本号。</description>
+    </item>
+    
+    <item>
+      <title>golang中的print系函数详解</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B9%8Bprint/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B9%8Bprint/</guid>
+      <description>golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
+ golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析
+import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; &amp;#34;io&amp;#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
+  Arguement
+fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.</description>
+    </item>
+    
+    <item>
+      <title>GOPATH的正确打开方式</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</guid>
+      <description>GOPATH的正确打开方式  GOPATH环境变量用于指定$GOROOT以外的目录，其中包含Go项目及其二进制文件的源。
+ GOPATH指定了go项目的位置及其编译得到的二进制文件的位置。GOPAHT可以是一个列表，也就是说可以设置多个GOPATH。
+1.如何查看GOPATH 使用
+go env 命令查看go相关的环境变量
+2. GOPATH的目录结构 GOPATH的目录结构如下：
+. ├── bin ├── pkg └── src └── main └── main.go $GOPATH/bin
+这个目录下存储编译的二进制文件，Linux操作系统使用\$PATH环境变量来查找无需完整路径即可执行的二进制应用程序，我们可以将这个目录添加到$PATH中，这样就可以方便的执行我们的二进制文件。
+$GOPATH/pkg
+Go在该目录中存储了预编译的目标文件，以加快程序的后续编译速度。通常，我们不需要访问该目录。但是如果在编译时遇到问题，可以安全地删除该目录，然后Go会重建它。
+$GOPATH/src
+这里是我们的代码所在位置。
+3. 我应该如何设置GOPATH   设置一个GOPATH
+当设置一个GOPAHT时，我们自行安装的一些包以及我们所有的项目文件，都会在\$GOPATH/src目录下，未免显得太过拥挤。不推荐。
+  设置两个GOPATH
+可以设置两个GOPATH，其中第一个作为从网络获取的包所在位置，第二个存放我们自己的项目，在从网络获取包时，将自动安装在第一个GOPATH下，这样就避免了我们自己的代码和网络上获取的代码挤在一起
+  每个项目设置一个GOPATH
+每个项目设置一个GOPATH，可以在建立项目的目录结构后使用
+  export GOPATH=`pwd` 来添加当前目录到GOPATH，但是下一次在运行这个命令时会将上一次的覆盖掉。这个方法的优点在于每个项目的目录结构变得清晰了，不再是所有项目存在于一个src文件夹下，可以建立在任意位置。但缺点在于每次切换项目都要重新export，同时还需要重新安装一些必要的包。类似于Python中的virtualenv.</description>
+    </item>
+    
+    <item>
+      <title>Go中的标准库</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/</guid>
+      <description>Go中的标准库 在Go语言的安装文件里包含了一些可以直接使用的包，即标准库。Go语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含 I/O 操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。
+在 Windows 下，标准库的位置在Go语言根目录下的子目录 pkg\windows_amd64 中；在 Linux 下，标准库在Go语言根目录下的子目录 pkg\linux_amd64 中（如果是安装的是 32 位，则在 linux_386 目录中）。一般情况下，标准包会存放在 $GOROOT/pkg/$GOOS_$GOARCH/ 目录下。
+Go语言的编译器也是标准库的一部分，通过词法器扫描源码，使用语法树获得源码逻辑分支等。Go语言的周边工具也是建立在这些标准库上。在标准库上可以完成几乎大部分的需求。
+Go语言的标准库以包的方式提供支持，下表列出了Go语言标准库中常见的包及其功能。
+ bufio	带缓冲的 I/O 操作 bytes	实现字节操作 container	封装堆、列表和环形列表等容器 crypto	加密算法 database	数据库驱动和接口 debug	各种调试文件格式访问及调试功能 encoding	常见算法如 JSON、XML、Base64 等 flag	命令行解析 fmt	格式化操作 go	Go语言的词法、语法树、类型等。可通过这个包进行代码信息提取和修改 html	HTML 转义及模板系统 image	常见图形格式的访问及生成 io	实现 I/O 原始访问接口及访问封装 math	数学库 net	网络库，支持 Socket、HTTP、邮件、RPC、SMTP 等 os	操作系统平台不依赖平台操作封装 path	兼容各操作系统的路径操作实用函数 plugin	Go 1.7 加入的插件系统。支持将代码编译为插件，按需加载 reflect	语言反射支持。可以动态获得代码中的类型信息，获取和修改变量的值 regexp	正则表达式封装 runtime	运行时接口 sort	排序接口 strings	字符串转换、解析及实用函数 time	时间接口 text	文本模板及 Token 词法器  </description>
+    </item>
+    
+    <item>
+      <title>Go的http包详解</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</guid>
+      <description>Go的http包详解 详细地解剖一下 http 包，看它到底是怎样实现整个过程的。
+Go 的 http 有两个核心功能：Conn、ServeMux
+Conn的goroputine 为了实现高并发和高性能，go使用了goroutine来处理Conn的读写事件，这样每个请求都能保持独立，相互不会阻塞，可以高效的相应网络事件。
+go在等待客户端请求中是这样的：
+c, err := srv.newConn(rw) if err != nil { continue } go c.serve() 可以看到，客户端的每次请求都会创建一个Conn，这个Conn里面保存了该次请求的信息，然后再传递到相应的handler，该handler中便可以读取到相应的header信息，这样保证了每个请求的独立性。
+ServeMux的自定义 conn.server内部调用了http包默认的路由器，通过路由器把本次请求的信息传递到了后端的处理函数，那么这个路由器是怎么实现的呢？
+它的结构如下：
+type ServeMux struct{ mu sync.RWMutext // 锁，请求涉及到并发处理，因此需要一个锁机制  m map[string]muxEntry // 路由规则，一个String对应一个mux实体，这里的String就是注册的一个路由表达式  hosts bool // 是否在任意的规则中带有host信息 } 下面看一下muxEntry
+type muxEntry struct { explicit bool // 是否精确匹配  h Handler // 这个路由表达式对应哪个handler  pattern string // 匹配字符串 } 在看一下Handler的定义
+type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 } Handler是一个接口，但是附中的sayhelloName函数中并没有实现ServeHTTP这个接口，为什么能添加呢？这是因为http包里面还定义了一个类型HandlerFunc，定义的函数sayhelloName就是这个HandlerFunc调用之后的结果，这个类型默认就实现了ServeHTTP这个方法，即我们调用了HandlerFunc(f)，强制类型转换f成为HandlerFunc类型，这样f就拥有了ServeHTTP方法。</description>
+    </item>
+    
+    <item>
+      <title>Go语言中值类型与引用类型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</guid>
+      <description>1.值类型与引用类型 值类型：int、float、bool和string这些类型都属于值类型，使用这些类型的变量直接指向存在内存中的值，值类型的变量的值存储在栈中。当使用等号=将一个变量的值赋给另一个变量时，如 j = i ,实际上是在内存中将 i 的值进行了拷贝。可以通过 &amp;amp;i 获取变量 i 的内存地址
+引用类型：特指slice、map、channel这三种预定义类型。引用类型拥有更复杂的存储结构:(1)分配内存 (2)初始化一系列属性等。一个引用类型的变量r1存储的是r1的值所在的内存地址（数字），或内存地址中第一个字所在的位置，这个内存地址被称之为指针，这个指针实际上也被存在另外的某一个字中
+2.值类型与引用类型的区别 值类型在传参时是做拷贝操作，即将原来的数据复制一份，而引用类型是直接传递指针，当参数在函数中被改变时，原数据也将改变。
+2.1.值类型 //先定义一个数组 var a = [5]int{1, 2, 3, 4, 5} //定义一个函数，将数组中的第一个值设为0 func change(a [5]int){ a[0] = 0 fmt.Println(a) } change(a) fmt.Println(a)  输出：
+ [0 2 3 4 5] [1 2 3 4 5] 可以看到，数组在函数内部被变成{0,1,2,3,4}，但当函数结束，还是原来的值没有变。
+2.2 引用类型 // 定义一个map var dit = make(map[string]int) dit[&amp;#34;one&amp;#34;] = 1 fmt.Println(dit) // 传参并做改变 func change(dit map[string]int){ dit[&amp;#34;two&amp;#34;] = 2 fmt.</description>
+    </item>
+    
+    <item>
+      <title>Go语言中的字面量</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</guid>
+      <description>Go语言中的字面量  什么是字面量 整型和浮点型的字面值 字符串的字面值 常量的字面值 数组的字面值 Slice的字面值 Map的字面值 结构体的字面值  什么是字面量 在计算机科学中，字面量（literal）是用于表达源代码中一个固定值的表示法（notation）。
+简单的说，字面量或者说字面值就是一个变量的值。
+整型和浮点型的字面值 var i int = 1 var f float64 = 3.14159 字符串的字面值 字符串值也可以用字符串面值方式编写，只要将一系列字节序列包含在双引号即可：
+&amp;#34;Hello 世界&amp;#34; `世界` 世界  一个原生的字符串面值形式是
+`...` 使用反引号代替双引号。在原生的字符串面值中，没有转义操作；全部的内容都是字面的意思，包含退格和换行，因此一个程序中的原生字符串面值可能跨越多行（译注：在原生字符串面值内部是无法直接写```````字符的，可以用八进制或十六进制转义或+&amp;quot;`&amp;quot;链接字符串常量完成）。唯一的特殊处理是会删除回车以保证在所有平台上的值都是一样的，包括那些把回车也放入文本文件的系统（译注：Windows系统会把回车和换行一起放入文本文件中）。
+原生字符串面值用于编写正则表达式会很方便，因为正则表达式往往会包含很多反斜杠。原生字符串面值同时被广泛应用于HTML模板、JSON面值、命令行提示信息以及那些需要扩展到多行的场景。
+const GoUsage = `Go is a tool for managing Go source code. Usage: go command [arguments] ...` GoUsage Go is a tool for managing Go source code. Usage: go command [arguments] ...  常量的字面值 对于常量面值，不同的写法可能会对应不同的类型。例如0、0.</description>
+    </item>
+    
+    <item>
+      <title>Go语言中的错误处理策略</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</guid>
+      <description>Go语言中的错误处理策略 0. 错误处理的编码风格 检查某个子函数是否失败后，我们通常将处理失败的逻辑代码放在处理成功的代码之前。如果某个错误会导致函数返回，那么成功的逻辑代码不应该放在else中，而应直接放在函数体中。
+1. 错误传播 函数某个子程序的失败，会变成该函数的失败
+resp, err := http.Get(url) if err != nil{ return nill, err } 或是构造新的错误信息返回给调用者
+doc, err := html.Parse(resp.Body) resp.Body.Close() if err != nil { return nil, fmt.Errorf(&amp;#34;parsing %s as HTML: %v&amp;#34;, url,err) } 一般而言，被调函数f(x)会将调用信息和参数信息作为发生错误时的上下文放在错误信息中并返回给调用者，调用者需要添加一些错误信息中不包含的信息。
+2. 重试失败的操作 如果错误的发生是偶然的，或由不可预知的问题导致的。此时可重新尝试失败的操作，但是在重试时，要限制重试的时间间隔或重试的时间次数，防止无限制的重试。
+func WaitForServer(url string) error { const timeout = 1 * time.Minute deadline := time.Now().Add(timeout) for tries := 0; time.Now().Before(deadline); tries++ { _, err := http.Head(url) if err == nil { return nil // success  } log.</description>
+    </item>
+    
+    <item>
+      <title>HINT : Add or change are lated_name</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/hint-add-or-change-a-relatedname/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/hint-add-or-change-a-relatedname/</guid>
+      <description>HINT: Add or change a related_name 解决方案：
+需要在setting中重载AUTH_USER_MODEL
+AUTH_USER_MODEL = &amp;lsquo;users.UserProfile&amp;rsquo;
+users：你的app
+UserProfile：model</description>
+    </item>
+    
+    <item>
+      <title>http/template</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/template/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/template/</guid>
+      <description>http/template 什么是模板 模板是一种常见的视图，通过它我们可以传递数据以使该视图有意义。可以以任何方式对其进行自定义以获取任何可能的输出。
+模板包 Go中的模板附带两个包text/template和html/template。文本包允许我们使用模板插入文本，而HTML模板通过提供安全的HTML代码来帮助我们。
+Part of template 1. 模板动作 模板动作是主要的控制流程，数据评估功能。这些动作控制最终输出将如何显示
+{{ /* a comment isside template */ }} 2. 控制结构 控制结构确定模板的控制流程，有助于产生结构化的输出，以下是模板中的一些控制结构
+if语句
+{{ if .condition }} {{ else }} {{ end }} 循环块
+{{ range .Items }} {{ end }} 3. 功能 函数也可以在模板内部使用，可以使用管道符|来使用预定义的函数
+ 如何预定义函数
+ 下面的代码创建并分析上面定义的模板templ。注意方法调用链的顺序:template.New先创建并返回一个模板;Funcs方法将daysAgo等自定义函数注册到模板中,并返回模板;最后调用Parse函数分析模板。
+report, err := template.New(&amp;#34;report&amp;#34;).Funcs(template.FuncMap{&amp;#34;daysAgo&amp;#34;: daysAgo}).Parse(templ) if err != nil { log.Fatal(err) } 在Go中解析模板 现在，我们来解析一些文本和HTML模板
+1. 访问数据 要访问传递的数据，使用点.，如下所示：
+{{ .data }} 2. 解析文本模板 现在，来解析一个文本模板</description>
+    </item>
+    
+    <item>
+      <title>Importsomedatatoplaywith</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/plot_roc/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/plot_roc/</guid>
+      <description>%matplotlib inline ======================================= Receiver Operating Characteristic (ROC) Example of Receiver Operating Characteristic (ROC) metric to evaluate classifier output quality.
+ROC curves typically feature true positive rate on the Y axis, and false positive rate on the X axis. This means that the top left corner of the plot is the &amp;ldquo;ideal&amp;rdquo; point - a false positive rate of zero, and a true positive rate of one. This is not very realistic, but it does mean that a larger area under the curve (AUC) is usually better.</description>
+    </item>
+    
+    <item>
+      <title>Keras函数式API</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/keras%E5%87%BD%E6%95%B0%E5%BC%8Fapi/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/keras%E5%87%BD%E6%95%B0%E5%BC%8Fapi/</guid>
+      <description>Keras函数式API 使用函数式API，你可以直接操作张量，也可以把层当做函数来使用，接收张量并返回张量。
+# 简单的实例 import os # **** change the warning level **** os.environ[&amp;#39;TF_CPP_MIN_LOG_LEVEL&amp;#39;] = &amp;#39;3&amp;#39; from keras.models import Sequential, Model from keras import layers from keras import Input # 使用Sequential模型 seq_model = Sequential() seq_model.add(layers.Dense(32, activation=&amp;#39;relu&amp;#39;, input_shape=(64,))) seq_model.add(layers.Dense(32, activation=&amp;#39;relu&amp;#39;)) seq_model.add(layers.Dense(10, activation=&amp;#39;softmax&amp;#39;)) # 对应的函数式API实现 input_tensor = Input(shape=(64,)) x = layers.Dense(32, activation=&amp;#39;relu&amp;#39;)(input_tensor) x = layers.Dense(32, activation=&amp;#39;softmax&amp;#39;)(x) output_tensor = layers.Dense(10, activation=&amp;#39;softmax&amp;#39;)(x) model = Model(input_tensor, output_tensor) model.summary() Model: &amp;quot;model_2&amp;quot; _________________________________________________________________ Layer (type) Output Shape Param # ================================================================= input_2 (InputLayer) (None, 64) 0 _________________________________________________________________ dense_10 (Dense) (None, 32) 2080 _________________________________________________________________ dense_11 (Dense) (None, 32) 1056 _________________________________________________________________ dense_12 (Dense) (None, 10) 330 ================================================================= Total params: 3,466 Trainable params: 3,466 Non-trainable params: 0 _________________________________________________________________  Keras会在后台检索从input_tensor到output_tensor所包含的每一层，并将这些层组合成一个类图的数据结构，即一个Model。这种方法有效的原因在于，output_tensor是通过对input_tensor进行多次变换得到的。如果你试图利用不相关的输入和输出来构建一个模型，那么会得到RuntimeError</description>
+    </item>
+    
+    <item>
+      <title>Linux下的权限管理</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid>
+      <description>Linux下的权限管理 Linux 系统中为什么需要设定不同的权限，所有用户都直接使用管理员（root）身份不好吗？
+ 由于绝大多数用户使用的是个人计算机，使用者一般都是被信任的人（如家人、朋友等）。在这种情况下，大家都可以使用管理员身份直接登录。但在服务器上就不是这种情况了，往往运行的数据越重要（如游戏数据），价值越高（如电子商城数据、银行数据），则服务器中对权限的设定就要越详细，用户的分级也要越明确。
+和 Windows 系统不同，Linux 系统为每个文件都添加了很多的属性，最大的作用就是维护数据的安全。举个简单的例子，在你的 Linux 系统中，和系统服务相关的文件通常只有 root 用户才能读或写，就拿 /etc/shadow 这个文件来说，此文件记录了系统中所有用户的密码数据，非常重要，因此绝不能让任何人读取（否则密码数据会被窃取），只有 root 才可以有读取权限。 此外，如果你有一个软件开发团队，你希望团队中的每个人都可以使用某一些目录下的文件，而非团队的其他人则不予以开放。通过前面章节的学习我们知道，只需要将团队中的所有人加入新的群组，并赋予此群组读写目录的权限，即可实现要求。反之，如果你的目录权限没有做好，就很难防止其他人在你的系统中乱搞。 比如说，本来 root 用户才能做的开关机、ADSL 拨接程序，新增或删除用户等命令，一旦允许任何人拥有这些权限，系统很可能会经常莫名其妙的挂掉。而且，万一 root 用户的密码被其他人获取，他们就可以登录你的系统，从事一些只有 root 用户才能执行的操作，这是绝对不允许发生的。 因此，在服务器上，绝对不是所有的用户都使用 root 身份登录，而要根据不同的工作需要和职位需要，合理分配用户等级和权限等级。
+ Linux 系统中，文件或目录的权限信息，可以使用 ls 命令查看，例如：
+[root@localhost ~]# ls -al total 156 drwxr-x---. 4 root root 4096 Sep 8 14:06 . drwxr-xr-x. 23 root root 4096 Sep 8 14:21 .. -rw-------. 1 root root 1474 Sep 4 18:27 anaconda-ks.cfg -rw-------. 1 root root 199 Sep 8 17:14 .</description>
+    </item>
+    
+    <item>
+      <title>Linux后台运行程序</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</guid>
+      <description>Linux后台运行程序 使用screen
+screen介绍 Screen是一个控制台应用程序，允许您在一个窗口中使用多个终端会话。该程序在shell会话中运行，并充当其他终端会话的容器和管理器，类似于窗口管理器管理窗口的方式。
+在许多情况下，创建多个终端窗口是不可能或不理想的。您可能需要在没有运行X服务器的情况下管理多个控制台会话，您可能需要轻松访问许多远程云服务器，或者您可能需要在处理其他任务时监视正在运行的程序的输出。所有需求都可以通过屏幕的强大功能轻松解决。
+安装srceen ubuntu下
+sudo apt-get install screen manjaro下
+sudo pacman -S screen 基本使用方法 使用screen命令打开一个新的窗口，在其中运行你想运行的脚本。
+开始运行后， 按ctrl+ad退出窗口
+使用screen -r重新进入窗口
+附：重定向    命令 说明     command &amp;gt; file 将输出重定向到 file。   command &amp;lt; file 将输入重定向到 file。   command &amp;raquo; file 将输出以追加的方式重定向到 file。   n &amp;gt; file 将文件描述符为 n 的文件重定向到 file。   n &amp;raquo; file 将文件描述符为 n 的文件以追加的方式重定向到 file。   n &amp;gt;&amp;amp; m 将输出文件 m 和 n 合并。   n &amp;lt;&amp;amp; m 将输入文件 m 和 n 合并。   &amp;laquo; tag 将开始标记 tag 和结束标记 tag 之间的内容作为输入。    Edited by Li Chang</description>
+    </item>
+    
+    <item>
+      <title>manjaro换源</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%8D%A2%E6%BA%90/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%8D%A2%E6%BA%90/</guid>
+      <description>manjaro换源 有关manjaro换源的文件：
+/etc/pacman.d/mirrorlist
+网上教程：
+sudo pacman-mirrors -gb testing -c China //选择中国源并更新 sudo pacman -Syyu //更新系统 manjaro更新
+pacman -Sc //清空并且下载新数据 pacman-mirrors -gb testing -c China //更新源 or pacman-mirrors -c China -g //更新源 pacman -Syu //更新 pacman -Syy //更新源数据库 pacman -Syyu //安装更新 </description>
+    </item>
+    
+    <item>
+      <title>mysql中无法插入中文解决办法</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</guid>
+      <description>mysql 中无法插入中文解决办法 alert database tuanplus character set utf8； 使用此方法可更改整个数据库，但是数据可能会丢失
+alter table address convert to character set utf8； 使用此方法可更改某个表的编码</description>
+    </item>
+    
+    <item>
+      <title>MySql安装和配置</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</guid>
+      <description>1. 安装mysql sudo apt update sudo apt install mysql-server 2. 配置mysql 运行 security script
+sudo mysql_secure_installation 根据提示进行一些必要的配置
+进入mysql
+sudo mysql 接下来，通过以下命令检查每个 MySQL 用户帐户使用的认证方法：
+SELECT user,authentication_string,plugin,host FROM mysql.user; 在输出中
++------------------+-------------------------------------------+-----------------------+-----------+ | user | authentication_string | plugin | host | +------------------+-------------------------------------------+-----------------------+-----------+ | root | | auth_socket | localhost | | mysql.session | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE | mysql_native_password | localhost | | mysql.sys | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE | mysql_native_password | localhost | | debian-sys-maint | *E6CD266C880D217453293A0247D0142C9CF52730 | mysql_native_password | localhost | +------------------+-------------------------------------------+-----------------------+-----------+ 可以看出，root用户使用插件进行身份验证（进入时不需要输入密码）。如果想要root用户使用密码登陆，可使用如下命令进行配置：</description>
+    </item>
+    
+    <item>
+      <title>Mysql无法远程访问</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid>
+      <description>Mysql无法远程访问 在使用navicat远程连接阿里云的时候，出现“2003 can t connect to mysql server on 10061”错误
+经过艰难的谷歌百度stackflow后，发现是3306端口没有监听外部连接，只接收内部ip访问。
+解决方案  首先保证阿里云服务器3306端口开放 使用netstat -ntpl |grep 3306命令查看3306端口状态 tcp 0 0 127.0.0.1:22 0.0.0.0:* LISTEN -
+可看出只接收内部访问 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf) 将bind-address = 127.0.0.1改成bind-address = 0.0.0.0 再次使用netstat -ntpl |grep 3306命令查看 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN -
+此时3306端口开始监听所有网络访问 **如果是ipv6主机，则改为 bind-address = :: ,表示监听所有网络**  主机&amp;rsquo;xxx.xx.xxx.xxx&amp;rsquo;不允许连接到此MySQL服务器 在进行连接ipv6主机的时候出现了如下问题：django.db.utils.InternalError: (1130, &amp;ldquo;Host &amp;lsquo;2409:8930:1450:316:6179:c54:5901:2f2b&amp;rsquo; is not allowed to connect to this MySQL server&amp;rdquo;) 解决方法如下：
+mysql&amp;gt; CREATE USER &amp;#39;monty&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED BY &amp;#39;some_pass&amp;#39;; mysql&amp;gt; GRANT ALL PRIVILEGES ON *.</description>
+    </item>
+    
+    <item>
+      <title>Nginx负载均衡配置--简介</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</guid>
+      <description>Nginx负载均衡配置&amp;ndash;简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。
+ 1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。
+没有负载平衡的Web基础结构可能如下所示：
+在此示例中，用户直接连接到web服务器yourdomain.com。如果此单个Web服务器出现故障，用户将无法再访问该网站。此外，如果许多用户尝试同时访问服务器并且无法处理负载，则可能会遇到加载时间缓慢或根本无法连接的情况。
+通过在后端引入负载均衡器和至少一个额外的Web服务器，可以减轻此单点故障。通常，所有后端服务器都将提供相同的内容，以便用户无论哪个服务器响应都会收到一致的内容。 在上面说明的示例中，用户访问负载均衡器，负载均衡器将用户的请求转发到后端服务器，后端服务器然后直接响应用户的请求。在这种情况下，单点故障现在是负载平衡器本身。这可以通过引入第二个负载均衡器来缓解.
+2. 负载均衡器可以处理什么样的流量   HTTP - 标准HTTP平衡基于标准HTTP机制定向请求。负载均衡器设置X-Forwarded-For，X-Forwarded-Proto以及X-Forwarded-Port头，提供有关原始请求的后端信息。
+  HTTPS - HTTPS平衡功能与HTTP平衡功能相同，但增加了加密功能。加密以两种方式之一处理：使用SSL直通，一直保持加密到后端，或者使用SSL终止，将解密负担放在负载均衡器上，但将未加密的流量发送到后端。
+  TCP - 对于不使用HTTP或HTTPS的应用程序，也可以平衡TCP流量。例如，数据库集群的流量可以分布在所有服务器上。
+  UDP&amp;ndash;最近，一些负载均衡器增加了对使用UDP的核心互联网协议（如DNS和syslogd）的负载平衡的支持。
+  这些转发规则将定义负载均衡器本身的协议和端口，并将它们映射到负载均衡器将用于将流量路由到后端的协议和端口。
+3. 负载均衡器如何选择后端服务器 负载均衡器根据两个因素的组合选择将请求转发到哪个服务器。他们将首先确保他们可以选择的任何服务器实际上对请求做出适当的响应，然后使用预先配置的规则从该健康池中进行选择。
+3.1 健康检查 负载均衡器应仅将流量转发到“健康”的后端服务器。要监视后端服务器的运行状况，运行状况检查会定期尝试使用转发规则定义的协议和端口连接到后端服务器，以确保服务器正在侦听。如果服务器未通过运行状况检查，因此无法提供请求，则会自动将其从池中删除，并且在再次响应运行状况检查之前，流量将不会转发给它。
+3.2 负载平衡算法 使用的负载平衡算法确定将选择后端中的哪些正常服务器。一些常用的算法是：
+  Round Robin - Round Robin意味着将按顺序选择服务器。负载均衡器将在其列表中为第一个请求选择第一个服务器，然后按顺序向下移动列表，当它到达结尾时从顶部开始。
+  least_conn - least_conn意味着负载均衡器将选择连接最少的服务器，并且当流量导致更长的会话时建议使用。
+  ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的服务器。前三个八位字节用作决定服务器处理请求的密钥。结果是客户端每次都倾向于由同一服务器提供服务，这有助于会话一致性。
+  hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。
+  管理员可用的算法取决于所使用的特定负载平衡技术。
+3.3 负载平衡器如何处理状态 某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。
+4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。</description>
+    </item>
+    
+    <item>
+      <title>pm2的使用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/pm2/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/pm2/</guid>
+      <description>pm2的使用 PM2 Runtime是具有内置Load Balancer的Node.js应用程序的生产过程管理器。它允许您永久保持应用程序的活动，无需停机即可重新加载它们，并促进常见的Devops任务。
+对于ipv4主机  用户名： lc 密码： Lichang1-  登录后使用以下命令查看当前后台进程状态
+pm2 ls 若status为online，则表明脚本运行正常，若为其他状态，则说明出现错误或异常，可用以下命令停止脚本运行
+pm2 stop 0 然后使用以下命令查看日志
+cat server.log 从日志中可获取错误信息或其他提示。
+若脚本一切正常，可直接进入数据库查看数据。
+注意：注销登录前请使用pm2 start server.sh命令重新启动脚本！！！
+对于ipv6主机  用户名： ubuntu 密码： ahnu2019  登录后使用以下命令查看当前后台进程状态
+pm2 ls 若status为online，则表明脚本运行正常，若为其他状态，则说明出现错误或异常，可用以下命令停止脚本运行
+pm2 stop 1 然后使用以下命令查看日志
+cat server.log 从日志中可获取错误信息或其他提示。
+若脚本一切正常，可直接进入数据库查看数据。
+注意：注销登录前请使用pm2 start server.sh命令重新启动脚本！！！</description>
+    </item>
+    
+    <item>
+      <title>python与其他语言的对比（helloworld）</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/python%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/python%E5%9F%BA%E7%A1%80/</guid>
+      <description>python与其他语言的对比（hello world）  C语言
+ include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;#34;hello world&amp;#34;); return 0; }  Java语言
+ public class HelloWorld{ public static void main(String[] args) { System.out.println(&amp;#34;Hello World!&amp;#34;); } }  Python
+ print(&amp;#39;hello world&amp;#39;) python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = &amp;#39;hello&amp;#39; str1_1 = &amp;#34;hello&amp;#34; str2 = &amp;#34;world&amp;#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = &amp;#39;hello \nworld&amp;#39; print(str4) str5 = &amp;#39;hello \\n world&amp;#39; print(str5) # 格式化输出 print(&amp;#39;str1:%s.</description>
+    </item>
+    
+    <item>
+      <title>Python中的拷贝</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</guid>
+      <description>Python中的拷贝   直接赋值：其实就是对象的引用（别名）.两个对象是引用的同一块内存区域
+  浅拷贝(copy)：拷贝父对象，不会拷贝对象的内部的子对象。
+  深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
+  引用示例
+a = [1,2,3,4] b = a a.append(5) print(a, b) [1, 2, 3, 4, 5] [1, 2, 3, 4, 5]  浅拷贝示例
+import copy a = [1, 2, 3, 4, [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;]] b = copy.copy(a) a.append(5) a[4].append(&amp;#39;c&amp;#39;) print(a) print(b) [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 5] [1, 2, 3, 4, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]]  可以看到,父对象被拷贝了,当直接对父对象做修改时,拷贝值也相应的得到了变化,但是对子对象修改时,拷贝值不变</description>
+    </item>
+    
+    <item>
+      <title>Python换源</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/python%E6%8D%A2%E6%BA%90/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E6%8D%A2%E6%BA%90/</guid>
+      <description>Python换源 1. 临时换源 可以在使用pip的时候在后面加上-i参数，指定pip源
+pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple 2. 永久换源 永久修改： linux: 修改 ~/.pip/pip.conf (没有就创建一个)， 内容如下：
+[global] index-url = https://pypi.tuna.tsinghua.edu.cn/simple </description>
+    </item>
+    
+    <item>
+      <title>python网络编程</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <description>python 网络编程 使用socket模块，即套接字 使用socket来创建套接字的语法如下： socket.socket(family[, type[, proto]])
+ 参数解释：
+  family: 套接字家族可以使AF_UNIX或者AF_INET type: 套接字类型可以根据是面向连接的还是非连接分为SOCK_STREAM或SOCK_DGRAM protocol：一般不填默认为0  socket对象的方法  s.bind() 绑定地址（host,port）到套接字， 在AF_INET下,以元组（host,port）的形式表示地址。 s.listen() 开始TCP监听。backlog指定在拒绝连接之前，操作系统可以挂起的最大连接数量。该值至少为1，大部分应用程序设为5就可以了。 s.accept() 被动接受TCP客户端连接,(阻塞式)等待连接的到来 客户端套接字 s.connect() 主动初始化TCP服务器连接，。一般address的格式为元组（hostname,port），如果连接出错，返回socket.error错误。 s.connect_ex() connect()函数的扩展版本,出错时返回出错码,而不是抛出异常 公共用途的套接字函数 s.recv() 接收TCP数据，数据以字符串形式返回，bufsize指定要接收的最大数据量。flag提供有关消息的其他信息，通常可以忽略。 s.send() 发送TCP数据，将string中的数据发送到连接的套接字。返回值是要发送的字节数量，该数量可能小于string的字节大小。 s.sendall() 完整发送TCP数据，完整发送TCP数据。将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有数据。成功返回None，失败则抛出异常。 s.recvfrom() 接收UDP数据，与recv()类似，但返回值是（data,address）。其中data是包含接收数据的字符串，address是发送数据的套接字地址。 s.sendto() 发送UDP数据，将数据发送到套接字，address是形式为（ipaddr，port）的元组，指定远程地址。返回值是发送的字节数。 s.close() 关闭套接字 s.getpeername() 返回连接套接字的远程地址。返回值通常是元组（ipaddr,port）。 s.getsockname() 返回套接字自己的地址。通常是一个元组(ipaddr,port) s.setsockopt(level,optname,value) 设置给定套接字选项的值。 s.getsockopt(level,optname[.buflen]) 返回套接字选项的值。 s.settimeout(timeout) 设置套接字操作的超时期，timeout是一个浮点数，单位是秒。值为None表示没有超时期。一般，超时期应该在刚创建套接字时设置，因为它们可能用于连接的操作（如connect()） s.gettimeout() 返回当前超时期的值，单位是秒，如果没有设置超时期，则返回None。 s.fileno() 返回套接字的文件描述符。 s.setblocking(flag) 如果flag为0，则将套接字设为非阻塞模式，否则将套接字设为阻塞模式（默认值）。非阻塞模式下，如果调用recv()没有发现任何数据，或send()调用无法立即发送数据，那么将引起socket.error异常。 s.makefile() 创建一个与该套接字相关连的文件  网络编程的基本设置步骤 服务端配置  导入socket模块 使用bind方法创建套接字 使用listen方法等待连接， 使用accept方法被动接收tcp连接 使用send或recv方法进行收发  客户端配置  导入socket模块 使用bind方法创建套接字 使用connect方法进行主动tcp连接 使用send或recv方法进行收发  </description>
+    </item>
+    
+    <item>
+      <title>RESTfulAPI入门</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/restful-api/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/restful-api/</guid>
+      <description>RESTful API 入门 1. 简介 表现层状态转换（英语：Representational State Transfer，缩写：REST）是Roy Thomas Fielding博士于2000年在他的博士论文中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。表现层状态转换是根基于超文本传输协议（HTTP）之上而确定的一组约束和属性，是一种设计提供万维网络服务的软件构建风格。符合或兼容于这种架构风格（简称为 REST 或 RESTful）的网络服务，允许客户端发出以统一资源标识符访问和操作网络资源的请求，而与预先定义好的无状态操作集一致化。因此表现层状态转换提供了在互联网络的计算系统之间，彼此资源可交互使用的协作性质（interoperability）。相对于其它种类的网络服务，例如SOAP服务，则是以本身所定义的操作集，来访问网络上的资源。
+2. REST 架构约束   客户端－服务器 从本质上讲，这意味着客户端应用程序和服务器应用程序必须能够独立发展而彼此之间没有任何依赖关系。客户端应该只知道资源URI，仅此而已。今天，这是Web开发中的常规做法，因此您不需要任何花哨。把事情简单化。
+ 服务器和客户端也可以独立替换和开发，只要它们之间的接口没有更改即可。
+   无状态
+Roy fielding的灵感来自HTTP，因此它反映了这一约束。使所有客户端-服务器交互都变为无状态。服务器将不存储有关客户端发出的最新HTTP请求的任何内容。它将每个请求视为新请求。没有会议，没有历史。
+如果客户端应用程序需要是最终用户的有状态应用程序，则用户必须登录一次并在此之后执行其他授权操作，则来自客户端的每个请求都应包含服务于该请求的所有必要信息，包括身份验证和授权细节。
+ 请求之间不得在服务器上存储任何客户端上下文。客户端负责管理应用程序的状态。
+   统一的接口 在约束名称本身适用的情况下，您必须为系统内部暴露给API使用者并认真遵循的资源确定API接口。系统中的资源应仅具有一个逻辑URI，并且应提供一种获取相关或附加数据的方式。最好将资源与网页同义。
+任何单个资源都不应太大，并在其表示中包含所有内容。只要相关，资源应包含指向相对URI的链接（HATEOAS），以获取相关信息。
+此外，整个系统上的资源表示应遵循特定的准则，例如命名约定，链接格式或数据格式（XML或/和JSON）。
+所有资源都应通过通用方法（例如HTTP GET）进行访问，并使用一致的方法进行类似的修改。
+ 一旦开发人员熟悉您的一个API，他就应该能够对其他API遵循类似的方法。
+   分层系统
+REST允许您使用分层的系统架构，在该架构中，您可以在服务器A上部署API，并在服务器B上存储数据并在服务器C中对请求进行身份验证。客户端通常无法确定它是直接连接到最终服务器还是中​​间连接。
+  可缓存的
+在当今世界中，缓存数据和响应在任何适用/可能的地方都至关重要。我们阅读的网页也是HTML页面的缓存版本。缓存可以提高客户端的性能，并为服务器提供更好的可伸缩性。
+在REST中，缓存应在适用时应用于资源，然后这些资源必须声明自己可缓存。可以在服务器或客户端上实现缓存。
+ 管理良好的缓存部分或完全消除了某些客户端-服务器交互，从而进一步提高了可伸缩性和性能。
+   按需代码（可选）
+好吧，这个约束是可选的。大多数时候，您将以XML或JSON的形式发送资源的静态表示。但是，如果需要，您可以自由地return executable code支持应用程序的一部分，例如，客户端可以调用您的API来获取UI小部件呈现代码。这是允许的。
+ 以上所有约束条件都可以帮助您构建真正的RESTful API，并且应该遵循它们。不过，有时您可能会发现自己违反了一两个约束。别担心; 您仍在制作RESTful API，但不是“真正的RESTful”。
+   3. REST资源命名指南 在REST中，主要数据表示称为Resource。从长远来看，拥有一个强大且一致的REST资源命名策略–无疑将证明是最佳的设计决策之一。</description>
+    </item>
+    
+    <item>
+      <title>SimpleSupportVectorMachine</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/svm-primal/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/svm-primal/</guid>
+      <description>Simple Support Vector Machine First we will import numpy to easily manage linear algebra and calculus operations in python. To plot the learning progress later on, we will use matplotlib.
+import numpy as np from matplotlib import pyplot as plt %matplotlib inline Stochastic Gradient Descent The svm will learn using the stochastic gradient descent algorithm (SGD). Gradient Descent minimizes a function by following the gradients of the cost function.
+Calculating the Error To calculate the error of a prediction we first need to define the objective function of the svm.</description>
+    </item>
+    
+    <item>
+      <title>tf.ones_like()</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/tensorflowapi/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/tensorflowapi/</guid>
+      <description>import tensorflow as tf import numpy as np from IPython.display import Image tf.ones_like() 创建一个所有元素设置为1的tensor
+tf.subtract() 两个矩阵相减
+ decision_p_comp = tf.subtract(tf.ones_like(decision_p), decision_p)
+  这一句计算出1-d
+ tf.stack 矩阵拼接，例如
+a = tf.constant([1,2,3]) b = tf.constant([4,5,6]) c = tf.stack([a, b], axis = 0) d = tf.stack([a, b], axis = 1) sess = tf.Session() print(sess.run(c)) print(sess.run(d)) [[1 2 3] [4 5 6]] [[1 4] [2 5] [3 6]]  tf.expand_dims 在axis位置增加一个维度
+tf.tile 在同一维度上进行复制
+with tf.</description>
+    </item>
+    
+    <item>
+      <title>ubuntu中增加用户</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</guid>
+      <description>ubuntu中增加用户 sudo useradd -m [username] -s /bin/bash #创建账户，使用/bin/bash作为shell sudo passwd [username] #设置密码 sudo adduser [username] sudo #添加管理员权限 su [username]#切换用户 </description>
+    </item>
+    
+    <item>
+      <title>Ubuntu完全删除nginx</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</guid>
+      <description>Ubuntu完全删除nginx 1. 卸载nginx及相关软件  卸载nginx  sudo apt-get --purge remove nginx  移除全部无用包  sudo apt-get autoremove  列出与nginx相关的软件  dpkg --get-selections | grep nginx  删除之  sudo apt-get --purge remove nginx-common sudo apt-get --purge remove nginx-core 2. 停止所有与nginx有关的进程  查看相关进程  ps -ef | grep nginx  停止这些进程  sudo kill -9 {process_id}  00:00:00 grep &amp;ndash;color=auto nginx 这个不是
+ 3. 查找主机中与nginx相关的文件 使用命令：
+sudo find / -name nginx* 删除之</description>
+    </item>
+    
+    <item>
+      <title>Vue中的指令介绍</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E5%89%8D%E7%AB%AF/vue%E6%8C%87%E4%BB%A4/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E5%89%8D%E7%AB%AF/vue%E6%8C%87%E4%BB%A4/</guid>
+      <description>Vue中的指令介绍 指令  解释：指令 (Directives) 是带有 v- 前缀的特殊属性 作用：当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM  v-text 解释：更新元素的 textContent
+&amp;lt;h1 v-text=&amp;#34;msg&amp;#34;&amp;gt;&amp;lt;/h1&amp;gt; v-html 解释：更新元素的 innerHTML
+&amp;lt;h1 v-html=&amp;#34;msg&amp;#34;&amp;gt;&amp;lt;/h1&amp;gt; v-bind 作用：当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM.响应式地更新 HTML attribute： 语法：v-bind:title=&amp;quot;msg&amp;quot; 简写：:title=&amp;quot;msg&amp;quot;
+&amp;lt;!-- 完整语法 --&amp;gt; &amp;lt;a v-bind:href=&amp;#34;url&amp;#34;&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;!-- 缩写 --&amp;gt; &amp;lt;a :href=&amp;#34;url&amp;#34;&amp;gt;&amp;lt;/a&amp;gt; &amp;lt;script&amp;gt; // 2 创建 Vue 的实例对象  var vm = new Vue({ // el 用来指定vue挂载到页面中的元素，值是：选择器  // 理解：用来指定vue管理的HTML区域  el: &amp;#39;#app&amp;#39;, // 数据对象，用来给视图中提供数据的  data: { url: &amp;#39;http://www.baidu.com&amp;#39; } }) &amp;lt;/script&amp;gt; v-on 作用：绑定事件 语法：v-on:click=&amp;quot;say&amp;quot; or v-on:click=&amp;quot;say(&#39;参数&#39;, $event)&amp;quot; 简写：@click=&amp;quot;say&amp;quot; 说明：绑定的事件从methods中获取</description>
+    </item>
+    
+    <item>
+      <title>Windows装系统遇到的问题</title>
+      <link>http://yangchnet.github.io/Dessert/posts/os/mbr-gpt/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/os/mbr-gpt/</guid>
+      <description>Windows装系统遇到的问题 1. 问题描述 windows无法安装到这个磁盘，选中的磁盘具有MBR分区表。在EFI系统上，Windows只能安装到GPT磁盘
+2. 问题来源 这个问题的根源网上众说纷纭，暂且不管他
+3. 解决办法   首先选择U盘安装，进入安装界面
+  按shift+F10打开命令行
+  输入diskpart并回车
+  输入list disk查看磁盘，一般会出现两个磁盘，一个是机器本身的磁盘，编号为0，另一个为U盘，编号为1
+  输入select disk x（x为要选择的磁盘编号） cmd会提示当前选择的磁盘为x
+  执行clean命令清除该磁盘上所有分区信息，并且会清空所有硬盘数据
+  执行convert gpt，将该硬盘转化为GPT格式
+  完成，继续安装系统
+  </description>
+    </item>
+    
+    <item>
+      <title>WordPress安装踩坑</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</guid>
+      <description>WordPress安装踩坑 1. 第一个坑，忘了安装PHP。。。 2. 第二个坑，访问页面not found 发现是因为同时开了apache2和nginx,导致冲突了，把nginx关掉就好了
+3. 第三个坑，打开页面全是源代码  打开/etc/apache2/apache2.conf，将以下内容添加到文件的底部：  &amp;lt;FilesMatch \ .php $&amp;gt; SetHandler application / x-httpd-php &amp;lt;/ FilesMatch&amp;gt; 为了使PHP正常运行，您必须禁用mpm_event模块并启用mpm_prefork和php7模块。为此，请返回您的终端窗口并发出命令：  sudo a2dismod mpm_event &amp;amp;&amp;amp; sudo a2enmod mpm_prefork &amp;amp;&amp;amp; sudo a2enmod php7.0 4. 在执行上面的命令时，遇到了第四个坑 ERROR: Module php7.0 does not exist! 解决办法
+sudo apt-get install libapache2-mod-php7.0 5. 您的PHP似乎没有安装运行WordPress所必需的MySQL扩展。 sudo apt-get install php-mysql 爬出来了。。</description>
+    </item>
+    
+    <item>
+      <title>使用sklearn的贝叶斯分类器进行文本分类</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/sklearn_%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/sklearn_%E8%B4%9D%E5%8F%B6%E6%96%AF/</guid>
+      <description>使用sklearn的贝叶斯分类器进行文本分类 1、sklearn简介 sklearn是一个Python第三方提供的非常强力的机器学习库，它包含了从数据预处理到训练模型的各个方面。在实战使用scikit-learn中可以极大的节省我们编写代码的时间以及减少我们的代码量，使我们有更多的精力去分析数据分布，调整模型和修改超参。
+2、朴素贝叶斯在文本分类中的常用模型：多项式、伯努利 朴素贝叶斯分类器是一种有监督学习，常见有两种模型，多项式模型(multinomial model)即为词频型和伯努利模(Bernoulli model)即文档型。二者的计算粒度不一样，多项式模型以单词为粒度，伯努利模型以文件为粒度，因此二者的先验概率和类条件概率的计算方法都不同。计算后验概率时，对于一个文档d，多项式模型中，只有在d中出现过的单词，才会参与后验概率计算，伯努利模型中，没有在d中出现，但是在全局单词表中出现的单词，也会参与计算，不过是作为“反方”参与的。这里暂不虑特征抽取、为避免消除测试文档时类条件概率中有为0现象而做的取对数等问题。
+2.1、多项式模型 2.2、伯努利模型 2.3、两个模型的区别 3、实战演练 使用在康奈尔大学下载的2M影评作为训练数据和测试数据，里面共同、共有1400条，好评和差评各自700条，我选择总数的70%作为训练数据，30%作为测试数据，来检测sklearn自带的贝叶斯分类器的分类效果。
+  读取全部数据，并随机打乱
+ import os import random def get_dataset(): data = [] for root, dirs, files in os.walk(&amp;#39;../dataset/aclImdb/neg&amp;#39;): for file in files: realpath = os.path.join(root, file) with open(realpath, errors=&amp;#39;ignore&amp;#39;) as f: data.append((f.read(), 0)) for root, dirs, files in os.walk(r&amp;#39;../dataset/aclImdb/pos&amp;#39;): for file in files: realpath = os.path.join(root, file) with open(realpath, errors=&amp;#39;ignore&amp;#39;) as f: data.append((f.read(), 1)) random.shuffle(data) return data data = get_dataset() data[:2] [(&amp;quot;Being a fan of Andy Goldsworthy&#39;s art for a while now, and owning some of his books, I had some expectations of what I would see.</description>
+    </item>
+    
+    <item>
+      <title>分类指标作业（第二题）</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%BA%8C%E9%A2%98/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%BA%8C%E9%A2%98/</guid>
+      <description>分类指标作业（第二题） 题目 给定完整数据集，分别计算在使用完整数据集的10%,30%,50%,80%,100%数据时的查准率、查全率，f1度量和ROC，使用折线图表现出这些指标的变化情况，并画出在不同数据量下的ROC曲线
+加载数据集 import os import random def get_dataset(): data = [] for root, dirs, files in os.walk(&amp;#39;../dataset/aclImdb/neg&amp;#39;): for file in files: realpath = os.path.join(root, file) with open(realpath, errors=&amp;#39;ignore&amp;#39;) as f: data.append((f.read(), 0)) for root, dirs, files in os.walk(r&amp;#39;../dataset/aclImdb/pos&amp;#39;): for file in files: realpath = os.path.join(root, file) with open(realpath, errors=&amp;#39;ignore&amp;#39;) as f: data.append((f.read(), 1)) random.shuffle(data) return data data = get_dataset() data[:2] [(&#39;Unless you are between the ages of 10 and 14 (except for the R rating), there are very few things to like here.</description>
+    </item>
+    
+    <item>
+      <title>删除WordPress</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%88%A0%E9%99%A4wordpress/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%88%A0%E9%99%A4wordpress/</guid>
+      <description>删除WordPress  删除网络文件：  rm -Rf /var/www/html/* 删除数据库。首先获取mysql的root密码（通过ssh登录时显示在MOTD中）。  mysql -uroot -p 输入密码后使用语句：
+DROP DATABASE wordpress; 删除WordPress数据库
+exit; </description>
+    </item>
+    
+    <item>
+      <title>四种常见的POST类型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</guid>
+      <description>四种常见的POST类型 1. application/x-www-form-urlencoded 这应该是最常见的 POST 提交数据的方式了。浏览器的原生 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：
+POST http://www.example.com HTTP/1.1 Content-Type: application/x-www-form-urlencoded;charset=utf-8 title=test&amp;amp;sub%5B%5D=1&amp;amp;sub%5B%5D=2&amp;amp;sub%5B%5D=3 首先，Content-Type 被指定为 application/x-www-form-urlencoded；其次，提交的数据按照 key1=val1&amp;amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。例如 PHP 中，$_POST[&amp;lsquo;title&amp;rsquo;] 可以获取到 title 的值，$_POST[&amp;lsquo;sub&amp;rsquo;] 可以得到 sub 数组。
+很多时候，我们用 Ajax 提交数据时，也是使用这种方式。例如 JQuery 和 QWrap 的 Ajax，Content-Type 默认值都是「application/x-www-form-urlencoded;charset=utf-8」。
+2. multipart/form-data 这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 &amp;lt;form&amp;gt; 表单的 enctype 等于 multipart/form-data。直接来看一个请求示例：
+POST http://www.example.com HTTP/1.1 Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA ------WebKitFormBoundaryrGKCBY7qhFd3TrwA Content-Disposition: form-data; name=&amp;#34;text&amp;#34; title ------WebKitFormBoundaryrGKCBY7qhFd3TrwA Content-Disposition: form-data; name=&amp;#34;file&amp;#34;; filename=&amp;#34;chrome.png&amp;#34; Content-Type: image/png PNG .</description>
+    </item>
+    
+    <item>
+      <title>在docker中构建django项目</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
+      <description>在docker中构建django项目 （需安装docker-compose, 安装教程）
+1. 定义项目组件 对于此项目，您需要创建Dockerfile，Python依赖项文件和docker-compose.yml文件。（您可以使用此文件的扩展名.yml或.yaml扩展名。）
+1.1. 创建一个空目录 该目录应仅包含构建该映像的资源。
+1.2 创建Dockerfile 内容如下：
+FROM python:3 ENV PYTHONUNBUFFERED 1 RUN mkdir /code WORKDIR /code COPY requirements.txt /code/ RUN pip install -r requirements.txt COPY . /code/ 对于DockerFile的解释
+1.3 创建requirements.txt 内容如下：
+django django-ckeditor pillow numpy 1.4 创建docker-compose.yml 该docker-compose.yml文件描述了构成应用程序的服务。在此示例中，这些服务是Web服务器和数据库。撰写文件还描述了这些服务使用哪些Docker映像，它们如何链接在一起，以及它们可能需要安装在容器内的任何卷。最后，该docker-compose.yml文件描述了这些服务公开的端口。有关此文件如何工作的更多信息，请参阅docker-compose.yml参考。 内容如下：
+version: &amp;#39;3&amp;#39; services: db: image: postgres web: build: . command: python manage.py runserver 0.0.0.0:8000 volumes: - .:/code ports: - &amp;#34;8000:8000&amp;#34; depends_on: - db 2 创建django项目  切换到项目跟目录】 通过运行docker-compose run 命令创建django项目  sudo docker-compose run web django-admin startproject mysite .</description>
+    </item>
+    
+    <item>
+      <title>在通过日期获取数据库条目时，出现djangoItmustbeinYYYY-MM-DDHH:MM[:ss[.uuuuuu]][TZ]format.&#34;]错误</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</guid>
+      <description>在通过日期获取数据库条目时，出现 django It must be in YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] format.&amp;quot;]错误 由于日期是从前端获取的，因此将前端日期引用标签改为：{{ comment.time|date:&amp;quot;Y-m-d H:i:s.u&amp;quot;}}</description>
+    </item>
+    
+    <item>
+      <title>基于卷积神经网络和决策树的体域网数据融合方法</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/dnf/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/dnf/</guid>
+      <description>基于卷积神经网络和决策树的体域网数据融合方法 现阶段想法:在softmax层后接随机森林，通过种树增加分类准确率
+import tensorflow as tf import numpy as np import tensorflow.examples.tutorials.mnist.input_data as input_data import scipy as sp %matplotlib inline sess = tf.Session() DEPTH = 3 # Depth of a tree N_LEAF = 2 ** (DEPTH + 1) # Number of leaf node N_LABEL = 10 # Number of classes N_TREE = 5 # Number of trees (ensemble) N_BATCH = 128 # Number of data points per mini-batch 分批训练，每一批128个  初始化矩阵 def init_weights(shape): return tf.</description>
+    </item>
+    
+    <item>
+      <title>基本计算指令</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%B1%87%E7%BC%96/%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%8C%87%E4%BB%A4/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%B1%87%E7%BC%96/%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%8C%87%E4%BB%A4/</guid>
+      <description>基本计算指令  这里的汇编指令均基于x86-64架构
+ 0. 先验知识 0.1 寄存器设置 一个x86-64的中央处理单元包含一组16个64位通用目的寄存器。这些寄存器用来存储整数数据和指针。指令可以对这16个寄存器的低位字节中存放的不同大小的数据进行操作。字节级操作可以访问最低的字节，16位操作可以访问最低的2个字节，32位操作可以访问最低的4个字节，而64位操作可以访问整个寄存器。
+3. 寻址方式 1. 数据传送指令 最简单形式的数据传送指令&amp;ndash;mov类。这些指令把数据从源位置复制到目的位置，不做任何变化。mov类指令由四条指令组成：movb, movw, movl,movq.这些指令都执行相同的操作，区别在于它们操作的数据大小不同：分别是1，2，4，8字节。
+ 由于历史原因，Intel处理器将16位作为一个字（w），8位为一个字节(b)，32位为双字(l),64位为4字（q）
+    指令 效果 描述     MOV S D D &amp;lt;- S 传送   movb  传送字节   movw  传送字   movl  传送双字   movq  传送四字   movabsq I, R  传送绝对的四字    传送指令的两个操作数不能都指向内存位置。将一个值从一个内存位置复制到另一个内存位置需要两个步骤，第一个指令将源值加载到寄存器，第二条指令将该寄存器写入目的位置。
+example
+ C code</description>
+    </item>
+    
+    <item>
+      <title>处理文本数据</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE/</guid>
+      <description>处理文本数据 1. 单词和字符的one-hot编码 one-hot编码是将标记转换为向量的最常用，最基本的方法。它将每个单词与一个唯一的整数索引相关联，然后将这个整数索引i转换为长度为N的二进制向量（N是词表大小），这个向量只有第i个元素是1，其余元素都是0.
+当然，也可以进行字符级的one-hot编码。
+1.1. 单词级的one-hot编码 import numpy as np samples = [&amp;#39;The cat sat on the mat.&amp;#39;, &amp;#39;The dog ate my homework.&amp;#39;] token_index = {} for sample in samples: for word in sample.split(): if word not in token_index: token_index[word] = len(token_index) + 1 # 为每个唯一单词指定一个唯一索引，没有为0索引指定单词 max_length = 10 results = np.zeros(shape=(len(samples), max_length, max(token_index.values())+1)) for i, sample in enumerate(samples): for j, word in list(enumerate(sample.split()))[:max_length]: index = token_index.get(word) results[i, j, index] = 1 results array([[[0.</description>
+    </item>
+    
+    <item>
+      <title>多输入模型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%9A%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%9A%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9E%8B/</guid>
+      <description>多输入模型 函数式API可以用于构建具有多个输入的模型，通常情况下，这种模型会在某一时刻用一个可以组合多个张量的层将不同的输入分支合并，张量组合方式可能是相加，连接等。这通常利用Keras的合并运算来实现，比如keras.layers.add, keras.layers.concatenate等。
+下面来看一个非常简单的多输入模型示例：一个问答模型
+典型的问答模型有两个输入，一个自然语言描述的问题和一个文本片段（比如新闻文章），后者提供用于回答问题的信息。然后模型要生成一个回答，在最简单的情况下，这个回答只包含一个词，可以通过对某个预定义的词表做softmax得到。
+# 具有两个输入的模型 from keras.models import Model from keras import layers from keras import Input text_vocabulary_size = 10000 question_vocabulary_size = 10000 answer_vocabulary_size = 500 text_input = Input(shape=(None, ), dtype=&amp;#39;int32&amp;#39;, name=&amp;#39;text&amp;#39;) embedded_text = layers.Embedding( text_vocabulary_size, 64) (text_input) # 将输入嵌入到长度为64的向量 encoded_text = layers.LSTM(32)(embedded_text) # 对问题进行相同的处理，使用不同的层实例 question_input = Input(shape=(None, ), dtype=&amp;#39;int32&amp;#39;, name=&amp;#39;question&amp;#39;) embedded_question = layers.Embedding( question_vocabulary_size, 32)(question_input) encoded_question = layers.LSTM(16)(embedded_question) # 将编码后的问题和文本连接起来 concatenated = layers.concatenate([encoded_text, encoded_question], axis=-1) # 在上面添加一个softmax分类器 answer = layers.</description>
+    </item>
+    
+    <item>
+      <title>如何在manjaro中安装MySQL</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</guid>
+      <description>如何在manjaro中安装MySQL # 安装MySQL pacman -S mysql # 初始化MySQL，记住输出的root密码 mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql # 设置开机启动MySQL服务 systemctl enable mysqld.service systemctl daemon-reload systemctl start mysqld.service # 使用MySQL前必须修改root密码，MySQL 8.0.15不能使用set password修改密码 mysql -u root -p mysql&amp;gt; ALTER USER &amp;#39;root&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED WITH mysql_native_password BY &amp;#39;新密码&amp;#39;; </description>
+    </item>
+    
+    <item>
+      <title>安装docker-compose</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85docker-compose/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85docker-compose/</guid>
+      <description>安装docker-compose  下载最新版本的docker-compose  sudo curl -L &amp;#34;https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34; -o /usr/local/bin/docker-compose 对二进制文件应用可执行权限  sudo chmod +x /usr/local/bin/docker-compose 测试安装完成  docker-compose --version </description>
+    </item>
+    
+    <item>
+      <title>安装完virtualbox后，提示内核问题</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</guid>
+      <description>安装完virtualbox后，提示内核问题 解决方法 安装内核匹配版本 sudo pacman -S linux419-virtualbox-host-modules
+重新加载内核模块 sudo /sbin/rcvboxdrv 然后重启即可</description>
+    </item>
+    
+    <item>
+      <title>快速入门Matplotlib教程</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/matplotlib%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/matplotlib%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/</guid>
+      <description>快速入门Matplotlib教程 介绍 Matplotlib 可能是 Python 2D-绘图领域使用最广泛的套件。它能让使用者很轻松地将数据图形化，并且提供多样化的输出格式。
+pylab pylab 是 matplotlib 面向对象绘图库的一个接口。它的语法和 Matlab 十分相近。也就是说，它主要的绘图命令和 Matlab 对应的命令有相似的参数。
+初级绘制 这一节中，我们将从简到繁：先尝试用默认配置在同一张图上绘制正弦和余弦函数图像，然后逐步美化它。
+第一步，是取得正弦函数和余弦函数的值：
+import numpy as np X = np.linspace(-np.pi, np.pi, 256,endpoint=True) C,S = np.cos(X), np.sin(X) X 是一个 numpy 数组，包含了从 −π−π 到 +π+π 等间隔的 256 个值。C和 S 则分别是这 256 个值对应的余弦和正弦函数值组成的 numpy 数组。
+np.linspace
+使用默认配置 Matplotlib 的默认配置都允许用户自定义。你可以调整大多数的默认配置：图片大小和分辨率（dpi）、线宽、颜色、风格、坐标轴、坐标轴以及网格的属性、文字与字体属性等。不过，matplotlib 的默认配置在大多数情况下已经做得足够好，你可能只在很少的情况下才会想更改这些默认配置。
+plot函数详解
+from pylab import * plot(X,C) plot(X,S) show() &amp;lt;Figure size 640x480 with 1 Axes&amp;gt;  默认配置的具体内容 下面的代码中，我们展现了 matplotlib 的默认配置并辅以注释说明，这部分配置包含了有关绘图样式的所有配置。代码中的配置与默认配置完全相同，你可以在交互模式中修改其中的值来观察效果。</description>
+    </item>
+    
+    <item>
+      <title>怎样从本地现有代码新建一个库</title>
+      <link>http://yangchnet.github.io/Dessert/posts/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</guid>
+      <description>怎样从本地现有代码新建一个库  在本地代码目录初始化git  git init 然后将代码添加到仓库中  git add . #这里是添加了当前目录所有的文件 提交代码到本地库中  git commit -m &amp;#34;这里是提交的注释&amp;#34;  接下来我们需要在github上新建一个库，比如说新库的名字为hello
+  将本地的仓库关联到github上
+  git remote add origin https://github.com/yourname/hello 上传之前，先要拉取远程的相关信息  git pull origin master 最后上传  git push -u origin master 遇到的问题  来自 https://github.com/yangchnet/Mygolang * branch master -&amp;gt; FETCH_HEAD fatal: 拒绝合并无关的历史
+ 解决方案 首先将远程仓库和本地仓库关联起来：
+git branch --set-upstream-to=origin/master master 然后使用git pull整合远程仓库和本地仓库，
+git pull --allow-unrelated-histories (忽略版本不同造成的影响) </description>
+    </item>
+    
+    <item>
+      <title>数据库中的视图</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</guid>
+      <description>数据库中的视图 1. 什么是数据库视图 数据库视图的创建是基于SQL SELECT query和JOIN的。视图和表很相似，它也包含行和列，所以可以直接对它进行查询操作。另外大多数的数据库同样允许进行UPADTE操作，但必须满足一定的条件。视图的数据结构如图：
+数据库并没有存储视图这个关系,存储的只是一个查询定义
+2. 数据库视图可以干什么   视图可以简化复杂查询
+视图的定义是基于一个查询声明，这个查询声明可能关联了很多底层表。可以使用视图向数据库的使用者或者外部程序隐藏复杂的底层表关系。
+  视图可以限制特定用户的数据访问权
+有时希望对一些特定用户隐藏某些表的某些数据，这时视图可以很好的实现这个功能。
+  视图可以使用可计算的列
+表的列一般都不支持动态计算，但是视图的列是支持的。假设在有一张order_details表，其中包含product_nums和price_each两列，当需要查询order总价时就需要查询出结果后在代码中进行计算，如果使用视图的话可以在视图中添加一列total_price(product_nums*price_each)。这样就可以直接查询出order的总价。
+  视图可以帮助兼容旧的系统
+假设一个数据中心，这个数据中心被很多的程序在使用。如果有一天决定重新设计这个数据中心以适应一些新的业务需求，可能需要删除一些旧的表，并且创建一些新的表，但又不希望这些变动影响到那些老的程序。那么这时可以创建一些视图用来适配那些老的程序。
+  3. 如何定义数据库视图 </description>
+    </item>
+    
+    <item>
+      <title>数据库表结构说明&amp;&amp;远程访问说明</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</guid>
+      <description>数据库表结构说明 &amp;amp;&amp;amp; 远程访问说明  code by lichang
+ 数据库表结构说明 数据库名为django_mysql
+1.用户  所有和用户有关的数据
+ 1.1 mhuse_mhuser表  用户总表，包含基本用户信息
+  id(key) password（密文密码） last_login is_superuser username first_name last_name email is_staff is_active date_joined usertype(normal, doctor) deviceid （设备id） mypassword(明文密码)  1.2 mhuser_normal表  普通用户表,包含普通用户的个人信息
+  user (foreign key, mhuser_mhuser.id) age [IntegerField, blank=True] gender [CharField,default=&amp;lsquo;man&amp;rsquo;,choice=(&amp;lsquo;man&amp;rsquo;,&amp;lsquo;woman&amp;rsquo;), max_length=10, blank=True] (性别) weight [FloatField, blank=True] （体重） marry [BooleanField, blank=True]（婚否） career [CharField, blank=True]（职业） signature [CharField, blank=True]（个性签名） medicalhistory [TextField, max_length=1000, blank=True] （用药史） avatar [ImageField, blank=True] (头像)  1.</description>
+    </item>
+    
+    <item>
+      <title>数据集的清洗</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</guid>
+      <description>数据集的清洗 一、一般数据集的处理 1、读取 首先创建文件对象，然后进行读取，两种写法
+# 第一种 f = open(&amp;#39;./Chinese.txt&amp;#39;, &amp;#39;r&amp;#39;) # 节选自：《父亲》（朱自清） article = [] # 创建一个列表 for l in f.readlines(): article.append(l) article [&#39;我说道，“爸爸，你走吧。”他望车外看了看，说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪，怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子望回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的，过一会说，“我走了；到那边来信！”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。&#39;]  # 第二种 article = [] # 创建一个列表 with open(&amp;#39;./Chinese.txt&amp;#39;, &amp;#39;r&amp;#39;) as file_project: for l in file_project.readlines(): article.append(l) article [&#39;我说道，“爸爸，你走吧。”他望车外看了看，说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪，怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子望回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的，过一会说，“我走了；到那边来信！”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。&#39;]  2、把每一句单独放在一行，并去除标点 # 首先读取到字符串 article = &amp;#39;&amp;#39; # 创建一个字符串 with open(&amp;#39;./Chinese.txt&amp;#39;, &amp;#39;r&amp;#39;) as file_project: for l in file_project.readlines(): article += l article &#39;我说道，“爸爸，你走吧。”他望车外看了看，说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪，怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子望回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的，过一会说，“我走了；到那边来信！”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。&#39;  # 使用replace函数，将标点替换为换行符 result_1 = article.</description>
+    </item>
+    
+    <item>
+      <title>数组越界判定问题</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%88%A4%E5%AE%9A%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E7%BB%84%E8%B6%8A%E7%95%8C%E5%88%A4%E5%AE%9A%E9%97%AE%E9%A2%98/</guid>
+      <description>数组越界判定问题  今天写了一个数组的代码，里面有个函数为数组越界判定，测试的时候没通过，看了答案才发现另有玄机
+ 数组定义 type Array struct{ data []int length uint } 越界判定1 // 判断索引是否越界 func (this *Array)isIndexOutRange1(index uint) bool{ if index &amp;gt; this.length-1{ //这种写法错误  return true } return false } 越界判定2 // 判断索引是否越界 func (this *Array)isIndexOutRange2(index uint) bool{ if index &amp;gt;= uint(cap(this.data)){ return true } return false } 第一种写法根据数组当前长度与要访问的下标进行比较，来判定是否下标越界
+第二种写法根绝数组占用内存大小与下标比较来判定
+二者的区别在哪?
+a := Array{ data: []int{1,2,3}, length: 3, } a.length 3  cap(a.data) 3  a.isIndexOutRange1(2) false  a.</description>
+    </item>
+    
+    <item>
+      <title>朴素贝叶斯</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</guid>
+      <description>朴素贝叶斯 1、理论部分 1.1、贝叶斯公式 $$P(c|x)=\frac{P(c)P(x|c)}{P(x)}\qquad\dots(1)$$
+其中，$P(c)$是类“先验概率”；$P(x|c)$是样本$x$相对于类标记$c$的类条件概率，或称为“似然”；$P(x)$是用于归一化的“证据因子”。对给定样本$x$，证据因子$P(x)$与类标记无关，因此估计$P(c|x)$的问题就转化为如何基于训练数据$D$来估计先验$P(c)$和似然$P(x|c)$
+类先验概率$P(c)$表达了样本空间中各类样本所占的比例，根据大数定律，当训练集包含充足的独立同分布样本时，$P(c)$可通过各类样本出现的频率来进行估计。
+对类条件概率$(P(x|c))$来说，由于它涉及关于$x$所有属性的联合概率，直接根据样本出现的频率来估计将会遇到严重的困难。为避开这个障碍，朴素贝叶斯分类器采用了“属性条件独立性假设”；对已知类别，假设所有属性相互独立。换言之，假设每个属性独立的对分类结果产生影响。
+基于属性条件独立性假设，贝叶斯公式可重写为： $$P(c|x)=\frac{P(c)P(x|c)}{P(x)}\qquad=\frac{P(c)}{P(x)}\prod_{i=1}^d{P(x_i|c)}\dots(2)$$ 其中$d$为属性数目，$x_i$为$x$在第i个属性上的取值
+由于对于所有类别来说$P(x)$相同，因此贝叶斯判定准则：$$h_{nb}(x)=arg max_{c\in y}P(c)\prod_{i=1}^d{P(x_i|c)}\dots(3)$$
+显然，朴素贝叶斯分类器的训练过程就是基于训练集$D$来估计类先验概率$P(c)$，并为每个属性估计条件概率$P(x_i|c)$
+令$D_c$表示训练集$D$中第$c$类样本组成的集合，若有充足的独立同分布样本，则可容易的估计出先验概率：$$P(c)=\frac{|D_c|}{|D|}\dots(4)$$
+对离散属性而言，令$D_{c,x_i}$表示$D_c$中在第$i$个属性上取值为$x_i$的样本组成的集合，则条件概率$P(x_i|c)$可估计为$$P(x_i|c)=\frac{|D_{c,x_i}|}{|D_c|}\qquad\dots(5)$$ 为了避免其他属性携带的信息被训练集中未出现的属性值抹去，在估计概率值时通常要进行“平滑”，常用“拉普拉斯修正”。具体来说，令$N$表示训练集$D$中可能的类别数，$N_i$表示第$i$个属性可能的取值数，则(4)(5)两式分别修正为：$$\hat{P}(c)=\frac{D_c+1}{|D|+N}\qquad\dots(6)$$ $$\hat{P}(x_i|c)=\frac{D_{c,x_i}+1}{|D|+N}\qquad\dots(7)$$
+2、实战演练 2.1、加载数据集 import numpy as np def loadDataSet(): &amp;#34;&amp;#34;&amp;#34; 导入数据， 1代表脏话 @ return postingList: 数据集 @ return classVec: 分类向量 &amp;#34;&amp;#34;&amp;#34; postingList = [[&amp;#39;my&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;has&amp;#39;, &amp;#39;flea&amp;#39;, &amp;#39;problems&amp;#39;, &amp;#39;help&amp;#39;, &amp;#39;please&amp;#39;], [&amp;#39;maybe&amp;#39;, &amp;#39;not&amp;#39;, &amp;#39;take&amp;#39;, &amp;#39;him&amp;#39;, &amp;#39;to&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;park&amp;#39;, &amp;#39;stupid&amp;#39;], [&amp;#39;my&amp;#39;, &amp;#39;dalmation&amp;#39;, &amp;#39;is&amp;#39;, &amp;#39;so&amp;#39;, &amp;#39;cute&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;love&amp;#39;, &amp;#39;him&amp;#39;], [&amp;#39;stop&amp;#39;, &amp;#39;posting&amp;#39;, &amp;#39;stupid&amp;#39;, &amp;#39;worthless&amp;#39;, &amp;#39;garbage&amp;#39;], [&amp;#39;mr&amp;#39;, &amp;#39;licks&amp;#39;, &amp;#39;ate&amp;#39;, &amp;#39;my&amp;#39;, &amp;#39;steak&amp;#39;, &amp;#39;how&amp;#39;, &amp;#39;to&amp;#39;, &amp;#39;stop&amp;#39;, &amp;#39;him&amp;#39;], [&amp;#39;quit&amp;#39;, &amp;#39;buying&amp;#39;, &amp;#39;worthless&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;food&amp;#39;, &amp;#39;stupid&amp;#39;]] classVec = [0, 1, 0, 1, 0, 1] return postingList, classVec 导入训练集及其分类，1代表是脏话，0代表不是</description>
+    </item>
+    
+    <item>
+      <title>检查Apache配置文件语法错误</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
+      <description>检查Apache配置文件语法错误 在/etc/apache2目录下输入apache2ctl configtest即可检查错误</description>
+    </item>
+    
+    <item>
+      <title>检查nginx的语法错误</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
+      <description>检查nginx的语法错误 使用nginx -t</description>
+    </item>
+    
+    <item>
+      <title>模型评估</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87/</guid>
+      <description>模型评估 此节内容只针对分类模型，使用sklearn库
+1、准确率 accuracy_score函数计算精度，在多标签分类中，该函数返回子集精度。如果样本的整个预测标签集与真实的标签集严格匹配，则子集精度为1.0; 否则它是0.0。如果$\hat{y}i$是第$i$类样本预测值，$y_i$是相应的真值，那么正确预测的分数$n\text{samples}$被定义为$$\texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)$$
+import numpy as np from sklearn.metrics import accuracy_score y_pred = [0, 2, 1, 3] y_true = [0, 1, 2, 3] accuracy_score(y_true, y_pred) 0.5  accuracy_score(y_true, y_pred, normalize=False) # 若normalize为False,则返回正确分类的样本数 2  2、混淆矩阵 该confusion_matrix函数通过计算混淆矩阵来评估分类准确性，行对应于真正的类，列表示预测值。
+from sklearn.metrics import confusion_matrix y_true = [2, 0, 2, 2, 0, 1] y_pred = [0, 0, 2, 2, 0, 2] confusion_matrix(y_true, y_pred) array([[2, 0, 0], [0, 0, 1], [1, 0, 2]])  3、汉明损失 如果$\hat{y}j$是预测为第$j$类的样本，$y_j$是真值，$n\text{labels}$是类别的数目，则两个样本之间的汉明损失定义为：$$L_{Hamming}(y, \hat{y}) = \frac{1}{n_\text{labels}} \sum_{j=0}^{n_\text{labels} - 1} 1(\hat{y}_j \not= y_j)$$ $1(x)$是指标函数</description>
+    </item>
+    
+    <item>
+      <title>正则表达式</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>正则表达式 1、什么是正则表达式 正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。（摘自百度百科）
+你可能熟悉文本查找,即按下 Ctrl-F,输入你要查找的词。“正则表达式”更进一步,它们让你指定要查找的“模式”。你也许不知道一家公司的准确电话号码,但如果你住在美国或加拿大,你就知道有3 位数字,然后是一个短横线,然后是 4 位数字(有时候以 3 位区号开始)。因此作为一个人,你看到一个电话号码就知道:415-555-1234 是电话号码,但 4,155,551,234 不是。 正则表达式很有用,但如果不是程序员,很少会有人了解,它,尽管大多数现代文本编辑器和文字处理器(诸如微软的 Word 或 OpenOffice)都有查找和查找替换功能,可以根据正则表达式查找。正则表达式可以节约大量时间,不仅适用于软件用户,也适用于程序员。实际上,技术作家 Cory Doctorow 声称,甚至应该在教授编程之前,先教授正则表达式: “知道[正则表达式]可能意味着用 3 步解决一个问题,而不是用 3000 步。如果你是一个技术怪侠,别忘了你用几次击键就能解决的问题,其他人需要数天的烦琐工作才能解决,而且他们容易犯错。” 1 (摘自《Python编程快速上手—让繁琐工作自动化》)
+2、不用正则表达式来查找文本模式 假设你希望在字符串中查找电话号码。你知道模式:3 个数字,一个短横线,3 个数字,一个短横线,再是 4 个数字。例如:415-555-4242。 假定我们用一个名为 isPhoneNumber()的函数,来检查字符串是否匹配模式,它 返回 True 或 False。
+def isPhoneNumber(text): if len(text) != 12: return False for i in range(0, 3): if not text[i].isdecimal(): return False if text[3] != &amp;#39;-&amp;#39;: return False for i in range(4, 7): if not text[i].</description>
+    </item>
+    
+    <item>
+      <title>温度预测</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/</guid>
+      <description>温度预测 1. 观察耶拿天气数据集的数据 import os fname = &amp;#39;./data/jena_climate_2009_2016.csv&amp;#39; f = open(fname) data = f.read() f.close() lines = data.split(&amp;#39;\n&amp;#39;) header = lines[0].split(&amp;#39;,&amp;#39;) lines = lines[1:] print(header) print(len(lines)) [&#39;&amp;quot;Date Time&amp;quot;&#39;, &#39;&amp;quot;p (mbar)&amp;quot;&#39;, &#39;&amp;quot;T (degC)&amp;quot;&#39;, &#39;&amp;quot;Tpot (K)&amp;quot;&#39;, &#39;&amp;quot;Tdew (degC)&amp;quot;&#39;, &#39;&amp;quot;rh (%)&amp;quot;&#39;, &#39;&amp;quot;VPmax (mbar)&amp;quot;&#39;, &#39;&amp;quot;VPact (mbar)&amp;quot;&#39;, &#39;&amp;quot;VPdef (mbar)&amp;quot;&#39;, &#39;&amp;quot;sh (g/kg)&amp;quot;&#39;, &#39;&amp;quot;H2OC (mmol/mol)&amp;quot;&#39;, &#39;&amp;quot;rho (g/m**3)&amp;quot;&#39;, &#39;&amp;quot;wv (m/s)&amp;quot;&#39;, &#39;&amp;quot;max. wv (m/s)&amp;quot;&#39;, &#39;&amp;quot;wd (deg)&amp;quot;&#39;] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line.</description>
+    </item>
+    
+    <item>
+      <title>理解LSTM层与GRU层</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/lstm/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/lstm/</guid>
+      <description>理解LSTM层与GRU层  SimpleRNN的问题在于，在时刻t，理论上来说，它应该能够记住许多时间部之前见过的各种信息，但实际上它是不可能学到这种长期依赖的。其原因在于“梯度消失”问题，这一效应类似于在层数较多的非循环网络中观察到的效应，随着层数的增加，网络最终变得无法训练。
+ 1. LSTM层 LSTM层是SimpleRNN的一种变体，它增加了一种携带信息跨越多个时间步的方法。假设有一条传送带，其运行方向平行于你所处理的序列。序列中的信息可以在任意位置跳上传送带，然后被传送到更晚的时间步，并在需要时原封不动地跳回来。这实际上就是LSTM的原理：它保存信息以便后面使用，从而防止较早期的信号在处理过程中逐渐消失。
+1.1 Keras 中一个LSTM的例子 # 准备数据 from keras.datasets import imdb from keras.preprocessing import sequence max_features = 10000 maxlen = 500 batch_size = 32 print(&amp;#39;Loading data...&amp;#39;) (input_train, y_train), (input_test, y_test) = imdb.load_data(num_words=max_features) print(len(input_train), &amp;#39;train_sequences&amp;#39;) print(len(input_test), &amp;#39;test sequences&amp;#39;) print(&amp;#39;Pad sequences (samples x time)&amp;#39;) input_train = sequence.pad_sequences(input_train, maxlen=maxlen) input_test = sequence.pad_sequences(input_test, maxlen=maxlen) print(&amp;#39;input_train shape: &amp;#39;, input_train.shape) print(&amp;#39;input_test shape:&amp;#39;, input_test.shape) Loading data... 25000 train_sequences 25000 test sequences Pad sequences (samples x time) input_train shape: (25000, 500) input_test shape: (25000, 500)  # 使用Keras中的LSTM层 from keras.</description>
+    </item>
+    
+    <item>
+      <title>理解循环神经网络</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E7%90%86%E8%A7%A3rnn/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E7%90%86%E8%A7%A3rnn/</guid>
+      <description>理解循环神经网络 1. 简单的循环神经网络 RNN以渐进的方式处理信息，同时保存一个关于所处理内容的内部模型，这个模型是根据过去的信息构建的，并随着新信息的进入而不断更新。
+RNN处理序列的方式是：遍历所有序列元素，并保存一个状态（State），其中包含与已查看内容相关的信息。
+RNN的伪代码：
+state_t = 0 for input_t in input_sequence: output_t = f(input_t, state_t) state_t = output_t 可以给出具体的函数f,从输入和状态到输出的变换，其参数包括两个矩阵（W和U）和一个偏置向量。它类似于前馈网络中密集连接层所做的变换。
+state_t = 0 for input_t in input_sequence: output_t = activation(dot(W, input_t) + dot(U, state_t) + b) state_t = output_t # 简单RNN的numpy实现 import numpy as np timesteps = 100 # 输入序列的时间步数 input_features = 32 # 输入特征空间的维度 output_features = 64 # 输出特征空间的维度 inputs = np.random.random((timesteps, input_features)) # 输入数据：随机噪声，仅作为示例 state_t = np.zeros((output_features,)) # 初试状态：全零向量 # 创建随机的权重矩阵 W = np.</description>
+    </item>
+    
+    <item>
+      <title>类型断言</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</guid>
+      <description>类型断言 类型断言是一个使用在接口上的操作，语法上看起来像是x.(T)，因此被称为断言类型，这里x是接口，T是类型。一个类型断言检查它操作对象的动态类型是否和断言的类型匹配。
+这里有两种可能：
+ 如果断言的类型T是一个具体类型
+类型断言检查x的动态类型是否和T相同。如果检查成功了，类型断言的结果是x的动态值，即T。换句话说，具体类型的类型断言从它的操作对象中获得具体的值。如果检查失败，接下来这个操作会panic。  import ( &amp;#34;io&amp;#34; &amp;#34;os&amp;#34; &amp;#34;bytes&amp;#34; &amp;#34;fmt&amp;#34; ) var w io.Writer w = os.Stdout f := w.(*os.File) // 类型检查成功了，所以f的值为os.Stdout f == os.Stdout // true fmt.Printf(&amp;#34;%p&amp;#34;, f)  输出
+ 0xc0004560c0
+ c := w.(*bytes.Buffer) // 类型检查失败  输出
+ interface conversion: &amp;lt;io.Writer&amp;gt; is &amp;lt;*os.File&amp;gt;, not &amp;lt;*bytes.Buffer&amp;gt; 断言的类型T是一个接口类型  t, ok := i.(T) 如果i是类型T（实现了T接口），即检查成功了，那么t将是i的原值，ok为true；如果检查失败了，t将为T类型的零值，ok为false，并且不引发panic。
+对一个接口类型的类型断言改变了类型的表述方式，改变了可以获取的方法集合（通常更大）， 但是它保护了接口值内部的动态类型和值的部分。
+var w io Wirter w = os.Stdout rw := w.</description>
+    </item>
+    
+    <item>
+      <title>网页静态文件找不到</title>
+      <link>http://yangchnet.github.io/Dessert/posts/django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%89%BE%E4%B8%8D%E5%88%B0/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%89%BE%E4%B8%8D%E5%88%B0/</guid>
+      <description>网页静态文件找不到 在19-2-18的开始，突然发现网页的静态文件找不到了 在将static目录移动到app目录内之后，发现网页可以正常显示。
+ 原来static目录是和app目录一个层级
+ 针对此问题的思考 STATIC_URL = &amp;lsquo;/static/&amp;rsquo; 注意此处是url，即对于静态文件的定位，这是必要的前提配置 STATIC_URL的定义制定了静态资源的url，具体指各个app下的static目录  STATIC_ROOT = os.path.join(BASE_DIR, &amp;ldquo;static&amp;rdquo;) STATIC_ROOT是总的static目录，主要用于在运行 collectstatic命令时存储所有的静态文件  STATICFILES_DIRS = [os.path.join(BASE_DIR, &amp;ldquo;static&amp;rdquo;), &amp;lsquo;mysite/static&amp;rsquo;,]  STATICFILES_DIRS是一个列表，存放各个app的static目录及公共的static目录  ​
+官网配置   确保django.contrib.staticfiles包含在您的 INSTALLED_APPS。
+  在您的设置文件中，定义STATIC_URL，例如：
+  STATIC_URL = &amp;#39;/static/&amp;#39; 在模板中，使用static模板标记使用已配置的相对路径构建URL STATICFILES_STORAGE。  {% load static %} &amp;lt;img src=&amp;#34;{% static &amp;#34;my_app/example.jpg&amp;#34; %}&amp;#34; alt=&amp;#34;My image&amp;#34;/&amp;gt; 将静态文件存储static在应用程序中调用的文件夹中。例如my_app/static/my_app/example.jpg。  对于模板中的{% load static%} 当在模板中使用过load static之后，再次使用static时，将会使用STATICFILES_FINDERS寻找静态文件，其默认值为：
+[ &amp;#39;django.contrib.staticfiles.finders.FileSystemFinder&amp;#39;, &amp;#39;django.contrib.staticfiles.finders.AppDirectoriesFinder&amp;#39;, ] 对此的解释是，将会从STATICFILES_DIRS的目录中以及每个app下的static目录中寻找静态文件。
+在url后加入+ static(settings.MEDIA_URL, document_root=settings.</description>
+    </item>
+    
+    <item>
+      <title>解决github每次push都要输入密码</title>
+      <link>http://yangchnet.github.io/Dessert/posts/git/git%E6%AF%8F%E6%AC%A1%E9%83%BD%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/git/git%E6%AF%8F%E6%AC%A1%E9%83%BD%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/</guid>
+      <description>解决github每次push都要输入密码 进入你的本地仓库目录 输入：
+git config --global credential.helper store 然后再运行一遍git pull或git push就可以了</description>
+    </item>
+    
+    <item>
+      <title>鸭子类型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</guid>
+      <description>鸭子类型 1. 什么是鸭子类型 只要走起路来像鸭子，叫起来像鸭子，就可以认为是鸭子。这就是鸭子类型
+2. 鸭子类型有什么作用？ 对应于golang中的接口的概念，一个接口定义了一组操作，这组操作可以看做是鸭子的走路，叫。也就是说，只要任何类型满足了这组方法，那么就可以看做是鸭子&amp;ndash;即满足了这个接口，可以看做是这个接口类型。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%AA%E5%91%BD%E5%90%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%AA%E5%91%BD%E5%90%8D/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/readme/</guid>
+      <description>Tem 这里存储我个人网站的markdown文件，并通过hugo生成静态文件，我的个人网站在这里，欢迎访问😊😘。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E5%89%8D%E7%AB%AF/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E5%89%8D%E7%AB%AF/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/prisma/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/prisma/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

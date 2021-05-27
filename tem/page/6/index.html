@@ -1,10 +1,181 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Tems | Linote</title><meta name=keywords content><meta name=description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta name=author content="李昌"><link rel=canonical href=http://yangchnet.github.io/Dessert/tem/><link crossorigin=anonymous href=/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as=style><link rel=preload href=https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png as=image><link rel=icon href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=32x32 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico><link rel=apple-touch-icon href=http://yangchnet.github.io/Dessert/apple-touch-icon.png><link rel=mask-icon href=http://yangchnet.github.io/Dessert/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.81.0"><link rel=alternate type=application/rss+xml href=http://yangchnet.github.io/Dessert/tem/index.xml><meta property="og:title" content="Tems"><meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><meta property="og:type" content="website"><meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/"><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta name=twitter:title content="Tems"><meta name=twitter:description content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Tems","item":"http://yangchnet.github.io/Dessert/tem/"}]}</script></head><body class=list id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><header class=header><nav class=nav><div class=logo><a href=http://yangchnet.github.io/Dessert accesskey=h title="Linote (Alt + H)">Linote</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=http://yangchnet.github.io/Dessert/archives title=存档><span>存档</span></a></li><li><a href=http://yangchnet.github.io/Dessert/categories/ title=分类><span>分类</span></a></li><li><a href=http://yangchnet.github.io/Dessert/search/ title=搜索><span>搜索</span></a></li><li><a href=http://yangchnet.github.io/Dessert/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><header class=page-header><div class=breadcrumbs><a href=http://yangchnet.github.io/Dessert>Home</a></div><h1>Tems</h1></header><article class=post-entry><header class=entry-header><h2>golang中的print系函数详解</h2></header><section class=entry-content><p>golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
-golang中的print系函数详解 fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结 下面来逐个分析
-import ( "fmt" "os" "io" ) fmt.Fprintf 函数原型： Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error) 官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
-Arguement
-fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to golang中的print系函数详解" href=http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/></a></article><article class=post-entry><header class=entry-header><h2>GOPATH的正确打开方式</h2></header><section class=entry-content><p>GOPATH的正确打开方式 GOPATH环境变量用于指定$GOROOT以外的目录，其中包含Go项目及其二进制文件的源。
-GOPATH指定了go项目的位置及其编译得到的二进制文件的位置。GOPAHT可以是一个列表，也就是说可以设置多个GOPATH。
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Tems | Linote</title>
+<meta name="keywords" content="" />
+<meta name="description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://yangchnet.github.io/Dessert/tem/" />
+<link crossorigin="anonymous" href="/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://yangchnet.github.io/Dessert/apple-touch-icon.png">
+<link rel="mask-icon" href="http://yangchnet.github.io/Dessert/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<link rel="alternate" type="application/rss+xml" href="http://yangchnet.github.io/Dessert/tem/index.xml">
+<meta property="og:title" content="Tems" />
+<meta property="og:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/" /><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/>
+
+<meta name="twitter:title" content="Tems"/>
+<meta name="twitter:description" content="Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tems",
+      "item": "http://yangchnet.github.io/Dessert/tem/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://yangchnet.github.io/Dessert" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://yangchnet.github.io/Dessert">Home</a></div>
+  <h1>Tems</h1>
+</header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>golang中的print系函数详解</h2>
+  </header>
+  <section class="entry-content">
+    <p>golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
+ golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析
+import ( &#34;fmt&#34; &#34;os&#34; &#34;io&#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
+  Arguement
+fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io....</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to golang中的print系函数详解" href="http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>GOPATH的正确打开方式</h2>
+  </header>
+  <section class="entry-content">
+    <p>GOPATH的正确打开方式  GOPATH环境变量用于指定$GOROOT以外的目录，其中包含Go项目及其二进制文件的源。
+ GOPATH指定了go项目的位置及其编译得到的二进制文件的位置。GOPAHT可以是一个列表，也就是说可以设置多个GOPATH。
 1.如何查看GOPATH 使用
 go env 命令查看go相关的环境变量
 2. GOPATH的目录结构 GOPATH的目录结构如下：
@@ -14,61 +185,240 @@ $GOPATH/pkg
 Go在该目录中存储了预编译的目标文件，以加快程序的后续编译速度。通常，我们不需要访问该目录。但是如果在编译时遇到问题，可以安全地删除该目录，然后Go会重建它。
 $GOPATH/src
 这里是我们的代码所在位置。
-3. 我应该如何设置GOPATH 设置一个GOPATH
+3. 我应该如何设置GOPATH   设置一个GOPATH
 当设置一个GOPAHT时，我们自行安装的一些包以及我们所有的项目文件，都会在\$GOPATH/src目录下，未免显得太过拥挤。不推荐。
-设置两个GOPATH
+  设置两个GOPATH
 可以设置两个GOPATH，其中第一个作为从网络获取的包所在位置，第二个存放我们自己的项目，在从网络获取包时，将自动安装在第一个GOPATH下，这样就避免了我们自己的代码和网络上获取的代码挤在一起
-每个项目设置一个GOPATH
+  每个项目设置一个GOPATH
 每个项目设置一个GOPATH，可以在建立项目的目录结构后使用
-export GOPATH=`pwd` 来添加当前目录到GOPATH，但是下一次在运行这个命令时会将上一次的覆盖掉。这个方法的优点在于每个项目的目录结构变得清晰了，不再是所有项目存在于一个src文件夹下，可以建立在任意位置。但缺点在于每次切换项目都要重新export，同时还需要重新安装一些必要的包。类似于Python中的virtualenv.</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to GOPATH的正确打开方式" href=http://yangchnet.github.io/Dessert/tem/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/></a></article><article class=post-entry><header class=entry-header><h2>Go中的标准库</h2></header><section class=entry-content><p>Go中的标准库 在Go语言的安装文件里包含了一些可以直接使用的包，即标准库。Go语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含 I/O 操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。
+  export GOPATH=`pwd` 来添加当前目录到GOPATH，但是下一次在运行这个命令时会将上一次的覆盖掉。这个方法的优点在于每个项目的目录结构变得清晰了，不再是所有项目存在于一个src文件夹下，可以建立在任意位置。但缺点在于每次切换项目都要重新export，同时还需要重新安装一些必要的包。类似于Python中的virtualenv.</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to GOPATH的正确打开方式" href="http://yangchnet.github.io/Dessert/tem/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Go中的标准库</h2>
+  </header>
+  <section class="entry-content">
+    <p>Go中的标准库 在Go语言的安装文件里包含了一些可以直接使用的包，即标准库。Go语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含 I/O 操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。
 在 Windows 下，标准库的位置在Go语言根目录下的子目录 pkg\windows_amd64 中；在 Linux 下，标准库在Go语言根目录下的子目录 pkg\linux_amd64 中（如果是安装的是 32 位，则在 linux_386 目录中）。一般情况下，标准包会存放在 $GOROOT/pkg/$GOOS_$GOARCH/ 目录下。
 Go语言的编译器也是标准库的一部分，通过词法器扫描源码，使用语法树获得源码逻辑分支等。Go语言的周边工具也是建立在这些标准库上。在标准库上可以完成几乎大部分的需求。
 Go语言的标准库以包的方式提供支持，下表列出了Go语言标准库中常见的包及其功能。
-bufio 带缓冲的 I/O 操作 bytes 实现字节操作 container 封装堆、列表和环形列表等容器 crypto 加密算法 database 数据库驱动和接口 debug 各种调试文件格式访问及调试功能 encoding 常见算法如 JSON、XML、Base64 等 flag 命令行解析 fmt 格式化操作 go Go语言的词法、语法树、类型等。可通过这个包进行代码信息提取和修改 html HTML 转义及模板系统 image 常见图形格式的访问及生成 io 实现 I/O 原始访问接口及访问封装 math 数学库 net 网络库，支持 Socket、HTTP、邮件、RPC、SMTP 等 os 操作系统平台不依赖平台操作封装 path 兼容各操作系统的路径操作实用函数 plugin Go 1.7 加入的插件系统。支持将代码编译为插件，按需加载 reflect 语言反射支持。可以动态获得代码中的类型信息，获取和修改变量的值 regexp 正则表达式封装 runtime 运行时接口 sort 排序接口 strings 字符串转换、解析及实用函数 time 时间接口 text 文本模板及 Token 词法器</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Go中的标准库" href=http://yangchnet.github.io/Dessert/tem/golang/%E6%A0%87%E5%87%86%E5%BA%93/></a></article><article class=post-entry><header class=entry-header><h2>Go的http包详解</h2></header><section class=entry-content><p>Go的http包详解 详细地解剖一下 http 包，看它到底是怎样实现整个过程的。
+ bufio	带缓冲的 I/O 操作 bytes	实现字节操作 container	封装堆、列表和环形列表等容器 crypto	加密算法 database	数据库驱动和接口 debug	各种调试文件格式访问及调试功能 encoding	常见算法如 JSON、XML、Base64 等 flag	命令行解析 fmt	格式化操作 go	Go语言的词法、语法树、类型等。可通过这个包进行代码信息提取和修改 html	HTML 转义及模板系统 image	常见图形格式的访问及生成 io	实现 I/O 原始访问接口及访问封装 math	数学库 net	网络库，支持 Socket、HTTP、邮件、RPC、SMTP 等 os	操作系统平台不依赖平台操作封装 path	兼容各操作系统的路径操作实用函数 plugin	Go 1.7 加入的插件系统。支持将代码编译为插件，按需加载 reflect	语言反射支持。可以动态获得代码中的类型信息，获取和修改变量的值 regexp	正则表达式封装 runtime	运行时接口 sort	排序接口 strings	字符串转换、解析及实用函数 time	时间接口 text	文本模板及 Token 词法器  </p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Go中的标准库" href="http://yangchnet.github.io/Dessert/tem/golang/%E6%A0%87%E5%87%86%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Go的http包详解</h2>
+  </header>
+  <section class="entry-content">
+    <p>Go的http包详解 详细地解剖一下 http 包，看它到底是怎样实现整个过程的。
 Go 的 http 有两个核心功能：Conn、ServeMux
 Conn的goroputine 为了实现高并发和高性能，go使用了goroutine来处理Conn的读写事件，这样每个请求都能保持独立，相互不会阻塞，可以高效的相应网络事件。
 go在等待客户端请求中是这样的：
 c, err := srv.newConn(rw) if err != nil { continue } go c.serve() 可以看到，客户端的每次请求都会创建一个Conn，这个Conn里面保存了该次请求的信息，然后再传递到相应的handler，该handler中便可以读取到相应的header信息，这样保证了每个请求的独立性。
 ServeMux的自定义 conn.server内部调用了http包默认的路由器，通过路由器把本次请求的信息传递到了后端的处理函数，那么这个路由器是怎么实现的呢？
 它的结构如下：
-type ServeMux struct{ mu sync.RWMutext // 锁，请求涉及到并发处理，因此需要一个锁机制 m map[string]muxEntry // 路由规则，一个String对应一个mux实体，这里的String就是注册的一个路由表达式 hosts bool // 是否在任意的规则中带有host信息 } 下面看一下muxEntry
-type muxEntry struct { explicit bool // 是否精确匹配 h Handler // 这个路由表达式对应哪个handler pattern string // 匹配字符串 } 在看一下Handler的定义
-type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 } Handler是一个接口，但是附中的sayhelloName函数中并没有实现ServeHTTP这个接口，为什么能添加呢？这是因为http包里面还定义了一个类型HandlerFunc，定义的函数sayhelloName就是这个HandlerFunc调用之后的结果，这个类型默认就实现了ServeHTTP这个方法，即我们调用了HandlerFunc(f)，强制类型转换f成为HandlerFunc类型，这样f就拥有了ServeHTTP方法。...</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Go的http包详解" href=http://yangchnet.github.io/Dessert/tem/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/></a></article><article class=post-entry><header class=entry-header><h2>Go语言中值类型与引用类型</h2></header><section class=entry-content><p>1.值类型与引用类型 值类型：int、float、bool和string这些类型都属于值类型，使用这些类型的变量直接指向存在内存中的值，值类型的变量的值存储在栈中。当使用等号=将一个变量的值赋给另一个变量时，如 j = i ,实际上是在内存中将 i 的值进行了拷贝。可以通过 &i 获取变量 i 的内存地址
+type ServeMux struct{ mu sync.RWMutext // 锁，请求涉及到并发处理，因此需要一个锁机制  m map[string]muxEntry // 路由规则，一个String对应一个mux实体，这里的String就是注册的一个路由表达式  hosts bool // 是否在任意的规则中带有host信息 } 下面看一下muxEntry
+type muxEntry struct { explicit bool // 是否精确匹配  h Handler // 这个路由表达式对应哪个handler  pattern string // 匹配字符串 } 在看一下Handler的定义
+type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 } Handler是一个接口，但是附中的sayhelloName函数中并没有实现ServeHTTP这个接口，为什么能添加呢？这是因为http包里面还定义了一个类型HandlerFunc，定义的函数sayhelloName就是这个HandlerFunc调用之后的结果，这个类型默认就实现了ServeHTTP这个方法，即我们调用了HandlerFunc(f)，强制类型转换f成为HandlerFunc类型，这样f就拥有了ServeHTTP方法。...</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Go的http包详解" href="http://yangchnet.github.io/Dessert/tem/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Go语言中值类型与引用类型</h2>
+  </header>
+  <section class="entry-content">
+    <p>1.值类型与引用类型 值类型：int、float、bool和string这些类型都属于值类型，使用这些类型的变量直接指向存在内存中的值，值类型的变量的值存储在栈中。当使用等号=将一个变量的值赋给另一个变量时，如 j = i ,实际上是在内存中将 i 的值进行了拷贝。可以通过 &amp;i 获取变量 i 的内存地址
 引用类型：特指slice、map、channel这三种预定义类型。引用类型拥有更复杂的存储结构:(1)分配内存 (2)初始化一系列属性等。一个引用类型的变量r1存储的是r1的值所在的内存地址（数字），或内存地址中第一个字所在的位置，这个内存地址被称之为指针，这个指针实际上也被存在另外的某一个字中
 2.值类型与引用类型的区别 值类型在传参时是做拷贝操作，即将原来的数据复制一份，而引用类型是直接传递指针，当参数在函数中被改变时，原数据也将改变。
-2.1.值类型 //先定义一个数组 var a = [5]int{1, 2, 3, 4, 5} //定义一个函数，将数组中的第一个值设为0 func change(a [5]int){ a[0] = 0 fmt.Println(a) } change(a) fmt.Println(a) 输出：
-[0 2 3 4 5] [1 2 3 4 5] 可以看到，数组在函数内部被变成{0,1,2,3,4}，但当函数结束，还是原来的值没有变。
-2.2 引用类型 // 定义一个map var dit = make(map[string]int) dit["one"] = 1 fmt.Println(dit) // 传参并做改变 func change(dit map[string]int){ dit["two"] = 2 fmt....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Go语言中值类型与引用类型" href=http://yangchnet.github.io/Dessert/tem/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/></a></article><article class=post-entry><header class=entry-header><h2>Go语言中的字面量</h2></header><section class=entry-content><p>Go语言中的字面量 什么是字面量 整型和浮点型的字面值 字符串的字面值 常量的字面值 数组的字面值 Slice的字面值 Map的字面值 结构体的字面值 什么是字面量 在计算机科学中，字面量（literal）是用于表达源代码中一个固定值的表示法（notation）。
+2.1.值类型 //先定义一个数组 var a = [5]int{1, 2, 3, 4, 5} //定义一个函数，将数组中的第一个值设为0 func change(a [5]int){ a[0] = 0 fmt.Println(a) } change(a) fmt.Println(a)  输出：
+ [0 2 3 4 5] [1 2 3 4 5] 可以看到，数组在函数内部被变成{0,1,2,3,4}，但当函数结束，还是原来的值没有变。
+2.2 引用类型 // 定义一个map var dit = make(map[string]int) dit[&#34;one&#34;] = 1 fmt.Println(dit) // 传参并做改变 func change(dit map[string]int){ dit[&#34;two&#34;] = 2 fmt....</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Go语言中值类型与引用类型" href="http://yangchnet.github.io/Dessert/tem/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Go语言中的字面量</h2>
+  </header>
+  <section class="entry-content">
+    <p>Go语言中的字面量  什么是字面量 整型和浮点型的字面值 字符串的字面值 常量的字面值 数组的字面值 Slice的字面值 Map的字面值 结构体的字面值  什么是字面量 在计算机科学中，字面量（literal）是用于表达源代码中一个固定值的表示法（notation）。
 简单的说，字面量或者说字面值就是一个变量的值。
 整型和浮点型的字面值 var i int = 1 var f float64 = 3.14159 字符串的字面值 字符串值也可以用字符串面值方式编写，只要将一系列字节序列包含在双引号即可：
-"Hello 世界" `世界` 世界 一个原生的字符串面值形式是
-`...` 使用反引号代替双引号。在原生的字符串面值中，没有转义操作；全部的内容都是字面的意思，包含退格和换行，因此一个程序中的原生字符串面值可能跨越多行（译注：在原生字符串面值内部是无法直接写```````字符的，可以用八进制或十六进制转义或+"`"链接字符串常量完成）。唯一的特殊处理是会删除回车以保证在所有平台上的值都是一样的，包括那些把回车也放入文本文件的系统（译注：Windows系统会把回车和换行一起放入文本文件中）。
+&#34;Hello 世界&#34; `世界` 世界  一个原生的字符串面值形式是
+`...` 使用反引号代替双引号。在原生的字符串面值中，没有转义操作；全部的内容都是字面的意思，包含退格和换行，因此一个程序中的原生字符串面值可能跨越多行（译注：在原生字符串面值内部是无法直接写```````字符的，可以用八进制或十六进制转义或&#43;&#34;`&#34;链接字符串常量完成）。唯一的特殊处理是会删除回车以保证在所有平台上的值都是一样的，包括那些把回车也放入文本文件的系统（译注：Windows系统会把回车和换行一起放入文本文件中）。
 原生字符串面值用于编写正则表达式会很方便，因为正则表达式往往会包含很多反斜杠。原生字符串面值同时被广泛应用于HTML模板、JSON面值、命令行提示信息以及那些需要扩展到多行的场景。
-const GoUsage = `Go is a tool for managing Go source code. Usage: go command [arguments] ...` GoUsage Go is a tool for managing Go source code. Usage: go command [arguments] ... 常量的字面值 对于常量面值，不同的写法可能会对应不同的类型。例如0、0....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Go语言中的字面量" href=http://yangchnet.github.io/Dessert/tem/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/></a></article><article class=post-entry><header class=entry-header><h2>Go语言中的错误处理策略</h2></header><section class=entry-content><p>Go语言中的错误处理策略 0. 错误处理的编码风格 检查某个子函数是否失败后，我们通常将处理失败的逻辑代码放在处理成功的代码之前。如果某个错误会导致函数返回，那么成功的逻辑代码不应该放在else中，而应直接放在函数体中。
+const GoUsage = `Go is a tool for managing Go source code. Usage: go command [arguments] ...` GoUsage Go is a tool for managing Go source code. Usage: go command [arguments] ...  常量的字面值 对于常量面值，不同的写法可能会对应不同的类型。例如0、0....</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Go语言中的字面量" href="http://yangchnet.github.io/Dessert/tem/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Go语言中的错误处理策略</h2>
+  </header>
+  <section class="entry-content">
+    <p>Go语言中的错误处理策略 0. 错误处理的编码风格 检查某个子函数是否失败后，我们通常将处理失败的逻辑代码放在处理成功的代码之前。如果某个错误会导致函数返回，那么成功的逻辑代码不应该放在else中，而应直接放在函数体中。
 1. 错误传播 函数某个子程序的失败，会变成该函数的失败
 resp, err := http.Get(url) if err != nil{ return nill, err } 或是构造新的错误信息返回给调用者
-doc, err := html.Parse(resp.Body) resp.Body.Close() if err != nil { return nil, fmt.Errorf("parsing %s as HTML: %v", url,err) } 一般而言，被调函数f(x)会将调用信息和参数信息作为发生错误时的上下文放在错误信息中并返回给调用者，调用者需要添加一些错误信息中不包含的信息。
+doc, err := html.Parse(resp.Body) resp.Body.Close() if err != nil { return nil, fmt.Errorf(&#34;parsing %s as HTML: %v&#34;, url,err) } 一般而言，被调函数f(x)会将调用信息和参数信息作为发生错误时的上下文放在错误信息中并返回给调用者，调用者需要添加一些错误信息中不包含的信息。
 2. 重试失败的操作 如果错误的发生是偶然的，或由不可预知的问题导致的。此时可重新尝试失败的操作，但是在重试时，要限制重试的时间间隔或重试的时间次数，防止无限制的重试。
-func WaitForServer(url string) error { const timeout = 1 * time.Minute deadline := time.Now().Add(timeout) for tries := 0; time.Now().Before(deadline); tries++ { _, err := http.Head(url) if err == nil { return nil // success } log....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Go语言中的错误处理策略" href=http://yangchnet.github.io/Dessert/tem/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/></a></article><article class=post-entry><header class=entry-header><h2>HINT : Add or change are lated_name</h2></header><section class=entry-content><p>HINT: Add or change a related_name 解决方案：
+func WaitForServer(url string) error { const timeout = 1 * time.Minute deadline := time.Now().Add(timeout) for tries := 0; time.Now().Before(deadline); tries&#43;&#43; { _, err := http.Head(url) if err == nil { return nil // success  } log....</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Go语言中的错误处理策略" href="http://yangchnet.github.io/Dessert/tem/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>HINT : Add or change are lated_name</h2>
+  </header>
+  <section class="entry-content">
+    <p>HINT: Add or change a related_name 解决方案：
 需要在setting中重载AUTH_USER_MODEL
 AUTH_USER_MODEL = ‘users.UserProfile’
 users：你的app
-UserProfile：model</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to HINT : Add or change are lated_name" href=http://yangchnet.github.io/Dessert/tem/django/hint-add-or-change-a-relatedname/></a></article><article class=post-entry><header class=entry-header><h2>http/template</h2></header><section class=entry-content><p>http/template 什么是模板 模板是一种常见的视图，通过它我们可以传递数据以使该视图有意义。可以以任何方式对其进行自定义以获取任何可能的输出。
+UserProfile：model</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to HINT : Add or change are lated_name" href="http://yangchnet.github.io/Dessert/tem/django/hint-add-or-change-a-relatedname/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>http/template</h2>
+  </header>
+  <section class="entry-content">
+    <p>http/template 什么是模板 模板是一种常见的视图，通过它我们可以传递数据以使该视图有意义。可以以任何方式对其进行自定义以获取任何可能的输出。
 模板包 Go中的模板附带两个包text/template和html/template。文本包允许我们使用模板插入文本，而HTML模板通过提供安全的HTML代码来帮助我们。
 Part of template 1. 模板动作 模板动作是主要的控制流程，数据评估功能。这些动作控制最终输出将如何显示
 {{ /* a comment isside template */ }} 2. 控制结构 控制结构确定模板的控制流程，有助于产生结构化的输出，以下是模板中的一些控制结构
 if语句
 {{ if .condition }} {{ else }} {{ end }} 循环块
 {{ range .Items }} {{ end }} 3. 功能 函数也可以在模板内部使用，可以使用管道符|来使用预定义的函数
-如何预定义函数
-下面的代码创建并分析上面定义的模板templ。注意方法调用链的顺序:template.New先创建并返回一个模板;Funcs方法将daysAgo等自定义函数注册到模板中,并返回模板;最后调用Parse函数分析模板。
-report, err := template.New("report").Funcs(template.FuncMap{"daysAgo": daysAgo}).Parse(templ) if err != nil { log.Fatal(err) } 在Go中解析模板 现在，我们来解析一些文本和HTML模板
+ 如何预定义函数
+ 下面的代码创建并分析上面定义的模板templ。注意方法调用链的顺序:template.New先创建并返回一个模板;Funcs方法将daysAgo等自定义函数注册到模板中,并返回模板;最后调用Parse函数分析模板。
+report, err := template.New(&#34;report&#34;).Funcs(template.FuncMap{&#34;daysAgo&#34;: daysAgo}).Parse(templ) if err != nil { log.Fatal(err) } 在Go中解析模板 现在，我们来解析一些文本和HTML模板
 1. 访问数据 要访问传递的数据，使用点.，如下所示：
-{{ .data }} 2. 解析文本模板 现在，来解析一个文本模板...</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to http/template" href=http://yangchnet.github.io/Dessert/tem/golang/template/></a></article><article class=post-entry><header class=entry-header><h2>Importsomedatatoplaywith</h2></header><section class=entry-content><p>%matplotlib inline ======================================= Receiver Operating Characteristic (ROC) Example of Receiver Operating Characteristic (ROC) metric to evaluate classifier output quality.
-ROC curves typically feature true positive rate on the Y axis, and false positive rate on the X axis. This means that the top left corner of the plot is the “ideal” point - a false positive rate of zero, and a true positive rate of one. This is not very realistic, but it does mean that a larger area under the curve (AUC) is usually better....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Importsomedatatoplaywith" href=http://yangchnet.github.io/Dessert/tem/dlml/plot_roc/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=http://yangchnet.github.io/Dessert/tem/page/5/>« Prev Page</a>
-<a class=next href=http://yangchnet.github.io/Dessert/tem/page/7/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+{{ .data }} 2. 解析文本模板 现在，来解析一个文本模板...</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to http/template" href="http://yangchnet.github.io/Dessert/tem/golang/template/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Importsomedatatoplaywith</h2>
+  </header>
+  <section class="entry-content">
+    <p>%matplotlib inline ======================================= Receiver Operating Characteristic (ROC) Example of Receiver Operating Characteristic (ROC) metric to evaluate classifier output quality.
+ROC curves typically feature true positive rate on the Y axis, and false positive rate on the X axis. This means that the top left corner of the plot is the “ideal” point - a false positive rate of zero, and a true positive rate of one. This is not very realistic, but it does mean that a larger area under the curve (AUC) is usually better....</p>
+  </section>
+  <footer class="entry-footer">February 25, 2021&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌</footer>
+  <a class="entry-link" aria-label="post link to Importsomedatatoplaywith" href="http://yangchnet.github.io/Dessert/tem/dlml/plot_roc/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="http://yangchnet.github.io/Dessert/tem/page/5/">« Prev Page</a>
+    <a class="next" href="http://yangchnet.github.io/Dessert/tem/page/7/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://yangchnet.github.io/Dessert">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

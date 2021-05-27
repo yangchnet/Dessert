@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 18 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/%E6%9D%82%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo中的公式问题</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</guid>
       <description>hugo默认不支持latex公式，为了在我们的博客上显示数学公式，我们需要使用katex.
 使用方法 对于hugo来说，我们只需要为每个页面加上
 &amp;lt;!-- KaTeX --&amp;gt; &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css&amp;#34;&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &amp;#34;$$&amp;#34;, right: &amp;#34;$$&amp;#34;, display: true}, {left: &amp;#34;$&amp;#34;, right: &amp;#34;$&amp;#34;, display: false} ] }); }); &amp;lt;/script&amp;gt; 就行了。
@@ -26,19 +26,19 @@ $$\frac{ x^{2} }{ k+1 }\qquad$$ 效果为： $$\frac{ x^{2} }{ k+1 }\qquad$$</de
     
     <item>
       <title>数据库原理</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</guid>
       <description>1. 数据库系统的结构抽象 1.1 三级模式(三级视图)  External Schema &amp;mdash;-（External）View 某一用户能看到与处理的数据的结构描述 (Conceptual) Schema &amp;mdash;- Conceptual View 从全局角度理解/管理的数据的结构描述, 含相应的关联约束。体现在数据之间的内在本质联系 Internal Schema &amp;mdash;- Internal View 存储在介质上的数据的结构描述，含存储路径、存储方式 、索引方式等  1.2 两层映像  E-C Mapping：External Schema-Conceptual Schema Mapping 将外模式映射为概念模式，从而支持实现数据概念视图向外部视图的转换，便于用户观察和使用 C-I Mapping：Conceptual Schema-Internal Schema Mapping 将概念模式映射为内模式，从而支持实现数据概念视图向内部视图的转换，便于计算机进行存储和处理  1.3 两个独立性  逻辑数据独立性 当概念模式变化时，可以不改变外部模式(只需改变E-C Mapping)，从而无需 改变应用程序 物理数据独立性 当内部模式变化时，可以不改变概念模式(只需改变C-I Mapping) ，从而不改 变外部模式  1.4 数据模型  数据模型  规定模式统一描述方式的模型，包括：数据结构、操作和约束 数据模型是对模式本身结构的抽象，模式是对数据本身结构形式的抽象   三大经典数据模型  关系模型：表的形式组织数据 层次模型：树的形式组织数据 网状模型：图的形式组织数据    2.</description>
     </item>
     
     <item>
       <title>复试英语</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/%E5%A4%8D%E8%AF%95%E8%8B%B1%E8%AF%AD/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%A4%8D%E8%AF%95%E8%8B%B1%E8%AF%AD/</link>
       <pubDate>Wed, 17 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/%E5%A4%8D%E8%AF%95%E8%8B%B1%E8%AF%AD/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%A4%8D%E8%AF%95%E8%8B%B1%E8%AF%AD/</guid>
       <description>0. 复试英语考试形式  自我介绍+老师提问（popular） 听一段文章内容，听完后回答（少） 小组讨论（少）  1. 自我介绍 一定不要说：我的英语很糟糕, My English is very poor!
  目的是： 表达我配上研究生
   先说姓名（微笑脸），年龄，学校 大学取得的成绩（没有成绩可以编&amp;hellip; 编点无从考证的，比如家教啥的） 再说性格爱好(稍微两句话提提)，尽量和专业联系到一起。 That&amp;rsquo;s all, thanks you very much. If I were admitted, I will go all out to learn my professional knowledge.除了学习①专业知识，我一定会加强我的②实践能力，我还要学会③更好的和导师和同学之间进行合作。Please trusted me.(不要超过三分钟)  2. 老师常问的9个问题  你为什么考研，为什么选择这个专业？  一定不要说本科学校坏话， 不要说我要挣钱.. 也不要说为了中华之崛起.. 我真心喜欢我的专业😊(举个例子怎么感兴趣的) 我遗憾自己以前没有好好学习，在别人选择工作的时候我决定考研提升自己 终极答案是喜欢   你对未来有什么规划？  3年研究生的规划和研究生刚毕业的规划，太远不要说 研究生入校后，一定跟老师好好学习专业知识，协助导师，争取自己早日发表论文，有机会考博，培养自己的实践能力，合作能力，与人相处能力。毕业后找一份自己喜欢的工作，在自己的岗位上做出贡献。（一定要配合导师）   介绍你的家乡  首先要说我爱的家乡（怀有一颗感恩的心） 说点名人和特产（有很多可以such as，然后重点说一个） 最后再说，欢迎老师到我的家乡去旅游   介绍你的家庭  先说几口人 对我的人生产生最大的影响是谁（举个栗子(〃￣︶￣)人）   介绍你的本科学校  一个字，好 学校有历史、就业率好、有名气（老师你可能从来没听过这个名字，但是我非常热爱它） 虽然我的学校不是那么有名气，但是我依然结到了很多朋友，给我了很多温暖   对英语的态度，关于英语你怎么看  喜欢，感兴趣 以前对英语没那么感兴趣，只是一门课 后来发现英语真他娘重要，意识到学英语的重要性 在研究生期间更加专注对英语的学习 我的口语没有那么好，但是我希望在研究生期间可以有长足的进步   你对我们学校和专业了解多少  首先，学校名气大（毋庸置疑） 其次，对我们学院相当有了解，对教授了解（提一下教授的名字） 师资力量，著作   你的优点和缺点  优点可以和专业相关，但是缺点不行 我喜欢交朋友&amp;hellip; 编&amp;hellip;（给爷爬）≡(▔﹏▔)≡   为什么换专业（给跨考）  &amp;hellip;    3.</description>
@@ -46,10 +46,10 @@ $$\frac{ x^{2} }{ k+1 }\qquad$$ 效果为： $$\frac{ x^{2} }{ k+1 }\qquad$$</de
     
     <item>
       <title>GitHub图床&#43;vscode&#43;Picgo </title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
       <description>GitHub图床+vscode+Picgo 0. 来由 用markdown写博客的时候，图片往哪里存地干活？图床里存···
 1. GitHub配置   创建图床仓库 为了不污染我原来的git账号，我决定新建一个git账号，专门用作图床账号。 新建账号之后，new一个repo，啥都不用点，直接create。
   生成token 点击你GitHub页面右上角的头像，点击settings 在页面左侧找到Developer settings，选择之，再找到Personal access tokens，再选择之，然后generate new tokens 在新弹出的页面中填写note，并选择repo， 然后直接到最下面，Generate token 这样GitHub会为你生成一个token（只会出现这一次），复制它留用。   2. 配置VScode中的Picgo插件 在vscode的插件商店中直接搜索Picgo，然后点击安装 安装完成后，再来配置你的Picgo File&amp;gt;Preferences&amp;gt;settings&amp;gt;Entensions&amp;gt;Picgo找到配置picgo的位置，填写必要的信息 &amp;#34;picgo.picBed.current&amp;#34;: &amp;#34;github&amp;#34;, &amp;#34;picgo.picBed.github.branch&amp;#34;: &amp;#34;master&amp;#34;, &amp;#34;picgo.picBed.github.path&amp;#34;: &amp;#34;&amp;#34;, # 你想要图片存储的路径 &amp;#34;picgo.picBed.github.repo&amp;#34;: &amp;#34;&amp;#34;, # 你的用户名以及repo名，user/REPO_name &amp;#34;picgo.picBed.github.token&amp;#34;: &amp;#34;&amp;#34; # 刚才复制的token，粘贴到这里 3. 使用picgo上传图片 截个图并复制到剪贴板，在vscode里按下&amp;quot;CTRL+ALT+u&amp;quot;，图片就可以十分迅速的上传到你配置的GitHub仓库并为你返回图片链接 （￣︶￣）↗。
@@ -58,10 +58,10 @@ END</description>
     
     <item>
       <title>博客建设</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
       <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
       <description>博客建设记 0. 前记 一直想要建设一个属于自己的博客，一开始用python写过一个简单的，可以做到富文本编辑、发布、更新、评论等功能，但那个不是一个单纯的博客，并且界面也不是太友好，因此后来废弃了。后来又用了一段时间的jupyter notebook，很强大，尤其让我喜欢的是可以直接运行代码，曾经有一段时间想过可否把jupyter notebook直接作为我的博客页面，或者是嵌入我的页面内，于是看了看其源代码。。。遂放弃。后来又用了为知笔记，印象笔记，Notion等，但感觉都没jupyter notebook好用。 在用jupyter notebook记了有了一定的数目之后，就想将其发布出来，考虑过CSDN，但感觉上面广告好多，不太喜欢，因此没有使用。后来买了域名和服务器，用wordpress搞了一个，但是不是太满意，也没发布。后来用go语言写了一个，因为某些原因，中间的一些数据通路没有搞通（主要是从jupyter到md再到网站的自动发布），再加上后来考研，所以这个项目也没活到&amp;quot;成站&amp;quot;。 终于，用hugo搞了一个。之所以用hugo，一是因为最近研究go语言，对go语言的项目具有一定的好感，第二是因为看了网上的一些介绍并且发现了一些使用hugo的个人博客。 2021/2/28，记之。
 1. 使用hugo开始自己的网站 1.1 开始 hugo的使用炒鸡简单，你只需要使用
 hugo new site MySite 即可新建一个名为MySite的网站

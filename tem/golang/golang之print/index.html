@@ -1,165 +1,738 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>golang中的print系函数详解 | Linote</title><meta name=keywords content="GoLang"><meta name=description content="golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>golang中的print系函数详解 | Linote</title>
+<meta name="keywords" content="GoLang" />
+<meta name="description" content="golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
  golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析
 import ( &#34;fmt&#34; &#34;os&#34; &#34;io&#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
   Arguement
-fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io."><meta name=author content="李昌"><link rel=canonical href=http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/><link crossorigin=anonymous href=/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as=style><link rel=preload href=https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png as=image><script defer crossorigin=anonymous src=/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=32x32 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico><link rel=apple-touch-icon href=http://yangchnet.github.io/Dessert/apple-touch-icon.png><link rel=mask-icon href=http://yangchnet.github.io/Dessert/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.81.0"><meta property="og:title" content="golang中的print系函数详解"><meta property="og:description" content="golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
+fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/" />
+<link crossorigin="anonymous" href="/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<script defer crossorigin="anonymous" src="/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://yangchnet.github.io/Dessert/apple-touch-icon.png">
+<link rel="mask-icon" href="http://yangchnet.github.io/Dessert/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<meta property="og:title" content="golang中的print系函数详解" />
+<meta property="og:description" content="golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
  golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析
 import ( &#34;fmt&#34; &#34;os&#34; &#34;io&#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
   Arguement
-fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io."><meta property="og:type" content="article"><meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/"><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta property="article:section" content="Tem"><meta property="article:published_time" content="2021-02-25T00:00:00+00:00"><meta property="article:modified_time" content="2021-02-25T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta name=twitter:title content="golang中的print系函数详解"><meta name=twitter:description content="golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
+fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/" /><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/><meta property="article:section" content="Tem" />
+<meta property="article:published_time" content="2021-02-25T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-02-25T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/>
+
+<meta name="twitter:title" content="golang中的print系函数详解"/>
+<meta name="twitter:description" content="golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
  golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析
 import ( &#34;fmt&#34; &#34;os&#34; &#34;io&#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
   Arguement
-fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Tems","item":"http://yangchnet.github.io/Dessert/tem/"},{"@type":"ListItem","position":3,"name":"golang中的print系函数详解","item":"http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"golang中的print系函数详解","name":"golang中的print系函数详解","description":"golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有\n golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析\nimport ( \u0026#34;fmt\u0026#34; \u0026#34;os\u0026#34; \u0026#34;io\u0026#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.\n  Arguement\nfmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.","keywords":["GoLang"],"articleBody":"golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有\n golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析\nimport ( \"fmt\" \"os\" \"io\" ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.\n  Arguement\nfmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.Writer 接口。Fprintf() 能够写入任何类型，只要其实现了 Write 方法，包括 os.Stdout,文件（例如 os.File），管道，网络连接，通道等等，同样的也可以使用 bufio 包中缓冲写入。bufio 包中定义了 type Writer struct{...}。Fprintf：来格式化并输出到 io.Writers 而不是 os.Stdout。\n  // example func ExampleFprintf() { const name, age = \"Kim\", 22 n, err := fmt.Fprintf(os.Stdout, \"%s is %d years old.\\n\", name, age) // The n and err return values from Fprintf are \t// those returned by the underlying io.Writer. \tif err != nil { fmt.Fprintf(os.Stderr, \"Fprintf: %v\\n\", err) } fmt.Printf(\"%d bytes written.\\n\", n) // Output: \t// Kim is 22 years old. \t// 21 bytes written. } ExampleFprintf() Kim is 22 years old. 21 bytes written.  fmt.Printf  函数原型  Printf(format string, a ...interface{}) (n int, err error)   官方注释\nPrintf formats according to a format specifier and writes to standard output.It returns the number of bytes written and any write error encountered.\n  Arguement\n只可以打印出格式化的字符串。只可以直接输出字符串类型的变量（不可以输出整形变量和整形 等），其实这个函数是fmt.Fprintf的调用，其调用语句return Fprintf(os.Stdout, format, a...)，输出对象为标准输出。\n  optional\n     optional description     %d 十进制整数   %x, %o, %b 十六进制，八进制，二进制整数   %f, %g, %e 浮点数，3.141593 3.141592653589793 3.141593e+00   %t 布尔 ture或false   %c 字符（rune）（Uniode码点）   %s 字符串   %q 带双引号的字符串\"abc\"或带单引号的字符’c'   %v 变量的自然形式   %T 变量的类型   %% 字面上的百分号标志（无操作数）    fmt.Printf(\"整数：%d\\t浮点数：%v\\t字符串：%s\\n\", 1, 3.14, \"hello world\") func ExamplePrintf() { const name, age = \"Kim\", 22 fmt.Printf(\"%s is %d years old.\\n\", name, age) // It is conventional not to worry about any \t// error returned by Printf.  // Output: \t// Kim is 22 years old. } ExamplePrintf() 整数：1\t浮点数：3.14\t字符串：hello world Kim is 22 years old.  fmt.Sprintf  函数原型  func Sprintf(format string, a ...interface{}) string   官方注释\nSprintf formats according to a format specifier and returns the resulting string.\n  Argument\n格式化并返回一个字符串而不带任何输出。可用于给其他函数传递格式化参数。\n  func ExampleSprintf() { const name, age = \"Kim\", 22 s := fmt.Sprintf(\"%s is %d years old.\\n\", name, age) io.WriteString(os.Stdout, s) // Ignoring error for simplicity.  // Output: \t// Kim is 22 years old. } ExampleSprintf() Kim is 22 years old.  fmt.Fprint  函数原型  Fprint(w io.Writer, a ...interface{}) (n int, err error)   官方注释\nFprint formats using the default formats for its operands and writes to w.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.\n  Argument\n向io.Writer对象中输入字符，第一个参数为输入对象，后面的参数为字符串，直接输出\n  func ExampleFprint() { const name, age = \"Kim\", 22 n, err := fmt.Fprint(os.Stdout, name, \" is \", age, \" years old.\\n\") // The n and err return values from Fprint are \t// those returned by the underlying io.Writer. \tif err != nil { fmt.Fprintf(os.Stderr, \"Fprint: %v\\n\", err) } fmt.Print(n, \" bytes written.\\n\") // Output: \t// Kim is 22 years old. \t// 21 bytes written. } ExampleFprint() Kim is 22 years old. 21 bytes written.  fmt.Print  函数原型  func Print(a ...interface{}) (n int, err error) { return Fprint(os.Stdout, a...) }   官方注释\nPrint formats using the default formats for its operands and writes to standard output.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.\n  Arguement\n显然，这个函数是对fmt.Fprint的调用，只是把输入对象默认为标准输出。\n  func ExamplePrint() { const name, age = \"Kim\", 22 fmt.Print(name, \" is \", age, \" years old.\\n\") // It is conventional not to worry about any \t// error returned by Print.  // Output: \t// Kim is 22 years old. } ExamplePrint() Kim is 22 years old.  fmt.Sprint  函数原型  Sprint(a ...interface{}) string   官方注释\nSprint formats using the default formats for its operands and returns the resulting string.Spaces are added between operands when neither is a string.\n  Arguement\n格式化并返回一个字符串而不带任何输出\n  func ExampleSprint() { const name, age = \"Kim\", 22 s := fmt.Sprint(name, \" is \", age, \" years old.\\n\") io.WriteString(os.Stdout, s) // Ignoring error for simplicity.  // Output: \t// Kim is 22 years old. } ExampleSprint() Kim is 22 years old.  fmt.Fprintln  函数原型  Fprintln(w io.Writer, a ...interface{}) (n int, err error)   官方注释\nFprintln formats using the default formats for its operands and writes to w.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.\n  Arguement\n输入字符串到io.Writer,并且带有换行\n  func ExampleFprintln() { const name, age = \"Kim\", 22 n, err := fmt.Fprintln(os.Stdout, name, \"is\", age, \"years old.\") // The n and err return values from Fprintln are \t// those returned by the underlying io.Writer. \tif err != nil { fmt.Fprintf(os.Stderr, \"Fprintln: %v\\n\", err) } fmt.Println(n, \"bytes written.\") // Output: \t// Kim is 22 years old. \t// 21 bytes written. } ExampleFprintln() Kim is 22 years old. 21 bytes written.  fmt.Println  函数原型  func Println(a ...interface{}) (n int, err error) { return Fprintln(os.Stdout, a...) }   官方注释\nPrintln formats using the default formats for its operands and writes to standard output.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.\n  Arguement\n显然这个函数是对fmt.Fprintln的调用，输入到os.Stdout\n  func ExamplePrintln() { const name, age = \"Kim\", 22 fmt.Println(name, \"is\", age, \"years old.\") // It is conventional not to worry about any \t// error returned by Println.  // Output: \t// Kim is 22 years old. } ExamplePrintln() Kim is 22 years old.  fmt.Sprintln  函数原型  Sprintln(a ...interface{}) string   官方注释 Sprintln formats using the default formats for its operands and returns the resulting string.Spaces are always added between operands and a newline is appended.\n  Arguement\n返回一个字符串，不做任何输出\n  func ExampleSprintln() { const name, age = \"Kim\", 22 s := fmt.Sprintln(name, \"is\", age, \"years old.\") io.WriteString(os.Stdout, s) // Ignoring error for simplicity.  // Output: \t// Kim is 22 years old. } ExampleSprintln() Kim is 22 years old.  总结 所有的函数名都是_print_格式的，其中_代表某个标志，标志及其含义如下：\n   标志 含义     _f 格式化   _ln 换行   F_ 输入到某个对象   S_ 只返回而不做输出    且，\nfmt.Fprintf和fmt.Printf是一对 fmt.Fprint和fmt.Print是一对\nfmt.Fprintln和fmt.Println是一对 不带F前缀的函数均是对带F前缀函数的调用，其输入对象均设置为标准输出\n","wordCount":"925","inLanguage":"en","datePublished":"2021-02-25T00:00:00Z","dateModified":"2021-02-25T00:00:00Z","author":{"@type":"Person","name":"李昌"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/"},"publisher":{"@type":"Organization","name":"Linote","logo":{"@type":"ImageObject","url":"https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><header class=header><nav class=nav><div class=logo><a href=http://yangchnet.github.io/Dessert accesskey=h title="Linote (Alt + H)">Linote</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=http://yangchnet.github.io/Dessert/archives title=存档><span>存档</span></a></li><li><a href=http://yangchnet.github.io/Dessert/categories/ title=分类><span>分类</span></a></li><li><a href=http://yangchnet.github.io/Dessert/search/ title=搜索><span>搜索</span></a></li><li><a href=http://yangchnet.github.io/Dessert/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=http://yangchnet.github.io/Dessert>Home</a>&nbsp;»&nbsp;<a href=http://yangchnet.github.io/Dessert/tem/>Tems</a></div><h1 class=post-title>golang中的print系函数详解</h1><div class=post-meta>February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><div class=details>Table of Contents</div></summary><div class=inner><ul><li><a href=#golang%e4%b8%ad%e7%9a%84print%e7%b3%bb%e5%87%bd%e6%95%b0%e8%af%a6%e8%a7%a3 aria-label=golang中的print系函数详解>golang中的print系函数详解</a><ul><li><a href=#fmtfprintf aria-label=fmt.Fprintf>fmt.Fprintf</a></li><li><a href=#fmtprintf aria-label=fmt.Printf>fmt.Printf</a></li><li><a href=#fmtsprintf aria-label=fmt.Sprintf>fmt.Sprintf</a></li><li><a href=#fmtfprint aria-label=fmt.Fprint>fmt.Fprint</a></li><li><a href=#fmtprint aria-label=fmt.Print>fmt.Print</a></li><li><a href=#fmtsprint aria-label=fmt.Sprint>fmt.Sprint</a></li><li><a href=#fmtfprintln aria-label=fmt.Fprintln>fmt.Fprintln</a></li><li><a href=#fmtprintln aria-label=fmt.Println>fmt.Println</a></li><li><a href=#fmtsprintln aria-label=fmt.Sprintln>fmt.Sprintln</a></li><li><a href=#%e6%80%bb%e7%bb%93 aria-label=总结>总结</a></li></ul></li></ul></div></details></div><div class=post-content><h1 id=golang中的print系函数详解>golang中的print系函数详解<a hidden class=anchor aria-hidden=true href=#golang中的print系函数详解>#</a></h1><p>pirnt系函数来自fmt包，主要用于做各种格式的输出
-这些函数主要有</p><ul><li><a href=#golang%E4%B8%AD%E7%9A%84print%E7%B3%BB%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3>golang中的print系函数详解</a><ul><li><a href=#fmtfprintf>fmt.Fprintf</a></li><li><a href=#fmtprintf>fmt.Printf</a></li><li><a href=#fmtsprintf>fmt.Sprintf</a></li><li><a href=#fmtfprint>fmt.Fprint</a></li><li><a href=#fmtprint>fmt.Print</a></li><li><a href=#fmtsprint>fmt.Sprint</a></li><li><a href=#fmtfprintln>fmt.Fprintln</a></li><li><a href=#fmtprintln>fmt.Println</a></li><li><a href=#fmtsprintln>fmt.Sprintln</a></li><li><a href=#%E6%80%BB%E7%BB%93>总结</a></li></ul></li></ul><p>下面来逐个分析</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#f92672>import</span> (
-    <span style=color:#e6db74>&#34;fmt&#34;</span>
-    <span style=color:#e6db74>&#34;os&#34;</span>
-    <span style=color:#e6db74>&#34;io&#34;</span>
+fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tems",
+      "item": "http://yangchnet.github.io/Dessert/tem/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "golang中的print系函数详解",
+      "item": "http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "golang中的print系函数详解",
+  "name": "golang中的print系函数详解",
+  "description": "golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有\n golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析\nimport ( \u0026#34;fmt\u0026#34; \u0026#34;os\u0026#34; \u0026#34;io\u0026#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.\n  Arguement\nfmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.",
+  "keywords": [
+    "GoLang"
+  ],
+  "articleBody": "golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有\n golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析\nimport ( \"fmt\" \"os\" \"io\" ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.\n  Arguement\nfmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.Writer 接口。Fprintf() 能够写入任何类型，只要其实现了 Write 方法，包括 os.Stdout,文件（例如 os.File），管道，网络连接，通道等等，同样的也可以使用 bufio 包中缓冲写入。bufio 包中定义了 type Writer struct{...}。Fprintf：来格式化并输出到 io.Writers 而不是 os.Stdout。\n  // example func ExampleFprintf() { const name, age = \"Kim\", 22 n, err := fmt.Fprintf(os.Stdout, \"%s is %d years old.\\n\", name, age) // The n and err return values from Fprintf are \t// those returned by the underlying io.Writer. \tif err != nil { fmt.Fprintf(os.Stderr, \"Fprintf: %v\\n\", err) } fmt.Printf(\"%d bytes written.\\n\", n) // Output: \t// Kim is 22 years old. \t// 21 bytes written. } ExampleFprintf() Kim is 22 years old. 21 bytes written.  fmt.Printf  函数原型  Printf(format string, a ...interface{}) (n int, err error)   官方注释\nPrintf formats according to a format specifier and writes to standard output.It returns the number of bytes written and any write error encountered.\n  Arguement\n只可以打印出格式化的字符串。只可以直接输出字符串类型的变量（不可以输出整形变量和整形 等），其实这个函数是fmt.Fprintf的调用，其调用语句return Fprintf(os.Stdout, format, a...)，输出对象为标准输出。\n  optional\n     optional description     %d 十进制整数   %x, %o, %b 十六进制，八进制，二进制整数   %f, %g, %e 浮点数，3.141593 3.141592653589793 3.141593e+00   %t 布尔 ture或false   %c 字符（rune）（Uniode码点）   %s 字符串   %q 带双引号的字符串\"abc\"或带单引号的字符’c'   %v 变量的自然形式   %T 变量的类型   %% 字面上的百分号标志（无操作数）    fmt.Printf(\"整数：%d\\t浮点数：%v\\t字符串：%s\\n\", 1, 3.14, \"hello world\") func ExamplePrintf() { const name, age = \"Kim\", 22 fmt.Printf(\"%s is %d years old.\\n\", name, age) // It is conventional not to worry about any \t// error returned by Printf.  // Output: \t// Kim is 22 years old. } ExamplePrintf() 整数：1\t浮点数：3.14\t字符串：hello world Kim is 22 years old.  fmt.Sprintf  函数原型  func Sprintf(format string, a ...interface{}) string   官方注释\nSprintf formats according to a format specifier and returns the resulting string.\n  Argument\n格式化并返回一个字符串而不带任何输出。可用于给其他函数传递格式化参数。\n  func ExampleSprintf() { const name, age = \"Kim\", 22 s := fmt.Sprintf(\"%s is %d years old.\\n\", name, age) io.WriteString(os.Stdout, s) // Ignoring error for simplicity.  // Output: \t// Kim is 22 years old. } ExampleSprintf() Kim is 22 years old.  fmt.Fprint  函数原型  Fprint(w io.Writer, a ...interface{}) (n int, err error)   官方注释\nFprint formats using the default formats for its operands and writes to w.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.\n  Argument\n向io.Writer对象中输入字符，第一个参数为输入对象，后面的参数为字符串，直接输出\n  func ExampleFprint() { const name, age = \"Kim\", 22 n, err := fmt.Fprint(os.Stdout, name, \" is \", age, \" years old.\\n\") // The n and err return values from Fprint are \t// those returned by the underlying io.Writer. \tif err != nil { fmt.Fprintf(os.Stderr, \"Fprint: %v\\n\", err) } fmt.Print(n, \" bytes written.\\n\") // Output: \t// Kim is 22 years old. \t// 21 bytes written. } ExampleFprint() Kim is 22 years old. 21 bytes written.  fmt.Print  函数原型  func Print(a ...interface{}) (n int, err error) { return Fprint(os.Stdout, a...) }   官方注释\nPrint formats using the default formats for its operands and writes to standard output.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.\n  Arguement\n显然，这个函数是对fmt.Fprint的调用，只是把输入对象默认为标准输出。\n  func ExamplePrint() { const name, age = \"Kim\", 22 fmt.Print(name, \" is \", age, \" years old.\\n\") // It is conventional not to worry about any \t// error returned by Print.  // Output: \t// Kim is 22 years old. } ExamplePrint() Kim is 22 years old.  fmt.Sprint  函数原型  Sprint(a ...interface{}) string   官方注释\nSprint formats using the default formats for its operands and returns the resulting string.Spaces are added between operands when neither is a string.\n  Arguement\n格式化并返回一个字符串而不带任何输出\n  func ExampleSprint() { const name, age = \"Kim\", 22 s := fmt.Sprint(name, \" is \", age, \" years old.\\n\") io.WriteString(os.Stdout, s) // Ignoring error for simplicity.  // Output: \t// Kim is 22 years old. } ExampleSprint() Kim is 22 years old.  fmt.Fprintln  函数原型  Fprintln(w io.Writer, a ...interface{}) (n int, err error)   官方注释\nFprintln formats using the default formats for its operands and writes to w.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.\n  Arguement\n输入字符串到io.Writer,并且带有换行\n  func ExampleFprintln() { const name, age = \"Kim\", 22 n, err := fmt.Fprintln(os.Stdout, name, \"is\", age, \"years old.\") // The n and err return values from Fprintln are \t// those returned by the underlying io.Writer. \tif err != nil { fmt.Fprintf(os.Stderr, \"Fprintln: %v\\n\", err) } fmt.Println(n, \"bytes written.\") // Output: \t// Kim is 22 years old. \t// 21 bytes written. } ExampleFprintln() Kim is 22 years old. 21 bytes written.  fmt.Println  函数原型  func Println(a ...interface{}) (n int, err error) { return Fprintln(os.Stdout, a...) }   官方注释\nPrintln formats using the default formats for its operands and writes to standard output.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.\n  Arguement\n显然这个函数是对fmt.Fprintln的调用，输入到os.Stdout\n  func ExamplePrintln() { const name, age = \"Kim\", 22 fmt.Println(name, \"is\", age, \"years old.\") // It is conventional not to worry about any \t// error returned by Println.  // Output: \t// Kim is 22 years old. } ExamplePrintln() Kim is 22 years old.  fmt.Sprintln  函数原型  Sprintln(a ...interface{}) string   官方注释 Sprintln formats using the default formats for its operands and returns the resulting string.Spaces are always added between operands and a newline is appended.\n  Arguement\n返回一个字符串，不做任何输出\n  func ExampleSprintln() { const name, age = \"Kim\", 22 s := fmt.Sprintln(name, \"is\", age, \"years old.\") io.WriteString(os.Stdout, s) // Ignoring error for simplicity.  // Output: \t// Kim is 22 years old. } ExampleSprintln() Kim is 22 years old.  总结 所有的函数名都是_print_格式的，其中_代表某个标志，标志及其含义如下：\n   标志 含义     _f 格式化   _ln 换行   F_ 输入到某个对象   S_ 只返回而不做输出    且，\nfmt.Fprintf和fmt.Printf是一对 fmt.Fprint和fmt.Print是一对\nfmt.Fprintln和fmt.Println是一对 不带F前缀的函数均是对带F前缀函数的调用，其输入对象均设置为标准输出\n",
+  "wordCount" : "925",
+  "inLanguage": "en",
+  "datePublished": "2021-02-25T00:00:00Z",
+  "dateModified": "2021-02-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "李昌"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://yangchnet.github.io/Dessert/tem/golang/golang%E4%B9%8Bprint/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Linote",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://yangchnet.github.io/Dessert" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://yangchnet.github.io/Dessert">Home</a>&nbsp;»&nbsp;<a href="http://yangchnet.github.io/Dessert/tem/">Tems</a></div>
+    <h1 class="post-title">
+      golang中的print系函数详解
+    </h1>
+    <div class="post-meta">February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <div class="details">Table of Contents</div>
+        </summary>
+        <div class="inner"><ul>
+                <li>
+                    <a href="#golang%e4%b8%ad%e7%9a%84print%e7%b3%bb%e5%87%bd%e6%95%b0%e8%af%a6%e8%a7%a3" aria-label="golang中的print系函数详解">golang中的print系函数详解</a><ul>
+                        
+                <li>
+                    <a href="#fmtfprintf" aria-label="fmt.Fprintf">fmt.Fprintf</a></li>
+                <li>
+                    <a href="#fmtprintf" aria-label="fmt.Printf">fmt.Printf</a></li>
+                <li>
+                    <a href="#fmtsprintf" aria-label="fmt.Sprintf">fmt.Sprintf</a></li>
+                <li>
+                    <a href="#fmtfprint" aria-label="fmt.Fprint">fmt.Fprint</a></li>
+                <li>
+                    <a href="#fmtprint" aria-label="fmt.Print">fmt.Print</a></li>
+                <li>
+                    <a href="#fmtsprint" aria-label="fmt.Sprint">fmt.Sprint</a></li>
+                <li>
+                    <a href="#fmtfprintln" aria-label="fmt.Fprintln">fmt.Fprintln</a></li>
+                <li>
+                    <a href="#fmtprintln" aria-label="fmt.Println">fmt.Println</a></li>
+                <li>
+                    <a href="#fmtsprintln" aria-label="fmt.Sprintln">fmt.Sprintln</a></li>
+                <li>
+                    <a href="#%e6%80%bb%e7%bb%93" aria-label="总结">总结</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="golang中的print系函数详解">golang中的print系函数详解<a hidden class="anchor" aria-hidden="true" href="#golang中的print系函数详解">#</a></h1>
+<p>pirnt系函数来自fmt包，主要用于做各种格式的输出
+这些函数主要有</p>
+<ul>
+<li><a href="#golang%E4%B8%AD%E7%9A%84print%E7%B3%BB%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3">golang中的print系函数详解</a>
+<ul>
+<li><a href="#fmtfprintf">fmt.Fprintf</a></li>
+<li><a href="#fmtprintf">fmt.Printf</a></li>
+<li><a href="#fmtsprintf">fmt.Sprintf</a></li>
+<li><a href="#fmtfprint">fmt.Fprint</a></li>
+<li><a href="#fmtprint">fmt.Print</a></li>
+<li><a href="#fmtsprint">fmt.Sprint</a></li>
+<li><a href="#fmtfprintln">fmt.Fprintln</a></li>
+<li><a href="#fmtprintln">fmt.Println</a></li>
+<li><a href="#fmtsprintln">fmt.Sprintln</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+<p>下面来逐个分析</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
+    <span style="color:#e6db74">&#34;fmt&#34;</span>
+    <span style="color:#e6db74">&#34;os&#34;</span>
+    <span style="color:#e6db74">&#34;io&#34;</span>
 )
-</code></pre></div><h2 id=fmtfprintf>fmt.Fprintf<a hidden class=anchor aria-hidden=true href=#fmtfprintf>#</a></h2><ul><li>函数原型：</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>w</span> <span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>Writer</span>, <span style=color:#a6e22e>format</span> <span style=color:#66d9ef>string</span>, <span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) (<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>err</span> <span style=color:#66d9ef>error</span>)
-</code></pre></div><ul><li><p>官方注释<br>Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.</p></li><li><p>Arguement<br><code>fmt.Fprintf()</code> 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 <code>io.Writer</code> 接口。<code>Fprintf()</code> 能够写入任何类型，只要其实现了 <code>Write</code> 方法，包括 <code>os.Stdout</code>,文件（例如 <code>os.File</code>），管道，网络连接，通道等等，同样的也可以使用 <code>bufio</code> 包中缓冲写入。bufio 包中定义了 <code>type Writer struct{...}</code>。<code>Fprintf</code>：来格式化并输出到 io.Writers 而不是 os.Stdout。</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#75715e>// example
-</span><span style=color:#75715e></span><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExampleFprintf</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>n</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#e6db74>&#34;%s is %d years old.\n&#34;</span>, <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span>)
+</code></pre></div><h2 id="fmtfprintf">fmt.Fprintf<a hidden class="anchor" aria-hidden="true" href="#fmtfprintf">#</a></h2>
+<ul>
+<li>函数原型：</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+</code></pre></div><ul>
+<li>
+<p>官方注释 <br>
+Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.</p>
+</li>
+<li>
+<p>Arguement<br>
+<code>fmt.Fprintf()</code> 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 <code>io.Writer</code> 接口。<code>Fprintf()</code> 能够写入任何类型，只要其实现了 <code>Write</code> 方法，包括 <code>os.Stdout</code>,文件（例如 <code>os.File</code>），管道，网络连接，通道等等，同样的也可以使用 <code>bufio</code> 包中缓冲写入。bufio 包中定义了 <code>type Writer struct{...}</code>。<code>Fprintf</code>：来格式化并输出到 io.Writers 而不是 os.Stdout。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// example
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExampleFprintf</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#e6db74">&#34;%s is %d years old.\n&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span>)
 
-	<span style=color:#75715e>// The n and err return values from Fprintf are
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// those returned by the underlying io.Writer.
-</span><span style=color:#75715e></span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
-		<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stderr</span>, <span style=color:#e6db74>&#34;Fprintf: %v\n&#34;</span>, <span style=color:#a6e22e>err</span>)
+	<span style="color:#75715e">// The n and err return values from Fprintf are
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// those returned by the underlying io.Writer.
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;Fprintf: %v\n&#34;</span>, <span style="color:#a6e22e">err</span>)
 	}
-	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;%d bytes written.\n&#34;</span>, <span style=color:#a6e22e>n</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%d bytes written.\n&#34;</span>, <span style="color:#a6e22e">n</span>)
 
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// 21 bytes written.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExampleFprintf</span>()
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 21 bytes written.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExampleFprintf</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
 21 bytes written.
-</code></pre><h2 id=fmtprintf>fmt.Printf<a hidden class=anchor aria-hidden=true href=#fmtprintf>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>Printf</span>(<span style=color:#a6e22e>format</span> <span style=color:#66d9ef>string</span>, <span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) (<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>err</span> <span style=color:#66d9ef>error</span>)
-</code></pre></div><ul><li><p>官方注释<br>Printf formats according to a format specifier and writes to standard output.It returns the number of bytes written and any write error encountered.</p></li><li><p>Arguement<br>只可以打印出格式化的字符串。只可以直接输出字符串类型的变量（不可以输出整形变量和整形 等），其实这个函数是<code>fmt.Fprintf</code>的调用，其调用语句<code>return Fprintf(os.Stdout, format, a...)</code>，输出对象为标准输出。</p></li><li><p>optional</p></li></ul><table><thead><tr><th>optional</th><th>description</th></tr></thead><tbody><tr><td>%d</td><td>十进制整数</td></tr><tr><td>%x, %o, %b</td><td>十六进制，八进制，二进制整数</td></tr><tr><td>%f, %g, %e</td><td>浮点数，3.141593 3.141592653589793 3.141593e+00</td></tr><tr><td>%t</td><td>布尔 ture或false</td></tr><tr><td>%c</td><td>字符（rune）（Uniode码点）</td></tr><tr><td>%s</td><td>字符串</td></tr><tr><td>%q</td><td>带双引号的字符串"abc"或带单引号的字符&rsquo;c'</td></tr><tr><td>%v</td><td>变量的自然形式</td></tr><tr><td>%T</td><td>变量的类型</td></tr><tr><td>%%</td><td>字面上的百分号标志（无操作数）</td></tr></tbody></table><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;整数：%d\t浮点数：%v\t字符串：%s\n&#34;</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>3.14</span>, <span style=color:#e6db74>&#34;hello world&#34;</span>)
-<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExamplePrintf</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;%s is %d years old.\n&#34;</span>, <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span>)
+</code></pre>
+<h2 id="fmtprintf">fmt.Printf<a hidden class="anchor" aria-hidden="true" href="#fmtprintf">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">Printf</span>(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+</code></pre></div><ul>
+<li>
+<p>官方注释<br>
+Printf formats according to a format specifier and writes to standard output.It returns the number of bytes written and any write error encountered.</p>
+</li>
+<li>
+<p>Arguement<br>
+只可以打印出格式化的字符串。只可以直接输出字符串类型的变量（不可以输出整形变量和整形 等），其实这个函数是<code>fmt.Fprintf</code>的调用，其调用语句<code>return Fprintf(os.Stdout, format, a...)</code>，输出对象为标准输出。</p>
+</li>
+<li>
+<p>optional</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>optional</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%d</td>
+<td>十进制整数</td>
+</tr>
+<tr>
+<td>%x, %o, %b</td>
+<td>十六进制，八进制，二进制整数</td>
+</tr>
+<tr>
+<td>%f, %g, %e</td>
+<td>浮点数，3.141593 3.141592653589793 3.141593e+00</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>布尔 ture或false</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>字符（rune）（Uniode码点）</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>%q</td>
+<td>带双引号的字符串&quot;abc&quot;或带单引号的字符&rsquo;c'</td>
+</tr>
+<tr>
+<td>%v</td>
+<td>变量的自然形式</td>
+</tr>
+<tr>
+<td>%T</td>
+<td>变量的类型</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>字面上的百分号标志（无操作数）</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;整数：%d\t浮点数：%v\t字符串：%s\n&#34;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3.14</span>, <span style="color:#e6db74">&#34;hello world&#34;</span>)
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExamplePrintf</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s is %d years old.\n&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span>)
 
-	<span style=color:#75715e>// It is conventional not to worry about any
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// error returned by Printf.
-</span><span style=color:#75715e></span>
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExamplePrintf</span>()
+	<span style="color:#75715e">// It is conventional not to worry about any
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// error returned by Printf.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExamplePrintf</span>()
 </code></pre></div><pre><code>整数：1	浮点数：3.14	字符串：hello world
 Kim is 22 years old.
-</code></pre><h2 id=fmtsprintf>fmt.Sprintf<a hidden class=anchor aria-hidden=true href=#fmtsprintf>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>Sprintf</span>(<span style=color:#a6e22e>format</span> <span style=color:#66d9ef>string</span>, <span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) <span style=color:#66d9ef>string</span>
-</code></pre></div><ul><li><p>官方注释<br>Sprintf formats according to a format specifier and returns the resulting string.</p></li><li><p>Argument<br>格式化并返回一个字符串而不带任何输出。可用于给其他函数传递格式化参数。</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExampleSprintf</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>s</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;%s is %d years old.\n&#34;</span>, <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span>)
+</code></pre>
+<h2 id="fmtsprintf">fmt.Sprintf<a hidden class="anchor" aria-hidden="true" href="#fmtsprintf">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Sprintf</span>(<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">string</span>
+</code></pre></div><ul>
+<li>
+<p>官方注释<br>
+Sprintf formats according to a format specifier and returns the resulting string.</p>
+</li>
+<li>
+<p>Argument<br>
+格式化并返回一个字符串而不带任何输出。可用于给其他函数传递格式化参数。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExampleSprintf</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s is %d years old.\n&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span>)
 
-	<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>WriteString</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#a6e22e>s</span>) <span style=color:#75715e>// Ignoring error for simplicity.
-</span><span style=color:#75715e></span>
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExampleSprintf</span>()
+	<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">s</span>) <span style="color:#75715e">// Ignoring error for simplicity.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExampleSprintf</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
-</code></pre><h2 id=fmtfprint>fmt.Fprint<a hidden class=anchor aria-hidden=true href=#fmtfprint>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>Fprint</span>(<span style=color:#a6e22e>w</span> <span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>Writer</span>, <span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) (<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>err</span> <span style=color:#66d9ef>error</span>)
-</code></pre></div><ul><li><p>官方注释<br>Fprint formats using the default formats for its operands and writes to w.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.</p></li><li><p>Argument<br>向<code>io.Writer</code>对象中输入字符，第一个参数为输入对象，后面的参数为字符串，直接输出</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExampleFprint</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>n</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprint</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#a6e22e>name</span>, <span style=color:#e6db74>&#34; is &#34;</span>, <span style=color:#a6e22e>age</span>, <span style=color:#e6db74>&#34; years old.\n&#34;</span>)
+</code></pre>
+<h2 id="fmtfprint">fmt.Fprint<a hidden class="anchor" aria-hidden="true" href="#fmtfprint">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+</code></pre></div><ul>
+<li>
+<p>官方注释<br>
+Fprint formats using the default formats for its operands and writes to w.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.</p>
+</li>
+<li>
+<p>Argument<br>
+向<code>io.Writer</code>对象中输入字符，第一个参数为输入对象，后面的参数为字符串，直接输出</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExampleFprint</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34; is &#34;</span>, <span style="color:#a6e22e">age</span>, <span style="color:#e6db74">&#34; years old.\n&#34;</span>)
 
-	<span style=color:#75715e>// The n and err return values from Fprint are
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// those returned by the underlying io.Writer.
-</span><span style=color:#75715e></span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
-		<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stderr</span>, <span style=color:#e6db74>&#34;Fprint: %v\n&#34;</span>, <span style=color:#a6e22e>err</span>)
+	<span style="color:#75715e">// The n and err return values from Fprint are
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// those returned by the underlying io.Writer.
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;Fprint: %v\n&#34;</span>, <span style="color:#a6e22e">err</span>)
 	}
-	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Print</span>(<span style=color:#a6e22e>n</span>, <span style=color:#e6db74>&#34; bytes written.\n&#34;</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">n</span>, <span style="color:#e6db74">&#34; bytes written.\n&#34;</span>)
 
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// 21 bytes written.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExampleFprint</span>()
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 21 bytes written.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExampleFprint</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
 21 bytes written.
-</code></pre><h2 id=fmtprint>fmt.Print<a hidden class=anchor aria-hidden=true href=#fmtprint>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>Print</span>(<span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) (<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>err</span> <span style=color:#66d9ef>error</span>) {
-	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>Fprint</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#a6e22e>a</span><span style=color:#f92672>...</span>)
+</code></pre>
+<h2 id="fmtprint">fmt.Print<a hidden class="anchor" aria-hidden="true" href="#fmtprint">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">a</span><span style="color:#f92672">...</span>)
 }
-</code></pre></div><ul><li><p>官方注释<br>Print formats using the default formats for its operands and writes to standard output.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.</p></li><li><p>Arguement<br>显然，这个函数是对<code>fmt.Fprint</code>的调用，只是把输入对象默认为标准输出。</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExamplePrint</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Print</span>(<span style=color:#a6e22e>name</span>, <span style=color:#e6db74>&#34; is &#34;</span>, <span style=color:#a6e22e>age</span>, <span style=color:#e6db74>&#34; years old.\n&#34;</span>)
+</code></pre></div><ul>
+<li>
+<p>官方注释<br>
+Print formats using the default formats for its operands and writes to standard output.Spaces are added between operands when neither is a string.It returns the number of bytes written and any write error encountered.</p>
+</li>
+<li>
+<p>Arguement<br>
+显然，这个函数是对<code>fmt.Fprint</code>的调用，只是把输入对象默认为标准输出。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExamplePrint</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34; is &#34;</span>, <span style="color:#a6e22e">age</span>, <span style="color:#e6db74">&#34; years old.\n&#34;</span>)
 
-	<span style=color:#75715e>// It is conventional not to worry about any
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// error returned by Print.
-</span><span style=color:#75715e></span>
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExamplePrint</span>()
+	<span style="color:#75715e">// It is conventional not to worry about any
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// error returned by Print.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExamplePrint</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
-</code></pre><h2 id=fmtsprint>fmt.Sprint<a hidden class=anchor aria-hidden=true href=#fmtsprint>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>Sprint</span>(<span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) <span style=color:#66d9ef>string</span>  
-</code></pre></div><ul><li><p>官方注释<br>Sprint formats using the default formats for its operands and returns the resulting string.Spaces are added between operands when neither is a string.</p></li><li><p>Arguement<br>格式化并返回一个字符串而不带任何输出</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExampleSprint</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>s</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprint</span>(<span style=color:#a6e22e>name</span>, <span style=color:#e6db74>&#34; is &#34;</span>, <span style=color:#a6e22e>age</span>, <span style=color:#e6db74>&#34; years old.\n&#34;</span>)
+</code></pre>
+<h2 id="fmtsprint">fmt.Sprint<a hidden class="anchor" aria-hidden="true" href="#fmtsprint">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">Sprint</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">string</span>  
+</code></pre></div><ul>
+<li>
+<p>官方注释<br>
+Sprint formats using the default formats for its operands and returns the resulting string.Spaces are added between operands when neither is a string.</p>
+</li>
+<li>
+<p>Arguement<br>
+格式化并返回一个字符串而不带任何输出</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExampleSprint</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprint</span>(<span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34; is &#34;</span>, <span style="color:#a6e22e">age</span>, <span style="color:#e6db74">&#34; years old.\n&#34;</span>)
 
-	<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>WriteString</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#a6e22e>s</span>) <span style=color:#75715e>// Ignoring error for simplicity.
-</span><span style=color:#75715e></span>
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExampleSprint</span>()
+	<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">s</span>) <span style="color:#75715e">// Ignoring error for simplicity.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExampleSprint</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
-</code></pre><h2 id=fmtfprintln>fmt.Fprintln<a hidden class=anchor aria-hidden=true href=#fmtfprintln>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>Fprintln</span>(<span style=color:#a6e22e>w</span> <span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>Writer</span>, <span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) (<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>err</span> <span style=color:#66d9ef>error</span>)
-</code></pre></div><ul><li><p>官方注释<br>Fprintln formats using the default formats for its operands and writes to w.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.</p></li><li><p>Arguement<br>输入字符串到<code>io.Writer</code>,并且带有换行</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExampleFprintln</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>n</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintln</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#a6e22e>name</span>, <span style=color:#e6db74>&#34;is&#34;</span>, <span style=color:#a6e22e>age</span>, <span style=color:#e6db74>&#34;years old.&#34;</span>)
+</code></pre>
+<h2 id="fmtfprintln">fmt.Fprintln<a hidden class="anchor" aria-hidden="true" href="#fmtfprintln">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">Fprintln</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>, <span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>)
+</code></pre></div><ul>
+<li>
+<p>官方注释<br>
+Fprintln formats using the default formats for its operands and writes to w.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.</p>
+</li>
+<li>
+<p>Arguement<br>
+输入字符串到<code>io.Writer</code>,并且带有换行</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExampleFprintln</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">n</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintln</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34;is&#34;</span>, <span style="color:#a6e22e">age</span>, <span style="color:#e6db74">&#34;years old.&#34;</span>)
 
-	<span style=color:#75715e>// The n and err return values from Fprintln are
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// those returned by the underlying io.Writer.
-</span><span style=color:#75715e></span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
-		<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Fprintf</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stderr</span>, <span style=color:#e6db74>&#34;Fprintln: %v\n&#34;</span>, <span style=color:#a6e22e>err</span>)
+	<span style="color:#75715e">// The n and err return values from Fprintln are
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// those returned by the underlying io.Writer.
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stderr</span>, <span style="color:#e6db74">&#34;Fprintln: %v\n&#34;</span>, <span style="color:#a6e22e">err</span>)
 	}
-	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>n</span>, <span style=color:#e6db74>&#34;bytes written.&#34;</span>)
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">n</span>, <span style="color:#e6db74">&#34;bytes written.&#34;</span>)
 
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// 21 bytes written.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExampleFprintln</span>()
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 21 bytes written.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExampleFprintln</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
 21 bytes written.
-</code></pre><h2 id=fmtprintln>fmt.Println<a hidden class=anchor aria-hidden=true href=#fmtprintln>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) (<span style=color:#a6e22e>n</span> <span style=color:#66d9ef>int</span>, <span style=color:#a6e22e>err</span> <span style=color:#66d9ef>error</span>) {
-	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>Fprintln</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#a6e22e>a</span><span style=color:#f92672>...</span>)
+</code></pre>
+<h2 id="fmtprintln">fmt.Println<a hidden class="anchor" aria-hidden="true" href="#fmtprintln">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) (<span style="color:#a6e22e">n</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fprintln</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">a</span><span style="color:#f92672">...</span>)
 }
-</code></pre></div><ul><li><p>官方注释<br>Println formats using the default formats for its operands and writes to standard output.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.</p></li><li><p>Arguement<br>显然这个函数是对<code>fmt.Fprintln</code>的调用，输入到<code>os.Stdout</code></p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExamplePrintln</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>name</span>, <span style=color:#e6db74>&#34;is&#34;</span>, <span style=color:#a6e22e>age</span>, <span style=color:#e6db74>&#34;years old.&#34;</span>)
+</code></pre></div><ul>
+<li>
+<p>官方注释<br>
+Println formats using the default formats for its operands and writes to standard output.Spaces are always added between operands and a newline is appended.It returns the number of bytes written and any write error encountered.</p>
+</li>
+<li>
+<p>Arguement<br>
+显然这个函数是对<code>fmt.Fprintln</code>的调用，输入到<code>os.Stdout</code></p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExamplePrintln</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34;is&#34;</span>, <span style="color:#a6e22e">age</span>, <span style="color:#e6db74">&#34;years old.&#34;</span>)
 
-	<span style=color:#75715e>// It is conventional not to worry about any
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// error returned by Println.
-</span><span style=color:#75715e></span>
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExamplePrintln</span>()
+	<span style="color:#75715e">// It is conventional not to worry about any
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// error returned by Println.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExamplePrintln</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
-</code></pre><h2 id=fmtsprintln>fmt.Sprintln<a hidden class=anchor aria-hidden=true href=#fmtsprintln>#</a></h2><ul><li>函数原型</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>Sprintln</span>(<span style=color:#a6e22e>a</span> <span style=color:#f92672>...</span><span style=color:#66d9ef>interface</span>{}) <span style=color:#66d9ef>string</span>
-</code></pre></div><ul><li><p>官方注释
-Sprintln formats using the default formats for its operands and returns the resulting string.Spaces are always added between operands and a newline is appended.</p></li><li><p>Arguement<br>返回一个字符串，不做任何输出</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>ExampleSprintln</span>() {
-	<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>name</span>, <span style=color:#a6e22e>age</span> = <span style=color:#e6db74>&#34;Kim&#34;</span>, <span style=color:#ae81ff>22</span>
-	<span style=color:#a6e22e>s</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintln</span>(<span style=color:#a6e22e>name</span>, <span style=color:#e6db74>&#34;is&#34;</span>, <span style=color:#a6e22e>age</span>, <span style=color:#e6db74>&#34;years old.&#34;</span>)
+</code></pre>
+<h2 id="fmtsprintln">fmt.Sprintln<a hidden class="anchor" aria-hidden="true" href="#fmtsprintln">#</a></h2>
+<ul>
+<li>函数原型</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">Sprintln</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">...</span><span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">string</span>
+</code></pre></div><ul>
+<li>
+<p>官方注释
+Sprintln formats using the default formats for its operands and returns the resulting string.Spaces are always added between operands and a newline is appended.</p>
+</li>
+<li>
+<p>Arguement<br>
+返回一个字符串，不做任何输出</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">ExampleSprintln</span>() {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">age</span> = <span style="color:#e6db74">&#34;Kim&#34;</span>, <span style="color:#ae81ff">22</span>
+	<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintln</span>(<span style="color:#a6e22e">name</span>, <span style="color:#e6db74">&#34;is&#34;</span>, <span style="color:#a6e22e">age</span>, <span style="color:#e6db74">&#34;years old.&#34;</span>)
 
-	<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>WriteString</span>(<span style=color:#a6e22e>os</span>.<span style=color:#a6e22e>Stdout</span>, <span style=color:#a6e22e>s</span>) <span style=color:#75715e>// Ignoring error for simplicity.
-</span><span style=color:#75715e></span>
-	<span style=color:#75715e>// Output:
-</span><span style=color:#75715e></span>	<span style=color:#75715e>// Kim is 22 years old.
-</span><span style=color:#75715e></span>}
-<span style=color:#a6e22e>ExampleSprintln</span>()
+	<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Stdout</span>, <span style="color:#a6e22e">s</span>) <span style="color:#75715e">// Ignoring error for simplicity.
+</span><span style="color:#75715e"></span>
+	<span style="color:#75715e">// Output:
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// Kim is 22 years old.
+</span><span style="color:#75715e"></span>}
+<span style="color:#a6e22e">ExampleSprintln</span>()
 </code></pre></div><pre><code>Kim is 22 years old.
-</code></pre><h2 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h2><p>所有的函数名都是<code>_print_</code>格式的，其中<code>_</code>代表某个标志，标志及其含义如下：</p><table><thead><tr><th>标志</th><th>含义</th></tr></thead><tbody><tr><td>_f</td><td>格式化</td></tr><tr><td>_ln</td><td>换行</td></tr><tr><td>F_</td><td>输入到某个对象</td></tr><tr><td>S_</td><td>只返回而不做输出</td></tr></tbody></table><p>且，<br><code>fmt.Fprintf</code>和<code>fmt.Printf</code>是一对<br><code>fmt.Fprint</code>和<code>fmt.Print</code>是一对<br><code>fmt.Fprintln</code>和<code>fmt.Println</code>是一对<br>不带<code>F</code>前缀的函数均是对带<code>F</code>前缀函数的调用，其输入对象均设置为标准输出</p></div><footer class=post-footer><ul class=post-tags><li><a href=http://yangchnet.github.io/Dessert/tags/golang/>GoLang</a></li></ul><div class=share-buttons><div class=bshare-custom><a title=分享到微信 class=bshare-weixin></a><a title=分享到QQ好友 class=bshare-qqim></a><a title=分享到复制网址 class=bshare-clipboard></a><a title=分享到QQ空间 class=bshare-qzone></a><a title=分享到新浪微博 class=bshare-sinaminiblog></a><a title=分享到电子邮件 class=bshare-email></a><a title=更多平台 class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type=text/javascript src="http://static.bshare.cn/b/buttonLite.js#style=-1&uuid=&pophcol=2&lang=zh"></script><script type=text/javascript src=http://static.bshare.cn/b/bshareC0.js></script></div></footer></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+</code></pre>
+<h2 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h2>
+<p>所有的函数名都是<code>_print_</code>格式的，其中<code>_</code>代表某个标志，标志及其含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>标志</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_f</td>
+<td>格式化</td>
+</tr>
+<tr>
+<td>_ln</td>
+<td>换行</td>
+</tr>
+<tr>
+<td>F_</td>
+<td>输入到某个对象</td>
+</tr>
+<tr>
+<td>S_</td>
+<td>只返回而不做输出</td>
+</tr>
+</tbody>
+</table>
+<p>且，<br>
+<code>fmt.Fprintf</code>和<code>fmt.Printf</code>是一对 <br>
+<code>fmt.Fprint</code>和<code>fmt.Print</code>是一对<br>
+<code>fmt.Fprintln</code>和<code>fmt.Println</code>是一对 <br>
+不带<code>F</code>前缀的函数均是对带<code>F</code>前缀函数的调用，其输入对象均设置为标准输出</p>
+
+</div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://yangchnet.github.io/Dessert/tags/golang/">GoLang</a></li>
+    </ul>
+
+<div class="share-buttons">
+    <div class="bshare-custom"><a title="分享到微信" class="bshare-weixin"></a><a title="分享到QQ好友" class="bshare-qqim"></a><a title="分享到复制网址" class="bshare-clipboard"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到电子邮件" class="bshare-email"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    
+</div>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://yangchnet.github.io/Dessert">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

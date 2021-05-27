@@ -1,51 +1,330 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>1、python与其他语言的对比（helloworld） | Linote</title><meta name=keywords content="Python"><meta name=description content="1、python与其他语言的对比（hello world）  C语言
- include<stdio.h> int main() { printf(&#34;hello world&#34;); return 0; }  Java语言
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>1、python与其他语言的对比（helloworld） | Linote</title>
+<meta name="keywords" content="Python" />
+<meta name="description" content="1、python与其他语言的对比（hello world）  C语言
+ include&lt;stdio.h&gt; int main() { printf(&#34;hello world&#34;); return 0; }  Java语言
  public class HelloWorld{ public static void main(String[] args) { System.out.println(&#34;Hello World!&#34;); } }  Python
- print('hello world') 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = 'hello' str1_1 = &#34;hello&#34; str2 = &#34;world&#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = 'hello \nworld' print(str4) str5 = 'hello \\n world' print(str5) # 格式化输出 print('str1:%s."><meta name=author content="李昌"><link rel=canonical href=http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/><link crossorigin=anonymous href=/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as=style><link rel=preload href=https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png as=image><script defer crossorigin=anonymous src=/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=32x32 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico><link rel=apple-touch-icon href=http://yangchnet.github.io/Dessert/apple-touch-icon.png><link rel=mask-icon href=http://yangchnet.github.io/Dessert/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.81.0"><meta property="og:title" content="1、python与其他语言的对比（helloworld）"><meta property="og:description" content="1、python与其他语言的对比（hello world）  C语言
- include<stdio.h> int main() { printf(&#34;hello world&#34;); return 0; }  Java语言
+ print(&#39;hello world&#39;) 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1&#43;2.2j # 字符串 str1 = &#39;hello&#39; str1_1 = &#34;hello&#34; str2 = &#34;world&#34; print(str1==str1_1) # 字符串连接 str3 = str1 &#43; str2 print(str3) # 转义字符 str4 = &#39;hello \nworld&#39; print(str4) str5 = &#39;hello \\n world&#39; print(str5) # 格式化输出 print(&#39;str1:%s.">
+<meta name="author" content="李昌">
+<link rel="canonical" href="http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/" />
+<link crossorigin="anonymous" href="/Dessert/assets/css/stylesheet.min.2d6dbfc6e0f8a1db1c9d082a76dc11d094328cf63f247bbc2421dfaa7f2bb170.css" integrity="sha256-LW2/xuD4odscnQgqdtwR0JQyjPY/JHu8JCHfqn8rsXA=" rel="preload stylesheet" as="style">
+<link rel="preload" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png" as="image">
+<script defer crossorigin="anonymous" src="/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico">
+<link rel="apple-touch-icon" href="http://yangchnet.github.io/Dessert/apple-touch-icon.png">
+<link rel="mask-icon" href="http://yangchnet.github.io/Dessert/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.81.0" />
+<meta property="og:title" content="1、python与其他语言的对比（helloworld）" />
+<meta property="og:description" content="1、python与其他语言的对比（hello world）  C语言
+ include&lt;stdio.h&gt; int main() { printf(&#34;hello world&#34;); return 0; }  Java语言
  public class HelloWorld{ public static void main(String[] args) { System.out.println(&#34;Hello World!&#34;); } }  Python
- print('hello world') 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = 'hello' str1_1 = &#34;hello&#34; str2 = &#34;world&#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = 'hello \nworld' print(str4) str5 = 'hello \\n world' print(str5) # 格式化输出 print('str1:%s."><meta property="og:type" content="article"><meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/"><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta property="article:section" content="Tem"><meta property="article:published_time" content="2021-02-25T00:00:00+00:00"><meta property="article:modified_time" content="2021-02-25T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta name=twitter:title content="1、python与其他语言的对比（helloworld）"><meta name=twitter:description content="1、python与其他语言的对比（hello world）  C语言
- include<stdio.h> int main() { printf(&#34;hello world&#34;); return 0; }  Java语言
+ print(&#39;hello world&#39;) 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1&#43;2.2j # 字符串 str1 = &#39;hello&#39; str1_1 = &#34;hello&#34; str2 = &#34;world&#34; print(str1==str1_1) # 字符串连接 str3 = str1 &#43; str2 print(str3) # 转义字符 str4 = &#39;hello \nworld&#39; print(str4) str5 = &#39;hello \\n world&#39; print(str5) # 格式化输出 print(&#39;str1:%s." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/" /><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/><meta property="article:section" content="Tem" />
+<meta property="article:published_time" content="2021-02-25T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-02-25T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"/>
+
+<meta name="twitter:title" content="1、python与其他语言的对比（helloworld）"/>
+<meta name="twitter:description" content="1、python与其他语言的对比（hello world）  C语言
+ include&lt;stdio.h&gt; int main() { printf(&#34;hello world&#34;); return 0; }  Java语言
  public class HelloWorld{ public static void main(String[] args) { System.out.println(&#34;Hello World!&#34;); } }  Python
- print('hello world') 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = 'hello' str1_1 = &#34;hello&#34; str2 = &#34;world&#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = 'hello \nworld' print(str4) str5 = 'hello \\n world' print(str5) # 格式化输出 print('str1:%s."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Tems","item":"http://yangchnet.github.io/Dessert/tem/"},{"@type":"ListItem","position":3,"name":"1、python与其他语言的对比（helloworld）","item":"http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"1、python与其他语言的对比（helloworld）","name":"1、python与其他语言的对比（helloworld）","description":"1、python与其他语言的对比（hello world）  C语言\n include\u0026lt;stdio.h\u0026gt; int main() { printf(\u0026#34;hello world\u0026#34;); return 0; }  Java语言\n public class HelloWorld{ public static void main(String[] args) { System.out.println(\u0026#34;Hello World!\u0026#34;); } }  Python\n print(\u0026#39;hello world\u0026#39;) 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = \u0026#39;hello\u0026#39; str1_1 = \u0026#34;hello\u0026#34; str2 = \u0026#34;world\u0026#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = \u0026#39;hello \\nworld\u0026#39; print(str4) str5 = \u0026#39;hello \\\\n world\u0026#39; print(str5) # 格式化输出 print(\u0026#39;str1:%s.","keywords":["Python"],"articleBody":"1、python与其他语言的对比（hello world）  C语言\n includestdio.h int main() { printf(\"hello world\"); return 0; }  Java语言\n public class HelloWorld{ public static void main(String[] args) { System.out.println(\"Hello World!\"); } }  Python\n print('hello world') 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = 'hello' str1_1 = \"hello\" str2 = \"world\" print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = 'hello \\nworld' print(str4) str5 = 'hello \\\\n world' print(str5) # 格式化输出 print('str1:%s.'%str1) # 切片 print(str1[1:4]) True helloworld hello world hello \\n world str1:hello. ell  # 列表 list1 = ['google', 'alibaba', 2001, 3.14] # 通过下标访问 print(list1[0]) # 更新列表 list1[2] = 'baidu' print(list1) # 删除元素 del list1[3] print(list1) # 拼接列表 list2 = ['microsoft', 'amazon'] list3 = list1 + list2 print(list3) # 增添列表项 list1.append('jingdong') print(list1) google ['google', 'alibaba', 'baidu', 3.14] ['google', 'alibaba', 'baidu'] ['google', 'alibaba', 'baidu', 'microsoft', 'amazon'] ['google', 'alibaba', 'baidu', 'jingdong']  # 元组：类似列表,是一系列元素的有序集合,但元组中的元素无法修改 tuple1 = ('google', 'alibaba', 'baidu') tuple1[0] = 'amazon' # 不能被改变 --------------------------------------------------------------------------- TypeError Traceback (most recent call last)  in  1 # 元组：类似列表,是一系列元素的有序集合,但元组中的元素无法修改 2 tuple1 = ('google', 'alibaba', 'baidu') ---- 3 tuple1[0] = 'amazon' TypeError: 'tuple' object does not support item assignment  # 字典 dict1 = { 'color': 'green', 'points': 5 } # 访问列表中的值 print(dict1['color']) # 增加字典中键值对 dict1['x_pos'] = 0 dict1['y_pos'] =4 print(dict1) green {'color': 'green', 'points': 5, 'x_pos': 0, 'y_pos': 4}  3、python中的结构语句 3.1、if条件语句 car = 'bmw' if car == 'bmw': print(car.upper()) # 输出car的大写版本 else: print(car.title()) # 输出car的标题版本 Bmw  现实世界中,很多情况下需要考虑的情形都超过两个。例如,来看一个根据年龄段收费的 游乐场:\n 4岁以下免费; 4~18岁收费5美元; 18岁(含)以上收费10美元。   如果只使用一条 if 语句,如何确定门票价格呢?下面的代码确定一个人所属的年龄段,并打印一条包含门票价格的消息:\n age = 12 if age  4: print(\"Your admission cost is $0.\") elif age  18: print(\"Your admission cost is $5.\") else: print(\"Your admission cost is $10.\") Your admission cost is $5.  3.2、for循环语句 fruits = ['banana', 'apple', 'mango'] for fruit in fruits: print('当前水果：%s'%fruit) 当前水果：banana 当前水果：apple 当前水果：mango  # range 步长为1 for i in range(0, 6): print(i) 1 2 3 4 5  # range 步长为2 for i in range(0, 6, 2): print(i) 0 2 4  # break 和 continue for i in range(0, 6): if i == 3: break print(i) for i in range(0, 6): if i == 3: continue print(i, end='') 0 1 2 01245  3.3、while循环语句 # while循环 current_number = 1 while current_number  5: print(current_number) current_number += 1 1 2 3 4 5  3.4、函数 def greet_user(username): \"\"\" 显示简单的问候语 \"\"\" print(\"Hello, \" + username.title() + \"!\") greet_user('jesse') greet_user('jack') Hello, Jesse! Hello, Jack!  # 有返回值的函数 def add(a, b): return a+b print('第一个函数：%d'%add(2, 3)) # 列表作为参数的函数 def add_l(mylist): result = 0 for l in mylist: result += l return result print('第二个函数：%d'%add_l([1, 2, 3, 4])) # 有多个返回值的函数 def muti_re(mylist): a = max(mylist) b = min(mylist) return a, b a, b = muti_re([1, 2, 3, 4]) print('第三个函数, 最大值：%d, 最小值：%d'%(a,b)) 第一个函数：5 第二个函数：10 第三个函数, 最大值：4, 最小值：1  有时候,你预先不知道函数需要接受多少个实参, 但是Python允许函数从调用语句中收集任意数量的实参。\n 例如,来看一个制作比萨的函数,它需要接受很多配料,但你无法预先确定顾客要多少种配 料。下面的函数只有一个形参 *toppings ,但不管调用语句提供了多少实参,这个形参都将它们 统统收入囊中:\n def make_pizza(*toppings): print(toppings) make_pizza('pepperoni') make_pizza('mushrooms', 'green peppers', 'extra cheese') ('pepperoni',) ('mushrooms', 'green peppers', 'extra cheese')  3.5、类 面向对象编程是最有效的软件编写方法之一。在面向对象编程中, 你编写表示现实世界中的事物和情景的类,并基于这些类来创建对象。 编写类时,你定义一大类对象都有的通用行为。基于类创建对象时, 每个对象都自动具备这种通用行为,然后可根据需要赋予每个对象独 特的个性。使用面向对象编程可模拟现实情景,其逼真程度达到了令 你惊讶的地步。 根据类来创建对象被称为实例化,这让你能够使用类的实例。在 本章中,你将编写一些类并创建其实例。你将指定可在实例中存储什 么信息,定义可对这些实例执行哪些操作。你还将编写一些类来扩展 既有类的功能,让相似的类能够高效地共享代码。你将把自己编写的类存储在模块中,并在 自己的程序文件中导入其他程序员编写的类\n使用类几乎可以模拟任何东西。下面来编写一个表示小狗的简单类 Dog ——它表示的不是特 定的小狗,而是任何小狗。对于大多数宠物狗,我们都知道些什么呢?它们都有名字和年龄;我 们还知道,大多数小狗还会蹲下和打滚。由于大多数小狗都具备上述两项信息(名字和年龄)和 两种行为(蹲下和打滚),我们的 Dog 类将包含它们。这个类让Python知道如何创建表示小狗的对 象。编写这个类后,我们将使用它来创建表示特定小狗的实例。\n# 创建类 class Dog(): def __init__(self, name, age): self.name = name self.age = age def sit(self): print(self.name.title() + \" is now sitting.\") def roll_over(self): print(self.name.title() + \" rolled over!\")对字符串的大小写进行更改 类中的函数称为方法;你前面学到的有关函数的一切都适用于方法,就目前而言,唯一重要 的差别是调用方法的方式。方法 init() 是一个特殊的方法,每当你根据 Dog 类创建新实 例时,Python都会自动运行它。在这个方法的名称中,开头和末尾各有两个下划线,这是一种约 定,旨在避免Python默认方法与普通方法发生名称冲突。\n# 根据类创建实例 my_dog = Dog('willie', 6) print(\"My dog's name is \" + my_dog.name.title() + \".\") print(\"My dog is \" + str(my_dog.age) + \" years old.\") My dog's name is Willie. My dog is 6 years old.  # 访问类的属性 my_dog.name 'willie'  # 调用类的方法 my_dog.sit() my_dog.roll_over() Willie is now sitting. Willie rolled over!  4、对字符串的一些操作 4.1、对字符串的大小写进行更改 # 对字符串的大小写进行更改 name = \"ada lovelace\" print(name.title()) name = \"Ada Lovelace\" print(name.upper()) print(name.lower()) Ada Lovelace ADA LOVELACE ada lovelace  4.2、合并/拼接字符串 first_name = \"ada\" last_name = \"lovelace\" full_name = first_name + \" \" + last_name print(full_name) ada lovelace  4.3、使用制表符或换行符来添加空白 print(\"\\tPython\") print(\"Languages:\\nPython\\nC\\nJavaScript\")  Python Languages: Python C JavaScript  4.4、删除空白 favorite_language = ' python ' # 删除末尾的空白 favorite_language.rstrip() # 删除开头的空白 favorite_language.lstrip() 'python '  4.5、字符串分割 my_languages = 'python,C,JAVA,PHP,MATLAB' languages_list = my_languages.split(',') print(languages_list) print(languages_list[0]) print(languages_list[0][3]) ['python', 'C', 'JAVA', 'PHP', 'MATLAB'] python h  习题 1、打印出99乘法表 2、判断是否是闰年 3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现 4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。 创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。 ","wordCount":"677","inLanguage":"en","datePublished":"2021-02-25T00:00:00Z","dateModified":"2021-02-25T00:00:00Z","author":{"@type":"Person","name":"李昌"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/"},"publisher":{"@type":"Organization","name":"Linote","logo":{"@type":"ImageObject","url":"https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><noscript><style type=text/css>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><header class=header><nav class=nav><div class=logo><a href=http://yangchnet.github.io/Dessert accesskey=h title="Linote (Alt + H)">Linote</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=http://yangchnet.github.io/Dessert/archives title=存档><span>存档</span></a></li><li><a href=http://yangchnet.github.io/Dessert/categories/ title=分类><span>分类</span></a></li><li><a href=http://yangchnet.github.io/Dessert/search/ title=搜索><span>搜索</span></a></li><li><a href=http://yangchnet.github.io/Dessert/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=http://yangchnet.github.io/Dessert>Home</a>&nbsp;»&nbsp;<a href=http://yangchnet.github.io/Dessert/tem/>Tems</a></div><h1 class=post-title>1、python与其他语言的对比（helloworld）</h1><div class=post-meta>February 25, 2021&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><div class=details>Table of Contents</div></summary><div class=inner><ul><li><a href=#1python%e4%b8%8e%e5%85%b6%e4%bb%96%e8%af%ad%e8%a8%80%e7%9a%84%e5%af%b9%e6%af%94hello-world aria-label="1、python与其他语言的对比（hello world）">1、python与其他语言的对比（hello world）</a></li><li><a href=#2python%e4%b8%ad%e7%9a%84%e5%b8%b8%e7%94%a8%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b aria-label=2、python中的常用数据类型>2、python中的常用数据类型</a></li><li><a href=#3python%e4%b8%ad%e7%9a%84%e7%bb%93%e6%9e%84%e8%af%ad%e5%8f%a5 aria-label=3、python中的结构语句>3、python中的结构语句</a><ul><li><a href=#31if%e6%9d%a1%e4%bb%b6%e8%af%ad%e5%8f%a5 aria-label=3.1、if条件语句>3.1、if条件语句</a></li><li><a href=#32for%e5%be%aa%e7%8e%af%e8%af%ad%e5%8f%a5 aria-label=3.2、for循环语句>3.2、for循环语句</a></li><li><a href=#33while%e5%be%aa%e7%8e%af%e8%af%ad%e5%8f%a5 aria-label=3.3、while循环语句>3.3、while循环语句</a></li><li><a href=#34%e5%87%bd%e6%95%b0 aria-label=3.4、函数>3.4、函数</a></li><li><a href=#35%e7%b1%bb aria-label=3.5、类>3.5、类</a></li></ul></li><li><a href=#4%e5%af%b9%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%9a%84%e4%b8%80%e4%ba%9b%e6%93%8d%e4%bd%9c aria-label=4、对字符串的一些操作>4、对字符串的一些操作</a><ul><li><a href=#41%e5%af%b9%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%9a%84%e5%a4%a7%e5%b0%8f%e5%86%99%e8%bf%9b%e8%a1%8c%e6%9b%b4%e6%94%b9 aria-label=4.1、对字符串的大小写进行更改>4.1、对字符串的大小写进行更改</a></li><li><a href=#42%e5%90%88%e5%b9%b6%e6%8b%bc%e6%8e%a5%e5%ad%97%e7%ac%a6%e4%b8%b2 aria-label=4.2、合并/拼接字符串>4.2、合并/拼接字符串</a></li><li><a href=#43%e4%bd%bf%e7%94%a8%e5%88%b6%e8%a1%a8%e7%ac%a6%e6%88%96%e6%8d%a2%e8%a1%8c%e7%ac%a6%e6%9d%a5%e6%b7%bb%e5%8a%a0%e7%a9%ba%e7%99%bd aria-label=4.3、使用制表符或换行符来添加空白>4.3、使用制表符或换行符来添加空白</a></li><li><a href=#44%e5%88%a0%e9%99%a4%e7%a9%ba%e7%99%bd aria-label=4.4、删除空白>4.4、删除空白</a></li><li><a href=#45%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%88%86%e5%89%b2 aria-label=4.5、字符串分割>4.5、字符串分割</a></li></ul></li><li><a href=#%e4%b9%a0%e9%a2%98 aria-label=习题>习题</a><ul><li><a href=#1%e6%89%93%e5%8d%b0%e5%87%ba99%e4%b9%98%e6%b3%95%e8%a1%a8 aria-label=1、打印出99乘法表>1、打印出99乘法表</a></li><li><a href=#2%e5%88%a4%e6%96%ad%e6%98%af%e5%90%a6%e6%98%af%e9%97%b0%e5%b9%b4 aria-label=2、判断是否是闰年>2、判断是否是闰年</a></li><li><a href=#3%e7%bc%96%e5%86%99python%e7%a8%8b%e5%ba%8f%e8%ae%a1%e7%ae%97%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e6%95%b0%e5%88%97%e8%a6%81%e6%b1%82%e8%be%93%e5%85%a5%e5%ba%8f%e5%8f%b7n%e8%be%93%e5%87%ba%e6%95%b0%e5%88%97%e7%9a%84%e7%ac%acn%e9%a1%b9%e6%95%b0%e5%88%97%e7%9a%84%e8%ae%a1%e7%ae%97%e7%94%a8%e5%87%bd%e6%95%b0%e5%ae%9e%e7%8e%b0 aria-label=3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现>3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现</a></li><li><a href=#4%e4%bd%bf%e7%94%a8%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%9a%84%e6%80%9d%e6%83%b3-%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e5%90%8d%e4%b8%ba-user-%e7%9a%84%e7%b1%bb%e5%85%b6%e4%b8%ad%e5%8c%85%e5%90%ab%e5%b1%9e%e6%80%a7-first_name-%e5%92%8c-last_name-%e8%bf%98%e6%9c%89%e7%94%a8%e6%88%b7%e7%ae%80%e4%bb%8b%e9%80%9a%e5%b8%b8%e4%bc%9a%e5%ad%98%e5%82%a8%e7%9a%84%e5%85%b6%e4%bb%96%e5%87%a0%e4%b8%aa%e5%b1%9e%e6%80%a7%e5%9c%a8%e7%b1%bb-user-%e4%b8%ad%e5%ae%9a%e4%b9%89%e4%b8%80%e4%b8%aa%e5%90%8d%e4%b8%ba-describe_user-%e7%9a%84%e6%96%b9%e6%b3%95%e5%ae%83%e6%89%93%e5%8d%b0%e7%94%a8%e6%88%b7%e4%bf%a1%e6%81%af%e6%91%98%e8%a6%81%e5%86%8d%e5%ae%9a%e4%b9%89%e4%b8%80%e4%b8%aa%e5%90%8d%e4%b8%ba-greet_user-%e7%9a%84%e6%96%b9%e6%b3%95%e5%ae%83%e5%90%91%e7%94%a8%e6%88%b7%e5%8f%91%e5%87%ba%e4%b8%aa%e6%80%a7%e5%8c%96%e7%9a%84%e9%97%ae%e5%80%99 aria-label="4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。">4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。</a></li><li><a href=#%e5%88%9b%e5%bb%ba%e5%a4%9a%e4%b8%aa%e8%a1%a8%e7%a4%ba%e4%b8%8d%e5%90%8c%e7%94%a8%e6%88%b7%e7%9a%84%e5%ae%9e%e4%be%8b%e5%b9%b6%e5%af%b9%e6%af%8f%e4%b8%aa%e5%ae%9e%e4%be%8b%e9%83%bd%e8%b0%83%e7%94%a8%e4%b8%8a%e8%bf%b0%e4%b8%a4%e4%b8%aa%e6%96%b9%e6%b3%95 aria-label=创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。>创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。</a></li></ul></li></ul></div></details></div><div class=post-content><h2 id=1python与其他语言的对比hello-world>1、python与其他语言的对比（hello world）<a hidden class=anchor aria-hidden=true href=#1python与其他语言的对比hello-world>#</a></h2><blockquote><p>C语言</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C data-lang=C>include<span style=color:#f92672>&lt;</span>stdio.h<span style=color:#f92672>&gt;</span>
-<span style=color:#66d9ef>int</span> main()
+ print(&#39;hello world&#39;) 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1&#43;2.2j # 字符串 str1 = &#39;hello&#39; str1_1 = &#34;hello&#34; str2 = &#34;world&#34; print(str1==str1_1) # 字符串连接 str3 = str1 &#43; str2 print(str3) # 转义字符 str4 = &#39;hello \nworld&#39; print(str4) str5 = &#39;hello \\n world&#39; print(str5) # 格式化输出 print(&#39;str1:%s."/>
+
+
+<script type="application/ld+json">
 {
-    printf(<span style=color:#e6db74>&#34;hello world&#34;</span>);
-    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Tems",
+      "item": "http://yangchnet.github.io/Dessert/tem/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "1、python与其他语言的对比（helloworld）",
+      "item": "http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/"
+    }
+  ]
 }
-</code></pre></div><blockquote><p>Java语言</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>HelloWorld</span><span style=color:#f92672>{</span> 
-    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>  
-        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Hello World!&#34;</span><span style=color:#f92672>);</span> 
-    <span style=color:#f92672>}</span>
-<span style=color:#f92672>}</span>
-</code></pre></div><blockquote><p>Python</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;hello world&#39;</span>)
-</code></pre></div><h2 id=2python中的常用数据类型>2、python中的常用数据类型<a hidden class=anchor aria-hidden=true href=#2python中的常用数据类型>#</a></h2><ul><li>Number</li><li>String</li><li>List</li><li>Tuple</li><li>Dictionary</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Number</span>
-a <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
-b <span style=color:#f92672>=</span> True
-c <span style=color:#f92672>=</span> <span style=color:#ae81ff>3.15</span>
-d <span style=color:#f92672>=</span> <span style=color:#ae81ff>1.1</span><span style=color:#f92672>+</span><span style=color:#ae81ff>2.2j</span>
-</code></pre></div><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 字符串</span>
-str1 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;hello&#39;</span>
-str1_1 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;hello&#34;</span>
-str2 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;world&#34;</span>
-<span style=color:#66d9ef>print</span>(str1<span style=color:#f92672>==</span>str1_1)
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "1、python与其他语言的对比（helloworld）",
+  "name": "1、python与其他语言的对比（helloworld）",
+  "description": "1、python与其他语言的对比（hello world）  C语言\n include\u0026lt;stdio.h\u0026gt; int main() { printf(\u0026#34;hello world\u0026#34;); return 0; }  Java语言\n public class HelloWorld{ public static void main(String[] args) { System.out.println(\u0026#34;Hello World!\u0026#34;); } }  Python\n print(\u0026#39;hello world\u0026#39;) 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = \u0026#39;hello\u0026#39; str1_1 = \u0026#34;hello\u0026#34; str2 = \u0026#34;world\u0026#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = \u0026#39;hello \\nworld\u0026#39; print(str4) str5 = \u0026#39;hello \\\\n world\u0026#39; print(str5) # 格式化输出 print(\u0026#39;str1:%s.",
+  "keywords": [
+    "Python"
+  ],
+  "articleBody": "1、python与其他语言的对比（hello world）  C语言\n includestdio.h int main() { printf(\"hello world\"); return 0; }  Java语言\n public class HelloWorld{ public static void main(String[] args) { System.out.println(\"Hello World!\"); } }  Python\n print('hello world') 2、python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = 'hello' str1_1 = \"hello\" str2 = \"world\" print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = 'hello \\nworld' print(str4) str5 = 'hello \\\\n world' print(str5) # 格式化输出 print('str1:%s.'%str1) # 切片 print(str1[1:4]) True helloworld hello world hello \\n world str1:hello. ell  # 列表 list1 = ['google', 'alibaba', 2001, 3.14] # 通过下标访问 print(list1[0]) # 更新列表 list1[2] = 'baidu' print(list1) # 删除元素 del list1[3] print(list1) # 拼接列表 list2 = ['microsoft', 'amazon'] list3 = list1 + list2 print(list3) # 增添列表项 list1.append('jingdong') print(list1) google ['google', 'alibaba', 'baidu', 3.14] ['google', 'alibaba', 'baidu'] ['google', 'alibaba', 'baidu', 'microsoft', 'amazon'] ['google', 'alibaba', 'baidu', 'jingdong']  # 元组：类似列表,是一系列元素的有序集合,但元组中的元素无法修改 tuple1 = ('google', 'alibaba', 'baidu') tuple1[0] = 'amazon' # 不能被改变 --------------------------------------------------------------------------- TypeError Traceback (most recent call last)  in  1 # 元组：类似列表,是一系列元素的有序集合,但元组中的元素无法修改 2 tuple1 = ('google', 'alibaba', 'baidu') ---- 3 tuple1[0] = 'amazon' TypeError: 'tuple' object does not support item assignment  # 字典 dict1 = { 'color': 'green', 'points': 5 } # 访问列表中的值 print(dict1['color']) # 增加字典中键值对 dict1['x_pos'] = 0 dict1['y_pos'] =4 print(dict1) green {'color': 'green', 'points': 5, 'x_pos': 0, 'y_pos': 4}  3、python中的结构语句 3.1、if条件语句 car = 'bmw' if car == 'bmw': print(car.upper()) # 输出car的大写版本 else: print(car.title()) # 输出car的标题版本 Bmw  现实世界中,很多情况下需要考虑的情形都超过两个。例如,来看一个根据年龄段收费的 游乐场:\n 4岁以下免费; 4~18岁收费5美元; 18岁(含)以上收费10美元。   如果只使用一条 if 语句,如何确定门票价格呢?下面的代码确定一个人所属的年龄段,并打印一条包含门票价格的消息:\n age = 12 if age  4: print(\"Your admission cost is $0.\") elif age  18: print(\"Your admission cost is $5.\") else: print(\"Your admission cost is $10.\") Your admission cost is $5.  3.2、for循环语句 fruits = ['banana', 'apple', 'mango'] for fruit in fruits: print('当前水果：%s'%fruit) 当前水果：banana 当前水果：apple 当前水果：mango  # range 步长为1 for i in range(0, 6): print(i) 1 2 3 4 5  # range 步长为2 for i in range(0, 6, 2): print(i) 0 2 4  # break 和 continue for i in range(0, 6): if i == 3: break print(i) for i in range(0, 6): if i == 3: continue print(i, end='') 0 1 2 01245  3.3、while循环语句 # while循环 current_number = 1 while current_number  5: print(current_number) current_number += 1 1 2 3 4 5  3.4、函数 def greet_user(username): \"\"\" 显示简单的问候语 \"\"\" print(\"Hello, \" + username.title() + \"!\") greet_user('jesse') greet_user('jack') Hello, Jesse! Hello, Jack!  # 有返回值的函数 def add(a, b): return a+b print('第一个函数：%d'%add(2, 3)) # 列表作为参数的函数 def add_l(mylist): result = 0 for l in mylist: result += l return result print('第二个函数：%d'%add_l([1, 2, 3, 4])) # 有多个返回值的函数 def muti_re(mylist): a = max(mylist) b = min(mylist) return a, b a, b = muti_re([1, 2, 3, 4]) print('第三个函数, 最大值：%d, 最小值：%d'%(a,b)) 第一个函数：5 第二个函数：10 第三个函数, 最大值：4, 最小值：1  有时候,你预先不知道函数需要接受多少个实参, 但是Python允许函数从调用语句中收集任意数量的实参。\n 例如,来看一个制作比萨的函数,它需要接受很多配料,但你无法预先确定顾客要多少种配 料。下面的函数只有一个形参 *toppings ,但不管调用语句提供了多少实参,这个形参都将它们 统统收入囊中:\n def make_pizza(*toppings): print(toppings) make_pizza('pepperoni') make_pizza('mushrooms', 'green peppers', 'extra cheese') ('pepperoni',) ('mushrooms', 'green peppers', 'extra cheese')  3.5、类 面向对象编程是最有效的软件编写方法之一。在面向对象编程中, 你编写表示现实世界中的事物和情景的类,并基于这些类来创建对象。 编写类时,你定义一大类对象都有的通用行为。基于类创建对象时, 每个对象都自动具备这种通用行为,然后可根据需要赋予每个对象独 特的个性。使用面向对象编程可模拟现实情景,其逼真程度达到了令 你惊讶的地步。 根据类来创建对象被称为实例化,这让你能够使用类的实例。在 本章中,你将编写一些类并创建其实例。你将指定可在实例中存储什 么信息,定义可对这些实例执行哪些操作。你还将编写一些类来扩展 既有类的功能,让相似的类能够高效地共享代码。你将把自己编写的类存储在模块中,并在 自己的程序文件中导入其他程序员编写的类\n使用类几乎可以模拟任何东西。下面来编写一个表示小狗的简单类 Dog ——它表示的不是特 定的小狗,而是任何小狗。对于大多数宠物狗,我们都知道些什么呢?它们都有名字和年龄;我 们还知道,大多数小狗还会蹲下和打滚。由于大多数小狗都具备上述两项信息(名字和年龄)和 两种行为(蹲下和打滚),我们的 Dog 类将包含它们。这个类让Python知道如何创建表示小狗的对 象。编写这个类后,我们将使用它来创建表示特定小狗的实例。\n# 创建类 class Dog(): def __init__(self, name, age): self.name = name self.age = age def sit(self): print(self.name.title() + \" is now sitting.\") def roll_over(self): print(self.name.title() + \" rolled over!\")对字符串的大小写进行更改 类中的函数称为方法;你前面学到的有关函数的一切都适用于方法,就目前而言,唯一重要 的差别是调用方法的方式。方法 init() 是一个特殊的方法,每当你根据 Dog 类创建新实 例时,Python都会自动运行它。在这个方法的名称中,开头和末尾各有两个下划线,这是一种约 定,旨在避免Python默认方法与普通方法发生名称冲突。\n# 根据类创建实例 my_dog = Dog('willie', 6) print(\"My dog's name is \" + my_dog.name.title() + \".\") print(\"My dog is \" + str(my_dog.age) + \" years old.\") My dog's name is Willie. My dog is 6 years old.  # 访问类的属性 my_dog.name 'willie'  # 调用类的方法 my_dog.sit() my_dog.roll_over() Willie is now sitting. Willie rolled over!  4、对字符串的一些操作 4.1、对字符串的大小写进行更改 # 对字符串的大小写进行更改 name = \"ada lovelace\" print(name.title()) name = \"Ada Lovelace\" print(name.upper()) print(name.lower()) Ada Lovelace ADA LOVELACE ada lovelace  4.2、合并/拼接字符串 first_name = \"ada\" last_name = \"lovelace\" full_name = first_name + \" \" + last_name print(full_name) ada lovelace  4.3、使用制表符或换行符来添加空白 print(\"\\tPython\") print(\"Languages:\\nPython\\nC\\nJavaScript\")  Python Languages: Python C JavaScript  4.4、删除空白 favorite_language = ' python ' # 删除末尾的空白 favorite_language.rstrip() # 删除开头的空白 favorite_language.lstrip() 'python '  4.5、字符串分割 my_languages = 'python,C,JAVA,PHP,MATLAB' languages_list = my_languages.split(',') print(languages_list) print(languages_list[0]) print(languages_list[0][3]) ['python', 'C', 'JAVA', 'PHP', 'MATLAB'] python h  习题 1、打印出99乘法表 2、判断是否是闰年 3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现 4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。 创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。 ",
+  "wordCount" : "677",
+  "inLanguage": "en",
+  "datePublished": "2021-02-25T00:00:00Z",
+  "dateModified": "2021-02-25T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "李昌"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://yangchnet.github.io/Dessert/tem/python/python%E5%9F%BA%E7%A1%80/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Linote",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
 
-<span style=color:#75715e># 字符串连接</span>
-str3 <span style=color:#f92672>=</span> str1 <span style=color:#f92672>+</span> str2
-<span style=color:#66d9ef>print</span>(str3)
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
 
-<span style=color:#75715e># 转义字符</span>
-str4 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;hello </span><span style=color:#ae81ff>\n</span><span style=color:#e6db74> world&#39;</span>
-<span style=color:#66d9ef>print</span>(str4)
-str5 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;hello </span><span style=color:#ae81ff>\\</span><span style=color:#e6db74>n world&#39;</span>
-<span style=color:#66d9ef>print</span>(str5)
+</script>
+<noscript>
+    <style type="text/css">
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
 
-<span style=color:#75715e># 格式化输出</span>
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;str1:</span><span style=color:#e6db74>%s</span><span style=color:#e6db74>.&#39;</span><span style=color:#f92672>%</span>str1)
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: #1d1e20;
+                --entry: #2e2e33;
+                --primary: rgba(255, 255, 255, 0.84);
+                --secondary: rgba(255, 255, 255, 0.56);
+                --tertiary: rgba(255, 255, 255, 0.16);
+                --content: rgba(255, 255, 255, 0.74);
+                --hljs-bg: #2e2e33;
+                --code-bg: #37383e;
+                --border: #333;
+            }
 
-<span style=color:#75715e># 切片</span>
-<span style=color:#66d9ef>print</span>(str1[<span style=color:#ae81ff>1</span>:<span style=color:#ae81ff>4</span>])
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://yangchnet.github.io/Dessert" accesskey="h" title="Linote (Alt + H)">Linote</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/archives" title="存档">
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/search/" title="搜索">
+                    <span>搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://yangchnet.github.io/Dessert/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://yangchnet.github.io/Dessert">Home</a>&nbsp;»&nbsp;<a href="http://yangchnet.github.io/Dessert/tem/">Tems</a></div>
+    <h1 class="post-title">
+      1、python与其他语言的对比（helloworld）
+    </h1>
+    <div class="post-meta">February 25, 2021&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <div class="details">Table of Contents</div>
+        </summary>
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1python%e4%b8%8e%e5%85%b6%e4%bb%96%e8%af%ad%e8%a8%80%e7%9a%84%e5%af%b9%e6%af%94hello-world" aria-label="1、python与其他语言的对比（hello world）">1、python与其他语言的对比（hello world）</a></li>
+                <li>
+                    <a href="#2python%e4%b8%ad%e7%9a%84%e5%b8%b8%e7%94%a8%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b" aria-label="2、python中的常用数据类型">2、python中的常用数据类型</a></li>
+                <li>
+                    <a href="#3python%e4%b8%ad%e7%9a%84%e7%bb%93%e6%9e%84%e8%af%ad%e5%8f%a5" aria-label="3、python中的结构语句">3、python中的结构语句</a><ul>
+                        
+                <li>
+                    <a href="#31if%e6%9d%a1%e4%bb%b6%e8%af%ad%e5%8f%a5" aria-label="3.1、if条件语句">3.1、if条件语句</a></li>
+                <li>
+                    <a href="#32for%e5%be%aa%e7%8e%af%e8%af%ad%e5%8f%a5" aria-label="3.2、for循环语句">3.2、for循环语句</a></li>
+                <li>
+                    <a href="#33while%e5%be%aa%e7%8e%af%e8%af%ad%e5%8f%a5" aria-label="3.3、while循环语句">3.3、while循环语句</a></li>
+                <li>
+                    <a href="#34%e5%87%bd%e6%95%b0" aria-label="3.4、函数">3.4、函数</a></li>
+                <li>
+                    <a href="#35%e7%b1%bb" aria-label="3.5、类">3.5、类</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4%e5%af%b9%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%9a%84%e4%b8%80%e4%ba%9b%e6%93%8d%e4%bd%9c" aria-label="4、对字符串的一些操作">4、对字符串的一些操作</a><ul>
+                        
+                <li>
+                    <a href="#41%e5%af%b9%e5%ad%97%e7%ac%a6%e4%b8%b2%e7%9a%84%e5%a4%a7%e5%b0%8f%e5%86%99%e8%bf%9b%e8%a1%8c%e6%9b%b4%e6%94%b9" aria-label="4.1、对字符串的大小写进行更改">4.1、对字符串的大小写进行更改</a></li>
+                <li>
+                    <a href="#42%e5%90%88%e5%b9%b6%e6%8b%bc%e6%8e%a5%e5%ad%97%e7%ac%a6%e4%b8%b2" aria-label="4.2、合并/拼接字符串">4.2、合并/拼接字符串</a></li>
+                <li>
+                    <a href="#43%e4%bd%bf%e7%94%a8%e5%88%b6%e8%a1%a8%e7%ac%a6%e6%88%96%e6%8d%a2%e8%a1%8c%e7%ac%a6%e6%9d%a5%e6%b7%bb%e5%8a%a0%e7%a9%ba%e7%99%bd" aria-label="4.3、使用制表符或换行符来添加空白">4.3、使用制表符或换行符来添加空白</a></li>
+                <li>
+                    <a href="#44%e5%88%a0%e9%99%a4%e7%a9%ba%e7%99%bd" aria-label="4.4、删除空白">4.4、删除空白</a></li>
+                <li>
+                    <a href="#45%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%88%86%e5%89%b2" aria-label="4.5、字符串分割">4.5、字符串分割</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b9%a0%e9%a2%98" aria-label="习题">习题</a><ul>
+                        
+                <li>
+                    <a href="#1%e6%89%93%e5%8d%b0%e5%87%ba99%e4%b9%98%e6%b3%95%e8%a1%a8" aria-label="1、打印出99乘法表">1、打印出99乘法表</a></li>
+                <li>
+                    <a href="#2%e5%88%a4%e6%96%ad%e6%98%af%e5%90%a6%e6%98%af%e9%97%b0%e5%b9%b4" aria-label="2、判断是否是闰年">2、判断是否是闰年</a></li>
+                <li>
+                    <a href="#3%e7%bc%96%e5%86%99python%e7%a8%8b%e5%ba%8f%e8%ae%a1%e7%ae%97%e6%96%90%e6%b3%a2%e9%82%a3%e5%a5%91%e6%95%b0%e5%88%97%e8%a6%81%e6%b1%82%e8%be%93%e5%85%a5%e5%ba%8f%e5%8f%b7n%e8%be%93%e5%87%ba%e6%95%b0%e5%88%97%e7%9a%84%e7%ac%acn%e9%a1%b9%e6%95%b0%e5%88%97%e7%9a%84%e8%ae%a1%e7%ae%97%e7%94%a8%e5%87%bd%e6%95%b0%e5%ae%9e%e7%8e%b0" aria-label="3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现">3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现</a></li>
+                <li>
+                    <a href="#4%e4%bd%bf%e7%94%a8%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%9a%84%e6%80%9d%e6%83%b3-%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e5%90%8d%e4%b8%ba-user-%e7%9a%84%e7%b1%bb%e5%85%b6%e4%b8%ad%e5%8c%85%e5%90%ab%e5%b1%9e%e6%80%a7-first_name-%e5%92%8c-last_name-%e8%bf%98%e6%9c%89%e7%94%a8%e6%88%b7%e7%ae%80%e4%bb%8b%e9%80%9a%e5%b8%b8%e4%bc%9a%e5%ad%98%e5%82%a8%e7%9a%84%e5%85%b6%e4%bb%96%e5%87%a0%e4%b8%aa%e5%b1%9e%e6%80%a7%e5%9c%a8%e7%b1%bb-user-%e4%b8%ad%e5%ae%9a%e4%b9%89%e4%b8%80%e4%b8%aa%e5%90%8d%e4%b8%ba-describe_user-%e7%9a%84%e6%96%b9%e6%b3%95%e5%ae%83%e6%89%93%e5%8d%b0%e7%94%a8%e6%88%b7%e4%bf%a1%e6%81%af%e6%91%98%e8%a6%81%e5%86%8d%e5%ae%9a%e4%b9%89%e4%b8%80%e4%b8%aa%e5%90%8d%e4%b8%ba-greet_user-%e7%9a%84%e6%96%b9%e6%b3%95%e5%ae%83%e5%90%91%e7%94%a8%e6%88%b7%e5%8f%91%e5%87%ba%e4%b8%aa%e6%80%a7%e5%8c%96%e7%9a%84%e9%97%ae%e5%80%99" aria-label="4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。">4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。</a></li>
+                <li>
+                    <a href="#%e5%88%9b%e5%bb%ba%e5%a4%9a%e4%b8%aa%e8%a1%a8%e7%a4%ba%e4%b8%8d%e5%90%8c%e7%94%a8%e6%88%b7%e7%9a%84%e5%ae%9e%e4%be%8b%e5%b9%b6%e5%af%b9%e6%af%8f%e4%b8%aa%e5%ae%9e%e4%be%8b%e9%83%bd%e8%b0%83%e7%94%a8%e4%b8%8a%e8%bf%b0%e4%b8%a4%e4%b8%aa%e6%96%b9%e6%b3%95" aria-label="创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。">创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="1python与其他语言的对比hello-world">1、python与其他语言的对比（hello world）<a hidden class="anchor" aria-hidden="true" href="#1python与其他语言的对比hello-world">#</a></h2>
+<blockquote>
+<p>C语言</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">include<span style="color:#f92672">&lt;</span>stdio.h<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">int</span> main()
+{
+    printf(<span style="color:#e6db74">&#34;hello world&#34;</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><blockquote>
+<p>Java语言</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HelloWorld</span><span style="color:#f92672">{</span> 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>  
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Hello World!&#34;</span><span style="color:#f92672">);</span> 
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><blockquote>
+<p>Python</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;hello world&#39;</span>)
+</code></pre></div><h2 id="2python中的常用数据类型">2、python中的常用数据类型<a hidden class="anchor" aria-hidden="true" href="#2python中的常用数据类型">#</a></h2>
+<ul>
+<li>Number</li>
+<li>String</li>
+<li>List</li>
+<li>Tuple</li>
+<li>Dictionary</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Number</span>
+a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+b <span style="color:#f92672">=</span> True
+c <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.15</span>
+d <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.1</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2.2j</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 字符串</span>
+str1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello&#39;</span>
+str1_1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span>
+str2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;world&#34;</span>
+<span style="color:#66d9ef">print</span>(str1<span style="color:#f92672">==</span>str1_1)
+
+<span style="color:#75715e"># 字符串连接</span>
+str3 <span style="color:#f92672">=</span> str1 <span style="color:#f92672">+</span> str2
+<span style="color:#66d9ef">print</span>(str3)
+
+<span style="color:#75715e"># 转义字符</span>
+str4 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74"> world&#39;</span>
+<span style="color:#66d9ef">print</span>(str4)
+str5 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hello </span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">n world&#39;</span>
+<span style="color:#66d9ef">print</span>(str5)
+
+<span style="color:#75715e"># 格式化输出</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;str1:</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">.&#39;</span><span style="color:#f92672">%</span>str1)
+
+<span style="color:#75715e"># 切片</span>
+<span style="color:#66d9ef">print</span>(str1[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">4</span>])
 </code></pre></div><pre><code>True
 helloworld
 hello 
@@ -53,36 +332,38 @@ hello
 hello \n world
 str1:hello.
 ell
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 列表</span>
-list1 <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#39;google&#39;</span>, <span style=color:#e6db74>&#39;alibaba&#39;</span>, <span style=color:#ae81ff>2001</span>, <span style=color:#ae81ff>3.14</span>]
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 列表</span>
+list1 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;google&#39;</span>, <span style="color:#e6db74">&#39;alibaba&#39;</span>, <span style="color:#ae81ff">2001</span>, <span style="color:#ae81ff">3.14</span>]
 
-<span style=color:#75715e># 通过下标访问</span>
-<span style=color:#66d9ef>print</span>(list1[<span style=color:#ae81ff>0</span>])
+<span style="color:#75715e"># 通过下标访问</span>
+<span style="color:#66d9ef">print</span>(list1[<span style="color:#ae81ff">0</span>])
 
-<span style=color:#75715e># 更新列表</span>
-list1[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;baidu&#39;</span>
-<span style=color:#66d9ef>print</span>(list1)
+<span style="color:#75715e"># 更新列表</span>
+list1[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;baidu&#39;</span>
+<span style="color:#66d9ef">print</span>(list1)
 
-<span style=color:#75715e># 删除元素</span>
-<span style=color:#66d9ef>del</span> list1[<span style=color:#ae81ff>3</span>]
-<span style=color:#66d9ef>print</span>(list1)
+<span style="color:#75715e"># 删除元素</span>
+<span style="color:#66d9ef">del</span> list1[<span style="color:#ae81ff">3</span>]
+<span style="color:#66d9ef">print</span>(list1)
 
-<span style=color:#75715e># 拼接列表</span>
-list2 <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#39;microsoft&#39;</span>, <span style=color:#e6db74>&#39;amazon&#39;</span>]
-list3 <span style=color:#f92672>=</span> list1 <span style=color:#f92672>+</span> list2
-<span style=color:#66d9ef>print</span>(list3)
+<span style="color:#75715e"># 拼接列表</span>
+list2 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;microsoft&#39;</span>, <span style="color:#e6db74">&#39;amazon&#39;</span>]
+list3 <span style="color:#f92672">=</span> list1 <span style="color:#f92672">+</span> list2
+<span style="color:#66d9ef">print</span>(list3)
 
-<span style=color:#75715e># 增添列表项</span>
-list1<span style=color:#f92672>.</span>append(<span style=color:#e6db74>&#39;jingdong&#39;</span>)
-<span style=color:#66d9ef>print</span>(list1)
+<span style="color:#75715e"># 增添列表项</span>
+list1<span style="color:#f92672">.</span>append(<span style="color:#e6db74">&#39;jingdong&#39;</span>)
+<span style="color:#66d9ef">print</span>(list1)
 </code></pre></div><pre><code>google
 ['google', 'alibaba', 'baidu', 3.14]
 ['google', 'alibaba', 'baidu']
 ['google', 'alibaba', 'baidu', 'microsoft', 'amazon']
 ['google', 'alibaba', 'baidu', 'jingdong']
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 元组：类似列表,是一系列元素的有序集合,但元组中的元素无法修改</span>
-tuple1 <span style=color:#f92672>=</span> (<span style=color:#e6db74>&#39;google&#39;</span>, <span style=color:#e6db74>&#39;alibaba&#39;</span>, <span style=color:#e6db74>&#39;baidu&#39;</span>)
-tuple1[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;amazon&#39;</span> <span style=color:#75715e># 不能被改变</span>
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 元组：类似列表,是一系列元素的有序集合,但元组中的元素无法修改</span>
+tuple1 <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;google&#39;</span>, <span style="color:#e6db74">&#39;alibaba&#39;</span>, <span style="color:#e6db74">&#39;baidu&#39;</span>)
+tuple1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;amazon&#39;</span> <span style="color:#75715e"># 不能被改变</span>
 </code></pre></div><pre><code>---------------------------------------------------------------------------
 
 TypeError                                 Traceback (most recent call last)
@@ -94,120 +375,151 @@ TypeError                                 Traceback (most recent call last)
 
 
 TypeError: 'tuple' object does not support item assignment
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 字典</span>
-dict1 <span style=color:#f92672>=</span> {
-         <span style=color:#e6db74>&#39;color&#39;</span>: <span style=color:#e6db74>&#39;green&#39;</span>, 
-         <span style=color:#e6db74>&#39;points&#39;</span>: <span style=color:#ae81ff>5</span>
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 字典</span>
+dict1 <span style="color:#f92672">=</span> {
+         <span style="color:#e6db74">&#39;color&#39;</span>: <span style="color:#e6db74">&#39;green&#39;</span>, 
+         <span style="color:#e6db74">&#39;points&#39;</span>: <span style="color:#ae81ff">5</span>
 }
 
-<span style=color:#75715e># 访问列表中的值</span>
-<span style=color:#66d9ef>print</span>(dict1[<span style=color:#e6db74>&#39;color&#39;</span>])
+<span style="color:#75715e"># 访问列表中的值</span>
+<span style="color:#66d9ef">print</span>(dict1[<span style="color:#e6db74">&#39;color&#39;</span>])
 
-<span style=color:#75715e># 增加字典中键值对</span>
-dict1[<span style=color:#e6db74>&#39;x_pos&#39;</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-dict1[<span style=color:#e6db74>&#39;y_pos&#39;</span>]  <span style=color:#f92672>=</span><span style=color:#ae81ff>4</span>
-<span style=color:#66d9ef>print</span>(dict1)
+<span style="color:#75715e"># 增加字典中键值对</span>
+dict1[<span style="color:#e6db74">&#39;x_pos&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+dict1[<span style="color:#e6db74">&#39;y_pos&#39;</span>]  <span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+<span style="color:#66d9ef">print</span>(dict1)
 </code></pre></div><pre><code>green
 {'color': 'green', 'points': 5, 'x_pos': 0, 'y_pos': 4}
-</code></pre><h2 id=3python中的结构语句>3、python中的结构语句<a hidden class=anchor aria-hidden=true href=#3python中的结构语句>#</a></h2><h3 id=31if条件语句>3.1、if条件语句<a hidden class=anchor aria-hidden=true href=#31if条件语句>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>car <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;bmw&#39;</span>
-<span style=color:#66d9ef>if</span> car <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;bmw&#39;</span>:
-    <span style=color:#66d9ef>print</span>(car<span style=color:#f92672>.</span>upper()) <span style=color:#75715e># 输出car的大写版本</span>
-<span style=color:#66d9ef>else</span>:
-    <span style=color:#66d9ef>print</span>(car<span style=color:#f92672>.</span>title()) <span style=color:#75715e># 输出car的标题版本</span>
+</code></pre>
+<h2 id="3python中的结构语句">3、python中的结构语句<a hidden class="anchor" aria-hidden="true" href="#3python中的结构语句">#</a></h2>
+<h3 id="31if条件语句">3.1、if条件语句<a hidden class="anchor" aria-hidden="true" href="#31if条件语句">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">car <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bmw&#39;</span>
+<span style="color:#66d9ef">if</span> car <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;bmw&#39;</span>:
+    <span style="color:#66d9ef">print</span>(car<span style="color:#f92672">.</span>upper()) <span style="color:#75715e"># 输出car的大写版本</span>
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(car<span style="color:#f92672">.</span>title()) <span style="color:#75715e"># 输出car的标题版本</span>
 </code></pre></div><pre><code>Bmw
-</code></pre><p>现实世界中,很多情况下需要考虑的情形都超过两个。例如,来看一个根据年龄段收费的
-游乐场:</p><ul><li>4岁以下免费;</li><li>4~18岁收费5美元;</li><li>18岁(含)以上收费10美元。</li></ul><blockquote><p>如果只使用一条 if 语句,如何确定门票价格呢?下面的代码确定一个人所属的年龄段,并打印一条包含门票价格的消息:</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>age <span style=color:#f92672>=</span> <span style=color:#ae81ff>12</span>
-<span style=color:#66d9ef>if</span> age <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>4</span>:
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;Your admission cost is $0.&#34;</span>)
-<span style=color:#66d9ef>elif</span> age <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>18</span>:
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;Your admission cost is $5.&#34;</span>)
-<span style=color:#66d9ef>else</span>:
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;Your admission cost is $10.&#34;</span>)
+</code></pre>
+<p>现实世界中,很多情况下需要考虑的情形都超过两个。例如,来看一个根据年龄段收费的
+游乐场:</p>
+<ul>
+<li>4岁以下免费;</li>
+<li>4~18岁收费5美元;</li>
+<li>18岁(含)以上收费10美元。</li>
+</ul>
+<blockquote>
+<p>如果只使用一条 if 语句,如何确定门票价格呢?下面的代码确定一个人所属的年龄段,并打印一条包含门票价格的消息:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">age <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
+<span style="color:#66d9ef">if</span> age <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Your admission cost is $0.&#34;</span>)
+<span style="color:#66d9ef">elif</span> age <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">18</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Your admission cost is $5.&#34;</span>)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Your admission cost is $10.&#34;</span>)
 </code></pre></div><pre><code>Your admission cost is $5.
-</code></pre><h3 id=32for循环语句>3.2、for循环语句<a hidden class=anchor aria-hidden=true href=#32for循环语句>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>fruits <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#39;banana&#39;</span>, <span style=color:#e6db74>&#39;apple&#39;</span>, <span style=color:#e6db74>&#39;mango&#39;</span>]
-<span style=color:#66d9ef>for</span> fruit <span style=color:#f92672>in</span> fruits:
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;当前水果：</span><span style=color:#e6db74>%s</span><span style=color:#e6db74>&#39;</span><span style=color:#f92672>%</span>fruit)
+</code></pre>
+<h3 id="32for循环语句">3.2、for循环语句<a hidden class="anchor" aria-hidden="true" href="#32for循环语句">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fruits <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;banana&#39;</span>, <span style="color:#e6db74">&#39;apple&#39;</span>, <span style="color:#e6db74">&#39;mango&#39;</span>]
+<span style="color:#66d9ef">for</span> fruit <span style="color:#f92672">in</span> fruits:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;当前水果：</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">%</span>fruit)
 </code></pre></div><pre><code>当前水果：banana
 当前水果：apple
 当前水果：mango
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># range 步长为1</span>
-<span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>6</span>):
-    <span style=color:#66d9ef>print</span>(i)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># range 步长为1</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>):
+    <span style="color:#66d9ef">print</span>(i)
 </code></pre></div><pre><code>1
 2
 3
 4
 5
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># range 步长为2</span>
-<span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>6</span>, <span style=color:#ae81ff>2</span>):
-    <span style=color:#66d9ef>print</span>(i)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># range 步长为2</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2</span>):
+    <span style="color:#66d9ef">print</span>(i)
 </code></pre></div><pre><code>0
 2
 4
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># break 和 continue</span>
-<span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>6</span>):
-    <span style=color:#66d9ef>if</span> i <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>:
-        <span style=color:#66d9ef>break</span>
-    <span style=color:#66d9ef>print</span>(i)
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># break 和 continue</span>
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>):
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+        <span style="color:#66d9ef">break</span>
+    <span style="color:#66d9ef">print</span>(i)
 
-<span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>6</span>):
-    <span style=color:#66d9ef>if</span> i <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>:
-        <span style=color:#66d9ef>continue</span>
-    <span style=color:#66d9ef>print</span>(i, end<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;&#39;</span>)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>):
+    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+        <span style="color:#66d9ef">continue</span>
+    <span style="color:#66d9ef">print</span>(i, end<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>)
 </code></pre></div><pre><code>0
 1
 2
 01245
-</code></pre><h3 id=33while循环语句>3.3、while循环语句<a hidden class=anchor aria-hidden=true href=#33while循环语句>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># while循环</span>
-current_number <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
-<span style=color:#66d9ef>while</span> current_number <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>5</span>:
-    <span style=color:#66d9ef>print</span>(current_number)
-    current_number <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+</code></pre>
+<h3 id="33while循环语句">3.3、while循环语句<a hidden class="anchor" aria-hidden="true" href="#33while循环语句">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># while循环</span>
+current_number <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">while</span> current_number <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">5</span>:
+    <span style="color:#66d9ef">print</span>(current_number)
+    current_number <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
 </code></pre></div><pre><code>1
 2
 3
 4
 5
-</code></pre><h3 id=34函数>3.4、函数<a hidden class=anchor aria-hidden=true href=#34函数>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>greet_user</span>(username):
-    <span style=color:#e6db74>&#34;&#34;&#34; 显示简单的问候语 &#34;&#34;&#34;</span>
-    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;Hello, &#34;</span> <span style=color:#f92672>+</span> username<span style=color:#f92672>.</span>title() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;!&#34;</span>)
+</code></pre>
+<h3 id="34函数">3.4、函数<a hidden class="anchor" aria-hidden="true" href="#34函数">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">greet_user</span>(username):
+    <span style="color:#e6db74">&#34;&#34;&#34; 显示简单的问候语 &#34;&#34;&#34;</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Hello, &#34;</span> <span style="color:#f92672">+</span> username<span style="color:#f92672">.</span>title() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;!&#34;</span>)
 
-greet_user(<span style=color:#e6db74>&#39;jesse&#39;</span>)
-greet_user(<span style=color:#e6db74>&#39;jack&#39;</span>)
+greet_user(<span style="color:#e6db74">&#39;jesse&#39;</span>)
+greet_user(<span style="color:#e6db74">&#39;jack&#39;</span>)
 </code></pre></div><pre><code>Hello, Jesse!
 Hello, Jack!
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 有返回值的函数</span>
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>add</span>(a, b):
-    <span style=color:#66d9ef>return</span> a<span style=color:#f92672>+</span>b
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;第一个函数：</span><span style=color:#e6db74>%d</span><span style=color:#e6db74>&#39;</span><span style=color:#f92672>%</span>add(<span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>))
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 有返回值的函数</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
+    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">+</span>b
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;第一个函数：</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">%</span>add(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>))
 
-<span style=color:#75715e># 列表作为参数的函数</span>
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>add_l</span>(mylist):
-    result <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
-    <span style=color:#66d9ef>for</span> l <span style=color:#f92672>in</span> mylist:
-        result <span style=color:#f92672>+=</span> l
-    <span style=color:#66d9ef>return</span> result
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;第二个函数：</span><span style=color:#e6db74>%d</span><span style=color:#e6db74>&#39;</span><span style=color:#f92672>%</span>add_l([<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span>]))
+<span style="color:#75715e"># 列表作为参数的函数</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_l</span>(mylist):
+    result <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> mylist:
+        result <span style="color:#f92672">+=</span> l
+    <span style="color:#66d9ef">return</span> result
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;第二个函数：</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">%</span>add_l([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]))
 
-<span style=color:#75715e># 有多个返回值的函数</span>
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>muti_re</span>(mylist):
-    a <span style=color:#f92672>=</span> max(mylist)
-    b <span style=color:#f92672>=</span> min(mylist)
-    <span style=color:#66d9ef>return</span> a, b
-a, b <span style=color:#f92672>=</span> muti_re([<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span>])
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;第三个函数, 最大值：</span><span style=color:#e6db74>%d</span><span style=color:#e6db74>, 最小值：</span><span style=color:#e6db74>%d</span><span style=color:#e6db74>&#39;</span><span style=color:#f92672>%</span>(a,b))
+<span style="color:#75715e"># 有多个返回值的函数</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">muti_re</span>(mylist):
+    a <span style="color:#f92672">=</span> max(mylist)
+    b <span style="color:#f92672">=</span> min(mylist)
+    <span style="color:#66d9ef">return</span> a, b
+a, b <span style="color:#f92672">=</span> muti_re([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>])
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;第三个函数, 最大值：</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">, 最小值：</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">%</span>(a,b))
 </code></pre></div><pre><code>第一个函数：5
 第二个函数：10
 第三个函数, 最大值：4, 最小值：1
-</code></pre><p>有时候,你预先不知道函数需要接受多少个实参, 但是Python允许函数从调用语句中收集任意数量的实参。</p><blockquote><p>例如,来看一个制作比萨的函数,它需要接受很多配料,但你无法预先确定顾客要多少种配
+</code></pre>
+<p>有时候,你预先不知道函数需要接受多少个实参, 但是Python允许函数从调用语句中收集任意数量的实参。</p>
+<blockquote>
+<p>例如,来看一个制作比萨的函数,它需要接受很多配料,但你无法预先确定顾客要多少种配
 料。下面的函数只有一个形参 *toppings ,但不管调用语句提供了多少实参,这个形参都将它们
-统统收入囊中:</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make_pizza</span>(<span style=color:#f92672>*</span>toppings):
-    <span style=color:#66d9ef>print</span>(toppings)
-make_pizza(<span style=color:#e6db74>&#39;pepperoni&#39;</span>)
-make_pizza(<span style=color:#e6db74>&#39;mushrooms&#39;</span>, <span style=color:#e6db74>&#39;green peppers&#39;</span>, <span style=color:#e6db74>&#39;extra cheese&#39;</span>)
+统统收入囊中:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_pizza</span>(<span style="color:#f92672">*</span>toppings):
+    <span style="color:#66d9ef">print</span>(toppings)
+make_pizza(<span style="color:#e6db74">&#39;pepperoni&#39;</span>)
+make_pizza(<span style="color:#e6db74">&#39;mushrooms&#39;</span>, <span style="color:#e6db74">&#39;green peppers&#39;</span>, <span style="color:#e6db74">&#39;extra cheese&#39;</span>)
 </code></pre></div><pre><code>('pepperoni',)
 ('mushrooms', 'green peppers', 'extra cheese')
-</code></pre><h3 id=35类>3.5、类<a hidden class=anchor aria-hidden=true href=#35类>#</a></h3><p>面向对象编程是最有效的软件编写方法之一。在面向对象编程中,
+</code></pre>
+<h3 id="35类">3.5、类<a hidden class="anchor" aria-hidden="true" href="#35类">#</a></h3>
+<p>面向对象编程是最有效的软件编写方法之一。在面向对象编程中,
 你编写表示现实世界中的事物和情景的类,并基于这些类来创建对象。
 编写类时,你定义一大类对象都有的通用行为。基于类创建对象时,
 每个对象都自动具备这种通用行为,然后可根据需要赋予每个对象独
@@ -217,78 +529,196 @@ make_pizza(<span style=color:#e6db74>&#39;mushrooms&#39;</span>, <span style=col
 本章中,你将编写一些类并创建其实例。你将指定可在实例中存储什
 么信息,定义可对这些实例执行哪些操作。你还将编写一些类来扩展
 既有类的功能,让相似的类能够高效地共享代码。你将把自己编写的类存储在模块中,并在
-自己的程序文件中导入其他程序员编写的类</p><p>使用类几乎可以模拟任何东西。下面来编写一个表示小狗的简单类 Dog ——它表示的不是特
+自己的程序文件中导入其他程序员编写的类</p>
+<p>使用类几乎可以模拟任何东西。下面来编写一个表示小狗的简单类 Dog ——它表示的不是特
 定的小狗,而是任何小狗。对于大多数宠物狗,我们都知道些什么呢?它们都有名字和年龄;我
 们还知道,大多数小狗还会蹲下和打滚。由于大多数小狗都具备上述两项信息(名字和年龄)和
 两种行为(蹲下和打滚),我们的 Dog 类将包含它们。这个类让Python知道如何创建表示小狗的对
-象。编写这个类后,我们将使用它来创建表示特定小狗的实例。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 创建类</span>
-<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Dog</span>():
-    <span style=color:#66d9ef>def</span> __init__(self, name, age):
-        self<span style=color:#f92672>.</span>name <span style=color:#f92672>=</span> name
-        self<span style=color:#f92672>.</span>age <span style=color:#f92672>=</span> age 
+象。编写这个类后,我们将使用它来创建表示特定小狗的实例。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 创建类</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Dog</span>():
+    <span style="color:#66d9ef">def</span> __init__(self, name, age):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age 
         
-    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>sit</span>(self):
-        <span style=color:#66d9ef>print</span>(self<span style=color:#f92672>.</span>name<span style=color:#f92672>.</span>title() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; is now sitting.&#34;</span>) 
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sit</span>(self):
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>title() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; is now sitting.&#34;</span>) 
         
-    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>roll_over</span>(self):
-        <span style=color:#66d9ef>print</span>(self<span style=color:#f92672>.</span>name<span style=color:#f92672>.</span>title() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; rolled over!&#34;</span>)<span style=color:#960050;background-color:#1e0010>对字符串的大小写进行更改</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">roll_over</span>(self):
+        <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>title() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; rolled over!&#34;</span>)<span style="color:#960050;background-color:#1e0010">对字符串的大小写进行更改</span>
 </code></pre></div><p>类中的函数称为方法;你前面学到的有关函数的一切都适用于方法,就目前而言,唯一重要
 的差别是调用方法的方式。方法 <strong>init</strong>() 是一个特殊的方法,每当你根据 Dog 类创建新实
 例时,Python都会自动运行它。在这个方法的名称中,开头和末尾各有两个下划线,这是一种约
-定,旨在避免Python默认方法与普通方法发生名称冲突。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 根据类创建实例</span>
-my_dog <span style=color:#f92672>=</span> Dog(<span style=color:#e6db74>&#39;willie&#39;</span>, <span style=color:#ae81ff>6</span>)
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;My dog&#39;s name is &#34;</span> <span style=color:#f92672>+</span> my_dog<span style=color:#f92672>.</span>name<span style=color:#f92672>.</span>title() <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;.&#34;</span>)
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;My dog is &#34;</span> <span style=color:#f92672>+</span> str(my_dog<span style=color:#f92672>.</span>age) <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; years old.&#34;</span>)
+定,旨在避免Python默认方法与普通方法发生名称冲突。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 根据类创建实例</span>
+my_dog <span style="color:#f92672">=</span> Dog(<span style="color:#e6db74">&#39;willie&#39;</span>, <span style="color:#ae81ff">6</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;My dog&#39;s name is &#34;</span> <span style="color:#f92672">+</span> my_dog<span style="color:#f92672">.</span>name<span style="color:#f92672">.</span>title() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.&#34;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;My dog is &#34;</span> <span style="color:#f92672">+</span> str(my_dog<span style="color:#f92672">.</span>age) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; years old.&#34;</span>)
 </code></pre></div><pre><code>My dog's name is Willie.
 My dog is 6 years old.
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 访问类的属性</span>
-my_dog<span style=color:#f92672>.</span>name
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 访问类的属性</span>
+my_dog<span style="color:#f92672">.</span>name
 </code></pre></div><pre><code>'willie'
-</code></pre><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 调用类的方法</span>
-my_dog<span style=color:#f92672>.</span>sit()
-my_dog<span style=color:#f92672>.</span>roll_over()
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 调用类的方法</span>
+my_dog<span style="color:#f92672">.</span>sit()
+my_dog<span style="color:#f92672">.</span>roll_over()
 </code></pre></div><pre><code>Willie is now sitting.
 Willie rolled over!
-</code></pre><h2 id=4对字符串的一些操作>4、对字符串的一些操作<a hidden class=anchor aria-hidden=true href=#4对字符串的一些操作>#</a></h2><h3 id=41对字符串的大小写进行更改>4.1、对字符串的大小写进行更改<a hidden class=anchor aria-hidden=true href=#41对字符串的大小写进行更改>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># 对字符串的大小写进行更改</span>
-name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ada lovelace&#34;</span>
-<span style=color:#66d9ef>print</span>(name<span style=color:#f92672>.</span>title())
+</code></pre>
+<h2 id="4对字符串的一些操作">4、对字符串的一些操作<a hidden class="anchor" aria-hidden="true" href="#4对字符串的一些操作">#</a></h2>
+<h3 id="41对字符串的大小写进行更改">4.1、对字符串的大小写进行更改<a hidden class="anchor" aria-hidden="true" href="#41对字符串的大小写进行更改">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># 对字符串的大小写进行更改</span>
+name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ada lovelace&#34;</span>
+<span style="color:#66d9ef">print</span>(name<span style="color:#f92672">.</span>title())
 
-name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Ada Lovelace&#34;</span>
-<span style=color:#66d9ef>print</span>(name<span style=color:#f92672>.</span>upper())
-<span style=color:#66d9ef>print</span>(name<span style=color:#f92672>.</span>lower())
+name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Ada Lovelace&#34;</span>
+<span style="color:#66d9ef">print</span>(name<span style="color:#f92672">.</span>upper())
+<span style="color:#66d9ef">print</span>(name<span style="color:#f92672">.</span>lower())
 </code></pre></div><pre><code>Ada Lovelace
 ADA LOVELACE
 ada lovelace
-</code></pre><h3 id=42合并拼接字符串>4.2、合并/拼接字符串<a hidden class=anchor aria-hidden=true href=#42合并拼接字符串>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>first_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;ada&#34;</span>
-last_name <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;lovelace&#34;</span>
-full_name <span style=color:#f92672>=</span> first_name <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; &#34;</span> <span style=color:#f92672>+</span> last_name
-<span style=color:#66d9ef>print</span>(full_name)
+</code></pre>
+<h3 id="42合并拼接字符串">4.2、合并/拼接字符串<a hidden class="anchor" aria-hidden="true" href="#42合并拼接字符串">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">first_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ada&#34;</span>
+last_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;lovelace&#34;</span>
+full_name <span style="color:#f92672">=</span> first_name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> last_name
+<span style="color:#66d9ef">print</span>(full_name)
 
 </code></pre></div><pre><code>ada lovelace
-</code></pre><h3 id=43使用制表符或换行符来添加空白>4.3、使用制表符或换行符来添加空白<a hidden class=anchor aria-hidden=true href=#43使用制表符或换行符来添加空白>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\t</span><span style=color:#e6db74>Python&#34;</span>)
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;Languages:</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>Python</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>C</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>JavaScript&#34;</span>)
+</code></pre>
+<h3 id="43使用制表符或换行符来添加空白">4.3、使用制表符或换行符来添加空白<a hidden class="anchor" aria-hidden="true" href="#43使用制表符或换行符来添加空白">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">Python&#34;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Languages:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Python</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">C</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">JavaScript&#34;</span>)
 </code></pre></div><pre><code>    Python
 Languages:
 Python
 C
 JavaScript
-</code></pre><h3 id=44删除空白>4.4、删除空白<a hidden class=anchor aria-hidden=true href=#44删除空白>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>favorite_language <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39; python &#39;</span>
-<span style=color:#75715e># 删除末尾的空白</span>
-favorite_language<span style=color:#f92672>.</span>rstrip()
-<span style=color:#75715e># 删除开头的空白</span>
-favorite_language<span style=color:#f92672>.</span>lstrip()
+</code></pre>
+<h3 id="44删除空白">4.4、删除空白<a hidden class="anchor" aria-hidden="true" href="#44删除空白">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">favorite_language <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39; python &#39;</span>
+<span style="color:#75715e"># 删除末尾的空白</span>
+favorite_language<span style="color:#f92672">.</span>rstrip()
+<span style="color:#75715e"># 删除开头的空白</span>
+favorite_language<span style="color:#f92672">.</span>lstrip()
 </code></pre></div><pre><code>'python '
-</code></pre><h3 id=45字符串分割>4.5、字符串分割<a hidden class=anchor aria-hidden=true href=#45字符串分割>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>my_languages <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;python,C,JAVA,PHP,MATLAB&#39;</span>
-languages_list <span style=color:#f92672>=</span> my_languages<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#39;,&#39;</span>)
-<span style=color:#66d9ef>print</span>(languages_list)
-<span style=color:#66d9ef>print</span>(languages_list[<span style=color:#ae81ff>0</span>])
-<span style=color:#66d9ef>print</span>(languages_list[<span style=color:#ae81ff>0</span>][<span style=color:#ae81ff>3</span>])
+</code></pre>
+<h3 id="45字符串分割">4.5、字符串分割<a hidden class="anchor" aria-hidden="true" href="#45字符串分割">#</a></h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_languages <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;python,C,JAVA,PHP,MATLAB&#39;</span>
+languages_list <span style="color:#f92672">=</span> my_languages<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;,&#39;</span>)
+<span style="color:#66d9ef">print</span>(languages_list)
+<span style="color:#66d9ef">print</span>(languages_list[<span style="color:#ae81ff">0</span>])
+<span style="color:#66d9ef">print</span>(languages_list[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">3</span>])
 </code></pre></div><pre><code>['python', 'C', 'JAVA', 'PHP', 'MATLAB']
 python
 h
-</code></pre><h2 id=习题>习题<a hidden class=anchor aria-hidden=true href=#习题>#</a></h2><h3 id=1打印出99乘法表>1、打印出99乘法表<a hidden class=anchor aria-hidden=true href=#1打印出99乘法表>#</a></h3><h3 id=2判断是否是闰年>2、判断是否是闰年<a hidden class=anchor aria-hidden=true href=#2判断是否是闰年>#</a></h3><h3 id=3编写python程序计算斐波那契数列要求输入序号n输出数列的第n项数列的计算用函数实现>3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现<a hidden class=anchor aria-hidden=true href=#3编写python程序计算斐波那契数列要求输入序号n输出数列的第n项数列的计算用函数实现>#</a></h3><h3 id=4使用面向对象的思想-创建一个名为-user-的类其中包含属性-first_name-和-last_name-还有用户简介通常会存储的其他几个属性在类-user-中定义一个名为-describe_user-的方法它打印用户信息摘要再定义一个名为-greet_user-的方法它向用户发出个性化的问候>4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。<a hidden class=anchor aria-hidden=true href=#4使用面向对象的思想-创建一个名为-user-的类其中包含属性-first_name-和-last_name-还有用户简介通常会存储的其他几个属性在类-user-中定义一个名为-describe_user-的方法它打印用户信息摘要再定义一个名为-greet_user-的方法它向用户发出个性化的问候>#</a></h3><h3 id=创建多个表示不同用户的实例并对每个实例都调用上述两个方法>创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。<a hidden class=anchor aria-hidden=true href=#创建多个表示不同用户的实例并对每个实例都调用上述两个方法>#</a></h3></div><footer class=post-footer><ul class=post-tags><li><a href=http://yangchnet.github.io/Dessert/tags/python/>Python</a></li></ul><div class=share-buttons><div class=bshare-custom><a title=分享到微信 class=bshare-weixin></a><a title=分享到QQ好友 class=bshare-qqim></a><a title=分享到复制网址 class=bshare-clipboard></a><a title=分享到QQ空间 class=bshare-qzone></a><a title=分享到新浪微博 class=bshare-sinaminiblog></a><a title=分享到电子邮件 class=bshare-email></a><a title=更多平台 class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type=text/javascript src="http://static.bshare.cn/b/buttonLite.js#style=-1&uuid=&pophcol=2&lang=zh"></script><script type=text/javascript src=http://static.bshare.cn/b/bshareC0.js></script></div></footer></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
-<span>Powered by
-<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>
-<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)"><button class=top-link id=top-link type=button accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></button></a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
+</code></pre>
+<h2 id="习题">习题<a hidden class="anchor" aria-hidden="true" href="#习题">#</a></h2>
+<h3 id="1打印出99乘法表">1、打印出99乘法表<a hidden class="anchor" aria-hidden="true" href="#1打印出99乘法表">#</a></h3>
+<h3 id="2判断是否是闰年">2、判断是否是闰年<a hidden class="anchor" aria-hidden="true" href="#2判断是否是闰年">#</a></h3>
+<h3 id="3编写python程序计算斐波那契数列要求输入序号n输出数列的第n项数列的计算用函数实现">3、编写Python程序计算斐波那契数列，要求：输入序号n，输出数列的第n项，数列的计算用函数实现<a hidden class="anchor" aria-hidden="true" href="#3编写python程序计算斐波那契数列要求输入序号n输出数列的第n项数列的计算用函数实现">#</a></h3>
+<h3 id="4使用面向对象的思想-创建一个名为-user-的类其中包含属性-first_name-和-last_name-还有用户简介通常会存储的其他几个属性在类-user-中定义一个名为-describe_user-的方法它打印用户信息摘要再定义一个名为-greet_user-的方法它向用户发出个性化的问候">4、使用面向对象的思想， 创建一个名为 User 的类,其中包含属性 first_name 和 last_name ,还有用户简介通常会存储的其他几个属性。在类 User 中定义一个名为 describe_user() 的方法,它打印用户信息摘要;再定义一个名为 greet_user() 的方法,它向用户发出个性化的问候。<a hidden class="anchor" aria-hidden="true" href="#4使用面向对象的思想-创建一个名为-user-的类其中包含属性-first_name-和-last_name-还有用户简介通常会存储的其他几个属性在类-user-中定义一个名为-describe_user-的方法它打印用户信息摘要再定义一个名为-greet_user-的方法它向用户发出个性化的问候">#</a></h3>
+<h3 id="创建多个表示不同用户的实例并对每个实例都调用上述两个方法">创建多个表示不同用户的实例,并对每个实例都调用上述两个方法。<a hidden class="anchor" aria-hidden="true" href="#创建多个表示不同用户的实例并对每个实例都调用上述两个方法">#</a></h3>
+
+</div>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://yangchnet.github.io/Dessert/tags/python/">Python</a></li>
+    </ul>
+
+<div class="share-buttons">
+    <div class="bshare-custom"><a title="分享到微信" class="bshare-weixin"></a><a title="分享到QQ好友" class="bshare-qqim"></a><a title="分享到复制网址" class="bshare-clipboard"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到电子邮件" class="bshare-email"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    
+</div>
+
+  </footer>
+</article>
+    </main>
+    <footer class="footer">
+    <span>&copy; 2021 <a href="http://yangchnet.github.io/Dessert">Linote</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
+        });
+    </script>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)">
+    <button class="top-link" id="top-link" type="button" accesskey="g">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+            <path d="M12 6H0l6-6z" />
+        </svg>
+    </button>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+    menu.onscroll = function () {
+        localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

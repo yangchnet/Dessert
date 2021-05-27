@@ -11,7 +11,7 @@ mkdir /etc/clash touch /etc/clash/config.yaml ··· # 编辑你的config.yaml 4
 [Unit] Description=clash proxy After=network.target [Service] Type=simple ExecStart=/usr/bin/clash -d /etc/clash [Install] WantedBy=multi-user.target 要想深入了解systemctl服务，可前往阮一峰大佬的教程
 编辑完成后，重载systemctl
 systemctl daemon-reload 开启clash服务
-systemctl start clash 5. 开启http代理和socks5代理 手动开启代理 export https_proxy=http://127....</p></section><footer class=entry-footer>March 4, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to 安装与配置clash" href=http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/></a></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
+systemctl start clash 5. 开启http代理和socks5代理 手动开启代理 export https_proxy=http://127....</p></section><footer class=entry-footer>March 4, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to 安装与配置clash" href=http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/></a></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>

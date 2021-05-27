@@ -12,10 +12,10 @@
     <lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/sql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ORM简介</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</link>
       <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</guid>
       <description>1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&amp;quot;对象-关系映射&amp;quot;（Object/Relational Mapping） 的缩写。
 ORM把数据库映射为对象
  数据库的表（table） &amp;ndash;&amp;gt; 类（class） 记录（record，行数据）&amp;ndash;&amp;gt; 对象（object） 字段（field）&amp;ndash;&amp;gt; 对象的属性（attribute）
@@ -29,10 +29,10 @@ p = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对�
     
     <item>
       <title>Ubuntu18（WSL2）安装redis</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
       <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
       <description>1. 安装并对redis进行配置 更新源并安装redis
 sudo apt-get update sudo apt-get install redis-server 将redis设置为systemctl
 sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
@@ -41,30 +41,30 @@ sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
     
     <item>
       <title>Did you install mysqlclient?</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</guid>
       <description>Did you install mysqlclient? 在进行新的django项目时出现了这个错误
 解决方法  确保pymysql和mysqlcient都安装 在和setting.py同级的init.py中加入  import pymysql pymysql.install_as_MySQLdb() </description>
     </item>
     
     <item>
       <title>mysql中无法插入中文解决办法</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</guid>
       <description>mysql 中无法插入中文解决办法 alert database tuanplus character set utf8； 使用此方法可更改整个数据库，但是数据可能会丢失
 alter table address convert to character set utf8； 使用此方法可更改某个表的编码</description>
     </item>
     
     <item>
       <title>MySql安装和配置</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</guid>
       <description>1. 安装mysql sudo apt update sudo apt install mysql-server 2. 配置mysql 运行 security script
 sudo mysql_secure_installation 根据提示进行一些必要的配置
 进入mysql
@@ -75,10 +75,10 @@ SELECT user,authentication_string,plugin,host FROM mysql.user; 在输出中
     
     <item>
       <title>Mysql无法远程访问</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid>
       <description>Mysql无法远程访问 在使用navicat远程连接阿里云的时候，出现“2003 can t connect to mysql server on 10061”错误
 经过艰难的谷歌百度stackflow后，发现是3306端口没有监听外部连接，只接收内部ip访问。
 解决方案  首先保证阿里云服务器3306端口开放 使用netstat -ntpl |grep 3306命令查看3306端口状态 tcp 0 0 127.0.0.1:22 0.0.0.0:* LISTEN -
@@ -89,19 +89,19 @@ mysql&amp;gt; CREATE USER &amp;#39;monty&amp;#39;@&amp;#39;localhost&amp;#39; ID
     
     <item>
       <title>如何在manjaro中安装MySQL</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</guid>
       <description>如何在manjaro中安装MySQL # 安装MySQL pacman -S mysql # 初始化MySQL，记住输出的root密码 mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql # 设置开机启动MySQL服务 systemctl enable mysqld.service systemctl daemon-reload systemctl start mysqld.service # 使用MySQL前必须修改root密码，MySQL 8.0.15不能使用set password修改密码 mysql -u root -p mysql&amp;gt; ALTER USER &amp;#39;root&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED WITH mysql_native_password BY &amp;#39;新密码&amp;#39;; </description>
     </item>
     
     <item>
       <title>数据库中的视图</title>
-      <link>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tem/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</guid>
       <description>数据库中的视图 1. 什么是数据库视图 数据库视图的创建是基于SQL SELECT query和JOIN的。视图和表很相似，它也包含行和列，所以可以直接对它进行查询操作。另外大多数的数据库同样允许进行UPADTE操作，但必须满足一定的条件。视图的数据结构如图：
 数据库并没有存储视图这个关系,存储的只是一个查询定义
 2. 数据库视图可以干什么   视图可以简化复杂查询
