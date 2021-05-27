@@ -2,173 +2,173 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on Linote</title>
-    <link>http://lichang.tech/categories/</link>
+    <link>http://yangchnet.github.io/Dessert/categories/</link>
     <description>Recent content in Categories on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 24 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tem</title>
-      <link>http://lichang.tech/categories/tem/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/tem/</link>
       <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/tem/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/tem/</guid>
       <description></description>
     </item>
     
     <item>
       <title>GoLang</title>
-      <link>http://lichang.tech/categories/golang/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/golang/</link>
       <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/golang/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tools</title>
-      <link>http://lichang.tech/categories/tools/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/tools/</link>
       <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/tools/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/tools/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>http://lichang.tech/categories/python/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/python/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/python/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>http://lichang.tech/categories/linux/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/linux/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/linux/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>架构</title>
-      <link>http://lichang.tech/categories/%E6%9E%B6%E6%9E%84/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/%E6%9E%B6%E6%9E%84/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/%E6%9E%B6%E6%9E%84/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Git</title>
-      <link>http://lichang.tech/categories/git/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/git/</link>
       <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/git/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>区块链</title>
-      <link>http://lichang.tech/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
       <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Django</title>
-      <link>http://lichang.tech/categories/django/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/django/</link>
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/django/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/django/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SQL</title>
-      <link>http://lichang.tech/categories/sql/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/sql/</link>
       <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/sql/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/sql/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OS</title>
-      <link>http://lichang.tech/categories/os/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/os/</link>
       <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/os/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/os/</guid>
       <description></description>
     </item>
     
     <item>
       <title>杂记</title>
-      <link>http://lichang.tech/categories/%E6%9D%82%E8%AE%B0/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/%E6%9D%82%E8%AE%B0/</link>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/%E6%9D%82%E8%AE%B0/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/%E6%9D%82%E8%AE%B0/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Github</title>
-      <link>http://lichang.tech/categories/github/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/github/</link>
       <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/github/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/github/</guid>
       <description></description>
     </item>
     
     <item>
       <title>DL&amp;ML</title>
-      <link>http://lichang.tech/categories/dlml/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/dlml/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/dlml/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/dlml/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Net</title>
-      <link>http://lichang.tech/categories/net/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/net/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/net/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/net/</guid>
       <description></description>
     </item>
     
     <item>
       <title>云计算与容器</title>
-      <link>http://lichang.tech/categories/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/</guid>
       <description></description>
     </item>
     
     <item>
       <title>前端</title>
-      <link>http://lichang.tech/categories/%E5%89%8D%E7%AB%AF/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/%E5%89%8D%E7%AB%AF/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/%E5%89%8D%E7%AB%AF/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/%E5%89%8D%E7%AB%AF/</guid>
       <description></description>
     </item>
     
     <item>
       <title>汇编</title>
-      <link>http://lichang.tech/categories/%E6%B1%87%E7%BC%96/</link>
+      <link>http://yangchnet.github.io/Dessert/categories/%E6%B1%87%E7%BC%96/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/categories/%E6%B1%87%E7%BC%96/</guid>
+      <guid>http://yangchnet.github.io/Dessert/categories/%E6%B1%87%E7%BC%96/</guid>
       <description></description>
     </item>
     

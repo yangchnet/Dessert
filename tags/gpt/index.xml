@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>GPT on Linote</title>
-    <link>http://lichang.tech/tags/gpt/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/gpt/</link>
     <description>Recent content in GPT on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/gpt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/gpt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows装系统遇到的问题</title>
-      <link>http://lichang.tech/tem/os/mbr-gpt/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/os/mbr-gpt/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/os/mbr-gpt/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/os/mbr-gpt/</guid>
       <description>Windows装系统遇到的问题 1. 问题描述 windows无法安装到这个磁盘，选中的磁盘具有MBR分区表。在EFI系统上，Windows只能安装到GPT磁盘
 2. 问题来源 这个问题的根源网上众说纷纭，暂且不管他
 3. 解决办法   首先选择U盘安装，进入安装界面

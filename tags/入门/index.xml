@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>入门 on Linote</title>
-    <link>http://lichang.tech/tags/%E5%85%A5%E9%97%A8/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/%E5%85%A5%E9%97%A8/</link>
     <description>Recent content in 入门 on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 17 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E5%85%A5%E9%97%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>区块链基础入门</title>
-      <link>http://lichang.tech/tem/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</link>
       <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</guid>
       <description>1. 区块链定义 区块链技术本质上是一个去中心化的数据库，它是比特币的核心技术与基础架构，是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。狭义来讲，区块链是一种按照时间顺序将数据区块以顺序相连的方式组合成的一种链式数据结构，并以密码学方式保证的不可篡改、不可伪造的分布式账本。广义来讲，区块链技术是利用块链式数据结构来验证与存储数据、利用分布式节点共识算法来生成和更新数据、利用密码学方式保证数据传输和访问的安全、利用由自动化脚本代码组成的智能合约来编程和操作数据的一种全新的分布式基础架构与计算范式。
 1.1 区块链的技术特征 区块链上存储的数据需由全网节点共同维护，可以在缺乏信任的节点之间有效地传递价值。相比现有的数据库技术，区块链具有以下技术特征。
  块链式数据结构

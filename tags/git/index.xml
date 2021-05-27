@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Git on Linote</title>
-    <link>http://lichang.tech/tags/git/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/git/</link>
     <description>Recent content in Git on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 10 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>清理本地分支</title>
-      <link>http://lichang.tech/tem/git/%E6%B8%85%E7%90%86%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/git/%E6%B8%85%E7%90%86%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/</link>
       <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/git/%E6%B8%85%E7%90%86%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/git/%E6%B8%85%E7%90%86%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF/</guid>
       <description>在使用git时，有时某分支已在远程服务器删除，但本地不会同步删除，这个分支依然存在。
 如下命令可以删除本地版本库上那些失效的远程追踪分支，具体用法是，假如你的远程版本库名是 origin,则使用如下命令先查看哪些分支需要清理：
 $ git remote prune origin --dry-run 修剪 origin URL：git@yuhu.github.com:yuhu-tech/grampus-contracts.git * [将删除] origin/cq-2021-0227_refactor * [将删除] origin/lichagn-feat-impl-grc20 * [将删除] origin/lichagn-feat-impl-grc20-em20-em721 * [将删除] origin/lichang-feat-add-some-support-for-ANT * [将删除] origin/lichang-feat-impl-20-and-720 * [将删除] origin/lichang-feat-mdy-20 * [将删除] origin/lichang-feat-mdy-20-and-721 * [将删除] origin/litao-dev * [将删除] origin/runjam-v0.0.2 可以看到， 以上分支已经失效，将被删除，执行
@@ -24,10 +24,10 @@ $ git remote prune origin 修剪 origin URL：git@yuhu.github.com:yuhu-tech/gram
     
     <item>
       <title>主机上设置两个git账号</title>
-      <link>http://lichang.tech/tem/git/%E4%B8%BB%E6%9C%BA%E4%B8%8A%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AAgit%E8%B4%A6%E5%8F%B7/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/git/%E4%B8%BB%E6%9C%BA%E4%B8%8A%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AAgit%E8%B4%A6%E5%8F%B7/</link>
       <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/git/%E4%B8%BB%E6%9C%BA%E4%B8%8A%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AAgit%E8%B4%A6%E5%8F%B7/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/git/%E4%B8%BB%E6%9C%BA%E4%B8%8A%E8%AE%BE%E7%BD%AE%E4%B8%A4%E4%B8%AAgit%E8%B4%A6%E5%8F%B7/</guid>
       <description>ubuntu环境
  0. 拉取github仓库的两种方式 在拉取github仓库时，我们常用
 git clone https://github.com/username/repoName.git 的方式，这种方式使用https协议 还可以使用ssh协议，以如下方式拉取仓库
@@ -43,10 +43,10 @@ Generating public/private ed25519 key pair. Enter file in which to save the key 
     
     <item>
       <title>将两个commit合并为一个</title>
-      <link>http://lichang.tech/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</link>
       <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</guid>
       <description>使用git log命令查看git日志文件，假设为如下内容
 commit cc7b5fc7bd2ae6f8d88144cd61c8ffad15d44e41 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 19:40:03 2021 +0800 4-25 commit fbd7265095b4c8989fba830393eb32ef29cd9ee1 Merge: 3ae3c19 6a25204 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 15:04:38 2021 +0800 Merge branch &#39;master&#39; of https://github.com/yangchnet/Tem commit 6a25204187602449bfe4ca8c862c9677e65fed04 Author: yangchnet &amp;lt;30308940+yangchnet@users.noreply.github.com&amp;gt; Date: Thu Apr 22 21:36:05 2021 +0800 Delete CNAME ... 现在想合并最后两个提交，则进行以下步骤：
  复制倒数第三个提交的哈希值，即：6a25204187602449bfe4ca8c862c9677e65fed04 使用如下命令进行合并：  git rebase -i 6a25204187602449bfe4ca8c862c9677e65fed04 # 这个哈希值就是你刚才复制的 若有如下提示，请进行第4步，否则直接进行第5步   不能变基：您有未暂存的变更。 请提交或为它们保存进度。
@@ -55,10 +55,10 @@ commit cc7b5fc7bd2ae6f8d88144cd61c8ffad15d44e41 Author: yangchnet &amp;lt;104888
     
     <item>
       <title>GithubAPI问题</title>
-      <link>http://lichang.tech/tem/git/api%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/git/api%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/git/api%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/git/api%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98/</guid>
       <description>Github API问题 使用github的RESTful API 访问https://developer.github.com/v3/来查看帮助文档
 API访问限制 在云服务器上使用git的API时，发现出现message&amp;quot;:&amp;quot;API rate limit exceeded for 59.110.140.133. (But here&#39;s the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&amp;quot;,&amp;quot;documentation_url&amp;quot;:&amp;quot;https://developer.github.com/v3/#rate-limiting提示信息，显然，这是存在着访问限制。
 查看访问限制 使用curl -i https://api.github.com/rate_limit查看自己的限制信息
@@ -67,10 +67,10 @@ HTTP/1.1 200 OK Content-Type: application/json X-Ratelimit-Limit: 60 X-Ratelimit
     
     <item>
       <title>怎样从本地现有代码新建一个库</title>
-      <link>http://lichang.tech/tem/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</guid>
       <description>怎样从本地现有代码新建一个库  在本地代码目录初始化git  git init 然后将代码添加到仓库中  git add . #这里是添加了当前目录所有的文件 提交代码到本地库中  git commit -m &amp;#34;这里是提交的注释&amp;#34;  接下来我们需要在github上新建一个库，比如说新库的名字为hello
   将本地的仓库关联到github上
   git remote add origin https://github.com/yourname/hello 上传之前，先要拉取远程的相关信息  git pull origin master 最后上传  git push -u origin master 遇到的问题  来自 https://github.com/yangchnet/Mygolang * branch master -&amp;gt; FETCH_HEAD fatal: 拒绝合并无关的历史
@@ -81,10 +81,10 @@ git pull --allow-unrelated-histories (忽略版本不同造成的影响) </desc
     
     <item>
       <title>解决github每次push都要输入密码</title>
-      <link>http://lichang.tech/tem/git/git%E6%AF%8F%E6%AC%A1%E9%83%BD%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/git/git%E6%AF%8F%E6%AC%A1%E9%83%BD%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/git/git%E6%AF%8F%E6%AC%A1%E9%83%BD%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/git/git%E6%AF%8F%E6%AC%A1%E9%83%BD%E8%A6%81%E8%BE%93%E5%85%A5%E5%AF%86%E7%A0%81/</guid>
       <description>解决github每次push都要输入密码 进入你的本地仓库目录 输入：
 git config --global credential.helper store 然后再运行一遍git pull或git push就可以了</description>
     </item>

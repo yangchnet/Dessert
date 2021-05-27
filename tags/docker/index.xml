@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>docker on Linote</title>
-    <link>http://lichang.tech/tags/docker/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/docker/</link>
     <description>Recent content in docker on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Docker 搭建Java环境</title>
-      <link>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
       <description>Docker 搭建Java环境 1. 拉取Ubuntu镜像 docker pull ubuntu 2. 运行docker镜像，并进入 docker run -it -v /home/hadoop/build:/root/build --name ubuntu ubuntu  -i 表示Interaction，交互，开启交互模式
 -t 表示分配一个tty，即控制台
 -v 分配一个共享目录，
@@ -26,19 +26,19 @@
     
     <item>
       <title>docker常用操作</title>
-      <link>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker/</guid>
       <description>docker常用操作  启动docker服务 sudo systemctl start docker 查看本地镜像 sudo docker images 查看正在运行的镜像 sudo docker ps 查看所有镜像 sudo docker ps -a 停止正在运行的镜像 sudo docker stop container_name 开始运行某个镜像 sudo docker start container_name 删除某个镜像 sudo docker rmi container_name 进入某个正在运行的镜像 sudo docker attach container_name 导出容器 sudo docker export container_id &amp;gt; name.tar 导入容器 cat name.tar | sudo docker import -test/buntu:v1.0 从网络导入 sudo docker import http://example.com/exampleimage.tgz example/imagerepo  </description>
     </item>
     
     <item>
       <title>docker的安装（Ubuntu)</title>
-      <link>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
       <description>1、docker的安装（Ubuntu) 1.1、 设置存储库  若是已安装旧版本的docker，
 请卸载：sudo apt-get remove docker docker-engine docker.io containerd runc
  1.1.1、更新apt索引 sudo apt-get update 1.1.2、安装依赖 sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg-agent \  software-properties-common 1.1.3、添加docker官方的GPG秘钥 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  在进行此步时，出现了sudo: unable to resolve host iZ2ze4512bfzoapfvch6btZ，这是因为机器不能反向解析
@@ -51,10 +51,10 @@ sudo apt-key fingerprint 0EBFCD88 1.1.4、 设置存储库 sudo add-apt-reposito
     
     <item>
       <title>在docker中构建django项目</title>
-      <link>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
       <description>在docker中构建django项目 （需安装docker-compose, 安装教程）
 1. 定义项目组件 对于此项目，您需要创建Dockerfile，Python依赖项文件和docker-compose.yml文件。（您可以使用此文件的扩展名.yml或.yaml扩展名。）
 1.1. 创建一个空目录 该目录应仅包含构建该映像的资源。
@@ -67,10 +67,10 @@ version: &amp;#39;3&amp;#39; services: db: image: postgres web: build: . command
     
     <item>
       <title>安装docker-compose</title>
-      <link>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85docker-compose/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85docker-compose/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85docker-compose/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/%E4%BA%91%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%AE%B9%E5%99%A8/%E5%AE%89%E8%A3%85docker-compose/</guid>
       <description>安装docker-compose  下载最新版本的docker-compose  sudo curl -L &amp;#34;https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34; -o /usr/local/bin/docker-compose 对二进制文件应用可执行权限  sudo chmod +x /usr/local/bin/docker-compose 测试安装完成  docker-compose --version </description>
     </item>
     

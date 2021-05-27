@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Linux on Linote</title>
-    <link>http://lichang.tech/categories/linux/</link>
+    <link>http://yangchnet.github.io/Dessert/categories/linux/</link>
     <description>Recent content in Linux on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux程序前台后台切换</title>
-      <link>http://lichang.tech/tem/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</guid>
       <description>1. 前后台切换  在Linux终端运行命令的时候，在命令末尾加上 &amp;amp; 符号，就可以让程序在后台运行  $ ./main &amp;amp;  如果程序正在前台运行，可以使用 Ctrl+z 选项把程序暂停，然后用 bg %[number] 命令把这个程序放到后台运行，摁Ctrl+z，然后在最后一行加上bg %number
   对于所有运行的程序，我们可以用jobs –l 指令查看
   $ jobs -l 也可以用 fg %[number] 指令把一个程序掉到前台  $ fg %1 也可以直接终止后台运行的程序，使用 kill 命令  $ kill %1 2. fg、bg、jobs、&amp;amp;、nohup、ctrl+z、ctrl+c 命令  &amp;amp; 加在一个命令的最后，可以把这个命令放到后台执行，如  watch -n 10 sh test.sh &amp;amp; #每10s在后台执行一次test.sh脚本  ctrl + z 可以将一个正在前台执行的命令放到后台，并且处于暂停状态。
@@ -24,10 +24,10 @@
     
     <item>
       <title>安装与配置clash</title>
-      <link>http://lichang.tech/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
       <description>安装与配置clash  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
 1. 下载安装clash 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
@@ -45,19 +45,19 @@ systemctl start clash 5. 开启http代理和socks5代理  手动开启代理 exp
     
     <item>
       <title>/usr/bin/env:‘node’:Nosuchfileordirectory</title>
-      <link>http://lichang.tech/tem/linux/nodejs/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/nodejs/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/nodejs/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/nodejs/</guid>
       <description>/usr/bin/env: ‘node’: No such file or directory 解决方法 sudo apt-get install nodejs-legacy </description>
     </item>
     
     <item>
       <title>CentOS安装Python环境</title>
-      <link>http://lichang.tech/tem/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</guid>
       <description>CentOS安装Python环境 吐槽：网上一堆从官网获取安装包然后自己编译的，慢不说，还容易出错
 可使用以下命令安装Python3环境：
    yum install rh-python36 使用这条命令，安装Python3.6，但是安装后找不到，输入Python3后还是找不到命令
@@ -70,10 +70,10 @@ systemctl start clash 5. 开启http代理和socks5代理  手动开启代理 exp
     
     <item>
       <title>Linux下的权限管理</title>
-      <link>http://lichang.tech/tem/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid>
       <description>Linux下的权限管理 Linux 系统中为什么需要设定不同的权限，所有用户都直接使用管理员（root）身份不好吗？
  由于绝大多数用户使用的是个人计算机，使用者一般都是被信任的人（如家人、朋友等）。在这种情况下，大家都可以使用管理员身份直接登录。但在服务器上就不是这种情况了，往往运行的数据越重要（如游戏数据），价值越高（如电子商城数据、银行数据），则服务器中对权限的设定就要越详细，用户的分级也要越明确。
 和 Windows 系统不同，Linux 系统为每个文件都添加了很多的属性，最大的作用就是维护数据的安全。举个简单的例子，在你的 Linux 系统中，和系统服务相关的文件通常只有 root 用户才能读或写，就拿 /etc/shadow 这个文件来说，此文件记录了系统中所有用户的密码数据，非常重要，因此绝不能让任何人读取（否则密码数据会被窃取），只有 root 才可以有读取权限。 此外，如果你有一个软件开发团队，你希望团队中的每个人都可以使用某一些目录下的文件，而非团队的其他人则不予以开放。通过前面章节的学习我们知道，只需要将团队中的所有人加入新的群组，并赋予此群组读写目录的权限，即可实现要求。反之，如果你的目录权限没有做好，就很难防止其他人在你的系统中乱搞。 比如说，本来 root 用户才能做的开关机、ADSL 拨接程序，新增或删除用户等命令，一旦允许任何人拥有这些权限，系统很可能会经常莫名其妙的挂掉。而且，万一 root 用户的密码被其他人获取，他们就可以登录你的系统，从事一些只有 root 用户才能执行的操作，这是绝对不允许发生的。 因此，在服务器上，绝对不是所有的用户都使用 root 身份登录，而要根据不同的工作需要和职位需要，合理分配用户等级和权限等级。
@@ -83,10 +83,10 @@ systemctl start clash 5. 开启http代理和socks5代理  手动开启代理 exp
     
     <item>
       <title>Linux后台运行程序</title>
-      <link>http://lichang.tech/tem/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</guid>
       <description>Linux后台运行程序 使用screen
 screen介绍 Screen是一个控制台应用程序，允许您在一个窗口中使用多个终端会话。该程序在shell会话中运行，并充当其他终端会话的容器和管理器，类似于窗口管理器管理窗口的方式。
 在许多情况下，创建多个终端窗口是不可能或不理想的。您可能需要在没有运行X服务器的情况下管理多个控制台会话，您可能需要轻松访问许多远程云服务器，或者您可能需要在处理其他任务时监视正在运行的程序的输出。所有需求都可以通过屏幕的强大功能轻松解决。
@@ -100,10 +100,10 @@ sudo pacman -S screen 基本使用方法 使用screen命令打开一个新的窗
     
     <item>
       <title>manjaro换源</title>
-      <link>http://lichang.tech/tem/linux/manjaro%E6%8D%A2%E6%BA%90/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/manjaro%E6%8D%A2%E6%BA%90/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/manjaro%E6%8D%A2%E6%BA%90/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/manjaro%E6%8D%A2%E6%BA%90/</guid>
       <description>manjaro换源 有关manjaro换源的文件：
 /etc/pacman.d/mirrorlist
 网上教程：
@@ -113,10 +113,10 @@ pacman -Sc //清空并且下载新数据 pacman-mirrors -gb testing -c China //�
     
     <item>
       <title>Nginx负载均衡配置--简介</title>
-      <link>http://lichang.tech/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</guid>
       <description>Nginx负载均衡配置&amp;ndash;简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。
  1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。
 没有负载平衡的Web基础结构可能如下所示：
@@ -141,10 +141,10 @@ pacman -Sc //清空并且下载新数据 pacman-mirrors -gb testing -c China //�
     
     <item>
       <title>pm2的使用</title>
-      <link>http://lichang.tech/tem/linux/pm2/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/pm2/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/pm2/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/pm2/</guid>
       <description>pm2的使用 PM2 Runtime是具有内置Load Balancer的Node.js应用程序的生产过程管理器。它允许您永久保持应用程序的活动，无需停机即可重新加载它们，并促进常见的Devops任务。
 对于ipv4主机  用户名： lc 密码： Lichang1-  登录后使用以下命令查看当前后台进程状态
 pm2 ls 若status为online，则表明脚本运行正常，若为其他状态，则说明出现错误或异常，可用以下命令停止脚本运行
@@ -162,19 +162,19 @@ cat server.log 从日志中可获取错误信息或其他提示。
     
     <item>
       <title>ubuntu中增加用户</title>
-      <link>http://lichang.tech/tem/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</guid>
       <description>ubuntu中增加用户 sudo useradd -m [username] -s /bin/bash #创建账户，使用/bin/bash作为shell sudo passwd [username] #设置密码 sudo adduser [username] sudo #添加管理员权限 su [username]#切换用户 </description>
     </item>
     
     <item>
       <title>Ubuntu完全删除nginx</title>
-      <link>http://lichang.tech/tem/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</guid>
       <description>Ubuntu完全删除nginx 1. 卸载nginx及相关软件  卸载nginx  sudo apt-get --purge remove nginx  移除全部无用包  sudo apt-get autoremove  列出与nginx相关的软件  dpkg --get-selections | grep nginx  删除之  sudo apt-get --purge remove nginx-common sudo apt-get --purge remove nginx-core 2. 停止所有与nginx有关的进程  查看相关进程  ps -ef | grep nginx  停止这些进程  sudo kill -9 {process_id}  00:00:00 grep &amp;ndash;color=auto nginx 这个不是
  3. 查找主机中与nginx相关的文件 使用命令：
 sudo find / -name nginx* 删除之</description>
@@ -182,10 +182,10 @@ sudo find / -name nginx* 删除之</description>
     
     <item>
       <title>WordPress安装踩坑</title>
-      <link>http://lichang.tech/tem/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</guid>
       <description>WordPress安装踩坑 1. 第一个坑，忘了安装PHP。。。 2. 第二个坑，访问页面not found 发现是因为同时开了apache2和nginx,导致冲突了，把nginx关掉就好了
 3. 第三个坑，打开页面全是源代码  打开/etc/apache2/apache2.conf，将以下内容添加到文件的底部：  &amp;lt;FilesMatch \ .php $&amp;gt; SetHandler application / x-httpd-php &amp;lt;/ FilesMatch&amp;gt; 为了使PHP正常运行，您必须禁用mpm_event模块并启用mpm_prefork和php7模块。为此，请返回您的终端窗口并发出命令：  sudo a2dismod mpm_event &amp;amp;&amp;amp; sudo a2enmod mpm_prefork &amp;amp;&amp;amp; sudo a2enmod php7.0 4. 在执行上面的命令时，遇到了第四个坑 ERROR: Module php7.0 does not exist! 解决办法
 sudo apt-get install libapache2-mod-php7.0 5. 您的PHP似乎没有安装运行WordPress所必需的MySQL扩展。 sudo apt-get install php-mysql 爬出来了。。</description>
@@ -193,10 +193,10 @@ sudo apt-get install libapache2-mod-php7.0 5. 您的PHP似乎没有安装运行W
     
     <item>
       <title>删除WordPress</title>
-      <link>http://lichang.tech/tem/linux/%E5%88%A0%E9%99%A4wordpress/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/%E5%88%A0%E9%99%A4wordpress/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/%E5%88%A0%E9%99%A4wordpress/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E5%88%A0%E9%99%A4wordpress/</guid>
       <description>删除WordPress  删除网络文件：  rm -Rf /var/www/html/* 删除数据库。首先获取mysql的root密码（通过ssh登录时显示在MOTD中）。  mysql -uroot -p 输入密码后使用语句：
 DROP DATABASE wordpress; 删除WordPress数据库
 exit; </description>
@@ -204,29 +204,29 @@ exit; </description>
     
     <item>
       <title>安装完virtualbox后，提示内核问题</title>
-      <link>http://lichang.tech/tem/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</guid>
       <description>安装完virtualbox后，提示内核问题 解决方法 安装内核匹配版本 sudo pacman -S linux419-virtualbox-host-modules
 重新加载内核模块 sudo /sbin/rcvboxdrv 然后重启即可</description>
     </item>
     
     <item>
       <title>检查Apache配置文件语法错误</title>
-      <link>http://lichang.tech/tem/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
       <description>检查Apache配置文件语法错误 在/etc/apache2目录下输入apache2ctl configtest即可检查错误</description>
     </item>
     
     <item>
       <title>检查nginx的语法错误</title>
-      <link>http://lichang.tech/tem/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
       <description>检查nginx的语法错误 使用nginx -t</description>
     </item>
     
