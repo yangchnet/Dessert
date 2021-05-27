@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>合并commit on Linote</title>
-    <link>http://lichang.tech/tags/%E5%90%88%E5%B9%B6commit/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/%E5%90%88%E5%B9%B6commit/</link>
     <description>Recent content in 合并commit on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 25 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/%E5%90%88%E5%B9%B6commit/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E5%90%88%E5%B9%B6commit/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>将两个commit合并为一个</title>
-      <link>http://lichang.tech/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</link>
       <pubDate>Sun, 25 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</guid>
       <description>使用git log命令查看git日志文件，假设为如下内容
 commit cc7b5fc7bd2ae6f8d88144cd61c8ffad15d44e41 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 19:40:03 2021 +0800 4-25 commit fbd7265095b4c8989fba830393eb32ef29cd9ee1 Merge: 3ae3c19 6a25204 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 15:04:38 2021 +0800 Merge branch &#39;master&#39; of https://github.com/yangchnet/Tem commit 6a25204187602449bfe4ca8c862c9677e65fed04 Author: yangchnet &amp;lt;30308940+yangchnet@users.noreply.github.com&amp;gt; Date: Thu Apr 22 21:36:05 2021 +0800 Delete CNAME ... 现在想合并最后两个提交，则进行以下步骤：
  复制倒数第三个提交的哈希值，即：6a25204187602449bfe4ca8c862c9677e65fed04 使用如下命令进行合并：  git rebase -i 6a25204187602449bfe4ca8c862c9677e65fed04 # 这个哈希值就是你刚才复制的 若有如下提示，请进行第4步，否则直接进行第5步   不能变基：您有未暂存的变更。 请提交或为它们保存进度。

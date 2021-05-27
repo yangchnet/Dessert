@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>interview on Linote</title>
-    <link>http://lichang.tech/tags/interview/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/interview/</link>
     <description>Recent content in interview on Linote</description>
     <image>
-      <url>http://lichang.tech/papermod-cover.png</url>
-      <link>http://lichang.tech/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 14 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://lichang.tech/tags/interview/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/interview/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>面试题golang</title>
-      <link>http://lichang.tech/tem/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/tem/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
       <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://lichang.tech/tem/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tem/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
       <description>三个goroutine分别输出张三、李四、王五，使其按上述顺序输出5遍。 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;sync&amp;#34; ) var w sync.WaitGroup func main() { w.Add(15) chan1 := make(chan struct{}, 0) chan2 := make(chan struct{}, 0) for i := 0; i &amp;lt; 5; i++ { go func() { defer w.Done() fmt.Println(&amp;#34;张三&amp;#34;) chan1 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan1 fmt.Println(&amp;#34;李四&amp;#34;) chan2 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan2 fmt.Println(&amp;#34;王五&amp;#34;) }() } w.Wait() } 编写程序输出某目录下的所有文件（包括子目录） package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;os&amp;#34; ) func main() { dir := os.</description>
     </item>
     
