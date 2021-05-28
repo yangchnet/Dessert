@@ -9,7 +9,22 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 24 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>go generate工具</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go-generate%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Thu, 27 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go-generate%E5%B7%A5%E5%85%B7/</guid>
+      <description>1. go generate go generate命令运行时，将找到源代码中所有包含//go:generate的特殊注释，提取并执行//go:generate后附加的命令。
+基本语法：
+//go:generate [-run regexp] [-n] [-v] [-x] [build flags] [file.go... | packages] 需要注意的几点：
+ 该特殊注释必须在.go源码文件中。 每个源码文件可以包含多个generate特殊注释。 go generate只在运行go generate命令时运行，go build, go get, go test等其他命令不会运行它。 命令串行执行的，如果出错，就终止后面的执行。 特殊注释必须以&amp;quot;//go:generate&amp;quot;开头，双斜线后面没有空格。  简单的例子：
+package main import &amp;#34;fmt&amp;#34; //go:generate echo &amp;#34;world&amp;#34; func main() { fmt.Println(&amp;#34;hello&amp;#34;) } 运行结果：
+在go generate命令中，还可以使用一些环境变量：
+ $GOARCH The execution architecture (arm, amd64, etc.) $GOOS The execution operating system (linux, windows, etc.) $GOFILE The base name of the file.</description>
+    </item>
+    
     <item>
       <title>errgroup的基本使用</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/errgroup%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
