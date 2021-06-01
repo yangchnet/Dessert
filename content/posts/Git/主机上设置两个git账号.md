@@ -106,12 +106,12 @@ vim ~/.ssh/config
 文件内容如下：
 ```
 # default github account
-Host git@github.com
+Host github.com
     HostName github.com
     User git 
     IdentityFile ~/.ssh/id_ed25519_one
 
-Host git@work.github.com
+Host work.github.com
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_ed25519_two
