@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/gpt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows装系统遇到的问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/os/mbr-gpt/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/windows/mbr-gpt/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/os/mbr-gpt/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/windows/mbr-gpt/</guid>
       <description>Windows装系统遇到的问题 1. 问题描述 windows无法安装到这个磁盘，选中的磁盘具有MBR分区表。在EFI系统上，Windows只能安装到GPT磁盘
 2. 问题来源 这个问题的根源网上众说纷纭，暂且不管他
 3. 解决办法   首先选择U盘安装，进入安装界面
