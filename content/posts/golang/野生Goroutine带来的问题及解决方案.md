@@ -408,24 +408,115 @@ the number of goroutines:  2
 
 建议不要一次性设置任务数量，尽量在任务启动时通过`wg.Add(1)`的方式来增加任务数。
 
-
-**未完待续**
-
 ### 2.3 goroutine泄露的排查
-https://ms2008.github.io/2019/06/02/golang-goroutine-leak/
-https://lessisbetter.site/2019/05/18/go-goroutine-leak/
 
-## 3. 控制goroutine的退出
+#### 2.3.1 使用`pprof`进行排查
+参考[Golang 大杀器之性能剖析 PProf](https://segmentfault.com/a/1190000016412013)
 
-## 4. 对goroutine的监视
+#### 2.3.2 使用`prometheus`进行排查
+本小节请转至[prometheus的使用](./prometheus的使用.md)查看
+
+## 3 使用池来管理goroutine
+
+### 3.1 池
+
+本小节转至[线程池](../架构/线程池.md)
+
+### 3.2 goroutine池的设计
+
+经过3.1小节的介绍我们知道，一个线程池或者说一个goroutine池实际上就是一个生产者-消费者模型，生产者生产的是需要并发执行的任务，消费者从任务队列中取出任务后进行“消费”的过程，就是完成任务的过程。
+
+#### 3.2.1 任务（task）的设计
+一个最简单的任务就是一个`func()`类型，即：
+```go
+type Task func()
+```
+但这显然不能满足多样化的需求。但太过具体的函数签名也不能满足抽象的要求，一种可行的方案是：
+```go
+type Task struct {
+	f func (...interface{})
+	params []interface{}
+}
+```
+
+#### 3.2.2 任务队列
+使用channel来实现任务队列，Worker从队列中获取任务
+```go
+var task chan Task
+```
+
+#### 3.2.3 工人（Worker）的设计
+由[线程池](../架构/线程池.md)的2.4.1小节可知，一个Worker持有一个工作线程（goroutine）和任务。
+```go
+type Worker struct {
+	task chan Task
+	pool *Pool
+}
+```
+
+#### 3.2.4 池（Pool）的设计
+经过前面的分析可知，一个池中需要有一定数量的worker， 相应的也应保存worker的数目，包括最大限制数目与正在运行数目，为了实现Pool的正常退出，还应提供退出信号与同步信号量保证每个worker都正常退出。
+```go
+type sig struct{}
+
+type Pool struct {
+	capacity uint64
+	free uint64
+	workers []*Worker
+	destory sig
+	m sync.Mutex
+	wg *sync.WaitGroup
+}
+```
+
+详细代码在：
 
 
 
 
-1. 野生goroutine中的panic的捕获
-2. goroutine泄露
-3. 控制goroutine退出
-4. goroutine执行超时
+
+
+
+<!-- 
+要实现一个gotoutine池，我们需要思考以下问题：
+1. 任务队列如何实现
+2. 任务如何构造，以什么样的形式传递
+3. goroutine的数量如何限制
+4. goroutine如何重用
+5. goroutine执行的结果如何告知主goroutine 
+6. ...
+
+**任务队列如何实现**
+可使用golang中的带缓存channel方便的实现一个任务队列，生产者向channel中发送任务，消费者则从中获取任务并执行。
+
+**任务如何构造，以什么样的形式传递**
+一个最简单的任务就是一个`func()`类型，但这显然不能满足多样化的需求。但太过具体的函数签名也不能满足抽象的要求，一种可行的方案是：
+```go
+type Task struct {
+	Func (...interface{}) error
+	Params []interface{}
+}
+```
+
+**goroutine的数量如何限制**
+我们可以在池创建的时候由用户指定池的容量，也可以设置默认的池容量，如设置池中goroutine的数量在0-10之间，当队列中无任务时，撤销池中goroutine，当池中有任务且有goroutine空闲，则为其分配任务，当池中有任务，但goroutine的数量已达到限制，那么队列中任务需等待其他任务完成。
+一个池的定义可以是：
+```go
+type Pool struct {
+	capacity uint64 
+	free uint64
+	sync.Mutex
+	... 
+}
+``` -->
+
+
+
+
+
+
+
+
 
 
 
@@ -448,3 +539,7 @@ https://lessisbetter.site/2019/05/18/go-goroutine-leak/
 [如何查看golang程序中有哪些goroutine 正在执行](https://blog.csdn.net/lanyang123456/article/details/106984623)
 [Go 语言踩坑记——panic 与 recover](https://xiaomi-info.github.io/2020/01/20/go-trample-panic-recover/)
 [Handling panics in go routines](https://stackoverflow.com/questions/50409011/handling-panics-in-go-routines)
+
+> 监控工具
+[INSTRUMENTING A GO APPLICATION FOR PROMETHEUS](https://prometheus.io/docs/guides/go-application/)
+[Package pprof](https://golang.org/pkg/net/http/pprof/)
