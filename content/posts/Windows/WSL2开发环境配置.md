@@ -40,6 +40,7 @@ wsl --set-default-version 2
 ```
 
 5. 选择你要安装的发行版
+
 ![20210601184148](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601184148.png)
 这里我选择了Ubuntu18.04，获取后安装
 
@@ -58,7 +59,8 @@ export LIBGL_ALWAYS_INDIRECT=1
 
 2. 安装Xserver，这里选择的软件是`vcxsrv`， 可在[sourceforge](https://sourceforge.net/projects/vcxsrv/)中下载安装。
 
-3. 安装完成后直接启动即可
+3. 安装完成后直接启动即可   
+   
 ![20210601184622](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601184622.png)
 
 ![20210601184640](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601184640.png)
@@ -114,9 +116,9 @@ LANG=zh_CN.UTF-8
 
 5. 注销重新登录，即可显示中文。
 
-{{< admonition note "依然不能显示中文怎么办" >}}
-  找到自己的VcXsrv安装位置，找到`vsxsrc.exe`和`xlaunch.exe`两个应用程序文件，右键属性>兼容性>更改高DPI设置>勾选替代高DPI缩放行为（应用程序）> 确定。
-{{< /admonition >}}
+> 依然不能显示中文怎么办: 
+> 找到自己的VcXsrv安装位置，找到`vsxsrc.exe`和`xlaunch.exe`两个应用程序文件，右键属性>兼容性>更改高DPI设置>勾选替代高DPI缩放行为（应用程序）> 确定。
+
 
 
 ### 3.2 WSL中文输入法配置
@@ -162,16 +164,16 @@ fcitx-autostart &>/dev/null
 ```bash
 source ~/.bashrc
 ```
-运行`fcitx-config-gtk3`,会出现如图的界面：
+运行`fcitx-config-gtk3`,会出现如图的界面：  
 ![20210601182023](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601182023.png)
-按照提示将键盘布局放在第一位，输入法放在第二位。
+按照提示将键盘布局放在第一位，输入法放在第二位。  
 
-为防止和Windows上的输入法切换快捷键冲突，这里将快捷键切换更改为`ctrl+shift`(Windows上为`shift`)
+为防止和Windows上的输入法切换快捷键冲突，这里将快捷键切换更改为`ctrl+shift`(Windows上为`shift`)  
 ![20210601182148](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601182148.png)
 
 到这里，配置就完成了。
 
-4. 开始输入
+4. 开始输入  
 ![20210601182727](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601182727.png)
 
 
