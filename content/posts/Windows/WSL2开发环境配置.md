@@ -48,7 +48,7 @@ wsl --set-default-version 2
 6. 启动安装的发行版即可
 
 
-## 2. WSLg
+## 2. 使用WSL图形界面
 
 1. 设置环境变量
 ```bash
@@ -59,7 +59,8 @@ export LIBGL_ALWAYS_INDIRECT=1
 
 2. 安装Xserver，这里选择的软件是`vcxsrv`， 可在[sourceforge](https://sourceforge.net/projects/vcxsrv/)中下载安装。
 
-3. 安装完成后直接启动即可   
+3. 安装完成后直接启动即可  
+> 每次重新启动电脑都要重新打开一下，略烦。微软官方的WSLg已经发布，不过需要Windows Insider,先等等吧
    
 ![20210601184622](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601184622.png)
 
@@ -116,10 +117,12 @@ LANG=zh_CN.UTF-8
 
 5. 注销重新登录，即可显示中文。
 
-> 依然不能显示中文怎么办: 
-> 找到自己的VcXsrv安装位置，找到`vsxsrc.exe`和`xlaunch.exe`两个应用程序文件，右键属性>兼容性>更改高DPI设置>勾选替代高DPI缩放行为（应用程序）> 确定。
+> 这里的显示中文只是在命令行里显示，在GUI中可能仍然不能显示中文，这时就需要安装GUI字体：
+> ```bash
+> sudo apt-get install fonts-noto
+> ```
 
-
+重启过后应该就可以在界面上显示中文了。
 
 ### 3.2 WSL中文输入法配置
 
@@ -176,6 +179,10 @@ source ~/.bashrc
 4. 开始输入  
 ![20210601182727](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601182727.png)
 
+
+## FAQ
+1. 打开的图形界面字体很模糊    
+找到自己的VcXsrv安装位置，找到`vsxsrc.exe`和`xlaunch.exe`两个应用程序文件，右键属性>兼容性>更改高DPI设置>勾选替代高DPI缩放行为（应用程序）> 确定。
 
 ## Reference
 
