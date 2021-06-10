@@ -40,12 +40,12 @@ id_ed25519.pub
 #### 生成新SSH秘钥
 输入如下命令：
 ```sh
-ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen -t rsa -C "your_email@example.com"
 ```
 会有如下输出：
 ```
-Generating public/private ed25519 key pair.
-Enter file in which to save the key (/home/lc/.ssh/id_ed25519):  # 可以直接回车使用默认位置
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/lc/.ssh/id_rsa):  # 可以直接回车使用默认位置
 Enter passphrase (empty for no passphrase): # 也可直接回车
 ```
 然后就可以在你的`~/.ssh`目录下生成新的秘钥
@@ -58,11 +58,11 @@ eval "$(ssh-agent -s)"
 ```
 添加
 ```sh
-ssh-add ~/.ssh/id_ed25519
+ssh-add ~/.ssh/id_rsa
 ```
 
 #### 新增 SSH 密钥到 GitHub 帐户
-复制你的ssh秘钥（id_ed25519.pub文件内容），打开github
+复制你的ssh秘钥（id_rsa.pub文件内容），打开github
 ![20210425191443](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210425191443.png)
 点击`new ssh key`,将你的秘钥复制到对应的位置
 ![20210425191558](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210425191558.png)
@@ -83,15 +83,15 @@ git config --global --unset user.email
 #### 生成两个新的ssh秘钥
 输入如下命令：
 ```sh
-ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-keygen -t rsa -C "your_email@example.com"
 ```
 会有如下输出：
 ```
-Generating public/private ed25519 key pair.
-Enter file in which to save the key (/home/lc/.ssh/id_ed25519):  # 这里要为两个秘钥定义不同的文件名
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/lc/.ssh/id_rsa):  # 这里要为两个秘钥定义不同的文件名
 Enter passphrase (empty for no passphrase): # 也可直接回车
 ```
-**这里要注意的是设置文件名时不能直接跳过，要为两个秘钥定义不同的文件名，比如所一个为`id_ed25519`, 另一个为`id_ed25519_work` ，其中`work`可以设置你的工作git用户名。分别用于你个人和工作用的github账号。**
+**这里要注意的是设置文件名时不能直接跳过，要为两个秘钥定义不同的文件名，比如所一个为`id_rsa`, 另一个为`id_rsa_work` ，其中`work`可以设置你的工作git用户名。分别用于你个人和工作用的github账号。**
 
 #### 将两个秘钥分别加入对应的github账号
 ...
@@ -109,12 +109,12 @@ vim ~/.ssh/config
 Host github.com
     HostName github.com
     User git 
-    IdentityFile ~/.ssh/id_ed25519_one
+    IdentityFile ~/.ssh/id_rsa_one
 
 Host work.github.com
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_ed25519_two
+    IdentityFile ~/.ssh/id_rsa_two
 ```
 
 #### 测试是否设置成功
