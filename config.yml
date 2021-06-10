@@ -67,11 +67,11 @@ params:
         imageHeight: 120
         buttons:
             - name: 存档
-              url: "archives/"
+              url: "/Dessert/archives/"
             - name: 分类
-              url: "categories/"
+              url: "/Dessert/categories/"
             - name: 标签
-              url: "tags/"
+              url: "/Dessert/tags/"
 
     homeInfoParams:
             Title: "李昌的个人网站"
