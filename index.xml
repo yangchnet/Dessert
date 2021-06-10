@@ -34,7 +34,7 @@
 启用虚拟机功能 以管理员身份打开powershell，使用如下命令：  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart 重新启动电脑
 下载Linux内核更新包 适用于 x64 计算机的 WSL2 Linux 内核更新包  运行你下载的更新包。
 将WSL2设置为默认版本 以管理员身份打开powershell，使用如下命令：  wsl --set-default-version 2 选择你要安装的发行版  这里我选择了Ubuntu18.04，获取后安装
-启动安装的发行版即可  2. WSLg  设置环境变量  export DISPLAY=$(awk &amp;#39;/nameserver / {print $2; exit}&amp;#39; /etc/resolv.conf 2&amp;gt;/dev/null):0 export LIBGL_ALWAYS_INDIRECT=1  安装Xserver，这里选择的软件是vcxsrv， 可在sourceforge中下载安装。
+启动安装的发行版即可  2. 使用WSL图形界面  设置环境变量  export DISPLAY=$(awk &amp;#39;/nameserver / {print $2; exit}&amp;#39; /etc/resolv.conf 2&amp;gt;/dev/null):0 export LIBGL_ALWAYS_INDIRECT=1  安装Xserver，这里选择的软件是vcxsrv， 可在sourceforge中下载安装。
   安装完成后直接启动即可</description>
     </item>
     
