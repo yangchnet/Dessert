@@ -58,25 +58,24 @@ params:
     # comments: false
     images: ["papermod-cover.png"]
 
-    profileMode:
-        enabled: true
-        title: 李昌的个人网站
-        imageUrl: "https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png"
-        imageTitle: Don't panic!
-        imageWidth: 120
-        imageHeight: 120
-        buttons:
-            - name: 存档
-              url: "/Dessert/archives/"
-            - name: 分类
-              url: "/Dessert/categories/"
-            - name: 标签
-              url: "/Dessert/tags/"
+    # profileMode:
+    #     enabled: true
+    #     title: 李昌的个人网站
+    #     imageUrl: "https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210514094119.png"
+    #     imageTitle: Don't panic!
+    #     imageWidth: 120
+    #     imageHeight: 120
+    #     buttons:
+    #         - name: 存档
+    #           url: "/Dessert/archives/"
+    #         - name: 分类
+    #           url: "/Dessert/categories/"
+    #         - name: 标签
+    #           url: "/Dessert/tags/"
 
     homeInfoParams:
             Title: "李昌的个人网站"
-            Content: >
-                    进来看看吧!希望这里的记录可以帮到你.  
+             
                       
     socialIcons:
         - name: github
