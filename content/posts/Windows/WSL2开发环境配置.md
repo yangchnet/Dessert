@@ -88,41 +88,26 @@ gedit
 ### 3.1 WSL中文显示
 1. 安装语言包
 ```bash
-sudo apt install language-pack-zh-hans
+sudo apt-get -y install locales xfonts-intl-chinese fonts-wqy-microhei  
 ```
 
-2. 设置local
+2. 语言环境设置
 ```bash
-sudo vim /etc/locale.gen
+sudo dpkg-reconfigure locales
 ```
-找到 `zh_CN.UTF-8 UTF-8` , 取消注释，保存并退出
-```
-# zh_CN.GBK GBK
-zh_CN.UTF-8 UTF-8
-# zh_HK BIG5-HKSCS
-```
+使用空格键选中en_US.UTF-8 UTF-8、zh_CN.UTF-8 UTF-8，使用Tab键切换至OK，再将en_US.UTF-8选为默认。
+![20210615144553](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210615144553.png)
 
-3. 编译语言
+3. 重启系统
 ```bash
-sudo locale-gen
+exit
+...
 ```
-4. 设置默认语言为中文
-```bash
-sudo vim /etc/default/locale
-```
-将内容修改为：
-```
-LANG=zh_CN.UTF-8
-```
+```shell
+wsl --shutdown
 
-5. 注销重新登录，即可显示中文。
-
-> 这里的显示中文只是在命令行里显示，在GUI中可能仍然不能显示中文，这时就需要安装GUI字体：
-> ```bash
-> sudo apt-get install fonts-noto
-> ```
-
-重启过后应该就可以在界面上显示中文了。
+wsl
+```
 
 ### 3.2 WSL中文输入法配置
 
