@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>solidity on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/solidity/</link>
+    <description>Recent content in solidity on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 17 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/solidity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>十分钟学会区块链合约开发</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</guid>
+      <description>1. evm虚拟机 交易的执行是区块链节点上的一个重要的功能。是把交易中的智能合约二进制代码取出来，用执行器（Executor）执行。在交易的执行过程中，会对区块链的状态（State）进行修改，形成新区块的状态储存下来（Storage）。执行器在这个过程中，类似于一个黑盒，输入是智能合约代码，输出是状态的改变.
+以太坊虚拟机（environment virtual machine，简称EVM），作用是将智能合约代码编译成可在以太坊上执行的机器码，并提供智能合约的运行环境。它是一个对外完全隔离的沙盒环境，在运行期间不能访问网络、文件，即使不同合约之间也有有限的访问权限。以太坊虚拟机提供了面向合约的高级编程语言solidity，这使得开发者可以专注于应用本身，更方便、快捷的开发去中心化应用程序，同时也大大降低了开发难度。
+EVM是一种基于栈的虚拟机（区别于基于寄存器的虚拟机），用于执行智能合约，同时EVM是图灵完备的，EVM操作数栈调用深度为1024,EVM机器码长度一个字节，最多可以有256个操作码，目前已经定义了144个操作码，还有100多个操作码可以扩展，每个操作码都根据其弹栈数、压栈数定义了相应的gas消耗数量。泰岳链应用了以太坊EVM机制来实现智能合约，并增加了对国密算法的支持(SM3)。
+2. solidity语言 Solidity 是一门面向合约的、为实现智能合约而创建的高级编程语言。这门语言受到了 C++，Python 和 Javascript 语言的影响，设计的目的是能在 以太坊虚拟机（EVM） 上运行。
+Solidity 是静态类型语言，支持继承、库和复杂的用户定义类型等特性。
+直接看这里：Solidity最新中文文档
+3. 使用Ganache与truffle进行合约开发 Ganache
+ganache可以快速的在本机上启动一条以太坊链，用户可以方便的在上面部署合约，调用合约，完成各种与合约之间的交互。
+ganache提供了Windows、Linux以及Mac三种系统的版本，直接到其官网或GitHub页面下载安装即可。
+安装完成后，即可以快速部署一条链 使用QUICKSTART模式部署的链只会在本次会话中存在，关闭当前会话或注销当前用户都会导致链的撤销，如果只是写个小demo的话，那么使用这种方式即可。
+NEW WORKSPACE则会创建一条持久化的链，不会因会话结束或用户注销而撤销链。
+ 使用QUICKSTART模式启动
+ ganache会自动创建10个测试账号，每个账号分配了100个原生币，交易需要消耗这些原生币。 在页面的上方，还有其他一些选项卡，可以方便的查看当前区块、交易、事件、日志等。需要注意的是在这些选项卡的下方，还标注了本链的一些信息，如它的端口，网络ID等。 truffle
+truffle提供了合约开发、测试、部署等一系列工具，通过与Ganache配合可以十分方便的测试你的合约。
+安装truffle
+npm install -g truffle 新建一个truffle项目
+mkdir MyContract truffle init truffle会创建如下的目录结构：
+├── contracts │ └── Migrations.sol ├── migrations │ └── 1_initial_migration.js ├── test └── truffle-config.js contract目录中存放我们的合约;migrations目录中存放migrate文件，功能类似数据库migrate文件，简单来说，就是让你的应用从一个状态迁移到另一个状态;test目录中存放测试文件（还未创建）;truffle-config.js是配置文件，其中配置了链的地址等信息。
+根据提示我们来创建一个简单的合约模板：
+truffle create contract Counter truffle创建了Counter.sol文件，再次查看目录结构：
+├── contracts │ ├── Counter.</description>
+    </item>
+    
+  </channel>
+</rss>
