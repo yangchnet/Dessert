@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Docker&amp;k8s on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/categories/dockerk8s/</link>
+    <description>Recent content in Docker&amp;k8s on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 20 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/dockerk8s/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker sudo</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-sudo/</link>
+      <pubDate>Sun, 20 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-sudo/</guid>
+      <description>sudo groupadd docker &amp;amp;&amp;amp; sudo gpasswd -a $USER docker 退出重新登陆即可</description>
+    </item>
+    
+  </channel>
+</rss>
