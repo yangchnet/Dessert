@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>heap on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/heap/</link>
+    <description>Recent content in heap on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 23 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/heap/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>堆和栈的区别</title>
+      <link>http://yangchnet.github.io/Dessert/posts/c&#43;&#43;/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Wed, 23 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/c&#43;&#43;/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>1. 栈（stack） 栈用于存储函数（包括主函数）内部使用的变量，是一个先进先出（LIFO）结构，每次声明一个新变量，都会将其推入栈中。当函数运行结束时，栈上上与该函数所有相关的变量（称为一个栈帧）将被释放。栈由CPU自动管理，用户不必关心如何分配和释放内存。栈内存分为栈帧，每次函数调用都会为其分配一个栈帧，在函数返回时释放。
+栈的大小通常有限，如果程序试图将过多的信息放入栈中，就会出现栈溢出。
+栈的先进后出并不是指栈中的变量是先进后出的，而是指&amp;quot;栈帧&amp;quot;的先进后出，这保证了函数的调用顺序。
+ 栈内存由CPU管理 变量自动分配和释放 栈的大小有限制 当变量创建和销毁时，栈会增长和收缩  2. 堆（heap） 堆是一块大的内存，支持动态分配，由用户负责管理。可以通过malloc方法分配内存，通过free方法回收内存，若内存使用后没有回收，则会导致&amp;quot;内存泄漏&amp;quot;，即这块内存无法被其他进程所用。
+与栈不同，除物理内存大小的限制，堆的大小没有严格限制。在堆中创建的变量可在程序的任何地方访问（全局变量）。
+ 堆内存由程序员管理 在C中，使用malloc和free来分配和释放堆内存 需要用指针访问堆  3. 考虑以下程序
+#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt; int x; int main(void) { int y; char *str; y = 4; printf(&amp;#34;stack memory: %d\n&amp;#34;, y); str = malloc(100 * sizeof(char)); str[0] = &amp;#39;m&amp;#39;; printf(&amp;#34;heap memory: %c\n&amp;#34;, str[0]); free(str); return 0; } 在上面这段程序中，x是一个全局变量，y和str都是局部变量。malloc为str在堆上分配了100个字节的内存，free则释放了分配的这些内存。</description>
+    </item>
+    
+  </channel>
+</rss>
