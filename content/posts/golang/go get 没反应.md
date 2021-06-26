@@ -33,3 +33,8 @@ go get -u golang.org/x/net
 git clone https://github.com/golang/net.git
 ```
 **注意：**要使用```git clone```命令，直接下载下来复制到目录下会提示找不到版本号。
+
+## 终极方案
+```bash
+go env -w GOPROXY=https://goproxy.cn,direct
+```
