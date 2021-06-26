@@ -847,7 +847,8 @@ go get golang.org 在使用go get golang.org/...时，总是time out（就算fp�
 幸好github上存在golang.org的镜像
 例如
 go get -u golang.org/x/net 那么这个包的位置在github上就是github.com/golang/net, 所以，我们可以手动建立golang.org/x/目录，并切换到该目录下，然后使用
-git clone https://github.com/golang/net.git **注意：**要使用git clone命令，直接下载下来复制到目录下会提示找不到版本号。</description>
+git clone https://github.com/golang/net.git **注意：**要使用git clone命令，直接下载下来复制到目录下会提示找不到版本号。
+终极方案 go env -w GOPROXY=https://goproxy.cn,direct </description>
     </item>
     
     <item>
