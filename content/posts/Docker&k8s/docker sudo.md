@@ -4,12 +4,12 @@ title: "docker sudo"
 date: "2021-06-20"
 tags: ["docker"]
 categories: ["Docker&k8s"]
-ShowToc: true
-TocOpen: true
+ShowToc: false
+TocOpen: false
 ---
 
 ```bash
-sudo groupadd docker && sudo gpasswd -a $USER docker
+sudo usermod -aG docker $USER && newgrp docker
 ```
 
 退出重新登陆即可
