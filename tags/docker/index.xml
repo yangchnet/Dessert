@@ -16,7 +16,7 @@
       <pubDate>Sun, 20 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-sudo/</guid>
-      <description>sudo groupadd docker &amp;amp;&amp;amp; sudo gpasswd -a $USER docker 退出重新登陆即可</description>
+      <description>sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可aaa</description>
     </item>
     
     <item>

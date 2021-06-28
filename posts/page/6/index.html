@@ -34,24 +34,11 @@ git clone https://github.com/golang/net.git **注意：**要使用git clone命�
 golang中的print系函数详解 fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结 下面来逐个分析
 import ( "fmt" "os" "io" ) fmt.Fprintf 函数原型： Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error) 官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
 Arguement
-fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to golang中的print系函数详解" href=http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B9%8Bprint/></a></article><article class=post-entry><header class=entry-header><h2>GOPATH的正确打开方式</h2></header><section class=entry-content><p>GOPATH的正确打开方式 GOPATH环境变量用于指定$GOROOT以外的目录，其中包含Go项目及其二进制文件的源。
-GOPATH指定了go项目的位置及其编译得到的二进制文件的位置。GOPAHT可以是一个列表，也就是说可以设置多个GOPATH。
-1.如何查看GOPATH 使用
-go env 命令查看go相关的环境变量
-2. GOPATH的目录结构 GOPATH的目录结构如下：
-. ├── bin ├── pkg └── src └── main └── main.go $GOPATH/bin
-这个目录下存储编译的二进制文件，Linux操作系统使用\$PATH环境变量来查找无需完整路径即可执行的二进制应用程序，我们可以将这个目录添加到$PATH中，这样就可以方便的执行我们的二进制文件。
-$GOPATH/pkg
-Go在该目录中存储了预编译的目标文件，以加快程序的后续编译速度。通常，我们不需要访问该目录。但是如果在编译时遇到问题，可以安全地删除该目录，然后Go会重建它。
-$GOPATH/src
-这里是我们的代码所在位置。
-3. 我应该如何设置GOPATH 设置一个GOPATH
-当设置一个GOPAHT时，我们自行安装的一些包以及我们所有的项目文件，都会在\$GOPATH/src目录下，未免显得太过拥挤。不推荐。
-设置两个GOPATH
-可以设置两个GOPATH，其中第一个作为从网络获取的包所在位置，第二个存放我们自己的项目，在从网络获取包时，将自动安装在第一个GOPATH下，这样就避免了我们自己的代码和网络上获取的代码挤在一起
-每个项目设置一个GOPATH
-每个项目设置一个GOPATH，可以在建立项目的目录结构后使用
-export GOPATH=`pwd` 来添加当前目录到GOPATH，但是下一次在运行这个命令时会将上一次的覆盖掉。这个方法的优点在于每个项目的目录结构变得清晰了，不再是所有项目存在于一个src文件夹下，可以建立在任意位置。但缺点在于每次切换项目都要重新export，同时还需要重新安装一些必要的包。类似于Python中的virtualenv.</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to GOPATH的正确打开方式" href=http://yangchnet.github.io/Dessert/posts/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=http://yangchnet.github.io/Dessert/posts/page/5/>« Prev Page</a>
+fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to golang中的print系函数详解" href=http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B9%8Bprint/></a></article><article class=post-entry><header class=entry-header><h2>Go中的标准库</h2></header><section class=entry-content><p>Go中的标准库 在Go语言的安装文件里包含了一些可以直接使用的包，即标准库。Go语言的标准库（通常被称为语言自带的电池），提供了清晰的构建模块和公共接口，包含 I/O 操作、文本处理、图像、密码学、网络和分布式应用程序等，并支持许多标准化的文件格式和编解码协议。
+在 Windows 下，标准库的位置在Go语言根目录下的子目录 pkg\windows_amd64 中；在 Linux 下，标准库在Go语言根目录下的子目录 pkg\linux_amd64 中（如果是安装的是 32 位，则在 linux_386 目录中）。一般情况下，标准包会存放在 $GOROOT/pkg/$GOOS_$GOARCH/ 目录下。
+Go语言的编译器也是标准库的一部分，通过词法器扫描源码，使用语法树获得源码逻辑分支等。Go语言的周边工具也是建立在这些标准库上。在标准库上可以完成几乎大部分的需求。
+Go语言的标准库以包的方式提供支持，下表列出了Go语言标准库中常见的包及其功能。
+bufio 带缓冲的 I/O 操作 bytes 实现字节操作 container 封装堆、列表和环形列表等容器 crypto 加密算法 database 数据库驱动和接口 debug 各种调试文件格式访问及调试功能 encoding 常见算法如 JSON、XML、Base64 等 flag 命令行解析 fmt 格式化操作 go Go语言的词法、语法树、类型等。可通过这个包进行代码信息提取和修改 html HTML 转义及模板系统 image 常见图形格式的访问及生成 io 实现 I/O 原始访问接口及访问封装 math 数学库 net 网络库，支持 Socket、HTTP、邮件、RPC、SMTP 等 os 操作系统平台不依赖平台操作封装 path 兼容各操作系统的路径操作实用函数 plugin Go 1.7 加入的插件系统。支持将代码编译为插件，按需加载 reflect 语言反射支持。可以动态获得代码中的类型信息，获取和修改变量的值 regexp 正则表达式封装 runtime 运行时接口 sort 排序接口 strings 字符串转换、解析及实用函数 time 时间接口 text 文本模板及 Token 词法器</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Go中的标准库" href=http://yangchnet.github.io/Dessert/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=http://yangchnet.github.io/Dessert/posts/page/5/>« Prev Page</a>
 <a class=next href=http://yangchnet.github.io/Dessert/posts/page/7/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

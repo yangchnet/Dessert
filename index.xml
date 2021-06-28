@@ -31,7 +31,7 @@
       <pubDate>Sun, 20 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-sudo/</guid>
-      <description>sudo groupadd docker &amp;amp;&amp;amp; sudo gpasswd -a $USER docker 退出重新登陆即可</description>
+      <description>sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可aaa</description>
     </item>
     
     <item>
@@ -220,7 +220,7 @@ func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用r
       <guid>http://yangchnet.github.io/Dessert/posts/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
       <description>1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
 这种线程可能带来一系列问题：
- 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成“家养”的线程。
+ 频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成&amp;quot;家养&amp;quot;的线程。
 1.2 什么是线程池  池化：池化是一种将资源统一进行管理，从而最大化收益并最小化风险的思想。
  线程池维护若干个线程，在总体上控制线程的数量，具体上控制线程的创建、销毁等生命周期，系统可通过申请线程池中的线程异步的完成某个任务。线程池通过对线程的管理实现对资源的有效利用，避免系统资源浪费或内存泄露等问题。
 1.3 使用线程池的好处  线程池中的线程可反复利用，减少了线程创建和销毁的开销 任务无需等待线程创建即可开始运行，提高了系统响应速度 通过设置合理的线程池线程数，可有效避免资源使用不当，资源浪费 对线程运行进行有效的监视与管理  通俗易懂的讲，如果将线程比作完成任务的人，那么线程池就像一个专门管理这些人的部门。当我有任务到来时，直接把任务交给该部门，而不用自己再去找人来完成任务。
@@ -862,32 +862,6 @@ git clone https://github.com/golang/net.git **注意：**要使用git clone命�
 import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; &amp;#34;io&amp;#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
   Arguement
 fmt.Fprintf() 依据指定的格式向第一个参数内写入字符串，第一参数必须实现了 io.</description>
-    </item>
-    
-    <item>
-      <title>GOPATH的正确打开方式</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/gopath%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</guid>
-      <description>GOPATH的正确打开方式  GOPATH环境变量用于指定$GOROOT以外的目录，其中包含Go项目及其二进制文件的源。
- GOPATH指定了go项目的位置及其编译得到的二进制文件的位置。GOPAHT可以是一个列表，也就是说可以设置多个GOPATH。
-1.如何查看GOPATH 使用
-go env 命令查看go相关的环境变量
-2. GOPATH的目录结构 GOPATH的目录结构如下：
-. ├── bin ├── pkg └── src └── main └── main.go $GOPATH/bin
-这个目录下存储编译的二进制文件，Linux操作系统使用\$PATH环境变量来查找无需完整路径即可执行的二进制应用程序，我们可以将这个目录添加到$PATH中，这样就可以方便的执行我们的二进制文件。
-$GOPATH/pkg
-Go在该目录中存储了预编译的目标文件，以加快程序的后续编译速度。通常，我们不需要访问该目录。但是如果在编译时遇到问题，可以安全地删除该目录，然后Go会重建它。
-$GOPATH/src
-这里是我们的代码所在位置。
-3. 我应该如何设置GOPATH   设置一个GOPATH
-当设置一个GOPAHT时，我们自行安装的一些包以及我们所有的项目文件，都会在\$GOPATH/src目录下，未免显得太过拥挤。不推荐。
-  设置两个GOPATH
-可以设置两个GOPATH，其中第一个作为从网络获取的包所在位置，第二个存放我们自己的项目，在从网络获取包时，将自动安装在第一个GOPATH下，这样就避免了我们自己的代码和网络上获取的代码挤在一起
-  每个项目设置一个GOPATH
-每个项目设置一个GOPATH，可以在建立项目的目录结构后使用
-  export GOPATH=`pwd` 来添加当前目录到GOPATH，但是下一次在运行这个命令时会将上一次的覆盖掉。这个方法的优点在于每个项目的目录结构变得清晰了，不再是所有项目存在于一个src文件夹下，可以建立在任意位置。但缺点在于每次切换项目都要重新export，同时还需要重新安装一些必要的包。类似于Python中的virtualenv.</description>
     </item>
     
     <item>
