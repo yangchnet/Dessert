@@ -86,7 +86,11 @@ func (p *Pool) run() {
 	}()
 }
 ```
+
 在`Put`函数中，每当放入一个新任务之前，都会直接创建一个新的worker，这显然不甚合理，因为此时池中可能存在空闲的worker，应设法利用这些空闲的worker而不是创建新的worker。
+
+> 尝试优化
+
 一种优化思路是：在`Pool`对象中增加`chIdle chan struct{}`字段，作为空闲标志。放入任务之前首先检查`chIdle`是否存在空闲标志，若存在，则说明此时存在空闲worker，不需创建新的worker，只需将task放入即可。
 而若`chIdle`中不存在空闲标志，则检查worker数量是否达到限制，然后创建新的worker。
 优化后的核心代码如下：
@@ -242,11 +246,11 @@ goroutine的复用很好的减小了大批量异步任务中的内存分配与�
 **系统结构**
 ```go
 type Pool interface {
-	Queue(fn WorkFunc) WorkUnit // 
-	Reset()
-	Cancel()
-	Close()
-	Batch() Batch
+	Queue(fn WorkFunc) WorkUnit // 传入要执行的任务，立即开始执行
+	Reset() // 重新初始化一个池
+	Cancel() // 取消所有未在运行的任务
+	Close() // 清除所有池数据并取消所有未提交的任务
+	Batch() Batch // 创建批量任务
 }
 ```
 
@@ -273,7 +277,7 @@ func (p *limitedPool) newWorker(work chan *workUnit, cancel chan struct{}) {
 			case wu = <-work:
 
 				// possible for one more nilled out value to make it
-				// through when channel closed, don't quite understad the why
+				// through when channel closed, don't quite understand the why
 				if wu == nil {
 					continue
 				}
@@ -493,14 +497,14 @@ worker数量和task队列大小是可配置的。
 ```go
 // Gorouting instance which can accept client jobs
 type worker struct {
-	workerPool chan *worker
-	jobChannel chan Job
-	stop       chan struct{}
+	workerPool chan *worker // 工人池
+	jobChannel chan Job // 这个worker独有的任务队列
+	stop       chan struct{} 
 }
 
 type dispatcher struct {
-	workerPool chan *worker //
-	jobQueue   chan Job
+	workerPool chan *worker // 与worker是同一个workerPool
+	jobQueue   chan Job // 与池共有的任务队列
 	stop       chan struct{}
 }
 
@@ -508,7 +512,7 @@ type dispatcher struct {
 type Job func()
 
 type Pool struct {
-	JobQueue   chan Job
+	JobQueue   chan Job  // 与dispatcher共有的任务队列
 	dispatcher *dispatcher
 	wg         sync.WaitGroup
 }
@@ -517,6 +521,25 @@ type Pool struct {
 **核心代码**
 
 ```go
+
+func (w *worker) start() {
+	go func() { //  创建了一个worker
+		var job Job
+		for {
+			// worker free, add it to pool
+			w.workerPool <- w // 把worker放入worker池
+
+			select {
+			case job = <-w.jobChannel:
+				job()
+			case <-w.stop:
+				w.stop <- struct{}{}
+				return
+			}
+		}
+	}()
+}
+
 func (d *dispatcher) dispatch() {
 	for {
 		select {
@@ -537,6 +560,12 @@ func (d *dispatcher) dispatch() {
 	}
 }
 ```
+其程序运行图大致如下：
+![20210628204418](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210628204418.png)
+程序中存在一个`workerPool`，所有的worker都存在在这个池中，在程序的开始，会创建指定数目的worker，一次性放入池中（此后不再增加或减少）。每个worker有一个独有的`jobChannel`，这个`jobChannel`向worker传递其要执行的任务。  
+用户通过直接使用`Pool`的`JobQueue`来提交任务，提交的任务会由`dispatcher`接收，然后分配给某个空闲的worker，即放入其`jobChannel`中。
+
+改进想法： 动态扩容
 
 **基本使用**
 ```go
