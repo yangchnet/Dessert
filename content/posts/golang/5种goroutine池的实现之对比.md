@@ -565,7 +565,6 @@ func (d *dispatcher) dispatch() {
 程序中存在一个`workerPool`，所有的worker都存在在这个池中，在程序的开始，会创建指定数目的worker，一次性放入池中（此后不再增加或减少）。每个worker有一个独有的`jobChannel`，这个`jobChannel`向worker传递其要执行的任务。  
 用户通过直接使用`Pool`的`JobQueue`来提交任务，提交的任务会由`dispatcher`接收，然后分配给某个空闲的worker，即放入其`jobChannel`中。
 
-改进想法： 动态扩容
 
 **基本使用**
 ```go
@@ -602,6 +601,9 @@ func main() {
 
 **性能测试**
 
+**总结**
+设计简单，代码简洁清晰，但无panic恢复，不能动态扩容，任务传递简陋，感觉像是一个未完成版本的任务池
+
 
 
 ## 4. Jeffail/tunny（★2.4k）
@@ -613,39 +615,27 @@ func main() {
 **系统结构**
 ```go
 type Pool struct {
-	queuedJobs int64
+	queuedJobs int64 // 当前挂起的任务数
 
-	ctor    func() Worker
+	ctor    func() Worker  // 初始任务
 	workers []*workerWrapper
 	reqChan chan workRequest
 
 	workerMut sync.Mutex
 }
 
-type workerWrapper struct {
+type workerWrapper struct { // 负责管理worker和goroutine的生命周期
 	worker        Worker
-	interruptChan chan struct{}
-
-	// reqChan is NOT owned by this type, it is used to send requests for work.
-	reqChan chan<- workRequest
-
-	// closeChan can be closed in order to cleanly shutdown this worker.
-	closeChan chan struct{}
-
-	// closedChan is closed by the run() goroutine when it exits.
-	closedChan chan struct{}
+	interruptChan chan struct{} // 中止信号通道
+	reqChan chan<- workRequest // 用于发送任务请求信号
+	closeChan chan struct{} // 退出信号通道
+	closedChan chan struct{} // 退出标志通道
 }
 
-type workRequest struct {
-	// jobChan is used to send the payload to this worker.
-	jobChan chan<- interface{}
-
-	// retChan is used to read the result from this worker.
-	retChan <-chan interface{}
-
-	// interruptFunc can be called to cancel a running job. When called it is no
-	// longer necessary to read from retChan.
-	interruptFunc func()
+type workRequest struct { // 任务请求信号
+	jobChan chan<- interface{} // 用于接收任务
+	retChan <-chan interface{} // 用于返回结果
+	interruptFunc func() 
 }
 
 ```
@@ -653,9 +643,10 @@ type workRequest struct {
 **核心代码**
 ```go
 func (p *Pool) Process(payload interface{}) interface{} {
+	// 省略了部分错误处理代码
 	request, open := <-p.reqChan
 	request.jobChan <- payload
-	payload, open = <-request.retChan
+	payload, open = <-request.retChan // 同步等待任务完成
 	return payload
 }
 
@@ -694,7 +685,13 @@ func (w *workerWrapper) run() {
 }
 
 ```
-![20210622203441](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210622203441.png)
+根据以上代码，其主要执行过程如下：
+1. 某个goroutine空闲后，通过其`reqChan`通道发送`workRequest`。`workRequest`中包括一个`jobChan`，用于生产者发送任务；一个`retChan`，用于返回执行结果；一个`interrupt Func`，用于任务执行超时时强行停止worker。需要注意的是，`reqChan`是池和workerWrapper共有的，因此发送的`workRequest`可直接被池接收到。
+2. 每当池中有新任务时，池尝试从`reqChan`中获取一个`workRequest`，若获取到，则将任务通过`workRequest`持有的`jobChan`(即某个worker持有的`jobChan`)发送到worker
+3. 发送完毕后，同步的从`retChan`中读取结果。
+4. 若设置了超时时间，则在时间超时后会强制停止
+
+![20210622203441](https://segmentfault.com/img/remote/1460000040158800/view)
 
 **基本使用**
 
@@ -779,6 +776,8 @@ func fib(n int) int {
 ![20210622204324](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210622204324.png)
 
 
+
+
 ## 5. panjf2000/ants（★5.8k）
 ![ants](https://raw.githubusercontent.com/panjf2000/logos/master/ants/logo.png)
 
@@ -796,19 +795,19 @@ func fib(n int) int {
 
 ```go
 type Pool struct {
-  capacity int32
-  running int32
-  workers workerArray
-  state int32
-  lock sync.Locker
-  cond *sync.Cond
+  capacity int32 // 池的容量
+  running int32 // 正在运行的worker
+  workers workerArray // 存储可获取的worker
+  state int32 // 池的状态
+  lock sync.Locker 
+  cond *sync.Cond // 条件变量，用于在条件满足时唤醒阻塞的程序
   workerCache sync.Pool
-  blockingNum int
+  blockingNum int // 被阻塞的数量
   options *Options
 }
 
 type workerArray interface {
-	len() int
+	len() int 
 	isEmpty() bool
 	insert(worker *goWorker) error
 	detach() *goWorker
@@ -827,7 +826,6 @@ type goWorker struct {
 
 ```go
 func NewPool(size int, options ...Option) (*Pool, error) {
-	
 
 	if expiry := opts.ExpiryDuration; expiry < 0 {
 		return nil, ErrInvalidPoolExpiry
@@ -870,17 +868,10 @@ func (w *goWorker) run() {
 			w.pool.decRunning()
 			w.pool.workerCache.Put(w)
 			if p := recover(); p != nil {
-				if ph := w.pool.options.PanicHandler; ph != nil {
-					ph(p)
-				} else {
-					w.pool.options.Logger.Printf("worker exits from a panic: %v\n", p)
-					var buf [4096]byte
-					n := runtime.Stack(buf[:], false)
-					w.pool.options.Logger.Printf("worker exits from panic: %s\n", string(buf[:n]))
-				}
+				// ...
 			}
-			// Call Signal() here in case there are goroutines waiting for available workers.
-			w.pool.cond.Signal()
+			// Call Signal() here in case there are goroutine waiting for available workers.
+			w.pool.cond.Signal() // 发出信号唤醒某些阻塞等待worker的线程
 		}()
 
 		for f := range w.task {
@@ -888,11 +879,62 @@ func (w *goWorker) run() {
 				return
 			}
 			f()
-			if ok := w.pool.revertWorker(w); !ok {
+			if ok := w.pool.revertWorker(w); !ok { // 将worker重新放入池中循环利用
 				return
 			}
 		}
 	}()
+}
+
+// 返回一个可用的worker
+func (p *Pool) retrieveWorker() (w *goWorker) {
+	spawnWorker := func() { // 返回一个可用的worker
+		w = p.workerCache.Get().(*goWorker)
+		w.run()
+	}
+
+	p.lock.Lock()
+
+	w = p.workers.detach() // 尝试从worker队列中取worker
+	if w != nil { // 从队列中获得了worker，直接返回
+		p.lock.Unlock()
+	} else if capacity := p.Cap(); capacity == -1 || capacity > p.Running() {
+		// 队列为空其worker数量未达到限制，则生成新的worker
+		p.lock.Unlock()
+		spawnWorker()
+	} else {  // 队列为空且数量达到限制，则阻塞等待其他worker空闲
+		if p.options.Nonblocking {
+			p.lock.Unlock()
+			return
+		}
+	retry:
+		if p.options.MaxBlockingTasks != 0 && p.blockingNum >= p.options.MaxBlockingTasks {
+			p.lock.Unlock()
+			return
+		}
+		p.blockingNum++
+		p.cond.Wait() // 阻塞等待可用的worker
+		p.blockingNum--
+		var nw int
+		if nw = p.Running(); nw == 0 { // awakened by the scavenger
+			p.lock.Unlock()
+			if !p.IsClosed() {
+				spawnWorker()
+			}
+			return
+		}
+		if w = p.workers.detach(); w == nil {
+			if nw < capacity {
+				p.lock.Unlock()
+				spawnWorker()
+				return
+			}
+			goto retry
+		}
+
+		p.lock.Unlock()
+	}
+	return
 }
 
 // 定时清理过期worker
