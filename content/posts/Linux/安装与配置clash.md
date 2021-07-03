@@ -1,65 +1,65 @@
 ---
 author: "李昌"
-title: "安装与配置clash"
+title: "安装与配置"
 date: "2021-03-04"
-tags: ["clash", "Linux", "install"]
+tags: ["", "Linux", "install"]
 categories: ["Linux"]
 ShowToc: true
 TocOpen: true
 ---
 
-# 安装与配置clash
-> 参考了[这位老哥的博客](https://wh1te.fun/2020/11/02/%E9%98%BF%E9%87%8C%E4%BA%91Linux%E4%BD%BF%E7%94%A8Clash%E8%BF%9B%E8%A1%8C%E5%A4%96%E7%BD%91%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/)
+# 安装与配置
+> 参考了[这位老哥的博客](https://wh1te.fun/2020/11/02/%E9%98%BF%E9%87%8C%E4%BA%91Linux%E4%BD%BF%E7%94%A8%E8%BF%9B%E8%A1%8C%E5%A4%96%E7%BD%91%E4%BB%A3%E7%90%86%E5%8A%A0%E9%80%9F/)
 
 ## 0. 来由
 阿里云与腾讯云git太慢了。。想快点
 
 
-## 1. 下载安装clash
-地址在[这里](https://github.com/Dreamacro/clash)，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
+## 1. 下载安装
+地址在[这里](https://github.com/Dreamacro/)，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
 
-## 2. 安装clash
-将下载的clash上传到自己的服务器之后，解压之：
+## 2. 安装
+将下载的上传到自己的服务器之后，解压之：
 ```bash
-gunzip clash-linux-amd64-v1.4.1.gz
+gunzip -linux-amd64-v1.4.1.gz
 ```
 解压结果就是一个可执行文件
 重命名：
 ```bash
-mv clash-linux-amd64 clash
+mv -linux-amd64 
 ```
 赋予运行权限：
 ```bash
-chmod +x clash
+chmod +x 
 ```
 移动到bin目录下：
 ```bash
-mv clash /usr/bin
+mv  /usr/bin
 ```
 
 ## 3. 编辑config.yaml文件
 config.yaml文件的内容来自你购买的vpn提供商
 ```bash
-mkdir /etc/clash
-touch /etc/clash/config.yaml
+mkdir /etc/
+touch /etc//config.yaml
 ···
 # 编辑你的config.yaml
 ```
 
-## 4. 将clash添加为系统服务
+## 4. 将添加为系统服务
 ```bash
 cd /etc/systemd/system/
-vim clash.service
+vim .service
 ```
-clash.service的内容为：
+.service的内容为：
 ```
 [Unit]
-Description=clash proxy
+Description= proxy
 After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/clash -d /etc/clash
+ExecStart=/usr/bin/ -d /etc/
 
 [Install]
 WantedBy=multi-user.target
@@ -70,9 +70,13 @@ WantedBy=multi-user.target
 ```bash
 systemctl daemon-reload
 ```
-开启clash服务
+开启服务
 ```bash
 systemctl start clash
+```
+设置开机启动
+```bash
+systemctl enable clash
 ```
 
 ## 5. 开启http代理和socks5代理
