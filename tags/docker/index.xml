@@ -20,20 +20,6 @@
     </item>
     
     <item>
-      <title>Docker 搭建Java环境</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
-      <description>Docker 搭建Java环境 1. 拉取Ubuntu镜像 docker pull ubuntu 2. 运行docker镜像，并进入 docker run -it -v /home/hadoop/build:/root/build --name ubuntu ubuntu  -i 表示Interaction，交互，开启交互模式
--t 表示分配一个tty，即控制台
--v 分配一个共享目录，
-&amp;ndash;name 为镜像命名
- 3. 基本操作  首先更新源，并安装vim  apt-get update apt-get install vim  为保证后面的软件安装速度，进行换源
-打开/etc/apt/sources.list，将其中的内容替换为：  deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse deb http://mirrors.</description>
-    </item>
-    
-    <item>
       <title>docker常用操作</title>
       <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>

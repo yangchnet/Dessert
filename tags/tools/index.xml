@@ -29,18 +29,6 @@ source ~/.zshrc 这时powerlevel10k会自动启动，询问你想要的配置 �
     </item>
     
     <item>
-      <title>zsh的基本配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
-      <description>1. 按照Oh my zsh $ sh -c &amp;#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; 2. 配置Oh my zsh  将zsh设置为默认Shell chsh -s /bin/zsh # 不需要使用root权限  更换主题 vim ~/.zshrc 找到ZSH_THEME=&#39;robbyrussell&#39;, 更换为你想要使用的主题，可以在这里找到你想要的主题
- 安装插件 vim ~/.zshrc 找到plugins=(), 添加插件名称，我这里添加的插件有：
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)  完成 source ~/.zshrc # 启动zsh    推荐主题powerlevel10k
- </description>
-    </item>
-    
-    <item>
       <title>GitHub图床&#43;vscode&#43;Picgo </title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>

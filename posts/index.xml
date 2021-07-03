@@ -165,18 +165,6 @@ source ~/.zshrc 这时powerlevel10k会自动启动，询问你想要的配置 �
     </item>
     
     <item>
-      <title>zsh的基本配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
-      <description>1. 按照Oh my zsh $ sh -c &amp;#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; 2. 配置Oh my zsh  将zsh设置为默认Shell chsh -s /bin/zsh # 不需要使用root权限  更换主题 vim ~/.zshrc 找到ZSH_THEME=&#39;robbyrussell&#39;, 更换为你想要使用的主题，可以在这里找到你想要的主题
- 安装插件 vim ~/.zshrc 找到plugins=(), 添加插件名称，我这里添加的插件有：
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)  完成 source ~/.zshrc # 启动zsh    推荐主题powerlevel10k
- </description>
-    </item>
-    
-    <item>
       <title>Deepin15安装Anaconda</title>
       <link>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
@@ -214,10 +202,10 @@ func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用r
     
     <item>
       <title>线程池</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
       <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9E%B6%E6%9E%84/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
       <description>1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
 这种线程可能带来一系列问题：
  频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成&amp;quot;家养&amp;quot;的线程。
@@ -545,25 +533,6 @@ Example: &amp;quot;Print to console&amp;quot;: { &amp;quot;prefix&amp;quot;: &am
     </item>
     
     <item>
-      <title>VsCode Snippets功能的使用</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/vscode-snippets%E5%8A%9F%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/vscode-snippets%E5%8A%9F%E8%83%BD%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-      <description>VsCode Snippets的Snippets功能  snippets是代码片段, 在这里的意思是代码模板. 在使用vscode写代码时，有时需要使用代码模板，一个典型的例子是在写文件头注释时，需要一个固定格式的注释，来表明当前的时间、作者等。
- 1. 使用内置的snippets vscode中已经为我们内置了许多语言的代码模板，在安装了对应的语言插件后,可直接使用这些snippets. 2. 安装来自marketplace的snippets 按Ctrl+Shift+X打开marketplace, 输入@category:&amp;quot;snippets&amp;quot;,即可下载来自marketplace的snippets 3. 自定义snippets 如果你对内置的或来自marketplace的snippets均不满意,那么你可以自定义你的snippets.
-在File &amp;gt; Preferences &amp;gt; User Snippets选项下,选择你要定义snippets的文件类型
-在选择了文件类型之后,你就可以根据vscode提供的Example自定义snippets了.
-Example: &amp;quot;Print to console&amp;quot;: { &amp;quot;prefix&amp;quot;: &amp;quot;log&amp;quot;, &amp;quot;body&amp;quot;: [ &amp;quot;console.log(&#39;$1&#39;);&amp;quot;, &amp;quot;$2&amp;quot; ], &amp;quot;description&amp;quot;: &amp;quot;Log output to console&amp;quot; &amp;quot;Print to console&amp;quot;是你自定义的snippets的名字,prefix为前缀,在输入了你定义的prefix后,body中的内容就会输出到当前光标的位置.
-在body中,你可以使用&amp;quot;variables&amp;ldquo;来描述你的snippets, 其格式为:
-  ${1:label}: 其中的1表示在body输出后光标会第一个停放在这个位置,而label是对当前variables的描述.
-  ${1|one, two, three|}: 这个语法格式将提醒你选择one, two, three中的一个值.
-  $name或${name:default}: 其中的name为预定义的变量名,可使用default指定其默认值.预定义的变量名有如下:
- 有关文件与目录的
- TM_SELECTED_TEXT当前选定的文本或空字符串 TM_CURRENT_LIN当前行的内容 TM_CURRENT_WORD光标下或空字符串下的单词内容 TM_LINE_INDEX基于零指数的行数 TM_LINE_NUMBER基于一个索引的行数 TM_FILENAME当前文档的文件名 TM_FILENAME_BASE没有扩展的当前文档的文件名 TM_DIRECTORY当前文档的目录 TM_FILEPATH当前文档的完整文件路径 CLIPBOARD剪贴板的内容 WORKSPACE_NAME打开的工作区或文件夹的名称 WORKSPACE_FOLDER打开的工作区或文件夹的路径    有关时间的</description>
-    </item>
-    
-    <item>
       <title>GitHub图床&#43;vscode&#43;Picgo </title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
@@ -576,24 +545,25 @@ END</description>
     </item>
     
     <item>
-      <title>安装与配置clash</title>
+      <title>安装与配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
-      <description>安装与配置clash  参考了这位老哥的博客
+      <description>安装与配置  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
-1. 下载安装clash 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
-2. 安装clash 将下载的clash上传到自己的服务器之后，解压之：
-gunzip clash-linux-amd64-v1.4.1.gz 解压结果就是一个可执行文件 重命名：
-mv clash-linux-amd64 clash 赋予运行权限：
-chmod +x clash 移动到bin目录下：
-mv clash /usr/bin 3. 编辑config.yaml文件 config.yaml文件的内容来自你购买的vpn提供商
-mkdir /etc/clash touch /etc/clash/config.yaml ··· # 编辑你的config.yaml 4. 将clash添加为系统服务 cd /etc/systemd/system/ vim clash.service clash.service的内容为：
-[Unit] Description=clash proxy After=network.target [Service] Type=simple ExecStart=/usr/bin/clash -d /etc/clash [Install] WantedBy=multi-user.target  要想深入了解systemctl服务，可前往阮一峰大佬的教程
+1. 下载安装 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
+2. 安装 将下载的上传到自己的服务器之后，解压之：
+gunzip -linux-amd64-v1.4.1.gz 解压结果就是一个可执行文件 重命名：
+mv -linux-amd64 赋予运行权限：
+chmod +x 移动到bin目录下：
+mv /usr/bin 3. 编辑config.yaml文件 config.yaml文件的内容来自你购买的vpn提供商
+mkdir /etc/ touch /etc//config.yaml ··· # 编辑你的config.yaml 4. 将添加为系统服务 cd /etc/systemd/system/ vim .service .service的内容为：
+[Unit] Description= proxy After=network.target [Service] Type=simple ExecStart=/usr/bin/ -d /etc/ [Install] WantedBy=multi-user.target  要想深入了解systemctl服务，可前往阮一峰大佬的教程
  编辑完成后，重载systemctl
-systemctl daemon-reload 开启clash服务
-systemctl start clash 5. 开启http代理和socks5代理  手动开启代理 export https_proxy=http://127.</description>
+systemctl daemon-reload 开启服务
+systemctl start clash 设置开机启动
+systemctl enable clash 5. 开启http代理和socks5代理  手动开启代理 export https_proxy=http://127.</description>
     </item>
     
     <item>
@@ -769,20 +739,6 @@ models.ImageField(upload_to=&amp;lsquo;path&amp;rsquo;) upload_to的储存路径
 在前端显示上传的图片 {% load static %} &amp;lt;body data-media-url=&amp;#34;{% get_media_prefix %}&amp;#34;&amp;gt; 使用get_media_prefxi模板tag，代表MEDIA_URL变量
 &amp;lt;img src=&amp;#34;{% get_media_prefix %}/{{ page.cover }}&amp;#34; alt = &amp;#34;{{ page.cover }}&amp;#34;&amp;gt;  存在的问题  每个用户上传的图片集中在一个文件夹下，容易造成命名冲突，
 可参考这里</description>
-    </item>
-    
-    <item>
-      <title>Docker 搭建Java环境</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85java%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
-      <description>Docker 搭建Java环境 1. 拉取Ubuntu镜像 docker pull ubuntu 2. 运行docker镜像，并进入 docker run -it -v /home/hadoop/build:/root/build --name ubuntu ubuntu  -i 表示Interaction，交互，开启交互模式
--t 表示分配一个tty，即控制台
--v 分配一个共享目录，
-&amp;ndash;name 为镜像命名
- 3. 基本操作  首先更新源，并安装vim  apt-get update apt-get install vim  为保证后面的软件安装速度，进行换源
-打开/etc/apt/sources.list，将其中的内容替换为：  deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse deb http://mirrors.</description>
     </item>
     
     <item>
