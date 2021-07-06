@@ -9,7 +9,17 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 23 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>依赖注入：wire包的使用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <description>官方教程，写的很好，我就不多说了
+ Let&amp;rsquo;s learn to use Wire by example. The Wire guide provides thorough documentation of the tool&amp;rsquo;s usage. For readers eager to see Wire applied to a larger server, the guestbook sample in Go Cloud uses Wire to initialize its components. Here we are going to build a small greeter program to understand how to use Wire. The finished product may be found in the same directory as this README.</description>
+    </item>
+    
     <item>
       <title>堆和栈的区别</title>
       <link>http://yangchnet.github.io/Dessert/posts/c&#43;&#43;/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
@@ -183,9 +193,10 @@ source ~/.zshrc 这时powerlevel10k会自动启动，询问你想要的配置 �
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
-      <description>1. goroutine中panic无法恢复 正常的函数中panic的recover
+      <description>一、野生goroutine的问题  引言： 毋庸置疑，golang原生的goroutine极大降低了程序员使用并发编程的代价，程序员们不需要再去关心如何实现接口、如何继承Thread类等多余的操作，只需要简简单单的go, 就可以开启一个并发的协程。但这种简单的使用方式同时也带来一些问题，这些goroutine不再受我们控制了，它们在运行时可能会发生任何错误或意外，而我们无法得知或去处理这些意外。我们将启动后不再受主进程控制的goroutine称为野生goroutine，本节将介绍野生goroutine存在的一些问题并介绍一些简单的解决方法。
+ 1. goroutine中panic无法恢复 正常的函数中panic的recover
 import ( &amp;#34;fmt&amp;#34; ) func main(){ defer func(){ if err := recover(); err != nil{ fmt.Println(err) } }() var bar = []int{1} fmt.Println(bar[1]) } reflect: slice index out of range goroutine中panic的恢复
-func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用recover(),不能捕获panic 	fmt.Println(&amp;#34;catch you, bad guy&amp;#34;) } }() go func(){ fmt.Println(&amp;#34;I&amp;#39;m in a goroutine&amp;#34;) panic(&amp;#34;come to catch me&amp;#34;) }() time.Sleep(10 * time.Second) // 主进程做其他事 } I&#39;m in a goroutine panic: come to catch me goroutine 6 [running]: main.</description>
+func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用recover(),不能捕获panic 	fmt.Println(&amp;#34;catch you, bad guy&amp;#34;) } }() go func(){ fmt.Println(&amp;#34;I&amp;#39;m in a goroutine&amp;#34;) panic(&amp;#34;come to catch me&amp;#34;) }() time.</description>
     </item>
     
     <item>
