@@ -164,6 +164,29 @@ source ~/.bashrc
 4. 开始输入  
 ![20210601182727](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601182727.png)
 
+## 4. WSL 开发环境备份
+可以使用`wsl --export <DistributionName> <fileName>`， 例如，我们使用`Ubuntu18.04`的Linux版本，那么使用如下命令导出：
+```shell
+# --export <分发版> <文件名>
+wsl --export Ubuntu18.04 ubuntuLinux
+```
+那么就会在当前文件夹下生成一个名为ubuntuLinux的文件，这就是我们的WSL开发环境了。
+
+如何导入？
+```shell
+# --import <分发版> <安装位置> <文件名> 
+wsl --import Ubuntu18.04 . ubuntuLinux
+```
+> 导入的WSL默认用户会被设置为root，但是有时候使用root会比较麻烦，比如我们使用普通账户开发的项目，如果用root打开的话，可能有些文件的所有人和所有组会变成root，这时候如果再使用普通账户读写就会产生问题。因此要设置默认用户为普通用户。
+```bash
+sudo vim /etc/wsl.conf
+```
+文件内容如下：
+```
+[user]
+default=lc
+```
+![20210709150131](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210709150131.png)
 
 ## FAQ
 1. 打开的图形界面字体很模糊    
