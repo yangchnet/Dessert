@@ -41,8 +41,7 @@
       
       <guid>http://yangchnet.github.io/Dessert/posts/windows/mbr-gpt/</guid>
       <description>Windows装系统遇到的问题 1. 问题描述 windows无法安装到这个磁盘，选中的磁盘具有MBR分区表。在EFI系统上，Windows只能安装到GPT磁盘
-2. 问题来源 这个问题的根源网上众说纷纭，暂且不管他
-3. 解决办法   首先选择U盘安装，进入安装界面
+2. 解决办法   首先选择U盘安装，进入安装界面
   按shift+F10打开命令行
   输入diskpart并回车
   输入list disk查看磁盘，一般会出现两个磁盘，一个是机器本身的磁盘，编号为0，另一个为U盘，编号为1

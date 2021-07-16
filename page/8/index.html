@@ -28,19 +28,7 @@ ip_hash：此平衡算法根据客户端的IP地址将请求分发到不同的�
 hash：此平衡算法主要用于memcached代理。基于任意提供的散列密钥的值来划分服务器。这可以是文本，变量或组合。这是唯一需要用户提供数据的平衡方法，这是应该用于哈希的密钥。
 管理员可用的算法取决于所使用的特定负载平衡技术。
 3.3 负载平衡器如何处理状态 某些应用程序要求用户继续连接到同一后端服务器。Source算法根据客户端IP信息创建关联。在Web应用程序级别实现此目的的另一种方法是通过粘性会话，其中负载平衡器设置cookie，并且来自该会话的所有请求都定向到同一物理服务器。
-4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。...</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Nginx负载均衡配置--简介" href=http://yangchnet.github.io/Dessert/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/></a></article><article class=post-entry><header class=entry-header><h2>pm2的使用</h2></header><section class=entry-content><p>pm2的使用 PM2 Runtime是具有内置Load Balancer的Node.js应用程序的生产过程管理器。它允许您永久保持应用程序的活动，无需停机即可重新加载它们，并促进常见的Devops任务。
-对于ipv4主机 用户名： lc 密码： Lichang1- 登录后使用以下命令查看当前后台进程状态
-pm2 ls 若status为online，则表明脚本运行正常，若为其他状态，则说明出现错误或异常，可用以下命令停止脚本运行
-pm2 stop 0 然后使用以下命令查看日志
-cat server.log 从日志中可获取错误信息或其他提示。
-若脚本一切正常，可直接进入数据库查看数据。
-注意：注销登录前请使用pm2 start server.sh命令重新启动脚本！！！
-对于ipv6主机 用户名： ubuntu 密码： ahnu2019 登录后使用以下命令查看当前后台进程状态
-pm2 ls 若status为online，则表明脚本运行正常，若为其他状态，则说明出现错误或异常，可用以下命令停止脚本运行
-pm2 stop 1 然后使用以下命令查看日志
-cat server.log 从日志中可获取错误信息或其他提示。
-若脚本一切正常，可直接进入数据库查看数据。
-注意：注销登录前请使用pm2 start server.sh命令重新启动脚本！！！</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to pm2的使用" href=http://yangchnet.github.io/Dessert/posts/linux/pm2/></a></article><article class=post-entry><header class=entry-header><h2>python与其他语言的对比（helloworld）</h2></header><section class=entry-content><p>python与其他语言的对比（hello world） C语言
+4. 冗余负载均衡器 要将负载均衡器作为单点故障移除，可以将第二个负载均衡器连接到第一个负载均衡器以形成一个集群，其中每个负载均衡器监控其他负载平衡器的运行状况。每个人都具有同样的故障检测和恢复能力。如果主负载均衡器发生故障，DNS必须将用户带到第二个负载均衡器。由于DNS更改可能需要花费大量时间在Internet上传播并自动进行此故障转移，因此许多管理员将使用允许灵活IP地址重新映射的系统，例如浮动IP。按需IP地址重新映射通过提供可在需要时轻松重新映射的静态IP地址，消除了DNS更改中固有的传播和缓存问题。域名可以保持与相同的IP地址关联，而IP地址本身在服务器之间移动。...</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Nginx负载均衡配置--简介" href=http://yangchnet.github.io/Dessert/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/></a></article><article class=post-entry><header class=entry-header><h2>python与其他语言的对比（helloworld）</h2></header><section class=entry-content><p>python与其他语言的对比（hello world） C语言
 include&lt;stdio.h> int main() { printf("hello world"); return 0; } Java语言
 public class HelloWorld{ public static void main(String[] args) { System.out.println("Hello World!"); } } Python
 print('hello world') python中的常用数据类型 Number String List Tuple Dictionary # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = 'hello' str1_1 = "hello" str2 = "world" print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = 'hello \nworld' print(str4) str5 = 'hello \\n world' print(str5) # 格式化输出 print('str1:%s....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to python与其他语言的对比（helloworld）" href=http://yangchnet.github.io/Dessert/posts/django/python%E5%9F%BA%E7%A1%80/></a></article><article class=post-entry><header class=entry-header><h2>Python中的拷贝</h2></header><section class=entry-content><p>Python中的拷贝 直接赋值：其实就是对象的引用（别名）.两个对象是引用的同一块内存区域
@@ -75,7 +63,14 @@ REST允许您使用分层的系统架构，在该架构中，您可以在服务�
 以上所有约束条件都可以帮助您构建真正的RESTful API，并且应该遵循它们。不过，有时您可能会发现自己违反了一两个约束。别担心; 您仍在制作RESTful API，但不是“真正的RESTful”。
 3. REST资源命名指南 在REST中，主要数据表示称为Resource。从长远来看，拥有一个强大且一致的REST资源命名策略–无疑将证明是最佳的设计决策之一。...</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to RESTfulAPI入门" href=http://yangchnet.github.io/Dessert/posts/golang/restful-api/></a></article><article class=post-entry><header class=entry-header><h2>SimpleSupportVectorMachine</h2></header><section class=entry-content><p>Simple Support Vector Machine First we will import numpy to easily manage linear algebra and calculus operations in python. To plot the learning progress later on, we will use matplotlib.
 import numpy as np from matplotlib import pyplot as plt %matplotlib inline Stochastic Gradient Descent The svm will learn using the stochastic gradient descent algorithm (SGD). Gradient Descent minimizes a function by following the gradients of the cost function.
-Calculating the Error To calculate the error of a prediction we first need to define the objective function of the svm....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to SimpleSupportVectorMachine" href=http://yangchnet.github.io/Dessert/posts/dlml/svm-primal/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=http://yangchnet.github.io/Dessert/page/7/>« Prev Page</a>
+Calculating the Error To calculate the error of a prediction we first need to define the objective function of the svm....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;5 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to SimpleSupportVectorMachine" href=http://yangchnet.github.io/Dessert/posts/dlml/svm-primal/></a></article><article class=post-entry><header class=entry-header><h2>tf.ones_like()</h2></header><section class=entry-content><p>import tensorflow as tf import numpy as np from IPython.display import Image tf.ones_like() 创建一个所有元素设置为1的tensor
+tf.subtract() 两个矩阵相减
+decision_p_comp = tf.subtract(tf.ones_like(decision_p), decision_p)
+这一句计算出1-d
+tf.stack 矩阵拼接，例如
+a = tf.constant([1,2,3]) b = tf.constant([4,5,6]) c = tf.stack([a, b], axis = 0) d = tf.stack([a, b], axis = 1) sess = tf.Session() print(sess.run(c)) print(sess.run(d)) [[1 2 3] [4 5 6]] [[1 4] [2 5] [3 6]] tf.expand_dims 在axis位置增加一个维度
+tf.tile 在同一维度上进行复制
+with tf....</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to tf.ones_like()" href=http://yangchnet.github.io/Dessert/posts/dlml/tensorflowapi/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=http://yangchnet.github.io/Dessert/page/7/>« Prev Page</a>
 <a class=next href=http://yangchnet.github.io/Dessert/page/9/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
