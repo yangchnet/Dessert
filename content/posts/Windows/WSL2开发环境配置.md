@@ -192,7 +192,7 @@ default=lc
 1. 打开的图形界面字体很模糊    
 找到自己的VcXsrv安装位置，找到`vsxsrc.exe`和`xlaunch.exe`两个应用程序文件，右键属性>兼容性>更改高DPI设置>勾选替代高DPI缩放行为（应用程序）> 确定。
 
-2. 如何从windows访问wsl2的网络
+2. 如何从windows访问wsl2的网络   
 在命令行中使用如下命令显示wsl2的ip地址
 ```
 wsl -- ifconfig eth0
