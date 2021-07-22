@@ -197,6 +197,7 @@ default=lc
 ```
 wsl -- ifconfig eth0
 ```
+> 我写了一个小工具，可以方便的帮你解决wsl中ip地址的问题：https://github.com/yangchnet/wsl-Ip
 
 ## Reference
 

@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "安装与配置"
+title: "Linux上安装与配置clash"
 date: "2021-03-04"
 tags: ["", "Linux", "install"]
 categories: ["Linux"]
