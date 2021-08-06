@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>npm on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/npm/</link>
+    <description>Recent content in npm on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/npm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>多版本npm解决方案</title>
+      <link>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>1. nvm install wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+2. 常用操作   列出本地所有npm版本
+nvm ls   列出可获取的所有版本
+nvm ls-remote   安装指定版本
+nvm install 14 # 14是版本号   指定使用某个版本
+nvm use 14   </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -9,7 +9,19 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pm2使用指南</title>
+      <link>http://yangchnet.github.io/Dessert/posts/node/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/node/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
+      <description>1. 安装pm2 npm install pm2 -g 或
+yarn global add pm2 使用pm2 -v查看版本号
+2. 基本使用 2.1 启动应用 pm2 start app.js # 不止是js文件，其他可执行文件也可以执行 pm2 start script.sh # 启动bash脚本 pm2 start python3 -- app.py # -- 后跟要传给命令的参数 pm2 start binary -- -port 8080 在启动应用时还有一些参数
+--name &amp;lt;app_name&amp;gt; # 为应用设置一个名字 --watch # 监视源文件并在源文件存在更改时重启应用 --max-memory-restart &amp;lt;200MB&amp;gt; # 设置应用占用内存上限 --log &amp;lt;log_path&amp;gt; # 设置log文件路径 -- arg1 arg2 arg3 # 传递参数 --restart-delay &amp;lt;delay in ms&amp;gt; # 重启前延时 --time 在日志前增加时间戳 --no-autorestart # 不要自动重启 2.</description>
+    </item>
+    
     <item>
       <title>zsh的基本配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/tool/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>

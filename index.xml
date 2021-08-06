@@ -9,7 +9,33 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>pm2使用指南</title>
+      <link>http://yangchnet.github.io/Dessert/posts/node/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/node/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
+      <description>1. 安装pm2 npm install pm2 -g 或
+yarn global add pm2 使用pm2 -v查看版本号
+2. 基本使用 2.1 启动应用 pm2 start app.js # 不止是js文件，其他可执行文件也可以执行 pm2 start script.sh # 启动bash脚本 pm2 start python3 -- app.py # -- 后跟要传给命令的参数 pm2 start binary -- -port 8080 在启动应用时还有一些参数
+--name &amp;lt;app_name&amp;gt; # 为应用设置一个名字 --watch # 监视源文件并在源文件存在更改时重启应用 --max-memory-restart &amp;lt;200MB&amp;gt; # 设置应用占用内存上限 --log &amp;lt;log_path&amp;gt; # 设置log文件路径 -- arg1 arg2 arg3 # 传递参数 --restart-delay &amp;lt;delay in ms&amp;gt; # 重启前延时 --time 在日志前增加时间戳 --no-autorestart # 不要自动重启 2.</description>
+    </item>
+    
+    <item>
+      <title>多版本npm解决方案</title>
+      <link>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <description>1. nvm install wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+2. 常用操作   列出本地所有npm版本
+nvm ls   列出可获取的所有版本
+nvm ls-remote   安装指定版本
+nvm install 14 # 14是版本号   指定使用某个版本
+nvm use 14   </description>
+    </item>
+    
     <item>
       <title>可信存证</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8F%AF%E4%BF%A1%E5%AD%98%E8%AF%81/</link>
@@ -40,15 +66,6 @@
 5. 区块链存证系统对电子数据认定的作用 区块链技术对电子数据证据认定的作用，即对电子证据“三性”的影响，首先在于对电子证据真实性的判定所产出的显著影响。此外，对于某些业务类型，诸如证据在链上形成并同步存储的情形，该系统对于证明所存证据的合法性和关联性也具有一定帮助。
 具体而言，该系统对于证据认定辅助功能主要通过以下四个层面来实现。
  安全架构确保电子数据载体真实性 关键技术提高电子数据真实性 相关技术提高证据认定效率 相关业务和链下治理辅助证据认定  6. 总结 在理想情况下（即电子数据生成时即同步上链）：</description>
-    </item>
-    
-    <item>
-      <title>Makefile简明教程</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/makefile%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</link>
-      <pubDate>Sun, 25 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/makefile%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/</guid>
-      <description></description>
     </item>
     
     <item>
@@ -635,15 +652,6 @@ hugo new posts/my-first-post.md 需要注意的一点：为了让hugo知道更�
 --- title: &amp;quot;My First Post&amp;quot; date: 2019-03-26T08:47:11+01:00 draft: true --- 这里的头部并不是一成不变的，你可以根据需要自行配置。
 1.4 开始让你的网站服务 使用如下命令让你的网站开始服务吧！
 hugo server -D 注意，这个命令只会让你的hugo服务器监听本地访问，也就是127.0.0.1 如果你想要你的hugo服务器为整个网络服务，可以这样：</description>
-    </item>
-    
-    <item>
-      <title>/usr/bin/env:‘node’:Nosuchfileordirectory</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/nodejs/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/nodejs/</guid>
-      <description>/usr/bin/env: ‘node’: No such file or directory 解决方法 sudo apt-get install nodejs-legacy </description>
     </item>
     
     <item>

@@ -9,22 +9,31 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>node</title>
+      <link>http://yangchnet.github.io/Dessert/categories/node/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/categories/node/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tool</title>
+      <link>http://yangchnet.github.io/Dessert/categories/tool/</link>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/categories/tool/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>区块链</title>
       <link>http://yangchnet.github.io/Dessert/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
       <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>http://yangchnet.github.io/Dessert/categories/linux/</link>
-      <pubDate>Sun, 25 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/categories/linux/</guid>
       <description></description>
     </item>
     
@@ -70,6 +79,15 @@
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://yangchnet.github.io/Dessert/categories/linux/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/categories/linux/</guid>
       <description></description>
     </item>
     
