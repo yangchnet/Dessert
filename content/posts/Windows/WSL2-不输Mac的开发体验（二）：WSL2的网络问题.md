@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "WSL2的网络问题"
+title: "WSL2-不输Mac的开发体验（二）：WSL2的网络问题"
 date: "2021-08-10"
 tags: ["wsl2", "windows"]
 categories: ["Windows"]

@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "WSL2开发环境配置"
+title: "WSL2-不输Mac的开发体验（一）：WSL2的安装及基本配置"
 date: "2021-06-01"
 tags: ["windows", "wsl", "env"]
 categories: ["Windows"]
@@ -81,6 +81,9 @@ gedit
 ![20210601184847](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210601184847.png)
 
 完成！！！
+
+
+> 可以从wsl中启动图形界面意味着你可以将vscode、idea、goland等开发工具直接装在wsl中。但我强烈建议你使用vscode的`Remote-WSL`插件来进行开发，而只在一些必要的时候才从wsl中直接启动图形界面。
 
 
 ## 3. WSL中文
@@ -197,7 +200,6 @@ default=lc
 ```
 wsl -- ifconfig eth0
 ```
-> 我写了一个小工具，可以方便的帮你解决wsl中ip地址的问题：https://github.com/yangchnet/wsl-Ip
 
 ## Reference
 
