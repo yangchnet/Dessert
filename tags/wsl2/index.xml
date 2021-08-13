@@ -11,11 +11,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 10 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/wsl2/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>WSL2的网络问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</link>
+      <title>WSL2-不输Mac的开发体验（二）：WSL2的网络问题</title>
+      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</guid>
       <description>1. 代理服务 1.1 获取Windows主机ip并使用其代理 可以在wsl中安装代理软件，但如果win主机上也有代理软件的话，会感觉有点乱。这里让wsl使用主机的代理。
 我使用的代理软件是clash，这里首先要确保clash允许局域网
 确认完clash支持局域网后，我们来看如何从wsl中获取win主机的ip地址。 在Windows主机上，我们可以用ipconfig命令来查看本地的ip地址
