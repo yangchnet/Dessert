@@ -3,21 +3,33 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://yangchnet.github.io/Dessert/categories/</loc>
-    <lastmod>2021-08-12T00:00:00+00:00</lastmod>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/categories/golang/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/migrate/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</loc>
+    <lastmod>2021-08-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/docker/</loc>
     <lastmod>2021-08-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/k8s/</loc>
-    <lastmod>2021-08-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/</loc>
-    <lastmod>2021-08-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
-    <lastmod>2021-08-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
     <lastmod>2021-08-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/windows/</loc>
@@ -70,9 +82,6 @@
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8F%AF%E4%BF%A1%E5%AD%98%E8%AF%81/</loc>
     <lastmod>2021-08-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/golang/</loc>
-    <lastmod>2021-07-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/golang/</loc>
     <lastmod>2021-07-06T00:00:00+00:00</lastmod>

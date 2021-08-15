@@ -9,7 +9,23 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 12 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库版本管理-migrate</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</link>
+      <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</guid>
+      <description>migrate是一个golang写成的数据库版本迁移工具，可以用来方便的对数据库进行迁移和回退。 Github上有详细的教程等：https://github.com/golang-migrate/migrate
+  建立目录  mkdir -p migrate-demo/db cd migrate-demo/db mkdir ddl mkdir -p schema/blog 现在migrate-demo目录下结构如下：
+. └── db ├── ddl └── schema └── blog 其中，ddl中存储建库的sql文件，schema存放建表的sql文件
+建库  建库
+vim db/ddl/blog.sql CREATE DATABASE IF NOT EXISTS blog DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci; build镜像  编写Dockerfile
+vim db/Dockerfile FROMmysql:5.7COPY ./ddl /docker-entrypoint-initdb.d/ENV MYSQL_ROOT_PASSWORD=admin123 复制到/docker-entrypoint-initdb.d目录下的sql脚本会被自动执行
+docker build -t mysql-demo -f ./Dockerfile . build成功后，使用docker images命令查看镜像：
+REPOSITORY TAG IMAGE ID CREATED SIZE mysql-demo latest 6a2faae69a6f 26 minutes ago 447MB 启动镜像并查看  docker run --name mysql -p 13306:3306 -d mysql-demo 进入容器查看数据库</description>
+    </item>
+    
     <item>
       <title>WSL2-不输Mac的开发体验（三）：WSL2中使用docker&amp;k8s</title>
       <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
