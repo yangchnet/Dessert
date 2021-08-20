@@ -9,7 +9,29 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 10 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WSL2-不输Mac的开发体验（三）：WSL2中使用docker&amp;k8s</title>
+      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</guid>
+      <description>1. docker for wsl2 在wsl2中使用docker的最佳实践不是在wsl2中安装docker，而是安装docker desktop：
+从docker官网下载并安装完成后，打开docker desktop，选择setting-&amp;gt;General，确保Use the WSL 2 based engine选项被勾选，然后选择右下角Apply&amp;amp;Restart。
+重启docker desktop后，再次打开设置，确保setting-&amp;gt;Resources-&amp;gt;WSL INTEGRATION选项页中你的WSL发行版被勾选。
+完成以上步骤之后，打开你的wsl, 输入docker： 出现这一堆说明安装成功。
+使用docker run helloworld验证你的docker可以正常启动容器。
+ 如果输入docker命令后无法启动，可以尝试sudo docker
+ 2. k8s for wsl2 安装了docker desktop后，可以通过setting-&amp;gt;Kubernetes，勾选Enable Kubernetes来为你的wsl提供k8s服务，但由于网络问题，通常不可能成功。
+所以我们要&amp;quot;换源&amp;quot;。
+打开setting-&amp;gt;Docker Engine，将右侧配置文件改为：
+{ &amp;#34;registry-mirrors&amp;#34;: [ &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;,// 中科大 &amp;#34;https://registry.docker-cn.com&amp;#34;// 官方 ], &amp;#34;insecure-registries&amp;#34;: [], &amp;#34;debug&amp;#34;: false, &amp;#34;experimental&amp;#34;: false, &amp;#34;features&amp;#34;: { &amp;#34;buildkit&amp;#34;: true } } Apply&amp;amp;Restart，重启docker desktop。
+现在我们还需要一些额外的镜像。 clone AliyunContainerService/k8s-for-docker-desktop 这个项目。
+git clone https://github.com/AliyunContainerService/k8s-for-docker-desktop.git 查看自己的docker desktop上Kubernetes的版本。
+可以看到我们这里是v1.21.2。相应的，我们进入刚才clone的文件夹下，切换到v1.21.2分支
+git checkout v1.</description>
+    </item>
+    
     <item>
       <title>WSL2-不输Mac的开发体验（二）：WSL2的网络问题</title>
       <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</link>

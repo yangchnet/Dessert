@@ -47,6 +47,15 @@
     </item>
     
     <item>
+      <title>Windows</title>
+      <link>http://yangchnet.github.io/Dessert/tags/windows/</link>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>wsl</title>
       <link>http://yangchnet.github.io/Dessert/tags/wsl/</link>
       <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
@@ -56,20 +65,11 @@
     </item>
     
     <item>
-      <title>Windows</title>
-      <link>http://yangchnet.github.io/Dessert/tags/windows/</link>
+      <title>proxy</title>
+      <link>http://yangchnet.github.io/Dessert/tags/proxy/</link>
       <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/tags/windows/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>wsl2</title>
-      <link>http://yangchnet.github.io/Dessert/tags/wsl2/</link>
-      <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/wsl2/</guid>
+      <guid>http://yangchnet.github.io/Dessert/tags/proxy/</guid>
       <description></description>
     </item>
     
