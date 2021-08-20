@@ -2,7 +2,7 @@
 author: "李昌"
 title: "WSL2-不输Mac的开发体验（三）：WSL2中使用docker&k8s"
 date: "2021-08-12"
-tags: ["wsl", "docker", "k8s"]
+tags: ["wsl", "docker", "k8s", "windows"]
 categories: ["Windows"]
 ShowToc: true
 TocOpen: true

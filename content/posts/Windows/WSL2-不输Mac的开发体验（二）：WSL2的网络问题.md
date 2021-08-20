@@ -2,7 +2,7 @@
 author: "李昌"
 title: "WSL2-不输Mac的开发体验（二）：WSL2的网络问题"
 date: "2021-08-10"
-tags: ["wsl2", "windows"]
+tags: ["wsl", "windows", "proxy"]
 categories: ["Windows"]
 ShowToc: true
 TocOpen: true
@@ -126,7 +126,22 @@ fi
 
 当需要从Windows访问wsl中的服务时，就可以使用`dns`命令来设置为通过使用`wsl`域名来访问。
 
-> 关于这个脚本，我还用golang实现了一遍，并编译出二进制文件，你可以直接下载二进制文件放在你的`/usr/local/bin`目录下面，在需要的时候使用命令一键设置dns.
+> 关于这个脚本，我还实现了golang版本，并编译出二进制文件，你可以直接下载二进制文件放在你的`/usr/local/bin`目录下面，在需要的时候使用命令一键设置dns.
 > 地址在这里：https://github.com/yangchnet/wsl-Ip
+
+
+### 2.3 遇到访问权限问题怎么办
+如果遇到因权限问题不能更改文件，可按照以下步骤更改`C:\Windows\System32\drivers\etc\hosts`文件权限
+右击文件，选择`属性`，选择`安全`选项卡，点击`编辑`来更改文件权限  
+![20210820194359](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20210820194359.png)
+
+为`User`增加写入权限
+![20210820194659](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20210820194659.png)
+
+点击确定保存退出。
+
+这时候，可以在wsl中cd进入`/mnt/c/Windows/System32/drivers/etc`，使用`ll`命令查看`hosts`文件的权限
+![20210820194929](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20210820194929.png)
+可以看到，对于`hosts`文件，已经有了写权限
 
 
