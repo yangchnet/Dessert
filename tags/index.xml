@@ -9,7 +9,34 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 15 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 22 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang</title>
+      <link>http://yangchnet.github.io/Dessert/tags/golang/</link>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ORM</title>
+      <link>http://yangchnet.github.io/Dessert/tags/orm/</link>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/orm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sqlc</title>
+      <link>http://yangchnet.github.io/Dessert/tags/sqlc/</link>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/sqlc/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>migrate</title>
       <link>http://yangchnet.github.io/Dessert/tags/migrate/</link>
@@ -115,15 +142,6 @@
       <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/%E5%8F%AF%E4%BF%A1%E5%AD%98%E8%AF%81/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>http://yangchnet.github.io/Dessert/tags/golang/</link>
-      <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/golang/</guid>
       <description></description>
     </item>
     
@@ -583,15 +601,6 @@
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/wsgi/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ORM</title>
-      <link>http://yangchnet.github.io/Dessert/tags/orm/</link>
-      <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/orm/</guid>
       <description></description>
     </item>
     

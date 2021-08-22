@@ -9,7 +9,19 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 22 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ORM之sqlc</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/orm%E4%B9%8Bsqlc/</link>
+      <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/orm%E4%B9%8Bsqlc/</guid>
+      <description>1. 安装sqlc go get github.com/kyleconroy/sqlc/cmd/sqlc 2. 基本使用 建立基本项目结构 mkdir sqlc-demo cd sqlc-demo go mod init sqlc-demo 在sqlc-demo中建立如下目录结构：
+. ├── db │ ├── queries │ ├── schema │ └── sqlc └── go.mod 其中query中存储查询语句，schema中存储数据库表结构，sqlc中存储生成的代码。
+基本表结构  sqlc-demo/db/schema/table.sql
+ CREATE TABLE &amp;#34;accounts&amp;#34; ( &amp;#34;id&amp;#34; bigserial PRIMARY KEY, &amp;#34;owner&amp;#34; varchar NOT NULL, &amp;#34;balance&amp;#34; bigint NOT NULL, &amp;#34;currency&amp;#34; varchar NOT NULL, &amp;#34;created_at&amp;#34; timestamptz NOT NULL DEFAULT (now()) ); CREATE TABLE &amp;#34;entries&amp;#34; ( &amp;#34;id&amp;#34; bigserial PRIMARY KEY, &amp;#34;account_id&amp;#34; bigint NOT NULL, &amp;#34;amount&amp;#34; bigint NOT NULL, &amp;#34;created_at&amp;#34; timestamptz NOT NULL DEFAULT (now()) ); CREATE TABLE &amp;#34;transfers&amp;#34; ( &amp;#34;id&amp;#34; bigserial PRIMARY KEY, &amp;#34;from_account_id&amp;#34; bigint NOT NULL, &amp;#34;to_account_id&amp;#34; bigint NOT NULL, &amp;#34;amount&amp;#34; bigint NOT NULL, &amp;#34;created_at&amp;#34; timestamptz NOT NULL DEFAULT (now()) ); 配置文件  sqlc-demo/sqlc.</description>
+    </item>
+    
     <item>
       <title>依赖注入：wire包的使用</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
