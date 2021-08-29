@@ -44,8 +44,8 @@ TocOpen: true
 ```json
 {
   "registry-mirrors": [
-    "https://docker.mirrors.ustc.edu.cn",// 中科大
-    "https://registry.docker-cn.com"// 官方
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://registry.docker-cn.com"
   ],
   "insecure-registries": [],
   "debug": false,
