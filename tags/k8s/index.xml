@@ -25,11 +25,11 @@
  2. k8s for wsl2 安装了docker desktop后，可以通过setting-&amp;gt;Kubernetes，勾选Enable Kubernetes来为你的wsl提供k8s服务，但由于网络问题，通常不可能成功。
 所以我们要&amp;quot;换源&amp;quot;。
 打开setting-&amp;gt;Docker Engine，将右侧配置文件改为：
-{ &amp;#34;registry-mirrors&amp;#34;: [ &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;,// 中科大 &amp;#34;https://registry.docker-cn.com&amp;#34;// 官方 ], &amp;#34;insecure-registries&amp;#34;: [], &amp;#34;debug&amp;#34;: false, &amp;#34;experimental&amp;#34;: false, &amp;#34;features&amp;#34;: { &amp;#34;buildkit&amp;#34;: true } } Apply&amp;amp;Restart，重启docker desktop。
+{ &amp;#34;registry-mirrors&amp;#34;: [ &amp;#34;https://docker.mirrors.ustc.edu.cn&amp;#34;, &amp;#34;https://registry.docker-cn.com&amp;#34; ], &amp;#34;insecure-registries&amp;#34;: [], &amp;#34;debug&amp;#34;: false, &amp;#34;experimental&amp;#34;: false, &amp;#34;features&amp;#34;: { &amp;#34;buildkit&amp;#34;: true } } Apply&amp;amp;Restart，重启docker desktop。
 现在我们还需要一些额外的镜像。 clone AliyunContainerService/k8s-for-docker-desktop 这个项目。
 git clone https://github.com/AliyunContainerService/k8s-for-docker-desktop.git 查看自己的docker desktop上Kubernetes的版本。
 可以看到我们这里是v1.21.2。相应的，我们进入刚才clone的文件夹下，切换到v1.21.2分支
-git checkout v1.</description>
+git checkout v1.21.2 切换分支后，在当前目录下执行：</description>
     </item>
     
   </channel>

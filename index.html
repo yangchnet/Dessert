@@ -18,11 +18,11 @@ REPOSITORY TAG IMAGE ID CREATED SIZE mysql-demo latest 6a2faae69a6f 26 minutes a
 2. k8s for wsl2 安装了docker desktop后，可以通过setting->Kubernetes，勾选Enable Kubernetes来为你的wsl提供k8s服务，但由于网络问题，通常不可能成功。
 所以我们要"换源"。
 打开setting->Docker Engine，将右侧配置文件改为：
-{ "registry-mirrors": [ "https://docker.mirrors.ustc.edu.cn",// 中科大 "https://registry.docker-cn.com"// 官方 ], "insecure-registries": [], "debug": false, "experimental": false, "features": { "buildkit": true } } Apply&Restart，重启docker desktop。
+{ "registry-mirrors": [ "https://docker.mirrors.ustc.edu.cn", "https://registry.docker-cn.com" ], "insecure-registries": [], "debug": false, "experimental": false, "features": { "buildkit": true } } Apply&Restart，重启docker desktop。
 现在我们还需要一些额外的镜像。 clone AliyunContainerService/k8s-for-docker-desktop 这个项目。
 git clone https://github.com/AliyunContainerService/k8s-for-docker-desktop.git 查看自己的docker desktop上Kubernetes的版本。
 可以看到我们这里是v1.21.2。相应的，我们进入刚才clone的文件夹下，切换到v1.21.2分支
-git checkout v1....</p></section><footer class=entry-footer>August 12, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to WSL2-不输Mac的开发体验（三）：WSL2中使用docker&k8s" href=http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/></a></article><article class=post-entry><header class=entry-header><h2>WSL2-不输Mac的开发体验（二）：WSL2的网络问题</h2></header><section class=entry-content><p>1. 代理服务 1.1 获取Windows主机ip并使用其代理 可以在wsl中安装代理软件，但如果win主机上也有代理软件的话，会感觉有点乱。这里让wsl使用主机的代理。
+git checkout v1.21.2 切换分支后，在当前目录下执行：...</p></section><footer class=entry-footer>August 12, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to WSL2-不输Mac的开发体验（三）：WSL2中使用docker&k8s" href=http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/></a></article><article class=post-entry><header class=entry-header><h2>WSL2-不输Mac的开发体验（二）：WSL2的网络问题</h2></header><section class=entry-content><p>1. 代理服务 1.1 获取Windows主机ip并使用其代理 可以在wsl中安装代理软件，但如果win主机上也有代理软件的话，会感觉有点乱。这里让wsl使用主机的代理。
 我使用的代理软件是clash，这里首先要确保clash允许局域网
 确认完clash支持局域网后，我们来看如何从wsl中获取win主机的ip地址。 在Windows主机上，我们可以用ipconfig命令来查看本地的ip地址
 ipconfig 如图所示，命令行输出了在wsl网络中Win主机的ip地址。（wsl和windows处于一个网络中，这里得到的是windows在这个网络中的ip地址）。
