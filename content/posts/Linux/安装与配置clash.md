@@ -2,7 +2,7 @@
 author: "李昌"
 title: "Linux上安装与配置clash"
 date: "2021-03-04"
-tags: ["", "Linux", "install"]
+tags: ["clash", "Linux", "install"]
 categories: ["Linux"]
 ShowToc: true
 TocOpen: true
@@ -21,37 +21,44 @@ TocOpen: true
 ## 2. 安装
 将下载的上传到自己的服务器之后，解压之：
 ```bash
-gunzip -linux-amd64-v1.4.1.gz
+gunzip clash-linux-amd64-v1.4.1.gz
 ```
 解压结果就是一个可执行文件
 重命名：
 ```bash
-mv -linux-amd64 
+mv clash-linux-amd64 clash
 ```
 赋予运行权限：
 ```bash
-chmod +x 
+chmod +x clash
 ```
 移动到bin目录下：
 ```bash
-mv  /usr/bin
+mv clash /usr/local/bin/clash
 ```
 
 ## 3. 编辑config.yaml文件
-config.yaml文件的内容来自你购买的vpn提供商
+
 ```bash
-mkdir /etc/
-touch /etc//config.yaml
+vim ~/.config/clash/config.yaml
 ···
-# 编辑你的config.yaml
+
+```yaml
+# port of HTTP
+port: 7890
+
+# port of SOCKS5
+socks-port: 7891
+
+... # 这里输入你自己的配置文件
 ```
 
 ## 4. 将添加为系统服务
 ```bash
 cd /etc/systemd/system/
-vim .service
+vim clash.service
 ```
-.service的内容为：
+clash.service的内容为：
 ```
 [Unit]
 Description= proxy
@@ -59,7 +66,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/ -d /etc/
+ExecStart=/usr/local/bin/clash
 
 [Install]
 WantedBy=multi-user.target
