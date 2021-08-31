@@ -9,16 +9,7 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 24 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/golang/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>grpc-swagger</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/grpc-swagger/</link>
-      <pubDate>Tue, 24 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/grpc-swagger/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Sun, 22 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ORM之sqlc</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/orm%E4%B9%8Bsqlc/</link>

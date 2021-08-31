@@ -48,7 +48,7 @@ sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
 gunzip clash-linux-amd64-v1.4.1.gz 解压结果就是一个可执行文件 重命名：
 mv clash-linux-amd64 clash 赋予运行权限：
 chmod +x clash 移动到bin目录下：
-mv clash /usr/local/bin/clash 3. 编辑config.yaml文件 vim ~/.config/clash/config.yaml ··· ```yaml # port of HTTP port: 7890 # port of SOCKS5 socks-port: 7891 ... # 这里输入你自己的配置文件 4. 将添加为系统服务 cd /etc/systemd/system/ vim clash.service clash.service的内容为：
+mv clash /usr/local/bin/clash 3. 编辑config.yaml文件 vim ~/.config/clash/config.yaml # port of HTTP port: 7890 # port of SOCKS5 socks-port: 7891 …… # 这里输入你自己的配置文件 4. 将添加为系统服务 cd /etc/systemd/system/ vim clash.service clash.service的内容为：
 [Unit] Description= proxy After=network.target [Service] Type=simple ExecStart=/usr/local/bin/clash [Install] WantedBy=multi-user.target  要想深入了解systemctl服务，可前往阮一峰大佬的教程
  编辑完成后，重载systemctl
 systemctl daemon-reload 开启服务</description>
