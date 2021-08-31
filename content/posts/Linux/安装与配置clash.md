@@ -41,7 +41,7 @@ mv clash /usr/local/bin/clash
 
 ```bash
 vim ~/.config/clash/config.yaml
-···
+```
 
 ```yaml
 # port of HTTP
@@ -50,7 +50,8 @@ port: 7890
 # port of SOCKS5
 socks-port: 7891
 
-... # 这里输入你自己的配置文件
+…… # 这里输入你自己的配置文件
+
 ```
 
 ## 4. 将添加为系统服务
