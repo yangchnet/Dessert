@@ -9,7 +9,26 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>k8s中的apiVersion</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
+      <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
+      <description>apiVersion可能的字段值：    Kind apiVersion     CertificateSigningRequest certificates.k8s.io/v1beta1   ClusterRoleBinding rbac.authorization.k8s.io/v1   ClusterRole rbac.authorization.k8s.io/v1   ComponentStatus v1   ConfigMap v1   ControllerRevision apps/v1   CronJob batch/v1beta1   DaemonSet extensions/v1beta1   Deployment extensions/v1beta1   Endpoints v1   Event v1   HorizontalPodAutoscaler autoscaling/v1   Ingress extensions/v1beta1   Job batch/v1   LimitRange v1   Namespace v1   NetworkPolicy extensions/v1beta1   Node v1   PersistentVolumeClaim v1   PersistentVolume v1   PodDisruptionBudget policy/v1beta1   Pod v1   PodSecurityPolicy extensions/v1beta1   PodTemplate v1   ReplicaSet extensions/v1beta1   ReplicationController v1   ResourceQuota v1   RoleBinding rbac.</description>
+    </item>
+    
+    <item>
+      <title>安装etcd</title>
+      <link>http://yangchnet.github.io/Dessert/posts/etcd/%E5%AE%89%E8%A3%85etcd/</link>
+      <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/etcd/%E5%AE%89%E8%A3%85etcd/</guid>
+      <description>安装goreman  go get github.com/mattn/goreman 下载etcd 从etcd release 页面下载etcd v3.4.9二进制文件  tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz # 解压 cd etcd-v3.4.9-linux-amd64 sudo mv etcd /usr/local/bin sudo mv etcdctl /usr/local/bin 下载Procfile文件  https://github.com/etcd-io/etcd/blob/v3.4.9/Procfile
+# Use goreman to run `go get github.com/mattn/goreman` etcd1: bin/etcd --name infra1 --listen-client-urls http://127.0.0.1:2379 --advertise-client-urls http://127.0.0.1:2379 --listen-peer-urls http://127.0.0.1:12380 --initial-advertise-peer-urls http://127.0.0.1:12380 --initial-cluster-token etcd-cluster-1 --initial-cluster &#39;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380&#39; --initial-cluster-state new --enable-pprof --logger=zap --log-outputs=stderr etcd2: bin/etcd --name infra2 --listen-client-urls http://127.0.0.1:22379 --advertise-client-urls http://127.0.0.1:22379 --listen-peer-urls http://127.0.0.1:22380 --initial-advertise-peer-urls http://127.</description>
+    </item>
+    
     <item>
       <title>vim配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/</link>
