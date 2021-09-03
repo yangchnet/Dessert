@@ -9,7 +9,20 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 02 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>为apt设置代理</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E4%B8%BAapt%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E4%B8%BAapt%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</guid>
+      <description>1. 临时设置 sudo apt-get -o Acquire::http::proxy=&amp;#34;http://127.0.0.1:8000/&amp;#34; update 2. 永久设置 创建/etc/apt/apt.conf
+touch /etc/apt/apt.conf 写入如下内容：
+Acquire::http::Proxy &amp;quot;http://yourproxyaddress:proxyport&amp;quot;; 如果proxy需要密码，则格式如下：
+Acquire::http::Proxy &amp;#34;http://username:password@yourproxyaddress:proxyport&amp;#34;; Reference: https://www.jianshu.com/p/fdae9cb5181b
+https://askubuntu.com/questions/257290/configure-proxy-for-apt</description>
+    </item>
+    
     <item>
       <title>k8s中的apiVersion</title>
       <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
@@ -126,7 +139,8 @@ yarn global add pm2 使用pm2 -v查看版本号
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
-      <description>1. nvm install wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+      <description>1. nvm install curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash 安装完毕后会提示你让你将以下命令加入你的配置文件中
+export NVM_DIR=&amp;#34;$HOME/.nvm&amp;#34; [ -s &amp;#34;$NVM_DIR/nvm.sh&amp;#34; ] &amp;amp;&amp;amp; \. &amp;#34;$NVM_DIR/nvm.sh&amp;#34; # This loads nvm [ -s &amp;#34;$NVM_DIR/bash_completion&amp;#34; ] &amp;amp;&amp;amp; \. &amp;#34;$NVM_DIR/bash_completion&amp;#34; # This loads nvm bash_completion 默认情况下，已经加入你的~/.bashrc文件中，如果你使用的是zsh，那么就需要手动将其添加到~/.zshrc中
 2. 常用操作   列出本地所有npm版本
 nvm ls   列出可获取的所有版本
 nvm ls-remote   安装指定版本
@@ -725,7 +739,7 @@ gunzip clash-linux-amd64-v1.4.1.gz 解压结果就是一个可执行文件 重�
 mv clash-linux-amd64 clash 赋予运行权限：
 chmod +x clash 移动到bin目录下：
 mv clash /usr/local/bin/clash 3. 编辑config.yaml文件 vim ~/.config/clash/config.yaml # port of HTTP port: 7890 # port of SOCKS5 socks-port: 7891 …… # 这里输入你自己的配置文件 4. 将添加为系统服务 cd /etc/systemd/system/ vim clash.service clash.service的内容为：
-[Unit] Description= proxy After=network.target [Service] Type=simple ExecStart=/usr/local/bin/clash [Install] WantedBy=multi-user.target  要想深入了解systemctl服务，可前往阮一峰大佬的教程
+[Unit] Description= proxy After=network.target [Service] Type=simple ExecStart=/usr/local/bin/clash -f /home/YourUsername/.config/clash/config.yaml [Install] WantedBy=multi-user.target  要想深入了解systemctl服务，可前往阮一峰大佬的教程
  编辑完成后，重载systemctl
 systemctl daemon-reload 开启服务</description>
     </item>

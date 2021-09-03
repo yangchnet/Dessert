@@ -2,8 +2,29 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://yangchnet.github.io/Dessert/tags/apt/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/</loc>
-    <lastmod>2021-09-02T00:00:00+00:00</lastmod>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/categories/linux/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/proxy/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/linux/%E4%B8%BAapt%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</loc>
+    <lastmod>2021-09-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/etcd/</loc>
     <lastmod>2021-09-02T00:00:00+00:00</lastmod>
@@ -23,22 +44,10 @@
     <loc>http://yangchnet.github.io/Dessert/tags/kubernetes/</loc>
     <lastmod>2021-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/</loc>
-    <lastmod>2021-09-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
-    <lastmod>2021-09-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
-    <lastmod>2021-09-02T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/etcd/%E5%AE%89%E8%A3%85etcd/</loc>
     <lastmod>2021-09-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/linux/</loc>
-    <lastmod>2021-08-31T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/linux/</loc>
     <lastmod>2021-08-31T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/vim/</loc>
@@ -88,9 +97,6 @@
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</loc>
     <lastmod>2021-08-12T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/proxy/</loc>
-    <lastmod>2021-08-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2021-08-10T00:00:00+00:00</lastmod>

@@ -16,7 +16,8 @@
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
-      <description>1. nvm install wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+      <description>1. nvm install curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash 安装完毕后会提示你让你将以下命令加入你的配置文件中
+export NVM_DIR=&amp;#34;$HOME/.nvm&amp;#34; [ -s &amp;#34;$NVM_DIR/nvm.sh&amp;#34; ] &amp;amp;&amp;amp; \. &amp;#34;$NVM_DIR/nvm.sh&amp;#34; # This loads nvm [ -s &amp;#34;$NVM_DIR/bash_completion&amp;#34; ] &amp;amp;&amp;amp; \. &amp;#34;$NVM_DIR/bash_completion&amp;#34; # This loads nvm bash_completion 默认情况下，已经加入你的~/.bashrc文件中，如果你使用的是zsh，那么就需要手动将其添加到~/.zshrc中
 2. 常用操作   列出本地所有npm版本
 nvm ls   列出可获取的所有版本
 nvm ls-remote   安装指定版本

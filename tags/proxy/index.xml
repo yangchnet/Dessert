@@ -9,7 +9,20 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 10 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>为apt设置代理</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E4%B8%BAapt%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</link>
+      <pubDate>Fri, 03 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E4%B8%BAapt%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</guid>
+      <description>1. 临时设置 sudo apt-get -o Acquire::http::proxy=&amp;#34;http://127.0.0.1:8000/&amp;#34; update 2. 永久设置 创建/etc/apt/apt.conf
+touch /etc/apt/apt.conf 写入如下内容：
+Acquire::http::Proxy &amp;quot;http://yourproxyaddress:proxyport&amp;quot;; 如果proxy需要密码，则格式如下：
+Acquire::http::Proxy &amp;#34;http://username:password@yourproxyaddress:proxyport&amp;#34;; Reference: https://www.jianshu.com/p/fdae9cb5181b
+https://askubuntu.com/questions/257290/configure-proxy-for-apt</description>
+    </item>
+    
     <item>
       <title>WSL2-不输Mac的开发体验（二）：WSL2的网络问题</title>
       <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</link>
