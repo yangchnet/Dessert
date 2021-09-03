@@ -10,7 +10,17 @@ TocOpen: true
 
 ## 1. nvm install
 
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+
+安装完毕后会提示你让你将以下命令加入你的配置文件中
+```sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+默认情况下，已经加入你的`~/.bashrc`文件中，如果你使用的是zsh，那么就需要手动将其添加到`~/.zshrc`中
 
 ## 2. 常用操作
 

@@ -67,7 +67,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/clash
+ExecStart=/usr/local/bin/clash -f /home/YourUsername/.config/clash/config.yaml
 
 [Install]
 WantedBy=multi-user.target
