@@ -9,7 +9,31 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 02 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vagrant&#43;ansible安装k8s集群</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
+      <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
+      <description>部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
+ 1. 安装vagrant和ansible 按官网教程即可
+2. Vagrantfile 建立如下目录
+k8s-cluster ├── kubernetes-setup │ ├── master-playbook.yml │ └── node-playbook.yml └── Vagrantfile 其中，Vagrantfile内容如下：
+IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.ssh.insert_key = false config.vm.provider &amp;quot;virtualbox&amp;quot; do |v| v.memory = 2048 v.cpus = 2 end config.vm.define &amp;quot;k8s-master&amp;quot; do |master| master.vm.box = IMAGE_NAME master.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.50.10&amp;quot; master.vm.hostname = &amp;quot;k8s-master&amp;quot; master.vm.provision &amp;quot;ansible&amp;quot; do |ansible| ansible.playbook = &amp;quot;kubernetes-setup/master-playbook.yml&amp;quot; ansible.extra_vars = { node_ip: &amp;quot;192.</description>
+    </item>
+    
+    <item>
+      <title>k8s安装</title>
+      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E5%AE%89%E8%A3%85/</guid>
+      <description>环境：ubuntu-20.04, kubernetes:v1.22.1
+ 1. 安装docker  安装时有可能会遇到网络问题，你可以选择换源或是为apt设置代理，设置代理的方法见这里
+  更新源镜像并安装依赖  sudo apt-get update sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg \  lsb-release 安装docker 官方GPG密钥  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg 设置稳定版本  echo \  &amp;#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs)stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null 安装docker  sudo apt-get update sudo apt-get install docker-ce docker-ce-cli containerd.</description>
+    </item>
+    
     <item>
       <title>安装etcd</title>
       <link>http://yangchnet.github.io/Dessert/posts/etcd/%E5%AE%89%E8%A3%85etcd/</link>
