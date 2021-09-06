@@ -12,4 +12,4 @@ TocOpen: false
 sudo usermod -aG docker $USER && newgrp docker # 将当前用户添加到docker用户组
 ```
 
-退出重新登陆即可aaa
+退出重新登陆即可

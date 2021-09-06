@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "k8s安装"
+title: "使用kubeadm安装单节点Kubernetes"
 date: "2021-09-04"
 tags: ["kubernetes", "install"]
 categories: ["Kubernetes"]
@@ -11,7 +11,7 @@ TocOpen: true
 > 环境：ubuntu-20.04, kubernetes:v1.22.1
 
 ## 1. 安装docker
-> 安装时有可能会遇到网络问题，你可以选择换源或是为apt设置代理，设置代理的方法见[这里](../Linux/为apt设置代理.md)
+> 安装时有可能会遇到网络问题，你可以选择换源或是为apt设置代理，设置代理的方法见[这里](https://yangchnet.github.io/Dessert/posts/linux/%E4%B8%BAapt%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/)
 
 1. 更新源镜像并安装依赖
 ```sh
