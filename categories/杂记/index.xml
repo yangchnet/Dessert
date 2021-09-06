@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 18 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/%E6%9D%82%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>hugo中的公式问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</guid>
       <description>hugo默认不支持latex公式，为了在我们的博客上显示数学公式，我们需要使用katex.
 使用方法 对于hugo来说，我们只需要为每个页面加上
 &amp;lt;!-- KaTeX --&amp;gt; &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css&amp;#34;&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &amp;#34;$$&amp;#34;, right: &amp;#34;$$&amp;#34;, display: true}, {left: &amp;#34;$&amp;#34;, right: &amp;#34;$&amp;#34;, display: false} ] }); }); &amp;lt;/script&amp;gt; 就行了。
@@ -46,10 +46,10 @@ $$\frac{ x^{2} }{ k+1 }\qquad$$ 效果为： $$\frac{ x^{2} }{ k+1 }\qquad$$</de
     
     <item>
       <title>GitHub图床&#43;vscode&#43;Picgo </title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
       <description>GitHub图床+vscode+Picgo 0. 来由 用markdown写博客的时候，图片往哪里存地干活？图床里存···
 1. GitHub配置   创建图床仓库 为了不污染我原来的git账号，我决定新建一个git账号，专门用作图床账号。 新建账号之后，new一个repo，啥都不用点，直接create。
   生成token 点击你GitHub页面右上角的头像，点击settings 在页面左侧找到Developer settings，选择之，再找到Personal access tokens，再选择之，然后generate new tokens 在新弹出的页面中填写note，并选择repo， 然后直接到最下面，Generate token 这样GitHub会为你生成一个token（只会出现这一次），复制它留用。   2. 配置VScode中的Picgo插件 在vscode的插件商店中直接搜索Picgo，然后点击安装 安装完成后，再来配置你的Picgo File&amp;gt;Preferences&amp;gt;settings&amp;gt;Entensions&amp;gt;Picgo找到配置picgo的位置，填写必要的信息 &amp;#34;picgo.picBed.current&amp;#34;: &amp;#34;github&amp;#34;, &amp;#34;picgo.picBed.github.branch&amp;#34;: &amp;#34;master&amp;#34;, &amp;#34;picgo.picBed.github.path&amp;#34;: &amp;#34;&amp;#34;, # 你想要图片存储的路径 &amp;#34;picgo.picBed.github.repo&amp;#34;: &amp;#34;&amp;#34;, # 你的用户名以及repo名，user/REPO_name &amp;#34;picgo.picBed.github.token&amp;#34;: &amp;#34;&amp;#34; # 刚才复制的token，粘贴到这里 3. 使用picgo上传图片 截个图并复制到剪贴板，在vscode里按下&amp;quot;CTRL+ALT+u&amp;quot;，图片就可以十分迅速的上传到你配置的GitHub仓库并为你返回图片链接 （￣︶￣）↗。
@@ -58,10 +58,10 @@ END</description>
     
     <item>
       <title>博客建设</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
       <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
       <description>博客建设记 0. 前记 一直想要建设一个属于自己的博客，一开始用python写过一个简单的，可以做到富文本编辑、发布、更新、评论等功能，但那个不是一个单纯的博客，并且界面也不是太友好，因此后来废弃了。后来又用了一段时间的jupyter notebook，很强大，尤其让我喜欢的是可以直接运行代码，曾经有一段时间想过可否把jupyter notebook直接作为我的博客页面，或者是嵌入我的页面内，于是看了看其源代码。。。遂放弃。后来又用了为知笔记，印象笔记，Notion等，但感觉都没jupyter notebook好用。 在用jupyter notebook记了有了一定的数目之后，就想将其发布出来，考虑过CSDN，但感觉上面广告好多，不太喜欢，因此没有使用。后来买了域名和服务器，用wordpress搞了一个，但是不是太满意，也没发布。后来用go语言写了一个，因为某些原因，中间的一些数据通路没有搞通（主要是从jupyter到md再到网站的自动发布），再加上后来考研，所以这个项目也没活到&amp;quot;成站&amp;quot;。 终于，用hugo搞了一个。之所以用hugo，一是因为最近研究go语言，对go语言的项目具有一定的好感，第二是因为看了网上的一些介绍并且发现了一些使用hugo的个人博客。 2021/2/28，记之。
 1. 使用hugo开始自己的网站 1.1 开始 hugo的使用炒鸡简单，你只需要使用
 hugo new site MySite 即可新建一个名为MySite的网站

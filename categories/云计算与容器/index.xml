@@ -51,14 +51,5 @@ django django-ckeditor pillow numpy 1.4 创建docker-compose.yml 该docker-compo
 version: &amp;#39;3&amp;#39; services: db: image: postgres web: build: . command: python manage.py runserver 0.0.0.0:8000 volumes: - .:/code ports: - &amp;#34;8000:8000&amp;#34; depends_on: - db 2 创建django项目  切换到项目跟目录】 通过运行docker-compose run 命令创建django项目  sudo docker-compose run web django-admin startproject mysite .</description>
     </item>
     
-    <item>
-      <title>安装docker-compose</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85docker-compose/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85docker-compose/</guid>
-      <description>安装docker-compose  下载最新版本的docker-compose  sudo curl -L &amp;#34;https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34; -o /usr/local/bin/docker-compose 对二进制文件应用可执行权限  sudo chmod +x /usr/local/bin/docker-compose 测试安装完成  docker-compose --version </description>
-    </item>
-    
   </channel>
 </rss>

@@ -9,7 +9,7 @@ chmod +x clash 移动到bin目录下：
 mv clash /usr/local/bin/clash 3. 编辑config.yaml文件 vim ~/.config/clash/config.yaml # port of HTTP port: 7890 # port of SOCKS5 socks-port: 7891 …… # 这里输入你自己的配置文件 4. 将添加为系统服务 cd /etc/systemd/system/ vim clash.service clash.service的内容为：
 [Unit] Description= proxy After=network.target [Service] Type=simple ExecStart=/usr/local/bin/clash -f /home/YourUsername/.config/clash/config.yaml [Install] WantedBy=multi-user.target 要想深入了解systemctl服务，可前往阮一峰大佬的教程
 编辑完成后，重载systemctl
-systemctl daemon-reload 开启服务...</p></section><footer class=entry-footer>March 4, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Linux上安装与配置clash" href=http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/></a></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
+systemctl daemon-reload 开启服务...</p></section><footer class=entry-footer>March 4, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Linux上安装与配置clash" href=http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/></a></article></main><footer class=footer><span>&copy; 2021 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
 <span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
         <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span>

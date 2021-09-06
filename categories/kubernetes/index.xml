@@ -11,11 +11,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sat, 04 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>k8s安装</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E5%AE%89%E8%A3%85/</link>
+      <title>使用kubeadm安装单节点Kubernetes</title>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</link>
       <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E5%AE%89%E8%A3%85/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</guid>
       <description>环境：ubuntu-20.04, kubernetes:v1.22.1
  1. 安装docker  安装时有可能会遇到网络问题，你可以选择换源或是为apt设置代理，设置代理的方法见这里
   更新源镜像并安装依赖  sudo apt-get update sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg \  lsb-release 安装docker 官方GPG密钥  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg 设置稳定版本  echo \  &amp;#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs)stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null 安装docker  sudo apt-get update sudo apt-get install docker-ce docker-ce-cli containerd.</description>

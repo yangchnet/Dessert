@@ -12,10 +12,10 @@
     <lastBuildDate>Mon, 06 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
       <description>部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
 2. Vagrantfile 建立如下目录
@@ -24,11 +24,11 @@ IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp
     </item>
     
     <item>
-      <title>k8s安装</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E5%AE%89%E8%A3%85/</link>
+      <title>使用kubeadm安装单节点Kubernetes</title>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</link>
       <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E5%AE%89%E8%A3%85/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</guid>
       <description>环境：ubuntu-20.04, kubernetes:v1.22.1
  1. 安装docker  安装时有可能会遇到网络问题，你可以选择换源或是为apt设置代理，设置代理的方法见这里
   更新源镜像并安装依赖  sudo apt-get update sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg \  lsb-release 安装docker 官方GPG密钥  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg 设置稳定版本  echo \  &amp;#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs)stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null 安装docker  sudo apt-get update sudo apt-get install docker-ce docker-ce-cli containerd.</description>
@@ -67,16 +67,6 @@ https://askubuntu.com/questions/257290/configure-proxy-for-apt</description>
     </item>
     
     <item>
-      <title>vim配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Tue, 31 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/</guid>
-      <description>~/.vimrc
- let data_dir = has(&#39;nvim&#39;) ? stdpath(&#39;data&#39;) . &#39;/site&#39; : &#39;~/.vim&#39; if empty(glob(data_dir . &#39;/autoload/plug.vim&#39;)) silent execute &#39;!curl -fLo &#39;.data_dir.&#39;/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim&#39; autocmd VimEnter * PlugInstall --sync | source $MYVIMRC endif call plug#begin(&#39;~/.vim/plugged&#39;) Plug &#39;fatih/vim-go&#39;, { &#39;do&#39;: &#39;:GoUpdateBinaries&#39; } Plug &#39;majutsushi/tagbar&#39; &amp;quot; 状态条 Plug &#39;bling/vim-airline&#39; &amp;quot; 文件目录树 Plug &#39;scrooloose/nerdtree&#39; Plug &#39;scrooloose/nerdtree&#39; | \ Plug &#39;Xuyuanp/nerdtree-git-plugin&#39; call plug#end() syntax enable colorscheme monokai &amp;quot; 显示行号 set nu &amp;quot; tab 缩进 set tabstop=4 &amp;quot; 设置Tab长度为4空格 set shiftwidth=4 &amp;quot; 设置自动缩进长度为4空格 set autoindent &amp;quot; 继承前一行的缩进方式，适用于多行注释 let g:go_def_mode=&#39;gopls&#39; let g:go_info_mode=&#39;gopls&#39; &amp;quot; vim-yaml setting autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab set foldlevelstart=20 let g:ale_echo_msg_format = &#39;[%linter%] %s [%severity%]&#39; let g:ale_sign_error = &#39;✘&#39; let g:ale_sign_warning = &#39;⚠&#39; let g:ale_lint_on_text_changed = &#39;never&#39; nmap &amp;lt;F8&amp;gt; :TagbarToggle&amp;lt;CR&amp;gt; &amp;quot;===================================================== &amp;quot;&amp;quot; vim-airline 配置 &amp;quot;===================================================== set t_Co=256 &amp;quot; Explicitly tell Vim that the terminal supports 256 colors set laststatus=2 let g:airline_powerline_fonts=1 let g:airline#extensions#tabline#enabled=1 &amp;quot; enable tabline let g:airline#extensions#tabline#buffer_nr_show=1 &amp;quot; 显示buffer行号 &amp;quot;let g:airline_theme=&amp;quot;solarized&amp;quot; &amp;quot;set ambiwidth=double &amp;quot; When iTerm set double-width characters, set it &amp;quot;===================================================== &amp;quot;&amp;quot; NERDTree 配置 &amp;quot;===================================================== let NERDTreeChDirMode=1 &amp;quot;显示书签&amp;quot; let NERDTreeShowBookmarks=1 &amp;quot;设置忽略文件类型&amp;quot; let NERDTreeIgnore=[&#39;\~$&#39;, &#39;\.</description>
-    </item>
-    
-    <item>
       <title>ORM之sqlc</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/orm%E4%B9%8Bsqlc/</link>
       <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
@@ -106,10 +96,10 @@ REPOSITORY TAG IMAGE ID CREATED SIZE mysql-demo latest 6a2faae69a6f 26 minutes a
     
     <item>
       <title>WSL2-不输Mac的开发体验（三）：WSL2中使用docker&amp;k8s</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
       <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</guid>
       <description>1. docker for wsl2 在wsl2中使用docker的最佳实践不是在wsl2中安装docker，而是安装docker desktop：
 从docker官网下载并安装完成后，打开docker desktop，选择setting-&amp;gt;General，确保Use the WSL 2 based engine选项被勾选，然后选择右下角Apply&amp;amp;Restart。
 重启docker desktop后，再次打开设置，确保setting-&amp;gt;Resources-&amp;gt;WSL INTEGRATION选项页中你的WSL发行版被勾选。
@@ -128,10 +118,10 @@ git checkout v1.21.2 切换分支后，在当前目录下执行：</description>
     
     <item>
       <title>WSL2-不输Mac的开发体验（二）：WSL2的网络问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%BA%8Cwsl2%E7%9A%84%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</guid>
       <description>1. 代理服务 1.1 获取Windows主机ip并使用其代理 可以在wsl中安装代理软件，但如果win主机上也有代理软件的话，会感觉有点乱。这里让wsl使用主机的代理。
 我使用的代理软件是clash，这里首先要确保clash允许局域网
 确认完clash支持局域网后，我们来看如何从wsl中获取win主机的ip地址。 在Windows主机上，我们可以用ipconfig命令来查看本地的ip地址
@@ -159,10 +149,10 @@ yarn global add pm2 使用pm2 -v查看版本号
     
     <item>
       <title>多版本npm解决方案</title>
-      <link>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/node/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%A4%9A%E7%89%88%E6%9C%ACnpm%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>1. nvm install curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash 安装完毕后会提示你让你将以下命令加入你的配置文件中
 export NVM_DIR=&amp;#34;$HOME/.nvm&amp;#34; [ -s &amp;#34;$NVM_DIR/nvm.sh&amp;#34; ] &amp;amp;&amp;amp; \. &amp;#34;$NVM_DIR/nvm.sh&amp;#34; # This loads nvm [ -s &amp;#34;$NVM_DIR/bash_completion&amp;#34; ] &amp;amp;&amp;amp; \. &amp;#34;$NVM_DIR/bash_completion&amp;#34; # This loads nvm bash_completion 默认情况下，已经加入你的~/.bashrc文件中，如果你使用的是zsh，那么就需要手动将其添加到~/.zshrc中
 2. 常用操作   列出本地所有npm版本
@@ -235,7 +225,7 @@ nvm use 14   </description>
       <pubDate>Sun, 20 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-sudo/</guid>
-      <description>sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可aaa</description>
+      <description>sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可</description>
     </item>
     
     <item>
@@ -281,10 +271,10 @@ truffle create contract Counter truffle创建了Counter.sol文件，再次查看
     
     <item>
       <title>长安链区块链浏览器部署</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Mon, 07 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
       <description>前置条件 浏览器部署需要依赖一个ChainMaker运行环境。具体的ChainMaker环境安装部署请参考对应的文档。
 1. 下载源码 mkdir -p ~/chainmaker/chainmaker-explorer \ &amp;amp;&amp;amp; cd ~/chainmaker/chainmaker-explorer \ &amp;amp;&amp;amp; git clone --recursive https://git.chainmaker.org.cn/chainmaker/chainmaker-explorer.git \ &amp;amp;&amp;amp; git clone --recursive https://git.chainmaker.org.cn/chainmaker/chainmaker-explorer-web.git 2. 安装npm及node.js  版本要求： npm&amp;gt;=6.14.13 node.js&amp;gt;=v14.17.0
   这里推荐使用nvm方式安装
@@ -294,10 +284,10 @@ truffle create contract Counter truffle创建了Counter.sol文件，再次查看
     
     <item>
       <title>WSL2-不输Mac的开发体验（一）：WSL2的安装及基本配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
       <description>1. WSL的安装 1.1 升级Windows WSL需要高版本的windows，可使用微软官方的易升工具或直接从设置中升级，升级需要一定的时间。
 1.2 安装WSL  使用管理员模式打开power shell， 使用如下命令开启WSL功能  dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart 重启你的机器
 启用虚拟机功能 以管理员身份打开powershell，使用如下命令：  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart 重新启动电脑
@@ -352,10 +342,10 @@ func Sprint(x interface{}) string { type stringer interface { String() string } 
     
     <item>
       <title>zsh的基本配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/tool/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/tool/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
       <description>1. 按照Oh my zsh $ sh -c &amp;#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; 2. 配置Oh my zsh   将zsh设置为默认Shell (脚本的最后一般会问你是否切换)
 chsh -s /bin/zsh # 不需要使用root权限   更换主题
 vim ~/.zshrc 找到ZSH_THEME=&#39;robbyrussell&#39;, 更换为你想要使用的主题，可以在这里找到你想要的主题
@@ -675,10 +665,10 @@ func main(){ fmt.Println(&amp;#34;main start&amp;#34;) outerFunc() fmt.Println(&
     
     <item>
       <title>hugo中的公式问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</guid>
       <description>hugo默认不支持latex公式，为了在我们的博客上显示数学公式，我们需要使用katex.
 使用方法 对于hugo来说，我们只需要为每个页面加上
 &amp;lt;!-- KaTeX --&amp;gt; &amp;lt;link rel=&amp;#34;stylesheet&amp;#34; href=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.css&amp;#34;&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/katex.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0-rc.1/contrib/auto-render.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script&amp;gt; document.addEventListener(&amp;#34;DOMContentLoaded&amp;#34;, function() { renderMathInElement(document.body, { delimiters: [ {left: &amp;#34;$$&amp;#34;, right: &amp;#34;$$&amp;#34;, display: true}, {left: &amp;#34;$&amp;#34;, right: &amp;#34;$&amp;#34;, display: false} ] }); }); &amp;lt;/script&amp;gt; 就行了。
@@ -739,10 +729,10 @@ Example: &amp;quot;Print to console&amp;quot;: { &amp;quot;prefix&amp;quot;: &am
     
     <item>
       <title>GitHub图床&#43;vscode&#43;Picgo </title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</link>
       <pubDate>Fri, 05 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/github%E5%9B%BE%E5%BA%8A&#43;vscode&#43;picgo-/</guid>
       <description>GitHub图床+vscode+Picgo 0. 来由 用markdown写博客的时候，图片往哪里存地干活？图床里存···
 1. GitHub配置   创建图床仓库 为了不污染我原来的git账号，我决定新建一个git账号，专门用作图床账号。 新建账号之后，new一个repo，啥都不用点，直接create。
   生成token 点击你GitHub页面右上角的头像，点击settings 在页面左侧找到Developer settings，选择之，再找到Personal access tokens，再选择之，然后generate new tokens 在新弹出的页面中填写note，并选择repo， 然后直接到最下面，Generate token 这样GitHub会为你生成一个token（只会出现这一次），复制它留用。   2. 配置VScode中的Picgo插件 在vscode的插件商店中直接搜索Picgo，然后点击安装 安装完成后，再来配置你的Picgo File&amp;gt;Preferences&amp;gt;settings&amp;gt;Entensions&amp;gt;Picgo找到配置picgo的位置，填写必要的信息 &amp;#34;picgo.picBed.current&amp;#34;: &amp;#34;github&amp;#34;, &amp;#34;picgo.picBed.github.branch&amp;#34;: &amp;#34;master&amp;#34;, &amp;#34;picgo.picBed.github.path&amp;#34;: &amp;#34;&amp;#34;, # 你想要图片存储的路径 &amp;#34;picgo.picBed.github.repo&amp;#34;: &amp;#34;&amp;#34;, # 你的用户名以及repo名，user/REPO_name &amp;#34;picgo.picBed.github.token&amp;#34;: &amp;#34;&amp;#34; # 刚才复制的token，粘贴到这里 3. 使用picgo上传图片 截个图并复制到剪贴板，在vscode里按下&amp;quot;CTRL+ALT+u&amp;quot;，图片就可以十分迅速的上传到你配置的GitHub仓库并为你返回图片链接 （￣︶￣）↗。
@@ -751,10 +741,10 @@ END</description>
     
     <item>
       <title>Linux上安装与配置clash</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
       <description>安装与配置  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
 1. 下载安装 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
@@ -770,10 +760,10 @@ systemctl daemon-reload 开启服务</description>
     
     <item>
       <title>博客建设</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
       <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
       <description>博客建设记 0. 前记 一直想要建设一个属于自己的博客，一开始用python写过一个简单的，可以做到富文本编辑、发布、更新、评论等功能，但那个不是一个单纯的博客，并且界面也不是太友好，因此后来废弃了。后来又用了一段时间的jupyter notebook，很强大，尤其让我喜欢的是可以直接运行代码，曾经有一段时间想过可否把jupyter notebook直接作为我的博客页面，或者是嵌入我的页面内，于是看了看其源代码。。。遂放弃。后来又用了为知笔记，印象笔记，Notion等，但感觉都没jupyter notebook好用。 在用jupyter notebook记了有了一定的数目之后，就想将其发布出来，考虑过CSDN，但感觉上面广告好多，不太喜欢，因此没有使用。后来买了域名和服务器，用wordpress搞了一个，但是不是太满意，也没发布。后来用go语言写了一个，因为某些原因，中间的一些数据通路没有搞通（主要是从jupyter到md再到网站的自动发布），再加上后来考研，所以这个项目也没活到&amp;quot;成站&amp;quot;。 终于，用hugo搞了一个。之所以用hugo，一是因为最近研究go语言，对go语言的项目具有一定的好感，第二是因为看了网上的一些介绍并且发现了一些使用hugo的个人博客。 2021/2/28，记之。
 1. 使用hugo开始自己的网站 1.1 开始 hugo的使用炒鸡简单，你只需要使用
 hugo new site MySite 即可新建一个名为MySite的网站
@@ -1542,15 +1532,6 @@ example
       
       <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</guid>
       <description>如何在manjaro中安装MySQL # 安装MySQL pacman -S mysql # 初始化MySQL，记住输出的root密码 mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql # 设置开机启动MySQL服务 systemctl enable mysqld.service systemctl daemon-reload systemctl start mysqld.service # 使用MySQL前必须修改root密码，MySQL 8.0.15不能使用set password修改密码 mysql -u root -p mysql&amp;gt; ALTER USER &amp;#39;root&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED WITH mysql_native_password BY &amp;#39;新密码&amp;#39;; </description>
-    </item>
-    
-    <item>
-      <title>安装docker-compose</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85docker-compose/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85docker-compose/</guid>
-      <description>安装docker-compose  下载最新版本的docker-compose  sudo curl -L &amp;#34;https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34; -o /usr/local/bin/docker-compose 对二进制文件应用可执行权限  sudo chmod +x /usr/local/bin/docker-compose 测试安装完成  docker-compose --version </description>
     </item>
     
     <item>

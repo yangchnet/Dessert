@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 12 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WSL2-不输Mac的开发体验（三）：WSL2中使用docker&amp;k8s</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
       <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</guid>
       <description>1. docker for wsl2 在wsl2中使用docker的最佳实践不是在wsl2中安装docker，而是安装docker desktop：
 从docker官网下载并安装完成后，打开docker desktop，选择setting-&amp;gt;General，确保Use the WSL 2 based engine选项被勾选，然后选择右下角Apply&amp;amp;Restart。
 重启docker desktop后，再次打开设置，确保setting-&amp;gt;Resources-&amp;gt;WSL INTEGRATION选项页中你的WSL发行版被勾选。
@@ -38,7 +38,7 @@ git checkout v1.21.2 切换分支后，在当前目录下执行：</description>
       <pubDate>Sun, 20 Jun 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-sudo/</guid>
-      <description>sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可aaa</description>
+      <description>sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可</description>
     </item>
     
     <item>
@@ -80,15 +80,6 @@ FROM python:3 ENV PYTHONUNBUFFERED 1 RUN mkdir /code WORKDIR /code COPY requirem
 1.3 创建requirements.txt 内容如下：
 django django-ckeditor pillow numpy 1.4 创建docker-compose.yml 该docker-compose.yml文件描述了构成应用程序的服务。在此示例中，这些服务是Web服务器和数据库。撰写文件还描述了这些服务使用哪些Docker映像，它们如何链接在一起，以及它们可能需要安装在容器内的任何卷。最后，该docker-compose.yml文件描述了这些服务公开的端口。有关此文件如何工作的更多信息，请参阅docker-compose.yml参考。 内容如下：
 version: &amp;#39;3&amp;#39; services: db: image: postgres web: build: . command: python manage.py runserver 0.0.0.0:8000 volumes: - .:/code ports: - &amp;#34;8000:8000&amp;#34; depends_on: - db 2 创建django项目  切换到项目跟目录】 通过运行docker-compose run 命令创建django项目  sudo docker-compose run web django-admin startproject mysite .</description>
-    </item>
-    
-    <item>
-      <title>安装docker-compose</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85docker-compose/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%AE%89%E8%A3%85docker-compose/</guid>
-      <description>安装docker-compose  下载最新版本的docker-compose  sudo curl -L &amp;#34;https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)&amp;#34; -o /usr/local/bin/docker-compose 对二进制文件应用可执行权限  sudo chmod +x /usr/local/bin/docker-compose 测试安装完成  docker-compose --version </description>
     </item>
     
   </channel>

@@ -12,10 +12,10 @@
     <lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/env/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WSL2-不输Mac的开发体验（一）：WSL2的安装及基本配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
       <description>1. WSL的安装 1.1 升级Windows WSL需要高版本的windows，可使用微软官方的易升工具或直接从设置中升级，升级需要一定的时间。
 1.2 安装WSL  使用管理员模式打开power shell， 使用如下命令开启WSL功能  dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart 重启你的机器
 启用虚拟机功能 以管理员身份打开powershell，使用如下命令：  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart 重新启动电脑

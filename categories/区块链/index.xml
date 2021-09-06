@@ -73,10 +73,10 @@ truffle create contract Counter truffle创建了Counter.sol文件，再次查看
     
     <item>
       <title>长安链区块链浏览器部署</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
       <pubDate>Mon, 07 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
       <description>前置条件 浏览器部署需要依赖一个ChainMaker运行环境。具体的ChainMaker环境安装部署请参考对应的文档。
 1. 下载源码 mkdir -p ~/chainmaker/chainmaker-explorer \ &amp;amp;&amp;amp; cd ~/chainmaker/chainmaker-explorer \ &amp;amp;&amp;amp; git clone --recursive https://git.chainmaker.org.cn/chainmaker/chainmaker-explorer.git \ &amp;amp;&amp;amp; git clone --recursive https://git.chainmaker.org.cn/chainmaker/chainmaker-explorer-web.git 2. 安装npm及node.js  版本要求： npm&amp;gt;=6.14.13 node.js&amp;gt;=v14.17.0
   这里推荐使用nvm方式安装

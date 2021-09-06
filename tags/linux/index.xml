@@ -9,17 +9,7 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>vim配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Tue, 31 Aug 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/</guid>
-      <description>~/.vimrc
- let data_dir = has(&#39;nvim&#39;) ? stdpath(&#39;data&#39;) . &#39;/site&#39; : &#39;~/.vim&#39; if empty(glob(data_dir . &#39;/autoload/plug.vim&#39;)) silent execute &#39;!curl -fLo &#39;.data_dir.&#39;/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim&#39; autocmd VimEnter * PlugInstall --sync | source $MYVIMRC endif call plug#begin(&#39;~/.vim/plugged&#39;) Plug &#39;fatih/vim-go&#39;, { &#39;do&#39;: &#39;:GoUpdateBinaries&#39; } Plug &#39;majutsushi/tagbar&#39; &amp;quot; 状态条 Plug &#39;bling/vim-airline&#39; &amp;quot; 文件目录树 Plug &#39;scrooloose/nerdtree&#39; Plug &#39;scrooloose/nerdtree&#39; | \ Plug &#39;Xuyuanp/nerdtree-git-plugin&#39; call plug#end() syntax enable colorscheme monokai &amp;quot; 显示行号 set nu &amp;quot; tab 缩进 set tabstop=4 &amp;quot; 设置Tab长度为4空格 set shiftwidth=4 &amp;quot; 设置自动缩进长度为4空格 set autoindent &amp;quot; 继承前一行的缩进方式，适用于多行注释 let g:go_def_mode=&#39;gopls&#39; let g:go_info_mode=&#39;gopls&#39; &amp;quot; vim-yaml setting autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab set foldlevelstart=20 let g:ale_echo_msg_format = &#39;[%linter%] %s [%severity%]&#39; let g:ale_sign_error = &#39;✘&#39; let g:ale_sign_warning = &#39;⚠&#39; let g:ale_lint_on_text_changed = &#39;never&#39; nmap &amp;lt;F8&amp;gt; :TagbarToggle&amp;lt;CR&amp;gt; &amp;quot;===================================================== &amp;quot;&amp;quot; vim-airline 配置 &amp;quot;===================================================== set t_Co=256 &amp;quot; Explicitly tell Vim that the terminal supports 256 colors set laststatus=2 let g:airline_powerline_fonts=1 let g:airline#extensions#tabline#enabled=1 &amp;quot; enable tabline let g:airline#extensions#tabline#buffer_nr_show=1 &amp;quot; 显示buffer行号 &amp;quot;let g:airline_theme=&amp;quot;solarized&amp;quot; &amp;quot;set ambiwidth=double &amp;quot; When iTerm set double-width characters, set it &amp;quot;===================================================== &amp;quot;&amp;quot; NERDTree 配置 &amp;quot;===================================================== let NERDTreeChDirMode=1 &amp;quot;显示书签&amp;quot; let NERDTreeShowBookmarks=1 &amp;quot;设置忽略文件类型&amp;quot; let NERDTreeIgnore=[&#39;\~$&#39;, &#39;\.</description>
-    </item>
-    
+    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux程序前台后台切换</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
@@ -34,10 +24,10 @@
     
     <item>
       <title>Linux上安装与配置clash</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
       <description>安装与配置  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
 1. 下载安装 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）

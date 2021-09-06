@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 12 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WSL2-不输Mac的开发体验（三）：WSL2中使用docker&amp;k8s</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>
       <pubDate>Thu, 12 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</guid>
       <description>1. docker for wsl2 在wsl2中使用docker的最佳实践不是在wsl2中安装docker，而是安装docker desktop：
 从docker官网下载并安装完成后，打开docker desktop，选择setting-&amp;gt;General，确保Use the WSL 2 based engine选项被勾选，然后选择右下角Apply&amp;amp;Restart。
 重启docker desktop后，再次打开设置，确保setting-&amp;gt;Resources-&amp;gt;WSL INTEGRATION选项页中你的WSL发行版被勾选。
