@@ -9,7 +9,25 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 06 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>golang中的tag</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</link>
+      <pubDate>Tue, 14 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</guid>
+      <description>1. tag的基本介绍 字段标签可以存储元信息，这些元信息可以使用反射来访问。通常这些元信息用来提供一个字段如何从一种格式编码至另一种格式的相关信息（或是数据应如何在数据库中存储等）。但实际上标签可以存储任何你想要的元信息，无论是你自己使用还是由另一个包使用。
+就像reflect.StructTag文档中提到的那样，字段标签通常是由空格分割的key:&amp;quot;value&amp;quot;列表，例如：
+type User struct { Name string `json:&amp;#34;name&amp;#34; xml:&amp;#34;name&amp;#34;` } 其中的key通常表示后面&amp;quot;value&amp;quot;所对应的包，例如json这个key将被encoding/json这个包使用。
+如果需要在&amp;quot;value&amp;quot;中传递多个值，那么通常使用,逗号来分割，例如：
+Name string `json:&amp;#34;name,omitempty&amp;#34; xml:&amp;#34;name&amp;#34;` 值为破折号通常代表在处理时忽略该字段，例如在json中代表不要序列化这个字段
+2. 例子：获取自定义tag 我们可以使用反射包来获取结构体字段的值。首先我们需要获取结构体的Type，然后查询字段，可以使用Type.Field(i int)或者Type.FieldByName(name string)。这些方法返回一个代表结构体字段的StructField值和一个代表tag的类型为StructTag的StructField.Tag值。
+前面我们提到，字段标签通常是由空格分割的key:&amp;quot;value&amp;quot;列表，如果你的确是这么做的，你可以使用StructTag.Get(key string)这个方法来获取这个key对应的value。如果你不是这么做的，Get()方法可能不能解析key:&amp;quot;value&amp;quot;对并找到你想要的标签。如果你没有遵循字段标签通常是由空格分割的key:&amp;quot;value&amp;quot;列表，那么你可能需要实现自己的解析逻辑。
+go1.7中添加了StructTag.Lookup()方法，这个方法的行为类似于Get()，但其将不包含给定键的标签与将空字符串与给定键相关联的标签区分开来。
+来看下面这个例子：
+type User struct { Name string `mytag:&amp;#34;MyName&amp;#34;` Email stirng `mytag:&amp;#34;MyEmail&amp;#34;` } u := User{&amp;#34;Bob&amp;#34;, &amp;#34;bob@cc.com&amp;#34;} t := reflect.TypeOf(u) for _ fieldName := range []string{&amp;#34;Name&amp;#34;, &amp;#34;Email&amp;#34;} { field, found := t.FieldByName(fieldName) if !found { continue } fmt.Printf(&amp;#34;\nField: User.%s\n&amp;#34;, fieldName) fmt.Printf(&amp;#34;\tWhole tag value : %q\n&amp;#34;, field.</description>
+    </item>
+    
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
