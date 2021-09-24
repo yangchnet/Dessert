@@ -201,6 +201,13 @@ default=lc
 wsl -- ifconfig eth0
 ```
 
+3. 启动vsxsrc后，依然不能打开图形界面
+首先检查vsxsrc的配置是否正确，环境变量是否配置，若检查无误，则可能是防火墙阻止了连接。
+尝试关闭全部防火墙（事后再重新打开），再次尝试启动，若可以启动成功，则证明为防火墙问题。
+修复方法：确保防火墙入站规则中私有和公有规则都允许连接
+![20210924183744](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20210924183744.png)
+![20210924183850](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20210924183850.png)
+
 ## Reference
 
 [在WSL上配置输入法](https://patrickwu.space/2019/10/28/wsl-fcitx-setup-cn/)   
