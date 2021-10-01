@@ -9,7 +9,33 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TCMalloc : Thread-Caching Malloc</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/tcmalloc/</link>
+      <pubDate>Thu, 30 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/tcmalloc/</guid>
+      <description>翻译自：TCMalloc : Thread-Caching Malloc（性能测试部分没有翻译）
+ 动机 在我测试过的所有malloc(动态内存分配器)中，TCMalloc比glibc 2.3 malloc(作为一个单独的库称作ptmalloc2)以及其他内存分配器都要快。对于小内存对象来说，在Intel® Pentium® 4 Processor 2.80 GHzCPU上ptmalloc2执行一次内存分配/回收操作需要大约300ns，而TCMalloc完成相同的操作只需要50ns。显然对于内存分配操作来说，速度十分重要，因为如果内存分配不够及时，开发人员就倾向于在malloc上编写他们自己的空闲列表，这会造成额外的复杂性以及更多的内存占用，除非开发人员非常小心的估算空闲列表的大小并清理其中的空闲对象。
+TCMalloc也降低了多线程应用中的锁冲突。对于小内存对象来说几乎不存在冲突。对于大内存对象来说，TCMalloc尝试使用细粒度和高效的自旋锁。ptmalloc2也尝试通过一些方法降低锁冲突，其为每个线程分配一个arena空间，但ptmalloc2对于arena空间的使用存在一个大问题：在ptmalloc2中内存将不可能从一个arena空间转移到另一个arena空间，也即内存不可以在线程之间进行二次分配。这会导致巨大的内存浪费。例如，在一个Google应用中，阶段一为其数据结构分配了大约300MB。当其第一阶段结束后，阶段二将在相同的地址空间上开始。如果阶段二分配了一个与阶段一不同的arena空间，那么阶段二的计算将不会重复使用阶段一留下的任何内存空间，而是重新分配另一个300MB内存空间。这种内存的“blowup”问题同样出现在其他应用中。
+TCMolloc的另一个优点是针对小内存对象的空间的有效利用。例如，可以将8N bytes大小的对象分配到8N*1.01bytes的空间上，即只需要1%的空间开销。ptmalloc2对每一个对象分配一个4bytes的头，（我认为）这种方式将本来只需要8N bytes大小对象变成了需要16N bytes
+用法 要想使用TCMalloc，只要使用-l tcmalloc标志将tcmalloc链接到你的应用。
+你也可以在不是你编译的应用中使用tcmalloc，通过使用LD_PRELOAD环境变量
+LD_PRELOAD=&amp;#34;/usr/lib/libtcmalloc.so&amp;#34; 但我们不推荐在非必要的情况下使用这种方式。
+TCMalloc也包括一个堆检查器和一个堆分析器。
+如果你只想要链接一个没有堆检查器和分析器的TCMalloc版本（可能想要减小二进制包的大小），你可以链接libtcmalloc_minimal
+概览 TCMalloc为每个线程分配一个本地线程缓存thread-local cache。小的内存分配将直接被本地线程缓存满足。对象按需从中间部件central data structure移动到本地线程缓存。定期的垃圾收集被用来把内存从本地线程缓存放回中间部件central data structure。
+TCMalloc对于大小&amp;lt;=32K的（小）对象的处理方式与大对象不同。大对象由顶层堆管理器central heap使用页级的分配器直接分配。（一个页面是一个4K对齐的内存区域），同时，大对象总是页对齐并且占据整数个页面。
+页面可被一系列的小对象瓜分为大小相同的区域。例如：一个4K的内存将被32个对象分割为每个128bytes的内存序列。
+小对象的分配 每个小对象都对应于170个可分配内存大小size-classes中的一种，例如，大小范围在961-1024bytes的对象将占据1024bytes。这些内存大小级别被不同大小的间距分隔开，其中较小尺寸为8bytes，大尺寸为16bytes，更大的是32bytes，以此类推。最大的空间是256bytes（对于size-classes）大于等于2k。
+一个本地线程缓存thread-local cache持有一个包含每种size-class的单链表。
+当分配一个小对象时：
+ 将其大小映射到相应的size-class 为当前线程在其thread-local cache的（内存）空闲链表中寻找对应size-class链表 如果空闲链表非空，那么我们将链表的第一个对象移出并返回之，当执行这种快速路径时，TCMalloc不需要任何锁，因为加锁解锁这一对操作在2.8GHz的机器上大约需要100ns，这使得内存分配速度明显加快。  如果空闲链表为空：
+ 从central free list(central data structure)获取一系列对应大小的内存。（central data structure被所有线程共享） 将获取到的内存放入thread-local cache的空闲链表。 返回其中一个新获取的内存对象给应用  如果central free list也为空：
+ 从central page allocator(central heap)分配一系列页面 将这些页面分割为对应size-class大小的内存对象 将这些新的内存对象放入central free list 像之前所说将内存对象放入thread-local free list  大内存对的分配 大对象被对齐到页大小（4K）,并且被central page heap管理。central page heap同样是一个空闲列表数组。当数组下标i小于256时，第k个数组元素是一个每个节点包含k个页的空闲列表，而第256个数组元素中，链表的节点长度大于256页</description>
+    </item>
+    
     <item>
       <title>端口消耗问题</title>
       <link>http://yangchnet.github.io/Dessert/posts/windows/%E7%AB%AF%E5%8F%A3%E6%B6%88%E8%80%97%E9%97%AE%E9%A2%98/</link>
