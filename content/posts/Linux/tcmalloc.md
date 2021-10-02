@@ -29,7 +29,6 @@ LD_PRELOAD="/usr/lib/libtcmalloc.so"
 `TCMalloc`也包括一个[堆检查器](http://goog-perftools.sourceforge.net/doc/heap_checker.html)和一个[堆分析器](http://goog-perftools.sourceforge.net/doc/heap_profiler.html)。
 
 如果你只想要链接一个没有堆检查器和分析器的`TCMalloc`版本（可能想要减小二进制包的大小），你可以链接`libtcmalloc_minimal`
-
 ## 概览
 `TCMalloc`为每个线程分配一个本地线程缓存`thread-local cache`。小的内存分配将直接被本地线程缓存满足。对象按需从中间部件`central data structure`移动到本地线程缓存。定期的垃圾收集被用来把内存从本地线程缓存放回中间部件`central data structure`。   
 ![20210930134530](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20210930134530.png)
@@ -94,5 +93,8 @@ LD_PRELOAD="/usr/lib/libtcmalloc.so"
 我们将遍历所有`cache`中的空闲列表并且将一些对象从空闲列表中移动到相应的`central list`。
 
 被移动对象的数目是使用每个列表上低位标记`L`确定的，`L`记录自上次垃圾回收以来列表的最小长度。注意，我们可以在最后一次垃圾回收时将列表缩短L个对象而无需对`central list`进行任何额外访问。我们将这部分历史记录作为对未来访问的一个预测，将`L/2`个对象从`thread-local cache`移动到对应的`central free list`。这个算法有一个很好的特性，如果一个线程停止使用特定大小的内存，那么所有该大小的对象将被快速的从`thread-local cache`移动到`central free list`，从而这些对象可以被其他线程使用。
+
+
+
 
 
