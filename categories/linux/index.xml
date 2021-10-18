@@ -29,11 +29,11 @@ TCMalloc也包括一个堆检查器和一个堆分析器。
 TCMalloc对于大小&amp;lt;=32K的（小）对象的处理方式与大对象不同。大对象由顶层堆管理器central heap使用页级的分配器直接分配。（一个页面是一个4K对齐的内存区域），同时，大对象总是页对齐并且占据整数个页面。
 页面可被一系列的小对象瓜分为大小相同的区域。例如：一个4K的内存将被32个对象分割为每个128bytes的内存序列。
 小对象的分配 每个小对象都对应于170个可分配内存大小size-classes中的一种，例如，大小范围在961-1024bytes的对象将占据1024bytes。这些内存大小级别被不同大小的间距分隔开，其中较小尺寸为8bytes，大尺寸为16bytes，更大的是32bytes，以此类推。最大的空间是256bytes（对于size-classes）大于等于2k。
-一个本地线程缓存thread-local cache持有一个包含每种size-class的单链表。
+本地线程缓存thread-local cache持有不同size-class的空闲链表。
 当分配一个小对象时：
  将其大小映射到相应的size-class 为当前线程在其thread-local cache的（内存）空闲链表中寻找对应size-class链表 如果空闲链表非空，那么我们将链表的第一个对象移出并返回之，当执行这种快速路径时，TCMalloc不需要任何锁，因为加锁解锁这一对操作在2.8GHz的机器上大约需要100ns，这使得内存分配速度明显加快。  如果空闲链表为空：
  从central free list(central data structure)获取一系列对应大小的内存。（central data structure被所有线程共享） 将获取到的内存放入thread-local cache的空闲链表。 返回其中一个新获取的内存对象给应用  如果central free list也为空：
- 从central page allocator(central heap)分配一系列页面 将这些页面分割为对应size-class大小的内存对象 将这些新的内存对象放入central free list 像之前所说将内存对象放入thread-local free list  大内存对的分配 大对象被对齐到页大小（4K）,并且被central page heap管理。central page heap同样是一个空闲列表数组。当数组下标i小于256时，第k个数组元素是一个每个节点包含k个页的空闲列表，而第256个数组元素中，链表的节点长度大于256页</description>
+ 从central page allocator(central heap)分配一系列页面 将这些页面分割为对应size-class大小的内存对象 将这些新的内存对象放入central free list 像之前所说将内存对象放入thread-local free list  大内存的分配 大对象被对齐到页大小（4K）,并且被central page heap管理。central page heap同样是一个空闲列表数组。当数组下标i小于256时，第k个数组元素是一个每个节点包含k个页的空闲列表，而第256个数组元素中，链表的节点长度大于256页</description>
     </item>
     
     <item>
