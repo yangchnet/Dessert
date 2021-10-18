@@ -40,7 +40,7 @@ LD_PRELOAD="/usr/lib/libtcmalloc.so"
 ## 小对象的分配
 每个小对象都对应于170个可分配内存大小`size-classes`中的一种，例如，大小范围在961-1024bytes的对象将占据1024bytes。这些内存大小级别被不同大小的间距分隔开，其中较小尺寸为8bytes，大尺寸为16bytes，更大的是32bytes，以此类推。最大的空间是256bytes（对于`size-classes`）大于等于2k。
 
-一个本地线程缓存`thread-local cache`持有一个包含每种`size-class`的单链表。  
+本地线程缓存`thread-local cache`持有不同`size-class`的空闲链表。  
 ![20210930140810](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20210930140810.png)
 
 当分配一个小对象时：
@@ -59,7 +59,7 @@ LD_PRELOAD="/usr/lib/libtcmalloc.so"
 3. 将这些新的内存对象放入`central free list`
 4. 像之前所说将内存对象放入`thread-local free list`
 
-## 大内存对的分配
+## 大内存的分配
 大对象被对齐到页大小（4K）,并且被`central page heap`管理。`central page heap`同样是一个空闲列表数组。当数组下标i小于256时，第k个数组元素是一个每个节点包含k个页的空闲列表，而第256个数组元素中，链表的节点长度大于256页
 
 一次分配k个页面的需求将被第k个空闲列表满足。如果这个空闲列表为空，那么将在下一个空闲列表中寻找，以此类推。如果有需要的话，我们将在最后一个空闲列表中获得内存对象。如果这仍然失败，那么我们直接从操作系统中获取内存。
@@ -93,8 +93,3 @@ LD_PRELOAD="/usr/lib/libtcmalloc.so"
 我们将遍历所有`cache`中的空闲列表并且将一些对象从空闲列表中移动到相应的`central list`。
 
 被移动对象的数目是使用每个列表上低位标记`L`确定的，`L`记录自上次垃圾回收以来列表的最小长度。注意，我们可以在最后一次垃圾回收时将列表缩短L个对象而无需对`central list`进行任何额外访问。我们将这部分历史记录作为对未来访问的一个预测，将`L/2`个对象从`thread-local cache`移动到对应的`central free list`。这个算法有一个很好的特性，如果一个线程停止使用特定大小的内存，那么所有该大小的对象将被快速的从`thread-local cache`移动到`central free list`，从而这些对象可以被其他线程使用。
-
-
-
-
-
