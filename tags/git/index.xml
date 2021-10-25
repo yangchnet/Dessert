@@ -49,8 +49,8 @@ Generating public/private rsa key pair. Enter file in which to save the key (/ho
       <guid>http://yangchnet.github.io/Dessert/posts/git/%E5%B0%86%E4%B8%A4%E4%B8%AAcommit%E5%90%88%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA/</guid>
       <description>使用git log命令查看git日志文件，假设为如下内容
 commit cc7b5fc7bd2ae6f8d88144cd61c8ffad15d44e41 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 19:40:03 2021 +0800 4-25 commit fbd7265095b4c8989fba830393eb32ef29cd9ee1 Merge: 3ae3c19 6a25204 Author: yangchnet &amp;lt;1048887414@qq.com&amp;gt; Date: Sun Apr 25 15:04:38 2021 +0800 Merge branch &#39;master&#39; of https://github.com/yangchnet/Tem commit 6a25204187602449bfe4ca8c862c9677e65fed04 Author: yangchnet &amp;lt;30308940+yangchnet@users.noreply.github.com&amp;gt; Date: Thu Apr 22 21:36:05 2021 +0800 Delete CNAME ... 现在想合并最后两个提交，则进行以下步骤：
- 复制倒数第三个提交的哈希值，即：6a25204187602449bfe4ca8c862c9677e65fed04 使用如下命令进行合并：  git rebase -i 6a25204187602449bfe4ca8c862c9677e65fed04 # 这个哈希值就是你刚才复制的 若有如下提示，请进行第4步，否则直接进行第5步   不能变基：您有未暂存的变更。 请提交或为它们保存进度。
-4. 使用`git stash`暂存修改 ```sh $ git stash 保存工作目录和索引状态 WIP on master: cc7b5fc 4-25 HEAD 现在位于 cc7b5fc 4-25 使用git rebase后，会出现如下内容  pick 3ae3c19 增加graphql介绍 pick cc7b5fc 4-25 # 变基 6a25204.</description>
+ 复制倒数第三个提交的哈希值，即：6a25204187602449bfe4ca8c862c9677e65fed04 使用如下命令进行合并：  git rebase -i 6a25204187602449bfe4ca8c862c9677e65fed04 # 这个哈希值就是你刚才复制的 kk 3. 若有如下提示，请进行第4步，否则直接进行第5步
+不能变基：您有未暂存的变更。 请提交或为它们保存进度。 使用git stash暂存修改  $ git stash 保存工作目录和索引状态 WIP on master: cc7b5fc 4-25 HEAD 现在位于 cc7b5fc 4-25 使用git rebase后，会出现如下内容  pick 3ae3c19 增加graphql介绍 pick cc7b5fc 4-25 # 变基 6a25204.</description>
     </item>
     
     <item>
