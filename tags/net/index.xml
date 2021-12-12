@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Net on Linote</title>
+    <title>NET on Linote</title>
     <link>http://yangchnet.github.io/Dessert/tags/net/</link>
-    <description>Recent content in Net on Linote</description>
+    <description>Recent content in NET on Linote</description>
     <image>
       <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/net/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTTP2简介</title>
+      <link>http://yangchnet.github.io/Dessert/posts/net/http2/</link>
+      <pubDate>Sat, 11 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/net/http2/</guid>
+      <description>这是一篇理论性较强的文章
+ 1. HTTP/1的不足与面临的问题  此部分内容来自：https://segmentfault.com/a/1190000013519925
+ 1.1 HTTP/1概述 1.2 队头阻塞 浏览器很少只从一个域名获取一份资源。大多数时候，它希望能同时获取许多资源。设想这样一个网站，它把所有图片放在单个特定域名下。HTTP/1 并未提供机制来同时请求这些资源。如果仅仅使用一个连接，它需要发起请求、等待响应，之后才能发起下一个请求。这显然会在加载页面时造成较大的延迟，降低了用户体验。
+h1 有个特性叫 管道化(pipelining)，允许一次发送一组连续的请求，而不用等待应答返回。这样可以避免连接延迟。但是该特性只能按照发送顺序依次接收响应。而且，管道化备受互操作性和部署的各种问题的困扰，基本没有实用价值。
+在请求应答过程中，如果出现任何状况，剩下所有的工作都会被阻塞在那次请求应答之后。这就是队头阻塞（Head-of-line blocking或缩写为HOL blocking），它会阻碍网络传输和 Web 页面渲染，直至失去响应。
+为了防止这种问题，现代浏览器会针对单个域名开启 6 个连接，通过各个连接分别发送请求。它实现了某种程度上的并行，但是每个连接仍会受到 队头阻塞 的影响。另外，这也没有高效利用有限的设备资源。
+1.3 TCP复用 传输控制协议(TCP) 的设计思路是：对假设情况很保守，并能够公平对待同一网络的不同流量的应用。它的避免拥塞机制被设计成即使在最差的网络状况下仍能起作用，并且如果有需求冲突也保证相对公平。这是它取得成功的原因之一。
+它的成功并不是因为传输数据最快，而是因为它是最可靠的协议之一，涉及的核心概念就是 拥塞窗口(congestion window) 。拥塞窗口是指，在接收方确认数据包之前，发送方可以发出的 TCP 包的数量。 例如，如果拥塞窗口指定为 1，那么发送方发出 1 个数据包之后，只有接收方确认了那个包，才能发送下一个。
+一般来讲，每次发送一个数据包并不是非常低效。TCP 有个概念叫 慢启动(Slow Start)， 它用来探索当前连接对应拥塞窗口的合适大小。慢启动的设计目标是为了让新连接搞清楚当前网络状况，避免给已经拥堵的网络继续添乱。它允许发送者在收到每个确认回复后额外发送 1 个未确认包。这意味着新连接在收到 1 个确认回复之后，可以发送 2 个数据包; 在收到 2 个确认回复之后，可以发 4 个；以此类推。这种几何级数增长很快就会到达协议规定的发包数上限，这时候连接将进入拥塞避免阶段 这种机制需要几次往返数据请求才能得知最佳拥塞窗口大小。但在解决性能问题时，就这 区区几次数据往返也是非常宝贵的时间(成本)。现代操作系统一般会取 4~10 个数据包作为初始拥塞窗口大小。如果你把一个数据包设置为最大值下限 1460 字节(也就是 最大有效负载)，那么只能先发送 5840 字节(假定拥塞窗口为 4)，然后就需要等待接收确认回复。
+如今的 Web 页面平均大小约 2MB，包括 HTML 和所有依赖的资源。在理想情况下， 这需要大约 9 次往返请求来传输完整个页面。除此之外，浏览器一般会针对同一个域名开启 6 个并发连接，这意味着拥塞窗口波动也会并行发生 6 次。TCP 协议保证那些连接都能正常工作， 但是不能保证它们的性能是最优的。</description>
+    </item>
+    
     <item>
       <title>四种常见的POST类型</title>
       <link>http://yangchnet.github.io/Dessert/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</link>
