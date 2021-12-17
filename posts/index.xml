@@ -9,7 +9,16 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 11 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>z</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/z/</link>
+      <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/z/</guid>
+      <description>install z # Download to latest to home dir wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh # Add to .bashrc echo . /path/to/z.sh &amp;gt;&amp;gt; ~/.bashrc # Add to .zshrc echo . /path/to/z.sh &amp;gt;&amp;gt; ~/.zshrc </description>
+    </item>
+    
     <item>
       <title>HTTP2简介</title>
       <link>http://yangchnet.github.io/Dessert/posts/net/http2/</link>
