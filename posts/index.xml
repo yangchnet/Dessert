@@ -1916,29 +1916,11 @@ git config --global credential.helper store 然后再运行一遍git pull或git 
     
     <item>
       <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/prometheus%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/prometheus%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>http://yangchnet.github.io/Dessert/posts/readme/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/readme/</guid>
       <description>Tem 这里存储我个人网站的markdown文件，并通过hugo生成静态文件，我的个人网站在这里，欢迎访问😊😘。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/prisma/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/prisma/</guid>
-      <description></description>
     </item>
     
   </channel>
