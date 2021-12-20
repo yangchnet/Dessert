@@ -31,7 +31,7 @@ REST允许您使用分层的系统架构，在该架构中，您可以在服务�
 按需代码（可选）
 好吧，这个约束是可选的。大多数时候，您将以XML或JSON的形式发送资源的静态表示。但是，如果需要，您可以自由地return executable code支持应用程序的一部分，例如，客户端可以调用您的API来获取UI小部件呈现代码。这是允许的。
 以上所有约束条件都可以帮助您构建真正的RESTful API，并且应该遵循它们。不过，有时您可能会发现自己违反了一两个约束。别担心; 您仍在制作RESTful API，但不是“真正的RESTful”。
-3. REST资源命名指南 在REST中，主要数据表示称为Resource。从长远来看，拥有一个强大且一致的REST资源命名策略–无疑将证明是最佳的设计决策之一。...</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to RESTfulAPI入门" href=http://yangchnet.github.io/Dessert/posts/golang/restful-api/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>数组越界判定问题</h2></header><section class=entry-content><p>数组越界判定问题 今天写了一个数组的代码，里面有个函数为数组越界判定，测试的时候没通过，看了答案才发现另有玄机
+3. REST资源命名指南 在REST中，主要数据表示称为Resource。从长远来看，拥有一个强大且一致的REST资源命名策略–无疑将证明是最佳的设计决策之一。...</p></section><footer class=entry-footer>February 25, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to RESTfulAPI入门" href=http://yangchnet.github.io/Dessert/posts/net/restful-api/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>数组越界判定问题</h2></header><section class=entry-content><p>数组越界判定问题 今天写了一个数组的代码，里面有个函数为数组越界判定，测试的时候没通过，看了答案才发现另有玄机
 数组定义 type Array struct{ data []int length uint } 越界判定1 // 判断索引是否越界 func (this *Array)isIndexOutRange1(index uint) bool{ if index > this.length-1{ //这种写法错误 return true } return false } 越界判定2 // 判断索引是否越界 func (this *Array)isIndexOutRange2(index uint) bool{ if index >= uint(cap(this.data)){ return true } return false } 第一种写法根据数组当前长度与要访问的下标进行比较，来判定是否下标越界
 第二种写法根绝数组占用内存大小与下标比较来判定
 二者的区别在哪?

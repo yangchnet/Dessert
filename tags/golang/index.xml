@@ -305,10 +305,10 @@ report, err := template.New(&amp;#34;report&amp;#34;).Funcs(template.FuncMap{&am
     
     <item>
       <title>RESTfulAPI入门</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/restful-api/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/net/restful-api/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/restful-api/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/net/restful-api/</guid>
       <description>RESTful API 入门 1. 简介 表现层状态转换（英语：Representational State Transfer，缩写：REST）是Roy Thomas Fielding博士于2000年在他的博士论文中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。表现层状态转换是根基于超文本传输协议（HTTP）之上而确定的一组约束和属性，是一种设计提供万维网络服务的软件构建风格。符合或兼容于这种架构风格（简称为 REST 或 RESTful）的网络服务，允许客户端发出以统一资源标识符访问和操作网络资源的请求，而与预先定义好的无状态操作集一致化。因此表现层状态转换提供了在互联网络的计算系统之间，彼此资源可交互使用的协作性质（interoperability）。相对于其它种类的网络服务，例如SOAP服务，则是以本身所定义的操作集，来访问网络上的资源。
 2. REST 架构约束   客户端－服务器 从本质上讲，这意味着客户端应用程序和服务器应用程序必须能够独立发展而彼此之间没有任何依赖关系。客户端应该只知道资源URI，仅此而已。今天，这是Web开发中的常规做法，因此您不需要任何花哨。把事情简单化。
  服务器和客户端也可以独立替换和开发，只要它们之间的接口没有更改即可。
