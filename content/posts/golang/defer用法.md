@@ -73,8 +73,9 @@ func a() {
 a()
 ```
 
+```
     0
-    
+```
 
 ### 2. defer函数的执行顺序与声明顺序相反，类似于栈
 
@@ -88,11 +89,13 @@ func b() {
 b()
 ```
 
+```
     3
     2
     1
     0
     
+```
 
 ### 3. defer函数可以读取函数的返回值
 
@@ -105,12 +108,9 @@ func c() (i int) {
 c()
 ```
 
-
-
-
+```
     2
-
-
+```
 
 defer语句中的函数会在return语句更新返回值变量后再执行，又因为在函数中定义的匿名函数可以访问该函数包括返回值变量在内的所有变量，所以，对匿名函数采用defer机制，可以使其访问函数的返回值。
 
@@ -125,15 +125,10 @@ func triple(x int) ( result int){
 fmt.Println(triple(4))
 ```
 
+```
     12
-    
-
-
-
-
     3 <nil>
-
-
+```
 
 
 ```go
@@ -144,15 +139,10 @@ func triple(x int) ( result int){
 fmt.Println(triple(4))
 ```
 
+```
     12
-    
-
-
-
-
     3 <nil>
-
-
+```
 
 ### defer函数
 
@@ -171,10 +161,12 @@ func a() func(){
 test()
 ```
 
+```
     h1
     
     h2
     
+```
 
 ### 循环体中的defer语句
 
@@ -207,9 +199,4 @@ func doFile(filename string) error{
     defer f.Close()
     //...process
 }
-```
-
-
-```go
-
 ```
