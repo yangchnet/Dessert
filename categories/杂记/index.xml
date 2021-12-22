@@ -9,7 +9,39 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 18 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/%E6%9D%82%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/%E6%9D%82%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google搜索指令</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/google%E6%90%9C%E7%B4%A2%E6%8C%87%E4%BB%A4/</link>
+      <pubDate>Wed, 22 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/google%E6%90%9C%E7%B4%A2%E6%8C%87%E4%BB%A4/</guid>
+      <description>1. site site: 搜索指定站点
+用法:
+site:[example.com] 示例:
+golang site:github.com 2. source source: 在谷歌新闻中指定来源
+用法:
+source:[sourcesite] 示例:
+COVID source:yahoo 3. intext intext: 查询的内容必须出现在正文中
+用法:
+intext:[somewords] 示例:
+intext:xiaomi 4. allintext allintext: 查询的每个单词都必须包含在页面中
+用法:
+allintext:[somewords] 示例:
+allintext:Quantum Network Coding 5. intitle intitle: 标题中包含要查询的内容
+用法:
+intitle:[somewords] 示例:
+intitle:Quantum 6. allintitle allintitle: 类似allintext
+7. url url:结果的url中必须包含某些内容
+用法:
+url:[somewords] 示例:
+url:airpods 8. allinurl allinurl: 结果的url必须包含所有查询内容
+9. filetype filetype: 查询的结果满足某种文件类型
+用法:
+filetype:[filetype] 示例:
+golang filetype:pdf 10. related related: 查找有关内容</description>
+    </item>
+    
     <item>
       <title>hugo中的公式问题</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
