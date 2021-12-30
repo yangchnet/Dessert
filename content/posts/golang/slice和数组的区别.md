@@ -43,7 +43,6 @@ endlessSummer := summer[:5] // extend a slice (within capacity)
 fmt.Println(endlessSummer) // "[June July August September October]"
 ```
 
-
 ## 2. 比较
 > 数组  
 
@@ -126,4 +125,56 @@ reverse(a[:])
 fmt.Println(a) // "[5 4 3 2 1 0]"
 ```
 
-   
+这里存在一个坑，就是我们会误以为对于传入的切片作出的任何更改都会反映到原来的切片上，其实不然，请看下面程序：
+```go
+package main
+
+import "fmt"
+
+func myAppend(s []int) []int {
+        // 这里 s 虽然改变了，但并不会影响外层函数的 s
+        s = append(s, 100)
+        return s
+}
+
+func myAppendPtr(s *[]int) {
+        // 会改变外层 s 本身
+        *s = append(*s, 100)
+        return
+}
+
+func main() {
+        s := []int{1, 1, 1}
+        newS := myAppend(s)
+
+        fmt.Println(s)
+        fmt.Println(newS)
+
+        s = newS
+
+        myAppendPtr(&s)
+        fmt.Println(s)
+}
+```
+
+运行结果为：
+```
+[1 1 1]
+[1 1 1 100]
+[1 1 1 100 100]
+```
+
+很明显，对于切片作出的改变未反映到原切片上，这是为什么呢？  
+仔细观察，可以看出，对于反映到原切片上的改动，都是直接访问了切片元素，而没有反映到原切片上的改动，则没有直接访问元素。这是因为对于切片元素的访问，实际上访问的是切片内部array指针，因此才能反映到原数组中。  
+而对于切片的直接修改，没有访问array指针(可能是改变了array或len、cap)，因此无法反映到原切片上.  
+但当我们传入切片指针时，作出的任何改变就都可以反映到原切片上了。
+```go
+type slice struct {
+    array unsafe.Pointer
+    len   int
+    cap   int
+}
+```
+
+示意图如下，传入函数内部的slice是对外部slice的一个复制，因此二者具有相同的array、len、cap等。对于函数内部的slice.array进行访问修改，实际上就是在对外部slice的array进行修改。但如果是直接对array修改（不访问指针），那么无论作出任何修改，都仅仅是在外部slice的一个复制上作出的改动。
+![slice.drawio](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/slice.drawio.png)

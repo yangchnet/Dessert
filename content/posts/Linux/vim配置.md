@@ -101,28 +101,8 @@ set completeopt-=preview
 
 ## 5. 其他配置
 1. 括号自动补全
-
-在`~/.vimrc`中添加如下内容：
 ```
-imap ( ()<ESC>i
-imap () ()<ESC>a
-
-imap [ []<ESC>i
-imap [] []<ESC>a
-
-imap {<SPACE> {<SPACE><SPACE>};<ESC><LEFT><LEFT>i
-imap {; {<CR><CR>};<ESC>jddkkddkA
-imap { {}<ESC>i<CR><CR><ESC>kA<TAB><RIGHT><RIGHT>
-imap {} {}<ESC>a
-
-imap < <><ESC>i
-imap <<SPACE> <<ESC><RIGHT>r<SPACE>a
-imap << <<<ESC><RIGHT>r<SPACE>a<BACKSPACE>
-imap <= <=<ESC>a
-imap <> <><ESC>a
-
-imap "" ""<ESC>i
-imap '' ''<ESC>i
+Plug 'tmsvg/pear-tree'
 ```
 
 2. 显示行号

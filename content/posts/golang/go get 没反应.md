@@ -8,6 +8,8 @@ ShowToc: true
 TocOpen: true
 ---
 
+> 直接干终极方案: `go env -w GOPROXY=https://goproxy.cn,direct`
+
 # go get 没反应
 
 **修改hosts，然后reboot**
