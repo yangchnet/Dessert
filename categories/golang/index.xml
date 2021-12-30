@@ -246,7 +246,8 @@ func CopyFile(dstName, srcName string) (written int64, err error) { src, err := 
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/golang/go-get-%E6%B2%A1%E5%8F%8D%E5%BA%94/</guid>
-      <description>go get 没反应 修改hosts，然后reboot 添加
+      <description> 直接干终极方案: go env -w GOPROXY=https://goproxy.cn,direct
+ go get 没反应 修改hosts，然后reboot 添加
 192.30.253.112 github.com 151.101.185.194 github.global.ssl.fastly.net 到/etc/hosts 然后reboot
 go get golang.org 在使用go get golang.org/...时，总是time out（就算fp也一样，fp之后可以访问golang.org），不知道为啥。
 幸好github上存在golang.org的镜像
@@ -295,7 +296,7 @@ type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 
       <guid>http://yangchnet.github.io/Dessert/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</guid>
       <description>1.值类型与引用类型 值类型：int、float、bool和string这些类型都属于值类型，使用这些类型的变量直接指向存在内存中的值，值类型的变量的值存储在栈中。当使用等号=将一个变量的值赋给另一个变量时，如 j = i ,实际上是在内存中将 i 的值进行了拷贝。可以通过 &amp;amp;i 获取变量 i 的内存地址
 引用类型：特指slice、map、channel这三种预定义类型。引用类型拥有更复杂的存储结构:(1)分配内存 (2)初始化一系列属性等。一个引用类型的变量r1存储的是r1的值所在的内存地址（数字），或内存地址中第一个字所在的位置，这个内存地址被称之为指针，这个指针实际上也被存在另外的某一个字中
-2.值类型与引用类型的区别 值类型在传参时是做拷贝操作，即将原来的数据复制一份，而引用类型是直接传递指针，当参数在函数中被改变时，原数据也将改变。
+2.值类型与引用类型的区别 首先明确，golang中无论是什么类型，传参时都是传递的原值的复制，因此，值类型直接传入函数，任何变动都会反映到原值上，而对于引用类型，其传递的是原值类型的一个复制，因此在函数内的修改，可能会反映到原值中，也可能不会。具体取决引用类型的内部定义。可参考另一篇文章slice和数组的区别
 2.1.值类型 //先定义一个数组 var a = [5]int{1, 2, 3, 4, 5} //定义一个函数，将数组中的第一个值设为0 func change(a [5]int){ a[0] = 0 fmt.Println(a) } change(a) fmt.Println(a)  输出：
  [0 2 3 4 5] [1 2 3 4 5] 可以看到，数组在函数内部被变成{0,1,2,3,4}，但当函数结束，还是原来的值没有变。
 2.2 引用类型 // 定义一个map var dit = make(map[string]int) dit[&amp;#34;one&amp;#34;] = 1 fmt.Println(dit) // 传参并做改变 func change(dit map[string]int){ dit[&amp;#34;two&amp;#34;] = 2 fmt.</description>
@@ -307,13 +308,13 @@ type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</guid>
-      <description>Go语言中的字面量  什么是字面量 整型和浮点型的字面值 字符串的字面值 常量的字面值 数组的字面值 Slice的字面值 Map的字面值 结构体的字面值  什么是字面量 在计算机科学中，字面量（literal）是用于表达源代码中一个固定值的表示法（notation）。
+      <description>Go语言中的字面量  Go语言中的字面量  什么是字面量 整型和浮点型的字面值 字符串的字面值 常量的字面值 数组的字面值 Slice的字面值 Map的字面值 结构体的字面值    什么是字面量 在计算机科学中，字面量（literal）是用于表达源代码中一个固定值的表示法（notation）。
 简单的说，字面量或者说字面值就是一个变量的值。
 整型和浮点型的字面值 var i int = 1 var f float64 = 3.14159 字符串的字面值 字符串值也可以用字符串面值方式编写，只要将一系列字节序列包含在双引号即可：
-&amp;#34;Hello 世界&amp;#34; `世界` 世界  一个原生的字符串面值形式是
+&amp;#34;Hello 世界&amp;#34; `世界`  世界 一个原生的字符串面值形式是
 `...` 使用反引号代替双引号。在原生的字符串面值中，没有转义操作；全部的内容都是字面的意思，包含退格和换行，因此一个程序中的原生字符串面值可能跨越多行（译注：在原生字符串面值内部是无法直接写```````字符的，可以用八进制或十六进制转义或+&amp;quot;`&amp;quot;链接字符串常量完成）。唯一的特殊处理是会删除回车以保证在所有平台上的值都是一样的，包括那些把回车也放入文本文件的系统（译注：Windows系统会把回车和换行一起放入文本文件中）。
 原生字符串面值用于编写正则表达式会很方便，因为正则表达式往往会包含很多反斜杠。原生字符串面值同时被广泛应用于HTML模板、JSON面值、命令行提示信息以及那些需要扩展到多行的场景。
-const GoUsage = `Go is a tool for managing Go source code. Usage: go command [arguments] ...` GoUsage Go is a tool for managing Go source code. Usage: go command [arguments] ...  常量的字面值 对于常量面值，不同的写法可能会对应不同的类型。例如0、0.</description>
+const GoUsage = `Go is a tool for managing Go source code. Usage: go command [arguments] ...` GoUsage  Go is a tool for managing Go source code. Usage: go command [arguments] .</description>
     </item>
     
     <item>
