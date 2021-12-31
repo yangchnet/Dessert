@@ -296,10 +296,11 @@ type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 
       <guid>http://yangchnet.github.io/Dessert/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</guid>
       <description>1.值类型与引用类型 值类型：int、float、bool和string这些类型都属于值类型，使用这些类型的变量直接指向存在内存中的值，值类型的变量的值存储在栈中。当使用等号=将一个变量的值赋给另一个变量时，如 j = i ,实际上是在内存中将 i 的值进行了拷贝。可以通过 &amp;amp;i 获取变量 i 的内存地址
 引用类型：特指slice、map、channel这三种预定义类型。引用类型拥有更复杂的存储结构:(1)分配内存 (2)初始化一系列属性等。一个引用类型的变量r1存储的是r1的值所在的内存地址（数字），或内存地址中第一个字所在的位置，这个内存地址被称之为指针，这个指针实际上也被存在另外的某一个字中
-2.值类型与引用类型的区别 首先明确，golang中无论是什么类型，传参时都是传递的原值的复制，因此，值类型直接传入函数，任何变动都会反映到原值上，而对于引用类型，其传递的是原值类型的一个复制，因此在函数内的修改，可能会反映到原值中，也可能不会。具体取决引用类型的内部定义。可参考另一篇文章slice和数组的区别
+2.值类型与引用类型的区别 首先明确，golang中无论是什么类型，传参时都是传递的原值的复制，因此，值类型直接传入函数，任何变动都会反映到原值上，而对于引用类型，其传递的是原值类型的一个复制，因此在函数内的修改，可能会反映到原值中，也可能不会。具体取决引用类型的构造方式及其内部定义。可参考另一篇文章slice和数组的区别
 2.1.值类型 //先定义一个数组 var a = [5]int{1, 2, 3, 4, 5} //定义一个函数，将数组中的第一个值设为0 func change(a [5]int){ a[0] = 0 fmt.Println(a) } change(a) fmt.Println(a)  输出：
  [0 2 3 4 5] [1 2 3 4 5] 可以看到，数组在函数内部被变成{0,1,2,3,4}，但当函数结束，还是原来的值没有变。
-2.2 引用类型 // 定义一个map var dit = make(map[string]int) dit[&amp;#34;one&amp;#34;] = 1 fmt.Println(dit) // 传参并做改变 func change(dit map[string]int){ dit[&amp;#34;two&amp;#34;] = 2 fmt.</description>
+2.2 引用类型  map的构造函数返回的是一个指针，指向map对象，因此对于map的任何操作都会反映到原map中
+ // 定义一个map var dit = make(map[string]int) dit[&amp;#34;one&amp;#34;] = 1 fmt.Println(dit) // 传参并做改变 func change(dit map[string]int){ dit[&amp;#34;two&amp;#34;] = 2 fmt.</description>
     </item>
     
     <item>
