@@ -257,7 +257,7 @@ var _ErrCode_index = [...]uint8{0, 2, 14, 20}
 复制代码可以看到确实通过注释生成了错误消息。
 
 
-## Reference 
+## Reference  
 [深入理解Go之generate](https://juejin.cn/post/6844903923166216200)   
 [GoMock](https://github.com/golang/mock)   
 [stringer](https://pkg.go.dev/golang.org/x/tools@v0.1.2/cmd/stringer)   
