@@ -9,7 +9,27 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 14 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>channel的行为</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</link>
+      <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</guid>
+      <description>1. nil channel   接收 接收goroutine阻塞
+  发送 发送个goroutine阻塞
+  2. 向无缓冲channel发送消息   接受队列有goroutine 接收端将收到消息
+  接收队列无goroutine 发送goroutine将阻塞
+  已有发送goroutine阻塞 发送goroutine将阻塞
+  3. 从无缓冲channel接收消息   无发送goroutine 接收端阻塞
+  有发送goroutine 收到消息
+  4. 向有缓冲channel发送消息   队列未满 正常发送
+  队列已满 发送端阻塞
+  5. 从有缓冲channel接收消息   队列中有消息 正常接收
+  队列中无消息 接收端阻塞
+  6. 对close channel的操作   向closed channel发送 panic</description>
+    </item>
+    
     <item>
       <title>golang中的tag</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</link>
