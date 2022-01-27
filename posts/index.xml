@@ -9,7 +9,31 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 02 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常用工具集合</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</link>
+      <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</guid>
+      <description>1. draw.io 在线画图工具 https://app.diagrams.net/
+2. sql to Gorm SQL语句转化为go结构体 https://sql2gorm.mccode.info/
+3. 一些编程字体 https://www.nerdfonts.com/font-downloads
+4. 团队协作工具 https://www.devbefore.com/product
+5. markdown 写作工具（开源免费） https://marktext.app/
+6. z 目录快速跳转 (强烈推荐) https://github.com/rupa/z (安装)https://yangchnet.github.io/Dessert/posts/tool/z/
+7. nvm npm多版本管理 (强烈推荐) https://github.com/nvm-sh/nvm
+8. lazydocker 容器查看工具 https://github.com/jesseduffield/lazydocker
+9. dive 镜像查看工具 https://github.com/wagoodman/dive
+10. corc 文件转发工具（任意主机） (强烈推荐) https://github.com/schollz/croc
+11. asciinema 终端会话记录工具 https://github.com/asciinema/asciinema
+12. tree 目录树工具 sudo apt-get install tree
+13. Dev hints 技术速查表 https://devhints.io/
+15. utools 快捷启动工具 (强烈推荐) https://u.tools/
+16. 语雀 文档写作工具（团队/个人） https://www.yuque.com/
+17. fehelper 一些小工具的集合（浏览器插件）(强烈推荐) https://www.</description>
+    </item>
+    
     <item>
       <title>channel的行为</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</link>
@@ -1440,16 +1464,6 @@ pacman -Sc //清空并且下载新数据 pacman-mirrors -gb testing -c China //�
     </item>
     
     <item>
-      <title>mysql中无法插入中文解决办法</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</guid>
-      <description>mysql 中无法插入中文解决办法 alert database tuanplus character set utf8； 使用此方法可更改整个数据库，但是数据可能会丢失
-alter table address convert to character set utf8； 使用此方法可更改某个表的编码</description>
-    </item>
-    
-    <item>
       <title>MySql安装和配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -1792,15 +1806,6 @@ example
     </item>
     
     <item>
-      <title>如何在manjaro中安装MySQL</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</guid>
-      <description>如何在manjaro中安装MySQL # 安装MySQL pacman -S mysql # 初始化MySQL，记住输出的root密码 mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql # 设置开机启动MySQL服务 systemctl enable mysqld.service systemctl daemon-reload systemctl start mysqld.service # 使用MySQL前必须修改root密码，MySQL 8.0.15不能使用set password修改密码 mysql -u root -p mysql&amp;gt; ALTER USER &amp;#39;root&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED WITH mysql_native_password BY &amp;#39;新密码&amp;#39;; </description>
-    </item>
-    
-    <item>
       <title>安装完virtualbox后，提示内核问题</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -1839,25 +1844,6 @@ from pylab import * plot(X,C) plot(X,S) show() &amp;lt;Figure size 640x480 with 
  解决方案 首先将远程仓库和本地仓库关联起来：
 git branch --set-upstream-to=origin/master master 然后使用git pull整合远程仓库和本地仓库，
 git pull --allow-unrelated-histories (忽略版本不同造成的影响) </description>
-    </item>
-    
-    <item>
-      <title>数据库中的视图</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</guid>
-      <description>数据库中的视图 1. 什么是数据库视图 数据库视图的创建是基于SQL SELECT query和JOIN的。视图和表很相似，它也包含行和列，所以可以直接对它进行查询操作。另外大多数的数据库同样允许进行UPADTE操作，但必须满足一定的条件。视图的数据结构如图：
-数据库并没有存储视图这个关系,存储的只是一个查询定义
-2. 数据库视图可以干什么   视图可以简化复杂查询
-视图的定义是基于一个查询声明，这个查询声明可能关联了很多底层表。可以使用视图向数据库的使用者或者外部程序隐藏复杂的底层表关系。
-  视图可以限制特定用户的数据访问权
-有时希望对一些特定用户隐藏某些表的某些数据，这时视图可以很好的实现这个功能。
-  视图可以使用可计算的列
-表的列一般都不支持动态计算，但是视图的列是支持的。假设在有一张order_details表，其中包含product_nums和price_each两列，当需要查询order总价时就需要查询出结果后在代码中进行计算，如果使用视图的话可以在视图中添加一列total_price(product_nums*price_each)。这样就可以直接查询出order的总价。
-  视图可以帮助兼容旧的系统
-假设一个数据中心，这个数据中心被很多的程序在使用。如果有一天决定重新设计这个数据中心以适应一些新的业务需求，可能需要删除一些旧的表，并且创建一些新的表，但又不希望这些变动影响到那些老的程序。那么这时可以创建一些视图用来适配那些老的程序。
-  3. 如何定义数据库视图 </description>
     </item>
     
     <item>

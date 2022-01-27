@@ -38,16 +38,6 @@ p = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对�
     </item>
     
     <item>
-      <title>mysql中无法插入中文解决办法</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%96%87/</guid>
-      <description>mysql 中无法插入中文解决办法 alert database tuanplus character set utf8； 使用此方法可更改整个数据库，但是数据可能会丢失
-alter table address convert to character set utf8； 使用此方法可更改某个表的编码</description>
-    </item>
-    
-    <item>
       <title>MySql安装和配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -73,34 +63,6 @@ SELECT user,authentication_string,plugin,host FROM mysql.user; 在输出中
 可看出只接收内部访问 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf) 将bind-address = 127.0.0.1改成bind-address = 0.0.0.0 再次使用netstat -ntpl |grep 3306命令查看 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN -
 此时3306端口开始监听所有网络访问 **如果是ipv6主机，则改为 bind-address = :: ,表示监听所有网络**  主机&amp;rsquo;xxx.xx.xxx.xxx&amp;rsquo;不允许连接到此MySQL服务器 在进行连接ipv6主机的时候出现了如下问题：django.db.utils.InternalError: (1130, &amp;ldquo;Host &amp;lsquo;2409:8930:1450:316:6179:c54:5901:2f2b&amp;rsquo; is not allowed to connect to this MySQL server&amp;rdquo;) 解决方法如下：
 mysql&amp;gt; CREATE USER &amp;#39;monty&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED BY &amp;#39;some_pass&amp;#39;; mysql&amp;gt; GRANT ALL PRIVILEGES ON *.</description>
-    </item>
-    
-    <item>
-      <title>如何在manjaro中安装MySQL</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/manjaro%E5%AE%89%E8%A3%85mysql/</guid>
-      <description>如何在manjaro中安装MySQL # 安装MySQL pacman -S mysql # 初始化MySQL，记住输出的root密码 mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql # 设置开机启动MySQL服务 systemctl enable mysqld.service systemctl daemon-reload systemctl start mysqld.service # 使用MySQL前必须修改root密码，MySQL 8.0.15不能使用set password修改密码 mysql -u root -p mysql&amp;gt; ALTER USER &amp;#39;root&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED WITH mysql_native_password BY &amp;#39;新密码&amp;#39;; </description>
-    </item>
-    
-    <item>
-      <title>数据库中的视图</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A7%86%E5%9B%BE/</guid>
-      <description>数据库中的视图 1. 什么是数据库视图 数据库视图的创建是基于SQL SELECT query和JOIN的。视图和表很相似，它也包含行和列，所以可以直接对它进行查询操作。另外大多数的数据库同样允许进行UPADTE操作，但必须满足一定的条件。视图的数据结构如图：
-数据库并没有存储视图这个关系,存储的只是一个查询定义
-2. 数据库视图可以干什么   视图可以简化复杂查询
-视图的定义是基于一个查询声明，这个查询声明可能关联了很多底层表。可以使用视图向数据库的使用者或者外部程序隐藏复杂的底层表关系。
-  视图可以限制特定用户的数据访问权
-有时希望对一些特定用户隐藏某些表的某些数据，这时视图可以很好的实现这个功能。
-  视图可以使用可计算的列
-表的列一般都不支持动态计算，但是视图的列是支持的。假设在有一张order_details表，其中包含product_nums和price_each两列，当需要查询order总价时就需要查询出结果后在代码中进行计算，如果使用视图的话可以在视图中添加一列total_price(product_nums*price_each)。这样就可以直接查询出order的总价。
-  视图可以帮助兼容旧的系统
-假设一个数据中心，这个数据中心被很多的程序在使用。如果有一天决定重新设计这个数据中心以适应一些新的业务需求，可能需要删除一些旧的表，并且创建一些新的表，但又不希望这些变动影响到那些老的程序。那么这时可以创建一些视图用来适配那些老的程序。
-  3. 如何定义数据库视图 </description>
     </item>
     
   </channel>

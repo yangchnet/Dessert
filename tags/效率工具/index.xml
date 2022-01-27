@@ -9,7 +9,31 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常用工具集合</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</link>
+      <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</guid>
+      <description>1. draw.io 在线画图工具 https://app.diagrams.net/
+2. sql to Gorm SQL语句转化为go结构体 https://sql2gorm.mccode.info/
+3. 一些编程字体 https://www.nerdfonts.com/font-downloads
+4. 团队协作工具 https://www.devbefore.com/product
+5. markdown 写作工具（开源免费） https://marktext.app/
+6. z 目录快速跳转 (强烈推荐) https://github.com/rupa/z (安装)https://yangchnet.github.io/Dessert/posts/tool/z/
+7. nvm npm多版本管理 (强烈推荐) https://github.com/nvm-sh/nvm
+8. lazydocker 容器查看工具 https://github.com/jesseduffield/lazydocker
+9. dive 镜像查看工具 https://github.com/wagoodman/dive
+10. corc 文件转发工具（任意主机） (强烈推荐) https://github.com/schollz/croc
+11. asciinema 终端会话记录工具 https://github.com/asciinema/asciinema
+12. tree 目录树工具 sudo apt-get install tree
+13. Dev hints 技术速查表 https://devhints.io/
+15. utools 快捷启动工具 (强烈推荐) https://u.tools/
+16. 语雀 文档写作工具（团队/个人） https://www.yuque.com/
+17. fehelper 一些小工具的集合（浏览器插件）(强烈推荐) https://www.</description>
+    </item>
+    
     <item>
       <title>zsh的基本配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
