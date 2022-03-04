@@ -9,7 +9,22 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 09 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>标准库之unsafe</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bunsafe/</link>
+      <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bunsafe/</guid>
+      <description>1. Go中对指针的限制  Go 的指针不能进行数学运算。 不同类型的指针不能相互转换。 不同类型的指针不能使用 == 或 != 比较。只有在两个指针类型相同或者可以相互转换的情况下，才可以对两者进行比较。另外，指针可以通过 == 和 != 直接和 nil 作比较。 不同类型的指针变量不能相互赋值。  使用unsafe包，可以一定程度上打破这些限制，那么为什么要打破这些限制。请看下文。
+2. unsafe.Pointer unsafe.Pointer的定义
+type ArbitraryType int type Pointer *ArbitraryType unsafe 包提供了 2 点重要的能力：
+ 任何类型的指针和 unsafe.Pointer 可以相互转换。 uintptr 类型和 unsafe.Pointer 可以相互转换。  pointer 不能直接进行数学运算，但可以把它转换成 uintptr，对 uintptr 类型进行数学运算，再转换成 pointer 类型。利用这两个对象的相互转换，就可以打破上述4个限制。
+// uintptr 是一个整数类型，它足够大，可以存储 type uintptr uintptr 还有一点要注意的是，uintptr 并没有指针的语义，意思就是 uintptr 所指向的对象会被 gc 无情地回收.而 unsafe.Pointer 有指针语义，可以保护它所指向的对象在“有用”的时候不会被垃圾回收。
+3. 利用unsafe获取slice和map的长度 slice和map的长度都存储在其内部变量中，因此我们先来看这两个结构体定义：
+// runtime/slice.go type slice struct { array unsafe.</description>
+    </item>
+    
     <item>
       <title>静态代码检查: golangci-lint</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</link>
