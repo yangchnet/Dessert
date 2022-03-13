@@ -3,22 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://yangchnet.github.io/Dessert/categories/</loc>
-    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/golang/for...range%E8%A6%81%E7%82%B9/</loc>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/golang/</loc>
-    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/golang/</loc>
-    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/</loc>
-    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/</loc>
-    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/range/</loc>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/</loc>
-    <lastmod>2022-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2022-03-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/unsafe/</loc>
     <lastmod>2022-03-04T00:00:00+00:00</lastmod>
