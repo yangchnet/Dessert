@@ -9,6 +9,7 @@ TocOpen: true
 ---
 
 反射是一个接口，其定义如下：
+
 ```go
 type Type interface {
 	// 返回具体类型在内存分配时的字节分配方式
