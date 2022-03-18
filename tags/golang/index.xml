@@ -16,7 +16,7 @@
       <pubDate>Sat, 12 Mar 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/golang/for...range%E8%A6%81%E7%82%B9/</guid>
-      <description>TODO </description>
+      <description>range循环时，使用的是被迭代的元素的副本  type T struct { n int } func main() { ts := [2]T{} for i, t := range ts { switch i { case 0: t.n = 3 // 被访问的是ts的副本  ts[1].n = 9 case 1: fmt.Print(t.n, &amp;#34; &amp;#34;) } } fmt.Print(ts) } 输出：0 {{0} {9}} range 循环语句使用的临时变量  func main() { h := make([]*int, 3) u := []int{1, 2, 3} for i, v := range u { h[i] = &amp;amp;v } for i := range h { fmt.</description>
     </item>
     
     <item>
@@ -222,19 +222,6 @@ func main(){ fmt.Println(&amp;#34;main start&amp;#34;) outerFunc() fmt.Println(&
     </item>
     
     <item>
-      <title>defer用法</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</guid>
-      <description>defer用法 defer用来延迟对某个语句的调用，常用于处理成对的操作，如打开、关闭、连接、断开连接，加锁、释放锁。通过defer语句，无论函数逻辑多复杂，都能保证在任何代码执行路径下，资源被释放。defer应该直接跟在请求资源的语句后。
-defer语句将函数的调用push到一个列表中，当外层函数返回时，会执行保存的函数列表
-举个例子，这个程序打开两个文件并将一个文件的内容复制到另一个文件的函数
-func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } dst, err := os.Create(dstName) if err != nil { return } written, err = io.Copy(dst, src) dst.Close() src.Close() return } 这个函数似乎可以正常工作，但其实存在一个bug，如果对os.Create的调用失败，该函数将返回但却不关闭源文件，通过在第二个return语句中调用src.Close可以解决这个问题。但是如果函数更加复杂，问题可能不会那么容易被发现和解决。通过使用defer语句，可以确保始终关闭文件。
-func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } defer src.Close() dst, err := os.</description>
-    </item>
-    
-    <item>
       <title>Flag包的基本用法</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -427,6 +414,20 @@ var w io Wirter w = os.Stdout rw := w.</description>
       <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</guid>
       <description>鸭子类型 1. 什么是鸭子类型 只要走起路来像鸭子，叫起来像鸭子，就可以认为是鸭子。这就是鸭子类型
 2. 鸭子类型有什么作用？ 对应于golang中的接口的概念，一个接口定义了一组操作，这组操作可以看做是鸭子的走路，叫。也就是说，只要任何类型满足了这组方法，那么就可以看做是鸭子&amp;ndash;即满足了这个接口，可以看做是这个接口类型。</description>
+    </item>
+    
+    <item>
+      <title>defer用法</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</guid>
+      <description>Revise in 2022-3-18
+ defer用法 defer用来延迟对某个语句的调用，常用于处理成对的操作，如打开、关闭、连接、断开连接，加锁、释放锁。通过defer语句，无论函数逻辑多复杂，都能保证在任何代码执行路径下，资源被释放。defer应该直接跟在请求资源的语句后。
+defer语句将函数的调用push到一个列表中，当外层函数返回时，会执行保存的函数列表
+举个例子，这个程序打开两个文件并将一个文件的内容复制到另一个文件的函数
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } dst, err := os.Create(dstName) if err != nil { return } written, err = io.Copy(dst, src) dst.Close() src.Close() return } 这个函数似乎可以正常工作，但其实存在一个bug，如果对os.Create的调用失败，该函数将返回但却不关闭源文件，通过在第二个return语句中调用src.Close可以解决这个问题。但是如果函数更加复杂，问题可能不会那么容易被发现和解决。通过使用defer语句，可以确保始终关闭文件。
+func CopyFile(dstName, srcName string) (written int64, err error) { src, err := os.Open(srcName) if err != nil { return } defer src.</description>
     </item>
     
   </channel>

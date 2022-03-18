@@ -16,7 +16,7 @@
       <pubDate>Sat, 12 Mar 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/golang/for...range%E8%A6%81%E7%82%B9/</guid>
-      <description>TODO </description>
+      <description>range循环时，使用的是被迭代的元素的副本  type T struct { n int } func main() { ts := [2]T{} for i, t := range ts { switch i { case 0: t.n = 3 // 被访问的是ts的副本  ts[1].n = 9 case 1: fmt.Print(t.n, &amp;#34; &amp;#34;) } } fmt.Print(ts) } 输出：0 {{0} {9}} range 循环语句使用的临时变量  func main() { h := make([]*int, 3) u := []int{1, 2, 3} for i, v := range u { h[i] = &amp;amp;v } for i := range h { fmt.</description>
     </item>
     
   </channel>
