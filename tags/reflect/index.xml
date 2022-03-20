@@ -11,11 +11,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Tue, 15 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/reflect/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>理解反射之：一个reflect。Type可以做什么</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflecttype%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</link>
+      <title>理解反射之：一个reflect.Type可以做什么</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</link>
       <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflecttype%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</guid>
       <description>反射是一个接口，其定义如下：
 type Type interface { // 返回具体类型在内存分配时的字节分配方式 	Align() int // 返回具体类型在结构体中作为一个字段是内存对齐方式 	FieldAlign() int // 返回具体类型的第x个方法 	Method(int) Method // 根据函数名返回具体类型的方法 	MethodByName(string) (Method, bool) // 返回类型的方法个数 	NumMethod() int // 返回类型的名字 	Name() string // 返回类型的包名 	PkgPath() string // 返回类型所占内存字节大小 	Size() uintptr // 返回类型的简单描述，如：main.User 	String() string // 返回这个类型的Kind 	Kind() Kind // 检查类型是否实现了某个接口 	//stringer := reflect.TypeOf((*fmt.Stringer)(nil)).Elem() 	//fmt.Println(reflect.ValueOf(u).Type().Implements(stringer)) 	Implements(u Type) bool // 检查类型是否可以被赋值给某个类型 	AssignableTo(u Type) bool // 检查类型是否可以转换到类型u 	ConvertibleTo(u Type) bool // 检查类型是否可比较 	Comparable() bool // 返回Int, Uint, Float, or Complex kinds.</description>
     </item>

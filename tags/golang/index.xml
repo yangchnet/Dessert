@@ -9,7 +9,19 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 12 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 19 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>切片append规则</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E5%88%87%E7%89%87append%E8%A7%84%E5%88%99/</link>
+      <pubDate>Sat, 19 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E5%88%87%E7%89%87append%E8%A7%84%E5%88%99/</guid>
+      <description>大约2021年8月份，go社区对切片容量增长的方式进行了一次调整。具体讨论可见：https://groups.google.com/g/golang-nuts/c/UaVlMQ8Nz3o
+ 1. 之前的增长规则 先看源码
+ runtime/slice.go
+ func growslice(et *_type, old slice, cap int) slice { // 省略部分条件检查  // ...  newcap := old.cap doublecap := newcap + newcap if cap &amp;gt; doublecap { newcap = cap } else { if old.cap &amp;lt; 1024 { newcap = doublecap } else { // Check 0 &amp;lt; newcap to detect overflow 	// and prevent an infinite loop. 	for 0 &amp;lt; newcap &amp;amp;&amp;amp; newcap &amp;lt; cap { newcap += newcap / 4 } // Set newcap to the requested cap when 	// the newcap calculation overflowed.</description>
+    </item>
+    
     <item>
       <title>for...range要点</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/for...range%E8%A6%81%E7%82%B9/</link>
