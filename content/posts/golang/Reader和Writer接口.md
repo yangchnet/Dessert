@@ -14,7 +14,7 @@ type Reader interface {
     Read(p []byte) (n int, err error)
 }
 ```
-> 接口说明  
+> 接口说明
 
 Read 将 len(p) 个字节读取到 p 中。它返回读取的字节数 n（0 <= n <= len(p)） 以及任何遇到的错误。即使 Read 返回的 n < len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。
 
@@ -42,7 +42,7 @@ data, err := ReadFrom(os.Stdin, 11)
 data, err := Read From(file, 9)
 
 // 从字符串读取
-data, err := ReadFrom(strings.NewReader("from string"), 12) 
+data, err := ReadFrom(strings.NewReader("from string"), 12)
 ```
 
 **io.Reader将当前io.Reader实例中的值读取到参数p中**
@@ -56,13 +56,13 @@ type Writer interface {
 ```
 
 > 功能说明
- 
+
 Write 将 len(p) 个字节从 p 中写入到基本数据流中。它返回从 p 中被写入的字节数 n（0 <= n <= len(p)）以及任何遇到的引起写入提前停止的错误。若 Write 返回的 n < len(p)，它就必须返回一个 非nil 的错误。
 
 > 例子
 
-在fmt标准库中，有一组函数:Fprint/Fprintf/Fprintln,它们接收一个io.Wirter类型参数，也就是说它们将数据格式化输出到io.Writer中。那么，调用这组函数时，该如何实现这个参数呢？  
-以fmt.Fprintln()为例：  
+在fmt标准库中，有一组函数:Fprint/Fprintf/Fprintln,它们接收一个io.Wirter类型参数，也就是说它们将数据格式化输出到io.Writer中。那么，调用这组函数时，该如何实现这个参数呢？
+以fmt.Fprintln()为例：
 ```go
 func Println(a ...interface{}) (n int, err error) {
     return Fprintln(os.Stdout, a...)

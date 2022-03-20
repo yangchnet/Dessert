@@ -178,3 +178,20 @@ type slice struct {
 
 示意图如下，传入函数内部的slice是对外部slice的一个复制，因此二者具有相同的array、len、cap等。对于函数内部的slice.array进行访问修改，实际上就是在对外部slice的array进行修改。但如果是直接对array修改（不访问指针），那么无论作出任何修改，都仅仅是在外部slice的一个复制上作出的改动。
 ![slice.drawio](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/slice.drawio.png)
+
+### 一个小坑
+请看下面程序
+```go
+a := []int{1, 2, 3}
+b := a[1:2] // b: [2]
+b[0] = 4 // b: [4]
+b = append(b, 5) // b: [4, 5]; a: [1, 4, 5]
+b = append(b, 6) // b: [4, 5, 6]; a: [1, 4, 5]
+b[0] = 7 // b: [7, 5, 6]; a: [1, 4, 5]
+fmt.Println(a) // 1, 4, 5
+fmt.Println(b) // 7, 5, 6
+```
+
+这里b是截取a得到的切片，也就是说b与a共享同一个底层数组。那么对b的修改应反映到a上。但在倒数第三行中，对b的第一个元素的修改卻并没有被反映到a中。这是为什么呢？
+
+首先，a的容量为3,b截取了a的第1个元素，此时b的容量为1，且b的第0个元素与a的第1个元素为同一个底层int值。对b进行一次append，b的容量变为2,且由于b的长度未超出a的容量，所以是直接在a与b共享的底层数组上进行的修改。但再次对b进行append时，a的容量已经不足，这时就要重新为b分配内存，分配完毕后将b的值复制到新切片上，然后再进行append。也就是说此时a与b已经不是一个底层数组了，因此对b的修改将不再与a有关。

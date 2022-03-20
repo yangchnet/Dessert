@@ -13,7 +13,7 @@ TocOpen: true
 - 不同类型的指针不能相互转换。
 - 不同类型的指针不能使用 == 或 != 比较。只有在两个指针类型相同或者可以相互转换的情况下，才可以对两者进行比较。另外，指针可以通过 == 和 != 直接和 nil 作比较。
 - 不同类型的指针变量不能相互赋值。
-  
+
 使用unsafe包，可以一定程度上打破这些限制，那么为什么要打破这些限制。请看下文。
 
 ## 2. unsafe.Pointer
@@ -45,7 +45,7 @@ slice和map的长度都存储在其内部变量中，因此我们先来看这两
 // runtime/slice.go
 type slice struct {
     array unsafe.Pointer // 元素指针
-    len   int // 长度 
+    len   int // 长度
     cap   int // 容量
 }
 ```

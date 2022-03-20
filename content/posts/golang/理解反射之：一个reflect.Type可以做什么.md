@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "理解反射之：一个reflect。Type可以做什么"
+title: "理解反射之：一个reflect.Type可以做什么"
 date: "2022-03-15"
 tags: ["reflect"]
 categories: ["Golang"]
