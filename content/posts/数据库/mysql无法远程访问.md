@@ -17,12 +17,12 @@ TocOpen: true
 ### 解决方案
 1. 首先保证阿里云服务器3306端口开放
 2. 使用netstat -ntpl |grep 3306命令查看3306端口状态
- tcp        0      0 127.0.0.1:22                  0.0.0.0:*                   LISTEN      -   
- 可看出只接收内部访问  
+ tcp        0      0 127.0.0.1:22                  0.0.0.0:*                   LISTEN      -
+ 可看出只接收内部访问
 3. 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf)
 将bind-address  = 127.0.0.1改成bind-address  = 0.0.0.0
 4. 再次使用netstat -ntpl |grep 3306命令查看
-tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      -  
+tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      -
 此时3306端口开始监听所有网络访问
 **如果是ipv6主机，则改为 bind-address  = :: ,表示监听所有网络**
 
