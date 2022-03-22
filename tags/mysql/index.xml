@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>mysql on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/mysql/</link>
+    <description>Recent content in mysql on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql:锁</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B9%8B%E9%94%81/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B9%8B%E9%94%81/</guid>
+      <description>索引是什么，为何存在，以什么样的结构组织或存储索引? 简单来说，索引是一个目录，用来对数据进行快速的查找。就像一本厚厚的字典，想要查询某个字或者词语，我们固然可以一页页翻阅整本词典，但更好的方式是通过拼音索引或者笔画索引到这条记录。
+索引可以有效减小查询的资源消耗，但索引不是毫无代价的，大量的创建索引会造成存储空间的损耗，我们要根据业务需求，有目的的创建对业务有帮助的索引。
+在MYSQL的InnoDB引擎中，索引是以B+树的形式存在的。B+树的节点存储在物理页上。
+根据叶子节点的内容，索引类型分为主键索引和非主键索引。
+主键索引的叶子节点存的是整行数据。在 InnoDB 里，主键索引也被称为聚簇索引（clustered index）。
+非主键索引的叶子节点内容是*主键的值。在 InnoDB 里，非主键索引也被称为二级索引（secondary index）。
+为什么更推荐使用自增主键? 自增主键是指自增列上定义的主键，在建表语句中一般是这么定义的： NOT NULL PRIMARY KEY AUTO_INCREMENT。
+B+树天然就是有序的，当我们想在上图中插入一个ID=400的记录，那么可能需要进行页分裂操作，这就需要挪动后面的数据。但如果想插入一个ID=700的值，只需要在最后附加一条记录就可以，不需要对前面的值就行操作。
+自增主键的插入数据模式，正符合了我们前面提到的递增插入的场景。每次插入一条新记录，都是追加操作，都不涉及到挪动其他记录，也不会触发叶子节点的分裂。
+除了性能外，页分裂操作还影响数据页的利用率。原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约 50%。
+使用索引查询的过程是怎么样的，什么叫回表、覆盖索引？ 对于如下表：
+mysql&amp;gt; create table T ( ID int primary key, k int NOT NULL DEFAULT 0, s varchar(16) NOT NULL DEFAULT &amp;#39;&amp;#39;, index k(k)) engine=InnoDB; insert into T values(100,1, &amp;#39;aa&amp;#39;),(200,2,&amp;#39;bb&amp;#39;),(300,3,&amp;#39;cc&amp;#39;),(500,5,&amp;#39;ee&amp;#39;),(600,6,&amp;#39;ff&amp;#39;),(700,7,&amp;#39;gg&amp;#39;); 当执行select * from T where k between 3 and 5时，过程如下：
+ 在 k 索引树上找到 k=3 的记录，取得 ID = 300； 再到 ID 索引树查到 ID=300 对应的 R3； 在 k 索引树取下一个值 k=5，取得 ID=500； 再回到 ID 索引树查到 ID=500 对应的 R4； 在 k 索引树取下一个值 k=6，不满足条件，循环结束。  可以看到，MYSQL先在k索引树上查找满足条件的记录，拿到主键，然后再到主键索引树上去取整条记录。这个用主键去主键索引上取数据的操作就叫做回表。</description>
+    </item>
+    
+  </channel>
+</rss>

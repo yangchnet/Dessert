@@ -71,9 +71,7 @@ SELECT user,authentication_string,plugin,host FROM mysql.user; 在输出中
       <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid>
       <description>Mysql无法远程访问 在使用navicat远程连接阿里云的时候，出现“2003 can t connect to mysql server on 10061”错误
 经过艰难的谷歌百度stackflow后，发现是3306端口没有监听外部连接，只接收内部ip访问。
-解决方案  首先保证阿里云服务器3306端口开放 使用netstat -ntpl |grep 3306命令查看3306端口状态 tcp 0 0 127.0.0.1:22 0.0.0.0:* LISTEN -
-可看出只接收内部访问 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf) 将bind-address = 127.0.0.1改成bind-address = 0.0.0.0 再次使用netstat -ntpl |grep 3306命令查看 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN -
-此时3306端口开始监听所有网络访问 **如果是ipv6主机，则改为 bind-address = :: ,表示监听所有网络**  主机&amp;rsquo;xxx.xx.xxx.xxx&amp;rsquo;不允许连接到此MySQL服务器 在进行连接ipv6主机的时候出现了如下问题：django.db.utils.InternalError: (1130, &amp;ldquo;Host &amp;lsquo;2409:8930:1450:316:6179:c54:5901:2f2b&amp;rsquo; is not allowed to connect to this MySQL server&amp;rdquo;) 解决方法如下：
+解决方案  首先保证阿里云服务器3306端口开放 使用netstat -ntpl |grep 3306命令查看3306端口状态 tcp 0 0 127.0.0.1:22 0.0.0.0:* LISTEN - 可看出只接收内部访问 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf) 将bind-address = 127.0.0.1改成bind-address = 0.0.0.0 再次使用netstat -ntpl |grep 3306命令查看 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN - 此时3306端口开始监听所有网络访问 **如果是ipv6主机，则改为 bind-address = :: ,表示监听所有网络**  主机&amp;rsquo;xxx.xx.xxx.xxx&amp;rsquo;不允许连接到此MySQL服务器 在进行连接ipv6主机的时候出现了如下问题：django.db.utils.InternalError: (1130, &amp;ldquo;Host &amp;lsquo;2409:8930:1450:316:6179:c54:5901:2f2b&amp;rsquo; is not allowed to connect to this MySQL server&amp;rdquo;) 解决方法如下：
 mysql&amp;gt; CREATE USER &amp;#39;monty&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED BY &amp;#39;some_pass&amp;#39;; mysql&amp;gt; GRANT ALL PRIVILEGES ON *.</description>
     </item>
     

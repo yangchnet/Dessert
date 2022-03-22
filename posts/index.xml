@@ -9,7 +9,28 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 19 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql:锁</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B9%8B%E9%94%81/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B9%8B%E9%94%81/</guid>
+      <description>索引是什么，为何存在，以什么样的结构组织或存储索引? 简单来说，索引是一个目录，用来对数据进行快速的查找。就像一本厚厚的字典，想要查询某个字或者词语，我们固然可以一页页翻阅整本词典，但更好的方式是通过拼音索引或者笔画索引到这条记录。
+索引可以有效减小查询的资源消耗，但索引不是毫无代价的，大量的创建索引会造成存储空间的损耗，我们要根据业务需求，有目的的创建对业务有帮助的索引。
+在MYSQL的InnoDB引擎中，索引是以B+树的形式存在的。B+树的节点存储在物理页上。
+根据叶子节点的内容，索引类型分为主键索引和非主键索引。
+主键索引的叶子节点存的是整行数据。在 InnoDB 里，主键索引也被称为聚簇索引（clustered index）。
+非主键索引的叶子节点内容是*主键的值。在 InnoDB 里，非主键索引也被称为二级索引（secondary index）。
+为什么更推荐使用自增主键? 自增主键是指自增列上定义的主键，在建表语句中一般是这么定义的： NOT NULL PRIMARY KEY AUTO_INCREMENT。
+B+树天然就是有序的，当我们想在上图中插入一个ID=400的记录，那么可能需要进行页分裂操作，这就需要挪动后面的数据。但如果想插入一个ID=700的值，只需要在最后附加一条记录就可以，不需要对前面的值就行操作。
+自增主键的插入数据模式，正符合了我们前面提到的递增插入的场景。每次插入一条新记录，都是追加操作，都不涉及到挪动其他记录，也不会触发叶子节点的分裂。
+除了性能外，页分裂操作还影响数据页的利用率。原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约 50%。
+使用索引查询的过程是怎么样的，什么叫回表、覆盖索引？ 对于如下表：
+mysql&amp;gt; create table T ( ID int primary key, k int NOT NULL DEFAULT 0, s varchar(16) NOT NULL DEFAULT &amp;#39;&amp;#39;, index k(k)) engine=InnoDB; insert into T values(100,1, &amp;#39;aa&amp;#39;),(200,2,&amp;#39;bb&amp;#39;),(300,3,&amp;#39;cc&amp;#39;),(500,5,&amp;#39;ee&amp;#39;),(600,6,&amp;#39;ff&amp;#39;),(700,7,&amp;#39;gg&amp;#39;); 当执行select * from T where k between 3 and 5时，过程如下：
+ 在 k 索引树上找到 k=3 的记录，取得 ID = 300； 再到 ID 索引树查到 ID=300 对应的 R3； 在 k 索引树取下一个值 k=5，取得 ID=500； 再回到 ID 索引树查到 ID=500 对应的 R4； 在 k 索引树取下一个值 k=6，不满足条件，循环结束。  可以看到，MYSQL先在k索引树上查找满足条件的记录，拿到主键，然后再到主键索引树上去取整条记录。这个用主键去主键索引上取数据的操作就叫做回表。</description>
+    </item>
+    
     <item>
       <title>切片append规则</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/%E5%88%87%E7%89%87append%E8%A7%84%E5%88%99/</link>
@@ -299,7 +320,7 @@ baseURL = &amp;#34;http://your-user-name.github.io/Mysite/&amp;#34; # 使用你�
  1. 数据库中的三种锁   写锁（Write Lock，也叫做排他锁 eXclusive Lock，简写为 X-Lock）：只有持有写锁的事务才能对数据进行写入操作，数据加持着写锁时，其他事务不能写入数据，也不能施加读锁。
   读锁（Read Lock，也叫做共享锁 Shared Lock，简写为 S-Lock）：多个事务可以对同一个数据添加多个读锁，数据被加上读锁后就不能再被加上写锁，所以其他事务不能对该数据进行写入，但仍然可以读取。对于持有读锁的事务，如果该数据只有一个事务加了读锁，那可以直接将其升级为写锁，然后写入数据。
   范围锁（Range Lock）：对于某个范围直接加排他锁，在这个范围内的数据不能被读取，也不能被写入。如下语句是典型的加范围锁的例子：
-SELECT * FROM books WHERE price &amp;lt; 100 FOR UPDATE;   2. 本地事务的四种隔离级别  以下隔离级别从高到低
+  SELECT * FROM books WHERE price &amp;lt; 100 FOR UPDATE; 2. 本地事务的四种隔离级别  以下隔离级别从高到低
  可串行化 串行化访问提供了强度最高的隔离性。可串行化比较符合普通程序员对数据竞争加锁的理解，如果不考虑性能优化的话，对事务所有读、写的数据全都加上读锁、写锁和范围锁即可（这种可串行化的实现方案称为 Two-Phase Lock）。
 但数据库显然不可能不考虑性能，并发控制理论（Concurrency Control）决定了隔离程度与并发能力是相互抵触的，隔离程度越高，并发访问时的吞吐量就越低。现代数据库一定会提供除可串行化以外的其他隔离级别供用户使用，让用户调节隔离级别的选项，这样做的根本目的是让用户可以调节数据库的加锁方式，取得隔离性与吞吐量之间的平衡。
 可重复读 可串行化的下一个隔离级别是可重复读（Repeatable Read）。可重复读的意思就是对事务所涉及到的数据加读锁和写锁，并且一直持续到事务结束，但不再加范围锁。
@@ -1528,9 +1549,7 @@ SELECT user,authentication_string,plugin,host FROM mysql.user; 在输出中
       <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid>
       <description>Mysql无法远程访问 在使用navicat远程连接阿里云的时候，出现“2003 can t connect to mysql server on 10061”错误
 经过艰难的谷歌百度stackflow后，发现是3306端口没有监听外部连接，只接收内部ip访问。
-解决方案  首先保证阿里云服务器3306端口开放 使用netstat -ntpl |grep 3306命令查看3306端口状态 tcp 0 0 127.0.0.1:22 0.0.0.0:* LISTEN -
-可看出只接收内部访问 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf) 将bind-address = 127.0.0.1改成bind-address = 0.0.0.0 再次使用netstat -ntpl |grep 3306命令查看 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN -
-此时3306端口开始监听所有网络访问 **如果是ipv6主机，则改为 bind-address = :: ,表示监听所有网络**  主机&amp;rsquo;xxx.xx.xxx.xxx&amp;rsquo;不允许连接到此MySQL服务器 在进行连接ipv6主机的时候出现了如下问题：django.db.utils.InternalError: (1130, &amp;ldquo;Host &amp;lsquo;2409:8930:1450:316:6179:c54:5901:2f2b&amp;rsquo; is not allowed to connect to this MySQL server&amp;rdquo;) 解决方法如下：
+解决方案  首先保证阿里云服务器3306端口开放 使用netstat -ntpl |grep 3306命令查看3306端口状态 tcp 0 0 127.0.0.1:22 0.0.0.0:* LISTEN - 可看出只接收内部访问 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf) 将bind-address = 127.0.0.1改成bind-address = 0.0.0.0 再次使用netstat -ntpl |grep 3306命令查看 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN - 此时3306端口开始监听所有网络访问 **如果是ipv6主机，则改为 bind-address = :: ,表示监听所有网络**  主机&amp;rsquo;xxx.xx.xxx.xxx&amp;rsquo;不允许连接到此MySQL服务器 在进行连接ipv6主机的时候出现了如下问题：django.db.utils.InternalError: (1130, &amp;ldquo;Host &amp;lsquo;2409:8930:1450:316:6179:c54:5901:2f2b&amp;rsquo; is not allowed to connect to this MySQL server&amp;rdquo;) 解决方法如下：
 mysql&amp;gt; CREATE USER &amp;#39;monty&amp;#39;@&amp;#39;localhost&amp;#39; IDENTIFIED BY &amp;#39;some_pass&amp;#39;; mysql&amp;gt; GRANT ALL PRIVILEGES ON *.</description>
     </item>
     
@@ -1876,20 +1895,6 @@ from pylab import * plot(X,C) plot(X,S) show() &amp;lt;Figure size 640x480 with 
     </item>
     
     <item>
-      <title>怎样从本地现有代码新建一个库</title>
-      <link>http://yangchnet.github.io/Dessert/posts/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/git/%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%BA%93/</guid>
-      <description>怎样从本地现有代码新建一个库  在本地代码目录初始化git  git init 然后将代码添加到仓库中  git add . #这里是添加了当前目录所有的文件 提交代码到本地库中  git commit -m &amp;#34;这里是提交的注释&amp;#34;  接下来我们需要在github上新建一个库，比如说新库的名字为hello
-  将本地的仓库关联到github上
-  git remote add origin https://github.com/yourname/hello 上传之前，先要拉取远程的相关信息  git pull origin master 最后上传  git push -u origin master 遇到的问题  来自 https://github.com/yangchnet/Mygolang * branch master -&amp;gt; FETCH_HEAD fatal: 拒绝合并无关的历史
- 解决方案 首先将远程仓库和本地仓库关联起来：
-git branch --set-upstream-to=origin/master master 然后使用git pull整合远程仓库和本地仓库，
-git pull --allow-unrelated-histories (忽略版本不同造成的影响) </description>
-    </item>
-    
-    <item>
       <title>数据库表结构说明&amp;&amp;远程访问说明</title>
       <link>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -2088,15 +2093,6 @@ var w io Wirter w = os.Stdout rw := w.</description>
       
       <guid>http://yangchnet.github.io/Dessert/posts/readme/</guid>
       <description>Tem 这里存储我个人网站的markdown文件，并通过hugo生成静态文件，我的个人网站在这里，欢迎访问😊😘。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/todo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/todo/</guid>
-      <description> golang append golang range  </description>
     </item>
     
     <item>
