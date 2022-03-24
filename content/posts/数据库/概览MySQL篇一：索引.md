@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "Mysql:锁"
+title: "概览MySQL篇一：索引"
 date: "2022-03-22"
 tags: ["mysql"]
 categories: ["数据库"]
