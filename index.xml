@@ -9,7 +9,16 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 23 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux下的用户和用户组管理</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</guid>
+      <description>#解锁用户[root@localhost ~]# usermod -U lamp[root@localhost ~]# grep &amp;quot;lamp&amp;quot; /etc/shadowlamp:$6$YrPj8g0w$ChRVASybEncU24hkYFqxREH3NnzhAVDJSQLwRwTSbcA2N8UbPD9bBKVQSkyxlaMGs/Eg5AQwO.UokOnKqaHFa/:15711:0:99999:7::: #取消了密码字段前的 &amp;quot;!</description>
+    </item>
+    
     <item>
       <title>概览MySQL篇二：日志</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%97%A5%E5%BF%97/</link>
