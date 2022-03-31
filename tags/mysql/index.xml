@@ -11,6 +11,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 23 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>概览MySQL篇三：锁、事务和隔离</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%89%E9%94%81/</link>
+      <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%89%E9%94%81/</guid>
+      <description>MySQL中的隔离级别 见本地事务的隔离
+事务隔离的实现 事务之间的隔离是如何实现的?
+在 MySQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上的最新值，通过回滚操作，都可以得到前一个状态的值。
+假设一个值从 1 被按顺序改成了 2、3、4，在回滚日志里面就会有类似下面的记录。
+当前值是 4，但是在查询这条记录的时候，不同时刻启动的事务会有不同的 read-view。如图中看到的，在视图 A、B、C 里面，这一个记录的值分别是 1、2、4，同一条记录在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。对于 read-view A，要得到 1，就必须将当前值依次执行图中所有的回滚操作得到。
+但这种回滚日志不能一直保留，当系统判断，没有事务再需要用到这些回滚日志时，回滚日志会被删除，也即当系统中没有比这个回滚日志更早的read-view时。
+如何尽量避免长事务 为什么要避免长事务？
+长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面它可能用到的回滚记录都必须保留，这就会导致大量占用存储空间。
+在 MySQL 5.5 及以前的版本，回滚日志是跟数据字典一起放在 ibdata 文件里的，即使长事务最终提交，回滚段被清理，文件也不会变小。
+除了对回滚段的影响，长事务还占用锁资源，也可能拖垮整个库。
+如何避免长事务？
+MySQL 的事务启动方式有以下几种：
+  显式启动事务语句， begin 或 start transaction。配套的提交语句是 commit，回滚语句是 rollback。
+  set autocommit=0，这个命令会将这个线程的自动提交关掉。意味着如果你只执行一个 select 语句，这个事务就启动了，而且并不会自动提交。这个事务持续存在直到你主动执行 commit 或 rollback 语句，或者断开连接。
+  因此，建议总是使用 set autocommit=1, 通过显式语句的方式来启动事务。
+但这样会多一次“交互”，针对这个问题，使用commit work and chain 语法。
+在 autocommit 为 1 的情况下，用 begin 显式启动的事务，如果执行 commit 则提交事务。如果执行 commit work and chain，则是提交事务并自动启动下一个事务，这样也省去了再次执行 begin 语句的开销。同时带来的好处是从程序开发的角度明确地知道每个语句是否处于事务中。</description>
+    </item>
+    
+    <item>
       <title>概览MySQL篇二：日志</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%97%A5%E5%BF%97/</link>
       <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
