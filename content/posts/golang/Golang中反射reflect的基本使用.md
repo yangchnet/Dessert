@@ -14,7 +14,7 @@ TocOpen: true
 > Go语音提供了一种机制在运行时更新变量和检查它们的值、调用它们的方法和它们支持的内在操作，但是在编译时并不知道这些变量的具体类型。这种机制被称为反射。反射也可以让我们将类型本身作为第一类的值类型处理。
 
 ## 1. 为何我们需要反射？
-`fmt.Fprintf`函数提供字符串格式化处理逻辑，它可以对任意类型的值格式化并打印，甚至支持用户自定义的类型。  
+`fmt.Fprintf`函数提供字符串格式化处理逻辑，它可以对任意类型的值格式化并打印，甚至支持用户自定义的类型。
 让我们也来尝试实现一个类似功能的函数。为了简单起见，我们的函数只接收一个参数，然后返回和fmt.Sprint类似的格式化后的字符串。我们实现的函数名也叫Sprint。
 这里我们使用switch类型分支来对不同的类型进行处理。
 ```go
@@ -41,15 +41,16 @@ func Sprint(x interface{}) string {
     }
 }
 ```
-但是我们如何处理其它类似`[]float64、map[string][]string`等类型呢？我们当然可以添加更多的测试分支，但是这些组合类型的数目基本是无穷的。还有如何处理`url.Values`等命名的类型呢？虽然类型分支可以识别出底层的基础类型是`map[string][]string`，但是它并不匹配`url.Values`类型，因为它们是两种不同的类型，而且switch类型分支也不可能包含每个类似`url.Values`的类型，这会导致对这些库的循环依赖。   
+但是我们如何处理其它类似`[]float64、map[string][]string`等类型呢？我们当然可以添加更多的测试分支，但是这些组合类型的数目基本是无穷的。还有如何处理`url.Values`等命名的类型呢？虽然类型分支可以识别出底层的基础类型是`map[string][]string`，但是它并不匹配`url.Values`类型，因为它们是两种不同的类型，而且switch类型分支也不可能包含每个类似`url.Values`的类型，这会导致对这些库的循环依赖。
 没有一种方法来检查未知类型的表示方式，我们被卡住了，这就是我们为何需要反射的原因。
 
 ## 2. reflect.Type和reflect.Values
 ![20210522163144](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210522163144.png)
 
 ### 2.1 interface{}和反射
-**接口值**    
-概念上讲一个接口的值，由两部分组成，一个具体的类型和那个类型的值, 它们被称为接口的动态类型和动态值。在Go的概念模型中，一些提供每个类型信息的值被称为`类型描述符`，比如类型的名称和方法。**在一个接口值中，类型部分代表与之相关类型的描述符**。  
+
+**接口值**
+概念上讲一个接口的值，由两部分组成，一个具体的类型和那个类型的值, 它们被称为接口的动态类型和动态值。在Go的概念模型中，一些提供每个类型信息的值被称为`类型描述符`，比如类型的名称和方法。**在一个接口值中，类型部分代表与之相关类型的描述符**。
 下面4个语句中，变量w得到了3个不同的值（第一个和最后一个是相同的）
 ```go
 var w io.Writer
@@ -73,7 +74,7 @@ w = os.Stdout
 ```
 这个赋值过程调用了一个具体类型到接口类型的隐式转换，这和显式的使用`io.Writer(os.Stdout)`是等价的.这个接口值的动态类型被设为`*os.Stdout`指针的类型描述符，它的动态值持有`os.Stdout`的拷贝；这是一个代表处理标准输出的`os.File`类型变量的指针
 ![20210522144134](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210522144134.png)
-调用一个包含`*os.File`类型指针的接口值的`Write`方法，使得`(*os.File).Write`方法被调用。这个调用输出“hello”。   
+调用一个包含`*os.File`类型指针的接口值的`Write`方法，使得`(*os.File).Write`方法被调用。这个调用输出“hello”。
 ```go
 w.Write([]byte("hello"))
 ```
@@ -104,7 +105,7 @@ w = nil
 interface及其`动态类型，动态值`的存在，是Golang中实现反射的前提，理解了接口的动态类型的动态值，就更容易理解反射。反射就是用来检测存储在接口变量内部动态类型，动态值的一种机制。
 
 ### 2.2 类型（Type）
-一个Type表示一个Go类型，它是一个接口:reflect.Type()。   
+一个Type表示一个Go类型，它是一个接口:reflect.Type()。
 函数`reflect.TypeOf`接受任意的`interface{}`类型，并返回对应动态类型的`reflect.Type`:
 ```go
 t := reflect.TypeOf(3)  // a reflect.Type
@@ -125,7 +126,7 @@ fmt.Printf("%T\n", 3) // "int"
 ```
 
 ### 2.3 值（Value）
-一个`reflect.Value`可以持有一个任意类型的值，函数`reflect.ValueOf`接受任意的`interface{}`类型，并返回对应动态类型的`reflect。Value`。   
+一个`reflect.Value`可以持有一个任意类型的值，函数`reflect.ValueOf`接受任意的`interface{}`类型，并返回对应动态类型的`reflect。Value`。
 与`reflect.TypeOf`类似，`reflect.ValueOf`返回的结果也是对于具体的类型，但是`reflect.Value`也可以持有一个接口值。
 ```go
 v := reflect.ValueOf(3) // a reflect.Value
@@ -151,7 +152,7 @@ fmt.Printf("%d\n", i) // "3"
 一个 `reflect.Value` 和 `interface{}` 都能保存任意的值. 所不同的是, 一个空的接口隐藏了值对应的表示方式和所有的公开的方法, 因此只有我们知道具体的动态类型才能使用类型断言来访问内部的值(就像上面那样), 对于内部值并没有特别可做的事情. 相比之下, 一个 `Value` 则有很多方法来检查其内容, 无论它的具体类型是什么.
 
 ### 2.4 再次尝试format.Any
-我们使用 `reflect.Value` 的 `Kind` 方法来替代之前的类型switch. 虽然还是有无穷多的类型, 但是它们的`kinds`类型却是有限的: Bool, String 和 所有数字类型的基础类型; Array 和 Struct 对应的聚合类型; Chan, Func, Ptr, Slice, 和 Map 对应的引用类似; 接口类型; 还有表示空值的无效类型. (空的 reflect.Value 对应 Invalid 无效类型.   
+我们使用 `reflect.Value` 的 `Kind` 方法来替代之前的类型switch. 虽然还是有无穷多的类型, 但是它们的`kinds`类型却是有限的: Bool, String 和 所有数字类型的基础类型; Array 和 Struct 对应的聚合类型; Chan, Func, Ptr, Slice, 和 Map 对应的引用类似; 接口类型; 还有表示空值的无效类型. (空的 reflect.Value 对应 Invalid 无效类型.
 `reflect.Value.Kind()`返回`reflect.Value`的基类型。即对应类型的底层表示。
 ```go
 var f func(string)int
@@ -208,7 +209,7 @@ func formatAtom(v reflect.Value) string {
 上面提到的 `reflect.TypeOf` 和 `reflect.ValueOf` 函数就能完成这里的转换，如果我们认为 Go 语言的类型和反射类型处于两个不同的世界，那么这两个函数就是连接这两个世界的桥梁。
 ![20210522164336](https://raw.githubusercontent.com/lich-Img/blogImg/master/img20210522164336.png)
 请看以下例子：
-```go  
+```go
 author := "Bob"
 fmt.Println("TypeOf author:", reflect.TypeOf(author))  // TypeOf author: string
 
@@ -224,7 +225,7 @@ fmt.Println("ValueOf author:", reflect.ValueOf(author)) // ValueOf author: Bob
 
 ### 3.2 从反射对象可以获取`interface{}`变量
 既然能够将接口类型的变量转换成反射对象，那么一定需要其他方法将反射对象还原成接口类型的变量，`reflect`包中的`reflect.Value.Interface`就能完成这项工作：
-```go  
+```go
 v := reflect.ValueOf(3) // a reflect.Value
 x := v.Interface() // an interface{}
 i := x.(int) // an int
@@ -238,7 +239,7 @@ fmt.Printf("%d\n", i) // "3"
 
 ### 3.3 要修改反射对象，其值必须可设置
 假如我们想要更新一个`reflect.Value`,那么它持有的值一定是可以被更新的，假设有如下代码：
-```go  
+```go
 i := 1
 v := reflect.ValueOf(i)
 v.SetInt(10)
@@ -247,7 +248,7 @@ fmt.Println(i) // panic: reflect: reflect.flag.mustBeAssignable using unaddressa
 运行上述代码会导致程序崩溃并报出 “reflect: reflect.flag.mustBe Assignableusing unaddressable value” 错误，仔细思考一下就能够发现出错的原因：由于 Go 语言的函数调用都是传值的，所以我们得到的反射对象跟最开始的变量没有任何关系，那么直接修改反射对象无法改变原始变量，程序为了防止错误就会崩溃。
 
 想要修改原变量只能使用如下方法：
-```go  
+```go
 i := 1
 v := reflect.ValueOf(&i)
 v.Elem().SetInt(10)
@@ -257,9 +258,9 @@ fmt.Println(i)
 
 ## 4. reflect场景实践
 
-1. 动态调用函数(无参数)  
+1. 动态调用函数(无参数)
 
-```go  
+```go
 type T struct {}
 
 func main() {
@@ -275,7 +276,7 @@ func (t *T) Do() {
 
 2. 动态调用函数(有参数)
 
-```go  
+```go
 type T struct{}
 
 func main() {
@@ -295,7 +296,7 @@ func (t *T) Do(a int, b string) {
 3. 处理返回值中的错误
 
 返回值也是 Value 类型，对于错误，可以转为 interface 之后断言
-```go  
+```go
 type T struct{}
 
 func main() {
@@ -312,7 +313,7 @@ func (t *T) Do() (string, error) {
 
 4. struct tag 解析
 
-```go  
+```go
 type T struct {
     A int    `json:"aaa" test:"testaaa"`
     B string `json:"bbb" test:"testbbb"`
@@ -337,7 +338,7 @@ func main() {
 
 5. 类型转换和赋值
 
-```go  
+```go
 type T struct {
     A int    `newT:"AA"`
     B string `newT:"BB"`
@@ -367,12 +368,12 @@ func main() {
     }
 
     fmt.Println(newT)
-}  
+}
 ```
 
 6. 通过 kind（）处理不同分支
 
-```go  
+```go
 func main() {
     a := 1
     t := reflect.TypeOf(a)
@@ -387,7 +388,7 @@ func main() {
 
 7. 判断实例是否实现了某接口
 
-```go  
+```go
 type IT interface {
     test1()
 }
@@ -407,13 +408,16 @@ func main() {
 ```
 
 ## Reference
-《The Go Programmer Language》   
-[Golang的反射reflect深入理解和示例](https://juejin.cn/post/6844903559335526407)    
-[Go 语言设计与实现](https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/)    
-[《Go学习笔记 . 雨痕》反射](https://www.cnblogs.com/52php/p/6340487.html)    
-[Go Reflect 高级实践](https://segmentfault.com/a/1190000016230264)     
-[Package reflect](https://golang.org/pkg/reflect)     
-这是一个测试
+《The Go Programmer Language》
+[Golang的反射reflect深入理解和示例](https://juejin.cn/post/6844903559335526407)
+
+[Go 语言设计与实现](https://draveness.me/golang/docs/part2-foundation/ch04-basic/golang-reflect/)
+
+[《Go学习笔记 . 雨痕》反射](https://www.cnblogs.com/52php/p/6340487.html)
+
+[Go Reflect 高级实践](https://segmentfault.com/a/1190000016230264)
+
+[Package reflect](https://golang.org/pkg/reflect)
 
 
 

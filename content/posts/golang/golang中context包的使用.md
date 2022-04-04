@@ -15,13 +15,16 @@ TocOpen: true
 
 `WithCancel`, `WithDeadline`, `WithTimeout`接收一个`Context`对象（父对象），并返回其父对象的一个携带有`cancel/deadline/timeout`的一个拷贝（子对象）。调用`CancelFunc`会取消其子对象及子对象的子对象等，删除父对象对子对象的引用，并停止所有关联的计时器。未能调用`CancelFunc`将造成父对象结束前或计时器被触发前子对象的泄露。使用`go vet`工具可以检查所有控制流路径上是否都使用了`CancelFunc`
 
-使用`context`的程序应遵循以下规则，以使各个包之间的接口保持一致，并启用静态分析工具来检查上下文传播：    
+使用`context`的程序应遵循以下规则，以使各个包之间的接口保持一致，并启用静态分析工具来检查上下文传播：
+
 1. 不要将`context`存储在结构类型中，而是将`context`明确传递给需要它的每个函数。`Context`应该是第一个函数，通常命名为`ctx`。
+
 ```go
 func DoSomething(ctx context.Context, arg Arg) error {
     // ...use ctx...
 }
 ```
+
 2. 不要传递一个值为nil的`context`，即使一个函数允许这样做。如果你不确定`Context`的作用那就请传递`context.TODO`。
 3. 只在进程和API间传递请求范围数据时使用`context`值，不要用于将可选参数传递给函数。
 4. 同样的`Context`可以传递给运行在不同`goroutine`中的函数，`Context`是线程安全的。
@@ -46,8 +49,8 @@ type Context interface {
   `Deadline()`方法返回持有这个`context`的函数的预期结束时间。如果并没有设置`deadline`，那么返回的`ok`将被设置为`false`。
 
 - Value(key interface{}) interface{}
-  `Value()`方法返回与此`context`关联的`key`，如果没有与`key`对应的值那么返回nil。   
-  `key`可以是任何支持比较的类型，为了避免冲突，应将`key`定义为不可导出的。   
+  `Value()`方法返回与此`context`关联的`key`，如果没有与`key`对应的值那么返回nil。
+  `key`可以是任何支持比较的类型，为了避免冲突，应将`key`定义为不可导出的。
   示例：
   ```go
   package user
@@ -72,9 +75,9 @@ type Context interface {
 ## 3. Context构造
 构造一个`context`对象有两种方法。
 ```go
-func Background() Context 
+func Background() Context
 
-func TODO() Context 
+func TODO() Context
 ```
 上面两个方法都会返回一个非nil，非空的`Context`对象。`Background()`一般用于构造出最初的`Context`，所有的`Context`都派生自它。`TODO()`用当传入的方法不确定是哪种类型的`Context`时，为了避免`Context`参数为nil而初始化的`Context`。
 
@@ -84,9 +87,9 @@ func TODO() Context
 ## 4. context.With...
 ### 4.1 context.WithCancel()
 ```go
-func WithCancel(parent Context) (ctx Context, cancel CancelFunc) 
+func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
 ```
-`WithCancel`接收一个父`context`并返回该父`context`的一个持有`Done channel`的子`context`和一个`cancel`方法，当`cancel`方法被调用时或是父`context`的`Done channel`被关闭时，当前`context`的`Done channel`将被关闭。  
+`WithCancel`接收一个父`context`并返回该父`context`的一个持有`Done channel`的子`context`和一个`cancel`方法，当`cancel`方法被调用时或是父`context`的`Done channel`被关闭时，当前`context`的`Done channel`将被关闭。
 
 `WithCancel`常被用于通知`goroutine`退出。
 ```go
@@ -123,7 +126,7 @@ func main() {
 
 ### 4.2 context.WithValue()
 ```go
-func WithValue(parent Context, key, val interface{}) Context 
+func WithValue(parent Context, key, val interface{}) Context
 ```
 `WithValue`方法接收一个父`context`，以及一个键值对，返回一个包含这个键值对的子`context`。可使用`context.Value(key)`方法取出其中保存的值。
 ```go
@@ -272,11 +275,16 @@ func main() {
 
 
 ## Reference
-[Package context](https://golang.org/pkg/context/)     
-[Go Concurrency Patterns: Context](https://blog.golang.org/context)    
-[Golang Context深入理解](https://juejin.cn/post/6844903555145400334)   
-[Golang Context 原理与实战](https://segmentfault.com/a/1190000022534841)    
-[Go 语言设计与实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-context/)    
+
+[Package context](https://golang.org/pkg/context/)
+
+[Go Concurrency Patterns: Context](https://blog.golang.org/context)
+
+[Golang Context深入理解](https://juejin.cn/post/6844903555145400334)
+
+[Golang Context 原理与实战](https://segmentfault.com/a/1190000022534841)
+
+[Go 语言设计与实现](https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-context/)
 
 
 

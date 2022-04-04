@@ -29,12 +29,12 @@ Go中的模板附带两个包text/template和html/template。文本包允许我�
 
 ### 2. 控制结构
 
-控制结构确定模板的控制流程，有助于产生结构化的输出，以下是模板中的一些控制结构  
-**if语句**  
+控制结构确定模板的控制流程，有助于产生结构化的输出，以下是模板中的一些控制结构
+**if语句**
 ```html
 {{ if .condition }} {{ else }} {{ end }}
 ```
-循环块  
+循环块
 ```html
 {{ range .Items }} {{ end }}
 ```
@@ -60,56 +60,57 @@ if err != nil {
 
 ### 1. 访问数据
 
-要访问传递的数据，使用点```.```，如下所示：  
+要访问传递的数据，使用点```.```，如下所示：
 ```
 {{ .data }}
 ```
 
 ### 2. 解析文本模板
 
-现在，来解析一个文本模板  
+现在，来解析一个文本模板
 ```go
 package main
- 
+
 import (
     "os"
     "text/template"
 )
- 
+
 type User struct {
     Name    string
     Bio     string
 }
- 
+
 func main() {
     u := User{"John", "a regular user"}
- 
+
     ut, err := template.New("users").Parse("The user is {{ .Name }} and he is {{ .Bio }}.")
-     
+
     if err != nil {
         panic(err)
     }
- 
+
     err = ut.Execute(os.Stdout, u)
- 
+
     if err != nil {
         panic(err)
     }
 }
 ```
 
-其输出如图所示：  
+其输出如图所示：
+
 ![](https://cdn.golangdocs.com/wp-content/uploads/2020/01/string-template-parse.png)
 
 ### 3. 解析HTML模板
 
-> hello.html   
+> hello.html
 
 ```html
 <h1>Go templates</h1>
 <p>The user is {{ .Name }}</p>
 <h2>Skills:</h2>
-{{ range .Skills }} 
+{{ range .Skills }}
     <p>{{ . }}</p>
 {{ end }}
 ```
@@ -118,19 +119,19 @@ func main() {
 
 ```go
 package main
- 
+
 import (
     "os"
     "html/template"
 )
- 
+
 func main() {
     t, err := template.ParseFiles("templates/hello.gohtml")
- 
+
     if err != nil {
         panic(err)
     }
- 
+
     data := struct {
         Name string
         Skills []string
@@ -142,9 +143,9 @@ func main() {
             "Python",
         },
     }
- 
+
     err = t.Execute(os.Stdout, data)
- 
+
     if err != nil {
         panic(err)
     }
@@ -152,7 +153,7 @@ func main() {
 ```
 
 
-则结果：  
+则结果：
 ![](https://cdn.golangdocs.com/wp-content/uploads/2020/01/html-template-parsing-1.png)
 
 ## Go中的模板验证

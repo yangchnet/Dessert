@@ -19,7 +19,7 @@ go get github.com/kyleconroy/sqlc/cmd/sqlc
 ##### 建立基本项目结构
 
 ```sh
-mkdir sqlc-demo  
+mkdir sqlc-demo
 
 cd sqlc-demo
 
@@ -72,7 +72,7 @@ CREATE TABLE "transfers" (
 ```yaml
 version: 1
 packages:
-  - name: "db" # 生成文件的包名 
+  - name: "db" # 生成文件的包名
     path: "db/sqlc"  # 生成的文件位置
     engine: "postgresql" # 数据库驱动引擎
     schema: "./db/schema/" # 数据库表结构

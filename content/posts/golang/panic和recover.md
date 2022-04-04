@@ -13,14 +13,14 @@ TocOpen: true
 func panic(v interface{})
 ```
 在通常情况下，函数向其调用方报告错误都是返回一个error类型，但有时会遇到致命（即会让程序崩溃）的错误时，显然无法通过返回error进行处理。这时我们使用panic函数来报告致命错误。
- 
+
 当panic异常发生时，程序会中断运行，并立即执行在该goroutine中被defer的函数。随后，程序崩溃并输出日志信息（panic value和函数调用的堆栈信息）。在Go的panic机制中，延迟函数的调用在释放堆栈信息之前.
 
 panic的来源：
     1. 运行时panic异常
     2. 直接调用内置的panic函数
-   
-例子：  
+
+例子：
 ```go
 func main(){
 	fmt.Println("main start")
@@ -74,7 +74,7 @@ func innerFunc(){
 // 程序正常结束
 main start
 out start
-internal error:an intended fatal error 
+internal error:an intended fatal error
 out end
 main end
 ```
