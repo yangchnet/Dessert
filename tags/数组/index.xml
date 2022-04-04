@@ -18,8 +18,7 @@
       <guid>http://yangchnet.github.io/Dessert/posts/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>1. 长度  数组
  对于数组来说，它的长度是固定的，并且数组的长度是其类型的一部分，即对于以下两个数组来说，他们是不同的类型。
-var a [5]int var b [6]int fmt.Printf(&amp;#34;%v&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： false 数组的长度必须是常量表达式，因为数组的长度需要在编译阶段确定。
-对于数组来说，由于其长度是固定的，因此不能添加或删除元素。
+var a [5]int var b [6]int fmt.Printf(&amp;#34;%v&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： false 数组的长度必须是常量表达式，因为数组的长度需要在编译阶段确定。 对于数组来说，由于其长度是固定的，因此不能添加或删除元素。
  切片
  而对于切片，其长度是不固定的，不同长度的切片，只要其元素类型相同，则它们就是相同的切片类型。
 a := make([]int, 5) b := make([]int, 6) fmt.Printf(&amp;#34;%v\n&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： true 如果切片操作超出cap(s)的上限将导致一个panic异常，但是超出len(s)则是意味着扩展了 slice，因为新slice的长度会变大：
