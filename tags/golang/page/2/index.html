@@ -35,15 +35,15 @@ func main(){ fmt.Println("main start") outerFunc() fmt.Println("main end") } fun
 1. 使用flag包的基本流程 使用flag包涉及三个步骤：
 定义变量以捕获标志值 定义Go应用程序将使用的标志 在执行时解析提供给应用程序的标志。 flag软件包中的大多数功能都与定义标志并将其绑定到定义的变量有关。解析阶段由Parse()函数处理。
 一个例子 创建一个程序，该程序定义一个布尔标志，该标志会更改将打印到标准输出的消息。如果-color提供了一个标志，程序将以蓝色打印一条消息。如果未提供标志，则消息将被打印为没有任何颜色。
-// boolean.go import ( "flag" "fmt" ) type Color string // 定义变量以捕获标志值 const ( ColorBlack Color = "\u001b[30m" ColorRed = "\u001b[31m" ColorGreen = "\u001b[32m" ColorYellow = "\u001b[33m" ColorBlue = "\u001b[34m" ColorReset = "\u001b[0m" ) func colorize(color Color, message string) { fmt.Println(string(color), message, string(ColorReset)) } func main() { useColor := flag.Bool("color", false, "display colorized output") // 定义Go应用程序将使用的标志 flag....</p></section><footer class=entry-footer><span title="2021-02-25 00:00:00 +0000 UTC">February 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Flag包的基本用法" href=http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>goget没反应</h2></header><section class=entry-content><p>直接干终极方案: go env -w GOPROXY=https://goproxy.cn,direct
-go get 没反应 修改hosts，然后reboot 添加
+// boolean.go import ( "flag" "fmt" ) type Color string // 定义变量以捕获标志值 const ( ColorBlack Color = "\u001b[30m" ColorRed = "\u001b[31m" ColorGreen = "\u001b[32m" ColorYellow = "\u001b[33m" ColorBlue = "\u001b[34m" ColorReset = "\u001b[0m" ) func colorize(color Color, message string) { fmt.Println(string(color), message, string(ColorReset)) } func main() { useColor := flag.Bool("color", false, "display colorized output") // 定义Go应用程序将使用的标志 flag....</p></section><footer class=entry-footer><span title="2021-02-25 00:00:00 +0000 UTC">February 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to Flag包的基本用法" href=http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>go get代理方案</h2></header><section class=entry-content><p>直接干终极方案: go env -w GOPROXY=https://goproxy.cn,direct
+修改hosts，然后reboot
+添加
 192.30.253.112 github.com 151.101.185.194 github.global.ssl.fastly.net 到/etc/hosts 然后reboot
 go get golang.org 在使用go get golang.org/...时，总是time out（就算fp也一样，fp之后可以访问golang.org），不知道为啥。
-幸好github上存在golang.org的镜像
-例如
+幸好github上存在golang.org的镜像 例如
 go get -u golang.org/x/net 那么这个包的位置在github上就是github.com/golang/net, 所以，我们可以手动建立golang.org/x/目录，并切换到该目录下，然后使用
 git clone https://github.com/golang/net.git **注意：**要使用git clone命令，直接下载下来复制到目录下会提示找不到版本号。
-终极方案 go env -w GOPROXY=https://goproxy.cn,direct</p></section><footer class=entry-footer><span title="2021-02-25 00:00:00 +0000 UTC">February 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to goget没反应" href=http://yangchnet.github.io/Dessert/posts/golang/go-get-%E6%B2%A1%E5%8F%8D%E5%BA%94/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=http://yangchnet.github.io/Dessert/tags/golang/>« Prev Page</a>
+终极方案 go env -w GOPROXY=https://goproxy.cn,direct</p></section><footer class=entry-footer><span title="2021-02-25 00:00:00 +0000 UTC">February 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to go get代理方案" href=http://yangchnet.github.io/Dessert/posts/golang/go-get%E4%BB%A3%E7%90%86%E6%96%B9%E6%A1%88/></a></article><footer class=page-footer><nav class=pagination><a class=prev href=http://yangchnet.github.io/Dessert/tags/golang/>« Prev Page</a>
 <a class=next href=http://yangchnet.github.io/Dessert/tags/golang/page/3/>Next Page »</a></nav></footer></main><footer class=footer><span>&copy; 2022 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
 <script src=https://utteranc.es/client.js repo=yangchnet/Dessert issue-term=pathname theme=github-light crossorigin=anonymous async></script><span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
