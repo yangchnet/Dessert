@@ -9,7 +9,33 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 06 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>manjaro初始化</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
+      <description>proxy 见：https://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/
+系统更新 首先要换源
+sudo pacman-mirrors -i -c China -m rank 在弹出的窗口中选择你要切换的源。
+然后
+sudo pacman -Syyu 安装yay包管理
+sudo pacman -S yay vim 配置 见：https://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/
+输入法配置 安装fcitx5（输入法框架）
+yay -S fcitx5-im 配置fcitx5的环境变量：
+vim ~/.pam_environment 内容为：
+GTK_IM_MODULE DEFAULT=fcitx QT_IM_MODULE DEFAULT=fcitx XMODIFIERS DEFAULT=\@im=fcitx SDL_IM_MODULE DEFAULT=fcitx 安装fcitx5-rime（输入法引擎）
+yay -S fcitx5-rime 安装rime-cloverpinyin（输入方案）
+yay -S rime-cloverpinyin 如果出现问题可能还需要做下面这步：
+yay -S base-devel 创建并写入rime-cloverpinyin的输入方案：
+vim ~/.local/share/fcitx5/rime/default.custom.yaml 内容为：
+patch: &amp;#34;menu/page_size&amp;#34;: 5 schema_list: - schema: clover  可参考：https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux
+ 配置主题
+参考：https://github.com/hosxy/Fcitx5-Material-Color
+配置命令行工具 见：https://yangchnet.</description>
+    </item>
+    
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>

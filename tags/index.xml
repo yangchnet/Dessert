@@ -9,7 +9,25 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>install</title>
+      <link>http://yangchnet.github.io/Dessert/tags/install/</link>
+      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/install/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>manjaro</title>
+      <link>http://yangchnet.github.io/Dessert/tags/manjaro/</link>
+      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/manjaro/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Dockerfile</title>
       <link>http://yangchnet.github.io/Dessert/tags/dockerfile/</link>
@@ -313,15 +331,6 @@
       <pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/windows/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>install</title>
-      <link>http://yangchnet.github.io/Dessert/tags/install/</link>
-      <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/install/</guid>
       <description></description>
     </item>
     
