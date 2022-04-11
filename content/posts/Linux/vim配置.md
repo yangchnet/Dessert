@@ -67,7 +67,7 @@ call plug#end()
 ```sh
 git clone https://github.com/tomasr/molokai.git
 
-cd molokai && mv colors/molokai.vim ~/.vim/colors
+cd molokai && mv colors/molokai.vim ~/.vim/colors/
 ```
 
 使用主题  
