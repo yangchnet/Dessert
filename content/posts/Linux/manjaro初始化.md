@@ -123,6 +123,18 @@ yay -S linuxqq
 
 或`icalingua`(自行在github搜索)
 
+## Virtualbox
+
+```sh
+sudo pacman -S virtualbox
+
+sudo pacman -S linux-headers  # 安装对应自己内核版本的一个
+
+sudo pacman -S virtualbox-host-dkms
+
+sudo modprobe vboxdrv
+```
+
 
 ## Reference
 
