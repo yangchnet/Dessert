@@ -26,14 +26,12 @@ sudo pacman -S yay vim 配置 见：https://yangchnet.github.io/Dessert/posts/li
 yay -S fcitx5-im 配置fcitx5的环境变量：
 vim ~/.pam_environment 内容为：
 GTK_IM_MODULE DEFAULT=fcitx QT_IM_MODULE DEFAULT=fcitx XMODIFIERS DEFAULT=\@im=fcitx SDL_IM_MODULE DEFAULT=fcitx 安装fcitx5-rime（输入法引擎）
-yay -S fcitx5-rime 安装rime-cloverpinyin（输入方案）
+yay -S fcitx5-rime 安装fcitx5-gtk
+yay -S fcitx5-gtk # 不装的话，部分软件可能会出现不能输入中文的情况 安装rime-cloverpinyin（输入方案）
 yay -S rime-cloverpinyin 如果出现问题可能还需要做下面这步：
 yay -S base-devel 创建并写入rime-cloverpinyin的输入方案：
 vim ~/.local/share/fcitx5/rime/default.custom.yaml 内容为：
-patch: &amp;#34;menu/page_size&amp;#34;: 5 schema_list: - schema: clover  可参考：https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux
- 配置主题
-参考：https://github.com/hosxy/Fcitx5-Material-Color
-配置命令行工具 见：https://yangchnet.</description>
+patch: &amp;#34;menu/page_size&amp;#34;: 5 schema_list: - schema: clover  可参考：https://github.</description>
     </item>
     
     <item>
