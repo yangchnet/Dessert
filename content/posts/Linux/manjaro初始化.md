@@ -62,6 +62,11 @@ SDL_IM_MODULE DEFAULT=fcitx
 yay -S fcitx5-rime
 ```
 
+安装fcitx5-gtk
+```sh
+yay -S fcitx5-gtk # 不装的话，部分软件可能会出现不能输入中文的情况
+```
+
 安装rime-cloverpinyin（输入方案）
 
 ```sh
