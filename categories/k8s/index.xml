@@ -16,7 +16,12 @@
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</guid>
-      <description>1. 准备节点 2. 安装sealyun 3. 安装k8s </description>
+      <description>1. 准备节点 可以使用云服务器，这里我们选择vagrant搭建本地虚拟机节点。
+安装vagrant(需要提前安装virtualbox)
+yay -S vagrant 创建虚拟机
+mkdir ~/vagrant cd ~/vagrant &amp;amp;&amp;amp; mkdir 0.2 0.3 0.4 cd ~/vagrant/0.2 vagrant init bento/centos-7.7 这会在~/vagrant/0.2下创建Vagrantfile，其内容大致为：（省略注释）
+# -*- mode: ruby -*- # vi: set ft=ruby : Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.vm.box = &amp;quot;bento/centos-7.7&amp;quot; end 修改vagrantfile:
+# -*- mode: ruby -*- # vi: set ft=ruby : Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.vm.box = &amp;quot;bento/centos-7.7&amp;quot; # 设置虚拟机ip地址 config.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.0.2&amp;quot; # 设置虚拟机host config.vm.hostname = &amp;quot;node.02&amp;quot; config.vm.provider &amp;quot;virtualbox&amp;quot; do |vb| # Display the VirtualBox GUI when booting the machine vb.</description>
     </item>
     
   </channel>
