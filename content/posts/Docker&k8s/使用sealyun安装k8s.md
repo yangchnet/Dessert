@@ -95,7 +95,7 @@ wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/05a3db657821277f5f3b92d834bb
 
 安装K8s
 ```sh
-# 安装一个三master的kubernetes集群
+# 安装一个单master，两个salve的kubernetes集群
 sealos init --passwd 'vagrant' \
 	--master 192.168.0.2 \
 	--node 192.168.0.3 --node 192.168.0.4 \

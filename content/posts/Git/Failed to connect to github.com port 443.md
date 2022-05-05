@@ -7,7 +7,7 @@ categories: ["Github"]
 ShowToc: true
 TocOpen: true
 ---
-# Github 出现 Failed to connect to github.com port 443: Timed out
+## Github 出现 Failed to connect to github.com port 443: Timed out
 
 ## 1. 问题来由
 可能是由于使用了全局代理的原因
