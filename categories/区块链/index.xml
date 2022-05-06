@@ -72,19 +72,6 @@ truffle create contract Counter truffle创建了Counter.sol文件，再次查看
     </item>
     
     <item>
-      <title>长安链区块链浏览器部署</title>
-      <link>http://yangchnet.github.io/Dessert/posts/env/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</link>
-      <pubDate>Mon, 07 Jun 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/env/%E9%95%BF%E5%AE%89%E9%93%BE%E5%8C%BA%E5%9D%97%E9%93%BE%E6%B5%8F%E8%A7%88%E5%99%A8%E9%83%A8%E7%BD%B2/</guid>
-      <description>前置条件 浏览器部署需要依赖一个ChainMaker运行环境。具体的ChainMaker环境安装部署请参考对应的文档。
-1. 下载源码 mkdir -p ~/chainmaker/chainmaker-explorer \ &amp;amp;&amp;amp; cd ~/chainmaker/chainmaker-explorer \ &amp;amp;&amp;amp; git clone --recursive https://git.chainmaker.org.cn/chainmaker/chainmaker-explorer.git \ &amp;amp;&amp;amp; git clone --recursive https://git.chainmaker.org.cn/chainmaker/chainmaker-explorer-web.git 2. 安装npm及node.js  版本要求： npm&amp;gt;=6.14.13 node.js&amp;gt;=v14.17.0
-  这里推荐使用nvm方式安装
- curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash # 安装nvm nvm --version # 查看nvm是否安装成功 nvm install 14 # 安装node.js v14.17.0 3. 安装nginx  版本要求： nginx&amp;gt;=1.18.0, 这里先暂时用低版本的试试
- apt-get update apt-get install nginx 4. 数据库初始化 mkdir -p ~/chainmaker/chainmaker-explorer/explorer-mysql docker run --name explorerMysql -p 3306:3306 -v ~/chainmaker/chainmaker-explorer/explorer-mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=Yuhu8888 -d mysql:5.</description>
-    </item>
-    
-    <item>
       <title>同质化代币和非同质化代币</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81%E5%92%8C%E9%9D%9E%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81/</link>
       <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
