@@ -9,7 +9,40 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CgroupV2</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/cgroupv2/</link>
+      <pubDate>Thu, 19 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/cgroupv2/</guid>
+      <description>1. Cgroup概览 cgroup是Linux内核提供的一种按层次组织进程，并对进程资源按层次进行分配和限制的机制。
+cgroup 主要由两部分组成——core和controller。core主要负责分层组织进程。 controller负责为属于当前cgroup的进程分配和限制资源.
+多个cgroup以树形结构组织，系统中每个进程都属于一个cgroup，一个进程中的所有线程都属于同一个cgroup。
+controller可以在cgroup上有选择的开启，开启后的controller将影响这个cgroup内的所有进程。
+使用如下命令挂载cgroupv2
+mount -t cgroup2 none $MOUNT_POINT # MOUNT_POINT 是任意你想要挂载到的位置 直接在$MOUNT_POINT创建一个文件夹即可创建一个cgroup
+mkdir $MOUNT_POINT/$GROUP_NAME 每个cgroup内都有一个cgroup.procs接口文件，其中逐行列出了属于当前cgroup的所有进程的PID。需要注意的是，PID可能重复出现且无序。
+若想将某个进程移动到一个cgroup中，只需将其PID写入cgroup.procs文件,进程中的所有线程也会迁移到该cgroup中。fork出的子进程依然属于这个cgroup。
+若要删除一个cgroup，需要注意一点：这个cgroup内需要没有任何子进程且仅与僵尸进程相关联，且没有子cgroup.满足了上述条件后，将其作为一个空目录删除即可,使用rm -rf无法对cgroup目录进行删除。
+rmdir $MOUNT_POINT/$GROUP_NAME /proc/$PID/cgroup中包含一个进程所属的cgroup。
+$ cat /proc/self/cgroup # self表示当前shell进程 0::/user.slice/user-1000.slice/session-2.scope 如果进程成为僵尸进程并且随后删除了与之关联的 cgroup，则将“（已删除）”附加到路径中：
+$ cat /proc/842/cgroup 0::/test-cgroup/test-cgroup-nested (deleted) CgroupV2还支持线程模式
+每个非根 cgroup 都有一个cgroup.events文件，其中包含populated字段，指示 cgroup 的子层次结构中是否有实时进程。 如果 cgroup 及其后代中没有实时进程，则其值为 0； 否则为1.
+例如：考虑如下cgroup结构，括号内数字代表cgroup内进程数：
+A(4) - B(0) - C(1) \ D(0) 则A、B 和 C 的populated字段将为 1，而 D 为 0。在 C 中的一个进程退出后，B 和 C 的populated字段将翻转为“0”，文件修改事件将在两个cgroup的cgroup.</description>
+    </item>
+    
+    <item>
+      <title>Linux中的信号</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</link>
+      <pubDate>Wed, 18 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</guid>
+      <description>1. Linux 中的信号 信号这个概念在很早期的 Unix 系统上就有。它一般会从 1 开始编号，通常来说，信号编号是 1 到 31，这个编号在所有的 Unix 系统上都是一样的。
+   取值 名称 解释 默认动作     1 SIGHUP 挂起    2 SIGINT 中断    3 SIGQUIT 退出    4 SIGILL 非法指令    5 SIGTRAP 断点或陷阱指令    6 SIGABRT abort发出的信号    7 SIGBUS 非法内存访问    8 SIGFPE 浮点异常    9 SIGKILL kill信号 不能被忽略、处理和阻塞   10 SIGUSR1 用户信号1    11 SIGSEGV 无效内存访问    12 SIGUSR2 用户信号2    13 SIGPIPE 管道破损，没有读端的管道写数据    14 SIGALRM alarm发出的信号    15 SIGTERM 终止信号    16 SIGSTKFLT 栈溢出    17 SIGCHLD 子进程退出 默认忽略   18 SIGCONT 进程继续    19 SIGSTOP 进程停止 不能被忽略、处理和阻塞   20 SIGTSTP 进程停止    21 SIGTTIN 进程停止，后台进程从终端读数据时    22 SIGTTOU 进程停止，后台进程想终端写数据时    23 SIGURG I/O有紧急数据到达当前进程 默认忽略   24 SIGXCPU 进程的CPU时间片到期    25 SIGXFSZ 文件大小的超出上限    26 SIGVTALRM 虚拟时钟超时    27 SIGPROF profile时钟超时    28 SIGWINCH 窗口大小改变 默认忽略   29 SIGIO I/O相关    30 SIGPWR 关机 默认忽略   31 SIGSYS 系统调用异常     用一句话来概括，信号（Signal）其实就是 Linux 进程收到的一个通知。这些通知产生的源头有很多种，通知的类型也有很多种。比如下面这几个典型的场景：</description>
+    </item>
+    
     <item>
       <title>使用sealyun安装k8s</title>
       <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</link>

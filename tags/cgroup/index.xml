@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Cgroup on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/cgroup/</link>
+    <description>Recent content in Cgroup on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 19 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/cgroup/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CgroupV2</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/cgroupv2/</link>
+      <pubDate>Thu, 19 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/cgroupv2/</guid>
+      <description>1. Cgroup概览 cgroup是Linux内核提供的一种按层次组织进程，并对进程资源按层次进行分配和限制的机制。
+cgroup 主要由两部分组成——core和controller。core主要负责分层组织进程。 controller负责为属于当前cgroup的进程分配和限制资源.
+多个cgroup以树形结构组织，系统中每个进程都属于一个cgroup，一个进程中的所有线程都属于同一个cgroup。
+controller可以在cgroup上有选择的开启，开启后的controller将影响这个cgroup内的所有进程。
+使用如下命令挂载cgroupv2
+mount -t cgroup2 none $MOUNT_POINT # MOUNT_POINT 是任意你想要挂载到的位置 直接在$MOUNT_POINT创建一个文件夹即可创建一个cgroup
+mkdir $MOUNT_POINT/$GROUP_NAME 每个cgroup内都有一个cgroup.procs接口文件，其中逐行列出了属于当前cgroup的所有进程的PID。需要注意的是，PID可能重复出现且无序。
+若想将某个进程移动到一个cgroup中，只需将其PID写入cgroup.procs文件,进程中的所有线程也会迁移到该cgroup中。fork出的子进程依然属于这个cgroup。
+若要删除一个cgroup，需要注意一点：这个cgroup内需要没有任何子进程且仅与僵尸进程相关联，且没有子cgroup.满足了上述条件后，将其作为一个空目录删除即可,使用rm -rf无法对cgroup目录进行删除。
+rmdir $MOUNT_POINT/$GROUP_NAME /proc/$PID/cgroup中包含一个进程所属的cgroup。
+$ cat /proc/self/cgroup # self表示当前shell进程 0::/user.slice/user-1000.slice/session-2.scope 如果进程成为僵尸进程并且随后删除了与之关联的 cgroup，则将“（已删除）”附加到路径中：
+$ cat /proc/842/cgroup 0::/test-cgroup/test-cgroup-nested (deleted) CgroupV2还支持线程模式
+每个非根 cgroup 都有一个cgroup.events文件，其中包含populated字段，指示 cgroup 的子层次结构中是否有实时进程。 如果 cgroup 及其后代中没有实时进程，则其值为 0； 否则为1.
+例如：考虑如下cgroup结构，括号内数字代表cgroup内进程数：
+A(4) - B(0) - C(1) \ D(0) 则A、B 和 C 的populated字段将为 1，而 D 为 0。在 C 中的一个进程退出后，B 和 C 的populated字段将翻转为“0”，文件修改事件将在两个cgroup的cgroup.</description>
+    </item>
+    
+  </channel>
+</rss>
