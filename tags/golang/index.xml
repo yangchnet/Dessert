@@ -9,7 +9,28 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go汇编之定义基本数据类型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E6%B1%87%E7%BC%96%E4%B9%8B%E5%AE%9A%E4%B9%89%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E6%B1%87%E7%BC%96%E4%B9%8B%E5%AE%9A%E4%B9%89%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <description>1. Go汇编基础  这里只介绍本文会用到的语法
+ 4个虚拟寄存器   FP: Frame pointer：伪FP寄存器对应函数的栈帧指针，一般用来访问函数的参数和返回值；golang语言中，函数的参数和返回值，函数中的局部变量，函数中调用子函数的参数和返回值都是存储在栈中的，我们把这一段栈内存称为栈帧（frame），伪FP寄存器对应栈帧的底部，但是伪FP只包括函数的参数和返回值这部分内存，其他部分由伪SP寄存器表示；注意golang中函数的返回值也是通过栈帧返回的，这也是golang函数可以有多个返回值的原因；
+  PC: Program counter：指令计数器，用于分支和跳转，它是汇编的IP寄存器的别名；
+  SB: Static base pointer：一般用于声明函数或者全局变量，对应代码区（text）内存段底部；可认为是内存的起源，所以符号foo(SB)就是名称foo作为内存中的一个地址。这种形式被用于命名全局函数和数据，如果将&amp;lt;&amp;gt;添加到名称中，如foo&amp;lt;&amp;gt;(SB)，则代表此标识符只在当前源文件中可见。可对名称添加偏移量，如foo+4(SB)指foo开头之后的四个字节。
+  SP: Stack pointer：指向当前栈帧的局部变量的开始位置，一般用来引用函数的局部变量，这里需要注意汇编中也有一个SP寄存器，它们的区别是：1.伪SP寄存器指向栈帧（不包括函数参数和返回值部分）的底部，真SP寄存器对应栈的顶部；所以伪SP寄存器一般用于寻址函数局部变量，真SP寄存器一般用于调用子函数时，寻址子函数的参数和返回值（后面会有具体示例演示）；2.当需要区分伪寄存器和真寄存器的时候只需要记住一点：伪寄存器一般需要一个标识符和偏移量为前缀，如果没有标识符前缀则是真寄存器。比如(SP)、+8(SP)没有标识符前缀为真SP寄存器，而a(SP)、b+8(SP)有标识符为前缀表示伪寄存器；
+  所有用户定义的符号都作为偏移量写入伪寄存器 FP（参数和局部变量）和 SB（全局变量）
+常量 Go汇编语言中常量以$美元符号为前缀。常量的类型有整数常量、浮点数常量、字符常量和字符串常量等几种类型。
+$1 // 十进制 $0xf4f8fcff // 十六进制 $1.5 // 浮点数 $&#39;a&#39; // 字符 $&amp;quot;abcd&amp;quot; DATA指令 DATA命令用于初始化包变量，DATA命令的语法如下：
+DATA symbol+offset(SB)/width, value 其中symbol为变量在汇编语言中对应的标识符，offset是符号开始地址的偏移量，width是要初始化内存的宽度大小，value是要初始化的值。其中当前包中Go语言定义的符号symbol，在汇编代码中对应·symbol，其中·中点符号为一个特殊的unicode符号；DATA命令示例如下
+DATA ·Id+0(SB)/1,$0x37 DATA ·Id+1(SB)/1,$0x25 这两条指令的含义是将全局变量Id赋值为16进制数0x2537，也就是十进制的9527； 我们也可以合并成一条指令
+GLOBL 用于将符号导出，例如将全局变量导出（所谓导出就是把汇编中的全局变量导出到go代码中声明的相同变量上，否则go代码中声明的变量感知不到汇编中变量的值的变化），其语法如下：
+GLOBL symbol(SB), width 其中symbol对应汇编中符号的名字，width为符号对应内存的大小；GLOBL命令示例如下： GLOBL ·Id, $8这条指令的含义是导出一个全局变量Id，其大小是8字节（byte）； 结合DATA和GLOBL指令，我们就可以初始化并导出一个全局变量.例如：
+GLOBL ·Id, $8 DATA ·Id+0(SB)/8,$0x12345 2.</description>
+    </item>
+    
     <item>
       <title>一份好用的golang应用Dockerfile模板</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</link>
