@@ -78,7 +78,7 @@ DATA ·Id+0(SB)/8,$0x12345
 #### int
 文件内容如下:
 
-```s
+```
 // pkg/pkg_amd64.s
 
 #include "textflag.h" // 使用NOPTR标志时必须导入此文件，此文件位置在：$GOROOT/src/runtime/textflag.h
@@ -114,7 +114,7 @@ func main() {
 
 #### float
 
-```s
+```
 // pkg/pkg_amd64.s
 
 #include "textflag.h"
@@ -140,7 +140,7 @@ type stringStruct struct {
 ```
 因此，我们需要首先定义字符数据，再将字符串的str指向这个字符数据
 
-```s
+```
 // pkg/pkg_amd64.s
 
 GLOBL NameData<>(SB),NOPTR,$8
@@ -159,7 +159,7 @@ var MyString string
 
 #### bool
 
-```s
+```
 // pkg/pkg_amd64.s
 
 GLOBL ·MyBool(SB),NOPTR,$1
@@ -174,7 +174,7 @@ var MyBool bool
 
 #### *int
 
-```s
+```
 // 首先定义一个int变量
 GLOBL IntData<>(SB),NOPTR,$8
 DATA IntData<>(SB)/8,$9876
@@ -191,7 +191,7 @@ var MyIntPtr *int
 ## 3. 复合数据类型
 
 #### 数组
-```s
+```
 // pkg/pkg_amd64.s
 
 // array [2]int = {12, 34}
@@ -219,7 +219,7 @@ type slice struct {
 
 切片是截取数组的一部分得来的，因此要先定义一个数组，然后将切片的`array`指针指向这个数组的某个偏移
 
-```s
+```
 // pkg/pkg_amd64.s
 
 // 定义三个string临时变量，作为切片元素
@@ -250,17 +250,27 @@ DATA  ·MySlice+16(SB)/8,$4
 ```
 
 上面的切片是截取了全部的数组元素，如果想要从第二个开始截取，可增加偏移：
-```s
+```
 DATA  ·MySlice+0(SB)/8,$strarray<>+16(SB)
 ```
 
-#### map
+#### map/chan
 
-TODO
+map/channel等类型并没有公开的内部结构，它们只是一种未知类型的指针，无法直接初始化。在汇编代码中我们只能为类似变量定义并进行0值初始化：
 
-#### chan
+```go
+var m map[string]int
 
-TODO
+var ch chan int
+```
+
+```
+GLOBL ·m(SB),$8  // var m map[string]int
+DATA  ·m+0(SB)/8,$0
+
+GLOBL ·ch(SB),$8 // var ch chan int
+DATA  ·ch+0(SB)/8,$0
+```
 
 ## References
 
@@ -272,4 +282,4 @@ TODO
 
 [A Quick Guide to Go's Assembler](https://go.dev/doc/asm)
 
-[汇编语言快速入门](https://chai2010.cn/advanced-go-programming-book/ch3-asm/ch3-01-basic.html)
+[Go语言高级编程](https://chai2010.cn/advanced-go-programming-book)
