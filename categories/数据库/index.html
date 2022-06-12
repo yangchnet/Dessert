@@ -29,7 +29,7 @@ binlog对数据进行“存档”，从而可通过binlog对数据进行恢复�
 这两种日志有以下三点不同：
 redo log 是 InnoDB 引擎特有的；binlog 是 MySQL 的 Server 层实现的，所有引擎都可以使用。
 redo log 是物理日志，记录的是“在某个数据页上做了什么修改”；binlog 是逻辑日志，记录的是这个语句的原始逻辑，比如“给 ID=2 这一行的 c 字段加 1 ”。
-redo log 是循环写的，空间固定会用完；binlog 是可以追加写入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志。...</p></section><footer class=entry-footer><span title="2022-03-23 00:00:00 +0000 UTC">March 23, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to 概览MySQL篇二：日志" href=http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%97%A5%E5%BF%97/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>概览MySQL篇一：索引</h2></header><section class=entry-content><p>索引是什么，为何存在，以什么样的结构组织或存储索引? 简单来说，索引是一个目录，用来对数据进行快速的查找。就像一本厚厚的字典，想要查询某个字或者词语，我们固然可以一页页翻阅整本词典，但更好的方式是通过拼音索引或者笔画索引到这条记录。
+redo log 是循环写的，空间固定会用完；binlog 是可以追加写入的。“追加写”是指 binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志。...</p></section><footer class=entry-footer><span title="2022-03-23 00:00:00 +0000 UTC">March 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to 概览MySQL篇二：日志" href=http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%97%A5%E5%BF%97/></a></article><article class="post-entry tag-entry"><header class=entry-header><h2>概览MySQL篇一：索引</h2></header><section class=entry-content><p>索引是什么，为何存在，以什么样的结构组织或存储索引? 简单来说，索引是一个目录，用来对数据进行快速的查找。就像一本厚厚的字典，想要查询某个字或者词语，我们固然可以一页页翻阅整本词典，但更好的方式是通过拼音索引或者笔画索引到这条记录。
 索引可以有效减小查询的资源消耗，但索引不是毫无代价的，大量的创建索引会造成存储空间的损耗，我们要根据业务需求，有目的的创建对业务有帮助的索引。
 在MYSQL的InnoDB引擎中，索引是以B+树的形式存在的。B+树的节点存储在物理页上。
 根据叶子节点的内容，索引类型分为主键索引和非主键索引。
