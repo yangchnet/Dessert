@@ -11,12 +11,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Wed, 23 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MySQL之主备</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87/</link>
+      <title>概览MySQL篇三：主备与高可用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
       <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87/</guid>
-      <description>TODO </description>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</guid>
+      <description>主备的基本原理 在状态 1 中，客户端的读写都直接访问节点 A，而节点 B 是 A 的备库，只是将 A 的更新都同步过来，到本地执行。这样可以保持节点 B 和 A 的数据是相同的。
+当需要切换的时候，就切成状态 2。这时候客户端读写访问的都是节点 B，而节点 A 是 B 的备库。
+那么从状态1切换到状态2的内部流程是什么样的？
+备库 B 跟主库 A 之间维持了一个长连接。主库 A 内部有一个线程，专门用于服务备库 B 的这个长连接。一个事务日志同步的完整过程是这样的：
+ 在备库 B 上通过 change master 命令，设置主库 A 的 IP、端口、用户名、密码，以及要从哪个位置开始请求 binlog，这个位置包含文件名和日志偏移量。 在备库 B 上执行 start slave 命令，这时候备库会启动两个线程，就是图中的 io_thread 和 sql_thread。其中 io_thread 负责与主库建立连接。 主库 A 校验完用户名、密码后，开始按照备库 B 传过来的位置，从本地读取 binlog，发给 B。 备库 B 拿到 binlog 后，写到本地文件，称为中转日志（relay log）。 sql_thread 读取中转日志，解析出日志里的命令，并执行。  binlog 的三种格式对比 主备复制依赖于bin log，那么bin log中是什么内容。</description>
     </item>
     
     <item>
