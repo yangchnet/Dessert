@@ -7,10 +7,10 @@ categories: ["云计算与容器"]
 ShowToc: true
 TocOpen: true
 ---
-# 1、docker的安装（Ubuntu)  
+# 1、docker的安装(Ubuntu)
 
 ### 1.1、 设置存储库
-> 若是已安装旧版本的docker，  
+> 若是已安装旧版本的docker，
 请卸载：sudo apt-get remove docker docker-engine docker.io containerd runc
 
 #### 1.1.1、更新apt索引
@@ -32,9 +32,9 @@ sudo apt-get install \
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
-> 在进行此步时，出现了sudo: unable to resolve host iZ2ze4512bfzoapfvch6btZ，这是因为机器不能反向解析  
-打开主机上的 /etc/hosts  
-添加： 127.0.0.1 【hostname】# 【hostname】用主机名替代  
+> 在进行此步时，出现了sudo: unable to resolve host iZ2ze4512bfzoapfvch6btZ，这是因为机器不能反向解析
+打开主机上的 /etc/hosts
+添加： 127.0.0.1 【hostname】# 【hostname】用主机名替代
 可在/etc/hostname中修改主机名，sudo shutdown -r now重启过后完成主机名修改
 
 验证添加成功：
