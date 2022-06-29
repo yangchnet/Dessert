@@ -104,7 +104,7 @@ func main() {
         u := &User{
                 Name: "tom",
         }
-        f(u)
+        defer f(u)
 
         u.Name = "Alice"
 }
@@ -115,7 +115,7 @@ func f(u *User) {
 ```
 
 ```
-    tom
+    Alice
 ```
 
 ### 2. defer函数的执行顺序与声明顺序相反，类似于栈
