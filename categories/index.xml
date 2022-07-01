@@ -9,7 +9,16 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mq</title>
+      <link>http://yangchnet.github.io/Dessert/categories/mq/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/categories/mq/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Golang</title>
       <link>http://yangchnet.github.io/Dessert/categories/golang/</link>

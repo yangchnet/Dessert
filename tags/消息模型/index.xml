@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>消息模型 on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</link>
+    <description>Recent content in 消息模型 on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 30 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>不同的mq的消息模型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/mq/%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</guid>
+      <description>极客时间《消息队列高手课》笔记
+ 1. 主题和队列 最基本的队列模型，是按照“队列”的数据结构来设计的，即先进先出。生产者发送消息（入队），消费者获取消息（出队）。
+当有多个生产者往同一个队列中发现鸥鸟給消息，则这个队列中可以消费到的消息，就是这些生产者生产的所有消息的合集。消息的顺序就是这些生产者发送消息的自然顺序。如果有多个消费者接收同一个队列的消息，这些消费者之间实际上是竞争的关系，每个消费者只能收到队列中的一部分消息，也就是说任何一条消息只能被其中的一个消费者收到。
+这时候问题就出现了，如果一份消息需要被多个消费者消费，比如，对于一个订单，它需要被风控系统、支付系统等系统消费，显然上述的模型不能满足这个需求。这时候一个可行的解决方案是：为每个消费者创建一个单独的队列，让生产者发送多份。
+但显然这样会浪费较多的资源，同一个消息复制了多份。更重要的是，生产者必须知道有多少个消费者。为每个消费者单独发送一份消息，这实际上违背了消息队列“解耦”这个设计初衷。
+为了解决这个问题，演化出“发布-订阅”(pub-sub)模型。
+在发布-订阅模型中，消息的发送方称为发布者（Publisher），消息的接收方称为订阅者（Subscriber），服务端存放消息的容器称为主题（Topic）。发布者将消息发送到主题中，订阅者在接收消息之前需要先“订阅主题”。“订阅”在这里既是一个动作，同时还可以认为是主题在消费时的一个逻辑副本，每份订阅中，订阅者都可以接收到主题的所有消息。
+当发布-订阅模型中只有一个订阅者时，那它和队列模型就基本上是一样的了。也就是说，发布 - 订阅模型在功能层面上是可以兼容队列模型的。
+2. 常见mq的消息模型 2.1 RabbitMQ的消息模型 RabbitMQ是少数仍坚持使用队列模型的产品之一。
+那么RabbitMQ是如何解决多个消费者的问题呢？
+RabbitMQ有一个Exchange模块，在 RabbitMQ 中，Exchange 位于生产者和队列之间，生产者并不关心将消息发送给哪个队列，而是将消息发送给 Exchange，由 Exchange 上配置的策略来决定将消息投递到哪些队列中。
+同一份消息如果需要被多个消费者来消费，需要配置 Exchange 将消息发送到多个队列，每个队列中都存放一份完整的消息数据，可以为一个消费者提供消费服务。
+2.2 RocketMQ的消息模型 RocketMQ 使用的消息模型是标准的发布-订阅模型
+但是，在 RocketMQ 也有队列（Queue）这个概念，并且队列在 RocketMQ 中是一个非常重要的概念，要了解队列在RocketMQ中的作用，我们首先要了解消息确认机制及其带来的问题
+为了确保消息不会在传递过程中由于网络或服务器故障丢失，消息队列一般采用“请求-确认”机制来确认消息的成功消费。消费者在成功消费一条消息，完成自己的业务逻辑后，会发送确认給消息队列。消息队列只有收到确认后，才认为一条消息被成功消费。
+这种机制很好地保证了消息传递过程中的可靠性，但是其带来另一个问题：在某一条消息被成功消费之前，下一条消息是不能被消费的，否则就会出现消息空洞，违背了有序性这个原则。
+也就是说，每个主题在任意时刻，至多只能有一个消费者实例在进行消费，那就没法通过水平扩展消费者的数量来提升消费端总体的消费性能。
+为了解决这个问题，RocketMQ在主题下增加了队列的概念，每个主题包含多个队列，通过多个队列来实现多实例并行生产和消费。
+RocketMQ 只在队列上保证消息的有序性，主题层面是无法保证消息的严格顺序的。
+RocketMQ 中，订阅者的概念是通过消费组（Consumer Group）来体现的。每个消费组都消费主题中一份完整的消息，不同消费组之间消费进度彼此不受影响，也就是说，一条消息被 Consumer Group1 消费过，也会再给 Consumer Group2 消费。
+同时，一个消费组中包含多个消费者，同一个组内的消费者是竞争消费的关系，每个消费者负责消费组内的一部分消息。如果一条消息被消费者 Consumer1 消费了，那同组的其他消费者就不会再收到这条消息。
+在 Topic 的消费过程中，由于消息需要被不同的组进行多次消费，所以消费完的消息并不会立即被删除，这就需要 RocketMQ 为每个消费组在每个队列上维护一个消费位置（Consumer Offset），这个位置之前的消息都被消费过，之后的消息都没有被消费过，每成功消费一条消息，消费位置就加一。
+2.3 Kafka的消息模型 Kafka 的消息模型和 RocketMQ 是完全一样的，唯一的区别是，在 Kafka 中，队列这个概念的名称不一样，Kafka 中对应的名称是“分区（Partition）”，含义和功能是没有任何区别的。</description>
+    </item>
+    
+  </channel>
+</rss>
