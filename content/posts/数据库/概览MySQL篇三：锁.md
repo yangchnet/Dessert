@@ -2,11 +2,13 @@
 author: "李昌"
 title: "概览MySQL篇三：锁、事务和隔离"
 date: "2022-03-23"
-tags: ["mysql"]
+tags: ["MySQL"]
 categories: ["数据库"]
 ShowToc: true
 TocOpen: true
 ---
+
+> 极客时间[《MySQL实战45讲》](https://time.geekbang.org/column/intro/100020801?tab=catalog)笔记
 
 ### MySQL中的隔离级别
 

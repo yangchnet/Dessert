@@ -1,18 +1,45 @@
 ---
 author: "李昌"
-title: "概览MySQL篇二：日志"
+title: "概览MySQL篇二：持久化"
 date: "2022-03-23"
-tags: ["mysql"]
+tags: ["MySQL"]
 categories: ["数据库"]
 ShowToc: true
 TocOpen: true
 ---
 
+> 极客时间[《MySQL实战45讲》](https://time.geekbang.org/column/intro/100020801?tab=catalog)笔记
+
+### 什么是change buffer，有什么作用
+当需要更新一个数据页时，如果数据页在内存中就直接更新，而如果这个数据页还没有在内存中的话，在不影响数据一致性的前提下，InnoDB 会将这些更新操作缓存在 **change buffer** 中，这样就不需要从磁盘中读入这个数据页了。在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行 `change buffer` 中与这个页有关的操作。通过这种方式就能保证这个数据逻辑的正确性。这个操作称为**merge**.
+
+这里需要注意的是，`change buffer`看起来像是内存缓存一类的东西，但是`change buffer`是可以持久化的数据。也就是说，`change buffer`在内存中有拷贝，也会被写入到磁盘上。
+
+如果将`change buffer`也存在磁盘上，而数据也是存储在磁盘上，那么`change buffer`相比直接读取磁盘数据快在哪里呢？
+
+从磁盘读取一条记录，是随机读写，而写`change buffer`，是顺序读写。这二者的速度存在较大差异。随机读写由于存在磁头移道等物理操作，因此比较慢，但顺序读写比较快速。
+
+#### change buffer的限制
+
+`change buffer`只是暂时的将更新操作保存下来，而并没有去读取真正的数据。考虑以下情况，表中要求某一字段为唯一的，而在更新时不小心插入了一个与原有某数据重复的条目，这显然是不被允许的。
+
+因此，**当表中存在唯一索引、唯一值等限制，这时候就不能用`change buffer`了。只有普通索引和不存在值唯一性约束的列，才可以用`change buffer`。**
+
+`change buffer`用的是`buffer pool`中的内存，因此不能无限增大。`change buffer` 的大小，可以通过参数 **innodb_change_buffer_max_size** 来动态设置。这个参数设置为 `50` 的时候，表示 `change buffer` 的大小最多只能占用 `buffer pool` 的 **50%**。
+
+#### change buffer的使用场景
+
+`merge` 的时候是真正进行数据更新的时刻，而 `change buffer` 的主要目的就是将记录的变更动作缓存下来，所以在一个数据页做 `merge` 之前，`change buffer` 记录的变更越多（也就是这个页面上要更新的次数越多），收益就越大。
+
+因此，对于写多读少的业务来说，页面在写完以后马上被访问到的概率比较小，此时 `change buffer` 的使用效果最好。这种业务模型常见的就是账单类、日志类的系统。
+
+反过来，假设一个业务的更新模式是写入之后马上会做查询，那么即使满足了条件，将更新先记录在 `change buffer`，但之后由于马上要访问这个数据页，会立即触发 `merge` 过程。这样随机访问 IO 的次数不会减少，反而增加了 `change buffer` 的维护代价。所以，对于这种业务模式来说，`change buffer` 反而起到了副作用。
+
 ### 什么是redo log， 有什么作用
 
 在MySQL中，如果每一次的更新操作都需要写进磁盘，然后磁盘也要找到对应的那条记录，然后再更新，整个过程 IO 成本、查找成本都很高。因此，我们可以使用类似“缓存”的思路来解决这个问题。
 
-**WAL**:Write-Ahead Logging，先写日志，再写磁盘。注意这里不是*Write ahead logging(在记日志之前写)*，而是*Write-Ahead Logging*：在写之前记日志。
+**WAL**:Write-Ahead Logging，先写日志，再写磁盘。注意这里不是*Write ahead logging(在记日志之前写)*，而是*Write-Ahead Logging：在写之前记日志*。
 
 具体说来，当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到 `redo log` 里面，并更新内存，这个时候更新就算完成了（WAL）。同时，InnoDB 引擎会在适当的时候(系统比较空闲的时候或其他情况)，将这个操作记录更新到磁盘里面.
 
