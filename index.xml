@@ -9,7 +9,19 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>面试合集</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/2022-7-4-%E5%8D%83%E5%AF%BB%E4%BD%8D%E7%BD%AE/</link>
+      <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/2022-7-4-%E5%8D%83%E5%AF%BB%E4%BD%8D%E7%BD%AE/</guid>
+      <description>2022/7/4-千寻位置   设计一个作业系统，该系统需要控制10000台机器都运行某个脚本，每个机器上都装有该系统的agent，请大致描述该系统的架构。
+  现需要对nginx日志进行分析，需要对日志进行转储分析，请问如何实现。
+ 追问1: 在读取日志过程中，日志名可能会发生变化，请问如何处理 追问2: 对于数据竞争问题，如何处理    有x台机器，要将其均匀的分散到2个城市，城市之间机器数相差不大于1，请问如何实现
+ 追问1: 如果有3个城市，如何实现 追问2: 如果有x个城市，如何实现    </description>
+    </item>
+    
     <item>
       <title>概览MySQL篇〇：MySQL架构</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87mysql%E6%9E%B6%E6%9E%84/</link>
