@@ -11,15 +11,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>面试合集</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/2022-7-4-%E5%8D%83%E5%AF%BB%E4%BD%8D%E7%BD%AE/</link>
+      <title>inotify</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/inotify/</link>
       <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/2022-7-4-%E5%8D%83%E5%AF%BB%E4%BD%8D%E7%BD%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/inotify/</guid>
+      <description>1. 什么是inotify Inotify API提供了一种监视文件系统的机制事件。 Inotify可用于监视单个文件或监视目录。当监视目录时，Inotify将返回目录本身的事件，以及内部的文件目录。
+简单的说，就是inotify可以为你监控文件系统的变化，在发生一些事件时通知你。
+2. 实验 需要安装inotify-tools包
+# arch系统 yay -S inotify-tools inotify-tools提供了两个命令：inotifywait和inotifywatch
+2.1 inotifywait 先来看inotifywait,它被用来&amp;quot;Wait for a particular event on a file or set of files.&amp;quot;, 也就是说等待在文件上的某些事件发生。使用inotifywait -h查看其支持的参数：
+-h show this help info --exclude &amp;lt;pattern&amp;gt; 排除匹配所给正则的所有事件 --excludei &amp;lt;pattern&amp;gt; 类似前一个命令但非敏感 --include &amp;lt;pattern&amp;gt; 排除除匹配正则之外的所有事件 --includei &amp;lt;pattern&amp;gt; 类似前一个命令但非敏感 -m|--monitor 在timeout之前保持监听，若不设置此标志，inotifywait将在一个事件后退出。 -d|--daemon 类似前一个命令但在后台运行，将日志输出到`--outfile`所指定的文件 -P|--no-dereference 不跟踪符号链接 -r|--recursive 递归的监听、 --fromfile &amp;lt;file&amp;gt; Read files to watch from &amp;lt;file&amp;gt; or `-&#39; for stdin. -o|--outfile &amp;lt;file&amp;gt; 输出到&amp;lt;file&amp;gt;而不是标准输出 -s|--syslog 向syslog发送错误而不是Stderr -q|--quiet 只输出事件 -qq 啥也不输出 --format &amp;lt;fmt&amp;gt; 以特定格式输出 --no-newline 在格式化输出后不打印换行符 --timefmt &amp;lt;fmt&amp;gt; strftime-compatible format string for use with %T in --format string.</description>
+    </item>
+    
+    <item>
+      <title>面试合集</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E9%9D%A2%E8%AF%95%E5%90%88%E9%9B%86/</link>
+      <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E9%9D%A2%E8%AF%95%E5%90%88%E9%9B%86/</guid>
       <description>2022/7/4-千寻位置   设计一个作业系统，该系统需要控制10000台机器都运行某个脚本，每个机器上都装有该系统的agent，请大致描述该系统的架构。
   现需要对nginx日志进行分析，需要对日志进行转储分析，请问如何实现。
  追问1: 在读取日志过程中，日志名可能会发生变化，请问如何处理 追问2: 对于数据竞争问题，如何处理    有x台机器，要将其均匀的分散到2个城市，城市之间机器数相差不大于1，请问如何实现
- 追问1: 如果有3个城市，如何实现 追问2: 如果有x个城市，如何实现    </description>
+ 追问1: 如果有3个城市，如何实现 追问2: 如果有x个城市，如何实现    设计一个算法对1000亿次调用进行身份去重，用户数为6亿，内存限制512M.
+  </description>
     </item>
     
     <item>

@@ -5,10 +5,19 @@
     <loc>http://yangchnet.github.io/Dessert/categories/</loc>
     <lastmod>2022-07-04T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/linux/inotify/</loc>
+    <lastmod>2022-07-04T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/interview/</loc>
     <lastmod>2022-07-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/</loc>
+    <lastmod>2022-07-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/linux/</loc>
+    <lastmod>2022-07-04T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/categories/linux/</loc>
     <lastmod>2022-07-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/</loc>
@@ -20,7 +29,7 @@
     <loc>http://yangchnet.github.io/Dessert/categories/%E9%9D%A2%E8%AF%95/</loc>
     <lastmod>2022-07-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/2022-7-4-%E5%8D%83%E5%AF%BB%E4%BD%8D%E7%BD%AE/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E9%9D%A2%E8%AF%95%E5%90%88%E9%9B%86/</loc>
     <lastmod>2022-07-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/mysql/</loc>
@@ -61,12 +70,6 @@
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/linux/cgroupv2/</loc>
     <lastmod>2022-05-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/linux/</loc>
-    <lastmod>2022-05-19T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/linux/</loc>
-    <lastmod>2022-05-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</loc>
     <lastmod>2022-05-18T00:00:00+00:00</lastmod>

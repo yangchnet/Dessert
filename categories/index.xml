@@ -11,6 +11,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Linux</title>
+      <link>http://yangchnet.github.io/Dessert/categories/linux/</link>
+      <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>面试</title>
       <link>http://yangchnet.github.io/Dessert/categories/%E9%9D%A2%E8%AF%95/</link>
       <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
@@ -43,15 +52,6 @@
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/categories/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>http://yangchnet.github.io/Dessert/categories/linux/</link>
-      <pubDate>Thu, 19 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/categories/linux/</guid>
       <description></description>
     </item>
     
