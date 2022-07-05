@@ -25,19 +25,6 @@
     </item>
     
     <item>
-      <title>面试合集</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E9%9D%A2%E8%AF%95%E5%90%88%E9%9B%86/</link>
-      <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E9%9D%A2%E8%AF%95%E5%90%88%E9%9B%86/</guid>
-      <description>2022/7/4-千寻位置   设计一个作业系统，该系统需要控制10000台机器都运行某个脚本，每个机器上都装有该系统的agent，请大致描述该系统的架构。
-  现需要对nginx日志进行分析，需要对日志进行转储分析，请问如何实现。
- 追问1: 在读取日志过程中，日志名可能会发生变化，请问如何处理 追问2: 对于数据竞争问题，如何处理    有x台机器，要将其均匀的分散到2个城市，城市之间机器数相差不大于1，请问如何实现
- 追问1: 如果有3个城市，如何实现 追问2: 如果有x个城市，如何实现    设计一个算法对1000亿次调用进行身份去重，用户数为6亿，内存限制512M.
-  </description>
-    </item>
-    
-    <item>
       <title>概览MySQL篇〇：MySQL架构</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87mysql%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Sat, 02 Jul 2022 00:00:00 +0000</pubDate>
