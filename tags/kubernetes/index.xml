@@ -12,10 +12,10 @@
     <lastBuildDate>Mon, 06 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/clould/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/clould/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
       <description>部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
 2. Vagrantfile 建立如下目录
@@ -36,10 +36,10 @@ IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp
     
     <item>
       <title>k8s中的apiVersion</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/clould/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
       <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/clould/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
       <description>apiVersion可能的字段值：    Kind apiVersion     CertificateSigningRequest certificates.k8s.io/v1beta1   ClusterRoleBinding rbac.authorization.k8s.io/v1   ClusterRole rbac.authorization.k8s.io/v1   ComponentStatus v1   ConfigMap v1   ControllerRevision apps/v1   CronJob batch/v1beta1   DaemonSet extensions/v1beta1   Deployment extensions/v1beta1   Endpoints v1   Event v1   HorizontalPodAutoscaler autoscaling/v1   Ingress extensions/v1beta1   Job batch/v1   LimitRange v1   Namespace v1   NetworkPolicy extensions/v1beta1   Node v1   PersistentVolumeClaim v1   PersistentVolume v1   PodDisruptionBudget policy/v1beta1   Pod v1   PodSecurityPolicy extensions/v1beta1   PodTemplate v1   ReplicaSet extensions/v1beta1   ReplicationController v1   ResourceQuota v1   RoleBinding rbac.</description>
     </item>
     

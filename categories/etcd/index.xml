@@ -12,10 +12,10 @@
     <lastBuildDate>Thu, 02 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/etcd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>安装etcd</title>
-      <link>http://yangchnet.github.io/Dessert/posts/etcd/%E5%AE%89%E8%A3%85etcd/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/clould/%E5%AE%89%E8%A3%85etcd/</link>
       <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/etcd/%E5%AE%89%E8%A3%85etcd/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E5%AE%89%E8%A3%85etcd/</guid>
       <description>安装goreman  go get github.com/mattn/goreman 下载etcd 从etcd release 页面下载etcd v3.4.9二进制文件  tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz # 解压 cd etcd-v3.4.9-linux-amd64 sudo mv etcd /usr/local/bin sudo mv etcdctl /usr/local/bin 下载Procfile文件  https://github.com/etcd-io/etcd/blob/v3.4.9/Procfile
 # Use goreman to run `go get github.com/mattn/goreman` etcd1: bin/etcd --name infra1 --listen-client-urls http://127.0.0.1:2379 --advertise-client-urls http://127.0.0.1:2379 --listen-peer-urls http://127.0.0.1:12380 --initial-advertise-peer-urls http://127.0.0.1:12380 --initial-cluster-token etcd-cluster-1 --initial-cluster &#39;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380&#39; --initial-cluster-state new --enable-pprof --logger=zap --log-outputs=stderr etcd2: bin/etcd --name infra2 --listen-client-urls http://127.0.0.1:22379 --advertise-client-urls http://127.0.0.1:22379 --listen-peer-urls http://127.0.0.1:22380 --initial-advertise-peer-urls http://127.</description>
     </item>

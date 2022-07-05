@@ -12,10 +12,10 @@
     <lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用sealyun安装k8s</title>
-      <link>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/clould/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</link>
       <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</guid>
       <description>1. 准备节点 可以使用云服务器，这里我们选择vagrant搭建本地虚拟机节点。
 安装vagrant(需要提前安装virtualbox)
 yay -S vagrant 创建虚拟机

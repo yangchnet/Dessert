@@ -38,10 +38,10 @@
     <loc>http://yangchnet.github.io/Dessert/categories/mq/</loc>
     <lastmod>2022-06-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/mq/%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</loc>
+    <loc>http://yangchnet.github.io/Dessert/tags/%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2022-06-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/mq/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2022-06-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/golang/</loc>
@@ -74,7 +74,7 @@
     <loc>http://yangchnet.github.io/Dessert/categories/k8s/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</loc>
     <lastmod>2022-05-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/install/</loc>
@@ -281,7 +281,7 @@
     <loc>http://yangchnet.github.io/Dessert/tags/vagrant/</loc>
     <lastmod>2021-09-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/dockerk8s/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</loc>
     <lastmod>2021-09-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/kubernetes/</loc>
@@ -305,10 +305,10 @@
     <loc>http://yangchnet.github.io/Dessert/categories/etcd/</loc>
     <lastmod>2021-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/dockerk8s/k8s%E4%B8%AD%E7%9A%84apiversion/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/k8s%E4%B8%AD%E7%9A%84apiversion/</loc>
     <lastmod>2021-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/etcd/%E5%AE%89%E8%A3%85etcd/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/%E5%AE%89%E8%A3%85etcd/</loc>
     <lastmod>2021-09-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/orm/</loc>
@@ -386,7 +386,7 @@
     <loc>http://yangchnet.github.io/Dessert/posts/c&#43;&#43;/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
     <lastmod>2021-06-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-sudo/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/docker-sudo/</loc>
     <lastmod>2021-06-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/dockerk8s/</loc>
@@ -749,10 +749,10 @@
     <loc>http://yangchnet.github.io/Dessert/categories/dlml/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/docker/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/dockerk8s/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</loc>
@@ -875,7 +875,7 @@
     <loc>http://yangchnet.github.io/Dessert/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/dockerk8s/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/clould/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</loc>
@@ -957,8 +957,6 @@
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%AA%E5%91%BD%E5%90%8D/</loc>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/readme/</loc>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/archives/</loc>
   </url><url>
