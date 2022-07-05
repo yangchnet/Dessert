@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "不同的mq的消息模型"
+title: "消息队列篇一：不同的mq的消息模型"
 date: "2022-06-30"
 tags: ["mq", "消息模型"]
 categories: ["mq"]
