@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>cache on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/categories/cache/</link>
+    <description>Recent content in cache on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/cache/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis篇一：单线程模型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
+      <description> 极客时间《Redis 核心技术与实战》学习笔记
+ Redis单线程模型 Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。但 Redis 的其他功能，比如持久化、异步删除、集群数据同步等，其实是由额外的线程执行的。
+为什么Redis采用单线程 通畅的程序设计都采用多线程来提高性能，获得更快的响应速度。
+但采用多线程模型将不可避免地面对以下问题：
+ 多个线程对同一资源的数据竞争 因解决数据竞争而导致的性能损耗 增加系统复杂度，降低系统代码的易调试性和可维护性  为啥Redis单线程还这么快 主要是两点：
+ Redis大部分操作在内存上完成，并采用了高效的数据结构 Redis采用了多路复用机制  </description>
+    </item>
+    
+  </channel>
+</rss>

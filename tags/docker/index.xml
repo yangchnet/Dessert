@@ -9,7 +9,23 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 12 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览容器篇一：镜像</title>
+      <link>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
+      <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
+      <description>1. 分层的镜像 在我们启动一个容器之前，通畅需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像提供了容器中程序执行需要的所有文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
+创建一个镜像（image）的最简单方法是使用Dockerfile。
+FROMscratchCOPY hello /CMD [&amp;#34;/hello&amp;#34;]scratch是docker为我们提供的一个空镜像，我们可以在此基础上构建任何我们想要的镜像。
+在书写Dockerfile时，想必你听说过这么一句话，不要在Dockerfile中创建太多层.
+在Dockerfile中，每一个指令都会创建一个新的“层”，这里的层，指的是UnionFS中的一个文件目录。当我们创建了过多的层，会导致镜像体积变大，除此之外，Union FS 也会有最大层数限制。
+因此对于如下的Dockerfile文件写法，应尽量避免：
+FROMdebian:stretchRUN apt-get updateRUN apt-get install -y gcc libc6-dev make wgetRUN wget -O redis.tar.gz &amp;#34;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;#34;RUN mkdir -p /usr/src/redisRUN tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1RUN make -C /usr/src/redisRUN make -C /usr/src/redis install可优化为如下写法
+FROMdebian:stretchRUN set -x; buildDeps=&amp;#39;gcc libc6-dev make wget&amp;#39; \  &amp;amp;&amp;amp; apt-get update \  &amp;amp;&amp;amp; apt-get install -y $buildDeps \  &amp;amp;&amp;amp; wget -O redis.tar.gz &amp;#34;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;#34; \  &amp;amp;&amp;amp; mkdir -p /usr/src/redis \  &amp;amp;&amp;amp; tar -xzf redis.</description>
+    </item>
+    
     <item>
       <title>WSL2-不输Mac的开发体验（三）：WSL2中使用docker&amp;k8s</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%89wsl2%E4%B8%AD%E4%BD%BF%E7%94%A8dockerk8s/</link>

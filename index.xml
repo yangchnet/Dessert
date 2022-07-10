@@ -9,7 +9,37 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览容器篇一：镜像</title>
+      <link>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
+      <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
+      <description>1. 分层的镜像 在我们启动一个容器之前，通畅需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像提供了容器中程序执行需要的所有文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
+创建一个镜像（image）的最简单方法是使用Dockerfile。
+FROMscratchCOPY hello /CMD [&amp;#34;/hello&amp;#34;]scratch是docker为我们提供的一个空镜像，我们可以在此基础上构建任何我们想要的镜像。
+在书写Dockerfile时，想必你听说过这么一句话，不要在Dockerfile中创建太多层.
+在Dockerfile中，每一个指令都会创建一个新的“层”，这里的层，指的是UnionFS中的一个文件目录。当我们创建了过多的层，会导致镜像体积变大，除此之外，Union FS 也会有最大层数限制。
+因此对于如下的Dockerfile文件写法，应尽量避免：
+FROMdebian:stretchRUN apt-get updateRUN apt-get install -y gcc libc6-dev make wgetRUN wget -O redis.tar.gz &amp;#34;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;#34;RUN mkdir -p /usr/src/redisRUN tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1RUN make -C /usr/src/redisRUN make -C /usr/src/redis install可优化为如下写法
+FROMdebian:stretchRUN set -x; buildDeps=&amp;#39;gcc libc6-dev make wget&amp;#39; \  &amp;amp;&amp;amp; apt-get update \  &amp;amp;&amp;amp; apt-get install -y $buildDeps \  &amp;amp;&amp;amp; wget -O redis.tar.gz &amp;#34;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;#34; \  &amp;amp;&amp;amp; mkdir -p /usr/src/redis \  &amp;amp;&amp;amp; tar -xzf redis.</description>
+    </item>
+    
+    <item>
+      <title>Redis篇一：单线程模型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
+      <description> 极客时间《Redis 核心技术与实战》学习笔记
+ Redis单线程模型 Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。但 Redis 的其他功能，比如持久化、异步删除、集群数据同步等，其实是由额外的线程执行的。
+为什么Redis采用单线程 通畅的程序设计都采用多线程来提高性能，获得更快的响应速度。
+但采用多线程模型将不可避免地面对以下问题：
+ 多个线程对同一资源的数据竞争 因解决数据竞争而导致的性能损耗 增加系统复杂度，降低系统代码的易调试性和可维护性  为啥Redis单线程还这么快 主要是两点：
+ Redis大部分操作在内存上完成，并采用了高效的数据结构 Redis采用了多路复用机制  </description>
+    </item>
+    
     <item>
       <title>inotify</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/inotify/</link>
