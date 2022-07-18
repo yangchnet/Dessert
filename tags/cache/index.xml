@@ -9,7 +9,31 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/cache/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/cache/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis篇二：AOF日志</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</guid>
+      <description>极客时间《Redis 核心技术与实战》学习笔记
+ AOF: Append Only File
+AOF日志的WAL 数据库中的WAL是Write-Ahead Logging, 为先写日志后执行。而Redis中的WAL为Write Ahead Log,先执行后写日志。
+为了避免额外的开销，Redis在向AOF里面记录日志时，不回去对这些命令进行语法检查，因此，如果先记录日志再执行命令的话，日志中有可能记录了错误的命令，Redis在使用日志恢复数据时，就可能会出错。
+AOF日志中记录了什么内容 有如下命令：
+set testkey testvalue 则AOF日志内容为：
+*3 $3 set $7 testkey $9 testvalue 其中“*3”表示当前命令有3个部分，每部分都由“$+数字”开头，后面紧跟具体的命令、键或值。
+AOF的潜在风险 AOF使用先执行，再写日志的方式，这样可以避免记录错误的命令，同时不会阻塞当前的写操作。
+但这样也带来了一些潜在风险：
+ 刚执行完一个命令，没来得及记日志就宕机了，这个命令和相应的数据就有丢失的风险。 AOF避免了对当前命令的阻塞，但AOF写日志是在主线程中执行的，可能会给下一个操作带来阻塞风险。  这就需要我们对AOF写日志的实际进行把控。
+AOF的三种写回策略   Always，同步写回：每个写命令执行完，立马同步地将日志写回磁盘；
+  Everysec，每秒写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，每隔一秒把缓冲区中的内容写入磁盘；
+  No，操作系统控制的写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，由操作系统决定何时将缓冲区内容写回磁盘。
+  针对避免主线程阻塞和减少数据丢失问题，这三种写回策略都无法做到两全其美。原因如下：
+ “同步写回”可以做到基本不丢数据，但是它在每一个写命令后都有一个慢速的落盘操作，不可避免地会影响主线程性能； 虽然“操作系统控制的写回”在写完缓冲区后，就可以继续执行后续的命令，但是落盘的时机已经不在 Redis 手中了，只要 AOF 记录没有写回磁盘，一旦宕机对应的数据就丢失了； “每秒写回”采用一秒写回一次的频率，避免了“同步写回”的性能开销，虽然减少了对系统性能的影响，但是如果发生宕机，上一秒内未落盘的命令操作仍然会丢失。所以，这只能算是，在避免影响主线程性能和避免数据丢失两者间取了个折中。  总结一下：
+ 想要获得高性能，就选择 No 策略； 如果想要得到高可靠性保证，就选择 Always 策略； 如果允许数据有一点丢失，又希望性能别受太大影响的话，那么就选择 Everysec 策略。  AOF重写 当系统运行一段时间后，AOF日志会越来越大，这会带来一些问题：</description>
+    </item>
+    
     <item>
       <title>Redis篇一：单线程模型</title>
       <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
