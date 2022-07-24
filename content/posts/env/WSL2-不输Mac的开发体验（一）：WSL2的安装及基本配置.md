@@ -48,7 +48,7 @@ wsl --set-default-version 2
 6. 启动安装的发行版即可
 
 
-## 2. 使用WSL图形界面
+## 2. 使用WSL图形界面(可选)
 
 1. 设置环境变量
 ```bash
@@ -86,7 +86,7 @@ gedit
 > 可以从wsl中启动图形界面意味着你可以将vscode、idea、goland等开发工具直接装在wsl中。但我强烈建议你使用vscode的`Remote-WSL`插件来进行开发，而只在一些必要的时候才从wsl中直接启动图形界面。
 
 
-## 3. WSL中文
+## 3. WSL中文(如未安装GUI，则不需要配置)
 
 ### 3.1 WSL中文显示
 1. 安装语言包
@@ -112,7 +112,7 @@ wsl --shutdown
 wsl
 ```
 
-### 3.2 WSL中文输入法配置
+### 3.2 WSL中文输入法配置(如未安装GUI，则不需要配置)
 
 1. 安装fcitx及输入法   
 安装fcitx核心及CJK字体  

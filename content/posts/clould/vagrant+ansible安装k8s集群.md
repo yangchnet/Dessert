@@ -8,6 +8,8 @@ ShowToc: true
 TocOpen: true
 ---
 
+**已过时，不可用**
+
 > 部署环境： ubuntu20.04， 8G+4核
 > kubernete版本： 1.22.1
 

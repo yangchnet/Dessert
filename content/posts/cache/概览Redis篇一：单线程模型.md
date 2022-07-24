@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "Redis篇一：单线程模型"
+title: "概览Redis篇一：单线程模型"
 date: "2022-07-09"
 tags: ["redis", "cache"]
 categories: ["cache"]

@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "Redis篇四：主从"
+title: "概览Redis篇四：主从"
 date: "2022-07-22"
 tags: ["cache"]
 categories: ["cache"]

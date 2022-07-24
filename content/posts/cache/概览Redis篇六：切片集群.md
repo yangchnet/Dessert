@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "Redis篇六：切片集群"
+title: "概览Redis篇六：切片集群"
 date: "2022-07-22"
 tags: ["cache"]
 categories: ["cache"]

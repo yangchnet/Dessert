@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "Redis篇五：哨兵"
+title: "概览Redis篇五：哨兵"
 date: "2022-07-22"
 tags: ["cache"]
 categories: ["cache"]

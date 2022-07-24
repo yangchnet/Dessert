@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "Redis篇三：RDB快照"
+title: "概览Redis篇三：RDB快照"
 date: "2022-07-22"
 tags: ["cache"]
 categories: ["cache"]

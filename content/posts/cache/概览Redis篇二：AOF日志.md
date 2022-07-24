@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "Redis篇二：AOF日志"
+title: "概览Redis篇二：AOF日志"
 date: "2022-07-18"
 tags: ["cache", "redis"]
 categories: ["cache"]
