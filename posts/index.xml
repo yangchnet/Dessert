@@ -11,6 +11,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>概览容器篇二：系统资源的管理</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E8%B5%84%E6%BA%90%E7%9A%84%E9%9A%94%E7%A6%BB%E4%B8%8E%E9%99%90%E5%88%B6/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E8%B5%84%E6%BA%90%E7%9A%84%E9%9A%94%E7%A6%BB%E4%B8%8E%E9%99%90%E5%88%B6/</guid>
+      <description>系统资源的隔离 系统资源的限制 不能被隔离的资源 </description>
+    </item>
+    
+    <item>
       <title>概览消息队列篇〇：为什么需要消息队列</title>
       <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
       <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
@@ -233,10 +242,10 @@ AOF的三种写回策略   Always，同步写回：每个写命令执行完，�
     
     <item>
       <title>概览容器篇一：镜像</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
       <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
       <description>1. 分层的镜像 在我们启动一个容器之前，通畅需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像提供了容器中程序执行需要的所有文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
 创建一个镜像（image）的最简单方法是使用Dockerfile。
 FROMscratchCOPY hello /CMD [&amp;#34;/hello&amp;#34;]scratch是docker为我们提供的一个空镜像，我们可以在此基础上构建任何我们想要的镜像。
@@ -880,10 +889,10 @@ type User struct { Name string `mytag:&amp;#34;MyName&amp;#34;` Email stirng `my
     
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
       <description>已过时，不可用
  部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
@@ -918,10 +927,10 @@ https://askubuntu.com/questions/257290/configure-proxy-for-apt</description>
     
     <item>
       <title>k8s中的apiVersion</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
       <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
       <description>apiVersion可能的字段值：    Kind apiVersion     CertificateSigningRequest certificates.k8s.io/v1beta1   ClusterRoleBinding rbac.authorization.k8s.io/v1   ClusterRole rbac.authorization.k8s.io/v1   ComponentStatus v1   ConfigMap v1   ControllerRevision apps/v1   CronJob batch/v1beta1   DaemonSet extensions/v1beta1   Deployment extensions/v1beta1   Endpoints v1   Event v1   HorizontalPodAutoscaler autoscaling/v1   Ingress extensions/v1beta1   Job batch/v1   LimitRange v1   Namespace v1   NetworkPolicy extensions/v1beta1   Node v1   PersistentVolumeClaim v1   PersistentVolume v1   PodDisruptionBudget policy/v1beta1   Pod v1   PodSecurityPolicy extensions/v1beta1   PodTemplate v1   ReplicaSet extensions/v1beta1   ReplicationController v1   ResourceQuota v1   RoleBinding rbac.</description>
     </item>
     
@@ -1080,10 +1089,10 @@ nvm use 14   </description>
     
     <item>
       <title>docker sudo</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/docker-sudo/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/docker-sudo/</link>
       <pubDate>Sun, 20 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/docker-sudo/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/docker-sudo/</guid>
       <description>sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可</description>
     </item>
     
@@ -1756,19 +1765,19 @@ models.ImageField(upload_to=&amp;lsquo;path&amp;rsquo;) upload_to的储存路径
     
     <item>
       <title>docker常用操作</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/docker/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/docker/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/docker/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/docker/</guid>
       <description>docker常用操作  启动docker服务 sudo systemctl start docker 查看本地镜像 sudo docker images 查看正在运行的镜像 sudo docker ps 查看所有镜像 sudo docker ps -a 停止正在运行的镜像 sudo docker stop container_name 开始运行某个镜像 sudo docker start container_name 删除某个镜像 sudo docker rmi container_name 进入某个正在运行的镜像 sudo docker attach container_name 导出容器 sudo docker export container_id &amp;gt; name.tar 导入容器 cat name.tar | sudo docker import -test/buntu:v1.0 从网络导入 sudo docker import http://example.com/exampleimage.tgz example/imagerepo  </description>
     </item>
     
     <item>
       <title>docker的安装（Ubuntu)</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
       <description>1、docker的安装(Ubuntu) 1.1、 设置存储库  若是已安装旧版本的docker， 请卸载：sudo apt-get remove docker docker-engine docker.io containerd runc
  1.1.1、更新apt索引 sudo apt-get update 1.1.2、安装依赖 sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg-agent \  software-properties-common 1.1.3、添加docker官方的GPG秘钥 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  在进行此步时，出现了sudo: unable to resolve host iZ2ze4512bfzoapfvch6btZ，这是因为机器不能反向解析 打开主机上的 /etc/hosts 添加： 127.0.0.1 【hostname】# 【hostname】用主机名替代 可在/etc/hostname中修改主机名，sudo shutdown -r now重启过后完成主机名修改
  验证添加成功：
@@ -2255,10 +2264,10 @@ POST http://www.example.com HTTP/1.1 Content-Type:multipart/form-data; boundary=
     
     <item>
       <title>在docker中构建django项目</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
       <description>在docker中构建django项目 （需安装docker-compose, 安装教程）
 1. 定义项目组件 对于此项目，您需要创建Dockerfile，Python依赖项文件和docker-compose.yml文件。（您可以使用此文件的扩展名.yml或.yaml扩展名。）
 1.1. 创建一个空目录 该目录应仅包含构建该映像的资源。
