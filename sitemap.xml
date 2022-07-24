@@ -2,34 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://yangchnet.github.io/Dessert/categories/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/mq/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/categories/mq/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</loc>
+    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/cache/</loc>
     <lastmod>2022-07-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/cache/</loc>
     <lastmod>2022-07-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</loc>
     <lastmod>2022-07-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</loc>
     <lastmod>2022-07-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</loc>
     <lastmod>2022-07-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</loc>
-    <lastmod>2022-07-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</loc>
-    <lastmod>2022-07-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</loc>
-    <lastmod>2022-07-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</loc>
-    <lastmod>2022-07-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</loc>
     <lastmod>2022-07-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/os/</loc>
@@ -50,13 +65,13 @@
     <loc>http://yangchnet.github.io/Dessert/tags/redis/</loc>
     <lastmod>2022-07-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2022-07-18T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/socket/</loc>
     <lastmod>2022-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/net/socket%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2022-07-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2022-07-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/cloud/</loc>
@@ -68,7 +83,7 @@
     <loc>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</loc>
     <lastmod>2022-07-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2022-07-09T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/linux/inotify/</loc>
@@ -89,16 +104,10 @@
     <loc>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87mysql%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2022-07-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/mq/</loc>
-    <lastmod>2022-06-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/mq/</loc>
+    <loc>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2022-06-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2022-06-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/mq/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2022-06-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/golang/</loc>
@@ -124,15 +133,6 @@
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/%E5%AE%B9%E5%99%A8/</loc>
     <lastmod>2022-05-18T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/k8s/</loc>
-    <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/k8s/</loc>
-    <lastmod>2022-05-01T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/clould/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</loc>
-    <lastmod>2022-05-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/install/</loc>
     <lastmod>2022-04-11T00:00:00+00:00</lastmod>
@@ -350,16 +350,7 @@
     <loc>http://yangchnet.github.io/Dessert/posts/linux/%E4%B8%BAapt%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2021-09-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/etcd/</loc>
-    <lastmod>2021-09-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/etcd/</loc>
-    <lastmod>2021-09-02T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/clould/k8s%E4%B8%AD%E7%9A%84apiversion/</loc>
-    <lastmod>2021-09-02T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/clould/%E5%AE%89%E8%A3%85etcd/</loc>
     <lastmod>2021-09-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/orm/</loc>
@@ -379,6 +370,9 @@
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</loc>
     <lastmod>2021-08-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/k8s/</loc>
+    <lastmod>2021-08-12T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/wsl/</loc>
     <lastmod>2021-08-12T00:00:00+00:00</lastmod>

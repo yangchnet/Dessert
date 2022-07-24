@@ -16,11 +16,12 @@
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/clould/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
-      <description>部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
+      <description>已过时，不可用
+ 部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
 2. Vagrantfile 建立如下目录
 k8s-cluster ├── kubernetes-setup │ ├── master-playbook.yml │ └── node-playbook.yml └── Vagrantfile 其中，Vagrantfile内容如下：
-IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.ssh.insert_key = false config.vm.provider &amp;quot;virtualbox&amp;quot; do |v| v.memory = 2048 v.cpus = 2 end config.vm.define &amp;quot;k8s-master&amp;quot; do |master| master.vm.box = IMAGE_NAME master.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.50.10&amp;quot; master.vm.hostname = &amp;quot;k8s-master&amp;quot; master.vm.provision &amp;quot;ansible&amp;quot; do |ansible| ansible.playbook = &amp;quot;kubernetes-setup/master-playbook.yml&amp;quot; ansible.extra_vars = { node_ip: &amp;quot;192.</description>
+IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.ssh.insert_key = false config.vm.provider &amp;quot;virtualbox&amp;quot; do |v| v.memory = 2048 v.cpus = 2 end config.vm.define &amp;quot;k8s-master&amp;quot; do |master| master.vm.box = IMAGE_NAME master.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.50.10&amp;quot; master.vm.hostname = &amp;quot;k8s-master&amp;quot; master.vm.provision &amp;quot;ansible&amp;quot; do |ansible| ansible.playbook = &amp;quot;kubernetes-setup/master-playbook.yml&amp;quot; ansible.</description>
     </item>
     
   </channel>

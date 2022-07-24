@@ -9,7 +9,16 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mq</title>
+      <link>http://yangchnet.github.io/Dessert/categories/mq/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/categories/mq/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>cache</title>
       <link>http://yangchnet.github.io/Dessert/categories/cache/</link>
@@ -65,29 +74,11 @@
     </item>
     
     <item>
-      <title>mq</title>
-      <link>http://yangchnet.github.io/Dessert/categories/mq/</link>
-      <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/categories/mq/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Golang</title>
       <link>http://yangchnet.github.io/Dessert/categories/golang/</link>
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/categories/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>k8s</title>
-      <link>http://yangchnet.github.io/Dessert/categories/k8s/</link>
-      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/categories/k8s/</guid>
       <description></description>
     </item>
     
@@ -142,15 +133,6 @@
       <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/categories/kubernetes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>etcd</title>
-      <link>http://yangchnet.github.io/Dessert/categories/etcd/</link>
-      <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/categories/etcd/</guid>
       <description></description>
     </item>
     

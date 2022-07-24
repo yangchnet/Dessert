@@ -27,7 +27,7 @@ cat /etc/resolv.conf 得到类似下面的输出：
 启用虚拟机功能 以管理员身份打开powershell，使用如下命令： dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart 重新启动电脑
 下载Linux内核更新包 适用于 x64 计算机的 WSL2 Linux 内核更新包 运行你下载的更新包。
 将WSL2设置为默认版本 以管理员身份打开powershell，使用如下命令： wsl --set-default-version 2 选择你要安装的发行版 这里我选择了Ubuntu18.04，获取后安装
-启动安装的发行版即可 2. 使用WSL图形界面 设置环境变量 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 export LIBGL_ALWAYS_INDIRECT=1 安装Xserver，这里选择的软件是vcxsrv， 可在sourceforge中下载安装。
+启动安装的发行版即可 2. 使用WSL图形界面(可选) 设置环境变量 export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 export LIBGL_ALWAYS_INDIRECT=1 安装Xserver，这里选择的软件是vcxsrv， 可在sourceforge中下载安装。
 安装完成后直接启动即可...</p></section><footer class=entry-footer><span title="2021-06-01 00:00:00 +0000 UTC">June 1, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to WSL2-不输Mac的开发体验（一）：WSL2的安装及基本配置" href=http://yangchnet.github.io/Dessert/posts/env/wsl2-%E4%B8%8D%E8%BE%93mac%E7%9A%84%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E4%B8%80wsl2%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/></a></article></main><footer class=footer><span>&copy; 2022 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
 <script src=https://utteranc.es/client.js repo=yangchnet/Dessert issue-term=pathname theme=github-light crossorigin=anonymous async></script><span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

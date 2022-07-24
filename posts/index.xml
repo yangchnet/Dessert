@@ -9,13 +9,80 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Redis篇三：RDB快照</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</link>
+      <title>概览消息队列篇〇：为什么需要消息队列</title>
+      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid>
+      <description> 极客时间《消息队列高手课》笔记
+ 1. 异步处理 对于一个秒杀系统，需要解决的核心问题是，如何利用有限的服务器资源，尽可能多地处理短时间内的海量请求。
+处理一个秒杀请求包含了很多步骤：如风险控制、库存锁定、生成订单、短信通知、更新通知数据等。如果没有任何优化，正常的处理流程是：App 将请求发送给网关，依次调用上述 5 个流程，然后将结果返回给 APP。
+但上述5个步骤中，只需要风险控制和库存锁定这两步就可以决定秒杀是否成功，对于后续的生成订单、短信通知和更新统计数据等步骤，并不一定要在秒杀请求中处理完成。
+所以当服务端完成前面 2 个步骤，确定本次请求的秒杀结果后，就可以马上给用户返回响应，然后把请求的数据放入消息队列中，由消息队列异步地进行后续的操作。
+处理一个秒杀请求，从 5 个步骤减少为 2 个步骤，这样不仅响应速度更快，并且在秒杀期间，我们可以把大量的服务器资源用来处理秒杀请求。秒杀结束后再把资源用于处理后面的步骤，充分利用有限的服务器资源处理更多的秒杀请求。
+可以看到，在这个场景中，消息队列被用于实现服务的异步处理。
+这样做的好处是：
+ 可以更快地返回结果； 减少等待，自然实现了步骤之间的并发，提升系统总体的性能。  2. 流量控制 在用消息队列实现了部分工作的异步处理后，我们还需要考虑如何避免过多的请求压垮我们的秒杀系统。
+一个设计健壮的程序有自我保护的能力，也就是说，它应该可以在海量的请求下，还能在自身能力范围内尽可能多地处理请求，拒绝处理不了的请求并且保证自身运行正常。
+我们可以使用消息队列隔离网关和后端服务，以达到流量控制和保护后端服务的目的。
+加入消息队列后，整个秒杀流程变为：
+ 网关在收到请求后，将请求放入请求消息队列； 后端服务从请求消息队列中获取 APP 请求，完成后续秒杀处理过程，然后返回结果。  这种设计的优点是：能根据下游的处理能力自动调节流量，达到“削峰填谷”的作用。但这样做同样是有代价的：
+ 增加了系统调用链环节，导致总体的响应时延变长。 上下游系统都要将同步调用改为异步消息，增加了系统的复杂度。  3. 服务解耦 对于一个电商系统来说，当一个新订单创建时：
+ 支付系统需要发起支付流程； 风控系统需要审核订单的合法性； 客服系统需要给用户发短信告知用户； 经营分析系统需要更新统计数据； ……  这些订单下游的系统都需要实时获得订单数据。随着业务不断发展，这些订单下游系统不断的增加，不断变化，并且每个系统可能只需要订单数据的一个子集，负责订单服务的开发团队不得不花费很大的精力，应对不断增加变化的下游系统，不停地修改调试订单系统与这些下游系统的接口。任何一个下游系统接口变更，都需要订单模块重新进行一次上线，对于一个电商的核心服务来说，这几乎是不可接受的。
+所有的电商都选择用消息队列来解决类似的系统耦合过于紧密的问题。引入消息队列后，订单服务在订单变化时发送一条消息到消息队列的一个主题 Order 中，所有下游系统都订阅主题 Order，这样每个下游系统都可以获得一份实时完整的订单数据。无论增加、减少下游系统或是下游系统需求如何变化，订单服务都无需做任何更改，实现了订单服务与下游服务的解耦。
+其他  作为发布 / 订阅系统实现一个微服务级系统间的观察者模式； 连接流计算任务和数据； 用于将消息广播给大量接收者。  消息队列带来的一些问题  引入消息队列带来的延迟问题； 增加了系统的复杂度； 可能产生数据不一致的问题。  </description>
+    </item>
+    
+    <item>
+      <title>概览消息队列篇三：重复消息的处理</title>
+      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/</guid>
+      <description>消息队列本身可以保证消息不重复吗 在 MQTT 协议中，给出了三种传递消息时能够提供的服务质量标准，这三种服务质量从低到高依次是：
+ At most once: 至多一次。消息在传递时，最多会被送达一次。换一个说法就是，没什么消息可靠性保证，允许丢消息。一般都是一些对消息可靠性要求不太高的监控场景使用，比如每分钟上报一次机房温度数据，可以接受数据少量丢失。 At least once: 至少一次。消息在传递时，至少会被送达一次。也就是说，不允许丢消息，但是允许有少量重复消息出现。 Exactly once：恰好一次。消息在传递时，只会被送达一次，不允许丢失也不允许重复，这个是最高的等级。  这个服务质量标准不仅适用于 MQTT，对所有的消息队列都是适用的。我们现在常用的绝大部分消息队列提供的服务质量都是 At least once，包括 RocketMQ、RabbitMQ 和 Kafka 都是这样。
+也就是说，消息队列很难保证消息不重复
+用幂等性解决重复消息问题 一般解决重复消息的办法是，在消费端，让我们消费消息的操作具备幂等性。
+一个幂等操作的特点是，其任意多次执行所产生的影响均与一次执行的影响相同。
+一个幂等的方法，使用同样的参数，对它进行多次调用和一次调用，对系统产生的影响是一样的。所以，对于幂等的方法，不用担心重复执行会对系统造成任何改变。
+如果我们系统消费消息的业务逻辑具备幂等性，那就不用担心消息重复的问题了，因为同一条消息，消费一次和消费多次对系统的影响是完全一样的。也就可以认为，消费多次等于消费一次。从对系统的影响结果来说：At least once + 幂等消费 = Exactly once。
+常用设计幂等操作的方法
+ 利用数据库的唯一约束实现幂等  对于一个转账操作，我们可以设置对于每一个转账单只能进行一次转账操作，这样除第一次操作外其他重复操作都会失败。
+基于这个思路，不光是可以使用关系型数据库，只要是支持类似“INSERT IF NOT EXIST”语义的存储类系统都可以用于实现幂等，比如，还可以用 Redis 的 SETNX 命令来替代数据库中的唯一约束，来实现幂等消费。
+为更新的数据设置前置条件  如果满足条件就更新数据，否则拒绝更新数据，在更新数据的时候，同时变更前置条件中需要判断的数据。这样，重复执行这个操作时，由于第一次更新数据的时候已经变更了前置条件中需要判断的数据，不满足前置条件，则不会重复执行更新数据操作。
+记录并检查操作  记录并检查操作，也称为“Token 机制或者 GUID（全局唯一 ID）机制”，实现的思路特别简单：在执行数据更新操作之前，先检查一下是否执行过这个更新操作。
+具体的实现方法是，在发送消息时，给每条消息指定一个全局唯一的 ID，消费时，先根据这个 ID 检查这条消息是否有被消费过，如果没有消费过，才更新数据，然后将消费状态置为已消费。</description>
+    </item>
+    
+    <item>
+      <title>概览消息队列篇二：如何确保消息不丢失</title>
+      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</guid>
+      <description>极客时间《消息队列高手课》笔记
+ 检测消息丢失的方法 可以使用类似分布式链路追踪系统来追踪每一条信息。
+还可以利用消息队列的有序性来验证是否有消息丢失。
+在 Producer 端，我们给每个发出的消息附加一个连续递增的序号，然后在 Consumer 端来检查这个序号的连续性
+如果没有消息丢失，Consumer 收到消息的序号必然是连续递增的，或者说收到的消息，其中的序号必然是上一条消息的序号 +1。如果检测到序号不连续，那就是丢消息了。
+大多数消息队列的客户端都支持拦截器机制，你可以利用这个拦截器机制，在 Producer 发送消息之前的拦截器中将序号注入到消息中，在 Consumer 收到消息的拦截器中检测序号的连续性，这样实现的好处是消息检测的代码不会侵入到你的业务代码中，待你的系统稳定后，也方便将这部分检测的逻辑关闭或者删除。
+确保消息可靠传递 一条消息从生产到消费完成这个过程，可以划分三个阶段，
+ 生产阶段: 在这个阶段，从消息在 Producer 创建出来，经过网络传输发送到 Broker(mq服务端)端。 存储阶段: 在这个阶段，消息在 Broker 端存储，如果是集群，消息会在这个阶段被复制到其他的副本上。 消费阶段: 在这个阶段，Consumer 从 Broker 上拉取消息，经过网络传输发送到 Consumer 上。  下面就如何确保消息可靠传递分别对三个阶段进行分析
+ 生产阶段  在生产阶段，消息队列通过最常用的请求确认机制，来保证消息的可靠传递：当你的代码调用发消息方法时，消息队列的客户端会把消息发送到 Broker，Broker 收到消息后，会给客户端返回一个确认响应，表明消息已经收到了。客户端收到响应后，完成了一次正常消息的发送。
+只要 Producer 收到了 Broker 的确认响应，就可以保证消息在生产阶段不会丢失。有些消息队列在长时间没收到发送确认响应后，会自动重试，如果重试再失败，就会以返回值或者异常的方式告知用户。
+存储阶段  在存储阶段正常情况下，只要 Broker 在正常运行，就不会出现丢失消息的问题，但是如果 Broker 出现了故障，比如进程死掉了或者服务器宕机了，还是可能会丢失消息的。
+如果对消息的可靠性要求非常高，可以通过配置 Broker 参数来避免因为宕机丢消息。
+对于单个节点的 Broker，需要配置 Broker 参数，在收到消息后，将消息写入磁盘后再给 Producer 返回确认响应，这样即使发生宕机，由于消息已经被写入磁盘，就不会丢失消息，恢复后还可以继续消费。例如，在 RocketMQ 中，需要将刷盘方式 flushDiskType 配置为 SYNC_FLUSH 同步刷盘。</description>
+    </item>
+    
+    <item>
+      <title>概览Redis篇三：RDB快照</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
  什么是RDB 所谓RDB，即Redis DataBase。是对Redis做的一个内存快照，即将内存中的数据在某一个时刻的状态记录。
 对 Redis 来说，它实现类似照片记录效果的方式，就是把某一时刻的状态以文件的形式写到磁盘上，也就是快照。这样一来，即使宕机，快照文件也不会丢失，数据的可靠性也就得到了保证。这个快照文件就称为 RDB 文件。
@@ -35,11 +102,11 @@ Redis 提供了两个命令来生成 RDB 文件，分别是 save 和 bgsave。
     </item>
     
     <item>
-      <title>Redis篇五：哨兵</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</link>
+      <title>概览Redis篇五：哨兵</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
  什么是哨兵，哨兵有什么用 哨兵其实就是一个运行在特殊模式下的 Redis 进程，主从库实例运行的同时，它也在运行。哨兵主要负责的就是三个任务：监控、选主（选择主库）和通知。
 有了哨兵，我们就可以在主库故障的情况下快速实现主从库自动切换。
@@ -61,11 +128,11 @@ Redis 提供了两个命令来生成 RDB 文件，分别是 save 和 bgsave。
     </item>
     
     <item>
-      <title>Redis篇六：切片集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</link>
+      <title>概览Redis篇六：切片集群</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
  什么是切片集群，有什么用 切片集群，也叫分片集群，就是指启动多个 Redis 实例组成一个集群，然后按照一定的规则，把收到的数据划分成多份，每一份用一个实例来保存。
 当Redis保存大量数据时，其在进行RDB持久化时需要fork一个子进程，而fork子进程的用时和Redis的数据量是正相关的，而 fork 在执行时会阻塞主线程。数据量越大，fork 操作造成的主线程阻塞的时间越长。因此如果Redis保存了大量数据，会导致Redis响应变慢。
@@ -80,11 +147,11 @@ Redis Cluster 方案采用哈希槽Hash Slot，来处理数据和实例之间的
     </item>
     
     <item>
-      <title>Redis篇四：主从</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</link>
+      <title>概览Redis篇四：主从</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
  Redis的高可靠性 Redis 具有高可靠性，又是什么意思呢？其实，这里有两层含义：一是数据尽量少丢失，二是服务尽量少中断。
 AOF 和 RDB 保证了前者，而对于后者，Redis 的做法就是增加副本冗余量，将一份数据同时保存在多个实例上。即使有一个实例出现了故障，需要过一段时间才能恢复，其他实例也可以对外提供服务，不会影响业务使用。
@@ -121,30 +188,6 @@ IP 寄存器就是指令指针寄存器（Instruction Pointer Register），指�
     </item>
     
     <item>
-      <title>Redis篇二：AOF日志</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</link>
-      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</guid>
-      <description>极客时间《Redis 核心技术与实战》学习笔记
- AOF: Append Only File
-AOF日志的WAL 数据库中的WAL是Write-Ahead Logging, 为先写日志后执行。而Redis中的WAL为Write Ahead Log,先执行后写日志。
-为了避免额外的开销，Redis在向AOF里面记录日志时，不回去对这些命令进行语法检查，因此，如果先记录日志再执行命令的话，日志中有可能记录了错误的命令，Redis在使用日志恢复数据时，就可能会出错。
-AOF日志中记录了什么内容 有如下命令：
-set testkey testvalue 则AOF日志内容为：
-*3 $3 set $7 testkey $9 testvalue 其中“*3”表示当前命令有3个部分，每部分都由“$+数字”开头，后面紧跟具体的命令、键或值。
-AOF的潜在风险 AOF使用先执行，再写日志的方式，这样可以避免记录错误的命令，同时不会阻塞当前的写操作。
-但这样也带来了一些潜在风险：
- 刚执行完一个命令，没来得及记日志就宕机了，这个命令和相应的数据就有丢失的风险。 AOF避免了对当前命令的阻塞，但AOF写日志是在主线程中执行的，可能会给下一个操作带来阻塞风险。  这就需要我们对AOF写日志的实际进行把控。
-AOF的三种写回策略   Always，同步写回：每个写命令执行完，立马同步地将日志写回磁盘；
-  Everysec，每秒写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，每隔一秒把缓冲区中的内容写入磁盘；
-  No，操作系统控制的写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，由操作系统决定何时将缓冲区内容写回磁盘。
-  针对避免主线程阻塞和减少数据丢失问题，这三种写回策略都无法做到两全其美。原因如下：
- “同步写回”可以做到基本不丢数据，但是它在每一个写命令后都有一个慢速的落盘操作，不可避免地会影响主线程性能； 虽然“操作系统控制的写回”在写完缓冲区后，就可以继续执行后续的命令，但是落盘的时机已经不在 Redis 手中了，只要 AOF 记录没有写回磁盘，一旦宕机对应的数据就丢失了； “每秒写回”采用一秒写回一次的频率，避免了“同步写回”的性能开销，虽然减少了对系统性能的影响，但是如果发生宕机，上一秒内未落盘的命令操作仍然会丢失。所以，这只能算是，在避免影响主线程性能和避免数据丢失两者间取了个折中。  总结一下：
- 想要获得高性能，就选择 No 策略； 如果想要得到高可靠性保证，就选择 Always 策略； 如果允许数据有一点丢失，又希望性能别受太大影响的话，那么就选择 Everysec 策略。  AOF重写 当系统运行一段时间后，AOF日志会越来越大，这会带来一些问题：</description>
-    </item>
-    
-    <item>
       <title>SOCKET随笔</title>
       <link>http://yangchnet.github.io/Dessert/posts/net/socket%E9%9A%8F%E7%AC%94/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
@@ -165,6 +208,30 @@ UDP可以是全双工的
     </item>
     
     <item>
+      <title>概览Redis篇二：AOF日志</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</link>
+      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</guid>
+      <description>极客时间《Redis 核心技术与实战》学习笔记
+ AOF: Append Only File
+AOF日志的WAL 数据库中的WAL是Write-Ahead Logging, 为先写日志后执行。而Redis中的WAL为Write Ahead Log,先执行后写日志。
+为了避免额外的开销，Redis在向AOF里面记录日志时，不回去对这些命令进行语法检查，因此，如果先记录日志再执行命令的话，日志中有可能记录了错误的命令，Redis在使用日志恢复数据时，就可能会出错。
+AOF日志中记录了什么内容 有如下命令：
+set testkey testvalue 则AOF日志内容为：
+*3 $3 set $7 testkey $9 testvalue 其中“*3”表示当前命令有3个部分，每部分都由“$+数字”开头，后面紧跟具体的命令、键或值。
+AOF的潜在风险 AOF使用先执行，再写日志的方式，这样可以避免记录错误的命令，同时不会阻塞当前的写操作。
+但这样也带来了一些潜在风险：
+ 刚执行完一个命令，没来得及记日志就宕机了，这个命令和相应的数据就有丢失的风险。 AOF避免了对当前命令的阻塞，但AOF写日志是在主线程中执行的，可能会给下一个操作带来阻塞风险。  这就需要我们对AOF写日志的实际进行把控。
+AOF的三种写回策略   Always，同步写回：每个写命令执行完，立马同步地将日志写回磁盘；
+  Everysec，每秒写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，每隔一秒把缓冲区中的内容写入磁盘；
+  No，操作系统控制的写回：每个写命令执行完，只是先把日志写到 AOF 文件的内存缓冲区，由操作系统决定何时将缓冲区内容写回磁盘。
+  针对避免主线程阻塞和减少数据丢失问题，这三种写回策略都无法做到两全其美。原因如下：
+ “同步写回”可以做到基本不丢数据，但是它在每一个写命令后都有一个慢速的落盘操作，不可避免地会影响主线程性能； 虽然“操作系统控制的写回”在写完缓冲区后，就可以继续执行后续的命令，但是落盘的时机已经不在 Redis 手中了，只要 AOF 记录没有写回磁盘，一旦宕机对应的数据就丢失了； “每秒写回”采用一秒写回一次的频率，避免了“同步写回”的性能开销，虽然减少了对系统性能的影响，但是如果发生宕机，上一秒内未落盘的命令操作仍然会丢失。所以，这只能算是，在避免影响主线程性能和避免数据丢失两者间取了个折中。  总结一下：
+ 想要获得高性能，就选择 No 策略； 如果想要得到高可靠性保证，就选择 Always 策略； 如果允许数据有一点丢失，又希望性能别受太大影响的话，那么就选择 Everysec 策略。  AOF重写 当系统运行一段时间后，AOF日志会越来越大，这会带来一些问题：</description>
+    </item>
+    
+    <item>
       <title>概览容器篇一：镜像</title>
       <link>http://yangchnet.github.io/Dessert/posts/clould/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
       <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
@@ -181,11 +248,11 @@ FROMdebian:stretchRUN set -x; buildDeps=&amp;#39;gcc libc6-dev make wget&amp;#39
     </item>
     
     <item>
-      <title>Redis篇一：单线程模型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
+      <title>概览Redis篇一：单线程模型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
       <description> 极客时间《Redis 核心技术与实战》学习笔记
  Redis单线程模型 Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。但 Redis 的其他功能，比如持久化、异步删除、集群数据同步等，其实是由额外的线程执行的。
 为什么Redis采用单线程 通畅的程序设计都采用多线程来提高性能，获得更快的响应速度。
@@ -235,11 +302,11 @@ mysql -h$ip -P$port -u$user -p 这里要注意的一个问题是：一个用户�
     </item>
     
     <item>
-      <title>消息队列篇一：不同的mq的消息模型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</link>
+      <title>概览消息队列篇一：不同的mq的消息模型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</guid>
       <description>极客时间《消息队列高手课》笔记
  1. 主题和队列 最基本的队列模型，是按照“队列”的数据结构来设计的，即先进先出。生产者发送消息（入队），消费者获取消息（出队）。
 当有多个生产者往同一个队列中发送消息，则这个队列中可以消费到的消息，就是这些生产者生产的所有消息的合集。消息的顺序就是这些生产者发送消息的自然顺序。如果有多个消费者接收同一个队列的消息，这些消费者之间实际上是竞争的关系，每个消费者只能收到队列中的一部分消息，也就是说任何一条消息只能被其中的一个消费者收到。
@@ -317,20 +384,6 @@ A(4) - B(0) - C(1) \ D(0) 则A、B 和 C 的populated字段将为 1，而 D 为 
       <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</guid>
       <description>1. Linux 中的信号 信号这个概念在很早期的 Unix 系统上就有。它一般会从 1 开始编号，通常来说，信号编号是 1 到 31，这个编号在所有的 Unix 系统上都是一样的。
    取值 名称 解释 默认动作     1 SIGHUP 挂起    2 SIGINT 中断    3 SIGQUIT 退出    4 SIGILL 非法指令    5 SIGTRAP 断点或陷阱指令    6 SIGABRT abort发出的信号    7 SIGBUS 非法内存访问    8 SIGFPE 浮点异常    9 SIGKILL kill信号 不能被忽略、处理和阻塞   10 SIGUSR1 用户信号1    11 SIGSEGV 无效内存访问    12 SIGUSR2 用户信号2    13 SIGPIPE 管道破损，没有读端的管道写数据    14 SIGALRM alarm发出的信号    15 SIGTERM 终止信号    16 SIGSTKFLT 栈溢出    17 SIGCHLD 子进程退出 默认忽略   18 SIGCONT 进程继续    19 SIGSTOP 进程停止 不能被忽略、处理和阻塞   20 SIGTSTP 进程停止    21 SIGTTIN 进程停止，后台进程从终端读数据时    22 SIGTTOU 进程停止，后台进程想终端写数据时    23 SIGURG I/O有紧急数据到达当前进程 默认忽略   24 SIGXCPU 进程的CPU时间片到期    25 SIGXFSZ 文件大小的超出上限    26 SIGVTALRM 虚拟时钟超时    27 SIGPROF profile时钟超时    28 SIGWINCH 窗口大小改变 默认忽略   29 SIGIO I/O相关    30 SIGPWR 关机 默认忽略   31 SIGSYS 系统调用异常     用一句话来概括，信号（Signal）其实就是 Linux 进程收到的一个通知。这些通知产生的源头有很多种，通知的类型也有很多种。比如下面这几个典型的场景：</description>
-    </item>
-    
-    <item>
-      <title>使用sealyun安装k8s</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</link>
-      <pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E4%BD%BF%E7%94%A8sealyun%E5%AE%89%E8%A3%85k8s/</guid>
-      <description>1. 准备节点 可以使用云服务器，这里我们选择vagrant搭建本地虚拟机节点。
-安装vagrant(需要提前安装virtualbox)
-yay -S vagrant 创建虚拟机
-mkdir ~/vagrant cd ~/vagrant &amp;amp;&amp;amp; mkdir 0.2 0.3 0.4 cd ~/vagrant/0.2 vagrant init bento/centos-7.7 这会在~/vagrant/0.2下创建Vagrantfile，其内容大致为：（省略注释）
-# -*- mode: ruby -*- # vi: set ft=ruby : Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.vm.box = &amp;quot;bento/centos-7.7&amp;quot; end 修改vagrantfile:
-# -*- mode: ruby -*- # vi: set ft=ruby : Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.vm.box = &amp;quot;bento/centos-7.7&amp;quot; # 设置虚拟机ip地址 config.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.0.2&amp;quot; # 设置虚拟机host config.vm.hostname = &amp;quot;node.02&amp;quot; config.vm.provider &amp;quot;virtualbox&amp;quot; do |vb| # Display the VirtualBox GUI when booting the machine vb.</description>
     </item>
     
     <item>
@@ -831,11 +884,12 @@ type User struct { Name string `mytag:&amp;#34;MyName&amp;#34;` Email stirng `my
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/clould/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
-      <description>部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
+      <description>已过时，不可用
+ 部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
 2. Vagrantfile 建立如下目录
 k8s-cluster ├── kubernetes-setup │ ├── master-playbook.yml │ └── node-playbook.yml └── Vagrantfile 其中，Vagrantfile内容如下：
-IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.ssh.insert_key = false config.vm.provider &amp;quot;virtualbox&amp;quot; do |v| v.memory = 2048 v.cpus = 2 end config.vm.define &amp;quot;k8s-master&amp;quot; do |master| master.vm.box = IMAGE_NAME master.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.50.10&amp;quot; master.vm.hostname = &amp;quot;k8s-master&amp;quot; master.vm.provision &amp;quot;ansible&amp;quot; do |ansible| ansible.playbook = &amp;quot;kubernetes-setup/master-playbook.yml&amp;quot; ansible.extra_vars = { node_ip: &amp;quot;192.</description>
+IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp;quot;2&amp;quot;) do |config| config.ssh.insert_key = false config.vm.provider &amp;quot;virtualbox&amp;quot; do |v| v.memory = 2048 v.cpus = 2 end config.vm.define &amp;quot;k8s-master&amp;quot; do |master| master.vm.box = IMAGE_NAME master.vm.network &amp;quot;private_network&amp;quot;, ip: &amp;quot;192.168.50.10&amp;quot; master.vm.hostname = &amp;quot;k8s-master&amp;quot; master.vm.provision &amp;quot;ansible&amp;quot; do |ansible| ansible.playbook = &amp;quot;kubernetes-setup/master-playbook.yml&amp;quot; ansible.</description>
     </item>
     
     <item>
@@ -869,16 +923,6 @@ https://askubuntu.com/questions/257290/configure-proxy-for-apt</description>
       
       <guid>http://yangchnet.github.io/Dessert/posts/clould/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
       <description>apiVersion可能的字段值：    Kind apiVersion     CertificateSigningRequest certificates.k8s.io/v1beta1   ClusterRoleBinding rbac.authorization.k8s.io/v1   ClusterRole rbac.authorization.k8s.io/v1   ComponentStatus v1   ConfigMap v1   ControllerRevision apps/v1   CronJob batch/v1beta1   DaemonSet extensions/v1beta1   Deployment extensions/v1beta1   Endpoints v1   Event v1   HorizontalPodAutoscaler autoscaling/v1   Ingress extensions/v1beta1   Job batch/v1   LimitRange v1   Namespace v1   NetworkPolicy extensions/v1beta1   Node v1   PersistentVolumeClaim v1   PersistentVolume v1   PodDisruptionBudget policy/v1beta1   Pod v1   PodSecurityPolicy extensions/v1beta1   PodTemplate v1   ReplicaSet extensions/v1beta1   ReplicationController v1   ResourceQuota v1   RoleBinding rbac.</description>
-    </item>
-    
-    <item>
-      <title>安装etcd</title>
-      <link>http://yangchnet.github.io/Dessert/posts/clould/%E5%AE%89%E8%A3%85etcd/</link>
-      <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/clould/%E5%AE%89%E8%A3%85etcd/</guid>
-      <description>安装goreman  go get github.com/mattn/goreman 下载etcd 从etcd release 页面下载etcd v3.4.9二进制文件  tar -zxvf etcd-v3.4.9-linux-amd64.tar.gz # 解压 cd etcd-v3.4.9-linux-amd64 sudo mv etcd /usr/local/bin sudo mv etcdctl /usr/local/bin 下载Procfile文件  https://github.com/etcd-io/etcd/blob/v3.4.9/Procfile
-# Use goreman to run `go get github.com/mattn/goreman` etcd1: bin/etcd --name infra1 --listen-client-urls http://127.0.0.1:2379 --advertise-client-urls http://127.0.0.1:2379 --listen-peer-urls http://127.0.0.1:12380 --initial-advertise-peer-urls http://127.0.0.1:12380 --initial-cluster-token etcd-cluster-1 --initial-cluster &#39;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380&#39; --initial-cluster-state new --enable-pprof --logger=zap --log-outputs=stderr etcd2: bin/etcd --name infra2 --listen-client-urls http://127.0.0.1:22379 --advertise-client-urls http://127.0.0.1:22379 --listen-peer-urls http://127.0.0.1:22380 --initial-advertise-peer-urls http://127.</description>
     </item>
     
     <item>
@@ -1095,7 +1139,7 @@ truffle create contract Counter truffle创建了Counter.sol文件，再次查看
 启用虚拟机功能 以管理员身份打开powershell，使用如下命令：  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart 重新启动电脑
 下载Linux内核更新包 适用于 x64 计算机的 WSL2 Linux 内核更新包  运行你下载的更新包。
 将WSL2设置为默认版本 以管理员身份打开powershell，使用如下命令：  wsl --set-default-version 2 选择你要安装的发行版  这里我选择了Ubuntu18.04，获取后安装
-启动安装的发行版即可  2. 使用WSL图形界面  设置环境变量  export DISPLAY=$(awk &amp;#39;/nameserver / {print $2; exit}&amp;#39; /etc/resolv.conf 2&amp;gt;/dev/null):0 export LIBGL_ALWAYS_INDIRECT=1  安装Xserver，这里选择的软件是vcxsrv， 可在sourceforge中下载安装。
+启动安装的发行版即可  2. 使用WSL图形界面(可选)  设置环境变量  export DISPLAY=$(awk &amp;#39;/nameserver / {print $2; exit}&amp;#39; /etc/resolv.conf 2&amp;gt;/dev/null):0 export LIBGL_ALWAYS_INDIRECT=1  安装Xserver，这里选择的软件是vcxsrv， 可在sourceforge中下载安装。
   安装完成后直接启动即可</description>
     </item>
     

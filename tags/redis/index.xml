@@ -11,11 +11,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/redis/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Redis篇二：AOF日志</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</link>
+      <title>概览Redis篇二：AOF日志</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
  AOF: Append Only File
 AOF日志的WAL 数据库中的WAL是Write-Ahead Logging, 为先写日志后执行。而Redis中的WAL为Write Ahead Log,先执行后写日志。
@@ -35,11 +35,11 @@ AOF的三种写回策略   Always，同步写回：每个写命令执行完，�
     </item>
     
     <item>
-      <title>Redis篇一：单线程模型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
+      <title>概览Redis篇一：单线程模型</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
       <description> 极客时间《Redis 核心技术与实战》学习笔记
  Redis单线程模型 Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。但 Redis 的其他功能，比如持久化、异步删除、集群数据同步等，其实是由额外的线程执行的。
 为什么Redis采用单线程 通畅的程序设计都采用多线程来提高性能，获得更快的响应速度。
