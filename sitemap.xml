@@ -23,19 +23,10 @@
     <loc>http://yangchnet.github.io/Dessert/posts/net/%E6%A6%82%E8%BF%B0tls/</loc>
     <lastmod>2022-07-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/cloud/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/container/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/mq/</loc>
     <lastmod>2022-07-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/mq/</loc>
-    <lastmod>2022-07-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E8%B5%84%E6%BA%90%E7%9A%84%E9%9A%94%E7%A6%BB%E4%B8%8E%E9%99%90%E5%88%B6/</loc>
     <lastmod>2022-07-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</loc>
@@ -88,6 +79,9 @@
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2022-07-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/categories/cloud/</loc>
+    <lastmod>2022-07-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/docker/</loc>
     <lastmod>2022-07-10T00:00:00+00:00</lastmod>
