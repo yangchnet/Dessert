@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>TLS on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/tls/</link>
+    <description>Recent content in TLS on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 28 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/tls/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>详解TLS（译）</title>
+      <link>http://yangchnet.github.io/Dessert/posts/net/%E6%A6%82%E8%BF%B0tls/</link>
+      <pubDate>Thu, 28 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/net/%E6%A6%82%E8%BF%B0tls/</guid>
+      <description>1. TLS在哪些地方被使用 TLS(Transport Layer Security),是为计算机网络中提供安全通信的密码学协议。
+HTTPS = HTTP +　TLS SMTPS = SMTPS + TLS FTPS = FTP + TLS &amp;hellip;
+2. TLS给我们带来了什么  认证  TLS检查通信双方的身份 借助于非对称加密，TLS保证我们访问的是“真网站”，不是假冒的。   加密  TLS 通过使用对称加密算法对其进行加密来保护交换的数据免受未经授权的访问。   校验  TLS 通过检查消息验证码来识别传输过程中的任何数据更改    3. TLS通信的工作的基本流程 通畅，TLS包含2个过程，或者说2个协议。
+ Handshake Protocol 在这个阶段，客户端和服务端：  协商协议版本 选择加密算法 通过非对称加密算法验证对方身份呢 建立一个共享的对称加密密钥以应用于接下来的通信   Record Protocol 在这个阶段：  所有发出的信息都被上个阶段商定的对称密钥加密 信息被发送到对面 接收方验证信息是否受到篡改 如果未被篡改，信息将被解密    4. 为什么TLS要同时使用对称加密和非对称加密 很明显，对称加密不能保证通信的安全性，通信双方共享同一个密钥，他们没法进行彼此验证，并且很难保证密钥不被泄露。</description>
+    </item>
+    
+  </channel>
+</rss>
