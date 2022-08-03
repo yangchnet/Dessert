@@ -47,7 +47,7 @@ func growslice(et *_type, old slice, cap int) slice {
 }
 ```
 
-从代码中可以看出，当cap < 1024时，切片容量增长2倍，当cap > 1024时增长1.25倍。
+从代码中可以看出，当cap < 1024时，切片容量增长2倍，当cap > 1024时增长1.25倍，当然，在经过内存对齐等操作后，切片的长度可能不会严格等于原来的2倍或1.25倍。
 
 存在的问题：
 1. not monotonically increasing （不平滑）
