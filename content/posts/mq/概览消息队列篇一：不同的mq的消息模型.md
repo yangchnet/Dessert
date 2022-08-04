@@ -10,6 +10,11 @@ TocOpen: true
 
 > 极客时间[《消息队列高手课》](https://time.geekbang.org/column/article/110459)笔记
 
+- [概览消息队列篇〇：为什么需要消息队列](https://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/)
+- [概览消息队列篇一：不同的mq的消息模型](https://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/)
+- [概览消息队列篇二：如何确保消息不丢失](https://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/)
+- [概览消息队列篇三：重复消息的处理](https://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/)
+
 ## 1. 主题和队列
 
 最基本的队列模型，是按照“队列”的数据结构来设计的，即先进先出。生产者发送消息（入队），消费者获取消息（出队）。
