@@ -10,6 +10,13 @@ TocOpen: true
 
 > 极客时间《Redis 核心技术与实战》学习笔记
 
+- [概览Redis篇一：单线程模型](https://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/)
+- [概览Redis篇二：AOF日志](https://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/)
+- [概览Redis篇三：RDB快照](https://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/)
+- [概览Redis篇四：主从](https://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/)
+- [概览Redis篇五：哨兵](https://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/)
+- [概览Redis篇六：切片集群](https://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/)
+
 ## 什么是切片集群，有什么用
 
 切片集群，也叫分片集群，就是指启动多个 Redis 实例组成一个集群，然后按照一定的规则，把收到的数据划分成多份，每一份用一个实例来保存。

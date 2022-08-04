@@ -25,9 +25,7 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
-
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align Plug 'junegunn/vim-easy-align'
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -53,8 +51,53 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
 
+" auto complete
+Plug 'Valloric/YouCompleteMe'
+
+" auto complete ()[]{}
+Plug 'tmsvg/pear-tree'
+
+Plug 'preservim/nerdtree'
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'preservim/tagbar'
+
 " Initialize plugin system
 call plug#end()
+
+:colorscheme atom-dark
+
+" 设置行号
+set nu
+
+" 设置tab
+set ts=4
+%retab!
+
+" 设置YouCompleteMe不需要预览
+set completeopt-=preview
+
+if !isdirectory(&undodir)
+                call mkdir(&undodir, 'p', 0700)
+endif
+
+set nobackup
+set undodir=~/.vim/undodir
+
+" 设置ctrl+n打开目录
+map <C-n> :NERDTreeToggle<CR>
+
+" 设置F8打开tag bar
+nmap <F8> :TagbarToggle<CR>
+
+" 设置搜索高亮
+set hlsearch
+
+" 停止搜索高亮的键映
+nnoremap <silent> <BS> <BS>:nohlsearch<CR>
 ```
 
 然后在命令模式下执行：`PlugInstall`  
