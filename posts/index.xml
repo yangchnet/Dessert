@@ -9,7 +9,26 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 28 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>走进接口</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Thu, 04 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/</guid>
+      <description>以下代码基于golang1.18
+ 1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。
+概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。
+一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。
+近距离来看itab：
+type itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. 	_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。
+再来看interfacetype
+type interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。
+这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名iface.itab.inter.pkgpath、接口的函数列表iface.itab.inter.mhdr，接口的hash值iface.itab.hash。第二部分是对于实现接口的实体的描述，包括实体的类型iface.itab._type，实体的值iface.data。
+可以将itab的值输出看看：
+type iface struct { tab *itab data unsafe.</description>
+    </item>
+    
     <item>
       <title>详解TLS（译）</title>
       <link>http://yangchnet.github.io/Dessert/posts/net/%E6%A6%82%E8%BF%B0tls/</link>

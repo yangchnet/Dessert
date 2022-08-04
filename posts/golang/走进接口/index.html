@@ -1,0 +1,281 @@
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>走进接口 | Linote</title><meta name=keywords content="golang"><meta name=description content="以下代码基于golang1.18
+ 1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。
+概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。
+一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。
+近距离来看itab：
+type itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. 	_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。
+再来看interfacetype
+type interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。
+这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名iface.itab.inter.pkgpath、接口的函数列表iface.itab.inter.mhdr，接口的hash值iface.itab.hash。第二部分是对于实现接口的实体的描述，包括实体的类型iface.itab._type，实体的值iface.data。
+可以将itab的值输出看看：
+type iface struct { tab *itab data unsafe."><meta name=author content="李昌"><link rel=canonical href=http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/><link crossorigin=anonymous href=/Dessert/assets/css/stylesheet.min.7e145c6c051b0f6645e8d84c6faed7fed1214bbe82c223c2c19815bee6ee8403.css integrity="sha256-fhRcbAUbD2ZF6NhMb67X/tEhS76CwiPCwZgVvubuhAM=" rel="preload stylesheet" as=style><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel=stylesheet><script defer crossorigin=anonymous src=/Dessert/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script><link rel=icon href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico><link rel=icon type=image/png sizes=32x32 href=https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon32.ico><link rel=apple-touch-icon href=http://yangchnet.github.io/Dessert/apple-touch-icon.png><link rel=mask-icon href=http://yangchnet.github.io/Dessert/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.81.0"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="走进接口"><meta property="og:description" content="以下代码基于golang1.18
+ 1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。
+概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。
+一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。
+近距离来看itab：
+type itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. 	_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。
+再来看interfacetype
+type interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。
+这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名iface.itab.inter.pkgpath、接口的函数列表iface.itab.inter.mhdr，接口的hash值iface.itab.hash。第二部分是对于实现接口的实体的描述，包括实体的类型iface.itab._type，实体的值iface.data。
+可以将itab的值输出看看：
+type iface struct { tab *itab data unsafe."><meta property="og:type" content="article"><meta property="og:url" content="http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/"><meta property="og:image" content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-08-04T00:00:00+00:00"><meta property="article:modified_time" content="2022-08-04T00:00:00+00:00"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://yangchnet.github.io/Dessert/papermod-cover.png"><meta name=twitter:title content="走进接口"><meta name=twitter:description content="以下代码基于golang1.18
+ 1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。
+概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。
+一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。
+近距离来看itab：
+type itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. 	_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。
+再来看interfacetype
+type interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。
+这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名iface.itab.inter.pkgpath、接口的函数列表iface.itab.inter.mhdr，接口的hash值iface.itab.hash。第二部分是对于实现接口的实体的描述，包括实体的类型iface.itab._type，实体的值iface.data。
+可以将itab的值输出看看：
+type iface struct { tab *itab data unsafe."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"http://yangchnet.github.io/Dessert/posts/"},{"@type":"ListItem","position":3,"name":"走进接口","item":"http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"走进接口","name":"走进接口","description":"以下代码基于golang1.18\n 1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。\n概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。\n一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。\n近距离来看itab：\ntype itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. \t_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。\n再来看interfacetype\ntype interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。\n这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名iface.itab.inter.pkgpath、接口的函数列表iface.itab.inter.mhdr，接口的hash值iface.itab.hash。第二部分是对于实现接口的实体的描述，包括实体的类型iface.itab._type，实体的值iface.data。\n可以将itab的值输出看看：\ntype iface struct { tab *itab data unsafe.","keywords":["golang"],"articleBody":" 以下代码基于golang1.18\n 1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。\n概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。\n一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。\n近距离来看itab：\ntype itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. \t_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。\n再来看interfacetype\ntype interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。\n这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名iface.itab.inter.pkgpath、接口的函数列表iface.itab.inter.mhdr，接口的hash值iface.itab.hash。第二部分是对于实现接口的实体的描述，包括实体的类型iface.itab._type，实体的值iface.data。\n可以将itab的值输出看看：\ntype iface struct { tab *itab data unsafe.Pointer } type itab struct { inter *interfacetype _type uintptr hash uint32 _ [4]byte myfunc [1]uintptr } type interfacetype struct { mytype uintptr pkgpath string mhdr []uintptr } type Person interface { Walk() Say(words []string) string } type Student struct { name string age int } func (s Student) Walk() { return } func (s Student) Say(words []string) string { return strings.Join(words, \" \") } func main() { var p = Person(Student{ name: \"lichang\", age: 18, }) // 查看iface的结构 \tp_iface := *(*iface)(unsafe.Pointer(\u0026p)) fmt.Println(p_iface.tab) // 查看接口的动态值 \ts := (*Student)(unsafe.Pointer(p_iface.data)) fmt.Println(*s) } 输出：\n\u0026{0x489a80 4773888 3558907866 [0 0 0 0] [4234176]} {lichang 18} 而对于一个空接口来说，其并不是一个iface，而是一个eface:\ntype eface struct { _type *_type data unsafe.Pointer } 一个空接口，其没有函数列表，用于描述空接口的结构体只有两个字段，一是_type，表示实体类型，二是data，指向动态值。\n2. 接口的类型转换 2.1 结构体到接口类型的转换 对于如下代码：\ntype Person interface { Walk() Say(words []string) string } type Student struct { name string age int } func (s Student) Walk() { return } func (s Student) Say(words []string) string { return strings.Join(words, \" \") } func main() { var p = Person(Student{ name: \"lichang\", age: 18, }) fmt.Println(p) } 通过查看汇编代码可知，其在进行Student-Person的转换时，调用了runtime.convT，来看一下这个函数：\nfunc convT(t *_type, v unsafe.Pointer) unsafe.Pointer { // ... 部分条件检查  x := mallocgc(t.size, t, true) typedmemmove(t, x, v) return x } func mallocgc(size uintptr, typ *_type, needzero bool) unsafe.Pointer func typedmemmove(typ *_type, dst, src unsafe.Pointer) convT函数接收一个*_type：t, 一个unsafe.Pointer：v，将类型为t的v指向的值转换为一个可以作为iface结构体第二个字段的值。\n真正工作的只有两行，第一行分配一个类型为t的新的内存空间，并为其赋零值，第二行将v指向的值复制到x，最后返回。\n对于如下代码：\nvar _ Person = (*Student)(nil) 可以检查Student是否实现了Person接口，其底层同样是调用的runtime.convT()，如果Student未实现Person接口，则在typedmemmove会发生panic\n2.2 接口类型之间的转换 type Person interface { Walk() Say(words []string) string } type Walker interface { Walk() } type Student struct { name string age int } func (s Student) Walk() { return } func (s Student) Say(words []string) string { return strings.Join(words, \" \") } func main() { var p = Person(Student{ name: \"lichang\", age: 18, }) var w Walker = p fmt.Println(w) } 编译后查看汇编代码可知，在进行Person接口到Student接口的转换时调用了runtime.convI2I:\nfunc convI2I(dst *interfacetype, src *itab) *itab { if src == nil { return nil } if src.inter == dst { return src } return getitab(dst, src._type, false) } runtime.convI2I函数将src itab中的inter转换到dst类型，并返回一个新的itab，首先检查src不为空，然后判断src的inter是否与dst相等，最后调用了runtime.getitab\n来看runtime.getitab\nfunc getitab(inter *interfacetype, typ *_type, canfail bool) *itab { // ...  var m *itab // 首先会从已经存在的表中查找，如果找到了可以直接结束，否则进行下一步。  // 这里使用原子操作保证在这之前对itabTable的写操作结束。 \tt := (*itabTableType)(atomic.Loadp(unsafe.Pointer(\u0026itabTable))) if m = t.find(inter, typ); m != nil { goto finish } // 如果没找到，加锁继续找 \tlock(\u0026itabLock) if m = itabTable.find(inter, typ); m != nil { unlock(\u0026itabLock) goto finish } // 还没找到，搞个新的 \tm = (*itab)(persistentalloc(unsafe.Sizeof(itab{})+uintptr(len(inter.mhdr)-1)*goarch.PtrSize, 0, \u0026memstats.other_sys)) m.inter = inter m._type = typ m.hash = 0 m.init() itabAdd(m) unlock(\u0026itabLock) finish: if m.fun[0] != 0 { return m } if canfail { return nil } panic(\u0026TypeAssertionError{concrete: typ, asserted: \u0026inter.typ, missingMethod: m.init()}) } 这里一开始在构造itab时并没有直接构造，而是去一个runtime.itabTableType结构体中去查找这个itab是否存在，runtime.itabTableType的定义如下：\ntype itabTableType struct { size uintptr // length of entries array. Always a power of 2. \tcount uintptr // current number of filled entries. \tentries [itabInitSize]*itab // really [size] large } 用于查找itab的函数如下：\nfunc (t *itabTableType) find(inter *interfacetype, typ *_type) *itab { // Implemented using quadratic probing. \t// Probe sequence is h(i) = h0 + i*(i+1)/2 mod 2^k. \t// We're guaranteed to hit all table entries using this probe sequence. \tmask := t.size - 1 h := itabHashFunc(inter, typ) \u0026 mask for i := uintptr(1); ; i++ { p := (**itab)(add(unsafe.Pointer(\u0026t.entries), h*goarch.PtrSize)) // Use atomic read here so if we see m != nil, we also see \t// the initializations of the fields of m. \t// m := *p \tm := (*itab)(atomic.Loadp(unsafe.Pointer(p))) if m == nil { return nil } if m.inter == inter \u0026\u0026 m._type == typ { return m } h += i h \u0026= mask } } 在完成这些步骤之后，一个新的itab就构造完成了，而由于在进行转换时实现接口的实体并没有变化，只是接口类型发生了变化，因此我们只需要将iface.itab重新赋值为我们需要的itab即可。\n2.3 空接口的转换 func main() { var x int = 1 var ix interface{} = x fmt.Println(ix) } 这里调用的是runtime.convT64(SB)函数：\nfunc convT64(val uint64) (x unsafe.Pointer) { if val staticuint64s)) { x = unsafe.Pointer(\u0026staticuint64s[val]) } else { x = mallocgc(8, uint64Type, false) *(*uint64)(x) = val } return } 这里首先检查其值是否小于len(staticuint64s)，如果是的话，就不需要再去进行内存分配，而是直接到数组中取，算是进行了一步优化。否则调用mallocgc为其分配一个新的内存空间，然后将其底层值赋值为val。\n这里如果是将一个字符串转换为空接口类型，则调用的是runtime.convTstring:\nfunc convTstring(val string) (x unsafe.Pointer) { if val == \"\" { x = unsafe.Pointer(\u0026zeroVal[0]) } else { x = mallocgc(unsafe.Sizeof(val), stringType, true) *(*string)(x) = val } return } 逻辑相差不大。\n在runtime包中，对于某些特殊的类型做了优化，可直接调用相应的函数进行实体类型到空接口类型的转化，这些被调用的函数有：\nfunc convT16(val uint16) unsafe.Pointer func convT32(val uint32) unsafe.Pointer func convT64(val uint64) unsafe.Pointer func convTstring(val string) unsafe.Pointer func convTslice(val []uint8) unsafe.Pointer 3. 类型断言 TODO\nReferences Go Questions\ninterface的类型断言是如何实现\n","wordCount":"728","inLanguage":"en","datePublished":"2022-08-04T00:00:00Z","dateModified":"2022-08-04T00:00:00Z","author":{"@type":"Person","name":"李昌"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/"},"publisher":{"@type":"Organization","name":"Linote","logo":{"@type":"ImageObject","url":"https://raw.githubusercontent.com/lich-Img/blogImg/master/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script><header class=header><nav class=nav><div class=logo><a href=http://yangchnet.github.io/Dessert accesskey=h title="Linote (Alt + H)">Linote</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=http://yangchnet.github.io/Dessert/archives/ title=存档><span>存档</span></a></li><li><a href=http://yangchnet.github.io/Dessert/categories/ title=分类><span>分类</span></a></li><li><a href=http://yangchnet.github.io/Dessert/search/ title=搜索><span>搜索</span></a></li><li><a href=http://yangchnet.github.io/Dessert/tags/ title=标签><span>标签</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=http://yangchnet.github.io/Dessert>Home</a>&nbsp;»&nbsp;<a href=http://yangchnet.github.io/Dessert/posts/>Posts</a></div><h1 class=post-title>走进接口</h1><div class=post-meta><span title="2022-08-04 00:00:00 +0000 UTC">August 4, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;李昌</div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#1-%e6%8e%a5%e5%8f%a3%e7%9a%84%e5%86%85%e9%83%a8%e7%bb%93%e6%9e%84 aria-label="1. 接口的内部结构">1. 接口的内部结构</a></li><li><a href=#2-%e6%8e%a5%e5%8f%a3%e7%9a%84%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2 aria-label="2. 接口的类型转换">2. 接口的类型转换</a><ul><li><a href=#21-%e7%bb%93%e6%9e%84%e4%bd%93%e5%88%b0%e6%8e%a5%e5%8f%a3%e7%b1%bb%e5%9e%8b%e7%9a%84%e8%bd%ac%e6%8d%a2 aria-label="2.1 结构体到接口类型的转换">2.1 结构体到接口类型的转换</a></li><li><a href=#22-%e6%8e%a5%e5%8f%a3%e7%b1%bb%e5%9e%8b%e4%b9%8b%e9%97%b4%e7%9a%84%e8%bd%ac%e6%8d%a2 aria-label="2.2 接口类型之间的转换">2.2 接口类型之间的转换</a></li><li><a href=#23-%e7%a9%ba%e6%8e%a5%e5%8f%a3%e7%9a%84%e8%bd%ac%e6%8d%a2 aria-label="2.3 空接口的转换">2.3 空接口的转换</a></li></ul></li><li><a href=#3-%e7%b1%bb%e5%9e%8b%e6%96%ad%e8%a8%80 aria-label="3. 类型断言">3. 类型断言</a></li><li><a href=#references aria-label=References>References</a></li></ul></div></details></div><div class=post-content><blockquote><p>以下代码基于golang1.18</p></blockquote><h2 id=1-接口的内部结构>1. 接口的内部结构<a hidden class=anchor aria-hidden=true href=#1-接口的内部结构>#</a></h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>iface</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>tab</span>  <span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span>
+	<span style=color:#a6e22e>data</span> <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+}
+</code></pre></div><p>一个接口是一个<code>iface</code>结构体，其中包含一个<code>itab</code>指针和一个<code>unsafe.Pointer</code>。</p><p>概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。</p><p>一个<code>itab</code>可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而<code>data</code>所指向的<code>unsafe.Pointer</code>则指向接口的动态值。</p><p>近距离来看<code>itab</code>：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>itab</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>inter</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>interfacetype</span>
+	<span style=color:#a6e22e>_type</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>_type</span>
+	<span style=color:#a6e22e>hash</span>  <span style=color:#66d9ef>uint32</span> <span style=color:#75715e>// copy of _type.hash. Used for type switches.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>_</span>     [<span style=color:#ae81ff>4</span>]<span style=color:#66d9ef>byte</span>
+	<span style=color:#a6e22e>fun</span>   [<span style=color:#ae81ff>1</span>]<span style=color:#66d9ef>uintptr</span> <span style=color:#75715e>// variable sized. fun[0]==0 means _type does not implement inter.
+</span><span style=color:#75715e></span>}
+</code></pre></div><p>其中<code>inter</code>字段描述了接口的类型，<code>_type</code>字段描述了实体类型，<code>hash</code>字段是类型哈希，用于类型匹配，<code>fun</code>字段放置和接口方法对应的具体数据类型的方法地址。</p><p>再来看<code>interfacetype</code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>interfacetype</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>typ</span>     <span style=color:#a6e22e>_type</span>
+	<span style=color:#a6e22e>pkgpath</span> <span style=color:#a6e22e>name</span>
+	<span style=color:#a6e22e>mhdr</span>    []<span style=color:#a6e22e>imethod</span>
+}
+</code></pre></div><p>其中<code>typ</code>和<code>itab</code>中的<code>_type</code>为同一个值，<code>pkgpath</code>则存储了接口的包名，<code>mhdr</code>则表示接口所定义的函数列表。</p><p>这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名<code>iface.itab.inter.pkgpath</code>、接口的函数列表<code>iface.itab.inter.mhdr</code>，接口的hash值<code>iface.itab.hash</code>。第二部分是对于实现接口的实体的描述，包括实体的类型<code>iface.itab._type</code>，实体的值<code>iface.data</code>。</p><p>可以将itab的值输出看看：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>iface</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>tab</span>  <span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span>
+	<span style=color:#a6e22e>data</span> <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+}
+
+<span style=color:#66d9ef>type</span> <span style=color:#a6e22e>itab</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>inter</span>  <span style=color:#f92672>*</span><span style=color:#a6e22e>interfacetype</span>
+	<span style=color:#a6e22e>_type</span>  <span style=color:#66d9ef>uintptr</span>
+	<span style=color:#a6e22e>hash</span>   <span style=color:#66d9ef>uint32</span>
+	<span style=color:#a6e22e>_</span>      [<span style=color:#ae81ff>4</span>]<span style=color:#66d9ef>byte</span>
+	<span style=color:#a6e22e>myfunc</span> [<span style=color:#ae81ff>1</span>]<span style=color:#66d9ef>uintptr</span>
+}
+
+<span style=color:#66d9ef>type</span> <span style=color:#a6e22e>interfacetype</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>mytype</span>  <span style=color:#66d9ef>uintptr</span>
+	<span style=color:#a6e22e>pkgpath</span> <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>mhdr</span>    []<span style=color:#66d9ef>uintptr</span>
+}
+
+<span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Person</span> <span style=color:#66d9ef>interface</span> {
+	<span style=color:#a6e22e>Walk</span>()
+	<span style=color:#a6e22e>Say</span>(<span style=color:#a6e22e>words</span> []<span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span>
+}
+
+<span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Student</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>name</span> <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>age</span>  <span style=color:#66d9ef>int</span>
+}
+
+<span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>s</span> <span style=color:#a6e22e>Student</span>) <span style=color:#a6e22e>Walk</span>() {
+	<span style=color:#66d9ef>return</span>
+}
+
+<span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>s</span> <span style=color:#a6e22e>Student</span>) <span style=color:#a6e22e>Say</span>(<span style=color:#a6e22e>words</span> []<span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span> {
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>strings</span>.<span style=color:#a6e22e>Join</span>(<span style=color:#a6e22e>words</span>, <span style=color:#e6db74>&#34; &#34;</span>)
+}
+
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
+	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>p</span> = <span style=color:#a6e22e>Person</span>(<span style=color:#a6e22e>Student</span>{
+		<span style=color:#a6e22e>name</span>: <span style=color:#e6db74>&#34;lichang&#34;</span>,
+		<span style=color:#a6e22e>age</span>:  <span style=color:#ae81ff>18</span>,
+	})
+
+	<span style=color:#75715e>// 查看iface的结构
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>p_iface</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>*</span>(<span style=color:#f92672>*</span><span style=color:#a6e22e>iface</span>)(<span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>p</span>))
+	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>p_iface</span>.<span style=color:#a6e22e>tab</span>)
+
+	<span style=color:#75715e>// 查看接口的动态值
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>s</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>Student</span>)(<span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>(<span style=color:#a6e22e>p_iface</span>.<span style=color:#a6e22e>data</span>))
+	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#f92672>*</span><span style=color:#a6e22e>s</span>)
+}
+</code></pre></div><p>输出：</p><pre><code>&amp;{0x489a80 4773888 3558907866 [0 0 0 0] [4234176]}
+{lichang 18}
+</code></pre><p>而对于一个空接口来说，其并不是一个<code>iface</code>，而是一个<code>eface</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>eface</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>_type</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>_type</span>
+	<span style=color:#a6e22e>data</span>  <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+}
+</code></pre></div><p>一个空接口，其没有函数列表，用于描述空接口的结构体只有两个字段，一是<code>_type</code>，表示实体类型，二是<code>data</code>，指向动态值。</p><h2 id=2-接口的类型转换>2. 接口的类型转换<a hidden class=anchor aria-hidden=true href=#2-接口的类型转换>#</a></h2><h3 id=21-结构体到接口类型的转换>2.1 结构体到接口类型的转换<a hidden class=anchor aria-hidden=true href=#21-结构体到接口类型的转换>#</a></h3><p>对于如下代码：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Person</span> <span style=color:#66d9ef>interface</span> {
+	<span style=color:#a6e22e>Walk</span>()
+	<span style=color:#a6e22e>Say</span>(<span style=color:#a6e22e>words</span> []<span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span>
+}
+
+<span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Student</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>name</span> <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>age</span>  <span style=color:#66d9ef>int</span>
+}
+
+<span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>s</span> <span style=color:#a6e22e>Student</span>) <span style=color:#a6e22e>Walk</span>() {
+	<span style=color:#66d9ef>return</span>
+}
+
+<span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>s</span> <span style=color:#a6e22e>Student</span>) <span style=color:#a6e22e>Say</span>(<span style=color:#a6e22e>words</span> []<span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span> {
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>strings</span>.<span style=color:#a6e22e>Join</span>(<span style=color:#a6e22e>words</span>, <span style=color:#e6db74>&#34; &#34;</span>)
+}
+
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
+	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>p</span> = <span style=color:#a6e22e>Person</span>(<span style=color:#a6e22e>Student</span>{
+		<span style=color:#a6e22e>name</span>: <span style=color:#e6db74>&#34;lichang&#34;</span>,
+		<span style=color:#a6e22e>age</span>:  <span style=color:#ae81ff>18</span>,
+	})
+
+	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>p</span>)
+}
+</code></pre></div><p>通过查看汇编代码可知，其在进行<code>Student</code>-><code>Person</code>的转换时，调用了<code>runtime.convT</code>，来看一下这个函数：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convT</span>(<span style=color:#a6e22e>t</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>_type</span>, <span style=color:#a6e22e>v</span> <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>) <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span> {
+	<span style=color:#75715e>// ... 部分条件检查
+</span><span style=color:#75715e></span>
+	<span style=color:#a6e22e>x</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>mallocgc</span>(<span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>size</span>, <span style=color:#a6e22e>t</span>, <span style=color:#66d9ef>true</span>)
+	<span style=color:#a6e22e>typedmemmove</span>(<span style=color:#a6e22e>t</span>, <span style=color:#a6e22e>x</span>, <span style=color:#a6e22e>v</span>)
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>x</span>
+}
+
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>mallocgc</span>(<span style=color:#a6e22e>size</span> <span style=color:#66d9ef>uintptr</span>, <span style=color:#a6e22e>typ</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>_type</span>, <span style=color:#a6e22e>needzero</span> <span style=color:#66d9ef>bool</span>) <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>typedmemmove</span>(<span style=color:#a6e22e>typ</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>_type</span>, <span style=color:#a6e22e>dst</span>, <span style=color:#a6e22e>src</span> <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>)
+</code></pre></div><p><code>convT</code>函数接收一个<code>*_type</code>：t, 一个<code>unsafe.Pointer</code>：v，将类型为t的v指向的值转换为一个可以作为iface结构体第二个字段的值。</p><p>真正工作的只有两行，第一行分配一个类型为t的新的内存空间，并为其赋零值，第二行将v指向的值复制到x，最后返回。</p><p>对于如下代码：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>var</span> <span style=color:#a6e22e>_</span> <span style=color:#a6e22e>Person</span> = (<span style=color:#f92672>*</span><span style=color:#a6e22e>Student</span>)(<span style=color:#66d9ef>nil</span>)
+</code></pre></div><p>可以检查Student是否实现了Person接口，其底层同样是调用的<code>runtime.convT()</code>，如果Student未实现Person接口，则在typedmemmove会发生panic</p><h3 id=22-接口类型之间的转换>2.2 接口类型之间的转换<a hidden class=anchor aria-hidden=true href=#22-接口类型之间的转换>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Person</span> <span style=color:#66d9ef>interface</span> {
+	<span style=color:#a6e22e>Walk</span>()
+	<span style=color:#a6e22e>Say</span>(<span style=color:#a6e22e>words</span> []<span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span>
+}
+
+<span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Walker</span> <span style=color:#66d9ef>interface</span> {
+	<span style=color:#a6e22e>Walk</span>()
+}
+
+<span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Student</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>name</span> <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>age</span>  <span style=color:#66d9ef>int</span>
+}
+
+<span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>s</span> <span style=color:#a6e22e>Student</span>) <span style=color:#a6e22e>Walk</span>() {
+	<span style=color:#66d9ef>return</span>
+}
+
+<span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>s</span> <span style=color:#a6e22e>Student</span>) <span style=color:#a6e22e>Say</span>(<span style=color:#a6e22e>words</span> []<span style=color:#66d9ef>string</span>) <span style=color:#66d9ef>string</span> {
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>strings</span>.<span style=color:#a6e22e>Join</span>(<span style=color:#a6e22e>words</span>, <span style=color:#e6db74>&#34; &#34;</span>)
+}
+
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
+	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>p</span> = <span style=color:#a6e22e>Person</span>(<span style=color:#a6e22e>Student</span>{
+		<span style=color:#a6e22e>name</span>: <span style=color:#e6db74>&#34;lichang&#34;</span>,
+		<span style=color:#a6e22e>age</span>:  <span style=color:#ae81ff>18</span>,
+	})
+
+	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>w</span> <span style=color:#a6e22e>Walker</span> = <span style=color:#a6e22e>p</span>
+
+	<span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>w</span>)
+}
+</code></pre></div><p>编译后查看汇编代码可知，在进行<code>Person</code>接口到<code>Student</code>接口的转换时调用了<code>runtime.convI2I</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convI2I</span>(<span style=color:#a6e22e>dst</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>interfacetype</span>, <span style=color:#a6e22e>src</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span>) <span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span> {
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>src</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>nil</span> {
+		<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+	}
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>src</span>.<span style=color:#a6e22e>inter</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>dst</span> {
+		<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>src</span>
+	}
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>getitab</span>(<span style=color:#a6e22e>dst</span>, <span style=color:#a6e22e>src</span>.<span style=color:#a6e22e>_type</span>, <span style=color:#66d9ef>false</span>)
+}
+</code></pre></div><p><code>runtime.convI2I</code>函数将src itab中的inter转换到dst类型，并返回一个新的itab，首先检查src不为空，然后判断src的inter是否与dst相等，最后调用了<code>runtime.getitab</code></p><p>来看<code>runtime.getitab</code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>getitab</span>(<span style=color:#a6e22e>inter</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>interfacetype</span>, <span style=color:#a6e22e>typ</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>_type</span>, <span style=color:#a6e22e>canfail</span> <span style=color:#66d9ef>bool</span>) <span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span> {
+	<span style=color:#75715e>// ...
+</span><span style=color:#75715e></span>
+	<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>m</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span>
+
+    <span style=color:#75715e>// 首先会从已经存在的表中查找，如果找到了可以直接结束，否则进行下一步。
+</span><span style=color:#75715e></span>    <span style=color:#75715e>// 这里使用原子操作保证在这之前对itabTable的写操作结束。
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>t</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>itabTableType</span>)(<span style=color:#a6e22e>atomic</span>.<span style=color:#a6e22e>Loadp</span>(<span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>itabTable</span>)))
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>m</span> = <span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>find</span>(<span style=color:#a6e22e>inter</span>, <span style=color:#a6e22e>typ</span>); <span style=color:#a6e22e>m</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+		<span style=color:#66d9ef>goto</span> <span style=color:#a6e22e>finish</span>
+	}
+
+	<span style=color:#75715e>// 如果没找到，加锁继续找
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>lock</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>itabLock</span>)
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>m</span> = <span style=color:#a6e22e>itabTable</span>.<span style=color:#a6e22e>find</span>(<span style=color:#a6e22e>inter</span>, <span style=color:#a6e22e>typ</span>); <span style=color:#a6e22e>m</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+		<span style=color:#a6e22e>unlock</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>itabLock</span>)
+		<span style=color:#66d9ef>goto</span> <span style=color:#a6e22e>finish</span>
+	}
+
+    <span style=color:#75715e>// 还没找到，搞个新的
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>m</span> = (<span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span>)(<span style=color:#a6e22e>persistentalloc</span>(<span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Sizeof</span>(<span style=color:#a6e22e>itab</span>{})<span style=color:#f92672>+</span>uintptr(len(<span style=color:#a6e22e>inter</span>.<span style=color:#a6e22e>mhdr</span>)<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>)<span style=color:#f92672>*</span><span style=color:#a6e22e>goarch</span>.<span style=color:#a6e22e>PtrSize</span>, <span style=color:#ae81ff>0</span>, <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>memstats</span>.<span style=color:#a6e22e>other_sys</span>))
+	<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>inter</span> = <span style=color:#a6e22e>inter</span>
+	<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>_type</span> = <span style=color:#a6e22e>typ</span>
+	<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>hash</span> = <span style=color:#ae81ff>0</span>
+	<span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>init</span>()
+	<span style=color:#a6e22e>itabAdd</span>(<span style=color:#a6e22e>m</span>)
+	<span style=color:#a6e22e>unlock</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>itabLock</span>)
+<span style=color:#a6e22e>finish</span>:
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>fun</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>!=</span> <span style=color:#ae81ff>0</span> {
+		<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>m</span>
+	}
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>canfail</span> {
+		<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+	}
+
+	panic(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>TypeAssertionError</span>{<span style=color:#a6e22e>concrete</span>: <span style=color:#a6e22e>typ</span>, <span style=color:#a6e22e>asserted</span>: <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>inter</span>.<span style=color:#a6e22e>typ</span>, <span style=color:#a6e22e>missingMethod</span>: <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>init</span>()})
+}
+</code></pre></div><p>这里一开始在构造<code>itab</code>时并没有直接构造，而是去一个<code>runtime.itabTableType</code>结构体中去查找这个<code>itab</code>是否存在，<code>runtime.itabTableType</code>的定义如下：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>itabTableType</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>size</span>    <span style=color:#66d9ef>uintptr</span>             <span style=color:#75715e>// length of entries array. Always a power of 2.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>count</span>   <span style=color:#66d9ef>uintptr</span>             <span style=color:#75715e>// current number of filled entries.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>entries</span> [<span style=color:#a6e22e>itabInitSize</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span> <span style=color:#75715e>// really [size] large
+</span><span style=color:#75715e></span>}
+</code></pre></div><p>用于查找<code>itab</code>的函数如下：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>t</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>itabTableType</span>) <span style=color:#a6e22e>find</span>(<span style=color:#a6e22e>inter</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>interfacetype</span>, <span style=color:#a6e22e>typ</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>_type</span>) <span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span> {
+	<span style=color:#75715e>// Implemented using quadratic probing.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// Probe sequence is h(i) = h0 + i*(i+1)/2 mod 2^k.
+</span><span style=color:#75715e></span>	<span style=color:#75715e>// We&#39;re guaranteed to hit all table entries using this probe sequence.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>mask</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>size</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>
+	<span style=color:#a6e22e>h</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>itabHashFunc</span>(<span style=color:#a6e22e>inter</span>, <span style=color:#a6e22e>typ</span>) <span style=color:#f92672>&amp;</span> <span style=color:#a6e22e>mask</span>
+	<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>:=</span> uintptr(<span style=color:#ae81ff>1</span>); ; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span> {
+		<span style=color:#a6e22e>p</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>**</span><span style=color:#a6e22e>itab</span>)(<span style=color:#a6e22e>add</span>(<span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>t</span>.<span style=color:#a6e22e>entries</span>), <span style=color:#a6e22e>h</span><span style=color:#f92672>*</span><span style=color:#a6e22e>goarch</span>.<span style=color:#a6e22e>PtrSize</span>))
+		<span style=color:#75715e>// Use atomic read here so if we see m != nil, we also see
+</span><span style=color:#75715e></span>		<span style=color:#75715e>// the initializations of the fields of m.
+</span><span style=color:#75715e></span>		<span style=color:#75715e>// m := *p
+</span><span style=color:#75715e></span>		<span style=color:#a6e22e>m</span> <span style=color:#f92672>:=</span> (<span style=color:#f92672>*</span><span style=color:#a6e22e>itab</span>)(<span style=color:#a6e22e>atomic</span>.<span style=color:#a6e22e>Loadp</span>(<span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>(<span style=color:#a6e22e>p</span>)))
+		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>m</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>nil</span> {
+			<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>nil</span>
+		}
+		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>inter</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>inter</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>m</span>.<span style=color:#a6e22e>_type</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>typ</span> {
+			<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>m</span>
+		}
+		<span style=color:#a6e22e>h</span> <span style=color:#f92672>+=</span> <span style=color:#a6e22e>i</span>
+		<span style=color:#a6e22e>h</span> <span style=color:#f92672>&amp;=</span> <span style=color:#a6e22e>mask</span>
+	}
+}
+</code></pre></div><p>在完成这些步骤之后，一个新的<code>itab</code>就构造完成了，而由于在进行转换时实现接口的实体并没有变化，只是接口类型发生了变化，因此我们只需要将<code>iface.itab</code>重新赋值为我们需要的<code>itab</code>即可。</p><h3 id=23-空接口的转换>2.3 空接口的转换<a hidden class=anchor aria-hidden=true href=#23-空接口的转换>#</a></h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
+        <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>x</span> <span style=color:#66d9ef>int</span> = <span style=color:#ae81ff>1</span>
+
+        <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>ix</span> <span style=color:#66d9ef>interface</span>{} = <span style=color:#a6e22e>x</span>
+
+        <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Println</span>(<span style=color:#a6e22e>ix</span>)
+}
+</code></pre></div><p>这里调用的是<code>runtime.convT64(SB)</code>函数：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convT64</span>(<span style=color:#a6e22e>val</span> <span style=color:#66d9ef>uint64</span>) (<span style=color:#a6e22e>x</span> <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>) {
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>val</span> &lt; uint64(len(<span style=color:#a6e22e>staticuint64s</span>)) {
+		<span style=color:#a6e22e>x</span> = <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>staticuint64s</span>[<span style=color:#a6e22e>val</span>])
+	} <span style=color:#66d9ef>else</span> {
+		<span style=color:#a6e22e>x</span> = <span style=color:#a6e22e>mallocgc</span>(<span style=color:#ae81ff>8</span>, <span style=color:#a6e22e>uint64Type</span>, <span style=color:#66d9ef>false</span>)
+		<span style=color:#f92672>*</span>(<span style=color:#f92672>*</span><span style=color:#66d9ef>uint64</span>)(<span style=color:#a6e22e>x</span>) = <span style=color:#a6e22e>val</span>
+	}
+	<span style=color:#66d9ef>return</span>
+}
+</code></pre></div><p>这里首先检查其值是否小于<code>len(staticuint64s)</code>，如果是的话，就不需要再去进行内存分配，而是直接到数组中取，算是进行了一步优化。否则调用<code>mallocgc</code>为其分配一个新的内存空间，然后将其底层值赋值为val。</p><p>这里如果是将一个字符串转换为空接口类型，则调用的是<code>runtime.convTstring</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convTstring</span>(<span style=color:#a6e22e>val</span> <span style=color:#66d9ef>string</span>) (<span style=color:#a6e22e>x</span> <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>) {
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>val</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;&#34;</span> {
+		<span style=color:#a6e22e>x</span> = <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>(<span style=color:#f92672>&amp;</span><span style=color:#a6e22e>zeroVal</span>[<span style=color:#ae81ff>0</span>])
+	} <span style=color:#66d9ef>else</span> {
+		<span style=color:#a6e22e>x</span> = <span style=color:#a6e22e>mallocgc</span>(<span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Sizeof</span>(<span style=color:#a6e22e>val</span>), <span style=color:#a6e22e>stringType</span>, <span style=color:#66d9ef>true</span>)
+		<span style=color:#f92672>*</span>(<span style=color:#f92672>*</span><span style=color:#66d9ef>string</span>)(<span style=color:#a6e22e>x</span>) = <span style=color:#a6e22e>val</span>
+	}
+	<span style=color:#66d9ef>return</span>
+}
+</code></pre></div><p>逻辑相差不大。</p><p>在runtime包中，对于某些特殊的类型做了优化，可直接调用相应的函数进行实体类型到空接口类型的转化，这些被调用的函数有：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convT16</span>(<span style=color:#a6e22e>val</span> <span style=color:#66d9ef>uint16</span>) <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convT32</span>(<span style=color:#a6e22e>val</span> <span style=color:#66d9ef>uint32</span>) <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convT64</span>(<span style=color:#a6e22e>val</span> <span style=color:#66d9ef>uint64</span>) <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convTstring</span>(<span style=color:#a6e22e>val</span> <span style=color:#66d9ef>string</span>) <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>convTslice</span>(<span style=color:#a6e22e>val</span> []<span style=color:#66d9ef>uint8</span>) <span style=color:#a6e22e>unsafe</span>.<span style=color:#a6e22e>Pointer</span>
+</code></pre></div><h2 id=3-类型断言>3. 类型断言<a hidden class=anchor aria-hidden=true href=#3-类型断言>#</a></h2><p>TODO</p><h2 id=references>References<a hidden class=anchor aria-hidden=true href=#references>#</a></h2><p><a href=https://golang.design/go-questions/interface/assert/>Go Questions</a></p><p><a href=https://segmentfault.com/a/1190000039894161>interface的类型断言是如何实现</a></p></div><footer class=post-footer><ul class=post-tags><li><a href=http://yangchnet.github.io/Dessert/tags/golang/>golang</a></li></ul><nav class=paginav><a class=next href=http://yangchnet.github.io/Dessert/posts/net/%E6%A6%82%E8%BF%B0tls/><span class=title>Next Page »</span><br><span>详解TLS（译）</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2022 <a href=http://yangchnet.github.io/Dessert>Linote</a></span>
+<script src=https://utteranc.es/client.js repo=yangchnet/Dessert issue-term=pathname theme=github-light crossorigin=anonymous async></script><span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById('menu');menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script></body></html>
