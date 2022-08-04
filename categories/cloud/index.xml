@@ -16,7 +16,7 @@
       <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
-      <description>1. 分层的镜像 在我们启动一个容器之前，通畅需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像提供了容器中程序执行需要的所有文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
+      <description>1. 分层的镜像 在我们启动一个容器之前，通常需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像中包含了对应的程序的二进制文件与其所依赖的文件，程序在启动后看到的rootfs只是这个镜像中存在的文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
 创建一个镜像（image）的最简单方法是使用Dockerfile。
 FROMscratchCOPY hello /CMD [&amp;#34;/hello&amp;#34;]scratch是docker为我们提供的一个空镜像，我们可以在此基础上构建任何我们想要的镜像。
 在书写Dockerfile时，想必你听说过这么一句话，不要在Dockerfile中创建太多层.
