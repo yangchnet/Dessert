@@ -9,7 +9,17 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 04 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>走进chan</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bchan/</link>
+      <pubDate>Fri, 05 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bchan/</guid>
+      <description>1. chan的结构 一个channel长这样：
+type hchan struct { qcount uint // total data in the queue 	dataqsiz uint // size of the circular queue 	buf unsafe.Pointer // points to an array of dataqsiz elements 	elemsize uint16 // chan中元素大小 	closed uint32 // 是否关闭 	elemtype *_type // element type 	sendx uint // send index 	recvx uint // receive index 	recvq waitq // list of recv waiters 	sendq waitq // list of send waiters  lock mutex } channel的字段中，主要可以分为三部分：</description>
+    </item>
+    
     <item>
       <title>恋爱三分理论</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%81%8B%E7%88%B1%E4%B8%89%E5%88%86%E7%90%86%E8%AE%BA/</link>

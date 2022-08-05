@@ -9,7 +9,16 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 04 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 05 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>channel</title>
+      <link>http://yangchnet.github.io/Dessert/tags/channel/</link>
+      <pubDate>Fri, 05 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/channel/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>golang</title>
       <link>http://yangchnet.github.io/Dessert/tags/golang/</link>
@@ -232,15 +241,6 @@
       <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>channel</title>
-      <link>http://yangchnet.github.io/Dessert/tags/channel/</link>
-      <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/channel/</guid>
       <description></description>
     </item>
     
