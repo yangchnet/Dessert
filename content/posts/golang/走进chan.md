@@ -106,6 +106,8 @@ func makechan(t *chantype, size int) *hchan {
 
 ## 2. chan的发送与接收
 
+### 2.1 chan的发送
+
 chan发送时调用了`runtime.chansend1`:
 ```go
 func chansend(c *hchan, ep unsafe.Pointer, block bool, callerpc uintptr) bool {
@@ -223,7 +225,10 @@ func chansend(c *hchan, ep unsafe.Pointer, block bool, callerpc uintptr) bool {
 		- 不可以阻塞，解锁返回失败
 		- 可以阻塞，让goroutine进入等待队列并挂起，等待唤醒
 
+唤醒后，不会再进行发送或复制等，因为一个goroutine如果是从等待队列被唤醒，则是直接从发送goroutine将消息复制过来，然后才唤醒，因此可以直接结束。
+
 如果在发送时发现有等待接收的goroutine，会调用`runtime.send`将元素复制给等待的goroutine，`runtime.send`如下：
+
 ```go
 func send(c *hchan, sg *sudog, ep unsafe.Pointer, unlockf func(), skip int) {
 	if raceenabled {
@@ -242,6 +247,7 @@ func send(c *hchan, sg *sudog, ep unsafe.Pointer, unlockf func(), skip int) {
 			c.sendx = c.recvx // c.sendx = (c.sendx+1) % c.dataqsiz
 		}
 	}
+	// sg.elem 指向接收到的值存放的位置，如 val <- ch，指的就是 &val
 	if sg.elem != nil {
 		sendDirect(c.elemtype, sg, ep)
 		sg.elem = nil
@@ -257,4 +263,236 @@ func send(c *hchan, sg *sudog, ep unsafe.Pointer, unlockf func(), skip int) {
 }
 ```
 
-TODO
+### 2.2 chan的接收
+
+chan接收时调用的函数为`runtime.chanrecv`:
+
+```go
+func chanrecv(c *hchan, ep unsafe.Pointer, block bool) (selected, received bool) {
+	if debugChan {
+		print("chanrecv: chan=", c, "\n")
+	}
+
+	if c == nil { // chan为nil
+		if !block { // 且不可阻塞
+			return	// 直接返回失败
+		}
+		gopark(nil, nil, waitReasonChanReceiveNilChan, traceEvGoStop, 2) // 可阻塞，gotoutine挂起
+		throw("unreachable")
+	}
+
+	// Fast path: check for failed non-blocking operation without acquiring the lock.
+	if !block && empty(c) { // 不可阻塞且chan为空
+		if atomic.Load(&c.closed) == 0 { // chan没关闭
+			return
+		}
+		// The channel is irreversibly closed. Re-check whether the channel has any pending data
+		// to receive, which could have arrived between the empty and closed checks above.
+		// Sequential consistency is also required here, when racing with such a send.
+		if empty(c) { // chan被关闭了，但其中可能还有未取出的值
+			// The channel is irreversibly closed and empty.
+			if raceenabled {
+				raceacquire(c.raceaddr())
+			}
+			if ep != nil {
+				typedmemclr(c.elemtype, ep)
+			}
+			return true, false
+		}
+	}
+
+	var t0 int64
+	if blockprofilerate > 0 {
+		t0 = cputicks()
+	}
+
+	lock(&c.lock) // 上锁
+
+	if c.closed != 0 {	// 再次检查chan是否被关闭
+		if c.qcount == 0 {
+			if raceenabled {
+				raceacquire(c.raceaddr())
+			}
+			unlock(&c.lock)
+			if ep != nil {
+				typedmemclr(c.elemtype, ep)
+			}
+			return true, false
+		}
+		// The channel has been closed, but the channel's buffer have data.
+	} else {
+		// Just found waiting sender with not closed.
+		if sg := c.sendq.dequeue(); sg != nil { // 有个chan等着发
+			// Found a waiting sender. If buffer is size 0, receive value
+			// directly from sender. Otherwise, receive from head of queue
+			// and add sender's value to the tail of the queue (both map to
+			// the same buffer slot because the queue is full).
+			recv(c, sg, ep, func() { unlock(&c.lock) }, 3)
+			return true, true
+		}
+	}
+
+	if c.qcount > 0 { // 当前chan中有值
+		// Receive directly from queue
+		qp := chanbuf(c, c.recvx)
+		if raceenabled {
+			racenotify(c, c.recvx, nil)
+		}
+		if ep != nil {
+			typedmemmove(c.elemtype, ep, qp)	// 将消息复制给接收者
+		}
+		typedmemclr(c.elemtype, qp)	// 清理发送者内存空间
+		c.recvx++
+		if c.recvx == c.dataqsiz {
+			c.recvx = 0
+		}
+		c.qcount--
+		unlock(&c.lock)
+		return true, true
+	}
+
+	if !block {	// 当前chan中没有值，又不能阻塞，只好失败
+		unlock(&c.lock)
+		return false, false
+	}
+
+	// 可以阻塞，先坐等一会
+	gp := getg()
+	mysg := acquireSudog()
+	mysg.releasetime = 0
+	if t0 != 0 {
+		mysg.releasetime = -1
+	}
+	// No stack splits between assigning elem and enqueuing mysg
+	// on gp.waiting where copystack can find it.
+	mysg.elem = ep
+	mysg.waitlink = nil
+	gp.waiting = mysg
+	mysg.g = gp
+	mysg.isSelect = false
+	mysg.c = c
+	gp.param = nil
+	c.recvq.enqueue(mysg)
+	atomic.Store8(&gp.parkingOnChan, 1)
+	gopark(chanparkcommit, unsafe.Pointer(&c.lock), waitReasonChanReceive, traceEvGoBlockRecv, 2)
+
+	// 被唤醒了
+	if mysg != gp.waiting {
+		throw("G waiting list is corrupted")
+	}
+	gp.waiting = nil
+	gp.activeStackChans = false
+	if mysg.releasetime > 0 {
+		blockevent(mysg.releasetime-t0, 2)
+	}
+	success := mysg.success
+	gp.param = nil
+	mysg.c = nil
+	releaseSudog(mysg)
+	return true, success
+}
+```
+
+总体来看，和发送的过程很相似，主要是检查chan是否关闭，是否可阻塞，是否有发送者等待，chan中是否有值，然后做出响应的处理。
+
+在使用chan进行接收时，有时可以使用ok来标识是否真的从chan中接收到了值，go底层通过不同的函数做到这一点：
+```go
+// a := <-chan
+func chanrecv1(c *hchan, elem unsafe.Pointer) {
+	chanrecv(c, elem, true)
+}
+
+// a, ok :=  <-chan
+func chanrecv2(c *hchan, elem unsafe.Pointer) (received bool) {
+	_, received = chanrecv(c, elem, true)
+	return
+}
+```
+
+## 3. chan的关闭
+
+关闭chan时，调用的是`runtime.closechan`:
+```go
+func closechan(c *hchan) {
+	if c == nil { // 不能关闭一个nilchan
+		panic(plainError("close of nil channel"))
+	}
+
+	lock(&c.lock)
+	if c.closed != 0 { // 不能重复关闭chan
+		unlock(&c.lock)
+		panic(plainError("close of closed channel"))
+	}
+
+	if raceenabled {
+		callerpc := getcallerpc()
+		racewritepc(c.raceaddr(), callerpc, abi.FuncPCABIInternal(closechan))
+		racerelease(c.raceaddr())
+	}
+
+	c.closed = 1 // 设置chan状态为关闭
+
+	var glist gList
+
+	// 处理所有等待读取的goroutine
+	for {
+		sg := c.recvq.dequeue()
+		if sg == nil { // 当recvq中没有goroutine时跳出
+			break
+		}
+		if sg.elem != nil { // sg.elem不为空说明接受者未忽略接收值
+			typedmemclr(c.elemtype, sg.elem) // 给等待读取的设置零值
+			sg.elem = nil
+		}
+		if sg.releasetime != 0 {
+			sg.releasetime = cputicks()
+		}
+
+		// 把goroutine取出来
+		gp := sg.g
+		gp.param = unsafe.Pointer(sg)
+		sg.success = false
+		if raceenabled {
+			raceacquireg(gp, c.raceaddr())
+		}
+		glist.push(gp) // 将goroutine推入glist
+	}
+
+	// 所有想要发送的goroutine，对不起，你们panic吧
+	for {
+		sg := c.sendq.dequeue()
+		if sg == nil {
+			break
+		}
+		sg.elem = nil
+		if sg.releasetime != 0 {
+			sg.releasetime = cputicks()
+		}
+		gp := sg.g
+		gp.param = unsafe.Pointer(sg)
+		sg.success = false
+		if raceenabled {
+			raceacquireg(gp, c.raceaddr())
+		}
+		glist.push(gp) // 将goroutine推入glist
+	}
+	unlock(&c.lock)
+
+	// 遍历gList，把其中的所有goroutine唤醒
+	for !glist.empty() {
+		gp := glist.pop()
+		gp.schedlink = 0
+		goready(gp, 3)
+	}
+}
+```
+
+对于chan的关闭，主要有两点：
+- 对于待接收的chan，如果chan缓冲区中没有值了，则返回其一个零值，如果缓冲区还有值，则把值交给它
+- 对于待发送的chan，对不起了宝贝们，你们都给爷爷panic吧
+
+## References
+
+https://golang.design/go-questions/channel/struct/
+
+https://codeburst.io/diving-deep-into-the-golang-channels-549fd4ed21a8
