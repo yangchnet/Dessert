@@ -9,7 +9,25 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 04 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>top命令</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/</guid>
+      <description>在使用top命令查看系统状态时，会出现一堆参数，这些参数分别代表什么意思呢？
+ 第一行 首先打印了当前时间21:11:55，然后是系统已经启动了多久up 4 days, 8:45，我已经4天8小时45分钟没关机了。。
+然后当前有3个用户登录3 users，load average是1.47, 1.33, 1.14
+load average load average后面有三个值，分别代表过去 1 分钟，5 分钟，15 分钟在这个节点上的 load average.
+Load Average 是一种 CPU 资源需求的度量。
+举例来说，对于一个单个 CPU 的系统，如果在 1 分钟的时间里，处理器上始终有一个进程在运行，同时操作系统的进程可运行队列中始终都有 9 个进程在等待获取 CPU 资源。那么对于这 1 分钟的时间来说，系统的&amp;quot;load average&amp;quot;就是 1+9=10，这个定义对绝大部分的 Unix 系统都适用。
+对于 Linux 来说，如果只考虑 CPU 的资源，Load Averag 等于单位时间内正在运行的进程加上可运行队列的进程，这个定义也是成立的。
+对于load average的理解有以下三点：
+  不论计算机 CPU 是空闲还是满负载，Load Average 都是 Linux 进程调度器中可运行队列（Running Queue）里的一段时间的平均进程数目。
+  计算机上的 CPU 还有空闲的情况下，CPU Usage 可以直接反映到&amp;quot;load average&amp;quot;上，什么是 CPU 还有空闲呢？具体来说就是可运行队列中的进程数目小于 CPU 个数，这种情况下，单位时间进程 CPU Usage 相加的平均值应该就是&amp;quot;load average&amp;quot;的值。</description>
+    </item>
+    
     <item>
       <title>inotify</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/inotify/</link>

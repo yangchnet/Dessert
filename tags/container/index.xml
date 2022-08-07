@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>container on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/container/</link>
+    <description>Recent content in container on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 10 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>概览容器篇一：镜像</title>
+      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
+      <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
+      <description>1. 分层的镜像 在我们启动一个容器之前，通常需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像中包含了对应的程序的二进制文件与其所依赖的文件，程序在启动后看到的rootfs只是这个镜像中存在的文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
+创建一个镜像（image）的最简单方法是使用Dockerfile。
+FROMscratchCOPY hello /CMD [&amp;#34;/hello&amp;#34;]scratch是docker为我们提供的一个空镜像，我们可以在此基础上构建任何我们想要的镜像。
+在书写Dockerfile时，想必你听说过这么一句话，不要在Dockerfile中创建太多层.
+在Dockerfile中，每一个指令都会创建一个新的“层”，这里的层，指的是UnionFS中的一个文件目录。当我们创建了过多的层，会导致镜像体积变大，除此之外，Union FS 也会有最大层数限制。
+因此对于如下的Dockerfile文件写法，应尽量避免：
+FROMdebian:stretchRUN apt-get updateRUN apt-get install -y gcc libc6-dev make wgetRUN wget -O redis.tar.gz &amp;#34;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;#34;RUN mkdir -p /usr/src/redisRUN tar -xzf redis.tar.gz -C /usr/src/redis --strip-components=1RUN make -C /usr/src/redisRUN make -C /usr/src/redis install可优化为如下写法
+FROMdebian:stretchRUN set -x; buildDeps=&amp;#39;gcc libc6-dev make wget&amp;#39; \  &amp;amp;&amp;amp; apt-get update \  &amp;amp;&amp;amp; apt-get install -y $buildDeps \  &amp;amp;&amp;amp; wget -O redis.tar.gz &amp;#34;http://download.redis.io/releases/redis-5.0.3.tar.gz&amp;#34; \  &amp;amp;&amp;amp; mkdir -p /usr/src/redis \  &amp;amp;&amp;amp; tar -xzf redis.</description>
+    </item>
+    
+  </channel>
+</rss>
