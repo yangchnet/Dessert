@@ -11,6 +11,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>cloud</title>
+      <link>http://yangchnet.github.io/Dessert/categories/cloud/</link>
+      <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/categories/cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Linux</title>
       <link>http://yangchnet.github.io/Dessert/categories/linux/</link>
       <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
@@ -70,15 +79,6 @@
       <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/categories/os/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>cloud</title>
-      <link>http://yangchnet.github.io/Dessert/categories/cloud/</link>
-      <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/categories/cloud/</guid>
       <description></description>
     </item>
     
