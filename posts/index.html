@@ -8,8 +8,16 @@ Load Average 是一种 CPU 资源需求的度量。
 对于 Linux 来说，如果只考虑 CPU 的资源，Load Averag 等于单位时间内正在运行的进程加上可运行队列的进程，这个定义也是成立的。
 对于load average的理解有以下三点：
 不论计算机 CPU 是空闲还是满负载，Load Average 都是 Linux 进程调度器中可运行队列（Running Queue）里的一段时间的平均进程数目。
-计算机上的 CPU 还有空闲的情况下，CPU Usage 可以直接反映到"load average"上，什么是 CPU 还有空闲呢？具体来说就是可运行队列中的进程数目小于 CPU 个数，这种情况下，单位时间进程 CPU Usage 相加的平均值应该就是"load average"的值。...</p></section><footer class=entry-footer><span title="2022-08-07 00:00:00 +0000 UTC">August 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to top命令" href=http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/></a></article><article class=post-entry><header class=entry-header><h2>概览容器篇二：容器网络</h2></header><section class=entry-content><p>TODO
-0. 容器网络类型 1. bridge network 2. host network Reference https://time.geekbang.org/column/article/323325
+计算机上的 CPU 还有空闲的情况下，CPU Usage 可以直接反映到"load average"上，什么是 CPU 还有空闲呢？具体来说就是可运行队列中的进程数目小于 CPU 个数，这种情况下，单位时间进程 CPU Usage 相加的平均值应该就是"load average"的值。...</p></section><footer class=entry-footer><span title="2022-08-07 00:00:00 +0000 UTC">August 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to top命令" href=http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/></a></article><article class=post-entry><header class=entry-header><h2>概览容器篇二：容器网络</h2></header><section class=entry-content><p>容器具有自己的Network Namespace.
+eht0是这个Network Namespace里的网络接口。而宿主机上也有自己的 eth0，宿主机上的 eth0 对应着真正的物理网卡，可以和外面通讯
+要让容器 Network Namespace 中的数据包最终发送到物理网卡上，需要以下两步：
+将数据包从容器的 Network Namespace 发送到 Host Network Namespace 上 数据包从宿主机的eth0发送出去 要想让容器从自己的Network Namespace连接到Host Namespace，一般来说就只有两类设备接口，一是veth，另外是macvlan/ipvlan.
+veth是一个虚拟的网络设备，一般是成对建立，而且这对设备是相互连接的。当每个设备在不同的 Network Namespaces 的时候，Namespace 之间就可以用这对 veth 设备来进行网络通讯了。
+到这里，解决了第一步，下一步需要将数据包从宿主机的eth0发送出去。
+Docker 程序在节点上安装完之后，就会自动建立了一个 docker0 的 bridge interface。所以我们只需要把第一步中建立的 veth_host 这个设备，接入到 docker0 这个 bridge 上。
+容器和docker0组成了一个子网，docker0上的IP就是这个子网的网关IP。
+然后docekr0通过nat或route的方式，经过eth0将数据包向外发送。
+Reference https://time.geekbang.org/column/article/323325
 http://icyfenix.cn/immutable-infrastructure/network/linux-vnet.html
 https://morven.life/posts/networking-4-docker-sigle-host/
 https://network.51cto.com/article/708901.html</p></section><footer class=entry-footer><span title="2022-08-07 00:00:00 +0000 UTC">August 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;李昌</footer><a class=entry-link aria-label="post link to 概览容器篇二：容器网络" href=http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/></a></article><article class=post-entry><header class=entry-header><h2>走进chan</h2></header><section class=entry-content><p>1. chan的结构 一个channel长这样：

@@ -34,8 +34,16 @@ Load Average 是一种 CPU 资源需求的度量。
       <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</guid>
-      <description>TODO
-0. 容器网络类型 1. bridge network 2. host network Reference https://time.geekbang.org/column/article/323325
+      <description>容器具有自己的Network Namespace.
+eht0是这个Network Namespace里的网络接口。而宿主机上也有自己的 eth0，宿主机上的 eth0 对应着真正的物理网卡，可以和外面通讯
+要让容器 Network Namespace 中的数据包最终发送到物理网卡上，需要以下两步：
+ 将数据包从容器的 Network Namespace 发送到 Host Network Namespace 上 数据包从宿主机的eth0发送出去  要想让容器从自己的Network Namespace连接到Host Namespace，一般来说就只有两类设备接口，一是veth，另外是macvlan/ipvlan.
+veth是一个虚拟的网络设备，一般是成对建立，而且这对设备是相互连接的。当每个设备在不同的 Network Namespaces 的时候，Namespace 之间就可以用这对 veth 设备来进行网络通讯了。
+到这里，解决了第一步，下一步需要将数据包从宿主机的eth0发送出去。
+Docker 程序在节点上安装完之后，就会自动建立了一个 docker0 的 bridge interface。所以我们只需要把第一步中建立的 veth_host 这个设备，接入到 docker0 这个 bridge 上。
+容器和docker0组成了一个子网，docker0上的IP就是这个子网的网关IP。
+然后docekr0通过nat或route的方式，经过eth0将数据包向外发送。
+Reference https://time.geekbang.org/column/article/323325
 http://icyfenix.cn/immutable-infrastructure/network/linux-vnet.html
 https://morven.life/posts/networking-4-docker-sigle-host/
 https://network.51cto.com/article/708901.html</description>
