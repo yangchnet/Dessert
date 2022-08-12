@@ -9,7 +9,19 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>走进defer</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bdefer/</link>
+      <pubDate>Fri, 12 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bdefer/</guid>
+      <description>1. defer是什么 defer，是一种特殊的机制，在调用普通函数或方法前加上关键字defer，就完成了defer所需要的语法。当defer语句被执行时，跟在defer后面的函数会被延迟执行。直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行，多个defer的执行顺序与声明顺序相反。
+对于defer的使用及需要注意的地方，可参考defer用法。这里不再讨论。
+在golang runtime中，defer被描述为一个结构体：
+type _defer struct { started bool // 是否开始执行defer函数 	heap bool // 是否分配在堆上  openDefer bool // 是否经过开放编码（open-coded）的优化 	sp uintptr // 调用defer时的栈指针 stack pointer 	pc uintptr // 调用defer函数时的pc值 	fn func() // defer关键字传入的函数， 当使用open-coded defer时可为空 	_panic *_panic // defer运行时的panic 	link *_defer // 在goroutine中的下一个defer，可指向堆或栈  // 如果openDefer为true，则下面的字段将记录具有open-code defer的栈帧和相关的函数。  // 上面的sp将为帧的sp，pc将为defer调用的地址。 	fd unsafe.Pointer // funcdata for the function associated with the frame 	varp uintptr // value of varp for the stack frame  framepc uintptr // 当前栈帧的pc } 一个_defer结构体是defer调用的一环，一个函数中的多个defer被组织为链表的形式。defer有的分配在栈上，有的分配在堆上，但逻辑上他们都是属于栈的，因此在进行访问不需要加写屏障。</description>
+    </item>
+    
     <item>
       <title>top命令</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/</link>
