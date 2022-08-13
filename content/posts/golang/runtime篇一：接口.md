@@ -10,10 +10,10 @@ TocOpen: true
 
 > 本系列代码基于golang1.19(1e5987635cc8bf99e8a20d240da80bd6f0f793f7)
 
-[runtime篇一：接口]()
-[runtime篇二：通道]()
-[runtime篇三：defer]()
-[runtime篇四：panic]()
+- [runtime篇一：接口](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%80%E6%8E%A5%E5%8F%A3/)
+- [runtime篇二：通道](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/)
+- [runtime篇三：defer](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%89defer/)
+- [runtime篇四：panic](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/)
 
 ## 1. 接口的内部结构
 ```go
