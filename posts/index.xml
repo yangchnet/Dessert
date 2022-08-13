@@ -11,15 +11,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 12 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>走进defer</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bdefer/</link>
+      <title>runtime篇三：defer</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%89defer/</link>
       <pubDate>Fri, 12 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bdefer/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%89defer/</guid>
       <description>1. defer是什么 defer，是一种特殊的机制，在调用普通函数或方法前加上关键字defer，就完成了defer所需要的语法。当defer语句被执行时，跟在defer后面的函数会被延迟执行。直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行，多个defer的执行顺序与声明顺序相反。
 对于defer的使用及需要注意的地方，可参考defer用法。这里不再讨论。
 在golang runtime中，defer被描述为一个结构体：
-type _defer struct { started bool // 是否开始执行defer函数 	heap bool // 是否分配在堆上  openDefer bool // 是否经过开放编码（open-coded）的优化 	sp uintptr // 调用defer时的栈指针 stack pointer 	pc uintptr // 调用defer函数时的pc值 	fn func() // defer关键字传入的函数， 当使用open-coded defer时可为空 	_panic *_panic // defer运行时的panic 	link *_defer // 在goroutine中的下一个defer，可指向堆或栈  // 如果openDefer为true，则下面的字段将记录具有open-code defer的栈帧和相关的函数。  // 上面的sp将为帧的sp，pc将为defer调用的地址。 	fd unsafe.Pointer // funcdata for the function associated with the frame 	varp uintptr // value of varp for the stack frame  framepc uintptr // 当前栈帧的pc } 一个_defer结构体是defer调用的一环，一个函数中的多个defer被组织为链表的形式。defer有的分配在栈上，有的分配在堆上，但逻辑上他们都是属于栈的，因此在进行访问不需要加写屏障。</description>
+type _defer struct { started bool // 是否开始执行defer函数 	heap bool // 是否分配在堆上  openDefer bool // 是否经过开放编码（open-coded）的优化 	sp uintptr // 调用defer时的栈指针 stack pointer 	pc uintptr // 调用defer函数时的pc值 	fn func() // defer关键字传入的函数， 当使用open-coded defer时可为空 	_panic *_panic // defer函数中的_panic链表 	link *_defer // 在goroutine中的下一个defer，可指向堆或栈  // 如果openDefer为true，则下面的字段将记录具有open-code defer的栈帧和相关的函数。  // 上面的sp将为帧的sp，pc将为defer调用的地址。 	fd unsafe.Pointer // funcdata for the function associated with the frame 	varp uintptr // value of varp for the stack frame  framepc uintptr // 当前栈帧的pc } 一个_defer结构体是defer调用的一环，一个函数中的多个defer被组织为链表的形式。defer有的分配在栈上，有的分配在堆上，但逻辑上他们都是属于栈的，因此在进行访问不需要加写屏障。</description>
+    </item>
+    
+    <item>
+      <title>runtime篇四：panic</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/</link>
+      <pubDate>Fri, 12 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/</guid>
+      <description>1. panic的底层结构 panic在runtime中的底层表示是runtime._panic结构体。
+type _panic struct { argp unsafe.Pointer // 指向defer调用时参数的指针 	arg any // panic参数 	link *_panic // 连接到更早的_panic 	pc uintptr // 程序计数器 	sp unsafe.Pointer // 栈指针 	recovered bool // 当前panic是否被recover恢复 	aborted bool // 当前panic是否被中止 	goexit bool // 是否调用了runtime.Goexit } 类似于_defer，panic也被组织成链表结构，多个panic通过link字段连接成一个链表。
+在_panic结构体中，pc、sp、goexit三个字段是为了修复runtime.Goexit带来的问题引入的[1].
+2. 调用panic 在函数中调用panic时，底层会调用runtime.gopanic，其源码如下：
+func gopanic(e any) { gp := getg() // 获取当前g  // ...  // 此处省略部分代码  var p _panic p.</description>
     </item>
     
     <item>
@@ -62,13 +75,30 @@ https://network.51cto.com/article/708901.html</description>
     </item>
     
     <item>
-      <title>走进chan</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bchan/</link>
+      <title>runtime篇二：通道</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/</link>
       <pubDate>Fri, 05 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bchan/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/</guid>
       <description>1. chan的结构 一个channel长这样：
 type hchan struct { qcount uint // total data in the queue 	dataqsiz uint // size of the circular queue 	buf unsafe.Pointer // points to an array of dataqsiz elements 	elemsize uint16 // chan中元素大小 	closed uint32 // 是否关闭 	elemtype *_type // element type 	sendx uint // send index 	recvx uint // receive index 	recvq waitq // list of recv waiters 	sendq waitq // list of send waiters  lock mutex } channel的字段中，主要可以分为三部分：</description>
+    </item>
+    
+    <item>
+      <title>runtime篇一：接口</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%80%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Thu, 04 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%80%E6%8E%A5%E5%8F%A3/</guid>
+      <description>本系列代码基于golang1.19(1e5987635cc8bf99e8a20d240da80bd6f0f793f7)
+ runtime篇一：接口 runtime篇二：通道 runtime篇三：defer runtime篇四：panic
+1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。
+概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。
+一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。
+近距离来看itab：
+type itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. 	_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。
+再来看interfacetype
+type interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。</description>
     </item>
     
     <item>
@@ -78,25 +108,6 @@ type hchan struct { qcount uint // total data in the queue 	dataqsiz uint // siz
       
       <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%81%8B%E7%88%B1%E4%B8%89%E5%88%86%E7%90%86%E8%AE%BA/</guid>
       <description>- 第一阶段 接受你的存在 0-1分 - 第二阶段 习惯你的存在 1-2分 - 第三阶段 依赖你的存在 2-3分 0.7以上就可以表白，2分以上可结婚</description>
-    </item>
-    
-    <item>
-      <title>走进接口</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/</link>
-      <pubDate>Thu, 04 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9B%E6%8E%A5%E5%8F%A3/</guid>
-      <description>以下代码基于golang1.18
- 1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。
-概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。
-一个itab可以表示一个接口的类型和赋给这个接口的实体类型，即为接口的动态类型，而data所指向的unsafe.Pointer则指向接口的动态值。
-近距离来看itab：
-type itab struct { inter *interfacetype _type *_type hash uint32 // copy of _type.hash. Used for type switches. 	_ [4]byte fun [1]uintptr // variable sized. fun[0]==0 means _type does not implement inter. } 其中inter字段描述了接口的类型，_type字段描述了实体类型，hash字段是类型哈希，用于类型匹配，fun字段放置和接口方法对应的具体数据类型的方法地址。
-再来看interfacetype
-type interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和itab中的_type为同一个值，pkgpath则存储了接口的包名，mhdr则表示接口所定义的函数列表。
-这样来看，一个接口主要有两个部分构成：第一是对于接口本身的描述，包括接口的包名iface.itab.inter.pkgpath、接口的函数列表iface.itab.inter.mhdr，接口的hash值iface.itab.hash。第二部分是对于实现接口的实体的描述，包括实体的类型iface.itab._type，实体的值iface.data。
-可以将itab的值输出看看：
-type iface struct { tab *itab data unsafe.</description>
     </item>
     
     <item>

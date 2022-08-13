@@ -9,17 +9,7 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 05 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/channel/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>走进chan</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bchan/</link>
-      <pubDate>Fri, 05 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E8%B5%B0%E8%BF%9Bchan/</guid>
-      <description>1. chan的结构 一个channel长这样：
-type hchan struct { qcount uint // total data in the queue 	dataqsiz uint // size of the circular queue 	buf unsafe.Pointer // points to an array of dataqsiz elements 	elemsize uint16 // chan中元素大小 	closed uint32 // 是否关闭 	elemtype *_type // element type 	sendx uint // send index 	recvx uint // receive index 	recvq waitq // list of recv waiters 	sendq waitq // list of send waiters  lock mutex } channel的字段中，主要可以分为三部分：</description>
-    </item>
-    
+    <lastBuildDate>Sun, 02 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/channel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>channel的行为</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</link>
