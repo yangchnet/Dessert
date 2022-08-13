@@ -1,14 +1,19 @@
 ---
 author: "李昌"
-title: "走进接口"
+title: "runtime篇一：接口"
 date: "2022-08-04"
-tags: ["golang"]
-categories: ["golang"]
+tags: ["golang", "runtime"]
+categories: ["Golang"]
 ShowToc: true
 TocOpen: true
 ---
 
-> 以下代码基于golang1.18
+> 本系列代码基于golang1.19(1e5987635cc8bf99e8a20d240da80bd6f0f793f7)
+
+[runtime篇一：接口]()
+[runtime篇二：通道]()
+[runtime篇三：defer]()
+[runtime篇四：panic]()
 
 ## 1. 接口的内部结构
 ```go

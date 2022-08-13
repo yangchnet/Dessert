@@ -1,0 +1,371 @@
+---
+author: "李昌"
+title: "runtime篇四：panic"
+date: "2022-08-12"
+tags: ["golang", "runtime"]
+categories: ["Golang"]
+ShowToc: true
+TocOpen: true
+---
+
+## 1. panic的底层结构
+
+panic在runtime中的底层表示是`runtime._panic`结构体。
+
+```go
+type _panic struct {
+	argp      unsafe.Pointer // 指向defer调用时参数的指针
+	arg       any            // panic参数
+	link      *_panic        // 连接到更早的_panic
+	pc        uintptr        // 程序计数器
+	sp        unsafe.Pointer // 栈指针
+	recovered bool           // 当前panic是否被recover恢复
+	aborted   bool           // 当前panic是否被中止
+	goexit    bool           // 是否调用了runtime.Goexit
+}
+```
+
+类似于`_defer`，panic也被组织成链表结构，多个panic通过`link`字段连接成一个链表。
+
+在`_panic`结构体中，pc、sp、goexit三个字段是为了修复`runtime.Goexit`带来的问题引入的<sup>[[1]](https://github.com/golang/go/commit/7dcd343ed641d3b70c09153d3b041ca3fe83b25e)</sup>.
+
+
+## 2. 调用panic
+
+在函数中调用panic时，底层会调用`runtime.gopanic`，其源码如下：
+```go
+func gopanic(e any) {
+	gp := getg()         // 获取当前g
+
+    // ...
+    // 此处省略部分代码
+
+	var p _panic
+	p.arg = e          // panic参数
+	p.link = gp._panic // 头插
+	gp._panic = (*_panic)(noescape(unsafe.Pointer(&p)))
+
+	// 省略defer调用部分
+
+	// ran out of deferred calls - old-school panic now
+	// Because it is unsafe to call arbitrary user code after freezing
+	// the world, we call preprintpanics to invoke all necessary Error
+	// and String methods to prepare the panic strings before startpanic.
+	preprintpanics(gp._panic)
+
+	fatalpanic(gp._panic) // should not return
+	*(*int)(nil) = 0      // not reached
+}
+```
+
+先看panic主干流程，首先获取当前发生了panic的`g`，然后新建了一个`_panic`，将其字段赋值后，以头插的形式插入到`g`的`_panic`链表中，在函数的最后，调用了`runtime.fatalpanic`，这个函数实现了无法被恢复的程序崩溃：
+
+```go
+func fatalpanic(msgs *_panic) {
+	pc := getcallerpc()
+	sp := getcallersp()
+	gp := getg()
+	var docrash bool
+	// Switch to the system stack to avoid any stack growth, which
+	// may make things worse if the runtime is in a bad state.
+
+    // 切换到系统栈以避免用户栈增长
+	systemstack(func() {
+        // startpanic_m在应该打印panic信息时返回true
+		if startpanic_m() && msgs != nil { // 
+			atomic.Xadd(&runningPanicDefers, -1)
+
+			printpanics(msgs) // 打印panic信息
+		}
+
+		docrash = dopanic_m(gp, pc, sp)
+	})
+
+	if docrash {
+		crash()
+	}
+
+	systemstack(func() {
+		exit(2)
+	})
+
+	*(*int)(nil) = 0 // not reached
+}
+```
+
+`runtime.fatalpanic`最后调用`exit(2)`终止程序，返回值为2.
+
+## 3. 在有defer调用时panic
+
+上面介绍的情况是在函数运行时没有设置defer调用，然后直接panic，现在来看具有defer调用的函数发生panic时会怎样。
+
+回顾[runtime篇三：defer]()我们知道，程序的defer调用以`_defer`链表的形式存储在`g`中。
+
+先大致看下源码:
+
+```go
+func gopanic(e any) {
+	gp := getg()         // 获取当前g
+
+    // 省略部分代码
+
+	var p _panic
+	p.arg = e          // panic参数
+	p.link = gp._panic // 头插
+	gp._panic = (*_panic)(noescape(unsafe.Pointer(&p))) // 将当前这个panic赋值给当前defer
+
+	atomic.Xadd(&runningPanicDefers, 1)
+
+	// By calculating getcallerpc/getcallersp here, we avoid scanning the
+	// gopanic frame (stack scanning is slow...)
+	addOneOpenDeferFrame(gp, getcallerpc(), unsafe.Pointer(getcallersp())) // 这里添加了一个open-code defer
+
+    // 检查g中是否还存在defer调用
+	for {
+		d := gp._defer // 尝试获取_defer
+		if d == nil { // 如果没有设置_defer，则直接跳出
+			break
+		}
+
+        // 如果defer被更早的panic或Goexit启动了（或者在程序到达这里之前，又触发了一个新的panic），
+		// 则将当前defer移出defer链表，先前的panic将不再执行，但确保先前的Goexit继续执行
+
+		if d.started { // defer已经被启动了
+			if d._panic != nil { // defer函数中也存在panic
+				d._panic.aborted = true // 终止defer的panic
+			}
+			d._panic = nil
+			if !d.openDefer { // 未使用开放编码
+				d.fn = nil
+				gp._defer = d.link // 继续检查下一个defer
+				freedefer(d)
+				continue
+			}
+		}
+		// Mark defer as started, but keep on list, so that traceback
+		// can find and update the defer's argument frame if stack growth
+		// or a garbage collection happens before executing d.fn.
+		d.started = true // 将defer标记为启动
+
+		// Record the panic that is running the defer.
+		// If there is a new panic during the deferred call, that panic
+		// will find d in the list and will mark d._panic (this panic) aborted.
+		d._panic = (*_panic)(noescape(unsafe.Pointer(&p))) // 将当前panic赋值給defer
+
+		done := true
+		if d.openDefer {
+			done = runOpenDeferFrame(gp, d)
+			if done && !d._panic.recovered {
+				addOneOpenDeferFrame(gp, 0, nil)
+			}
+		} else {
+			p.argp = unsafe.Pointer(getargp())
+			d.fn() // 调用defer函数
+		}
+		p.argp = nil
+
+		// Deferred function did not panic. Remove d.
+		if gp._defer != d {
+			throw("bad defer entry in panic")
+		}
+		d._panic = nil
+
+		// trigger shrinkage to test stack copy. See stack_test.go:TestStackPanic
+		//GC()
+
+		pc := d.pc
+		sp := unsafe.Pointer(d.sp) // must be pointer so it gets adjusted during stack copy
+		if done { // 如果完成了defer函数
+			d.fn = nil
+			gp._defer = d.link
+			freedefer(d)
+		}
+		if p.recovered { // 如果panic被recover，则继续执行下一个panic
+			// 省略recover部分
+		}
+	}
+
+	preprintpanics(gp._panic)
+
+	fatalpanic(gp._panic) // should not return
+	*(*int)(nil) = 0      // not reached
+}
+```
+
+有点复杂，结合具体程序来看这段代码：
+```go
+1│ package main
+2│
+3│ func main() {
+4│     defer func() {
+5│         panic("2")
+6│     }()
+7│     panic("1")
+8│ }
+```
+
+对于这个程序，我们来分析它的运行过程，首先程序在运行到第4行时，会将这个defer放入`g`的`_defer`链表中，这个defer的fn字段指向`func(){panic("2")}`。然后程序继续执行，来到第7行，在这里调用了`runtime.gopanic`函数。
+
+1. 新建了一个`_panic`结构体，并将其插入到`g`的`_panic`链表头部，这里称为`panic1`
+2. 在`g`上又新增了一个open-coded defer，现在`g`上有两个defer了，第一个为我们调用defer产生的（暂称为`mydefer`），第二个为open-coded defer，是runtime添加的(暂称`openDefer`)
+3. 当`g`上还有defer时，取出第一个defer，这里为`mydefer`
+   1. `mydefer`没有在运行
+   2. 标记`mydefer`为运行状态，将`panic1`放入`mydefer`的_panic字段
+   3. 检查`mydefer`不是open-coded defer，调用`_defer.fn()`
+
+> 这里暂停一下，我们需要明确此时`g`中`_defer`和`_panic`的状态，在调用`_defer.fn()`之前，`g`中有两个defer，分别为`mydefer`、`openDefer`，且`mydefer.link = openDefer`：有一个panic，为`panic1`。且，`mydefer._panic = panic1`.
+
+继续，这里调用的`_defer.fn()`为`func(){panic("2")}`，在defer函数中再一次调用了panic，注意这里进行了栈帧的切换，当前的panic变成了`panic2`。这次调用panic的执行过程为：
+1. 新建一个新建了一个`_panic`结构体，并将其插入到`g`的`_panic`链表头部，这里称为`panic2`
+2. 这回不再增加新的open-coded defer
+3. 当`g`上还有defer时，取出第一个defer，这里为`mydefer`
+   1. `mydefer`在运行
+      1. `mydefer._panic`不为空，将其标记为aborted，即把`panic1`标记为aborted
+      2. `mydefer`不是open-coded defer，将`mydefer.fn`设为空，将`mydefer`从`g._defer`链表中取出
+      3. 重新检查`g._defer`中是否还存在defer
+
+> 再次暂停，此时`g`上只剩下一个`_defer`：`openDefer`
+
+继续：
+1. `g`上还有`openDefer`存在
+2. `openDefer`不在运行，将其标记为运行，将`panic2`赋值到`openDefer._panic`上
+3. 执行`openDefer`
+4. 完成`openDefer`后，free it
+5. 检查是否有recover调用
+6. 调用fatalpanic使程序崩溃
+
+分析完毕。
+
+## 4. recover
+
+编译器在将关键字`recover`转换成`runtime.gorecover`:
+```go
+func gorecover(argp uintptr) any {
+	gp := getg()
+	p := gp._panic
+	if p != nil && !p.goexit && !p.recovered && argp == uintptr(p.argp) {
+		p.recovered = true
+		return p.arg
+	}
+	return nil
+}
+```
+
+这个函数很简单，先是获取`g`，然后再获取`g._panic`的第一个元素，然后将其`recovered`标志设为true。
+
+而对recover的处理，还要来看`runtime.gopanic`:
+```go
+func gopanic(e any) {
+	...
+	for {
+		d := gp._defer // panic退出程序前，要执行defer
+		if d == nil {
+			break
+		}
+
+		...
+
+		if p.recovered { // 如果panic被recover，则继续执行下一个panic
+			gp._panic = p.link
+			if gp._panic != nil && gp._panic.goexit && gp._panic.aborted {
+				// A normal recover would bypass/abort the Goexit.  Instead,
+				// we return to the processing loop of the Goexit.
+				gp.sigcode0 = uintptr(gp._panic.sp)
+				gp.sigcode1 = uintptr(gp._panic.pc)
+				mcall(recovery)
+				throw("bypassed recovery failed") // mcall should not return
+			}
+			atomic.Xadd(&runningPanicDefers, -1)
+
+			// After a recover, remove any remaining non-started,
+			// open-coded defer entries, since the corresponding defers
+			// will be executed normally (inline). Any such entry will
+			// become stale once we run the corresponding defers inline
+			// and exit the associated stack frame. We only remove up to
+			// the first started (in-progress) open defer entry, not
+			// including the current frame, since any higher entries will
+			// be from a higher panic in progress, and will still be
+			// needed.
+			d := gp._defer
+			var prev *_defer
+			if !done {
+				// Skip our current frame, if not done. It is
+				// needed to complete any remaining defers in
+				// deferreturn()
+				prev = d
+				d = d.link
+			}
+			for d != nil {
+				if d.started {
+					// This defer is started but we
+					// are in the middle of a
+					// defer-panic-recover inside of
+					// it, so don't remove it or any
+					// further defer entries
+					break
+				}
+				if d.openDefer {
+					if prev == nil {
+						gp._defer = d.link
+					} else {
+						prev.link = d.link
+					}
+					newd := d.link
+					freedefer(d)
+					d = newd
+				} else {
+					prev = d
+					d = d.link
+				}
+			}
+
+			gp._panic = p.link
+			// Aborted panics are marked but remain on the g.panic list.
+			// Remove them from the list.
+			for gp._panic != nil && gp._panic.aborted {
+				gp._panic = gp._panic.link
+			}
+			if gp._panic == nil { // must be done with signal
+				gp.sig = 0
+			}
+			// Pass information about recovering frame to recovery.
+			gp.sigcode0 = uintptr(sp)
+			gp.sigcode1 = pc
+			mcall(recovery)
+			throw("recovery failed") // mcall should not return
+		}
+	}
+
+	// ran out of deferred calls - old-school panic now
+	// Because it is unsafe to call arbitrary user code after freezing
+	// the world, we call preprintpanics to invoke all necessary Error
+	// and String methods to prepare the panic strings before startpanic.
+	preprintpanics(gp._panic)
+
+	fatalpanic(gp._panic) // should not return
+	*(*int)(nil) = 0      // not reached
+}
+```
+
+先结合程序来看：
+```go
+1 │ package main
+2 │
+3 │ func main() {
+4 │     defer func() {
+5 │         if r := recover(); r != nil {
+6 │             println(r)
+7 │         }
+8 │     }()
+9 │     panic("1")
+10│ }
+```
+
+首先程序会执行到第9行，然后一个`panic1`将会被添加到`g._panic`链表上；然后在`runtime.gopanic`中会调用defer.fn，会执行到recover，根据`runtime.gorecover`，会将`g._panic`的第一个元素取出，然后将其设置为可recover。
+
+这样，我们就可以分析recover是怎么执行的了。
+
+TODO
+
+
+

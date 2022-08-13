@@ -1,8 +1,8 @@
 ---
 author: "李昌"
-title: "走进defer"
+title: "runtime篇三：defer"
 date: "2022-08-12"
-tags: ["golang"]
+tags: ["golang", "runtime"]
 categories: ["Golang"]
 ShowToc: true
 TocOpen: true
@@ -24,7 +24,7 @@ type _defer struct {
 	sp        uintptr // 调用defer时的栈指针 stack pointer
 	pc        uintptr // 调用defer函数时的pc值
 	fn        func()  // defer关键字传入的函数， 当使用open-coded defer时可为空
-	_panic    *_panic // defer运行时的panic
+	_panic    *_panic // defer函数中的_panic链表
 	link      *_defer // 在goroutine中的下一个defer，可指向堆或栈
 
     // 如果openDefer为true，则下面的字段将记录具有open-code defer的栈帧和相关的函数。

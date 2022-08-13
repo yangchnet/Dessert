@@ -1,9 +1,9 @@
 ---
 author: "李昌"
-title: "走进chan"
+title: "runtime篇二：通道"
 date: "2022-08-05"
-tags: ["channel"]
-categories: ["golang"]
+tags: ["golang", "runtime"]
+categories: ["Golang"]
 ShowToc: true
 TocOpen: true
 ---
