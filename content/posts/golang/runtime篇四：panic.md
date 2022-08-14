@@ -260,101 +260,7 @@ func gorecover(argp uintptr) any {
 
 这个函数很简单，先是获取`g`，然后再获取`g._panic`的第一个元素，然后将其`recovered`标志设为true。
 
-而对recover的处理，还要来看`runtime.gopanic`:
-```go
-func gopanic(e any) {
-	...
-	for {
-		d := gp._defer // panic退出程序前，要执行defer
-		if d == nil {
-			break
-		}
-
-		...
-
-		if p.recovered { // 如果panic被recover，则继续执行下一个panic
-			gp._panic = p.link
-			if gp._panic != nil && gp._panic.goexit && gp._panic.aborted {
-				// A normal recover would bypass/abort the Goexit.  Instead,
-				// we return to the processing loop of the Goexit.
-				gp.sigcode0 = uintptr(gp._panic.sp)
-				gp.sigcode1 = uintptr(gp._panic.pc)
-				mcall(recovery)
-				throw("bypassed recovery failed") // mcall should not return
-			}
-			atomic.Xadd(&runningPanicDefers, -1)
-
-			// After a recover, remove any remaining non-started,
-			// open-coded defer entries, since the corresponding defers
-			// will be executed normally (inline). Any such entry will
-			// become stale once we run the corresponding defers inline
-			// and exit the associated stack frame. We only remove up to
-			// the first started (in-progress) open defer entry, not
-			// including the current frame, since any higher entries will
-			// be from a higher panic in progress, and will still be
-			// needed.
-			d := gp._defer
-			var prev *_defer
-			if !done {
-				// Skip our current frame, if not done. It is
-				// needed to complete any remaining defers in
-				// deferreturn()
-				prev = d
-				d = d.link
-			}
-			for d != nil {
-				if d.started {
-					// This defer is started but we
-					// are in the middle of a
-					// defer-panic-recover inside of
-					// it, so don't remove it or any
-					// further defer entries
-					break
-				}
-				if d.openDefer {
-					if prev == nil {
-						gp._defer = d.link
-					} else {
-						prev.link = d.link
-					}
-					newd := d.link
-					freedefer(d)
-					d = newd
-				} else {
-					prev = d
-					d = d.link
-				}
-			}
-
-			gp._panic = p.link
-			// Aborted panics are marked but remain on the g.panic list.
-			// Remove them from the list.
-			for gp._panic != nil && gp._panic.aborted {
-				gp._panic = gp._panic.link
-			}
-			if gp._panic == nil { // must be done with signal
-				gp.sig = 0
-			}
-			// Pass information about recovering frame to recovery.
-			gp.sigcode0 = uintptr(sp)
-			gp.sigcode1 = pc
-			mcall(recovery)
-			throw("recovery failed") // mcall should not return
-		}
-	}
-
-	// ran out of deferred calls - old-school panic now
-	// Because it is unsafe to call arbitrary user code after freezing
-	// the world, we call preprintpanics to invoke all necessary Error
-	// and String methods to prepare the panic strings before startpanic.
-	preprintpanics(gp._panic)
-
-	fatalpanic(gp._panic) // should not return
-	*(*int)(nil) = 0      // not reached
-}
-```
-
-先结合程序来看：
+让我们先结合具体程序来简单看下recover流程：
 ```go
 1 │ package main
 2 │
@@ -368,11 +274,222 @@ func gopanic(e any) {
 10│ }
 ```
 
-首先程序会执行到第9行，然后一个`panic1`将会被添加到`g._panic`链表上；然后在`runtime.gopanic`中会调用defer.fn，会执行到recover，根据`runtime.gorecover`，会将`g._panic`的第一个元素取出，然后将其设置为可recover。
+首先程序会执行到第9行，然后一个`panic1`将会被添加到`g._panic`链表上；然后在`runtime.gopanic`中会添加一个`openDefer`,  然后调用defer.fn，会执行到recover，根据`runtime.gorecover`，会将`g._panic`的第一个元素取出，然后将其设置为可recover。
 
-这样，我们就可以分析recover是怎么执行的了。
+现在，`g`中有了两个`_defer`（`mydefer.link = openDefer`），一个`_panic`（`panic1`），且`mydefer`被设置`recovered = true`。我们可以开始分析recover是怎么执行的了：
 
-TODO
+而对recover的处理，还要来看`runtime.gopanic`:
+```go
+1 │func gopanic(e any) {
+2 │    ...
+3 │    for {
+4 │        d := gp._defer // panic退出程序前，要执行defer
+5 │        if d == nil {
+6 │            break
+7 │        }
+8 │
+9 │        ...
+10│
+11│        if p.recovered { // 如果panic被recover，则继续执行下一个panic
+12│            gp._panic = p.link
+13│            if gp._panic != nil && gp._panic.goexit && gp._panic.aborted {
+14│                // A normal recover would bypass/abort the Goexit.  Instead,
+15│                // we return to the processing loop of the Goexit.
+16│                gp.sigcode0 = uintptr(gp._panic.sp)
+17│                gp.sigcode1 = uintptr(gp._panic.pc)
+18│                mcall(recovery)
+19│                throw("bypassed recovery failed") // mcall should not return
+20│            }
+21│            atomic.Xadd(&runningPanicDefers, -1)
+22│
+23│            // After a recover, remove any remaining non-started,
+24│            // open-coded defer entries, since the corresponding defers
+25│            // will be executed normally (inline). Any such entry will
+26│            // become stale once we run the corresponding defers inline
+27│            // and exit the associated stack frame. We only remove up to
+28│            // the first started (in-progress) open defer entry, not
+29│            // including the current frame, since any higher entries will
+30│            // be from a higher panic in progress, and will still be
+31│            // needed.
+32│            d := gp._defer
+33│            var prev *_defer
+34│            if !done {
+35│                // Skip our current frame, if not done. It is
+36│                // needed to complete any remaining defers in
+37│                // deferreturn()
+38│                prev = d
+39│                d = d.link
+40│            }
+41│            for d != nil { // 这里去除了已经开始的open defer
+42│                // 暂时省略
+43│            }
+44│
+45│            gp._panic = p.link
+46│            // Aborted panics are marked but remain on the g.panic list.
+47│            // Remove them from the list.
+48│            for gp._panic != nil && gp._panic.aborted {
+49│                gp._panic = gp._panic.link
+50│            }
+51│            if gp._panic == nil { // must be done with signal
+52│                gp.sig = 0
+53│            }
+54│            // Pass information about recovering frame to recovery.
+55│            gp.sigcode0 = uintptr(sp)
+56│            gp.sigcode1 = pc
+57│            mcall(recovery)
+58│            throw("recovery failed") // mcall should not return
+59│        }
+60│    }
+61│
+62│    // ...
+63│}
+```
+
+当程序开始进行recover时，首先在13行会做一个if判断。正常recover是会绕过Goexit的，所以为了解决这个，添加了这个判断，这样就可以保证Goexit也会被recover住，这里是通过从runtime._panic中取出了程序计数器pc和栈指针sp并且调用runtime.recovery函数触发goroutine的调度，调度之前会准备好 sp、pc 以及函数的返回值。
+
+对于我们的程序来说，并未调用Goexit，因此这里会跳过，然后在32～43行，由于`done`为true，这里d将会被赋值为`mydefer`，然后来到45行，将`defer1`从`g._panic`链表中取出，然后将余下的被标记为aborted的`_panic`删除，这里没有。
+
+55、56两行设置`g`的`sigcode0`、`sigcode1`指针，用于跳转，然后57行`mcall(recovery)`。
+
+`mcall`是一个汇编实现的函数，其函数原型为：`func mcall(fn func(*g))`，其主要功能是切换到`g0`的栈，然后调用`fn(g)`，`fn(g)`将不会返回，并且触发`g`的重新调度。
+
+这里的`fn`就是`recovery`，来看：
+```go
+func recovery(gp *g) {
+	// Info about defer passed in G struct.
+	sp := gp.sigcode0
+	pc := gp.sigcode1
+
+	// d's arguments need to be in the stack.
+	if sp != 0 && (sp < gp.stack.lo || gp.stack.hi < sp) {
+		print("recover: ", hex(sp), " not in [", hex(gp.stack.lo), ", ", hex(gp.stack.hi), "]\n")
+		throw("bad recovery")
+	}
+
+	// Make the deferproc for this d return again,
+	// this time returning 1. The calling function will
+	// jump to the standard return epilogue.
+	gp.sched.sp = sp
+	gp.sched.pc = pc
+	gp.sched.lr = 0
+	gp.sched.ret = 1
+	gogo(&gp.sched)
+}
+```
+
+没什么特别的魔法，就是重新设置了`g`的一些指针，然后对其重新进行调度。
+
+这样就完成了panic的恢复。
+
+## 5. 场景分析
+
+**Q1** 为什么recover必须放在defer里面
+**A1** 不放到defer里面，没机会运行啊。。。
 
 
+**Q2** 为什么如下使用方法不会恢复：
+```go
+func main() {
+	defer recover()
+	panic("1")
+}
+```
+**A2** 在调用recover()函数时，会有如下if条件：
+```go
+if p != nil && !p.goexit && !p.recovered && argp == uintptr(p.argp) {
+	p.recovered = true
+	return p.arg
+}
+```
+这里`p != nil && !p.goexit && !p.recovered`会满足，而`argp`和`uintptr(p.argp)`并不相等，`argp`是`runtime.gopinic`报告的参数指针，`p.argp`是最顶层 defer 函数调用的参数指针，二者并不相等。
 
+**Q3** 下面这段代码将输出什么？为什么？
+```go
+func main() {
+	defer func() { // topdefer
+		fmt.Println(recover())
+	}()
+
+	defer panic(3) // defer3
+	defer panic(2) // defer2
+	defer panic(1) // defer1
+	panic(0)
+}
+```
+**A3** 将输出3.
+
+分析：在`runtime.gopanic`中，有如下代码：
+```go
+if d.started {
+	if d._panic != nil {
+		d._panic.aborted = true
+	}
+	d._panic = nil
+	if !d.openDefer {
+		d.fn = nil
+		gp._defer = d.link
+		freedefer(d)
+		continue
+	}
+}
+```
+
+当我们执行到`panic(0)`后，将返回执行`defer1`，这时`defer1`被设置为`started`，`panic(0)`被设置为`aborted`，然后`defer1`被释放；
+紧接着执行`defer2`，`defer2`被设置为`started`，`panic(1)`被设置为`aborted`，然后`defer2`被释放；
+紧接着执行`defer3`，`defer3`被设置为`started`，`panic(2)`被设置为`aborted`，然后`defer3`被释放；
+最后执行到`topdefer`，又因如下代码：
+```go
+for gp._panic != nil && gp._panic.aborted {
+	gp._panic = gp._panic.link
+}
+```
+被标记为`aborted`的panic将被忽略，因此只剩下了`panic(3)`。
+
+这样，最后输出的值就是3。
+
+**Q4** 为什么recover不能捕获不同goroutine的panic
+**A4** 查看`runtime.gorecover`源码：
+```go
+func gorecover(argp uintptr) any {
+	gp := getg()
+	p := gp._panic
+	if p != nil && !p.goexit && !p.recovered && argp == uintptr(p.argp) {
+		p.recovered = true
+		return p.arg
+	}
+	return nil
+}
+```
+这个函数获取了当前的`g`，并为其第一个`_panic`设置recover，跟其他`g`没有关系
+
+**Q5** 为什么子goroutine的panic不被recover会造成整个程序的崩溃
+**A5** 查看`runtime.fatalpanic`:
+```go
+func fatalpanic(msgs *_panic) {
+	// ...
+
+	systemstack(func() {
+		exit(2)
+	})
+
+	*(*int)(nil) = 0 // not reached
+}
+```
+
+其在执行`exit(2)`时，是在`systemstack`上执行的，因此整个程序都会退出。
+
+END
+
+## References
+
+https://gfw.go101.org/article/panic-and-recover-more.html
+
+https://golang.design/under-the-hood/zh-cn/part1basic/ch03lang/panic/
+
+https://www.purewhite.io/2019/11/28/runtime-hacking-translate/
+
+https://zhuanlan.zhihu.com/p/346514343
+
+https://draveness.me/golang/docs/part2-foundation/ch05-keyword/golang-panic-recover/
+
+https://xiaomi-info.github.io/2020/01/20/go-trample-panic-recover/
