@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://yangchnet.github.io/Dessert/</loc>
-    <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
-    <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E8%80%83%E7%A0%94/</loc>
-    <lastmod>2022-08-15T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
   </url><url>
@@ -18,6 +9,12 @@
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/golang/</loc>
+    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/</loc>
+    <lastmod>2022-08-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
     <lastmod>2022-08-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/runtime/</loc>
@@ -1021,6 +1018,9 @@
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E8%80%83%E7%A0%94/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%AA%E5%91%BD%E5%90%8D/</loc>
   </url><url>
