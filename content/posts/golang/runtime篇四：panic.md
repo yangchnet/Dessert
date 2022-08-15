@@ -14,6 +14,7 @@ TocOpen: true
 - [runtime篇二：通道](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/)
 - [runtime篇三：defer](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%89defer/)
 - [runtime篇四：panic](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/)
+- [runtime篇五：slice](https://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%94slice/)
 
 ## 1. panic的底层结构
 
