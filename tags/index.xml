@@ -9,11 +9,11 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 12 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>golang</title>
       <link>http://yangchnet.github.io/Dessert/tags/golang/</link>
-      <pubDate>Fri, 12 Aug 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/golang/</guid>
       <description></description>
@@ -22,7 +22,7 @@
     <item>
       <title>runtime</title>
       <link>http://yangchnet.github.io/Dessert/tags/runtime/</link>
-      <pubDate>Fri, 12 Aug 2022 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/runtime/</guid>
       <description></description>
@@ -988,15 +988,6 @@
       <pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/slice/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>数组</title>
-      <link>http://yangchnet.github.io/Dessert/tags/%E6%95%B0%E7%BB%84/</link>
-      <pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/%E6%95%B0%E7%BB%84/</guid>
       <description></description>
     </item>
     
