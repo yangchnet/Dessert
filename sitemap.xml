@@ -542,10 +542,10 @@
     <loc>http://yangchnet.github.io/Dessert/tags/goroutine/</loc>
     <lastmod>2021-05-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/python/</loc>
+    <loc>http://yangchnet.github.io/Dessert/categories/python/</loc>
     <lastmod>2021-05-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/python/</loc>
+    <loc>http://yangchnet.github.io/Dessert/tags/python/</loc>
     <lastmod>2021-05-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
@@ -704,15 +704,6 @@
     <loc>http://yangchnet.github.io/Dessert/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</loc>
     <lastmod>2021-03-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/panic/</loc>
-    <lastmod>2021-03-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/golang/panic%E5%92%8Crecover/</loc>
-    <lastmod>2021-03-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/recover/</loc>
-    <lastmod>2021-03-27T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/hugo/</loc>
     <lastmod>2021-03-18T00:00:00+00:00</lastmod>
   </url><url>
@@ -785,16 +776,7 @@
     <loc>http://yangchnet.github.io/Dessert/posts/python/python%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/python/2016%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%93%E4%B8%9A%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B%E8%80%83%E6%A0%B8/</loc>
-    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/django/autoreserve%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</loc>
-    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/django/django-form/</loc>
@@ -944,9 +926,6 @@
     <loc>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</loc>
-    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/dlml/dnf/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
@@ -969,12 +948,6 @@
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/%E6%8C%87%E4%BB%A4/</loc>
-    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</loc>
-    <lastmod>2021-02-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/python/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</loc>
     <lastmod>2021-02-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</loc>

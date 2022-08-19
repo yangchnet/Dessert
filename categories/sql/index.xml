@@ -40,16 +40,6 @@ sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
     </item>
     
     <item>
-      <title>Did you install mysqlclient?</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</guid>
-      <description>Did you install mysqlclient? 在进行新的django项目时出现了这个错误
-解决方法  确保pymysql和mysqlcient都安装 在和setting.py同级的init.py中加入  import pymysql pymysql.install_as_MySQLdb() </description>
-    </item>
-    
-    <item>
       <title>MySql安装和配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>

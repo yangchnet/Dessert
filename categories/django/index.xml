@@ -30,40 +30,6 @@ def demo_app(environ,start_response): from StringIO import StringIO stdout = Str
     </item>
     
     <item>
-      <title>AutoReserve|使用说明</title>
-      <link>http://yangchnet.github.io/Dessert/posts/django/autoreserve%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/django/autoreserve%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
-      <description>AutoReserve | 使用说明 1. 简介 AutoReserve是一个帮助同学们自动预约图书馆座位的系统，提供每晚代约座位服务，由一位热心同学开发和维护。
-2.访问站点 我们的网站是：http://59.110.140.133/reserve/ ，欢迎访问注册
-3.如何使用 访问网站-&amp;gt;注册账号-&amp;gt;填写表格-&amp;gt;审核通过-&amp;gt;成功加入预约名单
-3.1 访问并注册 访问http://59.110.140.133/reserve/主页
-点击免费注册或上方导航栏里的注册按钮进行注册，跳转到注册页面
-填写表单进行注册
-两次密码不一致会有检查提示
-注册完成后自动重定向到我的预约页面
-页面下方会显示系统数据库中已经被“预约”的位置
-按照提示填写表单后，页面上方会刷新出你的预约信息
-4. Q&amp;amp;A Q： 本系统的用户名必须和预约系统的账号一样吗？
-A： 不一定，你可以选择自己喜欢的用户名，比如：悲伤的雪，等等。在你填写自己的预约信息时要求的账号才是你图书馆预约系统的账号。
- Q： 可以100%保证我每天都可以约到想要的位置吗？
-A： 不一定，由于本系统也是模拟登录等行为来进行预约，因此也受到比如网络拥塞，系统卡顿等问题，因此不一定每天都可以约到想要的位置，当用户指定的位置未完成预约时，系统将自动预约与其相邻的下一个座位，保证用户有位置可坐。
- Q： 有时注册提交表单时会出现Internal Error 500,这代表什么意思，是注册失败了吗？
-A： Internal Error 500代表服务器内部错误，由于某些未知的原因，此类错误尚无法预知并排除，出现此类错误时，通常预约已经完成，用户可再次访问网页直接登录。推荐用户在浏览器内打开网址，不建议在QQ，微信环境下直接进入网页。
- Q： 我填写完表单后，当天就可以约到位置吗？
-A： 系统在每天晚上12点为用户预约“明天”的座位，也就是说，如果用户在1月1日中午填写表单，那么系统将在1月2日的凌晨00:00为其预约1月3日的座位，此后每天晚上都会再次预约。
- Q： 我今天不想去了，怎么才能取消今天的座位？
-A： 本系统不提供取消座位服务，用户可直接登录官方预约系统微信端（ http://libzwxt.ahnu.edu.cn/SeatWx/login.aspx ） 或网页端（ http://libzwxt.ahnu.edu.cn/SeatManage/ ） 进行取消。
- Q： 我想换个位置做，可以修改预约信息吗？
-A： 用户可直接登录系统，点击上方我的预约导航按钮，进入我的预约页面修改信息。
- Q： 一个账号可以提交多个预约信息吗？
-A： 不可以，每个账号只能为一个人预约。
- Q： 为什么我的座位没有预约成功？
-A： 系统可能存在未知的BUG， 反复出现此问题请联系管理员。</description>
-    </item>
-    
-    <item>
       <title>Django,Forms</title>
       <link>http://yangchnet.github.io/Dessert/posts/django/django-form/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -137,29 +103,6 @@ UserProfile：model</description>
  include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;#34;hello world&amp;#34;); return 0; }  Java语言
  public class HelloWorld{ public static void main(String[] args) { System.out.println(&amp;#34;Hello World!&amp;#34;); } }  Python
  print(&amp;#39;hello world&amp;#39;) python中的常用数据类型  Number String List Tuple Dictionary  # Number a = 1 b = True c = 3.15 d = 1.1+2.2j # 字符串 str1 = &amp;#39;hello&amp;#39; str1_1 = &amp;#34;hello&amp;#34; str2 = &amp;#34;world&amp;#34; print(str1==str1_1) # 字符串连接 str3 = str1 + str2 print(str3) # 转义字符 str4 = &amp;#39;hello \nworld&amp;#39; print(str4) str5 = &amp;#39;hello \\n world&amp;#39; print(str5) # 格式化输出 print(&amp;#39;str1:%s.</description>
-    </item>
-    
-    <item>
-      <title>在通过日期获取数据库条目时，出现djangoItmustbeinYYYY-MM-DDHH:MM[:ss[.uuuuuu]][TZ]format.&#34;]错误</title>
-      <link>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</guid>
-      <description>在通过日期获取数据库条目时，出现 django It must be in YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] format.&amp;quot;]错误 由于日期是从前端获取的，因此将前端日期引用标签改为：{{ comment.time|date:&amp;quot;Y-m-d H:i:s.u&amp;quot;}}</description>
-    </item>
-    
-    <item>
-      <title>数据库表结构说明&amp;&amp;远程访问说明</title>
-      <link>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</guid>
-      <description>数据库表结构说明 &amp;amp;&amp;amp; 远程访问说明  code by lichang
- 数据库表结构说明 数据库名为django_mysql
-1.用户  所有和用户有关的数据
- 1.1 mhuse_mhuser表  用户总表，包含基本用户信息
-  id(key) password（密文密码） last_login is_superuser username first_name last_name email is_staff is_active date_joined usertype(normal, doctor) deviceid （设备id） mypassword(明文密码)  1.2 mhuser_normal表  普通用户表,包含普通用户的个人信息
-  user (foreign key, mhuser_mhuser.id) age [IntegerField, blank=True] gender [CharField,default=&amp;lsquo;man&amp;rsquo;,choice=(&amp;lsquo;man&amp;rsquo;,&amp;lsquo;woman&amp;rsquo;), max_length=10, blank=True] (性别) weight [FloatField, blank=True] （体重） marry [BooleanField, blank=True]（婚否） career [CharField, blank=True]（职业） signature [CharField, blank=True]（个性签名） medicalhistory [TextField, max_length=1000, blank=True] （用药史） avatar [ImageField, blank=True] (头像)  1.</description>
     </item>
     
     <item>

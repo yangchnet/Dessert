@@ -1612,23 +1612,6 @@ months := [...]string{1: &amp;#34;January&amp;#34;, /* ... */, 12: &amp;#34;Dece
     </item>
     
     <item>
-      <title>panic和recover</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/panic%E5%92%8Crecover/</link>
-      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/panic%E5%92%8Crecover/</guid>
-      <description>1. Panic异常 func panic(v interface{}) 在通常情况下，函数向其调用方报告错误都是返回一个error类型，但有时会遇到致命（即会让程序崩溃）的错误时，显然无法通过返回error进行处理。这时我们使用panic函数来报告致命错误。
-当panic异常发生时，程序会中断运行，并立即执行在该goroutine中被defer的函数。随后，程序崩溃并输出日志信息（panic value和函数调用的堆栈信息）。在Go的panic机制中，延迟函数的调用在释放堆栈信息之前.
-panic的来源： 1. 运行时panic异常 2. 直接调用内置的panic函数
-例子：
-func main(){ fmt.Println(&amp;#34;main start&amp;#34;) outerFunc() fmt.Println(&amp;#34;main end&amp;#34;) } func outerFunc(){ fmt.Println(&amp;#34;out start&amp;#34;) innerFunc() fmt.Println(&amp;#34;out end&amp;#34;) } func innerFunc(){ panic(errors.New(&amp;#34;an intended fatal error&amp;#34;)) }  输出
- // 只有start，而没有end，因为程序崩溃了 main start out start panic: an intended fatal error 在这个程序中，当调用innerFunc中的panic时，innerFunc会立即停止执行，紧接着，outerFunc也会被停止，运行时panic沿着调用栈一直反方向进行传播，直至到达当前goroutine的调用栈最顶层。
-2. recover func recover() interface{} 通常来说，不应该对panic异常做任何处理，但有时我们可能需要在程序崩溃前做一些操作。这时，我们可以“从异常中恢复”。
-如果在defer函数中调用了内置函数recover，并且定义该defer语句的函数发生了panic异常，recover会使程序从panic中恢复，并返回panic value。导致panic异常的函数不会继续运行，但能正常返回。在未发生panic时调用recover，recover会返回nil。
-// ...  // 将innerFunc修改为如下 func innerFunc(){ defer func(){ if p := recover(); p !</description>
-    </item>
-    
-    <item>
       <title>hugo中的公式问题</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/hugo%E4%B8%AD%E7%9A%84%E5%85%AC%E5%BC%8F%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
@@ -1755,51 +1738,6 @@ hugo server -D 注意，这个命令只会让你的hugo服务器监听本地访�
     </item>
     
     <item>
-      <title>2016统计学专业数据挖掘实验课程考核</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/2016%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%93%E4%B8%9A%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B%E8%80%83%E6%A0%B8/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/python/2016%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%93%E4%B8%9A%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E5%AE%9E%E9%AA%8C%E8%AF%BE%E7%A8%8B%E8%80%83%E6%A0%B8/</guid>
-      <description>2016统计学专业数据挖掘实验课程考核  此考核预计用时120m, 满分100分
-  姓名： 学号：  1. Wordcount（30分） 计算出下文中每个英文字母出现的次数（不区分大小写, 去除空格与标点符号），并进行输出。
-Our entire class is quaking in its boots. The reason, of course, is the upcoming meeting in which the teachers decide who&amp;rsquo;ll be promoted to the next grade and who&amp;rsquo;ll be kept back. Half the class is making bets. G.Z. and I laugh ourselves sick at the two boys behind us, C.N. and Jacques Kocernoot, who have staked their entire vacation savings on their bet.</description>
-    </item>
-    
-    <item>
-      <title>AutoReserve|使用说明</title>
-      <link>http://yangchnet.github.io/Dessert/posts/django/autoreserve%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/django/autoreserve%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/</guid>
-      <description>AutoReserve | 使用说明 1. 简介 AutoReserve是一个帮助同学们自动预约图书馆座位的系统，提供每晚代约座位服务，由一位热心同学开发和维护。
-2.访问站点 我们的网站是：http://59.110.140.133/reserve/ ，欢迎访问注册
-3.如何使用 访问网站-&amp;gt;注册账号-&amp;gt;填写表格-&amp;gt;审核通过-&amp;gt;成功加入预约名单
-3.1 访问并注册 访问http://59.110.140.133/reserve/主页
-点击免费注册或上方导航栏里的注册按钮进行注册，跳转到注册页面
-填写表单进行注册
-两次密码不一致会有检查提示
-注册完成后自动重定向到我的预约页面
-页面下方会显示系统数据库中已经被“预约”的位置
-按照提示填写表单后，页面上方会刷新出你的预约信息
-4. Q&amp;amp;A Q： 本系统的用户名必须和预约系统的账号一样吗？
-A： 不一定，你可以选择自己喜欢的用户名，比如：悲伤的雪，等等。在你填写自己的预约信息时要求的账号才是你图书馆预约系统的账号。
- Q： 可以100%保证我每天都可以约到想要的位置吗？
-A： 不一定，由于本系统也是模拟登录等行为来进行预约，因此也受到比如网络拥塞，系统卡顿等问题，因此不一定每天都可以约到想要的位置，当用户指定的位置未完成预约时，系统将自动预约与其相邻的下一个座位，保证用户有位置可坐。
- Q： 有时注册提交表单时会出现Internal Error 500,这代表什么意思，是注册失败了吗？
-A： Internal Error 500代表服务器内部错误，由于某些未知的原因，此类错误尚无法预知并排除，出现此类错误时，通常预约已经完成，用户可再次访问网页直接登录。推荐用户在浏览器内打开网址，不建议在QQ，微信环境下直接进入网页。
- Q： 我填写完表单后，当天就可以约到位置吗？
-A： 系统在每天晚上12点为用户预约“明天”的座位，也就是说，如果用户在1月1日中午填写表单，那么系统将在1月2日的凌晨00:00为其预约1月3日的座位，此后每天晚上都会再次预约。
- Q： 我今天不想去了，怎么才能取消今天的座位？
-A： 本系统不提供取消座位服务，用户可直接登录官方预约系统微信端（ http://libzwxt.ahnu.edu.cn/SeatWx/login.aspx ） 或网页端（ http://libzwxt.ahnu.edu.cn/SeatManage/ ） 进行取消。
- Q： 我想换个位置做，可以修改预约信息吗？
-A： 用户可直接登录系统，点击上方我的预约导航按钮，进入我的预约页面修改信息。
- Q： 一个账号可以提交多个预约信息吗？
-A： 不可以，每个账号只能为一个人预约。
- Q： 为什么我的座位没有预约成功？
-A： 系统可能存在未知的BUG， 反复出现此问题请联系管理员。</description>
-    </item>
-    
-    <item>
       <title>CentOS安装Python环境</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -1813,16 +1751,6 @@ A： 系统可能存在未知的BUG， 反复出现此问题请联系管理员�
 如果再次检查Python版本，你会发现Python 3.6现在是当前shell中的默认版本。 需要指出的是，Python 3.6仅在此shell会话中设置为默认的Python版本。如果退出会话或从另一个终端打开一个新会话，Python 2.7将是默认的Python版本。
   可使用当前shell窗口建立一个Python3虚拟环境，这样就可以使用Python3
   #首先，创建项目目录并切换到它： mkdir ~/my_new_project cd ~/my_new_project #使用该scl工具激活Python 3.6 ： sl enable rh-python36 bash # 从项目根目录内部运行以下命令以创建名为的虚拟环境my_project_venv： python -m venv my_project_venv #要首先使用虚拟环境，我们需要输入以下命令来激活它： source my_project_venv/bin/activate #激活环境后，shell提示符将以环境名称作为前缀： (my_project_venv) user@host:~/my_new_project$ </description>
-    </item>
-    
-    <item>
-      <title>Did you install mysqlclient?</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/did-you-install-mysqlclient/</guid>
-      <description>Did you install mysqlclient? 在进行新的django项目时出现了这个错误
-解决方法  确保pymysql和mysqlcient都安装 在和setting.py同级的init.py中加入  import pymysql pymysql.install_as_MySQLdb() </description>
     </item>
     
     <item>
@@ -2392,15 +2320,6 @@ version: &amp;#39;3&amp;#39; services: db: image: postgres web: build: . command
     </item>
     
     <item>
-      <title>在通过日期获取数据库条目时，出现djangoItmustbeinYYYY-MM-DDHH:MM[:ss[.uuuuuu]][TZ]format.&#34;]错误</title>
-      <link>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/django/yyyy-mm-dd%E9%94%99%E8%AF%AF/</guid>
-      <description>在通过日期获取数据库条目时，出现 django It must be in YYYY-MM-DD HH:MM[:ss[.uuuuuu]][TZ] format.&amp;quot;]错误 由于日期是从前端获取的，因此将前端日期引用标签改为：{{ comment.time|date:&amp;quot;Y-m-d H:i:s.u&amp;quot;}}</description>
-    </item>
-    
-    <item>
       <title>基于卷积神经网络和决策树的体域网数据融合方法</title>
       <link>http://yangchnet.github.io/Dessert/posts/dlml/dnf/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
@@ -2473,30 +2392,6 @@ np.linspace
 使用默认配置 Matplotlib 的默认配置都允许用户自定义。你可以调整大多数的默认配置：图片大小和分辨率（dpi）、线宽、颜色、风格、坐标轴、坐标轴以及网格的属性、文字与字体属性等。不过，matplotlib 的默认配置在大多数情况下已经做得足够好，你可能只在很少的情况下才会想更改这些默认配置。
 plot函数详解
 from pylab import * plot(X,C) plot(X,S) show() &amp;lt;Figure size 640x480 with 1 Axes&amp;gt;  默认配置的具体内容 下面的代码中，我们展现了 matplotlib 的默认配置并辅以注释说明，这部分配置包含了有关绘图样式的所有配置。代码中的配置与默认配置完全相同，你可以在交互模式中修改其中的值来观察效果。</description>
-    </item>
-    
-    <item>
-      <title>数据库表结构说明&amp;&amp;远程访问说明</title>
-      <link>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/django/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%B4%E6%98%8E/</guid>
-      <description>数据库表结构说明 &amp;amp;&amp;amp; 远程访问说明  code by lichang
- 数据库表结构说明 数据库名为django_mysql
-1.用户  所有和用户有关的数据
- 1.1 mhuse_mhuser表  用户总表，包含基本用户信息
-  id(key) password（密文密码） last_login is_superuser username first_name last_name email is_staff is_active date_joined usertype(normal, doctor) deviceid （设备id） mypassword(明文密码)  1.2 mhuser_normal表  普通用户表,包含普通用户的个人信息
-  user (foreign key, mhuser_mhuser.id) age [IntegerField, blank=True] gender [CharField,default=&amp;lsquo;man&amp;rsquo;,choice=(&amp;lsquo;man&amp;rsquo;,&amp;lsquo;woman&amp;rsquo;), max_length=10, blank=True] (性别) weight [FloatField, blank=True] （体重） marry [BooleanField, blank=True]（婚否） career [CharField, blank=True]（职业） signature [CharField, blank=True]（个性签名） medicalhistory [TextField, max_length=1000, blank=True] （用药史） avatar [ImageField, blank=True] (头像)  1.</description>
-    </item>
-    
-    <item>
-      <title>数据集的清洗</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</link>
-      <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/python/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97/</guid>
-      <description>数据集的清洗 一、一般数据集的处理 1、读取 首先创建文件对象，然后进行读取，两种写法
-# 第一种 f = open(&amp;#39;./Chinese.txt&amp;#39;, &amp;#39;r&amp;#39;) # 节选自：《父亲》（朱自清） article = [] # 创建一个列表 for l in f.readlines(): article.append(l) article [&#39;我说道，“爸爸，你走吧。”他望车外看了看，说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪，怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子望回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的，过一会说，“我走了；到那边来信！”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。&#39;]  # 第二种 article = [] # 创建一个列表 with open(&amp;#39;./Chinese.txt&amp;#39;, &amp;#39;r&amp;#39;) as file_project: for l in file_project.readlines(): article.append(l) article [&#39;我说道，“爸爸，你走吧。”他望车外看了看，说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪，怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子望回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的，过一会说，“我走了；到那边来信！”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。&#39;]  2、把每一句单独放在一行，并去除标点 # 首先读取到字符串 article = &amp;#39;&amp;#39; # 创建一个字符串 with open(&amp;#39;./Chinese.txt&amp;#39;, &amp;#39;r&amp;#39;) as file_project: for l in file_project.readlines(): article += l article &#39;我说道，“爸爸，你走吧。”他望车外看了看，说，“我买几个橘子去。你就在此地，不要走动。”我看那边月台的栅栏外有几个卖东西的等着顾客。走到那边月台，须穿过铁道，须跳下去又爬上去。父亲是一个胖子，走过去自然要费事些。我本来要去的，他不肯，只好让他去。我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。我赶紧拭干了泪，怕他看见，也怕别人看见。我再向外看时，他已抱了朱红的橘子望回走了。过铁道时，他先将橘子散放在地上，自己慢慢爬下，再抱起橘子走。到这边时，我赶紧去搀他。他和我走到车上，将橘子一股脑儿放在我的皮大衣上。于是扑扑衣上的泥土，心里很轻松似的，过一会说，“我走了；到那边来信！”我望着他走出去。他走了几步，回过头看见我，说，“进去吧，里边没人。”等他的背影混入来来往往的人里，再找不着了，我便进来坐下，我的眼泪又来了。&#39;  # 使用replace函数，将标点替换为换行符 result_1 = article.</description>
     </item>
     
     <item>
