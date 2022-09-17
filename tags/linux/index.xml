@@ -9,7 +9,22 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 07 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>stat系列性能分析工具</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-sysstat/</link>
+      <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-sysstat/</guid>
+      <description>1. sysstat简介 sysstat是一个软件包，包含监测系统性能及效率的一组工具，这些工具对于我们收集系统性能数据，比如：CPU 使用率、硬盘和网络吞吐数据，这些数据的收集和分析，有利于我们判断系统是否正常运行，是提高系统运行效率、安全运行服务器的得力助手。
+sysstat包含多个工具套件： 首先是stat系列
+ iostat 输出CPU的统计信息和所有I/O设备的输入输出（I/O）统计信息 mpstat 关于CPU的详细信息（单独输出或者分组输出） pidstat 关于运行中的进程/任务、CPU、内存等的统计信息 sysstat sysstat 工具包的 man 帮助页面。 nfsiostat NFS（Network File System）的I/O统计信息 cifsiostat CIFS(Common Internet File System)的统计信息  还有sa系列 7. sar 保存并输出不同系统资源（CPU、内存、IO、网络、内核等）的详细信息 8. sadc 系统活动数据收集器，用于收集sar工具的后端数据 9. sa1 系统收集并存储sadc数据文件的二进制数据，与sadc工具配合使用 10. sa2 配合sar工具使用，产生每日的摘要报告 11. sadf 用于以不同的数据格式（CVS或者XML）来格式化sar工具的输出
+2. 简单使用  iostat    iostat: 显示从系统启动至今的io历史数据
+  iostat -d 2: 每隔两秒显示一个连续的设备报告。
+  iostat -d 2 6: 为所有设备显示6个报告，每隔两秒显示一个
+  iostat -x sda sdb 2 6: 为sda和sdb两个设备显示6个报告，每隔2秒显示一个</description>
+    </item>
+    
     <item>
       <title>top命令</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/</link>
