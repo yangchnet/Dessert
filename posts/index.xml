@@ -9,7 +9,21 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 17 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>python高阶函数</title>
+      <link>http://yangchnet.github.io/Dessert/posts/python/python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Wed, 19 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/</guid>
+      <description>如果一个函数能接收一个函数为参数或返回一个函数，那这个函数就被称为高阶函数。
+ 1. sorted sorted可以说是最常用的高阶函数，其用法如下：
+m = {&amp;#34;three&amp;#34;: 3, &amp;#34;tow&amp;#34;: 2, &amp;#34;one&amp;#34;: 1 sorted(m.items(), key=lambda x: x[1]) # [(&amp;#39;one&amp;#39;, 1), (&amp;#39;tow&amp;#39;, 2), (&amp;#39;three&amp;#39;, 3)] sorted可根据其参数key返回的值来进行排序。
+2. map map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回。
+如：
+def add10(x): return x+10 print(map(add10, [1, 2, 3])) # &amp;lt;map object at 0x7f5824cd01c0&amp;gt; list(map(add10, [1, 2, 3])) # [11, 12, 13] list(map(str, [1, 2, 3, 4, 5, 6, 7, 8, 9])) # [&amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;9&amp;#39;] functools.</description>
+    </item>
+    
     <item>
       <title>stat系列性能分析工具</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-sysstat/</link>
