@@ -40,6 +40,18 @@ sysstat包含多个工具套件： 首先是stat系列
     </item>
     
     <item>
+      <title>多版本语言环境</title>
+      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%A4%9A%E7%89%88%E6%9C%AC%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%A4%9A%E7%89%88%E6%9C%AC%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83/</guid>
+      <description>npm: nvm
+python: pyenv
+go: asdf
+asdf可用于多个语言的多版本环境管理</description>
+    </item>
+    
+    <item>
       <title>runtime篇五：slice</title>
       <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%94slice/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
@@ -588,20 +600,6 @@ patch: &amp;#34;menu/page_size&amp;#34;: 5 schema_list: - schema: clover  可参
     </item>
     
     <item>
-      <title>概览MySQL篇三：主备与高可用</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
-      <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</guid>
-      <description>极客时间《MySQL实战45讲》笔记
- 主备的基本原理 在状态 1 中，客户端的读写都直接访问节点 A，而节点 B 是 A 的备库，只是将 A 的更新都同步过来，到本地执行。这样可以保持节点 B 和 A 的数据是相同的。
-当需要切换的时候，就切成状态 2。这时候客户端读写访问的都是节点 B，而节点 A 是 B 的备库。
-那么从状态1切换到状态2的内部流程是什么样的？
-备库 B 跟主库 A 之间维持了一个长连接。主库 A 内部有一个线程，专门用于服务备库 B 的这个长连接。一个事务日志同步的完整过程是这样的：
- 在备库 B 上通过 change master 命令，设置主库 A 的 IP、端口、用户名、密码，以及要从哪个位置开始请求 binlog，这个位置包含文件名和日志偏移量。 在备库 B 上执行 start slave 命令，这时候备库会启动两个线程，就是图中的 io_thread 和 sql_thread。其中 io_thread 负责与主库建立连接。 主库 A 校验完用户名、密码后，开始按照备库 B 传过来的位置，从本地读取 binlog，发给 B。 备库 B 拿到 binlog 后，写到本地文件，称为中转日志（relay log）。 sql_thread 读取中转日志，解析出日志里的命令，并执行。  binlog 的三种格式对比 主备复制依赖于bin log，那么bin log中是什么内容。</description>
-    </item>
-    
-    <item>
       <title>概览MySQL篇三：锁、事务和隔离</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%89%E9%94%81/</link>
       <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
@@ -644,6 +642,20 @@ change buffer用的是buffer pool中的内存，因此不能无限增大。chang
 change buffer的使用场景 merge 的时候是真正进行数据更新的时刻，而 change buffer 的主要目的就是将记录的变更动作缓存下来，所以在一个数据页做 merge 之前，change buffer 记录的变更越多（也就是这个页面上要更新的次数越多），收益就越大。
 因此，对于写多读少的业务来说，页面在写完以后马上被访问到的概率比较小，此时 change buffer 的使用效果最好。这种业务模型常见的就是账单类、日志类的系统。
 反过来，假设一个业务的更新模式是写入之后马上会做查询，那么即使满足了条件，将更新先记录在 change buffer，但之后由于马上要访问这个数据页，会立即触发 merge 过程。这样随机访问 IO 的次数不会减少，反而增加了 change buffer 的维护代价。所以，对于这种业务模式来说，change buffer 反而起到了副作用。</description>
+    </item>
+    
+    <item>
+      <title>概览MySQL篇四：主备与高可用</title>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
+      <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</guid>
+      <description>极客时间《MySQL实战45讲》笔记
+ 主备的基本原理 在状态 1 中，客户端的读写都直接访问节点 A，而节点 B 是 A 的备库，只是将 A 的更新都同步过来，到本地执行。这样可以保持节点 B 和 A 的数据是相同的。
+当需要切换的时候，就切成状态 2。这时候客户端读写访问的都是节点 B，而节点 A 是 B 的备库。
+那么从状态1切换到状态2的内部流程是什么样的？
+备库 B 跟主库 A 之间维持了一个长连接。主库 A 内部有一个线程，专门用于服务备库 B 的这个长连接。一个事务日志同步的完整过程是这样的：
+ 在备库 B 上通过 change master 命令，设置主库 A 的 IP、端口、用户名、密码，以及要从哪个位置开始请求 binlog，这个位置包含文件名和日志偏移量。 在备库 B 上执行 start slave 命令，这时候备库会启动两个线程，就是图中的 io_thread 和 sql_thread。其中 io_thread 负责与主库建立连接。 主库 A 校验完用户名、密码后，开始按照备库 B 传过来的位置，从本地读取 binlog，发给 B。 备库 B 拿到 binlog 后，写到本地文件，称为中转日志（relay log）。 sql_thread 读取中转日志，解析出日志里的命令，并执行。  binlog 的三种格式对比 主备复制依赖于bin log，那么bin log中是什么内容。</description>
     </item>
     
     <item>
@@ -770,10 +782,10 @@ type ArbitraryType int type Pointer *ArbitraryType unsafe 包提供了 2 点重�
     
     <item>
       <title>vim配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/vim%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/vim%E9%85%8D%E7%BD%AE/</guid>
       <description>1. 安装插件系统  使用的是vim-plug
  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 2. 安装插件 打开~/.vimrc, 在其中写入：
 &amp;quot; Specify a directory for plugins &amp;quot; - For Neovim: stdpath(&#39;data&#39;) . &#39;/plugged&#39; &amp;quot; - Avoid using standard Vim directory names like &#39;plugin&#39; call plug#begin(&#39;~/.vim/plugged&#39;) &amp;quot; Make sure you use single quotes &amp;quot; Shorthand notation; fetches https://github.com/junegunn/vim-easy-align Plug &#39;junegunn/vim-easy-align&#39; &amp;quot; Any valid git URL is allowed Plug &#39;https://github.com/junegunn/vim-github-dashboard.git&#39; &amp;quot; Multiple Plug commands can be written in a single line using | separators Plug &#39;SirVer/ultisnips&#39; | Plug &#39;honza/vim-snippets&#39; &amp;quot; On-demand loading Plug &#39;scrooloose/nerdtree&#39;, { &#39;on&#39;: &#39;NERDTreeToggle&#39; } Plug &#39;tpope/vim-fireplace&#39;, { &#39;for&#39;: &#39;clojure&#39; } &amp;quot; Using a non-default branch Plug &#39;rdnetto/YCM-Generator&#39;, { &#39;branch&#39;: &#39;stable&#39; } &amp;quot; Using a tagged release; wildcard allowed (requires git 1.</description>
