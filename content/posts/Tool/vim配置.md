@@ -2,8 +2,8 @@
 author: "李昌"
 title: "vim配置"
 date: "2021-12-29"
-tags: ["Linux", "vim"]
-categories: ["Linux"]
+tags: ["vim", "env"]
+categories: ["Tool"]
 ShowToc: true
 TocOpen: true
 ---
@@ -98,9 +98,12 @@ set hlsearch
 
 " 停止搜索高亮的键映
 nnoremap <silent> <BS> <BS>:nohlsearch<CR>
+
+set backspace=2
 ```
 
-然后在命令模式下执行：`PlugInstall`  
+然后在命令模式下执行：`PlugInstall`
+
 等待一段时间，一些插件将会被安装到vim上
 
 ## 3. 使用主题
@@ -113,7 +116,8 @@ git clone https://github.com/tomasr/molokai.git
 cd molokai && mv colors/molokai.vim ~/.vim/colors/
 ```
 
-使用主题  
+使用主题
+
 在`~/.vimrc`文件中写入：
 ```
 :colorscheme molokai

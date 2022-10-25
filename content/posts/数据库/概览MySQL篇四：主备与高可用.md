@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "概览MySQL篇三：主备与高可用"
+title: "概览MySQL篇四：主备与高可用"
 date: "2022-03-23"
 tags: ["MySQL"]
 categories: ["数据库"]
