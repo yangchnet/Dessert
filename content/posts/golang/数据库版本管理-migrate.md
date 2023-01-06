@@ -12,6 +12,7 @@ TocOpen: true
 > migrate是一个golang写成的数据库版本迁移工具，可以用来方便的对数据库进行迁移和回退。
 > Github上有详细的教程等：https://github.com/golang-migrate/migrate
 
+> 在安装时可能需要指定所用的驱动，否则会因缺少驱动无法连接数据库，例如`go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate`
 
 1. 建立目录
 ```bash
