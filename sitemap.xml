@@ -2,25 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://yangchnet.github.io/Dessert/tags/arch/</loc>
-    <lastmod>2023-02-10T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/</loc>
-    <lastmod>2023-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/grub/</loc>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/</loc>
-    <lastmod>2023-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/linux/</loc>
-    <lastmod>2023-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/linux/</loc>
-    <lastmod>2023-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</loc>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/</loc>
-    <lastmod>2023-02-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/</loc>
+    <lastmod>2023-02-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/arch/</loc>
     <lastmod>2023-02-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/linux/%E5%9C%A8aur%E4%B8%8A%E5%8F%91%E5%B8%83%E5%8C%85/</loc>
