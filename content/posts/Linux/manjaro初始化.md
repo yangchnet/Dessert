@@ -1,6 +1,6 @@
 ---
 author: "李昌"
-title: "manjaro初始化"
+title: "manjaro初始化配置"
 date: "2022-04-11"
 tags: ["manjaro", "install"]
 categories: ["Linux"]
@@ -33,12 +33,10 @@ sudo pacman -S yay
 ```
 
 ## vim 配置
-
 见：https://yangchnet.github.io/Dessert/posts/linux/vim%E9%85%8D%E7%BD%AE/
-
 ## 输入法配置
 
-安装fcitx5（输入法框架）
+### 安装fcitx5（输入法框架）
 
 ```sh
 yay -S fcitx5-im
@@ -93,9 +91,42 @@ patch:
 
 > 可参考：https://github.com/fkxxyz/rime-cloverpinyin/wiki/linux
 
-配置主题
+### 配置主题
 
 参考：https://github.com/hosxy/Fcitx5-Material-Color
+
+### 安裝双拼(optional)
+```bash
+cd $HOME/.local/share/fcitx5 # rime_dir
+```
+
+安装plum
+```bash
+curl -fsSL https://git.io/rime-install | bash
+```
+
+安装双拼输入法
+```bash
+rime_dir="/home/lc/.local/share/fcitx5/rime" bash ./rime-install emoji
+rime_dir="/home/lc/.local/share/fcitx5/rime" bash ./rime-install double-pinyin
+```
+
+配置双拼：
+```
+patch:
+  "menu/page_size": 5
+  schema_list:
+    - schema: double_pinyin_flypy
+      #- schema: clover
+```
+
+参考：
+
+- https://help.flypy.com/#/up
+- https://www.bilibili.com/read/cv14690644
+- https://github.com/rime/home/wiki/CustomizationGuide#%E4%B8%80%E4%BE%8B%E5%AE%9A%E8%A3%BD%E7%B0%A1%E5%8C%96%E5%AD%97%E8%BC%B8%E5%87%BA
+- https://github.com/rime/plum
+
 
 ## 配置命令行工具
 
@@ -107,13 +138,9 @@ patch:
 微信
 
 ```sh
-yay -S deepin-wine-wechat
+yay -S wechat-uos
 ```
 
-或（暂不可用）
-```sh
-yay -S com.qq.weixin.spark
-```
 
 QQ
 
@@ -126,14 +153,13 @@ yay -S deepin-wine-tim
 yay -S linuxqq
 ```
 
-或`icalingua`(自行在github搜索)
-
 ## Virtualbox
 
 ```sh
 sudo pacman -S virtualbox
 
 sudo pacman -S linux-headers  # 安装对应自己内核版本的一个
+# linux61-virtualbox-host-modules
 
 sudo pacman -S virtualbox-host-dkms
 
