@@ -30,3 +30,12 @@ sudo docker export container_id > name.tar
 cat name.tar | sudo docker import -test/buntu:v1.0
 * 从网络导入
 sudo docker import http://example.com/exampleimage.tgz example/imagerepo
+
+
+## 非sudo运行
+
+```bash
+sudo usermod -aG docker $USER && newgrp docker # 将当前用户添加到docker用户组
+```
+
+退出重新登陆即可
