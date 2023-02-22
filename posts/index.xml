@@ -9,7 +9,27 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Install Docker on Arch</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/install-docker-on-arch/</link>
+      <pubDate>Tue, 21 Feb 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/install-docker-on-arch/</guid>
+      <description>官方给出的教程是使用docker desktop, 但内存占用太大。
+ 1. 安装docker二进制文件 从这里下载平台对应的二进制文件：https://download.docker.com/linux/static/stable/
+然后解压安装：
+$ tar xzvf /path/to/&amp;lt;FILE&amp;gt;.tar.gz $ sudo cp docker/* /usr/bin/  这时可以手动执行sudo dockerd &amp;amp;以启动守护进程，但我们不这样做
+ 配置守护进程 从https://github.com/moby/moby/tree/master/contrib/init/systemd拷贝docker.service, docker.socket两个文件到/etc/systemd/system/docker.service, /etc/systemd/system/docker.socket
+然后运行：
+$ sudo systemctl daemon-reload # 重新加载配置 $ sudo systemctl start docker #启动dockerd $ sudo systemctl enable docker # 设置开机启动  其实也可以直接yay -S docker :-)
+ docker-compose $ yay -S docker-compose References https://docs.docker.com/desktop/install/archlinux/
+https://docs.docker.com/engine/install/binaries/#install-daemon-and-client-binaries-on-linux
+https://docs.docker.com/config/daemon/systemd/
+https://wiki.archlinux.org/title/docker
+https://wiki.archlinux.org/title/Systemd#Drop-in_files</description>
+    </item>
+    
     <item>
       <title>Manjaro恢复grub</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</link>
