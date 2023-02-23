@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>cache on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/cache/</link>
+    <link>http://yangchnet.github.io/categories/cache/</link>
     <description>Recent content in cache on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/cache/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/cache/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>概览Redis篇三：RDB快照</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</link>
+      <link>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</guid>
+      <guid>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%89rdb%E5%BF%AB%E7%85%A7/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
   概览Redis篇一：单线程模型 概览Redis篇二：AOF日志 概览Redis篇三：RDB快照 概览Redis篇四：主从 概览Redis篇五：哨兵 概览Redis篇六：切片集群  什么是RDB 所谓RDB，即Redis DataBase。是对Redis做的一个内存快照，即将内存中的数据在某一个时刻的状态记录。
 对 Redis 来说，它实现类似照片记录效果的方式，就是把某一时刻的状态以文件的形式写到磁盘上，也就是快照。这样一来，即使宕机，快照文件也不会丢失，数据的可靠性也就得到了保证。这个快照文件就称为 RDB 文件。
@@ -36,10 +36,10 @@ Redis 提供了两个命令来生成 RDB 文件，分别是 save 和 bgsave。
     
     <item>
       <title>概览Redis篇五：哨兵</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</link>
+      <link>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</guid>
+      <guid>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%94%E5%93%A8%E5%85%B5/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
   概览Redis篇一：单线程模型 概览Redis篇二：AOF日志 概览Redis篇三：RDB快照 概览Redis篇四：主从 概览Redis篇五：哨兵 概览Redis篇六：切片集群  什么是哨兵，哨兵有什么用 哨兵其实就是一个运行在特殊模式下的 Redis 进程，主从库实例运行的同时，它也在运行。哨兵主要负责的就是三个任务：监控、选主（选择主库）和通知。
 有了哨兵，我们就可以在主库故障的情况下快速实现主从库自动切换。
@@ -61,10 +61,10 @@ Redis 提供了两个命令来生成 RDB 文件，分别是 save 和 bgsave。
     
     <item>
       <title>概览Redis篇六：切片集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</link>
+      <link>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%85%AD%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
   概览Redis篇一：单线程模型 概览Redis篇二：AOF日志 概览Redis篇三：RDB快照 概览Redis篇四：主从 概览Redis篇五：哨兵 概览Redis篇六：切片集群  什么是切片集群，有什么用 切片集群，也叫分片集群，就是指启动多个 Redis 实例组成一个集群，然后按照一定的规则，把收到的数据划分成多份，每一份用一个实例来保存。
 当Redis保存大量数据时，其在进行RDB持久化时需要fork一个子进程，而fork子进程的用时和Redis的数据量是正相关的，而 fork 在执行时会阻塞主线程。数据量越大，fork 操作造成的主线程阻塞的时间越长。因此如果Redis保存了大量数据，会导致Redis响应变慢。
@@ -76,10 +76,10 @@ Redis Cluster 方案采用哈希槽Hash Slot，来处理数据和实例之间的
     
     <item>
       <title>概览Redis篇四：主从</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</link>
+      <link>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</link>
       <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</guid>
+      <guid>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E5%9B%9B%E4%B8%BB%E4%BB%8E/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
   概览Redis篇一：单线程模型 概览Redis篇二：AOF日志 概览Redis篇三：RDB快照 概览Redis篇四：主从 概览Redis篇五：哨兵 概览Redis篇六：切片集群  Redis的高可靠性 Redis 具有高可靠性，又是什么意思呢？其实，这里有两层含义：一是数据尽量少丢失，二是服务尽量少中断。
 AOF 和 RDB 保证了前者，而对于后者，Redis 的做法就是增加副本冗余量，将一份数据同时保存在多个实例上。即使有一个实例出现了故障，需要过一段时间才能恢复，其他实例也可以对外提供服务，不会影响业务使用。
@@ -97,10 +97,10 @@ replicaof 172.16.19.3 6379 主从库间数据第一次同步有三个阶段：  
     
     <item>
       <title>概览Redis篇二：AOF日志</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</link>
+      <link>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</guid>
+      <guid>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%BA%8Caof%E6%97%A5%E5%BF%97/</guid>
       <description>极客时间《Redis 核心技术与实战》学习笔记
   概览Redis篇一：单线程模型 概览Redis篇二：AOF日志 概览Redis篇三：RDB快照 概览Redis篇四：主从 概览Redis篇五：哨兵 概览Redis篇六：切片集群  AOF: Append Only File
 AOF日志的WAL 数据库中的WAL是Write-Ahead Logging, 为先写日志后执行。而Redis中的WAL为Write Ahead Log,先执行后写日志。
@@ -120,10 +120,10 @@ AOF的三种写回策略   Always，同步写回：每个写命令执行完，�
     
     <item>
       <title>概览Redis篇一：单线程模型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
+      <link>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/cache/%E6%A6%82%E8%A7%88redis%E7%AF%87%E4%B8%80%E5%8D%95%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/</guid>
       <description> 极客时间《Redis 核心技术与实战》学习笔记
   概览Redis篇一：单线程模型 概览Redis篇二：AOF日志 概览Redis篇三：RDB快照 概览Redis篇四：主从 概览Redis篇五：哨兵 概览Redis篇六：切片集群  Redis单线程模型 Redis 是单线程，主要是指 Redis 的网络 IO 和键值对读写是由一个线程来完成的，这也是 Redis 对外提供键值存储服务的主要流程。但 Redis 的其他功能，比如持久化、异步删除、集群数据同步等，其实是由额外的线程执行的。
 为什么Redis采用单线程 通常的程序设计都采用多线程来提高性能，获得更快的响应速度。

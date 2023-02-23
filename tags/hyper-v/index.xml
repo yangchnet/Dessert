@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>hyper-v on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/hyper-v/</link>
+    <link>http://yangchnet.github.io/tags/hyper-v/</link>
     <description>Recent content in hyper-v on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/hyper-v/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/hyper-v/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>端口消耗问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/%E7%AB%AF%E5%8F%A3%E6%B6%88%E8%80%97%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/posts/windows/%E7%AB%AF%E5%8F%A3%E6%B6%88%E8%80%97%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/%E7%AB%AF%E5%8F%A3%E6%B6%88%E8%80%97%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/posts/windows/%E7%AB%AF%E5%8F%A3%E6%B6%88%E8%80%97%E9%97%AE%E9%A2%98/</guid>
       <description>1. 两种端口 我们知道TCP/UDP在工作时都需要一个端口来进行收发信息，有两种类型的端口：
  临时端口或者叫动态端口，是默认情况下计算机进行出站连接时所有的端口集 已知端口，是特定应用程序或服务的定义端口。 例如，文件服务器服务在端口 445 上，HTTPS 为 443，HTTP 为 80，RPC 为 135。 自定义应用程序还将具有其定义的端口号。  客户端要想连接到应用程序或服务，需要使用计算机中的临时端口去连接服务器的已知端口。如：客户端计算机上的浏览器将使用临时端口连接到端口 https://www.microsoft.com 443。
 当浏览器创建与多个网站的大量连接的情况下，其所尝试的任何新连接都将使用临时端口。 一段时间之后，连接将开始失败，并且出现此故障的可能性很高，因为浏览器已使用所有可用端口进行外部连接，并且建立连接的任何新尝试都将失败，因为没有更多的端口可用。 当使用计算机上的所有端口时，我们将它视为端口耗尽。

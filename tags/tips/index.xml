@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>tips on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/tips/</link>
+    <link>http://yangchnet.github.io/tags/tips/</link>
     <description>Recent content in tips on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 22 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/tips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/tips/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Google搜索指令</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/google%E6%90%9C%E7%B4%A2%E6%8C%87%E4%BB%A4/</link>
+      <link>http://yangchnet.github.io/posts/%E6%9D%82%E8%AE%B0/google%E6%90%9C%E7%B4%A2%E6%8C%87%E4%BB%A4/</link>
       <pubDate>Wed, 22 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/google%E6%90%9C%E7%B4%A2%E6%8C%87%E4%BB%A4/</guid>
+      <guid>http://yangchnet.github.io/posts/%E6%9D%82%E8%AE%B0/google%E6%90%9C%E7%B4%A2%E6%8C%87%E4%BB%A4/</guid>
       <description>1. site site: 搜索指定站点
 用法:
 site:[example.com] 示例:

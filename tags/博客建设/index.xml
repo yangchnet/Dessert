@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>博客建设 on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+    <link>http://yangchnet.github.io/tags/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
     <description>Recent content in 博客建设 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>博客建设</title>
-      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
+      <link>http://yangchnet.github.io/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</link>
       <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
+      <guid>http://yangchnet.github.io/posts/env/%E5%8D%9A%E5%AE%A2%E5%BB%BA%E8%AE%BE/</guid>
       <description>博客建设记 0. 前记 一直想要建设一个属于自己的博客，一开始用python写过一个简单的，可以做到富文本编辑、发布、更新、评论等功能，但那个不是一个单纯的博客，并且界面也不是太友好，因此后来废弃了。后来又用了一段时间的jupyter notebook，很强大，尤其让我喜欢的是可以直接运行代码，曾经有一段时间想过可否把jupyter notebook直接作为我的博客页面，或者是嵌入我的页面内，于是看了看其源代码。。。遂放弃。后来又用了为知笔记，印象笔记，Notion等，但感觉都没jupyter notebook好用。 在用jupyter notebook记了有了一定的数目之后，就想将其发布出来，考虑过CSDN，但感觉上面广告好多，不太喜欢，因此没有使用。后来买了域名和服务器，用wordpress搞了一个，但是不是太满意，也没发布。后来用go语言写了一个，因为某些原因，中间的一些数据通路没有搞通（主要是从jupyter到md再到网站的自动发布），再加上后来考研，所以这个项目也没活到&amp;quot;成站&amp;quot;。 终于，用hugo搞了一个。之所以用hugo，一是因为最近研究go语言，对go语言的项目具有一定的好感，第二是因为看了网上的一些介绍并且发现了一些使用hugo的个人博客。 2021/2/28，记之。
 1. 使用hugo开始自己的网站 1.1 开始 hugo的使用炒鸡简单，你只需要使用
 hugo new site MySite 即可新建一个名为MySite的网站

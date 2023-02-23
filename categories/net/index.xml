@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>NET on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/net/</link>
+    <link>http://yangchnet.github.io/categories/net/</link>
     <description>Recent content in NET on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 28 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/net/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/net/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>详解TLS（译）</title>
-      <link>http://yangchnet.github.io/Dessert/posts/net/%E6%A6%82%E8%BF%B0tls/</link>
+      <link>http://yangchnet.github.io/posts/net/%E6%A6%82%E8%BF%B0tls/</link>
       <pubDate>Thu, 28 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/net/%E6%A6%82%E8%BF%B0tls/</guid>
+      <guid>http://yangchnet.github.io/posts/net/%E6%A6%82%E8%BF%B0tls/</guid>
       <description>1. TLS在哪些地方被使用 TLS(Transport Layer Security),是为计算机网络中提供安全通信的密码学协议。
  HTTPS = HTTP +　TLS SMTPS = SMTPS + TLS FTPS = FTP + TLS &amp;hellip;  2. TLS给我们带来了什么  认证  TLS检查通信双方的身份 借助于非对称加密，TLS保证我们访问的是“真网站”，不是假冒的。   加密  TLS 通过使用对称加密算法对其进行加密来保护交换的数据免受未经授权的访问。   校验  TLS 通过检查消息验证码来识别传输过程中的任何数据更改    3. TLS通信的工作的基本流程 通常，TLS包含2个过程，或者说2个协议。
  Handshake Protocol 在这个阶段，客户端和服务端：  协商协议版本 选择加密算法 通过非对称加密算法验证对方身份呢 建立一个共享的对称加密密钥以应用于接下来的通信   Record Protocol 在这个阶段：  所有发出的信息都被上个阶段商定的对称密钥加密 信息被发送到对面 接收方验证信息是否受到篡改 如果未被篡改，信息将被解密    4.</description>
@@ -23,10 +23,10 @@
     
     <item>
       <title>SOCKET随笔</title>
-      <link>http://yangchnet.github.io/Dessert/posts/net/socket%E9%9A%8F%E7%AC%94/</link>
+      <link>http://yangchnet.github.io/posts/net/socket%E9%9A%8F%E7%AC%94/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/net/socket%E9%9A%8F%E7%AC%94/</guid>
+      <guid>http://yangchnet.github.io/posts/net/socket%E9%9A%8F%E7%AC%94/</guid>
       <description>一个UDP客户可以创建一个套接口并发送一个数据报給一个服务器，然后立即用同一个套接口发送另一个数据报給另一个服务器。同样，一个UDP服务器可以用同一个UDP套接口从5个不同的客户一连串接收5个数据报。
 UDP可以是全双工的
  TCP连接断开时，主动要求断开的一方会存在TIME_WAIT状态，此状态需要持续60s时间（Linux），在此状态期间，连接未完全断开，依然占用一个socket连接。
@@ -43,10 +43,10 @@ UDP可以是全双工的
     
     <item>
       <title>HTTP2简介</title>
-      <link>http://yangchnet.github.io/Dessert/posts/net/http2/</link>
+      <link>http://yangchnet.github.io/posts/net/http2/</link>
       <pubDate>Sat, 11 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/net/http2/</guid>
+      <guid>http://yangchnet.github.io/posts/net/http2/</guid>
       <description>这是一篇理论性较强的文章
  1. HTTP/1的不足与面临的问题  此部分内容来自：https://segmentfault.com/a/1190000013519925
  1.1 HTTP/1概述 1.2 队头阻塞 浏览器很少只从一个域名获取一份资源。大多数时候，它希望能同时获取许多资源。设想这样一个网站，它把所有图片放在单个特定域名下。HTTP/1 并未提供机制来同时请求这些资源。如果仅仅使用一个连接，它需要发起请求、等待响应，之后才能发起下一个请求。这显然会在加载页面时造成较大的延迟，降低了用户体验。
@@ -61,10 +61,10 @@ h1 有个特性叫 管道化(pipelining)，允许一次发送一组连续的请�
     
     <item>
       <title>四种常见的POST类型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</link>
+      <link>http://yangchnet.github.io/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/net/%E5%9B%9B%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84post%E7%B1%BB%E5%9E%8B/</guid>
       <description>四种常见的POST类型 1. application/x-www-form-urlencoded 这应该是最常见的 POST 提交数据的方式了。浏览器的原生 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded 方式提交数据。请求类似于下面这样（无关的请求头在本文中都省略掉了）：
 POST http://www.example.com HTTP/1.1 Content-Type: application/x-www-form-urlencoded;charset=utf-8 title=test&amp;amp;sub%5B%5D=1&amp;amp;sub%5B%5D=2&amp;amp;sub%5B%5D=3 首先，Content-Type 被指定为 application/x-www-form-urlencoded；其次，提交的数据按照 key1=val1&amp;amp;key2=val2 的方式进行编码，key 和 val 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。例如 PHP 中，$_POST[&amp;lsquo;title&amp;rsquo;] 可以获取到 title 的值，$_POST[&amp;lsquo;sub&amp;rsquo;] 可以得到 sub 数组。
 很多时候，我们用 Ajax 提交数据时，也是使用这种方式。例如 JQuery 和 QWrap 的 Ajax，Content-Type 默认值都是「application/x-www-form-urlencoded;charset=utf-8」。

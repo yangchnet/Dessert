@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>z on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/z/</link>
+    <link>http://yangchnet.github.io/tags/z/</link>
     <description>Recent content in z on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 12 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/z/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/z/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>z</title>
-      <link>http://yangchnet.github.io/Dessert/posts/tool/z/</link>
+      <link>http://yangchnet.github.io/posts/tool/z/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/tool/z/</guid>
+      <guid>http://yangchnet.github.io/posts/tool/z/</guid>
       <description>install z # Download to latest to home dir wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh # Add to .bashrc echo . /path/to/z.sh &amp;gt;&amp;gt; ~/.bashrc # Add to .zshrc echo . /path/to/z.sh &amp;gt;&amp;gt; ~/.zshrc </description>
     </item>
     

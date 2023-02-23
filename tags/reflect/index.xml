@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>reflect on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/reflect/</link>
+    <link>http://yangchnet.github.io/tags/reflect/</link>
     <description>Recent content in reflect on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 15 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/reflect/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/reflect/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>理解反射之：一个reflect.Type可以做什么</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</link>
       <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</guid>
       <description>反射是一个接口，其定义如下：
 type Type interface { // 返回具体类型在内存分配时的字节分配方式 	Align() int // 返回具体类型在结构体中作为一个字段是内存对齐方式 	FieldAlign() int // 返回具体类型的第x个方法 	Method(int) Method // 根据函数名返回具体类型的方法 	MethodByName(string) (Method, bool) // 返回类型的方法个数 	NumMethod() int // 返回类型的名字 	Name() string // 返回类型的包名 	PkgPath() string // 返回类型所占内存字节大小 	Size() uintptr // 返回类型的简单描述，如：main.User 	String() string // 返回这个类型的Kind 	Kind() Kind // 检查类型是否实现了某个接口 	//stringer := reflect.TypeOf((*fmt.Stringer)(nil)).Elem() 	//fmt.Println(reflect.ValueOf(u).Type().Implements(stringer)) 	Implements(u Type) bool // 检查类型是否可以被赋值给某个类型 	AssignableTo(u Type) bool // 检查类型是否可以转换到类型u 	ConvertibleTo(u Type) bool // 检查类型是否可比较 	Comparable() bool // 返回Int, Uint, Float, or Complex kinds.</description>
     </item>
     
     <item>
       <title>golang中的tag</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</link>
+      <link>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</link>
       <pubDate>Tue, 14 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</guid>
       <description>1. tag的基本介绍 字段标签可以存储元信息，这些元信息可以使用反射来访问。通常这些元信息用来提供一个字段如何从一种格式编码至另一种格式的相关信息（或是数据应如何在数据库中存储等）。但实际上标签可以存储任何你想要的元信息，无论是你自己使用还是由另一个包使用。
 就像reflect.StructTag文档中提到的那样，字段标签通常是由空格分割的key:&amp;quot;value&amp;quot;列表，例如：
 type User struct { Name string `json:&amp;#34;name&amp;#34; xml:&amp;#34;name&amp;#34;` } 其中的key通常表示后面&amp;quot;value&amp;quot;所对应的包，例如json这个key将被encoding/json这个包使用。
@@ -40,10 +40,10 @@ type User struct { Name string `mytag:&amp;#34;MyName&amp;#34;` Email stirng `my
     
     <item>
       <title>Golang中反射reflect的基本使用</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <link>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
       <description>在计算机领域，反射是指一类应用，它们能够自描述和自控制。也即是说，这类应用通过采用某种机制来实现对自己行为的描述和监测，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。 反射（reflect）让我们能在运行期探知对象的类型信息和内存结构，这从一定程度上弥(mi)补了静态语言在动态行为上的不足。 反射（reflect）是在计算机程序运行时，访问，检查，修改它自身的一种能力，是元编程的一种形式。 Go语音提供了一种机制在运行时更新变量和检查它们的值、调用它们的方法和它们支持的内在操作，但是在编译时并不知道这些变量的具体类型。这种机制被称为反射。反射也可以让我们将类型本身作为第一类的值类型处理。
  1. 为何我们需要反射？ fmt.Fprintf函数提供字符串格式化处理逻辑，它可以对任意类型的值格式化并打印，甚至支持用户自定义的类型。 让我们也来尝试实现一个类似功能的函数。为了简单起见，我们的函数只接收一个参数，然后返回和fmt.Sprint类似的格式化后的字符串。我们实现的函数名也叫Sprint。 这里我们使用switch类型分支来对不同的类型进行处理。
 func Sprint(x interface{}) string { type stringer interface { String() string } switch x := x.(type) { case stringer: return x.String() case string: return x case int: return strconv.Itoa(x) // ...similar cases for int16, uint32, and so on...  case bool: if x { return &amp;#34;true&amp;#34; } return &amp;#34;false&amp;#34; default: // array, chan, func, map, pointer, slice, struct  return &amp;#34;?</description>

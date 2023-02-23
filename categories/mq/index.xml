@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>mq on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/mq/</link>
+    <link>http://yangchnet.github.io/categories/mq/</link>
     <description>Recent content in mq on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/mq/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 24 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/mq/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>概览消息队列篇〇：为什么需要消息队列</title>
-      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
+      <link>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</link>
       <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid>
+      <guid>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/</guid>
       <description> 极客时间《消息队列高手课》笔记
   概览消息队列篇〇：为什么需要消息队列 概览消息队列篇一：不同的mq的消息模型 概览消息队列篇二：如何确保消息不丢失 概览消息队列篇三：重复消息的处理  1. 异步处理 对于一个秒杀系统，需要解决的核心问题是，如何利用有限的服务器资源，尽可能多地处理短时间内的海量请求。
 处理一个秒杀请求包含了很多步骤：如风险控制、库存锁定、生成订单、短信通知、更新通知数据等。如果没有任何优化，正常的处理流程是：App 将请求发送给网关，依次调用上述 5 个流程，然后将结果返回给 APP。
@@ -37,10 +37,10 @@
     
     <item>
       <title>概览消息队列篇三：重复消息的处理</title>
-      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/</link>
+      <link>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/</link>
       <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/</guid>
+      <guid>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%89%E9%87%8D%E5%A4%8D%E6%B6%88%E6%81%AF%E7%9A%84%E5%A4%84%E7%90%86/</guid>
       <description>极客时间《消息队列高手课》笔记
   概览消息队列篇〇：为什么需要消息队列 概览消息队列篇一：不同的mq的消息模型 概览消息队列篇二：如何确保消息不丢失 概览消息队列篇三：重复消息的处理  消息队列本身可以保证消息不重复吗 在 MQTT 协议中，给出了三种传递消息时能够提供的服务质量标准，这三种服务质量从低到高依次是：
  At most once: 至多一次。消息在传递时，最多会被送达一次。换一个说法就是，没什么消息可靠性保证，允许丢消息。一般都是一些对消息可靠性要求不太高的监控场景使用，比如每分钟上报一次机房温度数据，可以接受数据少量丢失。 At least once: 至少一次。消息在传递时，至少会被送达一次。也就是说，不允许丢消息，但是允许有少量重复消息出现。 Exactly once：恰好一次。消息在传递时，只会被送达一次，不允许丢失也不允许重复，这个是最高的等级。  这个服务质量标准不仅适用于 MQTT，对所有的消息队列都是适用的。我们现在常用的绝大部分消息队列提供的服务质量都是 At least once，包括 RocketMQ、RabbitMQ 和 Kafka 都是这样。
@@ -59,10 +59,10 @@
     
     <item>
       <title>概览消息队列篇二：如何确保消息不丢失</title>
-      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</link>
+      <link>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</link>
       <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</guid>
+      <guid>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%BA%8C%E5%A6%82%E4%BD%95%E7%A1%AE%E4%BF%9D%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/</guid>
       <description>极客时间《消息队列高手课》笔记
   概览消息队列篇〇：为什么需要消息队列 概览消息队列篇一：不同的mq的消息模型 概览消息队列篇二：如何确保消息不丢失 概览消息队列篇三：重复消息的处理  检测消息丢失的方法 可以使用类似分布式链路追踪系统来追踪每一条信息。
 还可以利用消息队列的有序性来验证是否有消息丢失。
@@ -80,10 +80,10 @@
     
     <item>
       <title>概览消息队列篇一：不同的mq的消息模型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</link>
+      <link>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/mq/%E6%A6%82%E8%A7%88%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87%E4%B8%80%E4%B8%8D%E5%90%8C%E7%9A%84mq%E7%9A%84%E6%B6%88%E6%81%AF%E6%A8%A1%E5%9E%8B/</guid>
       <description>极客时间《消息队列高手课》笔记
   概览消息队列篇〇：为什么需要消息队列 概览消息队列篇一：不同的mq的消息模型 概览消息队列篇二：如何确保消息不丢失 概览消息队列篇三：重复消息的处理  1. 主题和队列 最基本的队列模型，是按照“队列”的数据结构来设计的，即先进先出。生产者发送消息（入队），消费者获取消息（出队）。
 当有多个生产者往同一个队列中发送消息，则这个队列中可以消费到的消息，就是这些生产者生产的所有消息的合集。消息的顺序就是这些生产者发送消息的自然顺序。如果有多个消费者接收同一个队列的消息，这些消费者之间实际上是竞争的关系，每个消费者只能收到队列中的一部分消息，也就是说任何一条消息只能被其中的一个消费者收到。

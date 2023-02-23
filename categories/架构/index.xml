@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>架构 on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/%E6%9E%B6%E6%9E%84/</link>
+    <link>http://yangchnet.github.io/categories/%E6%9E%B6%E6%9E%84/</link>
     <description>Recent content in 架构 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 17 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/%E6%9E%B6%E6%9E%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>线程池</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</link>
       <pubDate>Mon, 17 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E7%BA%BF%E7%A8%8B%E6%B1%A0/</guid>
       <description>1. 线程池基础 1.1 野生线程 在我们平常的开发中，经常会有用到多线程的场景，合理利用多线程可有效利用CPU的多核结构，提高程序的执行效率。有这样一种线程：我们利用其完成一些工作，但只是将工作交给这个线程，该线程并不保证完成任务，也不保证正常退出，并且在线程开始运行后我们无法对其进行控制。这种状态可称为：野生线程，意为其已经不受控制，在内存中自由运行。
 这种线程可能带来一系列问题：
  频繁申请/销毁线程，可能带来巨大的额外消耗 当内存中存在较多的野生线程，会导致过分调度，降低系统性能 不能正常退出的线程会导致内存泄露 系统无法合理管理内部的资源分布，会降低系统的稳定性 ……  鉴于以上野生线程带来的问题，我们需要一种方式将其管理起来，使其从野生的线程变成&amp;quot;家养&amp;quot;的线程。

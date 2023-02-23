@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Dockerfile on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/dockerfile/</link>
+    <link>http://yangchnet.github.io/tags/dockerfile/</link>
     <description>Recent content in Dockerfile on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/dockerfile/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/dockerfile/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>一份好用的golang应用Dockerfile模板</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</link>
       <pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</guid>
       <description># 编译环境FROMgolang:alpine as builder # 设置go环境变量ENV GO111MODULE=on \  GOPROXY=https://goproxy.cn,direct# 工作目录WORKDIR/app# 将项目拷贝到docker中COPY . .# 拉取包，编译RUN go mod tidy &amp;amp;&amp;amp; CGO_ENABLED=0 GOOS=linux go build -a -ldflags &amp;#39;-extldflags &amp;#34;-static&amp;#34;&amp;#39; -o hello-app .# 运行环境FROMscratch# 设置时区COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/ShanghaiENV TZ Asia/ShanghaiWORKDIR/app# 将编译好的可执行文件从编译环境中拷贝到运行环境中COPY --from=builder /app/hello-app .# 启动ENTRYPOINT [&amp;#34;./hello-app&amp;#34;]# 端口EXPOSE10000</description>
     </item>
     

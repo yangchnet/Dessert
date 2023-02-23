@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Python on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/python/</link>
+    <link>http://yangchnet.github.io/categories/python/</link>
     <description>Recent content in Python on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 28 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>python生成器函数和go通道</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</link>
+      <link>http://yangchnet.github.io/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</link>
       <pubDate>Fri, 28 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</guid>
+      <guid>http://yangchnet.github.io/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</guid>
       <description>python生成器函数 def gen_char(): &amp;#34;&amp;#34;&amp;#34; 定义了一个生成器函数，将会生成a~z &amp;#34;&amp;#34;&amp;#34; for i in range(0, 26): yield chr(ord(&amp;#39;a&amp;#39;) +i) for char in gen_char(): print(char, end=&amp;#39; &amp;#39;) # 输出 # a b c d e f g h i j k l m n o p q r s t u v w x y z golang通道 func main() { ch := make(chan string) // 一个通道 	wg := &amp;amp;sync.WaitGroup{} // 用于goroutine同步  wg.Add(1) go func() { // 定义了一个“生成器函数“ 	defer wg.</description>
     </item>
     
     <item>
       <title>Deepin15安装Anaconda</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
+      <link>http://yangchnet.github.io/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
+      <guid>http://yangchnet.github.io/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
       <description>1. Anaconda下载地址  官方下载地址：https://www.anaconda.com/distribution/#linux 清华大学镜像：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ # 选择你想安装的版本下载  2. 安装 $ bash Anaconda3-2021.05-Linux-x86_64.sh # 中间会有一些选择，按照自己的意愿选择即可  关闭并重新打开你的终端来激活conda
 3. 使用  更新自己  # 更新conda conda update conda conda update anaconda  更新时出现了ValueError: check_hostname requires server_hostname错误，经查发现是代理的问题，可尝试关闭或开启代理再次尝试
   对包的操作
@@ -34,20 +34,20 @@
     
     <item>
       <title>deepin上升级Python</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/deepin%E4%B8%8A%E5%8D%87%E7%BA%A7python/</link>
+      <link>http://yangchnet.github.io/posts/python/deepin%E4%B8%8A%E5%8D%87%E7%BA%A7python/</link>
       <pubDate>Thu, 13 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/deepin%E4%B8%8A%E5%8D%87%E7%BA%A7python/</guid>
+      <guid>http://yangchnet.github.io/posts/python/deepin%E4%B8%8A%E5%8D%87%E7%BA%A7python/</guid>
       <description>1. 安装高版本的Python  这里要说明，不能删除原来的python2以及python3.5，因为系统是依赖于这两个python版本的，当然你也可以试试，后果自负&amp;hellip;
   去官网下载最新的Python 我这里下载的是源码，因为没有对应的安装包。（Python3.9） 下载完成后解压到本地 sudo tar -xvf Python-3.9.5.tar.xz -C /opt/python  编译安装 cd /opt/python mv Python-3.9.5 python3.9 sudo ./configure --enable-optimizations # 默认安装到/usr/local/bin, 可用--prefix指定安装目录 make -j8 &amp;amp;&amp;amp; sudo make altinstall sudo make clean  验证安装成功 /usr/local/bin/python3.9  Python 3.9.5 (default, May 13 2021, 09:51:10) [GCC 6.3.0 20170516] on linux Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot; for more information. &amp;gt;&amp;gt;&amp;gt; exit()   2. 设置默认Python版本 2.1 用户级修改 vim ~/.</description>
     </item>
     
     <item>
       <title>1、python与其他语言的对比（helloworld）</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/python%E5%9F%BA%E7%A1%80/</link>
+      <link>http://yangchnet.github.io/posts/python/python%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E5%9F%BA%E7%A1%80/</guid>
+      <guid>http://yangchnet.github.io/posts/python/python%E5%9F%BA%E7%A1%80/</guid>
       <description>1、python与其他语言的对比（hello world）  C语言
  include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;#34;hello world&amp;#34;); return 0; }  Java语言
  public class HelloWorld{ public static void main(String[] args) { System.out.println(&amp;#34;Hello World!&amp;#34;); } }  Python
@@ -56,10 +56,10 @@
     
     <item>
       <title>Python中的拷贝</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</link>
+      <link>http://yangchnet.github.io/posts/python/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</guid>
+      <guid>http://yangchnet.github.io/posts/python/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</guid>
       <description>Python中的拷贝   直接赋值：其实就是对象的引用（别名）.两个对象是引用的同一块内存区域
   浅拷贝(copy)：拷贝父对象，不会拷贝对象的内部的子对象。
   深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
@@ -70,10 +70,10 @@ import copy a = [1, 2, 3, 4, [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;]] b = cop
     
     <item>
       <title>Python换源</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/python%E6%8D%A2%E6%BA%90/</link>
+      <link>http://yangchnet.github.io/posts/python/python%E6%8D%A2%E6%BA%90/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E6%8D%A2%E6%BA%90/</guid>
+      <guid>http://yangchnet.github.io/posts/python/python%E6%8D%A2%E6%BA%90/</guid>
       <description>Python换源 1. 临时换源 可以在使用pip的时候在后面加上-i参数，指定pip源
 pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple 2. 永久换源 永久修改： linux: 修改 ~/.pip/pip.conf (没有就创建一个)， 内容如下：
 [global] index-url = https://pypi.tuna.tsinghua.edu.cn/simple </description>
@@ -81,10 +81,10 @@ pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple 2. 永久换源 �
     
     <item>
       <title>python网络编程</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <link>http://yangchnet.github.io/posts/python/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/python/python%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
       <description>python 网络编程 使用socket模块，即套接字 使用socket来创建套接字的语法如下： socket.socket(family[, type[, proto]])
  参数解释：
   family: 套接字家族可以使AF_UNIX或者AF_INET type: 套接字类型可以根据是面向连接的还是非连接分为SOCK_STREAM或SOCK_DGRAM protocol：一般不填默认为0  socket对象的方法  s.bind() 绑定地址（host,port）到套接字， 在AF_INET下,以元组（host,port）的形式表示地址。 s.listen() 开始TCP监听。backlog指定在拒绝连接之前，操作系统可以挂起的最大连接数量。该值至少为1，大部分应用程序设为5就可以了。 s.accept() 被动接受TCP客户端连接,(阻塞式)等待连接的到来 客户端套接字 s.connect() 主动初始化TCP服务器连接，。一般address的格式为元组（hostname,port），如果连接出错，返回socket.error错误。 s.connect_ex() connect()函数的扩展版本,出错时返回出错码,而不是抛出异常 公共用途的套接字函数 s.recv() 接收TCP数据，数据以字符串形式返回，bufsize指定要接收的最大数据量。flag提供有关消息的其他信息，通常可以忽略。 s.send() 发送TCP数据，将string中的数据发送到连接的套接字。返回值是要发送的字节数量，该数量可能小于string的字节大小。 s.sendall() 完整发送TCP数据，完整发送TCP数据。将string中的数据发送到连接的套接字，但在返回之前会尝试发送所有数据。成功返回None，失败则抛出异常。 s.recvfrom() 接收UDP数据，与recv()类似，但返回值是（data,address）。其中data是包含接收数据的字符串，address是发送数据的套接字地址。 s.sendto() 发送UDP数据，将数据发送到套接字，address是形式为（ipaddr，port）的元组，指定远程地址。返回值是发送的字节数。 s.close() 关闭套接字 s.getpeername() 返回连接套接字的远程地址。返回值通常是元组（ipaddr,port）。 s.getsockname() 返回套接字自己的地址。通常是一个元组(ipaddr,port) s.setsockopt(level,optname,value) 设置给定套接字选项的值。 s.getsockopt(level,optname[.buflen]) 返回套接字选项的值。 s.settimeout(timeout) 设置套接字操作的超时期，timeout是一个浮点数，单位是秒。值为None表示没有超时期。一般，超时期应该在刚创建套接字时设置，因为它们可能用于连接的操作（如connect()） s.gettimeout() 返回当前超时期的值，单位是秒，如果没有设置超时期，则返回None。 s.fileno() 返回套接字的文件描述符。 s.setblocking(flag) 如果flag为0，则将套接字设为非阻塞模式，否则将套接字设为阻塞模式（默认值）。非阻塞模式下，如果调用recv()没有发现任何数据，或send()调用无法立即发送数据，那么将引起socket.error异常。 s.makefile() 创建一个与该套接字相关连的文件  网络编程的基本设置步骤 服务端配置  导入socket模块 使用bind方法创建套接字 使用listen方法等待连接， 使用accept方法被动接收tcp连接 使用send或recv方法进行收发  客户端配置  导入socket模块 使用bind方法创建套接字 使用connect方法进行主动tcp连接 使用send或recv方法进行收发  </description>
@@ -92,10 +92,10 @@ pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple 2. 永久换源 �
     
     <item>
       <title>快速入门Matplotlib教程</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/matplotlib%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/</link>
+      <link>http://yangchnet.github.io/posts/python/matplotlib%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/matplotlib%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/python/matplotlib%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B/</guid>
       <description>快速入门Matplotlib教程 介绍 Matplotlib 可能是 Python 2D-绘图领域使用最广泛的套件。它能让使用者很轻松地将数据图形化，并且提供多样化的输出格式。
 pylab pylab 是 matplotlib 面向对象绘图库的一个接口。它的语法和 Matlab 十分相近。也就是说，它主要的绘图命令和 Matlab 对应的命令有相似的参数。
 初级绘制 这一节中，我们将从简到繁：先尝试用默认配置在同一张图上绘制正弦和余弦函数图像，然后逐步美化它。
@@ -109,10 +109,10 @@ from pylab import * plot(X,C) plot(X,S) show() &amp;lt;Figure size 640x480 with 
     
     <item>
       <title>正则表达式</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <link>http://yangchnet.github.io/posts/python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <guid>http://yangchnet.github.io/posts/python/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
       <description>正则表达式 1、什么是正则表达式 正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。（摘自百度百科）
 你可能熟悉文本查找,即按下 Ctrl-F,输入你要查找的词。“正则表达式”更进一步,它们让你指定要查找的“模式”。你也许不知道一家公司的准确电话号码,但如果你住在美国或加拿大,你就知道有3 位数字,然后是一个短横线,然后是 4 位数字(有时候以 3 位区号开始)。因此作为一个人,你看到一个电话号码就知道:415-555-1234 是电话号码,但 4,155,551,234 不是。 正则表达式很有用,但如果不是程序员,很少会有人了解,它,尽管大多数现代文本编辑器和文字处理器(诸如微软的 Word 或 OpenOffice)都有查找和查找替换功能,可以根据正则表达式查找。正则表达式可以节约大量时间,不仅适用于软件用户,也适用于程序员。实际上,技术作家 Cory Doctorow 声称,甚至应该在教授编程之前,先教授正则表达式: “知道[正则表达式]可能意味着用 3 步解决一个问题,而不是用 3000 步。如果你是一个技术怪侠,别忘了你用几次击键就能解决的问题,其他人需要数天的烦琐工作才能解决,而且他们容易犯错。” 1 (摘自《Python编程快速上手—让繁琐工作自动化》)
 2、不用正则表达式来查找文本模式 假设你希望在字符串中查找电话号码。你知道模式:3 个数字,一个短横线,3 个数字,一个短横线,再是 4 个数字。例如:415-555-4242。 假定我们用一个名为 isPhoneNumber()的函数,来检查字符串是否匹配模式,它 返回 True 或 False。

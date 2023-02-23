@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Golang on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/golang/</link>
+    <link>http://yangchnet.github.io/categories/golang/</link>
     <description>Recent content in Golang on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>runtime篇五：slice</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%94slice/</link>
+      <link>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%BA%94slice/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%94slice/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%BA%94slice/</guid>
       <description>本系列代码基于golang1.19
   runtime篇一：接口 runtime篇二：通道 runtime篇三：defer runtime篇四：panic runtime篇五：slice   推荐阅读：slice和数组的区别 切片append规则
  1. 切片的结构 切片的底层表示是runtime.slice:
@@ -26,10 +26,10 @@ func makeslice(et *_type, len, cap int) unsafe.Pointer { mem, overflow := math.M
     
     <item>
       <title>runtime篇三：defer</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%89defer/</link>
+      <link>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%B8%89defer/</link>
       <pubDate>Fri, 12 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%89defer/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%B8%89defer/</guid>
       <description>本系列代码基于golang1.19
   runtime篇一：接口 runtime篇二：通道 runtime篇三：defer runtime篇四：panic runtime篇五：slice  1. defer是什么 defer，是一种特殊的机制，在调用普通函数或方法前加上关键字defer，就完成了defer所需要的语法。当defer语句被执行时，跟在defer后面的函数会被延迟执行。直到包含该defer语句的函数执行完毕时，defer后的函数才会被执行，多个defer的执行顺序与声明顺序相反。
 对于defer的使用及需要注意的地方，可参考defer用法。这里不再讨论。
@@ -39,10 +39,10 @@ type _defer struct { started bool // 是否开始执行defer函数 	heap bool //
     
     <item>
       <title>runtime篇四：panic</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/</link>
+      <link>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/</link>
       <pubDate>Fri, 12 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E5%9B%9Bpanic/</guid>
       <description>本系列代码基于golang1.19
   runtime篇一：接口 runtime篇二：通道 runtime篇三：defer runtime篇四：panic runtime篇五：slice  1. panic的底层结构 panic在runtime中的底层表示是runtime._panic结构体。
 type _panic struct { argp unsafe.Pointer // 指向defer调用时参数的指针 	arg any // panic参数 	link *_panic // 连接到更早的_panic 	pc uintptr // 程序计数器 	sp unsafe.Pointer // 栈指针 	recovered bool // 当前panic是否被recover恢复 	aborted bool // 当前panic是否被中止 	goexit bool // 是否调用了runtime.Goexit } 类似于_defer，panic也被组织成链表结构，多个panic通过link字段连接成一个链表。
@@ -53,10 +53,10 @@ func gopanic(e any) { gp := getg() // 获取当前g  // .</description>
     
     <item>
       <title>runtime篇二：通道</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/</link>
+      <link>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/</link>
       <pubDate>Fri, 05 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%BA%8C%E9%80%9A%E9%81%93/</guid>
       <description>本系列代码基于golang1.19
   runtime篇一：接口 runtime篇二：通道 runtime篇三：defer runtime篇四：panic runtime篇五：slice  1. chan的结构 一个channel长这样：
 type hchan struct { qcount uint // total data in the queue 	dataqsiz uint // size of the circular queue 	buf unsafe.Pointer // points to an array of dataqsiz elements 	elemsize uint16 // chan中元素大小 	closed uint32 // 是否关闭 	elemtype *_type // element type 	sendx uint // send index 	recvx uint // receive index 	recvq waitq // list of recv waiters 	sendq waitq // list of send waiters  lock mutex } channel的字段中，主要可以分为三部分：</description>
@@ -64,10 +64,10 @@ type hchan struct { qcount uint // total data in the queue 	dataqsiz uint // siz
     
     <item>
       <title>runtime篇一：接口</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%80%E6%8E%A5%E5%8F%A3/</link>
+      <link>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%B8%80%E6%8E%A5%E5%8F%A3/</link>
       <pubDate>Thu, 04 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/runtime%E7%AF%87%E4%B8%80%E6%8E%A5%E5%8F%A3/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/runtime%E7%AF%87%E4%B8%80%E6%8E%A5%E5%8F%A3/</guid>
       <description>本系列代码基于golang1.19
   runtime篇一：接口 runtime篇二：通道 runtime篇三：defer runtime篇四：panic runtime篇五：slice  1. 接口的内部结构 type iface struct { tab *itab data unsafe.Pointer } 一个接口是一个iface结构体，其中包含一个itab指针和一个unsafe.Pointer。
 概念上讲一个接口的值,接口值,由两个部分组成,一个具体的类型和那个类型的值。它们被称为接口的动态类型和动态值。
@@ -80,10 +80,10 @@ type interfacetype struct { typ _type pkgpath name mhdr []imethod } 其中typ和
     
     <item>
       <title>Go汇编之定义基本数据类型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E6%B1%87%E7%BC%96%E4%B9%8B%E5%AE%9A%E4%B9%89%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+      <link>http://yangchnet.github.io/posts/golang/go%E6%B1%87%E7%BC%96%E4%B9%8B%E5%AE%9A%E4%B9%89%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E6%B1%87%E7%BC%96%E4%B9%8B%E5%AE%9A%E4%B9%89%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/go%E6%B1%87%E7%BC%96%E4%B9%8B%E5%AE%9A%E4%B9%89%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
       <description>1. Go汇编基础  这里只介绍本文会用到的语法
  4个虚拟寄存器   FP: Frame pointer：伪FP寄存器对应函数的栈帧指针，一般用来访问函数的参数和返回值；golang语言中，函数的参数和返回值，函数中的局部变量，函数中调用子函数的参数和返回值都是存储在栈中的，我们把这一段栈内存称为栈帧（frame），伪FP寄存器对应栈帧的底部，但是伪FP只包括函数的参数和返回值这部分内存，其他部分由伪SP寄存器表示；注意golang中函数的返回值也是通过栈帧返回的，这也是golang函数可以有多个返回值的原因；
   PC: Program counter：指令计数器，用于分支和跳转，它是汇编的IP寄存器的别名；
@@ -101,19 +101,19 @@ GLOBL ·Id, $8 DATA ·Id+0(SB)/8,$0x12345 2.</description>
     
     <item>
       <title>一份好用的golang应用Dockerfile模板</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</link>
       <pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E4%B8%80%E4%BB%BD%E5%A5%BD%E7%94%A8%E7%9A%84golang%E5%BA%94%E7%94%A8dockerfile%E6%A8%A1%E6%9D%BF/</guid>
       <description># 编译环境FROMgolang:alpine as builder # 设置go环境变量ENV GO111MODULE=on \  GOPROXY=https://goproxy.cn,direct# 工作目录WORKDIR/app# 将项目拷贝到docker中COPY . .# 拉取包，编译RUN go mod tidy &amp;amp;&amp;amp; CGO_ENABLED=0 GOOS=linux go build -a -ldflags &amp;#39;-extldflags &amp;#34;-static&amp;#34;&amp;#39; -o hello-app .# 运行环境FROMscratch# 设置时区COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/ShanghaiENV TZ Asia/ShanghaiWORKDIR/app# 将编译好的可执行文件从编译环境中拷贝到运行环境中COPY --from=builder /app/hello-app .# 启动ENTRYPOINT [&amp;#34;./hello-app&amp;#34;]# 端口EXPOSE10000</description>
     </item>
     
     <item>
       <title>切片append规则</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E5%88%87%E7%89%87append%E8%A7%84%E5%88%99/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E5%88%87%E7%89%87append%E8%A7%84%E5%88%99/</link>
       <pubDate>Sat, 19 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E5%88%87%E7%89%87append%E8%A7%84%E5%88%99/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E5%88%87%E7%89%87append%E8%A7%84%E5%88%99/</guid>
       <description>大约2021年8月份，go社区对切片容量增长的方式进行了一次调整。具体讨论可见：https://groups.google.com/g/golang-nuts/c/UaVlMQ8Nz3o
  1. 之前的增长规则 先看源码
  runtime/slice.go
@@ -122,29 +122,29 @@ GLOBL ·Id, $8 DATA ·Id+0(SB)/8,$0x12345 2.</description>
     
     <item>
       <title>理解反射之：一个reflect.Type可以做什么</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</link>
       <pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E7%90%86%E8%A7%A3%E5%8F%8D%E5%B0%84%E4%B9%8B%E4%B8%80%E4%B8%AAreflect.type%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88/</guid>
       <description>反射是一个接口，其定义如下：
 type Type interface { // 返回具体类型在内存分配时的字节分配方式 	Align() int // 返回具体类型在结构体中作为一个字段是内存对齐方式 	FieldAlign() int // 返回具体类型的第x个方法 	Method(int) Method // 根据函数名返回具体类型的方法 	MethodByName(string) (Method, bool) // 返回类型的方法个数 	NumMethod() int // 返回类型的名字 	Name() string // 返回类型的包名 	PkgPath() string // 返回类型所占内存字节大小 	Size() uintptr // 返回类型的简单描述，如：main.User 	String() string // 返回这个类型的Kind 	Kind() Kind // 检查类型是否实现了某个接口 	//stringer := reflect.TypeOf((*fmt.Stringer)(nil)).Elem() 	//fmt.Println(reflect.ValueOf(u).Type().Implements(stringer)) 	Implements(u Type) bool // 检查类型是否可以被赋值给某个类型 	AssignableTo(u Type) bool // 检查类型是否可以转换到类型u 	ConvertibleTo(u Type) bool // 检查类型是否可比较 	Comparable() bool // 返回Int, Uint, Float, or Complex kinds.</description>
     </item>
     
     <item>
       <title>for...range要点</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/for...range%E8%A6%81%E7%82%B9/</link>
+      <link>http://yangchnet.github.io/posts/golang/for...range%E8%A6%81%E7%82%B9/</link>
       <pubDate>Sat, 12 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/for...range%E8%A6%81%E7%82%B9/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/for...range%E8%A6%81%E7%82%B9/</guid>
       <description>range循环时，使用的是被迭代的元素的副本  type T struct { n int } func main() { ts := [2]T{} for i, t := range ts { switch i { case 0: t.n = 3 // 被访问的是ts的副本  ts[1].n = 9 case 1: fmt.Print(t.n, &amp;#34; &amp;#34;) } } fmt.Print(ts) } 输出：0 {{0} {9}} range 循环语句使用的临时变量  func main() { h := make([]*int, 3) u := []int{1, 2, 3} for i, v := range u { h[i] = &amp;amp;v } for i := range h { fmt.</description>
     </item>
     
     <item>
       <title>标准库之unsafe</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bunsafe/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bunsafe/</link>
       <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bunsafe/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E6%A0%87%E5%87%86%E5%BA%93%E4%B9%8Bunsafe/</guid>
       <description>1. Go中对指针的限制  Go 的指针不能进行数学运算。 不同类型的指针不能相互转换。 不同类型的指针不能使用 == 或 != 比较。只有在两个指针类型相同或者可以相互转换的情况下，才可以对两者进行比较。另外，指针可以通过 == 和 != 直接和 nil 作比较。 不同类型的指针变量不能相互赋值。  使用unsafe包，可以一定程度上打破这些限制，那么为什么要打破这些限制。请看下文。
 2. unsafe.Pointer unsafe.Pointer的定义
 type ArbitraryType int type Pointer *ArbitraryType unsafe 包提供了 2 点重要的能力：
@@ -156,20 +156,20 @@ type ArbitraryType int type Pointer *ArbitraryType unsafe 包提供了 2 点重�
     
     <item>
       <title>静态代码检查: golangci-lint</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</link>
       <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</guid>
       <description>1. 简介 golangci-lint 是对golang进行静态代码检查的工具。其具有以下特性：
  速度非常快：golangci-lint 是基于 gometalinter 开发的，但是平均速度要比 gometalinter 快 5 倍。golangci-lint 速度快的原因有三个：可以并行检查代码；可以复用 go build 缓存；会缓存分析结果。 可配置：支持 YAML 格式的配置文件，让检查更灵活，更可控。 IDE 集成：可以集成进多个主流的 IDE，例如 VS Code、GNU Emacs、Sublime Text、Goland 等。 linter 聚合器：1.41.1 版本的 golangci-lint 集成了 76 个 linter，不需要再单独安装这 76 个 linter。并且 golangci-lint 还支持自定义 linter。 最小的误报数：golangci-lint 调整了所集成 linter 的默认设置，大幅度减少了误报。 良好的输出：输出的结果带有颜色、代码行号和 linter 标识，易于查看和定位。  2. 安装 # 安装 go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1 # 检查是否安装成功 golangci-lint version # 输出 golangci-lint 版本号，说明安装成功 golangci-lint has version v1.44.0 built from (unknown, mod sum: &amp;#34;h1:YJPouGNQEdK+x2KsCpWMIBy0q6MSuxHjkWMxJMNj/DU=&amp;#34;) on (unknown) 3.</description>
     </item>
     
     <item>
       <title>channel的行为</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</link>
+      <link>http://yangchnet.github.io/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</link>
       <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/channel%E7%9A%84%E8%A1%8C%E4%B8%BA/</guid>
       <description>1. nil channel   接收 接收goroutine阻塞
   发送 发送个goroutine阻塞
   2. 向无缓冲channel发送消息   接受队列有goroutine 接收端将收到消息
@@ -186,10 +186,10 @@ type ArbitraryType int type Pointer *ArbitraryType unsafe 包提供了 2 点重�
     
     <item>
       <title>golang中的tag</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</link>
+      <link>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</link>
       <pubDate>Tue, 14 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</guid>
       <description>1. tag的基本介绍 字段标签可以存储元信息，这些元信息可以使用反射来访问。通常这些元信息用来提供一个字段如何从一种格式编码至另一种格式的相关信息（或是数据应如何在数据库中存储等）。但实际上标签可以存储任何你想要的元信息，无论是你自己使用还是由另一个包使用。
 就像reflect.StructTag文档中提到的那样，字段标签通常是由空格分割的key:&amp;quot;value&amp;quot;列表，例如：
 type User struct { Name string `json:&amp;#34;name&amp;#34; xml:&amp;#34;name&amp;#34;` } 其中的key通常表示后面&amp;quot;value&amp;quot;所对应的包，例如json这个key将被encoding/json这个包使用。
@@ -204,10 +204,10 @@ type User struct { Name string `mytag:&amp;#34;MyName&amp;#34;` Email stirng `my
     
     <item>
       <title>ORM之sqlc</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/orm%E4%B9%8Bsqlc/</link>
+      <link>http://yangchnet.github.io/posts/golang/orm%E4%B9%8Bsqlc/</link>
       <pubDate>Sun, 22 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/orm%E4%B9%8Bsqlc/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/orm%E4%B9%8Bsqlc/</guid>
       <description>1. 安装sqlc go get github.com/kyleconroy/sqlc/cmd/sqlc 2. 基本使用 建立基本项目结构 mkdir sqlc-demo cd sqlc-demo go mod init sqlc-demo 在sqlc-demo中建立如下目录结构：
 . ├── db │ ├── queries │ ├── schema │ └── sqlc └── go.mod 其中query中存储查询语句，schema中存储数据库表结构，sqlc中存储生成的代码。
 基本表结构  sqlc-demo/db/schema/table.sql
@@ -216,10 +216,10 @@ type User struct { Name string `mytag:&amp;#34;MyName&amp;#34;` Email stirng `my
     
     <item>
       <title>数据库版本管理-migrate</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</link>
       <pubDate>Sun, 15 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86-migrate/</guid>
       <description>migrate是一个golang写成的数据库版本迁移工具，可以用来方便的对数据库进行迁移和回退。 Github上有详细的教程等：https://github.com/golang-migrate/migrate
   在安装时可能需要指定所用的驱动，否则会因缺少驱动无法连接数据库，例如go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate
   建立目录  mkdir -p migrate-demo/db cd migrate-demo/db mkdir ddl mkdir -p schema/blog 现在migrate-demo目录下结构如下：
@@ -232,20 +232,20 @@ docker build -t mysql-demo -f ./Dockerfile . build成功后，使用docker image
     
     <item>
       <title>依赖注入：wire包的使用</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>官方教程，写的很好，我就不多说了
  Let&amp;rsquo;s learn to use Wire by example. The Wire guide provides thorough documentation of the tool&amp;rsquo;s usage. For readers eager to see Wire applied to a larger server, the guestbook sample in Go Cloud uses Wire to initialize its components. Here we are going to build a small greeter program to understand how to use Wire. The finished product may be found in the same directory as this README.</description>
     </item>
     
     <item>
       <title>5种goroutine池的实现之对比</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/5%E7%A7%8Dgoroutine%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B9%8B%E5%AF%B9%E6%AF%94/</link>
+      <link>http://yangchnet.github.io/posts/golang/5%E7%A7%8Dgoroutine%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B9%8B%E5%AF%B9%E6%AF%94/</link>
       <pubDate>Sat, 19 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/5%E7%A7%8Dgoroutine%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B9%8B%E5%AF%B9%E6%AF%94/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/5%E7%A7%8Dgoroutine%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B9%8B%E5%AF%B9%E6%AF%94/</guid>
       <description>1. wazsmwazsm/mortar（★74） 简单介绍
 创建一个容量为 N 的池, 在池容量未满时, 每塞入一个任务（生产任务）, 任务池开启一个 worker (建立协程) 去处理任务（消费任务）。 当任务池容量赛满，每塞入一个任务（生产任务）, 任务会被已有的 N 个 worker 抢占执行（消费任务），达到协程限制的功能。但worker创建后不会回收，除非将整个pool撤销。
 结构
@@ -254,10 +254,10 @@ type Task struct { Handler func(v ...interface{}) // 函数签名 	Params []inte
     
     <item>
       <title>go generate工具</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/go-generate%E5%B7%A5%E5%85%B7/</link>
+      <link>http://yangchnet.github.io/posts/golang/go-generate%E5%B7%A5%E5%85%B7/</link>
       <pubDate>Thu, 27 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/go-generate%E5%B7%A5%E5%85%B7/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/go-generate%E5%B7%A5%E5%85%B7/</guid>
       <description>1. go generate go generate命令运行时，将找到源代码中所有包含//go:generate的特殊注释，提取并执行//go:generate后附加的命令。
 基本语法：
 //go:generate [-run regexp] [-n] [-v] [-x] [build flags] [file.go... | packages] 需要注意的几点：
@@ -269,10 +269,10 @@ package main import &amp;#34;fmt&amp;#34; //go:generate echo &amp;#34;world&amp;
     
     <item>
       <title>golang中context包的使用</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>http://yangchnet.github.io/posts/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sun, 23 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/golang%E4%B8%ADcontext%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>context包定义了Context类型，这个类型在API边界即进程中传递截止日期、同步信号，请求值等相关信息。
  1. 对context包的介绍 在服务器的传入请求中应包含context，而对服务器的传出调用应接收一个context。它们之间的调用链必须包含context，或是衍生的WithCancel, WithDeadline, WithTimeout, WithValue。当一个WithCancel Context被“cancel”，那么当前context所派生的所有context也都将被取消。
 WithCancel, WithDeadline, WithTimeout接收一个Context对象（父对象），并返回其父对象的一个携带有cancel/deadline/timeout的一个拷贝（子对象）。调用CancelFunc会取消其子对象及子对象的子对象等，删除父对象对子对象的引用，并停止所有关联的计时器。未能调用CancelFunc将造成父对象结束前或计时器被触发前子对象的泄露。使用go vet工具可以检查所有控制流路径上是否都使用了CancelFunc
@@ -285,10 +285,10 @@ WithCancel, WithDeadline, WithTimeout接收一个Context对象（父对象），
     
     <item>
       <title>Golang中反射reflect的基本使用</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <link>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/golang%E4%B8%AD%E5%8F%8D%E5%B0%84reflect%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
       <description>在计算机领域，反射是指一类应用，它们能够自描述和自控制。也即是说，这类应用通过采用某种机制来实现对自己行为的描述和监测，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。 反射（reflect）让我们能在运行期探知对象的类型信息和内存结构，这从一定程度上弥(mi)补了静态语言在动态行为上的不足。 反射（reflect）是在计算机程序运行时，访问，检查，修改它自身的一种能力，是元编程的一种形式。 Go语音提供了一种机制在运行时更新变量和检查它们的值、调用它们的方法和它们支持的内在操作，但是在编译时并不知道这些变量的具体类型。这种机制被称为反射。反射也可以让我们将类型本身作为第一类的值类型处理。
  1. 为何我们需要反射？ fmt.Fprintf函数提供字符串格式化处理逻辑，它可以对任意类型的值格式化并打印，甚至支持用户自定义的类型。 让我们也来尝试实现一个类似功能的函数。为了简单起见，我们的函数只接收一个参数，然后返回和fmt.Sprint类似的格式化后的字符串。我们实现的函数名也叫Sprint。 这里我们使用switch类型分支来对不同的类型进行处理。
 func Sprint(x interface{}) string { type stringer interface { String() string } switch x := x.(type) { case stringer: return x.String() case string: return x case int: return strconv.Itoa(x) // ...similar cases for int16, uint32, and so on...  case bool: if x { return &amp;#34;true&amp;#34; } return &amp;#34;false&amp;#34; default: // array, chan, func, map, pointer, slice, struct  return &amp;#34;?</description>
@@ -296,10 +296,10 @@ func Sprint(x interface{}) string { type stringer interface { String() string } 
     
     <item>
       <title>野生Goroutine带来的问题及对应解决方案</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>一、野生goroutine的问题  引言： 毋庸置疑，golang原生的goroutine极大降低了程序员使用并发编程的代价，程序员们不需要再去关心如何实现接口、如何继承Thread类等多余的操作，只需要简简单单的go, 就可以开启一个并发的协程。但这种简单的使用方式同时也带来一些问题，这些goroutine不再受我们控制了，它们在运行时可能会发生任何错误或意外，而我们无法得知或去处理这些意外。我们将启动后不再受主进程控制的goroutine称为野生goroutine，本节将介绍野生goroutine存在的一些问题并介绍一些简单的解决方法。
  1. goroutine中panic无法恢复 正常的函数中panic的recover
 import ( &amp;#34;fmt&amp;#34; ) func main(){ defer func(){ if err := recover(); err != nil{ fmt.Println(err) } }() var bar = []int{1} fmt.Println(bar[1]) } reflect: slice index out of range goroutine中panic的恢复
@@ -308,10 +308,10 @@ func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用r
     
     <item>
       <title>Go中的锁</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</link>
+      <link>http://yangchnet.github.io/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</link>
       <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
       <description>1. sync.Mutex互斥锁 不同goroutine之间对公共资源进行访问需要使用互斥锁。例如在对银行账户的操作中，如果我们有两种操作，一个是查询余额，一个是存款。其操作如下：
 package bank // 存款余额 var balance int // 存款 func Deposit(amount int) { balance = balance + amount } // 查询 func Balance() int { return balance } // Alice: go func() { bank.Deposit(200) // A1  fmt.Println(&amp;#34;=&amp;#34;, bank.Balance()) // A2 }() // Bob: go bank.Deposit(100) // B 这其中，若把A1分为两个操作，A1r：把余额从内存中读出来；A2w：把修改后的余额写入内存。
 若执行顺序为A1r → B → A1w → A2， 正常情况下，Alice和Bob分别存入了$200，$100，因此最后的存款应该是300，但最后输出结果为200。因为A在计算时是按照A1r读出的数值进行计算，忽略了B的操作，A与B之间发生了数据竞争。
@@ -322,19 +322,19 @@ import &amp;#34;sync&amp;#34; var ( mu sync.Mutex // guards balance  balance int
     
     <item>
       <title>面试题golang</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</link>
       <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E9%9D%A2%E8%AF%95%E9%A2%98/</guid>
       <description>三个goroutine分别输出张三、李四、王五，使其按上述顺序输出5遍。 package main import ( &amp;#34;fmt&amp;#34; &amp;#34;sync&amp;#34; ) var w sync.WaitGroup func main() { w.Add(15) chan1 := make(chan struct{}, 0) chan2 := make(chan struct{}, 0) for i := 0; i &amp;lt; 5; i++ { go func() { defer w.Done() fmt.Println(&amp;#34;张三&amp;#34;) chan1 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan1 fmt.Println(&amp;#34;李四&amp;#34;) chan2 &amp;lt;- struct{}{} }() go func() { defer w.Done() &amp;lt;- chan2 fmt.Println(&amp;#34;王五&amp;#34;) }() } w.Wait() } 编写程序输出某目录下的所有文件（包括子目录） package main import ( &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;os&amp;#34; ) func main() { dir := os.</description>
     </item>
     
     <item>
       <title>slice和数组的区别</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <link>http://yangchnet.github.io/posts/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/slice%E5%92%8C%E6%95%B0%E7%BB%84%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>1. 长度  数组
  对于数组来说，它的长度是固定的，并且数组的长度是其类型的一部分，即对于以下两个数组来说，他们是不同的类型。
 var a [5]int var b [6]int fmt.Printf(&amp;#34;%v&amp;#34;, reflect.TypeOf(a) == reflect.TypeOf(b)) // 输出： false 数组的长度必须是常量表达式，因为数组的长度需要在编译阶段确定。 对于数组来说，由于其长度是固定的，因此不能添加或删除元素。
@@ -346,10 +346,10 @@ months := [...]string{1: &amp;#34;January&amp;#34;, /* ... */, 12: &amp;#34;Dece
     
     <item>
       <title>Reader和Writer接口</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</link>
+      <link>http://yangchnet.github.io/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</link>
       <pubDate>Sun, 28 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</guid>
       <description>1. Reader接口 type Reader interface { Read(p []byte) (n int, err error) }  接口说明
  Read 将 len(p) 个字节读取到 p 中。它返回读取的字节数 n（0 &amp;lt;= n &amp;lt;= len(p)） 以及任何遇到的错误。即使 Read 返回的 n &amp;lt; len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。
 当 Read 在成功读取 n &amp;gt; 0 个字节后遇到一个错误或 EOF (end-of-file)，它会返回读取的字节数。它可能会同时在本次的调用中返回一个non-nil错误,或在下一次的调用中返回这个错误（且 n 为 0）。 一般情况下, Reader会返回一个非0字节数n, 若 n = len(p) 个字节从输入源的结尾处由 Read 返回，Read可能返回 err == EOF 或者 err == nil。并且之后的 Read() 都应该返回 (n:0, err:EOF)。</description>
@@ -357,10 +357,10 @@ months := [...]string{1: &amp;#34;January&amp;#34;, /* ... */, 12: &amp;#34;Dece
     
     <item>
       <title>goroutine和线程</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
+      <link>http://yangchnet.github.io/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid>
       <description>1. 线程 在操作系统中，进程是分配资源的基本单位，但当进程作为调度的基本单位时，会造成较大的开销，频繁的进程调度将消耗大量时间。因此引出了线程：线程是处理器调度的基本单位，线程只拥有很小的运行时必要的资源。一个进程可拥有多个线程，同一个进程中的所有线程共享进程获得的主存空间和资源。 线程的实现
 有些系统同时支持用户线程和内核线程，由此产生了不同的多线程模型，即实现用户级线程 和内核级线程的连接方式：多对一模型、一对一模型、多对多模型。
 2. goroutine 在Go语言中，每一个并发的执行单元叫作一个goroutine，是一种轻量级的线程。
@@ -372,10 +372,10 @@ months := [...]string{1: &amp;#34;January&amp;#34;, /* ... */, 12: &amp;#34;Dece
     
     <item>
       <title>Flag包的基本用法</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
+      <link>http://yangchnet.github.io/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/flag%E5%8C%85%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/</guid>
       <description>Flag包的基本用法  flag包用于处理golang命令行程序中的参数
  1. 使用flag包的基本流程 使用flag包涉及三个步骤：
  定义变量以捕获标志值 定义Go应用程序将使用的标志 在执行时解析提供给应用程序的标志。  flag软件包中的大多数功能都与定义标志并将其绑定到定义的变量有关。解析阶段由Parse()函数处理。
@@ -385,10 +385,10 @@ months := [...]string{1: &amp;#34;January&amp;#34;, /* ... */, 12: &amp;#34;Dece
     
     <item>
       <title>go get代理方案</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/go-get%E4%BB%A3%E7%90%86%E6%96%B9%E6%A1%88/</link>
+      <link>http://yangchnet.github.io/posts/golang/go-get%E4%BB%A3%E7%90%86%E6%96%B9%E6%A1%88/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/go-get%E4%BB%A3%E7%90%86%E6%96%B9%E6%A1%88/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/go-get%E4%BB%A3%E7%90%86%E6%96%B9%E6%A1%88/</guid>
       <description> 直接干终极方案: go env -w GOPROXY=https://goproxy.cn,direct
  修改hosts，然后reboot
 添加
@@ -402,10 +402,10 @@ git clone https://github.com/golang/net.git **注意：**要使用git clone命�
     
     <item>
       <title>golang中的print系函数详解</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B9%8Bprint/</link>
+      <link>http://yangchnet.github.io/posts/golang/golang%E4%B9%8Bprint/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B9%8Bprint/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/golang%E4%B9%8Bprint/</guid>
       <description>golang中的print系函数详解 pirnt系函数来自fmt包，主要用于做各种格式的输出 这些函数主要有
  golang中的print系函数详解  fmt.Fprintf fmt.Printf fmt.Sprintf fmt.Fprint fmt.Print fmt.Sprint fmt.Fprintln fmt.Println fmt.Sprintln 总结    下面来逐个分析
 import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; &amp;#34;io&amp;#34; ) fmt.Fprintf  函数原型：  Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)   官方注释 Fprintf formats according to a format specifier and writes to w.It returns the number of bytes written and any write error encountered.
@@ -414,10 +414,10 @@ import ( &amp;#34;fmt&amp;#34; &amp;#34;os&amp;#34; &amp;#34;io&amp;#34; ) fmt.F
     
     <item>
       <title>Go的http包详解</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</link>
+      <link>http://yangchnet.github.io/posts/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/go%E7%9A%84http%E5%8C%85%E8%AF%A6%E8%A7%A3/</guid>
       <description>Go的http包详解 详细地解剖一下 http 包，看它到底是怎样实现整个过程的。
 Go 的 http 有两个核心功能：Conn、ServeMux
 Conn的goroputine 为了实现高并发和高性能，go使用了goroutine来处理Conn的读写事件，这样每个请求都能保持独立，相互不会阻塞，可以高效的相应网络事件。
@@ -432,10 +432,10 @@ type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 
     
     <item>
       <title>Go语言中值类型与引用类型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E5%80%BC%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B/</guid>
       <description>1.值类型与引用类型 值类型：int、float、bool和string这些类型都属于值类型，使用这些类型的变量直接指向存在内存中的值，值类型的变量的值存储在栈中。当使用等号=将一个变量的值赋给另一个变量时，如 j = i ,实际上是在内存中将 i 的值进行了拷贝。可以通过 &amp;amp;i 获取变量 i 的内存地址
 引用类型：特指slice、map、channel这三种预定义类型。引用类型拥有更复杂的存储结构:(1)分配内存 (2)初始化一系列属性等。一个引用类型的变量r1存储的是r1的值所在的内存地址（数字），或内存地址中第一个字所在的位置，这个内存地址被称之为指针，这个指针实际上也被存在另外的某一个字中
 2.值类型与引用类型的区别 首先明确，golang中无论是什么类型，传参时都是传递的原值的复制，因此，值类型直接传入函数，任何变动都会反映到原值上，而对于引用类型，其传递的是原值类型的一个复制，因此在函数内的修改，可能会反映到原值中，也可能不会。具体取决引用类型的构造方式及其内部定义。可参考另一篇文章slice和数组的区别
@@ -447,10 +447,10 @@ type Handler interface { ServeHTTP(ResponseWriter, *Request) // 路由实现器 
     
     <item>
       <title>Go语言中的字面量</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</link>
+      <link>http://yangchnet.github.io/posts/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/go%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AD%97%E9%9D%A2%E9%87%8F/</guid>
       <description>Go语言中的字面量  Go语言中的字面量  什么是字面量 整型和浮点型的字面值 字符串的字面值 常量的字面值 数组的字面值 Slice的字面值 Map的字面值 结构体的字面值    什么是字面量 在计算机科学中，字面量（literal）是用于表达源代码中一个固定值的表示法（notation）。
 简单的说，字面量或者说字面值就是一个变量的值。
 整型和浮点型的字面值 var i int = 1 var f float64 = 3.14159 字符串的字面值 字符串值也可以用字符串面值方式编写，只要将一系列字节序列包含在双引号即可：
@@ -462,10 +462,10 @@ const GoUsage = `Go is a tool for managing Go source code. Usage: go command [ar
     
     <item>
       <title>Go语言中的错误处理策略</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5/</guid>
       <description>0. 错误处理的编码风格 检查某个子函数是否失败后，我们通常将处理失败的逻辑代码放在处理成功的代码之前。如果某个错误会导致函数返回，那么成功的逻辑代码不应该放在else中，而应直接放在函数体中。
 1. 错误传播 函数某个子程序的失败，会变成该函数的失败
 resp, err := http.Get(url) if err != nil{ return nill, err } 或是构造新的错误信息返回给调用者
@@ -476,10 +476,10 @@ func WaitForServer(url string) error { const timeout = 1 * time.Minute deadline 
     
     <item>
       <title>http/template</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/template/</link>
+      <link>http://yangchnet.github.io/posts/golang/template/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/template/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/template/</guid>
       <description>http/template 什么是模板 模板是一种常见的视图，通过它我们可以传递数据以使该视图有意义。可以以任何方式对其进行自定义以获取任何可能的输出。
 模板包 Go中的模板附带两个包text/template和html/template。文本包允许我们使用模板插入文本，而HTML模板通过提供安全的HTML代码来帮助我们。
 Part of template 1. 模板动作 模板动作是主要的控制流程，数据评估功能。这些动作控制最终输出将如何显示
@@ -495,10 +495,10 @@ report, err := template.New(&amp;#34;report&amp;#34;).Funcs(template.FuncMap{&am
     
     <item>
       <title>RESTfulAPI入门</title>
-      <link>http://yangchnet.github.io/Dessert/posts/net/restful-api/</link>
+      <link>http://yangchnet.github.io/posts/net/restful-api/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/net/restful-api/</guid>
+      <guid>http://yangchnet.github.io/posts/net/restful-api/</guid>
       <description>RESTful API 入门 1. 简介 表现层状态转换（英语：Representational State Transfer，缩写：REST）是Roy Thomas Fielding博士于2000年在他的博士论文中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。表现层状态转换是根基于超文本传输协议（HTTP）之上而确定的一组约束和属性，是一种设计提供万维网络服务的软件构建风格。符合或兼容于这种架构风格（简称为 REST 或 RESTful）的网络服务，允许客户端发出以统一资源标识符访问和操作网络资源的请求，而与预先定义好的无状态操作集一致化。因此表现层状态转换提供了在互联网络的计算系统之间，彼此资源可交互使用的协作性质（interoperability）。相对于其它种类的网络服务，例如SOAP服务，则是以本身所定义的操作集，来访问网络上的资源。
 2. REST 架构约束   客户端－服务器 从本质上讲，这意味着客户端应用程序和服务器应用程序必须能够独立发展而彼此之间没有任何依赖关系。客户端应该只知道资源URI，仅此而已。今天，这是Web开发中的常规做法，因此您不需要任何花哨。把事情简单化。
  服务器和客户端也可以独立替换和开发，只要它们之间的接口没有更改即可。
@@ -525,10 +525,10 @@ REST允许您使用分层的系统架构，在该架构中，您可以在服务�
     
     <item>
       <title>类型断言</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</link>
+      <link>http://yangchnet.github.io/posts/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/go%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%9E%8B%E6%96%AD%E8%A8%80-unc/</guid>
       <description>类型断言 类型断言是一个使用在接口上的操作，语法上看起来像是x.(T)，因此被称为断言类型，这里x是接口，T是类型。一个类型断言检查它操作对象的动态类型是否和断言的类型匹配。
 这里有两种可能：
  如果断言的类型T是一个具体类型
@@ -542,20 +542,20 @@ var w io Wirter w = os.Stdout rw := w.</description>
     
     <item>
       <title>鸭子类型</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</guid>
       <description>鸭子类型 1. 什么是鸭子类型 只要走起路来像鸭子，叫起来像鸭子，就可以认为是鸭子。这就是鸭子类型
 2. 鸭子类型有什么作用？ 对应于golang中的接口的概念，一个接口定义了一组操作，这组操作可以看做是鸭子的走路，叫。也就是说，只要任何类型满足了这组方法，那么就可以看做是鸭子&amp;ndash;即满足了这个接口，可以看做是这个接口类型。</description>
     </item>
     
     <item>
       <title>defer用法</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</link>
+      <link>http://yangchnet.github.io/posts/golang/defer%E7%94%A8%E6%B3%95/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/defer%E7%94%A8%E6%B3%95/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/defer%E7%94%A8%E6%B3%95/</guid>
       <description>Revise in 2022-3-18
  defer用法 defer用来延迟对某个语句的调用，常用于处理成对的操作，如打开、关闭、连接、断开连接，加锁、释放锁。通过defer语句，无论函数逻辑多复杂，都能保证在任何代码执行路径下，资源被释放。defer应该直接跟在请求资源的语句后。
 defer语句将函数的调用push到一个列表中，当外层函数返回时，会执行保存的函数列表

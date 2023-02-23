@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tool on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/tool/</link>
+    <link>http://yangchnet.github.io/categories/tool/</link>
     <description>Recent content in Tool on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 12 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 12 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/tool/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>常用工具集合</title>
-      <link>http://yangchnet.github.io/Dessert/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</link>
+      <link>http://yangchnet.github.io/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</link>
       <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</guid>
+      <guid>http://yangchnet.github.io/posts/tool/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/</guid>
       <description>1. draw.io 在线画图工具 https://app.diagrams.net/
 2. sql to Gorm SQL语句转化为go结构体 https://sql2gorm.mccode.info/
 3. 一些编程字体 https://www.nerdfonts.com/font-downloads
@@ -36,10 +36,10 @@
     
     <item>
       <title>vim配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/tool/vim%E9%85%8D%E7%BD%AE/</link>
+      <link>http://yangchnet.github.io/posts/tool/vim%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Wed, 29 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/tool/vim%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://yangchnet.github.io/posts/tool/vim%E9%85%8D%E7%BD%AE/</guid>
       <description>1. 安装插件系统  使用的是vim-plug
  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 2. 安装插件 打开~/.vimrc, 在其中写入：
 &amp;quot; Specify a directory for plugins &amp;quot; - For Neovim: stdpath(&#39;data&#39;) . &#39;/plugged&#39; &amp;quot; - Avoid using standard Vim directory names like &#39;plugin&#39; call plug#begin(&#39;~/.vim/plugged&#39;) &amp;quot; Make sure you use single quotes &amp;quot; Shorthand notation; fetches https://github.com/junegunn/vim-easy-align Plug &#39;junegunn/vim-easy-align&#39; &amp;quot; Any valid git URL is allowed Plug &#39;https://github.com/junegunn/vim-github-dashboard.git&#39; &amp;quot; Multiple Plug commands can be written in a single line using | separators Plug &#39;SirVer/ultisnips&#39; | Plug &#39;honza/vim-snippets&#39; &amp;quot; On-demand loading Plug &#39;scrooloose/nerdtree&#39;, { &#39;on&#39;: &#39;NERDTreeToggle&#39; } Plug &#39;tpope/vim-fireplace&#39;, { &#39;for&#39;: &#39;clojure&#39; } &amp;quot; Using a non-default branch Plug &#39;rdnetto/YCM-Generator&#39;, { &#39;branch&#39;: &#39;stable&#39; } &amp;quot; Using a tagged release; wildcard allowed (requires git 1.</description>
@@ -47,19 +47,19 @@
     
     <item>
       <title>z</title>
-      <link>http://yangchnet.github.io/Dessert/posts/tool/z/</link>
+      <link>http://yangchnet.github.io/posts/tool/z/</link>
       <pubDate>Sun, 12 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/tool/z/</guid>
+      <guid>http://yangchnet.github.io/posts/tool/z/</guid>
       <description>install z # Download to latest to home dir wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh # Add to .bashrc echo . /path/to/z.sh &amp;gt;&amp;gt; ~/.bashrc # Add to .zshrc echo . /path/to/z.sh &amp;gt;&amp;gt; ~/.zshrc </description>
     </item>
     
     <item>
       <title>pm2使用指南</title>
-      <link>http://yangchnet.github.io/Dessert/posts/tool/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
+      <link>http://yangchnet.github.io/posts/tool/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link>
       <pubDate>Fri, 06 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/tool/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
+      <guid>http://yangchnet.github.io/posts/tool/pm2%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid>
       <description>1. 安装pm2 npm install pm2 -g 或
 yarn global add pm2 使用pm2 -v查看版本号
 2. 基本使用 2.1 启动应用 pm2 start app.js # 不止是js文件，其他可执行文件也可以执行 pm2 start script.sh # 启动bash脚本 pm2 start python3 -- app.py # -- 后跟要传给命令的参数 pm2 start binary -- -port 8080 在启动应用时还有一些参数

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>OS on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/os/</link>
+    <link>http://yangchnet.github.io/categories/os/</link>
     <description>Recent content in OS on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/os/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/os/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>实模式和保护模式</title>
-      <link>http://yangchnet.github.io/Dessert/posts/os/%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/</link>
+      <link>http://yangchnet.github.io/posts/os/%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/os/%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>http://yangchnet.github.io/posts/os/%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F/</guid>
       <description>8086结构 x86架构中经典的处理器8086的大体结构如下：
 其寻址范围为1M
 为了暂存数据，8086 处理器内部有 8 个 16 位的通用寄存器，也就是刚才说的 CPU 内部的数据单元，分别是 AX、BX、CX、DX、SP、BP、SI、DI。这些寄存器主要用于在计算过程中暂存数据。这些寄存器比较灵活，其中 AX、BX、CX、DX 可以分成两个 8 位的寄存器来使用，分别是 AH、AL、BH、BL、CH、CL、DH、DL，其中 H 就是 High（高位），L 就是 Low（低位）的意思。
@@ -31,19 +31,19 @@ IP 寄存器就是指令指针寄存器（Instruction Pointer Register），指�
     
     <item>
       <title>多出几个通用非即插即用显示器</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/%E5%A4%9A%E5%87%BA%E5%87%A0%E4%B8%AA%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</link>
+      <link>http://yangchnet.github.io/posts/windows/%E5%A4%9A%E5%87%BA%E5%87%A0%E4%B8%AA%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</link>
       <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/%E5%A4%9A%E5%87%BA%E5%87%A0%E4%B8%AA%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/windows/%E5%A4%9A%E5%87%BA%E5%87%A0%E4%B8%AA%E9%80%9A%E7%94%A8%E9%9D%9E%E5%8D%B3%E6%8F%92%E5%8D%B3%E7%94%A8%E6%98%BE%E7%A4%BA%E5%99%A8/</guid>
       <description>1. 问题现象 莫名其妙，多出来几个显示器。 从设备管理器中看，也是存在多个通用非即插即用显示器2. 解决办法 重新安装Intel显卡驱动，可以从电脑厂家官网下载。但需要注意的一点是：在重新安装显卡驱动后，需要禁用显卡驱动程序的自动更新，否则还有可能出现这个问题。 打开组策略gpedit.msc，选择计算机配置”-&amp;gt;“管理模板”-&amp;gt;“系统”-&amp;gt;“设备安装”-&amp;gt;“设备安装限制”，找到Intel显卡的类Guid添加到阻止使用与下列设备安装程序类相匹配的驱动程序安装设备中</description>
     </item>
     
     <item>
       <title>Windows装系统遇到的问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/windows/mbr-gpt/</link>
+      <link>http://yangchnet.github.io/posts/windows/mbr-gpt/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/windows/mbr-gpt/</guid>
+      <guid>http://yangchnet.github.io/posts/windows/mbr-gpt/</guid>
       <description>Windows装系统遇到的问题 1. 问题描述 windows无法安装到这个磁盘，选中的磁盘具有MBR分区表。在EFI系统上，Windows只能安装到GPT磁盘
 2. 解决办法   首先选择U盘安装，进入安装界面
   按shift+F10打开命令行

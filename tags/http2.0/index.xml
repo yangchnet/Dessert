@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>http2.0 on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/http2.0/</link>
+    <link>http://yangchnet.github.io/tags/http2.0/</link>
     <description>Recent content in http2.0 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 11 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/http2.0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/http2.0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>HTTP2简介</title>
-      <link>http://yangchnet.github.io/Dessert/posts/net/http2/</link>
+      <link>http://yangchnet.github.io/posts/net/http2/</link>
       <pubDate>Sat, 11 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/net/http2/</guid>
+      <guid>http://yangchnet.github.io/posts/net/http2/</guid>
       <description>这是一篇理论性较强的文章
  1. HTTP/1的不足与面临的问题  此部分内容来自：https://segmentfault.com/a/1190000013519925
  1.1 HTTP/1概述 1.2 队头阻塞 浏览器很少只从一个域名获取一份资源。大多数时候，它希望能同时获取许多资源。设想这样一个网站，它把所有图片放在单个特定域名下。HTTP/1 并未提供机制来同时请求这些资源。如果仅仅使用一个连接，它需要发起请求、等待响应，之后才能发起下一个请求。这显然会在加载页面时造成较大的延迟，降低了用户体验。

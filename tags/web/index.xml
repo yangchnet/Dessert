@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>web on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/web/</link>
+    <link>http://yangchnet.github.io/tags/web/</link>
     <description>Recent content in web on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>wsgi</title>
-      <link>http://yangchnet.github.io/Dessert/posts/django/wsgi/</link>
+      <link>http://yangchnet.github.io/posts/django/wsgi/</link>
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/django/wsgi/</guid>
+      <guid>http://yangchnet.github.io/posts/django/wsgi/</guid>
       <description>转载自：https://segmentfault.com/a/1190000011365430
  1. WSGI介绍 1.1 什么是WSGI 首先介绍几个关于WSGI相关的概念 WSGI：全称是Web Server Gateway Interface，WSGI不是服务器，python 模块，框架，API或者任何软件，只是一种规范，描述web server如何与web application通信的规范。server和application的规范在PEP 3333中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Torando,Flask,Django
 uwsgi:与WSGI一样是一种通信协议，是uWSGI服务器的独占协议，用于定义传输信息的类型(type of information)，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。

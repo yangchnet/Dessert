@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>SQL on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/sql/</link>
+    <link>http://yangchnet.github.io/tags/sql/</link>
     <description>Recent content in SQL on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/sql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ORM简介</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</link>
+      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</link>
       <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</guid>
+      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/orm%E7%AE%80%E4%BB%8B/</guid>
       <description>1. ORM是什么 面向对象编程把所有实体看成对象（object），关系型数据库则是采用实体之间的关系（relation）连接数据。很早就有人提出，关系也可以用对象表达，这样的话，就能使用面向对象编程，来操作关系型数据库。 简单的说，ORM 就是通过实例对象的语法，完成关系型数据库的操作的技术，是&amp;quot;对象-关系映射&amp;quot;（Object/Relational Mapping） 的缩写。
 ORM把数据库映射为对象
  数据库的表（table） &amp;ndash;&amp;gt; 类（class） 记录（record，行数据）&amp;ndash;&amp;gt; 对象（object） 字段（field）&amp;ndash;&amp;gt; 对象的属性（attribute）
@@ -29,10 +29,10 @@ p = Person.get(10) name = p.first_name 一比较就可以发现，ORM 使用对�
     
     <item>
       <title>MySql安装和配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
+      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</guid>
+      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%AE%89%E8%A3%85linux/</guid>
       <description>1. 安装mysql sudo apt update sudo apt install mysql-server 2. 配置mysql 运行 security script
 sudo mysql_secure_installation 根据提示进行一些必要的配置
 进入mysql
@@ -43,10 +43,10 @@ SELECT user,authentication_string,plugin,host FROM mysql.user; 在输出中
     
     <item>
       <title>Mysql无法远程访问</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</link>
+      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid>
+      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%97%A0%E6%B3%95%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE/</guid>
       <description>Mysql无法远程访问 在使用navicat远程连接阿里云的时候，出现“2003 can t connect to mysql server on 10061”错误
 经过艰难的谷歌百度stackflow后，发现是3306端口没有监听外部连接，只接收内部ip访问。
 解决方案  首先保证阿里云服务器3306端口开放 使用netstat -ntpl |grep 3306命令查看3306端口状态 tcp 0 0 127.0.0.1:22 0.0.0.0:* LISTEN - 可看出只接收内部访问 打开/etc/mysql/mysql.conf.d/mysqld.cnf(网上大部分说是:/etc/mysql/my.cnf) 将bind-address = 127.0.0.1改成bind-address = 0.0.0.0 再次使用netstat -ntpl |grep 3306命令查看 tcp 0 0 0.0.0.0:22 0.0.0.0:* LISTEN - 此时3306端口开始监听所有网络访问 **如果是ipv6主机，则改为 bind-address = :: ,表示监听所有网络**  主机&amp;rsquo;xxx.xx.xxx.xxx&amp;rsquo;不允许连接到此MySQL服务器 在进行连接ipv6主机的时候出现了如下问题：django.db.utils.InternalError: (1130, &amp;ldquo;Host &amp;lsquo;2409:8930:1450:316:6179:c54:5901:2f2b&amp;rsquo; is not allowed to connect to this MySQL server&amp;rdquo;) 解决方法如下：

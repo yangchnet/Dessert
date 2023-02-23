@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>云笔记 on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/%E4%BA%91%E7%AC%94%E8%AE%B0/</link>
+    <link>http://yangchnet.github.io/tags/%E4%BA%91%E7%AC%94%E8%AE%B0/</link>
     <description>Recent content in 云笔记 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 13 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E4%BA%91%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 13 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/%E4%BA%91%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>体验过的最好的云笔记方式</title>
-      <link>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%93%E9%AA%8C%E8%BF%87%E7%9A%84%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BA%91%E7%AC%94%E8%AE%B0%E6%96%B9%E5%BC%8F/</link>
+      <link>http://yangchnet.github.io/posts/env/%E4%BD%93%E9%AA%8C%E8%BF%87%E7%9A%84%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BA%91%E7%AC%94%E8%AE%B0%E6%96%B9%E5%BC%8F/</link>
       <pubDate>Sat, 13 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%93%E9%AA%8C%E8%BF%87%E7%9A%84%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BA%91%E7%AC%94%E8%AE%B0%E6%96%B9%E5%BC%8F/</guid>
+      <guid>http://yangchnet.github.io/posts/env/%E4%BD%93%E9%AA%8C%E8%BF%87%E7%9A%84%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BA%91%E7%AC%94%E8%AE%B0%E6%96%B9%E5%BC%8F/</guid>
       <description>0. 前记 作为一个技术人员, 一个笔记软件对于我们来说必不可少，每个人对笔记软件的需求又各不相同。对于我来说，我希望一个云笔记的功能包括：markdown支持、latex公式编辑、很好的版本控制、可以方便的分享、可以方便的导出/导入、代码块支持、图片插入等。
 我用过很多云笔记软件，印象笔记、为知笔记、有道云、Notion、OneNote等，这些市面上常见的云笔记软件均有一个问题，就是你用了一段时间后，发现自己被限制在里面了，你无法对你的笔记进行导出，更换一个你觉得更好的笔记软件。这对我来说是不可接受的，我希望我的笔记可以由我自己来管理，我需要它的所有控制权。
 因此，我后来又使用了jupyter notebook，用过jupyter的同学知道，我们可以在上面编辑代码，markdown和latex也被很好的支持，而又由于jupyter的源文件是文本文件，因此我们可以方便的使用git对其进行版本控制，这种方式可以说满足了我的绝大部分需要，是一种非常nice的笔记方式。

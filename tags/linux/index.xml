@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Linux on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/linux/</link>
+    <link>http://yangchnet.github.io/tags/linux/</link>
     <description>Recent content in Linux on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Install Docker on Arch</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/install-docker-on-arch/</link>
+      <link>http://yangchnet.github.io/posts/linux/install-docker-on-arch/</link>
       <pubDate>Tue, 21 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/install-docker-on-arch/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/install-docker-on-arch/</guid>
       <description>官方给出的教程是使用docker desktop, 但内存占用太大。
  1. 安装docker二进制文件 从这里下载平台对应的二进制文件：https://download.docker.com/linux/static/stable/
 然后解压安装：
@@ -32,10 +32,10 @@ https://wiki.archlinux.org/title/Systemd#Drop-in_files</description>
     
     <item>
       <title>Manjaro恢复grub</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</link>
+      <link>http://yangchnet.github.io/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</link>
       <pubDate>Mon, 13 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</guid>
       <description>https://wiki.manjaro.org/index.php/GRUB/Restore_the_GRUB_Bootloader#EFI_System
 启动笔记本时，突然发现gurb引导项故障了，记录一下修复过程：
 首先用U盘制备一个manjaro引导盘。然后有两种方式
@@ -52,10 +52,10 @@ grub-mkconfig -o /boot/grub/grub.cfg 提示完成后，拔掉U盘重启，应该
     
     <item>
       <title>在AUR上发布包</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%9C%A8aur%E4%B8%8A%E5%8F%91%E5%B8%83%E5%8C%85/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E5%9C%A8aur%E4%B8%8A%E5%8F%91%E5%B8%83%E5%8C%85/</link>
       <pubDate>Fri, 10 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%9C%A8aur%E4%B8%8A%E5%8F%91%E5%B8%83%E5%8C%85/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E5%9C%A8aur%E4%B8%8A%E5%8F%91%E5%B8%83%E5%8C%85/</guid>
       <description>如何在AUR上发布包 1. 准备PKGBUILD 文件  https://wiki.archlinux.org/title/PKGBUILD https://wiki.archlinux.org/title/Creating_packages
  想要打包一个可以在AUR上发布的package， 需要使用makepkg工具，makepkg在运行时会寻找当前工作目录下的PKGBUILD文件。
 找到之后，会从PKGBUILD配置的source去获取源码并根据PKGBUILD的配置去进行编译，最终产生二进制文件以及一些元信息文件。
@@ -65,10 +65,10 @@ $ cat /usr/share/pacman/PKGBUILD.proto # This is an example PKGBUILD file. Use t
     
     <item>
       <title>stat系列性能分析工具</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-sysstat/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-sysstat/</link>
       <pubDate>Sat, 17 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-sysstat/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7-sysstat/</guid>
       <description>1. sysstat简介 sysstat是一个软件包，包含监测系统性能及效率的一组工具，这些工具对于我们收集系统性能数据，比如：CPU 使用率、硬盘和网络吞吐数据，这些数据的收集和分析，有利于我们判断系统是否正常运行，是提高系统运行效率、安全运行服务器的得力助手。
 sysstat包含多个工具套件： 首先是stat系列
  iostat 输出CPU的统计信息和所有I/O设备的输入输出（I/O）统计信息 mpstat 关于CPU的详细信息（单独输出或者分组输出） pidstat 关于运行中的进程/任务、CPU、内存等的统计信息 sysstat sysstat 工具包的 man 帮助页面。 nfsiostat NFS（Network File System）的I/O统计信息 cifsiostat CIFS(Common Internet File System)的统计信息  还有sa系列 7. sar 保存并输出不同系统资源（CPU、内存、IO、网络、内核等）的详细信息 8. sadc 系统活动数据收集器，用于收集sar工具的后端数据 9. sa1 系统收集并存储sadc数据文件的二进制数据，与sadc工具配合使用 10. sa2 配合sar工具使用，产生每日的摘要报告 11. sadf 用于以不同的数据格式（CVS或者XML）来格式化sar工具的输出
@@ -80,10 +80,10 @@ sysstat包含多个工具套件： 首先是stat系列
     
     <item>
       <title>top命令</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/</link>
+      <link>http://yangchnet.github.io/posts/linux/top%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/top%E5%91%BD%E4%BB%A4/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/top%E5%91%BD%E4%BB%A4/</guid>
       <description>在使用top命令查看系统状态时，会出现一堆参数，这些参数分别代表什么意思呢？
  第一行 首先打印了当前时间21:11:55，然后是系统已经启动了多久up 4 days, 8:45，我已经4天8小时45分钟没关机了。。
 然后当前有3个用户登录3 users，load average是1.47, 1.33, 1.14
@@ -98,10 +98,10 @@ Load Average 是一种 CPU 资源需求的度量。
     
     <item>
       <title>inotify</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/inotify/</link>
+      <link>http://yangchnet.github.io/posts/linux/inotify/</link>
       <pubDate>Mon, 04 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/inotify/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/inotify/</guid>
       <description>1. 什么是inotify Inotify API提供了一种监视文件系统的机制事件。 Inotify可用于监视单个文件或监视目录。当监视目录时，Inotify将返回目录本身的事件，以及内部的文件目录。
 简单的说，就是inotify可以为你监控文件系统的变化，在发生一些事件时通知你。
 2. 实验 需要安装inotify-tools包
@@ -112,20 +112,20 @@ Load Average 是一种 CPU 资源需求的度量。
     
     <item>
       <title>Linux中的信号</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</link>
+      <link>http://yangchnet.github.io/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</link>
       <pubDate>Wed, 18 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/linux%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7/</guid>
       <description>1. Linux 中的信号 信号这个概念在很早期的 Unix 系统上就有。它一般会从 1 开始编号，通常来说，信号编号是 1 到 31，这个编号在所有的 Unix 系统上都是一样的。
    取值 名称 解释 默认动作     1 SIGHUP 挂起    2 SIGINT 中断    3 SIGQUIT 退出    4 SIGILL 非法指令    5 SIGTRAP 断点或陷阱指令    6 SIGABRT abort发出的信号    7 SIGBUS 非法内存访问    8 SIGFPE 浮点异常    9 SIGKILL kill信号 不能被忽略、处理和阻塞   10 SIGUSR1 用户信号1    11 SIGSEGV 无效内存访问    12 SIGUSR2 用户信号2    13 SIGPIPE 管道破损，没有读端的管道写数据    14 SIGALRM alarm发出的信号    15 SIGTERM 终止信号    16 SIGSTKFLT 栈溢出    17 SIGCHLD 子进程退出 默认忽略   18 SIGCONT 进程继续    19 SIGSTOP 进程停止 不能被忽略、处理和阻塞   20 SIGTSTP 进程停止    21 SIGTTIN 进程停止，后台进程从终端读数据时    22 SIGTTOU 进程停止，后台进程想终端写数据时    23 SIGURG I/O有紧急数据到达当前进程 默认忽略   24 SIGXCPU 进程的CPU时间片到期    25 SIGXFSZ 文件大小的超出上限    26 SIGVTALRM 虚拟时钟超时    27 SIGPROF profile时钟超时    28 SIGWINCH 窗口大小改变 默认忽略   29 SIGIO I/O相关    30 SIGPWR 关机 默认忽略   31 SIGSYS 系统调用异常     用一句话来概括，信号（Signal）其实就是 Linux 进程收到的一个通知。这些通知产生的源头有很多种，通知的类型也有很多种。比如下面这几个典型的场景：</description>
     </item>
     
     <item>
       <title>Linux下的用户和用户组管理</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</link>
+      <link>http://yangchnet.github.io/posts/linux/linux%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</link>
       <pubDate>Sat, 26 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/linux%E4%B8%8B%E7%9A%84%E7%94%A8%E6%88%B7%E5%92%8C%E7%94%A8%E6%88%B7%E7%BB%84%E7%AE%A1%E7%90%86/</guid>
       <description>1.概述 Linux 是多用户多任务操作系统，换句话说，Linux 系统支持多个用户在同一时间内登陆，不同用户可以执行不同的任务，并且互不影响。
 例如，某台 Linux 服务器上有 4 个用户，分别是 root、www、ftp 和 mysql，在同一时间内，root 用户可能在查看系统日志、管理维护系统；www 用户可能在修改自己的网页程序；ftp 用户可能在上传软件到服务器；mysql 用户可能在执行自己的 SQL 查询，每个用户互不干扰，有条不紊地进行着自己的工作。与此同时，每个用户之间不能越权访问，比如 www 用户不能执行 mysql 用户的 SQL 查询操作，ftp 用户也不能修改 www 用户的网页程序。
 不同用户具有不问的权限，毎个用户在权限允许的范围内完成不间的任务，Linux 正是通过这种权限的划分与管理，实现了多用户多任务的运行机制。
@@ -140,10 +140,10 @@ Load Average 是一种 CPU 资源需求的度量。
     
     <item>
       <title>Linux程序前台后台切换</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
+      <link>http://yangchnet.github.io/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</guid>
       <description>1. 前后台切换  在Linux终端运行命令的时候，在命令末尾加上 &amp;amp; 符号，就可以让程序在后台运行  $ ./main &amp;amp;  如果程序正在前台运行，可以使用 Ctrl+z 选项把程序暂停，然后用 bg %[number] 命令把这个程序放到后台运行，摁Ctrl+z，然后在最后一行加上bg %number
   对于所有运行的程序，我们可以用jobs –l 指令查看
   $ jobs -l 也可以用 fg %[number] 指令把一个程序掉到前台  $ fg %1 也可以直接终止后台运行的程序，使用 kill 命令  $ kill %1 2. fg、bg、jobs、&amp;amp;、nohup、ctrl+z、ctrl+c 命令  &amp;amp; 加在一个命令的最后，可以把这个命令放到后台执行，如  watch -n 10 sh test.sh &amp;amp; #每10s在后台执行一次test.sh脚本  ctrl + z 可以将一个正在前台执行的命令放到后台，并且处于暂停状态。
@@ -152,10 +152,10 @@ Load Average 是一种 CPU 资源需求的度量。
     
     <item>
       <title>Linux上安装与配置clash</title>
-      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <link>http://yangchnet.github.io/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <guid>http://yangchnet.github.io/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
       <description>安装与配置  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
 1. 下载安装 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）
@@ -171,10 +171,10 @@ systemctl daemon-reload 开启服务</description>
     
     <item>
       <title>CentOS安装Python环境</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</link>
+      <link>http://yangchnet.github.io/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/centos%E5%AE%89%E8%A3%85python%E7%8E%AF%E5%A2%83/</guid>
       <description>CentOS安装Python环境 吐槽：网上一堆从官网获取安装包然后自己编译的，慢不说，还容易出错
 可使用以下命令安装Python3环境：
    yum install rh-python36 使用这条命令，安装Python3.6，但是安装后找不到，输入Python3后还是找不到命令
@@ -187,10 +187,10 @@ systemctl daemon-reload 开启服务</description>
     
     <item>
       <title>Linux下的权限管理</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
+      <link>http://yangchnet.github.io/posts/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/linux%E4%B8%8B%E7%9A%84%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86/</guid>
       <description>Linux下的权限管理 Linux 系统中为什么需要设定不同的权限，所有用户都直接使用管理员（root）身份不好吗？
  由于绝大多数用户使用的是个人计算机，使用者一般都是被信任的人（如家人、朋友等）。在这种情况下，大家都可以使用管理员身份直接登录。但在服务器上就不是这种情况了，往往运行的数据越重要（如游戏数据），价值越高（如电子商城数据、银行数据），则服务器中对权限的设定就要越详细，用户的分级也要越明确。
 和 Windows 系统不同，Linux 系统为每个文件都添加了很多的属性，最大的作用就是维护数据的安全。举个简单的例子，在你的 Linux 系统中，和系统服务相关的文件通常只有 root 用户才能读或写，就拿 /etc/shadow 这个文件来说，此文件记录了系统中所有用户的密码数据，非常重要，因此绝不能让任何人读取（否则密码数据会被窃取），只有 root 才可以有读取权限。 此外，如果你有一个软件开发团队，你希望团队中的每个人都可以使用某一些目录下的文件，而非团队的其他人则不予以开放。通过前面章节的学习我们知道，只需要将团队中的所有人加入新的群组，并赋予此群组读写目录的权限，即可实现要求。反之，如果你的目录权限没有做好，就很难防止其他人在你的系统中乱搞。 比如说，本来 root 用户才能做的开关机、ADSL 拨接程序，新增或删除用户等命令，一旦允许任何人拥有这些权限，系统很可能会经常莫名其妙的挂掉。而且，万一 root 用户的密码被其他人获取，他们就可以登录你的系统，从事一些只有 root 用户才能执行的操作，这是绝对不允许发生的。 因此，在服务器上，绝对不是所有的用户都使用 root 身份登录，而要根据不同的工作需要和职位需要，合理分配用户等级和权限等级。
@@ -200,10 +200,10 @@ systemctl daemon-reload 开启服务</description>
     
     <item>
       <title>Linux后台运行程序</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</link>
+      <link>http://yangchnet.github.io/posts/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</guid>
       <description>Linux后台运行程序 使用screen
 screen介绍 Screen是一个控制台应用程序，允许您在一个窗口中使用多个终端会话。该程序在shell会话中运行，并充当其他终端会话的容器和管理器，类似于窗口管理器管理窗口的方式。
 在许多情况下，创建多个终端窗口是不可能或不理想的。您可能需要在没有运行X服务器的情况下管理多个控制台会话，您可能需要轻松访问许多远程云服务器，或者您可能需要在处理其他任务时监视正在运行的程序的输出。所有需求都可以通过屏幕的强大功能轻松解决。
@@ -217,10 +217,10 @@ sudo pacman -S screen 基本使用方法 使用screen命令打开一个新的窗
     
     <item>
       <title>manjaro换源</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%8D%A2%E6%BA%90/</link>
+      <link>http://yangchnet.github.io/posts/linux/manjaro%E6%8D%A2%E6%BA%90/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%8D%A2%E6%BA%90/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/manjaro%E6%8D%A2%E6%BA%90/</guid>
       <description>manjaro换源 有关manjaro换源的文件：
 /etc/pacman.d/mirrorlist
 网上教程：
@@ -230,10 +230,10 @@ pacman -Sc //清空并且下载新数据 pacman-mirrors -gb testing -c China //�
     
     <item>
       <title>Nginx负载均衡配置--简介</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%85%A5%E9%97%A8/</guid>
       <description>Nginx负载均衡配置&amp;ndash;简介  在使用tomcat部署静态网站的时候，由于服务器比较垃圾，所以如果多人同时访问的话，可能会造成卡顿，影响用户体验。所以想到了使用负载均衡。
  1. 什么是负载均衡 负载平衡是高可用性基础架构的关键组件，通常用于通过在多个服务器之间分配工作负载来提高网站，应用程序，数据库和其他服务的性能和可靠性。
 没有负载平衡的Web基础结构可能如下所示：
@@ -258,19 +258,19 @@ pacman -Sc //清空并且下载新数据 pacman-mirrors -gb testing -c China //�
     
     <item>
       <title>ubuntu中增加用户</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</link>
+      <link>http://yangchnet.github.io/posts/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/ubuntu%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7/</guid>
       <description>ubuntu中增加用户 sudo useradd -m [username] -s /bin/bash #创建账户，使用/bin/bash作为shell sudo passwd [username] #设置密码 sudo adduser [username] sudo #添加管理员权限 su [username]#切换用户 </description>
     </item>
     
     <item>
       <title>Ubuntu完全删除nginx</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E5%AE%8C%E5%85%A8%E5%88%A0%E9%99%A4nginx/</guid>
       <description>Ubuntu完全删除nginx 1. 卸载nginx及相关软件  卸载nginx  sudo apt-get --purge remove nginx  移除全部无用包  sudo apt-get autoremove  列出与nginx相关的软件  dpkg --get-selections | grep nginx  删除之  sudo apt-get --purge remove nginx-common sudo apt-get --purge remove nginx-core 2. 停止所有与nginx有关的进程  查看相关进程  ps -ef | grep nginx  停止这些进程  sudo kill -9 {process_id}  00:00:00 grep &amp;ndash;color=auto nginx 这个不是
  3. 查找主机中与nginx相关的文件 使用命令：
 sudo find / -name nginx* 删除之</description>
@@ -278,10 +278,10 @@ sudo find / -name nginx* 删除之</description>
     
     <item>
       <title>WordPress安装踩坑</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</link>
+      <link>http://yangchnet.github.io/posts/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/wordpress%E5%AE%89%E8%A3%85%E8%B8%A9%E5%9D%91/</guid>
       <description>WordPress安装踩坑 1. 第一个坑，忘了安装PHP。。。 2. 第二个坑，访问页面not found 发现是因为同时开了apache2和nginx,导致冲突了，把nginx关掉就好了
 3. 第三个坑，打开页面全是源代码  打开/etc/apache2/apache2.conf，将以下内容添加到文件的底部：  &amp;lt;FilesMatch \ .php $&amp;gt; SetHandler application / x-httpd-php &amp;lt;/ FilesMatch&amp;gt; 为了使PHP正常运行，您必须禁用mpm_event模块并启用mpm_prefork和php7模块。为此，请返回您的终端窗口并发出命令：  sudo a2dismod mpm_event &amp;amp;&amp;amp; sudo a2enmod mpm_prefork &amp;amp;&amp;amp; sudo a2enmod php7.0 4. 在执行上面的命令时，遇到了第四个坑 ERROR: Module php7.0 does not exist! 解决办法
 sudo apt-get install libapache2-mod-php7.0 5. 您的PHP似乎没有安装运行WordPress所必需的MySQL扩展。 sudo apt-get install php-mysql 爬出来了。。</description>
@@ -289,10 +289,10 @@ sudo apt-get install libapache2-mod-php7.0 5. 您的PHP似乎没有安装运行W
     
     <item>
       <title>删除WordPress</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%88%A0%E9%99%A4wordpress/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E5%88%A0%E9%99%A4wordpress/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%88%A0%E9%99%A4wordpress/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E5%88%A0%E9%99%A4wordpress/</guid>
       <description>删除WordPress  删除网络文件：  rm -Rf /var/www/html/* 删除数据库。首先获取mysql的root密码（通过ssh登录时显示在MOTD中）。  mysql -uroot -p 输入密码后使用语句：
 DROP DATABASE wordpress; 删除WordPress数据库
 exit; </description>
@@ -300,29 +300,29 @@ exit; </description>
     
     <item>
       <title>安装完virtualbox后，提示内核问题</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/posts/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/virtualbox%E7%9A%84%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</guid>
       <description>安装完virtualbox后，提示内核问题 解决方法 安装内核匹配版本 sudo pacman -S linux419-virtualbox-host-modules
 重新加载内核模块 sudo /sbin/rcvboxdrv 然后重启即可</description>
     </item>
     
     <item>
       <title>检查Apache配置文件语法错误</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E6%A3%80%E6%9F%A5apache%E7%9A%84%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
       <description>检查Apache配置文件语法错误 在/etc/apache2目录下输入apache2ctl configtest即可检查错误</description>
     </item>
     
     <item>
       <title>检查nginx的语法错误</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E6%A3%80%E6%9F%A5nginx%E7%9A%84%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF/</guid>
       <description>检查nginx的语法错误 使用nginx -t</description>
     </item>
     

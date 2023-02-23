@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>C/C&#43;&#43; on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/c/c&#43;&#43;/</link>
+    <link>http://yangchnet.github.io/categories/c/c&#43;&#43;/</link>
     <description>Recent content in C/C&#43;&#43; on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="http://yangchnet.github.io/Dessert/categories/c/c++/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator><atom:link href="http://yangchnet.github.io/categories/c/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>堆和栈的区别</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <link>http://yangchnet.github.io/posts/linux/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Wed, 23 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>1. 栈（stack） 栈用于存储函数（包括主函数）内部使用的变量，是一个先进先出（LIFO）结构，每次声明一个新变量，都会将其推入栈中。当函数运行结束时，栈上上与该函数所有相关的变量（称为一个栈帧）将被释放。栈由CPU自动管理，用户不必关心如何分配和释放内存。栈内存分为栈帧，每次函数调用都会为其分配一个栈帧，在函数返回时释放。
 栈的大小通常有限，如果程序试图将过多的信息放入栈中，就会出现栈溢出。
 栈的先进后出并不是指栈中的变量是先进后出的，而是指&amp;quot;栈帧&amp;quot;的先进后出，这保证了函数的调用顺序。

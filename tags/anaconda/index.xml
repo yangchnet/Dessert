@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>anaconda on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/anaconda/</link>
+    <link>http://yangchnet.github.io/tags/anaconda/</link>
     <description>Recent content in anaconda on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/anaconda/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/anaconda/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Deepin15安装Anaconda</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
+      <link>http://yangchnet.github.io/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
+      <guid>http://yangchnet.github.io/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
       <description>1. Anaconda下载地址  官方下载地址：https://www.anaconda.com/distribution/#linux 清华大学镜像：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ # 选择你想安装的版本下载  2. 安装 $ bash Anaconda3-2021.05-Linux-x86_64.sh # 中间会有一些选择，按照自己的意愿选择即可  关闭并重新打开你的终端来激活conda
 3. 使用  更新自己  # 更新conda conda update conda conda update anaconda  更新时出现了ValueError: check_hostname requires server_hostname错误，经查发现是代理的问题，可尝试关闭或开启代理再次尝试
   对包的操作

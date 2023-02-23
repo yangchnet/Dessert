@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>install on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/install/</link>
+    <link>http://yangchnet.github.io/tags/install/</link>
     <description>Recent content in install on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/install/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/install/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>manjaro初始化配置</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+      <link>http://yangchnet.github.io/posts/linux/manjaro%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
       <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/manjaro%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
       <description>proxy 见：https://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/
 系统更新 首先要换源
 sudo pacman-mirrors -i -c China -m rank 在弹出的窗口中选择你要切换的源。
@@ -35,10 +35,10 @@ patch: &amp;#34;menu/page_size&amp;#34;: 5 schema_list: - schema: clover  可参
     
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
+      <link>http://yangchnet.github.io/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
       <description>已过时，不可用
  部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
@@ -49,10 +49,10 @@ IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp
     
     <item>
       <title>使用kubeadm安装单节点Kubernetes</title>
-      <link>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</link>
+      <link>http://yangchnet.github.io/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</link>
       <pubDate>Sat, 04 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</guid>
+      <guid>http://yangchnet.github.io/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</guid>
       <description>环境：ubuntu-20.04, kubernetes:v1.22.1
  1. 安装docker  安装时有可能会遇到网络问题，你可以选择换源或是为apt设置代理，设置代理的方法见这里
   更新源镜像并安装依赖  sudo apt-get update sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg \  lsb-release 安装docker 官方GPG密钥  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg 设置稳定版本  echo \  &amp;#34;deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs)stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null 安装docker  sudo apt-get update sudo apt-get install docker-ce docker-ce-cli containerd.</description>
@@ -60,10 +60,10 @@ IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp
     
     <item>
       <title>Deepin15安装Anaconda</title>
-      <link>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
+      <link>http://yangchnet.github.io/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
+      <guid>http://yangchnet.github.io/posts/python/deepin15%E5%AE%89%E8%A3%85anaconda/</guid>
       <description>1. Anaconda下载地址  官方下载地址：https://www.anaconda.com/distribution/#linux 清华大学镜像：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ # 选择你想安装的版本下载  2. 安装 $ bash Anaconda3-2021.05-Linux-x86_64.sh # 中间会有一些选择，按照自己的意愿选择即可  关闭并重新打开你的终端来激活conda
 3. 使用  更新自己  # 更新conda conda update conda conda update anaconda  更新时出现了ValueError: check_hostname requires server_hostname错误，经查发现是代理的问题，可尝试关闭或开启代理再次尝试
   对包的操作
@@ -73,10 +73,10 @@ IMAGE_NAME = &amp;quot;bento/ubuntu-16.04&amp;quot; N = 2 Vagrant.configure(&amp
     
     <item>
       <title>Ubuntu18（WSL2）安装redis</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
+      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</link>
       <pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
+      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/ubuntu18%E5%AE%89%E8%A3%85redis/</guid>
       <description>1. 安装并对redis进行配置 更新源并安装redis
 sudo apt-get update sudo apt-get install redis-server 将redis设置为systemctl
 sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
@@ -85,10 +85,10 @@ sudo vim /etc/redis/redis.conf 找到supervised选项，设置为systemd
     
     <item>
       <title>Linux上安装与配置clash</title>
-      <link>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
+      <link>http://yangchnet.github.io/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
+      <guid>http://yangchnet.github.io/posts/env/%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AEclash/</guid>
       <description>安装与配置  参考了这位老哥的博客
  0. 来由 阿里云与腾讯云git太慢了。。想快点
 1. 下载安装 地址在这里，找到对应自己系统的版本，可以先下载到自己本地主机后再用FileZilla上传到云服务器（虽然蛮麻烦，但是它快呀）

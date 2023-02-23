@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>grub on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/grub/</link>
+    <link>http://yangchnet.github.io/tags/grub/</link>
     <description>Recent content in grub on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/grub/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/grub/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Manjaro恢复grub</title>
-      <link>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</link>
+      <link>http://yangchnet.github.io/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</link>
       <pubDate>Mon, 13 Feb 2023 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</guid>
+      <guid>http://yangchnet.github.io/posts/linux/manjaro%E6%81%A2%E5%A4%8Dgrub/</guid>
       <description>https://wiki.manjaro.org/index.php/GRUB/Restore_the_GRUB_Bootloader#EFI_System
 启动笔记本时，突然发现gurb引导项故障了，记录一下修复过程：
 首先用U盘制备一个manjaro引导盘。然后有两种方式

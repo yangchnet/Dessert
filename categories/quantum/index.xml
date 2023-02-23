@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Quantum on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/quantum/</link>
+    <link>http://yangchnet.github.io/categories/quantum/</link>
     <description>Recent content in Quantum on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/quantum/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/quantum/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>量子关联与量子失协</title>
-      <link>http://yangchnet.github.io/Dessert/posts/quantum/%E9%87%8F%E5%AD%90%E5%85%B3%E8%81%94/</link>
+      <link>http://yangchnet.github.io/posts/quantum/%E9%87%8F%E5%AD%90%E5%85%B3%E8%81%94/</link>
       <pubDate>Sun, 28 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/quantum/%E9%87%8F%E5%AD%90%E5%85%B3%E8%81%94/</guid>
+      <guid>http://yangchnet.github.io/posts/quantum/%E9%87%8F%E5%AD%90%E5%85%B3%E8%81%94/</guid>
       <description>1. 互信息量 信息熵（香农熵） $$ H(A) = - \sum_{x\in X}p(x)\log p(x) $$ 信息熵度量了信息量的多少。如英语有26个字母，加入每个字母在文章中出现次数相同的话，每个字母的信息量为: $$ I_e = -\log_2{\frac{1}{26}}=4.7 $$ 若有一个字母出现次数为总次数的一半，则其信息熵为： $$ I_e = -\log_2{\frac{1}{2}} = 1 $$ 以上例子说明，某一个信息出现次数越多，其信息量就越少。直观的说，某一篇文章中，“的”，“我”等词语可能出现次数最多，但其能为我们带来的信息可能并不是那么多。
 经典互信息量 假定我们在一系列的不同时刻$(t_1, t_2, \dots, t_N)$对一个给定的系统进行连续测量，把每次测量结果记为$x_1, x_2,\dots, x_N$，每个测量序列的结果都有不同的概率输出，将之记为$p(x_1), p(x_2), \dots, p(x_N)$.
 则关联就意味着对于任意的$1\le n \le N$，这些概率分布不会以乘积的形式出现，即$p(x_1, x_2, \dots, x_n)*p(x_n+1, x_n+2, \dots, x_N)$。用通俗易懂的话来说，就是这些概率分布不是相互独立的。

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>区块链 on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
+    <link>http://yangchnet.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</link>
     <description>Recent content in 区块链 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>可信存证</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8F%AF%E4%BF%A1%E5%AD%98%E8%AF%81/</link>
+      <link>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8F%AF%E4%BF%A1%E5%AD%98%E8%AF%81/</link>
       <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8F%AF%E4%BF%A1%E5%AD%98%E8%AF%81/</guid>
+      <guid>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8F%AF%E4%BF%A1%E5%AD%98%E8%AF%81/</guid>
       <description>电子数据的认定包含3个重要的部分，称为“三性”：
  真实性 关联性 合法性   1. 真实性认定 由于电子数据存证的特殊性，其真实性可以从三个不同的层面来认定：
  电子证据载体的真实性 电子数据的真实性 电子证据内容的真实性  1.1 电子证据载体的真实性 电子证据载体的真实性，是指存储电子数据的媒介、设备在诉讼过程中保持原始性、同一性、完整性，不存在被伪造、变造、替换、破坏等问题。 主要包括两个方面的要求：
@@ -44,10 +44,10 @@
     
     <item>
       <title>十分钟学会区块链合约开发</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</link>
+      <link>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</link>
       <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</guid>
+      <guid>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8D%81%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</guid>
       <description>1. evm虚拟机 交易的执行是区块链节点上的一个重要的功能。是把交易中的智能合约二进制代码取出来，用执行器（Executor）执行。在交易的执行过程中，会对区块链的状态（State）进行修改，形成新区块的状态储存下来（Storage）。执行器在这个过程中，类似于一个黑盒，输入是智能合约代码，输出是状态的改变.
 以太坊虚拟机（environment virtual machine，简称EVM），作用是将智能合约代码编译成可在以太坊上执行的机器码，并提供智能合约的运行环境。它是一个对外完全隔离的沙盒环境，在运行期间不能访问网络、文件，即使不同合约之间也有有限的访问权限。以太坊虚拟机提供了面向合约的高级编程语言solidity，这使得开发者可以专注于应用本身，更方便、快捷的开发去中心化应用程序，同时也大大降低了开发难度。
 EVM是一种基于栈的虚拟机（区别于基于寄存器的虚拟机），用于执行智能合约，同时EVM是图灵完备的，EVM操作数栈调用深度为1024,EVM机器码长度一个字节，最多可以有256个操作码，目前已经定义了144个操作码，还有100多个操作码可以扩展，每个操作码都根据其弹栈数、压栈数定义了相应的gas消耗数量。泰岳链应用了以太坊EVM机制来实现智能合约，并增加了对国密算法的支持(SM3)。
@@ -73,10 +73,10 @@ truffle create contract Counter truffle创建了Counter.sol文件，再次查看
     
     <item>
       <title>同质化代币和非同质化代币</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81%E5%92%8C%E9%9D%9E%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81/</link>
+      <link>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81%E5%92%8C%E9%9D%9E%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81/</link>
       <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81%E5%92%8C%E9%9D%9E%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81/</guid>
+      <guid>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81%E5%92%8C%E9%9D%9E%E5%90%8C%E8%B4%A8%E5%8C%96%E4%BB%A3%E5%B8%81/</guid>
       <description>1. 什么是同质化代币（FT） 同质化代币是一种能够相互替换，具有统一性，可接近无穷拆分的代币。在同质化代币的交易中，只需要关注代币交接的数量即可，其价值可能会根据交换的时间间隔而改变，但其本质没有发生变化。 举例来说，美元，人民币都是同质化代币，虽然每一张美元或人民币的序号不同，但在面额相同的情况下，不同序号的币对持有者来说没有区别。
 2. 什么是非同质化代币(NFT) Non-Fungible Tokens
 非同质化代币包含了记录在其智能合约中的识别信息。这些信息使每种代币具有其独特性，因此不能被另一种代币直接取代。它们不能以一换一，因为没有两个 NFT 是相同的。 此外，非同质化代币也不可分割，就像不能送给别人演唱会门票的一部分一样，门票的一部分并不值钱也不能兑换。 非同质化的独特属性使得它通常与特定资产挂钩，可以用来证明数字物品（如游戏皮肤）的所有权，甚至实物资产的所有权，主要应用于游戏和加密收藏品领域。 FT 和 NFT 的一大区别在于使用了不同的合约接口，前者为 ERC-20，后者为 ERC-721。
@@ -87,10 +87,10 @@ truffle create contract Counter truffle创建了Counter.sol文件，再次查看
     
     <item>
       <title>区块链基础入门</title>
-      <link>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</link>
+      <link>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</link>
       <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/%E5%8C%BA%E5%9D%97%E9%93%BE/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</guid>
       <description>1. 区块链定义 区块链技术本质上是一个去中心化的数据库，它是比特币的核心技术与基础架构，是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。狭义来讲，区块链是一种按照时间顺序将数据区块以顺序相连的方式组合成的一种链式数据结构，并以密码学方式保证的不可篡改、不可伪造的分布式账本。广义来讲，区块链技术是利用块链式数据结构来验证与存储数据、利用分布式节点共识算法来生成和更新数据、利用密码学方式保证数据传输和访问的安全、利用由自动化脚本代码组成的智能合约来编程和操作数据的一种全新的分布式基础架构与计算范式。
 1.1 区块链的技术特征 区块链上存储的数据需由全网节点共同维护，可以在缺乏信任的节点之间有效地传递价值。相比现有的数据库技术，区块链具有以下技术特征。
  块链式数据结构

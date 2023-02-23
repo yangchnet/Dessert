@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>依赖注入 on Linote</title>
-    <link>http://yangchnet.github.io/Dessert/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</link>
+    <link>http://yangchnet.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</link>
     <description>Recent content in 依赖注入 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>依赖注入：wire包的使用</title>
-      <link>http://yangchnet.github.io/Dessert/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>http://yangchnet.github.io/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Tue, 06 Jul 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://yangchnet.github.io/posts/golang/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5wire%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>官方教程，写的很好，我就不多说了
  Let&amp;rsquo;s learn to use Wire by example. The Wire guide provides thorough documentation of the tool&amp;rsquo;s usage. For readers eager to see Wire applied to a larger server, the guestbook sample in Go Cloud uses Wire to initialize its components. Here we are going to build a small greeter program to understand how to use Wire. The finished product may be found in the same directory as this README.</description>
     </item>
