@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>tcmalloc on Linote</title>
-    <link>http://yangchnet.github.io/tags/tcmalloc/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/tcmalloc/</link>
     <description>Recent content in tcmalloc on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 30 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/tcmalloc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/tcmalloc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TCMalloc : Thread-Caching Malloc</title>
-      <link>http://yangchnet.github.io/posts/linux/tcmalloc/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/tcmalloc/</link>
       <pubDate>Thu, 30 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/linux/tcmalloc/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/tcmalloc/</guid>
       <description>翻译自：TCMalloc : Thread-Caching Malloc（性能测试部分没有翻译）
  动机 在我测试过的所有malloc(动态内存分配器)中，TCMalloc比glibc 2.3 malloc(作为一个单独的库称作ptmalloc2)以及其他内存分配器都要快。对于小内存对象来说，在Intel® Pentium® 4 Processor 2.80 GHzCPU上ptmalloc2执行一次内存分配/回收操作需要大约300ns，而TCMalloc完成相同的操作只需要50ns。显然对于内存分配操作来说，速度十分重要，因为如果内存分配不够及时，开发人员就倾向于在malloc上编写他们自己的空闲列表，这会造成额外的复杂性以及更多的内存占用，除非开发人员非常小心的估算空闲列表的大小并清理其中的空闲对象。
 TCMalloc也降低了多线程应用中的锁冲突。对于小内存对象来说几乎不存在冲突。对于大内存对象来说，TCMalloc尝试使用细粒度和高效的自旋锁。ptmalloc2也尝试通过一些方法降低锁冲突，其为每个线程分配一个arena空间，但ptmalloc2对于arena空间的使用存在一个大问题：在ptmalloc2中内存将不可能从一个arena空间转移到另一个arena空间，也即内存不可以在线程之间进行二次分配。这会导致巨大的内存浪费。例如，在一个Google应用中，阶段一为其数据结构分配了大约300MB。当其第一阶段结束后，阶段二将在相同的地址空间上开始。如果阶段二分配了一个与阶段一不同的arena空间，那么阶段二的计算将不会重复使用阶段一留下的任何内存空间，而是重新分配另一个300MB内存空间。这种内存的“blowup”问题同样出现在其他应用中。

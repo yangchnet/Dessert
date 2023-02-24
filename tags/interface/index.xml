@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>interface on Linote</title>
-    <link>http://yangchnet.github.io/tags/interface/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/interface/</link>
     <description>Recent content in interface on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 28 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/interface/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/interface/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reader和Writer接口</title>
-      <link>http://yangchnet.github.io/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</link>
       <pubDate>Sun, 28 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/reader%E5%92%8Cwriter%E6%8E%A5%E5%8F%A3/</guid>
       <description>1. Reader接口 type Reader interface { Read(p []byte) (n int, err error) }  接口说明
  Read 将 len(p) 个字节读取到 p 中。它返回读取的字节数 n（0 &amp;lt;= n &amp;lt;= len(p)） 以及任何遇到的错误。即使 Read 返回的 n &amp;lt; len(p)，它也会在调用过程中占用 len(p) 个字节作为暂存空间。若可读取的数据不到 len(p) 个字节，Read 会返回可用数据，而不是等待更多数据。
 当 Read 在成功读取 n &amp;gt; 0 个字节后遇到一个错误或 EOF (end-of-file)，它会返回读取的字节数。它可能会同时在本次的调用中返回一个non-nil错误,或在下一次的调用中返回这个错误（且 n 为 0）。 一般情况下, Reader会返回一个非0字节数n, 若 n = len(p) 个字节从输入源的结尾处由 Read 返回，Read可能返回 err == EOF 或者 err == nil。并且之后的 Read() 都应该返回 (n:0, err:EOF)。</description>

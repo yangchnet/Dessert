@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>zsh on Linote</title>
-    <link>http://yangchnet.github.io/tags/zsh/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/zsh/</link>
     <description>Recent content in zsh on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>zsh的基本配置</title>
-      <link>http://yangchnet.github.io/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Thu, 20 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</guid>
       <description>1. 按照Oh my zsh $ sh -c &amp;#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; 2. 配置Oh my zsh   将zsh设置为默认Shell (脚本的最后一般会问你是否切换)
 chsh -s /bin/zsh # 不需要使用root权限   更换主题
 vim ~/.zshrc 找到ZSH_THEME=&#39;robbyrussell&#39;, 更换为你想要使用的主题，可以在这里找到你想要的主题

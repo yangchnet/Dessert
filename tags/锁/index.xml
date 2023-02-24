@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>锁 on Linote</title>
-    <link>http://yangchnet.github.io/tags/%E9%94%81/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/%E9%94%81/</link>
     <description>Recent content in 锁 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 14 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/%E9%94%81/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 14 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E9%94%81/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Go中的锁</title>
-      <link>http://yangchnet.github.io/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</link>
       <pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/go%E4%B8%AD%E7%9A%84%E9%94%81/</guid>
       <description>1. sync.Mutex互斥锁 不同goroutine之间对公共资源进行访问需要使用互斥锁。例如在对银行账户的操作中，如果我们有两种操作，一个是查询余额，一个是存款。其操作如下：
 package bank // 存款余额 var balance int // 存款 func Deposit(amount int) { balance = balance + amount } // 查询 func Balance() int { return balance } // Alice: go func() { bank.Deposit(200) // A1  fmt.Println(&amp;#34;=&amp;#34;, bank.Balance()) // A2 }() // Bob: go bank.Deposit(100) // B 这其中，若把A1分为两个操作，A1r：把余额从内存中读出来；A2w：把修改后的余额写入内存。
 若执行顺序为A1r → B → A1w → A2， 正常情况下，Alice和Bob分别存入了$200，$100，因此最后的存款应该是300，但最后输出结果为200。因为A在计算时是按照A1r读出的数值进行计算，忽略了B的操作，A与B之间发生了数据竞争。

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>socket on Linote</title>
-    <link>http://yangchnet.github.io/tags/socket/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/socket/</link>
     <description>Recent content in socket on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/socket/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/socket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SOCKET随笔</title>
-      <link>http://yangchnet.github.io/posts/net/socket%E9%9A%8F%E7%AC%94/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/net/socket%E9%9A%8F%E7%AC%94/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/net/socket%E9%9A%8F%E7%AC%94/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/net/socket%E9%9A%8F%E7%AC%94/</guid>
       <description>一个UDP客户可以创建一个套接口并发送一个数据报給一个服务器，然后立即用同一个套接口发送另一个数据报給另一个服务器。同样，一个UDP服务器可以用同一个UDP套接口从5个不同的客户一连串接收5个数据报。
 UDP可以是全双工的
  TCP连接断开时，主动要求断开的一方会存在TIME_WAIT状态，此状态需要持续60s时间（Linux），在此状态期间，连接未完全断开，依然占用一个socket连接。

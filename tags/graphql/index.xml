@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>graphql on Linote</title>
-    <link>http://yangchnet.github.io/tags/graphql/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/graphql/</link>
     <description>Recent content in graphql on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 22 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/graphql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/graphql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Graphql基本概念</title>
-      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/graphql/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/graphql/</link>
       <pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/graphql/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/graphql/</guid>
       <description>1. 什么是Graphql GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的runtime。 GraphQL对你的API中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让API更容易地随着时间推移而演进，还能用于构建强大的开发者工具。 一个 GraphQL 服务是通过定义类型和类型上的字段来创建的，然后给每个类型上的每个字段提供解析函数。
 简单的说，GraphQL为我们定义数据库提供了更为便捷的方式，你不需要写任何SQL语句，即可完成数据库的创建及迁移等工作。
 2. 概览 例如，一个 GraphQL 服务告诉我们当前登录用户是 me，这个用户的名称可能像这样：

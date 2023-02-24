@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>MySQL on Linote</title>
-    <link>http://yangchnet.github.io/tags/mysql/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/mysql/</link>
     <description>Recent content in MySQL on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 02 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>概览MySQL篇〇：MySQL架构</title>
-      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87mysql%E6%9E%B6%E6%9E%84/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87mysql%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Sat, 02 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87mysql%E6%9E%B6%E6%9E%84/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87mysql%E6%9E%B6%E6%9E%84/</guid>
       <description>极客时间《MySQL实战45讲》笔记
  MySQL的基本结构 大体来说，MySQL 可以分为 Server 层和存储引擎层两部分。
 Server 层包括连接器、查询缓存、分析器、优化器、执行器等，涵盖 MySQL 的大多数核心服务功能，以及所有的内置函数（如日期、时间、数学和加密函数等），所有跨存储引擎的功能都在这一层实现，比如存储过程、触发器、视图等。
@@ -38,10 +38,10 @@ mysql -h$ip -P$port -u$user -p 这里要注意的一个问题是：一个用户�
     
     <item>
       <title>概览MySQL篇三：锁、事务和隔离</title>
-      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%89%E9%94%81/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%89%E9%94%81/</link>
       <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%89%E9%94%81/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%89%E9%94%81/</guid>
       <description>极客时间《MySQL实战45讲》笔记
  MySQL中的隔离级别 见本地事务的隔离
 事务隔离的实现 事务之间的隔离是如何实现的?
@@ -64,10 +64,10 @@ MySQL 的事务启动方式有以下几种：
     
     <item>
       <title>概览MySQL篇二：持久化</title>
-      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%8C%81%E4%B9%85%E5%8C%96/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%8C%81%E4%B9%85%E5%8C%96/</link>
       <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%8C%81%E4%B9%85%E5%8C%96/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%BA%8C%E6%8C%81%E4%B9%85%E5%8C%96/</guid>
       <description>极客时间《MySQL实战45讲》笔记
  什么是change buffer，有什么作用 当需要更新一个数据页时，如果数据页在内存中就直接更新，而如果这个数据页还没有在内存中的话，在不影响数据一致性的前提下，InnoDB 会将这些更新操作缓存在 change buffer 中，这样就不需要从磁盘中读入这个数据页了。在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行 change buffer 中与这个页有关的操作。通过这种方式就能保证这个数据逻辑的正确性。这个操作称为merge.
 这里需要注意的是，change buffer看起来像是内存缓存一类的东西，但是change buffer是可以持久化的数据。也就是说，change buffer在内存中有拷贝，也会被写入到磁盘上。
@@ -83,10 +83,10 @@ change buffer的使用场景 merge 的时候是真正进行数据更新的时刻
     
     <item>
       <title>概览MySQL篇四：主备与高可用</title>
-      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</link>
       <pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E5%9B%9B%E4%B8%BB%E5%A4%87%E4%B8%8E%E9%AB%98%E5%8F%AF%E7%94%A8/</guid>
       <description>极客时间《MySQL实战45讲》笔记
  主备的基本原理 在状态 1 中，客户端的读写都直接访问节点 A，而节点 B 是 A 的备库，只是将 A 的更新都同步过来，到本地执行。这样可以保持节点 B 和 A 的数据是相同的。
 当需要切换的时候，就切成状态 2。这时候客户端读写访问的都是节点 B，而节点 A 是 B 的备库。
@@ -97,10 +97,10 @@ change buffer的使用场景 merge 的时候是真正进行数据更新的时刻
     
     <item>
       <title>概览MySQL篇一：索引</title>
-      <link>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%80%E7%B4%A2%E5%BC%95/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%80%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%80%E7%B4%A2%E5%BC%95/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%A6%82%E8%A7%88mysql%E7%AF%87%E4%B8%80%E7%B4%A2%E5%BC%95/</guid>
       <description>极客时间《MySQL实战45讲》笔记
  索引是什么，为何存在，以什么样的结构组织或存储索引? 简单来说，索引是一个目录，用来对数据进行快速的查找。就像一本厚厚的字典，想要查询某个字或者词语，我们固然可以一页页翻阅整本词典，但更好的方式是通过拼音索引或者笔画索引到这条记录。
 索引可以有效减小查询的资源消耗，但索引不是毫无代价的，大量的创建索引会造成存储空间的损耗，我们要根据业务需求，有目的的创建对业务有帮助的索引。

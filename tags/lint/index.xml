@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>lint on Linote</title>
-    <link>http://yangchnet.github.io/tags/lint/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/lint/</link>
     <description>Recent content in lint on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 09 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/lint/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/lint/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>静态代码检查: golangci-lint</title>
-      <link>http://yangchnet.github.io/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</link>
       <pubDate>Wed, 09 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%9D%99%E6%80%81%E4%BB%A3%E7%A0%81%E6%A3%80%E6%9F%A5-golangci-lint/</guid>
       <description>1. 简介 golangci-lint 是对golang进行静态代码检查的工具。其具有以下特性：
  速度非常快：golangci-lint 是基于 gometalinter 开发的，但是平均速度要比 gometalinter 快 5 倍。golangci-lint 速度快的原因有三个：可以并行检查代码；可以复用 go build 缓存；会缓存分析结果。 可配置：支持 YAML 格式的配置文件，让检查更灵活，更可控。 IDE 集成：可以集成进多个主流的 IDE，例如 VS Code、GNU Emacs、Sublime Text、Goland 等。 linter 聚合器：1.41.1 版本的 golangci-lint 集成了 76 个 linter，不需要再单独安装这 76 个 linter。并且 golangci-lint 还支持自定义 linter。 最小的误报数：golangci-lint 调整了所集成 linter 的默认设置，大幅度减少了误报。 良好的输出：输出的结果带有颜色、代码行号和 linter 标识，易于查看和定位。  2. 安装 # 安装 go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1 # 检查是否安装成功 golangci-lint version # 输出 golangci-lint 版本号，说明安装成功 golangci-lint has version v1.44.0 built from (unknown, mod sum: &amp;#34;h1:YJPouGNQEdK+x2KsCpWMIBy0q6MSuxHjkWMxJMNj/DU=&amp;#34;) on (unknown) 3.</description>
     </item>

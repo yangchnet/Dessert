@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>command on Linote</title>
-    <link>http://yangchnet.github.io/tags/command/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/command/</link>
     <description>Recent content in command on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/command/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/command/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux程序前台后台切换</title>
-      <link>http://yangchnet.github.io/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</link>
       <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E7%A8%8B%E5%BA%8F%E5%89%8D%E5%8F%B0%E5%90%8E%E5%8F%B0%E5%88%87%E6%8D%A2/</guid>
       <description>1. 前后台切换  在Linux终端运行命令的时候，在命令末尾加上 &amp;amp; 符号，就可以让程序在后台运行  $ ./main &amp;amp;  如果程序正在前台运行，可以使用 Ctrl+z 选项把程序暂停，然后用 bg %[number] 命令把这个程序放到后台运行，摁Ctrl+z，然后在最后一行加上bg %number
   对于所有运行的程序，我们可以用jobs –l 指令查看
   $ jobs -l 也可以用 fg %[number] 指令把一个程序掉到前台  $ fg %1 也可以直接终止后台运行的程序，使用 kill 命令  $ kill %1 2. fg、bg、jobs、&amp;amp;、nohup、ctrl+z、ctrl+c 命令  &amp;amp; 加在一个命令的最后，可以把这个命令放到后台执行，如  watch -n 10 sh test.sh &amp;amp; #每10s在后台执行一次test.sh脚本  ctrl + z 可以将一个正在前台执行的命令放到后台，并且处于暂停状态。

@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>DL&amp;ML on Linote</title>
-    <link>http://yangchnet.github.io/categories/dlml/</link>
+    <link>http://yangchnet.github.io/Dessert/categories/dlml/</link>
     <description>Recent content in DL&amp;ML on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/dlml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/dlml/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Importsomedatatoplaywith</title>
-      <link>http://yangchnet.github.io/posts/dlml/plot_roc/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/plot_roc/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/plot_roc/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/plot_roc/</guid>
       <description>%matplotlib inline ======================================= Receiver Operating Characteristic (ROC) Example of Receiver Operating Characteristic (ROC) metric to evaluate classifier output quality.
 ROC curves typically feature true positive rate on the Y axis, and false positive rate on the X axis. This means that the top left corner of the plot is the &amp;ldquo;ideal&amp;rdquo; point - a false positive rate of zero, and a true positive rate of one. This is not very realistic, but it does mean that a larger area under the curve (AUC) is usually better.</description>
     </item>
     
     <item>
       <title>Keras函数式API</title>
-      <link>http://yangchnet.github.io/posts/dlml/keras%E5%87%BD%E6%95%B0%E5%BC%8Fapi/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/keras%E5%87%BD%E6%95%B0%E5%BC%8Fapi/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/keras%E5%87%BD%E6%95%B0%E5%BC%8Fapi/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/keras%E5%87%BD%E6%95%B0%E5%BC%8Fapi/</guid>
       <description>Keras函数式API 使用函数式API，你可以直接操作张量，也可以把层当做函数来使用，接收张量并返回张量。
 # 简单的实例 import os # **** change the warning level **** os.environ[&amp;#39;TF_CPP_MIN_LOG_LEVEL&amp;#39;] = &amp;#39;3&amp;#39; from keras.models import Sequential, Model from keras import layers from keras import Input # 使用Sequential模型 seq_model = Sequential() seq_model.add(layers.Dense(32, activation=&amp;#39;relu&amp;#39;, input_shape=(64,))) seq_model.add(layers.Dense(32, activation=&amp;#39;relu&amp;#39;)) seq_model.add(layers.Dense(10, activation=&amp;#39;softmax&amp;#39;)) # 对应的函数式API实现 input_tensor = Input(shape=(64,)) x = layers.Dense(32, activation=&amp;#39;relu&amp;#39;)(input_tensor) x = layers.Dense(32, activation=&amp;#39;softmax&amp;#39;)(x) output_tensor = layers.Dense(10, activation=&amp;#39;softmax&amp;#39;)(x) model = Model(input_tensor, output_tensor) model.summary() Model: &amp;quot;model_2&amp;quot; _________________________________________________________________ Layer (type) Output Shape Param # ================================================================= input_2 (InputLayer) (None, 64) 0 _________________________________________________________________ dense_10 (Dense) (None, 32) 2080 _________________________________________________________________ dense_11 (Dense) (None, 32) 1056 _________________________________________________________________ dense_12 (Dense) (None, 10) 330 ================================================================= Total params: 3,466 Trainable params: 3,466 Non-trainable params: 0 _________________________________________________________________  Keras会在后台检索从input_tensor到output_tensor所包含的每一层，并将这些层组合成一个类图的数据结构，即一个Model。这种方法有效的原因在于，output_tensor是通过对input_tensor进行多次变换得到的。如果你试图利用不相关的输入和输出来构建一个模型，那么会得到RuntimeError</description>
     </item>
     
     <item>
       <title>SimpleSupportVectorMachine</title>
-      <link>http://yangchnet.github.io/posts/dlml/svm-primal/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/svm-primal/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/svm-primal/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/svm-primal/</guid>
       <description>Simple Support Vector Machine First we will import numpy to easily manage linear algebra and calculus operations in python. To plot the learning progress later on, we will use matplotlib.
 import numpy as np from matplotlib import pyplot as plt %matplotlib inline Stochastic Gradient Descent The svm will learn using the stochastic gradient descent algorithm (SGD). Gradient Descent minimizes a function by following the gradients of the cost function.
 Calculating the Error To calculate the error of a prediction we first need to define the objective function of the svm.</description>
@@ -43,10 +43,10 @@ Calculating the Error To calculate the error of a prediction we first need to de
     
     <item>
       <title>tf.ones_like()</title>
-      <link>http://yangchnet.github.io/posts/dlml/tensorflowapi/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/tensorflowapi/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/tensorflowapi/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/tensorflowapi/</guid>
       <description>import tensorflow as tf import numpy as np from IPython.display import Image tf.ones_like() 创建一个所有元素设置为1的tensor
 tf.subtract() 两个矩阵相减
  decision_p_comp = tf.subtract(tf.ones_like(decision_p), decision_p)
@@ -59,10 +59,10 @@ with tf.</description>
     
     <item>
       <title>使用sklearn的贝叶斯分类器进行文本分类</title>
-      <link>http://yangchnet.github.io/posts/dlml/sklearn_%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/sklearn_%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/sklearn_%E8%B4%9D%E5%8F%B6%E6%96%AF/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/sklearn_%E8%B4%9D%E5%8F%B6%E6%96%AF/</guid>
       <description>使用sklearn的贝叶斯分类器进行文本分类 1、sklearn简介 sklearn是一个Python第三方提供的非常强力的机器学习库，它包含了从数据预处理到训练模型的各个方面。在实战使用scikit-learn中可以极大的节省我们编写代码的时间以及减少我们的代码量，使我们有更多的精力去分析数据分布，调整模型和修改超参。
 2、朴素贝叶斯在文本分类中的常用模型：多项式、伯努利 朴素贝叶斯分类器是一种有监督学习，常见有两种模型，多项式模型(multinomial model)即为词频型和伯努利模(Bernoulli model)即文档型。二者的计算粒度不一样，多项式模型以单词为粒度，伯努利模型以文件为粒度，因此二者的先验概率和类条件概率的计算方法都不同。计算后验概率时，对于一个文档d，多项式模型中，只有在d中出现过的单词，才会参与后验概率计算，伯努利模型中，没有在d中出现，但是在全局单词表中出现的单词，也会参与计算，不过是作为“反方”参与的。这里暂不虑特征抽取、为避免消除测试文档时类条件概率中有为0现象而做的取对数等问题。
 2.1、多项式模型 2.2、伯努利模型 2.3、两个模型的区别 3、实战演练 使用在康奈尔大学下载的2M影评作为训练数据和测试数据，里面共同、共有1400条，好评和差评各自700条，我选择总数的70%作为训练数据，30%作为测试数据，来检测sklearn自带的贝叶斯分类器的分类效果。
@@ -72,30 +72,30 @@ with tf.</description>
     
     <item>
       <title>分类指标作业（第二题）</title>
-      <link>http://yangchnet.github.io/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%BA%8C%E9%A2%98/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%BA%8C%E9%A2%98/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%BA%8C%E9%A2%98/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87%E4%BD%9C%E4%B8%9A%E7%AC%AC%E4%BA%8C%E9%A2%98/</guid>
       <description>分类指标作业（第二题） 题目 给定完整数据集，分别计算在使用完整数据集的10%,30%,50%,80%,100%数据时的查准率、查全率，f1度量和ROC，使用折线图表现出这些指标的变化情况，并画出在不同数据量下的ROC曲线
 加载数据集 import os import random def get_dataset(): data = [] for root, dirs, files in os.walk(&amp;#39;../dataset/aclImdb/neg&amp;#39;): for file in files: realpath = os.path.join(root, file) with open(realpath, errors=&amp;#39;ignore&amp;#39;) as f: data.append((f.read(), 0)) for root, dirs, files in os.walk(r&amp;#39;../dataset/aclImdb/pos&amp;#39;): for file in files: realpath = os.path.join(root, file) with open(realpath, errors=&amp;#39;ignore&amp;#39;) as f: data.append((f.read(), 1)) random.shuffle(data) return data data = get_dataset() data[:2] [(&#39;Unless you are between the ages of 10 and 14 (except for the R rating), there are very few things to like here.</description>
     </item>
     
     <item>
       <title>基于卷积神经网络和决策树的体域网数据融合方法</title>
-      <link>http://yangchnet.github.io/posts/dlml/dnf/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/dnf/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/dnf/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/dnf/</guid>
       <description>基于卷积神经网络和决策树的体域网数据融合方法 现阶段想法:在softmax层后接随机森林，通过种树增加分类准确率
 import tensorflow as tf import numpy as np import tensorflow.examples.tutorials.mnist.input_data as input_data import scipy as sp %matplotlib inline sess = tf.Session() DEPTH = 3 # Depth of a tree N_LEAF = 2 ** (DEPTH + 1) # Number of leaf node N_LABEL = 10 # Number of classes N_TREE = 5 # Number of trees (ensemble) N_BATCH = 128 # Number of data points per mini-batch 分批训练，每一批128个  初始化矩阵 def init_weights(shape): return tf.</description>
     </item>
     
     <item>
       <title>处理文本数据</title>
-      <link>http://yangchnet.github.io/posts/dlml/%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%84%E7%90%86%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE/</guid>
       <description>处理文本数据 1. 单词和字符的one-hot编码 one-hot编码是将标记转换为向量的最常用，最基本的方法。它将每个单词与一个唯一的整数索引相关联，然后将这个整数索引i转换为长度为N的二进制向量（N是词表大小），这个向量只有第i个元素是1，其余元素都是0.
 当然，也可以进行字符级的one-hot编码。
 1.1. 单词级的one-hot编码 import numpy as np samples = [&amp;#39;The cat sat on the mat.&amp;#39;, &amp;#39;The dog ate my homework.&amp;#39;] token_index = {} for sample in samples: for word in sample.split(): if word not in token_index: token_index[word] = len(token_index) + 1 # 为每个唯一单词指定一个唯一索引，没有为0索引指定单词 max_length = 10 results = np.zeros(shape=(len(samples), max_length, max(token_index.values())+1)) for i, sample in enumerate(samples): for j, word in list(enumerate(sample.split()))[:max_length]: index = token_index.get(word) results[i, j, index] = 1 results array([[[0.</description>
@@ -103,10 +103,10 @@ import tensorflow as tf import numpy as np import tensorflow.examples.tutorials.
     
     <item>
       <title>多输入模型</title>
-      <link>http://yangchnet.github.io/posts/dlml/%E5%A4%9A%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9E%8B/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%9A%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/%E5%A4%9A%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%A4%9A%E8%BE%93%E5%85%A5%E6%A8%A1%E5%9E%8B/</guid>
       <description>多输入模型 函数式API可以用于构建具有多个输入的模型，通常情况下，这种模型会在某一时刻用一个可以组合多个张量的层将不同的输入分支合并，张量组合方式可能是相加，连接等。这通常利用Keras的合并运算来实现，比如keras.layers.add, keras.layers.concatenate等。
 下面来看一个非常简单的多输入模型示例：一个问答模型
 典型的问答模型有两个输入，一个自然语言描述的问题和一个文本片段（比如新闻文章），后者提供用于回答问题的信息。然后模型要生成一个回答，在最简单的情况下，这个回答只包含一个词，可以通过对某个预定义的词表做softmax得到。
@@ -115,10 +115,10 @@ import tensorflow as tf import numpy as np import tensorflow.examples.tutorials.
     
     <item>
       <title>朴素贝叶斯</title>
-      <link>http://yangchnet.github.io/posts/dlml/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/</guid>
       <description>朴素贝叶斯 1、理论部分 1.1、贝叶斯公式 $$P(c|x)=\frac{P(c)P(x|c)}{P(x)}\qquad\dots(1)$$
 其中，$P(c)$是类“先验概率”；$P(x|c)$是样本$x$相对于类标记$c$的类条件概率，或称为“似然”；$P(x)$是用于归一化的“证据因子”。对给定样本$x$，证据因子$P(x)$与类标记无关，因此估计$P(c|x)$的问题就转化为如何基于训练数据$D$来估计先验$P(c)$和似然$P(x|c)$
 类先验概率$P(c)$表达了样本空间中各类样本所占的比例，根据大数定律，当训练集包含充足的独立同分布样本时，$P(c)$可通过各类样本出现的频率来进行估计。
@@ -133,10 +133,10 @@ import tensorflow as tf import numpy as np import tensorflow.examples.tutorials.
     
     <item>
       <title>模型评估</title>
-      <link>http://yangchnet.github.io/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E5%88%86%E7%B1%BB%E6%8C%87%E6%A0%87/</guid>
       <description>模型评估 此节内容只针对分类模型，使用sklearn库
 1、准确率 accuracy_score函数计算精度，在多标签分类中，该函数返回子集精度。如果样本的整个预测标签集与真实的标签集严格匹配，则子集精度为1.0; 否则它是0.0。如果$\hat{y}i$是第$i$类样本预测值，$y_i$是相应的真值，那么正确预测的分数$n\text{samples}$被定义为$$\texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)$$
 import numpy as np from sklearn.metrics import accuracy_score y_pred = [0, 2, 1, 3] y_true = [0, 1, 2, 3] accuracy_score(y_true, y_pred) 0.5  accuracy_score(y_true, y_pred, normalize=False) # 若normalize为False,则返回正确分类的样本数 2  2、混淆矩阵 该confusion_matrix函数通过计算混淆矩阵来评估分类准确性，行对应于真正的类，列表示预测值。
@@ -145,19 +145,19 @@ from sklearn.metrics import confusion_matrix y_true = [2, 0, 2, 2, 0, 1] y_pred 
     
     <item>
       <title>温度预测</title>
-      <link>http://yangchnet.github.io/posts/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E6%B8%A9%E5%BA%A6%E9%A2%84%E6%B5%8B/</guid>
       <description>温度预测 1. 观察耶拿天气数据集的数据 import os fname = &amp;#39;./data/jena_climate_2009_2016.csv&amp;#39; f = open(fname) data = f.read() f.close() lines = data.split(&amp;#39;\n&amp;#39;) header = lines[0].split(&amp;#39;,&amp;#39;) lines = lines[1:] print(header) print(len(lines)) [&#39;&amp;quot;Date Time&amp;quot;&#39;, &#39;&amp;quot;p (mbar)&amp;quot;&#39;, &#39;&amp;quot;T (degC)&amp;quot;&#39;, &#39;&amp;quot;Tpot (K)&amp;quot;&#39;, &#39;&amp;quot;Tdew (degC)&amp;quot;&#39;, &#39;&amp;quot;rh (%)&amp;quot;&#39;, &#39;&amp;quot;VPmax (mbar)&amp;quot;&#39;, &#39;&amp;quot;VPact (mbar)&amp;quot;&#39;, &#39;&amp;quot;VPdef (mbar)&amp;quot;&#39;, &#39;&amp;quot;sh (g/kg)&amp;quot;&#39;, &#39;&amp;quot;H2OC (mmol/mol)&amp;quot;&#39;, &#39;&amp;quot;rho (g/m**3)&amp;quot;&#39;, &#39;&amp;quot;wv (m/s)&amp;quot;&#39;, &#39;&amp;quot;max. wv (m/s)&amp;quot;&#39;, &#39;&amp;quot;wd (deg)&amp;quot;&#39;] 420551  # 解析数据 import numpy as np float_data = np.zeros((len(lines), len(header) - 1)) for i, line in enumerate(lines): values = [float(x) for x in line.</description>
     </item>
     
     <item>
       <title>理解LSTM层与GRU层</title>
-      <link>http://yangchnet.github.io/posts/dlml/lstm/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/lstm/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/lstm/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/lstm/</guid>
       <description>理解LSTM层与GRU层  SimpleRNN的问题在于，在时刻t，理论上来说，它应该能够记住许多时间部之前见过的各种信息，但实际上它是不可能学到这种长期依赖的。其原因在于“梯度消失”问题，这一效应类似于在层数较多的非循环网络中观察到的效应，随着层数的增加，网络最终变得无法训练。
  1. LSTM层 LSTM层是SimpleRNN的一种变体，它增加了一种携带信息跨越多个时间步的方法。假设有一条传送带，其运行方向平行于你所处理的序列。序列中的信息可以在任意位置跳上传送带，然后被传送到更晚的时间步，并在需要时原封不动地跳回来。这实际上就是LSTM的原理：它保存信息以便后面使用，从而防止较早期的信号在处理过程中逐渐消失。
 1.1 Keras 中一个LSTM的例子 # 准备数据 from keras.datasets import imdb from keras.preprocessing import sequence max_features = 10000 maxlen = 500 batch_size = 32 print(&amp;#39;Loading data...&amp;#39;) (input_train, y_train), (input_test, y_test) = imdb.load_data(num_words=max_features) print(len(input_train), &amp;#39;train_sequences&amp;#39;) print(len(input_test), &amp;#39;test sequences&amp;#39;) print(&amp;#39;Pad sequences (samples x time)&amp;#39;) input_train = sequence.pad_sequences(input_train, maxlen=maxlen) input_test = sequence.pad_sequences(input_test, maxlen=maxlen) print(&amp;#39;input_train shape: &amp;#39;, input_train.shape) print(&amp;#39;input_test shape:&amp;#39;, input_test.shape) Loading data... 25000 train_sequences 25000 test sequences Pad sequences (samples x time) input_train shape: (25000, 500) input_test shape: (25000, 500)  # 使用Keras中的LSTM层 from keras.</description>
@@ -165,10 +165,10 @@ from sklearn.metrics import confusion_matrix y_true = [2, 0, 2, 2, 0, 1] y_pred 
     
     <item>
       <title>理解循环神经网络</title>
-      <link>http://yangchnet.github.io/posts/dlml/%E7%90%86%E8%A7%A3rnn/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/dlml/%E7%90%86%E8%A7%A3rnn/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/dlml/%E7%90%86%E8%A7%A3rnn/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/dlml/%E7%90%86%E8%A7%A3rnn/</guid>
       <description>理解循环神经网络 1. 简单的循环神经网络 RNN以渐进的方式处理信息，同时保存一个关于所处理内容的内部模型，这个模型是根据过去的信息构建的，并随着新信息的进入而不断更新。
 RNN处理序列的方式是：遍历所有序列元素，并保存一个状态（State），其中包含与已查看内容相关的信息。
 RNN的伪代码：

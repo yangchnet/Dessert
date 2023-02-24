@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>数据库原理 on Linote</title>
-    <link>http://yangchnet.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
     <description>Recent content in 数据库原理 on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 18 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>数据库原理</title>
-      <link>http://yangchnet.github.io/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</link>
       <pubDate>Thu, 18 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/</guid>
       <description>1. 数据库系统的结构抽象 1.1 三级模式(三级视图)  External Schema &amp;mdash;-（External）View 某一用户能看到与处理的数据的结构描述 (Conceptual) Schema &amp;mdash;- Conceptual View 从全局角度理解/管理的数据的结构描述, 含相应的关联约束。体现在数据之间的内在本质联系 Internal Schema &amp;mdash;- Internal View 存储在介质上的数据的结构描述，含存储路径、存储方式 、索引方式等  1.2 两层映像  E-C Mapping：External Schema-Conceptual Schema Mapping 将外模式映射为概念模式，从而支持实现数据概念视图向外部视图的转换，便于用户观察和使用 C-I Mapping：Conceptual Schema-Internal Schema Mapping 将概念模式映射为内模式，从而支持实现数据概念视图向内部视图的转换，便于计算机进行存储和处理  1.3 两个独立性  逻辑数据独立性 当概念模式变化时，可以不改变外部模式(只需改变E-C Mapping)，从而无需 改变应用程序 物理数据独立性 当内部模式变化时，可以不改变概念模式(只需改变C-I Mapping) ，从而不改 变外部模式  1.4 数据模型  数据模型  规定模式统一描述方式的模型，包括：数据结构、操作和约束 数据模型是对模式本身结构的抽象，模式是对数据本身结构形式的抽象   三大经典数据模型  关系模型：表的形式组织数据 层次模型：树的形式组织数据 网状模型：图的形式组织数据    2.</description>
     </item>
     

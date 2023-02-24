@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>goroutine on Linote</title>
-    <link>http://yangchnet.github.io/tags/goroutine/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/goroutine/</link>
     <description>Recent content in goroutine on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/goroutine/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/goroutine/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>野生Goroutine带来的问题及对应解决方案</title>
-      <link>http://yangchnet.github.io/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/%E9%87%8E%E7%94%9Fgoroutine%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid>
       <description>一、野生goroutine的问题  引言： 毋庸置疑，golang原生的goroutine极大降低了程序员使用并发编程的代价，程序员们不需要再去关心如何实现接口、如何继承Thread类等多余的操作，只需要简简单单的go, 就可以开启一个并发的协程。但这种简单的使用方式同时也带来一些问题，这些goroutine不再受我们控制了，它们在运行时可能会发生任何错误或意外，而我们无法得知或去处理这些意外。我们将启动后不再受主进程控制的goroutine称为野生goroutine，本节将介绍野生goroutine存在的一些问题并介绍一些简单的解决方法。
  1. goroutine中panic无法恢复 正常的函数中panic的recover
 import ( &amp;#34;fmt&amp;#34; ) func main(){ defer func(){ if err := recover(); err != nil{ fmt.Println(err) } }() var bar = []int{1} fmt.Println(bar[1]) } reflect: slice index out of range goroutine中panic的恢复
@@ -24,10 +24,10 @@ func main(){ defer func(){ if err := recover(); err != nil { // 在这里使用r
     
     <item>
       <title>goroutine和线程</title>
-      <link>http://yangchnet.github.io/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</link>
       <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/goroutine%E5%92%8C%E7%BA%BF%E7%A8%8B/</guid>
       <description>1. 线程 在操作系统中，进程是分配资源的基本单位，但当进程作为调度的基本单位时，会造成较大的开销，频繁的进程调度将消耗大量时间。因此引出了线程：线程是处理器调度的基本单位，线程只拥有很小的运行时必要的资源。一个进程可拥有多个线程，同一个进程中的所有线程共享进程获得的主存空间和资源。 线程的实现
 有些系统同时支持用户线程和内核线程，由此产生了不同的多线程模型，即实现用户级线程 和内核级线程的连接方式：多对一模型、一对一模型、多对多模型。
 2. goroutine 在Go语言中，每一个并发的执行单元叫作一个goroutine，是一种轻量级的线程。

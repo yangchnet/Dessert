@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Cgroup on Linote</title>
-    <link>http://yangchnet.github.io/tags/cgroup/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/cgroup/</link>
     <description>Recent content in Cgroup on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 19 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/cgroup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/cgroup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CgroupV2</title>
-      <link>http://yangchnet.github.io/posts/linux/cgroupv2/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/cgroupv2/</link>
       <pubDate>Thu, 19 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/linux/cgroupv2/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/cgroupv2/</guid>
       <description>1. Cgroup概览 cgroup是Linux内核提供的一种按层次组织进程，并对进程资源按层次进行分配和限制的机制。
 cgroup 主要由两部分组成——core和controller。core主要负责分层组织进程。 controller负责为属于当前cgroup的进程分配和限制资源.
 多个cgroup以树形结构组织，系统中每个进程都属于一个cgroup，一个进程中的所有线程都属于同一个cgroup。

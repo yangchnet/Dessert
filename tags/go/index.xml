@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>go on Linote</title>
-    <link>http://yangchnet.github.io/tags/go/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/go/</link>
     <description>Recent content in go on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 28 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>python生成器函数和go通道</title>
-      <link>http://yangchnet.github.io/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</link>
       <pubDate>Fri, 28 Oct 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/python/python%E7%94%9F%E6%88%90%E5%99%A8%E5%87%BD%E6%95%B0%E5%92%8Cgo%E9%80%9A%E9%81%93/</guid>
       <description>python生成器函数 def gen_char(): &amp;#34;&amp;#34;&amp;#34; 定义了一个生成器函数，将会生成a~z &amp;#34;&amp;#34;&amp;#34; for i in range(0, 26): yield chr(ord(&amp;#39;a&amp;#39;) +i) for char in gen_char(): print(char, end=&amp;#39; &amp;#39;) # 输出 # a b c d e f g h i j k l m n o p q r s t u v w x y z golang通道 func main() { ch := make(chan string) // 一个通道 	wg := &amp;amp;sync.WaitGroup{} // 用于goroutine同步  wg.Add(1) go func() { // 定义了一个“生成器函数“ 	defer wg.</description>
     </item>
     

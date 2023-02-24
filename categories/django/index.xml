@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Django on Linote</title>
-    <link>http://yangchnet.github.io/categories/django/</link>
+    <link>http://yangchnet.github.io/Dessert/categories/django/</link>
     <description>Recent content in Django on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/categories/django/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/django/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>wsgi</title>
-      <link>http://yangchnet.github.io/posts/django/wsgi/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/wsgi/</link>
       <pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/wsgi/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/wsgi/</guid>
       <description>转载自：https://segmentfault.com/a/1190000011365430
  1. WSGI介绍 1.1 什么是WSGI 首先介绍几个关于WSGI相关的概念 WSGI：全称是Web Server Gateway Interface，WSGI不是服务器，python 模块，框架，API或者任何软件，只是一种规范，描述web server如何与web application通信的规范。server和application的规范在PEP 3333中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Torando,Flask,Django
 uwsgi:与WSGI一样是一种通信协议，是uWSGI服务器的独占协议，用于定义传输信息的类型(type of information)，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。
@@ -31,20 +31,20 @@ def demo_app(environ,start_response): from StringIO import StringIO stdout = Str
     
     <item>
       <title>Django,Forms</title>
-      <link>http://yangchnet.github.io/posts/django/django-form/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/django-form/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/django-form/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/django-form/</guid>
       <description>Django, Forms 使用forms完成了用户登录 1、创建model class User(User): pass  这里使用了django提供的User类，直接继承
 2、创建UserForm类 class SigninFrom(forms.Form): user_name = forms.CharField() user_email = forms.EmailField() user_password = forms.CharField() 3、完成模板 &amp;lt;form action=&amp;#34;{% url &amp;#39;permission:signin&amp;#39; %}&amp;#34; accept-charset=&amp;#34;UTF-8&amp;#34; method=&amp;#34;post&amp;#34;&amp;gt; &amp;lt;input name=&amp;#34;utf8&amp;#34; type=&amp;#34;hidden&amp;#34; value=&amp;#34;&amp;amp;#x2713;&amp;#34;/&amp;gt; {% csrf_token %} &amp;lt;dl class=&amp;#34;form-group mt-0&amp;#34;&amp;gt; &amp;lt;dt class=&amp;#34;input-label&amp;#34;&amp;gt; &amp;lt;label class=&amp;#34;form-label f5&amp;#34; for=&amp;#34;user[login]&amp;#34;&amp;gt;用户名&amp;lt;/label&amp;gt; &amp;lt;/dt&amp;gt; &amp;lt;input type=&amp;#34;text&amp;#34; name=&amp;#34;user_name&amp;#34; id=&amp;#34;user_name&amp;#34; class=&amp;#34;form-control form-control-lg input-block&amp;#34; placeholder=&amp;#34;{{ default_name }}&amp;#34; autofocus&amp;gt; &amp;lt;/dl&amp;gt; &amp;lt;dl class=&amp;#34;form-group&amp;#34;&amp;gt; &amp;lt;dt class=&amp;#34;input-label&amp;#34;&amp;gt; &amp;lt;label class=&amp;#34;form-label f5&amp;#34; for=&amp;#34;user[email]&amp;#34;&amp;gt;Email&amp;lt;/label&amp;gt; &amp;lt;/dt&amp;gt; &amp;lt;dd&amp;gt; &amp;lt;input type=&amp;#34;text&amp;#34; name=&amp;#34;user_email&amp;#34; id=&amp;#34;user_email&amp;#34; class=&amp;#34;form-control form-control-lg input-block js-email-notice-trigger&amp;#34; placeholder=&amp;#34;you@example.</description>
     </item>
     
     <item>
       <title>django中forms的定义</title>
-      <link>http://yangchnet.github.io/posts/django/django%E4%B8%ADform%E7%9A%84%E5%AE%9A%E4%B9%89/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%ADform%E7%9A%84%E5%AE%9A%E4%B9%89/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/django%E4%B8%ADform%E7%9A%84%E5%AE%9A%E4%B9%89/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%ADform%E7%9A%84%E5%AE%9A%E4%B9%89/</guid>
       <description>django中forms的定义 直接定义 class ContactForm(forms.Form): date = DateField(widget=CalendarWidget) name = CharField(max_length=40, widget=OtherWidget) widget参数定义了要使用的小部件，小部件选项可见这里
 通过模型定义 必须继承ModelForm类
 from django.forms import ModelForm class BlogForm(ModelForm): class Meta: model = Blog fields = [&amp;#39;author&amp;#39;, &amp;#39;essay&amp;#39;, &amp;#39;title&amp;#39;, &amp;#39;label&amp;#39;, &amp;#39;cover&amp;#39;] widgets = { &amp;#39;essay&amp;#39;: CKEditorWidget, &amp;#39;cover&amp;#39;: } 通过定义内部类来生命form的属性
@@ -59,20 +59,20 @@ widgets: 设置字段的小部件
     
     <item>
       <title>django中使用highchart</title>
-      <link>http://yangchnet.github.io/posts/django/django%E4%B8%AD%E4%BD%BF%E7%94%A8highchart/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%AD%E4%BD%BF%E7%94%A8highchart/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/django%E4%B8%AD%E4%BD%BF%E7%94%A8highchart/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/django%E4%B8%AD%E4%BD%BF%E7%94%A8highchart/</guid>
       <description>django中使用highchart 引入js文件  顺序不能错
  &amp;lt;script src=&amp;#34;https://code.jquery.com/jquery-3.1.1.min.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script src=&amp;#34;https://code.highcharts.com/highcharts.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; 一点小插曲 在刚开始使用highchart时，由于使用的是继承模板，导致js文件引入的顺序没有把握好，导致不能显示图像，因此将上面两句提到base.html的前面，然后可以显示图像。</description>
     </item>
     
     <item>
       <title>Django中图像的处理方法</title>
-      <link>http://yangchnet.github.io/posts/django/%E5%9B%BE%E5%83%8F%E7%9A%84%E4%B8%8A%E4%BC%A0%E4%BF%9D%E5%AD%98%E6%98%BE%E7%A4%BA/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/%E5%9B%BE%E5%83%8F%E7%9A%84%E4%B8%8A%E4%BC%A0%E4%BF%9D%E5%AD%98%E6%98%BE%E7%A4%BA/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/%E5%9B%BE%E5%83%8F%E7%9A%84%E4%B8%8A%E4%BC%A0%E4%BF%9D%E5%AD%98%E6%98%BE%E7%A4%BA/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/%E5%9B%BE%E5%83%8F%E7%9A%84%E4%B8%8A%E4%BC%A0%E4%BF%9D%E5%AD%98%E6%98%BE%E7%A4%BA/</guid>
       <description>Django 中图像的处理方法 图像的上传保存  前端图片的上传：  &amp;lt;form action=&amp;#34;/updateinfo&amp;#34; method=&amp;#34;POST&amp;#34; enctype=&amp;#34;multipart/form-data&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;updateImg&amp;#34;&amp;gt; &amp;lt;img src=&amp;#34;{{ account.photo.url }}&amp;#34; alt=&amp;#34;&amp;#34;/&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;input name=&amp;#34;photo&amp;#34; type=&amp;#34;file&amp;#34; id=&amp;#34;exampleInputFile&amp;#34;&amp;gt; &amp;lt;button id=&amp;#34;photo&amp;#34; class=&amp;#34;btn btn-danger&amp;#34; type=&amp;#34;submit&amp;#34;&amp;gt;上传头像&amp;lt;/button&amp;gt; &amp;lt;/form&amp;gt; 其中input标签的type为file， 2. 图片模型
 models.ImageField(upload_to=&amp;lsquo;path&amp;rsquo;) upload_to的储存路径是相对于MEDIA_ROOT而来的，若MEDIA_ROOT为/media/，upload_to路径为image，则图片上传后的储存路径为/media/image
 在前端显示上传的图片 {% load static %} &amp;lt;body data-media-url=&amp;#34;{% get_media_prefix %}&amp;#34;&amp;gt; 使用get_media_prefxi模板tag，代表MEDIA_URL变量
@@ -82,10 +82,10 @@ models.ImageField(upload_to=&amp;lsquo;path&amp;rsquo;) upload_to的储存路径
     
     <item>
       <title>HINT : Add or change are lated_name</title>
-      <link>http://yangchnet.github.io/posts/django/hint-add-or-change-a-relatedname/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/hint-add-or-change-a-relatedname/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/hint-add-or-change-a-relatedname/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/hint-add-or-change-a-relatedname/</guid>
       <description>HINT: Add or change a related_name 解决方案：
 需要在setting中重载AUTH_USER_MODEL
 AUTH_USER_MODEL = &amp;lsquo;users.UserProfile&amp;rsquo;
@@ -95,10 +95,10 @@ UserProfile：model</description>
     
     <item>
       <title>python与其他语言的对比（helloworld）</title>
-      <link>http://yangchnet.github.io/posts/django/python%E5%9F%BA%E7%A1%80/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/python%E5%9F%BA%E7%A1%80/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/python%E5%9F%BA%E7%A1%80/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/python%E5%9F%BA%E7%A1%80/</guid>
       <description>python与其他语言的对比（hello world）  C语言
  include&amp;lt;stdio.h&amp;gt; int main() { printf(&amp;#34;hello world&amp;#34;); return 0; }  Java语言
  public class HelloWorld{ public static void main(String[] args) { System.out.println(&amp;#34;Hello World!&amp;#34;); } }  Python
@@ -107,10 +107,10 @@ UserProfile：model</description>
     
     <item>
       <title>网页静态文件找不到</title>
-      <link>http://yangchnet.github.io/posts/django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%89%BE%E4%B8%8D%E5%88%B0/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%89%BE%E4%B8%8D%E5%88%B0/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%89%BE%E4%B8%8D%E5%88%B0/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/django/%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E6%89%BE%E4%B8%8D%E5%88%B0/</guid>
       <description>网页静态文件找不到 在19-2-18的开始，突然发现网页的静态文件找不到了 在将static目录移动到app目录内之后，发现网页可以正常显示。
  原来static目录是和app目录一个层级
  针对此问题的思考 STATIC_URL = &amp;lsquo;/static/&amp;rsquo; 注意此处是url，即对于静态文件的定位，这是必要的前提配置 STATIC_URL的定义制定了静态资源的url，具体指各个app下的static目录  STATIC_ROOT = os.path.join(BASE_DIR, &amp;ldquo;static&amp;rdquo;) STATIC_ROOT是总的static目录，主要用于在运行 collectstatic命令时存储所有的静态文件  STATICFILES_DIRS = [os.path.join(BASE_DIR, &amp;ldquo;static&amp;rdquo;), &amp;lsquo;mysite/static&amp;rsquo;,]  STATICFILES_DIRS是一个列表，存放各个app的static目录及公共的static目录  ​

@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>croc on Linote</title>
-    <link>http://yangchnet.github.io/tags/croc/</link>
+    <link>http://yangchnet.github.io/Dessert/tags/croc/</link>
     <description>Recent content in croc on Linote</description>
     <image>
-      <url>http://yangchnet.github.io/papermod-cover.png</url>
-      <link>http://yangchnet.github.io/papermod-cover.png</link>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/tags/croc/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 21 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/croc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>croc: 跨网络、跨系统的空投</title>
-      <link>http://yangchnet.github.io/posts/tool/croc-%E8%B7%A8%E7%BD%91%E7%BB%9C%E8%B7%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A9%BA%E6%8A%95/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/croc-%E8%B7%A8%E7%BD%91%E7%BB%9C%E8%B7%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A9%BA%E6%8A%95/</link>
       <pubDate>Tue, 21 Dec 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/posts/tool/croc-%E8%B7%A8%E7%BD%91%E7%BB%9C%E8%B7%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A9%BA%E6%8A%95/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/croc-%E8%B7%A8%E7%BD%91%E7%BB%9C%E8%B7%A8%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%A9%BA%E6%8A%95/</guid>
       <description>1. install curl https://getcroc.schollz.com | bash 或
 go install github.com/schollz/croc/v9@latest 2. basic usage sender:
 $ croc send [file(s)-or-folder] Sending &amp;#39;file-or-folder&amp;#39; (X MB) Code is: code-phrase receiver:
