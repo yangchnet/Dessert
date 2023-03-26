@@ -32,6 +32,10 @@ FROM scratch
 COPY --from=builder /usr/share/zoneinfo/Asia/Shanghai /usr/share/zoneinfo/Asia/Shanghai
 ENV TZ Asia/Shanghai
 
+# 安装证书
+RUN apt-get -qq update \
+    && apt-get -qq install -y --no-install-recommends ca-certificates curl
+
 WORKDIR /app
 
 # 将编译好的可执行文件从编译环境中拷贝到运行环境中
