@@ -13,9 +13,10 @@ for {
   }
 }
 ```
-在具体实现时，实际状态来自Kubernetes本身，而期望状态来自用户提交的Yaml文件。
+在具体实现时，实际状态来自Kubernetes本身，而期望状态来自用户提交的Yaml文件。这个操作，通常被叫作调谐（Reconcile）。这个调谐的过程，则被称作“Reconcile Loop”（调谐循环）或者“Sync Loop”（同步循环）。
 
-
+**Q**:对于Deployment，其创建出的Pod的ownerReference是谁，是Deployment本身吗
+**A**:
 
 
 
