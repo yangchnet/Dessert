@@ -3,21 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://yangchnet.github.io/Dessert/categories/</loc>
-    <lastmod>2023-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/categories/kubernetes/</loc>
+    <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/kubernetes/</loc>
+    <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8B%E5%AD%98%E5%82%A8/</loc>
+    <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/</loc>
+    <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
+    <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
+    <lastmod>2023-07-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/categories/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2023-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/tags/%E7%94%9F%E6%B4%BB%E5%B0%8F%E5%A6%99%E6%8B%9B/</loc>
+    <lastmod>2023-03-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/%E7%94%9F%E6%B4%BB/%E9%99%A4%E8%9F%91%E8%9E%82%E5%B0%8F%E5%A6%99%E6%8B%9B/</loc>
+    <lastmod>2023-03-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/lb/</loc>
     <lastmod>2023-03-24T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/</loc>
-    <lastmod>2023-03-24T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/categories/net/</loc>
-    <lastmod>2023-03-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/posts/</loc>
-    <lastmod>2023-03-24T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/</loc>
     <lastmod>2023-03-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/net/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</loc>
@@ -407,17 +425,11 @@
     <loc>http://yangchnet.github.io/Dessert/posts/golang/golang%E4%B8%AD%E7%9A%84tag/</loc>
     <lastmod>2021-09-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://yangchnet.github.io/Dessert/tags/kubernetes/</loc>
-    <lastmod>2021-09-06T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://yangchnet.github.io/Dessert/tags/vagrant/</loc>
     <lastmod>2021-09-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</loc>
     <lastmod>2021-09-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://yangchnet.github.io/Dessert/categories/kubernetes/</loc>
-    <lastmod>2021-09-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</loc>
     <lastmod>2021-09-04T00:00:00+00:00</lastmod>
@@ -1029,6 +1041,28 @@
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%AA%E5%91%BD%E5%90%8D/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/env/aa/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bdaemonset/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bjob/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bpod%E7%AF%87/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bservice/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/kuberntes%E4%B9%8Bdeployment/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/kuberntets%E4%B9%8Bstatefulset/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/note/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/kubernetes/reinstall-kubernetes/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/net/tcp-%E6%8F%A1%E6%89%8B/</loc>
+  </url><url>
+    <loc>http://yangchnet.github.io/Dessert/posts/net/%E4%B8%80%E4%B8%AA%E6%B6%88%E6%81%AF%E7%9A%84%E7%94%9F%E5%91%BD%E5%8E%86%E7%A8%8B/</loc>
   </url><url>
     <loc>http://yangchnet.github.io/Dessert/archives/</loc>
   </url><url>

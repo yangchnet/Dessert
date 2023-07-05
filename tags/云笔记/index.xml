@@ -17,8 +17,8 @@
       
       <guid>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%93%E9%AA%8C%E8%BF%87%E7%9A%84%E6%9C%80%E5%A5%BD%E7%9A%84%E4%BA%91%E7%AC%94%E8%AE%B0%E6%96%B9%E5%BC%8F/</guid>
       <description>0. 前记 作为一个技术人员, 一个笔记软件对于我们来说必不可少，每个人对笔记软件的需求又各不相同。对于我来说，我希望一个云笔记的功能包括：markdown支持、latex公式编辑、很好的版本控制、可以方便的分享、可以方便的导出/导入、代码块支持、图片插入等。
-我用过很多云笔记软件，印象笔记、为知笔记、有道云、Notion、OneNote等，这些市面上常见的云笔记软件均有一个问题，就是你用了一段时间后，发现自己被限制在里面了，你无法对你的笔记进行导出，更换一个你觉得更好的笔记软件。这对我来说是不可接受的，我希望我的笔记可以由我自己来管理，我需要它的所有控制权。
-因此，我后来又使用了jupyter notebook，用过jupyter的同学知道，我们可以在上面编辑代码，markdown和latex也被很好的支持，而又由于jupyter的源文件是文本文件，因此我们可以方便的使用git对其进行版本控制，这种方式可以说满足了我的绝大部分需要，是一种非常nice的笔记方式。
+我用过很多云笔记软件，印象笔记、为知笔记、有道云、Notion、OneNote等，这些市面上常见的云笔记软件均有一个问题，就是你用了一段时间后，发现自己被限制在里面了，你无法对你的笔记进行导出，更换一个你觉得更好的笔记软件。这对我来说是不可接受的，我希望我的笔记可以满足三个要求：
+ 好用，能够支持markdown通用格式 数据完全受我控制，我可以任意移动、复用等 数据要能安全的存储在云端，有备份  因此，我后来又使用了jupyter notebook，用过jupyter的同学知道，我们可以在上面编辑代码，markdown和latex也被很好的支持，而又由于jupyter的源文件是文本文件，因此我们可以方便的使用git对其进行版本控制，这种方式可以说满足了我的绝大部分需要，是一种非常nice的笔记方式。
 但今天我们要说的是另一种非常纯粹的方式，只把笔记源文件存储为markdown，这样我们可以用任何编辑器书写，然后用git进行版本控制，用Github Pages进行展示与分享，具体过程如下。
 1. hugo的使用  为什么要用hugo？首先我们需要一种分享展示笔记的方式，将其编译为静态网站是一个不错的选择。除了hugo，我们也可以使用hexo等类似的静态网站编译工具。
  1.1 安装hugo 到GitHub上hugo的release页面下载你的系统需要的版本，比如我的系统为64位Linux，那么我需要下载hugo_*.**.*_Linux-64bit.tar.gz（中间的星号为版本号，这里代表你可以任意选择）。
@@ -29,7 +29,7 @@ hugo new site MySite # 你可以取一个好听的名字 即可新建一个名�
 1.2 为你的网站选择一个theme 进入到我们刚才建立的网站目录
 cd Mysite/ 从GitHub导入你想应用的主题
 git submodule add git@github.com:adityatelange/hugo-PaperMod.git themes/PaperMod --depth=1 待下载完成后，还需要修改你的配置文件
-baseURL = &amp;#34;http://your-user-name.github.io/Mysite/&amp;#34; # 使用你自己的用户名 languageCode = &amp;#34;en-us&amp;#34; title = &amp;#34;My New Hugo Site&amp;#34; theme = &amp;#34;PaperMod&amp;#34; 1.3 为你的网站添加一些内容 hugo使用我们上传的md文件来自动生成静态网页，而我们上传的md文件的位置在MySite/content/posts/*, 我们可以直接复制已经编辑好的md文件到这个目录，或者使用如下命令：</description>
+baseURL = &amp;#34;http://your-user-name.github.io/Mysite/&amp;#34; # 使用你自己的用户名 languageCode = &amp;#34;en-us&amp;#34; title = &amp;#34;My New Hugo Site&amp;#34; theme = &amp;#34;PaperMod&amp;#34; 1.</description>
     </item>
     
   </channel>
