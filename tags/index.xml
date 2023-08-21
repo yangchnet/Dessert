@@ -9,7 +9,97 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 05 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CR</title>
+      <link>http://yangchnet.github.io/Dessert/tags/cr/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/cr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>http://yangchnet.github.io/Dessert/tags/github/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>logitech</title>
+      <link>http://yangchnet.github.io/Dessert/tags/logitech/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/logitech/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>manjaro</title>
+      <link>http://yangchnet.github.io/Dessert/tags/manjaro/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/manjaro/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NET</title>
+      <link>http://yangchnet.github.io/Dessert/tags/net/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/net/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tool</title>
+      <link>http://yangchnet.github.io/Dessert/tags/tool/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/tool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tools</title>
+      <link>http://yangchnet.github.io/Dessert/tags/tools/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vxlan</title>
+      <link>http://yangchnet.github.io/Dessert/tags/vxlan/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/vxlan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>恋爱</title>
+      <link>http://yangchnet.github.io/Dessert/tags/%E6%81%8B%E7%88%B1/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/%E6%81%8B%E7%88%B1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>效率工具</title>
+      <link>http://yangchnet.github.io/Dessert/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>kubernetes</title>
       <link>http://yangchnet.github.io/Dessert/tags/kubernetes/</link>
@@ -173,15 +263,6 @@
     </item>
     
     <item>
-      <title>NET</title>
-      <link>http://yangchnet.github.io/Dessert/tags/net/</link>
-      <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/net/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>redis</title>
       <link>http://yangchnet.github.io/Dessert/tags/redis/</link>
       <pubDate>Mon, 18 Jul 2022 00:00:00 +0000</pubDate>
@@ -254,15 +335,6 @@
     </item>
     
     <item>
-      <title>manjaro</title>
-      <link>http://yangchnet.github.io/Dessert/tags/manjaro/</link>
-      <pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/manjaro/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Dockerfile</title>
       <link>http://yangchnet.github.io/Dessert/tags/dockerfile/</link>
       <pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate>
@@ -308,24 +380,6 @@
     </item>
     
     <item>
-      <title>tools</title>
-      <link>http://yangchnet.github.io/Dessert/tags/tools/</link>
-      <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/tools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>效率工具</title>
-      <link>http://yangchnet.github.io/Dessert/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Wed, 12 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>channel</title>
       <link>http://yangchnet.github.io/Dessert/tags/channel/</link>
       <pubDate>Sun, 02 Jan 2022 00:00:00 +0000</pubDate>
@@ -358,15 +412,6 @@
       <pubDate>Sun, 26 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/uml/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>github</title>
-      <link>http://yangchnet.github.io/Dessert/tags/github/</link>
-      <pubDate>Fri, 24 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/github/</guid>
       <description></description>
     </item>
     

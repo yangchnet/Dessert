@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>logitech on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/logitech/</link>
+    <description>Recent content in logitech on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 21 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/logitech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在manjaro台式机上使用罗技蓝牙鼠标</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/%E5%9C%A8manjaro%E5%8F%B0%E5%BC%8F%E6%9C%BA%E4%B8%8A%E4%BD%BF%E7%94%A8%E7%BD%97%E6%8A%80%E8%93%9D%E7%89%99%E9%BC%A0%E6%A0%87/</link>
+      <pubDate>Mon, 21 Aug 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/%E5%9C%A8manjaro%E5%8F%B0%E5%BC%8F%E6%9C%BA%E4%B8%8A%E4%BD%BF%E7%94%A8%E7%BD%97%E6%8A%80%E8%93%9D%E7%89%99%E9%BC%A0%E6%A0%87/</guid>
+      <description>0. 软硬环境  系统：manjaro（内核6.1.44） 鼠标：mx anywhere 2s 无蓝牙  1. 通过优联连接鼠标与主机 这里需要下载solaar包来进行连接。
+yay -S solaar  Solaar 是许多罗技键盘、鼠标和触控板的 Linux 管理器，可无线连接到 USB Unifying、Bolt、Lightspeed 或 Nano 接收器； 通过 USB 线直接连接； 或通过蓝牙连接。 Solar 不能与其他公司的外围设备配合使用。
+ 安装完成之后，打开solaar，将有如下ui界面出现，按步骤连接鼠标即可。 2. 设置鼠标按键 我的鼠标mx anywhere 2s上有一些按键，如果只用solaar连接到电脑，这些按键可能并不能发挥它的作用，因此我们需要将这些按键和快捷键进行绑定。 这里使用logiops
+安装：
+yay -S logiops 配置：
+sudo vim /etc/logid.cfg 在logid.cfg中添加如下内容：
+devices: ({ name: &amp;#34;Wireless Mobile Mouse MX Anywhere 2&amp;#34;; // A lower threshold number makes the wheel switch to free-spin mode // quicker when scrolling fast.</description>
+    </item>
+    
+  </channel>
+</rss>
