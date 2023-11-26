@@ -9,7 +9,63 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 21 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Function as a Method Receiver</title>
+      <link>http://yangchnet.github.io/Dessert/posts/golang/function-as-a-method-receiver/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/golang/function-as-a-method-receiver/</guid>
+      <description>通常来说，我们会使用某个具体的对象（struct）来作为receiver实现接口，但有时候，使用函数作为receiver可以起到不一样的效果。
+使用函数作为receiver一个最常见的例子是HandleFunc:
+type HandlerFunc func(ResponseWriter, *Request) func (f HandlerFunc) ServeHTTP(w ResponseWriter, r *Request) { f(w, r) } 这里将HandleFunc作为接收器，实现了ServeHTTP方法，同时也实现了http.Handler接口
+type Handler interface { ServeHTTP(ResponseWriter, *Request) } 代码注释中对与HandleFunc的解释如下：
+// The HandlerFunc type is an adapter to allow the use of // ordinary functions as HTTP handlers. If f is a function // with the appropriate signature, HandlerFunc(f) is a // Handler that calls f. HandleFunc的定位是：适配器。为什么这么说？有了这个适配器，我们就可以这样完成一个http server：
+func main() { http.HandleFunc(&amp;#34;/echo&amp;#34;, func(w http.ResponseWriter, r *http.</description>
+    </item>
+    
+    <item>
+      <title>Linux命令之nc</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnc/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnc/</guid>
+      <description>nc： 任意的TCP/UDP连接和监听
+It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.
+使用case  快速创建client/server对  nc -l 1234 nc 127.0.0.1 1234 任何在client端的输出都将在server端显示
+端口扫描  nc -zv 127.0.0.1 8885-8889 其他例子  nc -p 31337 -w 5 abc.com 42 nc -u abc.com 53 nc -s 10.1.2.3 abc.com 42 nc -lU /var/tmp/dsocket </description>
+    </item>
+    
+    <item>
+      <title>创建Linux新分区，并挂载</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/%E5%88%9B%E5%BB%BAlinux%E6%96%B0%E5%88%86%E5%8C%BA%E5%B9%B6%E6%8C%82%E8%BD%BD/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/%E5%88%9B%E5%BB%BAlinux%E6%96%B0%E5%88%86%E5%8C%BA%E5%B9%B6%E6%8C%82%E8%BD%BD/</guid>
+      <description>要创建一个新的 Linux 文件系统分区并进行挂载，您可以按照以下步骤进行操作：
+ 首先，使用以下命令之一来查看系统中已连接的磁盘和分区：  sudo fdisk -l 或者
+sudo lsblk 这将显示系统中的磁盘和分区列表。找到您要创建分区的磁盘。
+使用以下命令打开磁盘分区工具（例如 fdisk）：  sudo fdisk /dev/&amp;lt;disk_name&amp;gt; 将 &amp;lt;disk_name&amp;gt; 替换为您要创建分区的磁盘的名称，例如 /dev/sda。
+在磁盘分区工具中，使用以下命令创建新的分区：  n 然后按照提示选择分区类型、起始扇区和结束扇区。对于 Linux 文件系统，通常选择默认选项即可。
+设置分区的文件系统类型为 Linux。使用以下命令：  t 然后选择新创建的分区编号，并选择 Linux 文件系统类型（例如 83）。
+保存并退出磁盘分区工具。使用以下命令：  w 使用以下命令创建文件系统：  sudo mkfs.ext4 /dev/&amp;lt;partition&amp;gt; 将 替换为您刚刚创建的分区设备名称，例如 /dev/sda1。
+创建一个目录，用于挂载文件系统。使用以下命令：  sudo mkdir /mnt/&amp;lt;mount_point&amp;gt; 将 &amp;lt;mount_point&amp;gt; 替换为您希望挂载文件系统的目录路径。
+使用以下命令将文件系统挂载到目标目录：  sudo mount /dev/&amp;lt;partition&amp;gt; /mnt/&amp;lt;mount_point&amp;gt; 将 替换为您刚刚创建的分区设备名称，&amp;lt;mount_point&amp;gt; 替换为您在第 7 步中创建的目录路径。
+挂载成功后，您可以使用以下命令来验证文件系统是否已挂载：  df -h 这将显示已挂载的文件系统列表，包括挂载点和可用空间。</description>
+    </item>
+    
+    <item>
+      <title>容器网络实验</title>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/</guid>
+      <description>安装工具：
+apt install bridge-utils net-tools 创建一个新的网络命名空间
+$ ip netns add net1 # net1为该网络空间的名称 查看命名空间的iptable， 路由表，设备
+$ ip netns exec net1 route # 查看路由表 Kernel IP routing table Destination Gateway Genmask Flags Metric Ref Use Iface $ ip netns exec net1 iptables -L # 查看iptable Chain INPUT (policy ACCEPT) target prot opt source destination Chain FORWARD (policy ACCEPT) target prot opt source destination Chain OUTPUT (policy ACCEPT) target prot opt source destination $ ip netns exec net1 ip link list # 查看设备 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 # 目前只有本地回环设备， 并且状态为DOWN（未启动） 创建一对veth，并将veth的一头添加到net1中</description>
+    </item>
+    
     <item>
       <title>github黑话</title>
       <link>http://yangchnet.github.io/Dessert/posts/%E6%9D%82%E8%AE%B0/github%E9%BB%91%E8%AF%9D/</link>
@@ -111,23 +167,6 @@ devices: ({ name: &amp;#34;Wireless Mobile Mouse MX Anywhere 2&amp;#34;; // A lo
 三草理论 兔子不吃窝边草 好马不吃回头草 天涯何处无芳草 来自攀科同志~
 锚点与斗争理论（WIP） 马克思说：人是所有社会关系的总和。而如果用一张图来描述社会关系的话，对于不同的社会关系，点与点之间的权重（边的粗细）是不同的，更大的权重可以形象的理解为：更为亲密的关系（更粗的线）。人与社会（组织）中所有其他人的关系，共同组成了人对这个组织（社会）的归属感。而其中最亲密的关系，可以称为人在这个组织的锚点，在恋爱中，恋爱的对象就是这个锚点。
 在恋爱中，两个人有矛盾是正常的，而矛盾终究要通过斗争的形式，最终以某一方的妥协结束。斗争的过程，是一个求同存异的过程，没有斗争，靠冷战、非暴力不合作等形式得来的妥协，是不彻底的。就好比中国与印度的民族独立过程，中国以武装斗争进行抗争，印度以“非暴力不合作”、绝食等形式抗争，最终得来的妥协，一个是从上到下，彻彻底底的，一个是表面功夫，绣花枕头。</description>
-    </item>
-    
-    <item>
-      <title>Kubernetes之存储</title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8B%E5%AD%98%E5%82%A8/</link>
-      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8B%E5%AD%98%E5%82%A8/</guid>
-      <description>PV与PVC PV （Persistent Volume）描述的，是持久化存储数据卷。这个 API 对象主要定义的是一个持久化存储在宿主机上的目录，比如一个 NFS 的挂载目录。
-而 PVC （Persistent Volume Claim）描述的，则是 Pod 所希望使用的持久化存储的属性。比如，Volume 存储的大小、可读写权限等等。
-PVC是和PV配合使用的。在普通开发人员需要使用存储时，他不知道K8s中到底有那些存储空间可以使用，也不需要知道。他所需要做的，仅仅：1. 定义一个 PVC，声明想要的 Volume 的属性：2. 在应用的Pod中，声明使用这个PVC。
-PV与PVC的关系类似于接口与接口的实现，开发人员只需使用接口即可，而不用关心接口的具体实现，而接口的实现（即存储对象的具体定义）由运维人员完成。这种解耦，就避免了因为向开发者暴露过多的存储系统细节而带来的隐患。此外，这种职责的分离，往往也意味着出现事故时可以更容易定位问题和明确责任，从而避免“扯皮”现象的出现。
-用户创建的 PVC 要真正被容器使用起来，就必须先和某个符合条件的 PV 进行绑定。这里要检查的条件，包括两部分：
-  第一个条件，当然是 PV 和 PVC 的 spec 字段。比如，PV 的存储（storage）大小，就必须满足 PVC 的要求。
-  而第二个条件，则是 PV 和 PVC 的 storageClassName 字段必须一样。
-  PV与PVC是如何绑定的 在 Kubernetes 中，存在一个专门处理持久化存储的控制器，叫作 Volume Controller。这个 Volume Controller 维护着多个控制循环，其中有一个循环，扮演的就是撮合 PV 和 PVC 的“红娘”的角色。它的名字叫作 PersistentVolumeController。
-PersistentVolumeController 会不断地查看当前每一个 PVC，是不是已经处于 Bound（已绑定）状态。如果不是，那它就会遍历所有的、可用的 PV，并尝试将其与这个“单身”的 PVC 进行绑定。这样，Kubernetes 就可以保证用户提交的每一个 PVC，只要有合适的 PV 出现，它就能够很快进入绑定状态，从而结束“单身”之旅。</description>
     </item>
     
     <item>
@@ -335,10 +374,10 @@ Load Average 是一种 CPU 资源需求的度量。
     
     <item>
       <title>概览容器篇二：容器网络</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</link>
       <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</guid>
       <description>容器具有自己的Network Namespace.
 eht0是这个Network Namespace里的网络接口。而宿主机上也有自己的 eth0，宿主机上的 eth0 对应着真正的物理网卡，可以和外面通讯
 要让容器 Network Namespace 中的数据包最终发送到物理网卡上，需要以下两步：
@@ -609,10 +648,10 @@ AOF的三种写回策略   Always，同步写回：每个写命令执行完，�
     
     <item>
       <title>概览容器篇一：镜像</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
       <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
       <description>1. 分层的镜像 在我们启动一个容器之前，通常需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像中包含了对应的程序的二进制文件与其所依赖的文件，程序在启动后看到的rootfs只是这个镜像中存在的文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
 创建一个镜像（image）的最简单方法是使用Dockerfile。
 FROMscratchCOPY hello /CMD [&amp;#34;/hello&amp;#34;]scratch是docker为我们提供的一个空镜像，我们可以在此基础上构建任何我们想要的镜像。
@@ -1231,10 +1270,10 @@ type User struct { Name string `mytag:&amp;#34;MyName&amp;#34;` Email stirng `my
     
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
       <description>已过时，不可用
  部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
@@ -1269,10 +1308,10 @@ https://askubuntu.com/questions/257290/configure-proxy-for-apt</description>
     
     <item>
       <title>k8s中的apiVersion</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
       <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
       <description>apiVersion可能的字段值：    Kind apiVersion     CertificateSigningRequest certificates.k8s.io/v1beta1   ClusterRoleBinding rbac.authorization.k8s.io/v1   ClusterRole rbac.authorization.k8s.io/v1   ComponentStatus v1   ConfigMap v1   ControllerRevision apps/v1   CronJob batch/v1beta1   DaemonSet extensions/v1beta1   Deployment extensions/v1beta1   Endpoints v1   Event v1   HorizontalPodAutoscaler autoscaling/v1   Ingress extensions/v1beta1   Job batch/v1   LimitRange v1   Namespace v1   NetworkPolicy extensions/v1beta1   Node v1   PersistentVolumeClaim v1   PersistentVolume v1   PodDisruptionBudget policy/v1beta1   Pod v1   PodSecurityPolicy extensions/v1beta1   PodTemplate v1   ReplicaSet extensions/v1beta1   ReplicationController v1   ResourceQuota v1   RoleBinding rbac.</description>
     </item>
     
@@ -2027,19 +2066,19 @@ models.ImageField(upload_to=&amp;lsquo;path&amp;rsquo;) upload_to的储存路径
     
     <item>
       <title>docker常用操作</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/docker/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/docker/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/docker/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/docker/</guid>
       <description>docker常用操作  启动docker服务 sudo systemctl start docker 查看本地镜像 sudo docker images 查看正在运行的镜像 sudo docker ps 查看所有镜像 sudo docker ps -a 停止正在运行的镜像 sudo docker stop container_name 开始运行某个镜像 sudo docker start container_name 删除某个镜像 sudo docker rmi container_name 进入某个正在运行的镜像 sudo docker attach container_name 导出容器 sudo docker export container_id &amp;gt; name.tar 导入容器 cat name.tar | sudo docker import -test/buntu:v1.0 从网络导入 sudo docker import http://example.com/exampleimage.tgz example/imagerepo  非sudo运行 sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可</description>
     </item>
     
     <item>
       <title>docker的安装（Ubuntu)</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
       <description>1、docker的安装(Ubuntu) 1.1、 设置存储库  若是已安装旧版本的docker， 请卸载：sudo apt-get remove docker docker-engine docker.io containerd runc
  1.1.1、更新apt索引 sudo apt-get update 1.1.2、安装依赖 sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg-agent \  software-properties-common 1.1.3、添加docker官方的GPG秘钥 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  在进行此步时，出现了sudo: unable to resolve host iZ2ze4512bfzoapfvch6btZ，这是因为机器不能反向解析 打开主机上的 /etc/hosts 添加： 127.0.0.1 【hostname】# 【hostname】用主机名替代 可在/etc/hostname中修改主机名，sudo shutdown -r now重启过后完成主机名修改
  验证添加成功：
@@ -2526,10 +2565,10 @@ POST http://www.example.com HTTP/1.1 Content-Type:multipart/form-data; boundary=
     
     <item>
       <title>在docker中构建django项目</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
       <description>在docker中构建django项目 （需安装docker-compose, 安装教程）
 1. 定义项目组件 对于此项目，您需要创建Dockerfile，Python依赖项文件和docker-compose.yml文件。（您可以使用此文件的扩展名.yml或.yaml扩展名。）
 1.1. 创建一个空目录 该目录应仅包含构建该映像的资源。
@@ -2804,6 +2843,89 @@ Q: DaemonSet 如何保证每个 Node 上有且只有一个被管理的 Pod A: Da
     
     <item>
       <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/_tmp/kubernetes%E4%B9%8Bjob/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/_tmp/kubernetes%E4%B9%8Bjob/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/_tmp/kubernetes%E4%B9%8Bpod%E7%AF%87/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/_tmp/kubernetes%E4%B9%8Bpod%E7%AF%87/</guid>
+      <description>Pre Q:使用容器的“最佳实践”要求容器中只运行一个进程，是不是容器中只能运行一个进程呢？
+A：容器的“单进程模型”，并不是指容器里只能运行“一个”进程，而是指容器没有管理多个进程的能力。这是因为容器里 PID=1 的进程就是应用本身，其他的进程都是这个 PID=1 进程的子进程。可是，用户编写的应用，并不能够像正常操作系统里的 init 进程或者 systemd 那样拥有进程管理的功能。比如，你的应用是一个 Java Web 程序（PID=1），然后你执行 docker exec 在后台启动了一个 Nginx 进程（PID=3）。可是，当这个 Nginx 进程异常退出的时候，你该怎么知道呢？这个进程退出后的垃圾收集工作，又应该由谁去做呢？因此，只有当容器中只存在一个进程时，才能对容器内的进程进行有效的管理。
+Q:为什么需要Pod？
+A:
+ 有些容器之间有着一种“超亲密关系”。这些具有“超亲密关系”的容器的典型特征包括但不限于：互相之间会发生直接的文件交换、使用 localhost 或者 Socket 文件进行本地通信、会发生非常频繁的远程调用、需要共享某些 Linux Namespace（比如，一个容器要加入另一个容器的 Network Namespace）等等。这些容器有必要部署在同一环境中 有些容器需要与其他容器共享Network或Volume等，例如B需要共享A的Network。但这样就会出现B依赖与A的情况，容器之间从对等关系退化为拓扑关系。如果将Network以及Volume定义在容器之上（也就是Pod）的一个级别，同一Pod中的容器共享Network和Volume，那容器之间还是单纯的对等关系。  Pod是Kubernetes中最小的编排单位, 可以类比与传统部署环境中的“虚拟机”。凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别的。这些属性的共同特征在于，他们都是对“机器”进行描述。
+Pod中常用的字段  nodeSelector.供用户将Pod与Node进行绑定。  用法示例：
+apiVersion: v1 kind: Pod ... spec: nodeSelector: disktype: ssd 这代表这个Pod只能运行在携带了disktype:ssd标签的节点上。
+  nodeName. 一旦 Pod 的这个字段被赋值，Kubernetes 项目就会被认为这个 Pod 已经经过了调度，调度的结果就是赋值的节点名字。所以，这个字段一般由调度器负责设置，但用户也可以设置它来“骗过”调度器，当然这个做法一般是在测试或者调试的时候才会用到。
+  hostAliases. 定义Pod的hosts文件
+  apiVersion: v1 kind: Pod .</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/_tmp/kubernetes%E4%B9%8Bservice/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/_tmp/kubernetes%E4%B9%8Bservice/</guid>
+      <description>Service Service 是 Kubernetes 项目中用来将一组 Pod 暴露给外界访问的一种机制。比如，一个 Deployment 有 3 个 Pod，那么我就可以定义一个 Service。然后，用户只要能访问到这个 Service，它就能访问到某个具体的 Pod。
+Q: Service是如何被访问到的？ A: 两种方式
+ 以 Service 的 VIP（Virtual IP，即：虚拟 IP）方式。比如：当我访问 10.0.23.1 这个 Service 的 IP 地址时，10.0.23.1 其实就是一个 VIP，它会把请求转发到该 Service 所代理的某一个 Pod 上。 以 Service 的 DNS 方式。比如：这时候，只要我访问“my-svc.my-namespace.svc.cluster.local”这条 DNS 记录，就可以访问到名叫 my-svc 的 Service 所代理的某一个 Pod。这里又有两种处理方法：  第一种处理方法，是 Normal Service。这种情况下，你访问“my-svc.my-namespace.svc.cluster.local”解析到的，正是 my-svc 这个 Service 的 VIP，后面的流程就跟 VIP 方式一致了。 第二种处理方法，是 Headless Service。这种情况下，你访问“my-svc.my-namespace.svc.cluster.local”解析到的，直接就是 my-svc 代理的某一个 Pod 的 IP 地址。可以看到，这里的区别在于，Headless Service 不需要分配一个 VIP，而是可以直接以 DNS 记录的方式解析出被代理 Pod 的 IP 地址。    Headless Service</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/_tmp/kuberntes%E4%B9%8Bdeployment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/_tmp/kuberntes%E4%B9%8Bdeployment/</guid>
+      <description>Deployment是Kubernetes中的一个控制器，负责对pod进行控制
+Q:控制器对对象进行控制的逻辑是什么样的 A:通过控制循环对API对象进行控制，其控制逻辑用伪代码表示如下：
+for { 实际状态 := 获取集群中对象X的实际状态（Actual State） 期望状态 := 获取集群中对象X的期望状态（Desired State） if 实际状态 == 期望状态{ 什么都不做 } else { 执行编排动作，将实际状态调整为期望状态 } } 在具体实现时，实际状态来自Kubernetes本身，而期望状态来自用户提交的Yaml文件。这个操作，通常被叫作调谐（Reconcile）。这个调谐的过程，则被称作“Reconcile Loop”（调谐循环）或者“Sync Loop”（同步循环）。
+Q:对于Deployment，其创建出的Pod的ownerReference是谁，是Deployment本身吗 A:Deployment操作的是ReplicaSet对象。在Pod进行水平伸缩时，Deployment就可以完成任务（但其实不是这样的，这里只是探讨一种可能性）；但要想做到滚动更新，光有Deployment是不行的，因为Deployment的template字段决定了其只能管理一种配置的Pod。Deployment管理ReplicaSet，ReplicaSet管理Pod，这样如果需要进行滚动更新，Deployment只需创建新的ReplicaSet，然后逐步下线原有的ReplicaSet即可。 一个应用的版本，对应的正是一个ReplicaSet，这个版本应用的 Pod 数量，则由 ReplicaSet 通过它自己的控制器（ReplicaSet Controller）来保证。 而Deployment，其实就是对“应用”的抽象，我们可以使用这个 Deployment 对象来描述应用，使用 kubectl rollout 命令控制应用的版本。
+但Deployment只适合那些较简单的应用。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/_tmp/kuberntets%E4%B9%8Bstatefulset/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/_tmp/kuberntets%E4%B9%8Bstatefulset/</guid>
+      <description>有状态应用 什么是有状态应用 实例之间有不对等关系，以及实例对外部数据有依赖关系的应用，就被称为“有状态应用”（Stateful Application）
+StatefulSet 把真实世界里的应用状态，抽象为了两种情况：
+ 拓扑状态。这种情况意味着，应用的多个实例之间不是完全对等的关系。这些应用实例，必须按照某些顺序启动，比如应用的主节点 A 要先于从节点 B 启动。而如果你把 A 和 B 两个 Pod 删除掉，它们再次被创建出来时也必须严格按照这个顺序才行。并且，新创建出来的 Pod，必须和原来 Pod 的网络标识一样，这样原先的访问者才能使用同样的方法，访问到这个新 Pod。 存储状态。这种情况意味着，应用的多个实例分别绑定了不同的存储数据。对于这些应用实例来说，Pod A 第一次读取到的数据，和隔了十分钟之后再次读取到的数据，应该是同一份，哪怕在此期间 Pod A 被重新创建过。这种情况最典型的例子，就是一个数据库应用的多个存储实例。  StatefulSet 的核心功能，就是通过某种方式记录这些状态，然后在 Pod 被重新创建时，能够为新 Pod 恢复这些状态。
+Q: StatefulSet 如何保证应用实例之间“拓扑状态”的稳定性 A: StatefulSet 这个控制器的主要作用之一，就是使用 Pod 模板创建 Pod 的时候，对它们进行编号，并且按照编号顺序逐一完成创建工作。而当 StatefulSet 的“控制循环”发现 Pod 的“实际状态”与“期望状态”不一致，需要新建或者删除 Pod 进行“调谐”的时候，它会严格按照这些 Pod 编号的顺序，逐一完成这些操作。
+Q: StatefulSet如何实现对存储状态的管理 A: PVC、PV 的设计，也使得 StatefulSet 对存储状态的管理成为了可能。在定义了PVC的StatefulSet被创建后，Kubernetes会创建名为&amp;lt;PVC 名字 &amp;gt;-&amp;lt;StatefulSet 名字 &amp;gt;-&amp;lt; 编号 &amp;gt;的PVC，并将这些PVC绑定到Pod上。当Pod被删除重建后，依然会绑定到这个PVC上，这样，就恢复了原来的状态。
+Q: StatefulSet恢复Pod的过程 A:
+ 当一个 Pod （例如这个Pod叫做web-0, 它声明使用的 PVC 的名字，是叫作：www-web-0）被删除之后，这个 Pod 对应的 PVC 和 PV，并不会被删除，而这个 Volume 里已经写入的数据，也依然会保存在远程存储服务里。 StatefulSet 控制器发现，web-0 这个Pod 消失了。所以，控制器就会重新创建一个新的、名字还是叫作 web-0 的 Pod 来，“纠正”这个不一致的情况。 Kubernetes 为重建的web-0 Pod查找名叫 www-web-0 的 PVC，直接找到旧 Pod 遗留下来的同名的 PVC，进而找到跟这个 PVC 绑定在一起的 PV。 新的 Pod 就可以挂载到旧 Pod 对应的那个 Volume，并且获取到保存在 Volume 里的数据。  Q: StatefulSet是如何解决拓扑状态与存储状态这两个问题的？ A:</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://yangchnet.github.io/Dessert/posts/_tmp/t-kubernetes%E4%B9%8B%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/_tmp/t-kubernetes%E4%B9%8B%E5%AD%98%E5%82%A8/</guid>
+      <description>PV与PVC PV （Persistent Volume）描述的，是持久化存储数据卷。这个 API 对象主要定义的是一个持久化存储在宿主机上的目录，比如一个 NFS 的挂载目录。
+而 PVC （Persistent Volume Claim）描述的，则是 Pod 所希望使用的持久化存储的属性。比如，Volume 存储的大小、可读写权限等等。
+PVC是和PV配合使用的。在普通开发人员需要使用存储时，他不知道K8s中到底有那些存储空间可以使用，也不需要知道。他所需要做的，仅仅：1. 定义一个 PVC，声明想要的 Volume 的属性：2. 在应用的Pod中，声明使用这个PVC。
+PV与PVC的关系类似于接口与接口的实现，开发人员只需使用接口即可，而不用关心接口的具体实现，而接口的实现（即存储对象的具体定义）由运维人员完成。这种解耦，就避免了因为向开发者暴露过多的存储系统细节而带来的隐患。此外，这种职责的分离，往往也意味着出现事故时可以更容易定位问题和明确责任，从而避免“扯皮”现象的出现。
+用户创建的 PVC 要真正被容器使用起来，就必须先和某个符合条件的 PV 进行绑定。这里要检查的条件，包括两部分：
+  第一个条件，当然是 PV 和 PVC 的 spec 字段。比如，PV 的存储（storage）大小，就必须满足 PVC 的要求。
+  而第二个条件，则是 PV 和 PVC 的 storageClassName 字段必须一样。
+  PV与PVC是如何绑定的 在 Kubernetes 中，存在一个专门处理持久化存储的控制器，叫作 Volume Controller。这个 Volume Controller 维护着多个控制循环，其中有一个循环，扮演的就是撮合 PV 和 PVC 的“红娘”的角色。它的名字叫作 PersistentVolumeController。
+PersistentVolumeController 会不断地查看当前每一个 PVC，是不是已经处于 Bound（已绑定）状态。如果不是，那它就会遍历所有的、可用的 PV，并尝试将其与这个“单身”的 PVC 进行绑定。这样，Kubernetes 就可以保证用户提交的每一个 PVC，只要有合适的 PV 出现，它就能够很快进入绑定状态，从而结束“单身”之旅。</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>http://yangchnet.github.io/Dessert/posts/dlml/%E6%9C%AA%E5%91%BD%E5%90%8D/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -2825,95 +2947,6 @@ Q: DaemonSet 如何保证每个 Node 上有且只有一个被管理的 Pod A: Da
 引用  引用引用引用引用引用引用引用引
  二层引用
   </description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bdaemonset/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bdaemonset/</guid>
-      <description>Q: DaemonSet的的作用 A: 在 Kubernetes 集群里，运行一个 Daemon Pod。 这个 Pod 有如下三个特征：
- 这个 Pod 运行在 Kubernetes 集群里的每一个节点（Node）上； 每个节点上只有一个这样的 Pod 实例； 当有新的节点加入 Kubernetes 集群后，该 Pod 会自动地在新节点上被创建出来；而当旧节点被删除后，它上面的 Pod 也相应地会被回收掉。  Q: DaemonSet的应用实例 A:
- 各种网络插件的 Agent 组件，都必须运行在每一个节点上，用来处理这个节点上的容器网络； 各种存储插件的 Agent 组件，也必须运行在每一个节点上，用来在这个节点上挂载远程存储目录，操作容器的 Volume 目录； 各种监控组件和日志组件，也必须运行在每一个节点上，负责这个节点上的监控信息和日志搜集。  DaemonSet 开始运行的时机，很多时候比整个 Kubernetes 集群出现的时机都要早
-Q: DaemonSet 如何保证每个 Node 上有且只有一个被管理的 Pod A: DaemonSet Controller，首先从 Etcd 里获取所有的 Node 列表，然后遍历所有的 Node。这时，它就可以很容易地去检查，当前这个 Node 上是不是有一个携带了 name=fluentd-elasticsearch 标签的 Pod 在运行。而检查的结果，可能有这么三种情况：
- 没有这种 Pod，那么就意味着要在这个 Node 上创建这样一个 Pod； 有这种 Pod，但是数量大于 1，那就说明要把多余的 Pod 从这个 Node 上删除掉； 正好只有一个这种 Pod，那说明这个节点是正常的。其中，删除节点（Node）上多余的 Pod 非常简单，直接调用 Kubernetes API 就可以了。 DaemonSet通过污点容忍机制选择node  相比于 Deployment，DaemonSet 只管理 Pod 对象，然后通过 nodeAffinity 和 Toleration 这两个调度器的小功能，保证了每个节点上有且只有一个 Pod。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bjob/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bjob/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bpod%E7%AF%87/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bpod%E7%AF%87/</guid>
-      <description>Pre Q:使用容器的“最佳实践”要求容器中只运行一个进程，是不是容器中只能运行一个进程呢？
-A：容器的“单进程模型”，并不是指容器里只能运行“一个”进程，而是指容器没有管理多个进程的能力。这是因为容器里 PID=1 的进程就是应用本身，其他的进程都是这个 PID=1 进程的子进程。可是，用户编写的应用，并不能够像正常操作系统里的 init 进程或者 systemd 那样拥有进程管理的功能。比如，你的应用是一个 Java Web 程序（PID=1），然后你执行 docker exec 在后台启动了一个 Nginx 进程（PID=3）。可是，当这个 Nginx 进程异常退出的时候，你该怎么知道呢？这个进程退出后的垃圾收集工作，又应该由谁去做呢？因此，只有当容器中只存在一个进程时，才能对容器内的进程进行有效的管理。
-Q:为什么需要Pod？
-A:
- 有些容器之间有着一种“超亲密关系”。这些具有“超亲密关系”的容器的典型特征包括但不限于：互相之间会发生直接的文件交换、使用 localhost 或者 Socket 文件进行本地通信、会发生非常频繁的远程调用、需要共享某些 Linux Namespace（比如，一个容器要加入另一个容器的 Network Namespace）等等。这些容器有必要部署在同一环境中 有些容器需要与其他容器共享Network或Volume等，例如B需要共享A的Network。但这样就会出现B依赖与A的情况，容器之间从对等关系退化为拓扑关系。如果将Network以及Volume定义在容器之上（也就是Pod）的一个级别，同一Pod中的容器共享Network和Volume，那容器之间还是单纯的对等关系。  Pod是Kubernetes中最小的编排单位, 可以类比与传统部署环境中的“虚拟机”。凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别的。这些属性的共同特征在于，他们都是对“机器”进行描述。
-Pod中常用的字段  nodeSelector.供用户将Pod与Node进行绑定。  用法示例：
-apiVersion: v1 kind: Pod ... spec: nodeSelector: disktype: ssd 这代表这个Pod只能运行在携带了disktype:ssd标签的节点上。
-  nodeName. 一旦 Pod 的这个字段被赋值，Kubernetes 项目就会被认为这个 Pod 已经经过了调度，调度的结果就是赋值的节点名字。所以，这个字段一般由调度器负责设置，但用户也可以设置它来“骗过”调度器，当然这个做法一般是在测试或者调试的时候才会用到。
-  hostAliases. 定义Pod的hosts文件
-  apiVersion: v1 kind: Pod .</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bservice/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8Bservice/</guid>
-      <description>Service Service 是 Kubernetes 项目中用来将一组 Pod 暴露给外界访问的一种机制。比如，一个 Deployment 有 3 个 Pod，那么我就可以定义一个 Service。然后，用户只要能访问到这个 Service，它就能访问到某个具体的 Pod。
-Q: Service是如何被访问到的？ A: 两种方式
- 以 Service 的 VIP（Virtual IP，即：虚拟 IP）方式。比如：当我访问 10.0.23.1 这个 Service 的 IP 地址时，10.0.23.1 其实就是一个 VIP，它会把请求转发到该 Service 所代理的某一个 Pod 上。 以 Service 的 DNS 方式。比如：这时候，只要我访问“my-svc.my-namespace.svc.cluster.local”这条 DNS 记录，就可以访问到名叫 my-svc 的 Service 所代理的某一个 Pod。这里又有两种处理方法：  第一种处理方法，是 Normal Service。这种情况下，你访问“my-svc.my-namespace.svc.cluster.local”解析到的，正是 my-svc 这个 Service 的 VIP，后面的流程就跟 VIP 方式一致了。 第二种处理方法，是 Headless Service。这种情况下，你访问“my-svc.my-namespace.svc.cluster.local”解析到的，直接就是 my-svc 代理的某一个 Pod 的 IP 地址。可以看到，这里的区别在于，Headless Service 不需要分配一个 VIP，而是可以直接以 DNS 记录的方式解析出被代理 Pod 的 IP 地址。    Headless Service</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kuberntes%E4%B9%8Bdeployment/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kuberntes%E4%B9%8Bdeployment/</guid>
-      <description>Deployment是Kubernetes中的一个控制器，负责对pod进行控制
-Q:控制器对对象进行控制的逻辑是什么样的 A:通过控制循环对API对象进行控制，其控制逻辑用伪代码表示如下：
-for { 实际状态 := 获取集群中对象X的实际状态（Actual State） 期望状态 := 获取集群中对象X的期望状态（Desired State） if 实际状态 == 期望状态{ 什么都不做 } else { 执行编排动作，将实际状态调整为期望状态 } } 在具体实现时，实际状态来自Kubernetes本身，而期望状态来自用户提交的Yaml文件。这个操作，通常被叫作调谐（Reconcile）。这个调谐的过程，则被称作“Reconcile Loop”（调谐循环）或者“Sync Loop”（同步循环）。
-Q:对于Deployment，其创建出的Pod的ownerReference是谁，是Deployment本身吗 A:Deployment操作的是ReplicaSet对象。在Pod进行水平伸缩时，Deployment就可以完成任务（但其实不是这样的，这里只是探讨一种可能性）；但要想做到滚动更新，光有Deployment是不行的，因为Deployment的template字段决定了其只能管理一种配置的Pod。Deployment管理ReplicaSet，ReplicaSet管理Pod，这样如果需要进行滚动更新，Deployment只需创建新的ReplicaSet，然后逐步下线原有的ReplicaSet即可。 一个应用的版本，对应的正是一个ReplicaSet，这个版本应用的 Pod 数量，则由 ReplicaSet 通过它自己的控制器（ReplicaSet Controller）来保证。 而Deployment，其实就是对“应用”的抽象，我们可以使用这个 Deployment 对象来描述应用，使用 kubectl rollout 命令控制应用的版本。
-但Deployment只适合那些较简单的应用。</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kuberntets%E4%B9%8Bstatefulset/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kuberntets%E4%B9%8Bstatefulset/</guid>
-      <description>有状态应用 什么是有状态应用 实例之间有不对等关系，以及实例对外部数据有依赖关系的应用，就被称为“有状态应用”（Stateful Application）
-StatefulSet 把真实世界里的应用状态，抽象为了两种情况：
- 拓扑状态。这种情况意味着，应用的多个实例之间不是完全对等的关系。这些应用实例，必须按照某些顺序启动，比如应用的主节点 A 要先于从节点 B 启动。而如果你把 A 和 B 两个 Pod 删除掉，它们再次被创建出来时也必须严格按照这个顺序才行。并且，新创建出来的 Pod，必须和原来 Pod 的网络标识一样，这样原先的访问者才能使用同样的方法，访问到这个新 Pod。 存储状态。这种情况意味着，应用的多个实例分别绑定了不同的存储数据。对于这些应用实例来说，Pod A 第一次读取到的数据，和隔了十分钟之后再次读取到的数据，应该是同一份，哪怕在此期间 Pod A 被重新创建过。这种情况最典型的例子，就是一个数据库应用的多个存储实例。  StatefulSet 的核心功能，就是通过某种方式记录这些状态，然后在 Pod 被重新创建时，能够为新 Pod 恢复这些状态。
-Q: StatefulSet 如何保证应用实例之间“拓扑状态”的稳定性 A: StatefulSet 这个控制器的主要作用之一，就是使用 Pod 模板创建 Pod 的时候，对它们进行编号，并且按照编号顺序逐一完成创建工作。而当 StatefulSet 的“控制循环”发现 Pod 的“实际状态”与“期望状态”不一致，需要新建或者删除 Pod 进行“调谐”的时候，它会严格按照这些 Pod 编号的顺序，逐一完成这些操作。
-Q: StatefulSet如何实现对存储状态的管理 A: PVC、PV 的设计，也使得 StatefulSet 对存储状态的管理成为了可能。在定义了PVC的StatefulSet被创建后，Kubernetes会创建名为&amp;lt;PVC 名字 &amp;gt;-&amp;lt;StatefulSet 名字 &amp;gt;-&amp;lt; 编号 &amp;gt;的PVC，并将这些PVC绑定到Pod上。当Pod被删除重建后，依然会绑定到这个PVC上，这样，就恢复了原来的状态。
-Q: StatefulSet恢复Pod的过程 A:
- 当一个 Pod （例如这个Pod叫做web-0, 它声明使用的 PVC 的名字，是叫作：www-web-0）被删除之后，这个 Pod 对应的 PVC 和 PV，并不会被删除，而这个 Volume 里已经写入的数据，也依然会保存在远程存储服务里。 StatefulSet 控制器发现，web-0 这个Pod 消失了。所以，控制器就会重新创建一个新的、名字还是叫作 web-0 的 Pod 来，“纠正”这个不一致的情况。 Kubernetes 为重建的web-0 Pod查找名叫 www-web-0 的 PVC，直接找到旧 Pod 遗留下来的同名的 PVC，进而找到跟这个 PVC 绑定在一起的 PV。 新的 Pod 就可以挂载到旧 Pod 对应的那个 Volume，并且获取到保存在 Volume 里的数据。  Q: StatefulSet是如何解决拓扑状态与存储状态这两个问题的？ A:</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/note/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/note/</guid>
-      <description>sudo kubeadm init \  --pod-network-cidr=192.168.0.0/16 \  --apiserver-advertise-address=10.10.120.69 \  --kubernetes-version=v1.23.3 Output:
-Your Kubernetes control-plane has initialized successfully! To start using your cluster, you need to run the following as a regular user: mkdir -p $HOME/.kube sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config sudo chown $(id -u):$(id -g) $HOME/.kube/config Alternatively, if you are the root user, you can run: export KUBECONFIG=/etc/kubernetes/admin.conf You should now deploy a pod network to the cluster. Run &amp;quot;kubectl apply -f [podnetwork].</description>
     </item>
     
     <item>

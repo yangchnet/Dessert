@@ -9,7 +9,19 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>容器网络实验</title>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/</guid>
+      <description>安装工具：
+apt install bridge-utils net-tools 创建一个新的网络命名空间
+$ ip netns add net1 # net1为该网络空间的名称 查看命名空间的iptable， 路由表，设备
+$ ip netns exec net1 route # 查看路由表 Kernel IP routing table Destination Gateway Genmask Flags Metric Ref Use Iface $ ip netns exec net1 iptables -L # 查看iptable Chain INPUT (policy ACCEPT) target prot opt source destination Chain FORWARD (policy ACCEPT) target prot opt source destination Chain OUTPUT (policy ACCEPT) target prot opt source destination $ ip netns exec net1 ip link list # 查看设备 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 # 目前只有本地回环设备， 并且状态为DOWN（未启动） 创建一对veth，并将veth的一头添加到net1中</description>
+    </item>
+    
     <item>
       <title>Install Docker on Arch</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/install-docker-on-arch/</link>
@@ -32,10 +44,10 @@ https://wiki.archlinux.org/title/Systemd#Drop-in_files</description>
     
     <item>
       <title>概览容器篇二：容器网络</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</link>
       <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%BA%8C%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</guid>
       <description>容器具有自己的Network Namespace.
 eht0是这个Network Namespace里的网络接口。而宿主机上也有自己的 eth0，宿主机上的 eth0 对应着真正的物理网卡，可以和外面通讯
 要让容器 Network Namespace 中的数据包最终发送到物理网卡上，需要以下两步：
@@ -53,10 +65,10 @@ https://network.51cto.com/article/708901.html</description>
     
     <item>
       <title>概览容器篇一：镜像</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</link>
       <pubDate>Sun, 10 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E6%A6%82%E8%A7%88%E5%AE%B9%E5%99%A8%E7%AF%87%E4%B8%80%E9%95%9C%E5%83%8F/</guid>
       <description>1. 分层的镜像 在我们启动一个容器之前，通常需要下载这个容器对应的镜像，以这个镜像为基础启动容器。镜像中包含了对应的程序的二进制文件与其所依赖的文件，程序在启动后看到的rootfs只是这个镜像中存在的文件。这样，我们就可以为容器中的进程提供一个干净的文件系统。
 创建一个镜像（image）的最简单方法是使用Dockerfile。
 FROMscratchCOPY hello /CMD [&amp;#34;/hello&amp;#34;]scratch是docker为我们提供的一个空镜像，我们可以在此基础上构建任何我们想要的镜像。
@@ -91,19 +103,19 @@ git checkout v1.21.2 切换分支后，在当前目录下执行：</description>
     
     <item>
       <title>docker常用操作</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/docker/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/docker/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/docker/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/docker/</guid>
       <description>docker常用操作  启动docker服务 sudo systemctl start docker 查看本地镜像 sudo docker images 查看正在运行的镜像 sudo docker ps 查看所有镜像 sudo docker ps -a 停止正在运行的镜像 sudo docker stop container_name 开始运行某个镜像 sudo docker start container_name 删除某个镜像 sudo docker rmi container_name 进入某个正在运行的镜像 sudo docker attach container_name 导出容器 sudo docker export container_id &amp;gt; name.tar 导入容器 cat name.tar | sudo docker import -test/buntu:v1.0 从网络导入 sudo docker import http://example.com/exampleimage.tgz example/imagerepo  非sudo运行 sudo usermod -aG docker $USER &amp;amp;&amp;amp; newgrp docker # 将当前用户添加到docker用户组 退出重新登陆即可</description>
     </item>
     
     <item>
       <title>docker的安装（Ubuntu)</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/docker-%E7%AC%AC%E4%B8%80%E7%AF%87/</guid>
       <description>1、docker的安装(Ubuntu) 1.1、 设置存储库  若是已安装旧版本的docker， 请卸载：sudo apt-get remove docker docker-engine docker.io containerd runc
  1.1.1、更新apt索引 sudo apt-get update 1.1.2、安装依赖 sudo apt-get install \  apt-transport-https \  ca-certificates \  curl \  gnupg-agent \  software-properties-common 1.1.3、添加docker官方的GPG秘钥 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -  在进行此步时，出现了sudo: unable to resolve host iZ2ze4512bfzoapfvch6btZ，这是因为机器不能反向解析 打开主机上的 /etc/hosts 添加： 127.0.0.1 【hostname】# 【hostname】用主机名替代 可在/etc/hostname中修改主机名，sudo shutdown -r now重启过后完成主机名修改
  验证添加成功：
@@ -112,10 +124,10 @@ sudo apt-key fingerprint 0EBFCD88 1.1.4、 设置存储库 sudo add-apt-reposito
     
     <item>
       <title>在docker中构建django项目</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
       <description>在docker中构建django项目 （需安装docker-compose, 安装教程）
 1. 定义项目组件 对于此项目，您需要创建Dockerfile，Python依赖项文件和docker-compose.yml文件。（您可以使用此文件的扩展名.yml或.yaml扩展名。）
 1.1. 创建一个空目录 该目录应仅包含构建该映像的资源。

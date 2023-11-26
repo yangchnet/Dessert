@@ -9,7 +9,19 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 21 Feb 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux命令之nc</title>
+      <link>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnc/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/linux/linux%E5%91%BD%E4%BB%A4%E4%B9%8Bnc/</guid>
+      <description>nc： 任意的TCP/UDP连接和监听
+It can open TCP connections, send UDP packets, listen on arbitrary TCP and UDP ports, do port scanning, and deal with both IPv4 and IPv6.
+使用case  快速创建client/server对  nc -l 1234 nc 127.0.0.1 1234 任何在client端的输出都将在server端显示
+端口扫描  nc -zv 127.0.0.1 8885-8889 其他例子  nc -p 31337 -w 5 abc.com 42 nc -u abc.com 53 nc -s 10.1.2.3 abc.com 42 nc -lU /var/tmp/dsocket </description>
+    </item>
+    
     <item>
       <title>Install Docker on Arch</title>
       <link>http://yangchnet.github.io/Dessert/posts/linux/install-docker-on-arch/</link>

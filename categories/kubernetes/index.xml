@@ -9,24 +9,7 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 05 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Kubernetes之存储</title>
-      <link>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8B%E5%AD%98%E5%82%A8/</link>
-      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/posts/kubernetes/kubernetes%E4%B9%8B%E5%AD%98%E5%82%A8/</guid>
-      <description>PV与PVC PV （Persistent Volume）描述的，是持久化存储数据卷。这个 API 对象主要定义的是一个持久化存储在宿主机上的目录，比如一个 NFS 的挂载目录。
-而 PVC （Persistent Volume Claim）描述的，则是 Pod 所希望使用的持久化存储的属性。比如，Volume 存储的大小、可读写权限等等。
-PVC是和PV配合使用的。在普通开发人员需要使用存储时，他不知道K8s中到底有那些存储空间可以使用，也不需要知道。他所需要做的，仅仅：1. 定义一个 PVC，声明想要的 Volume 的属性：2. 在应用的Pod中，声明使用这个PVC。
-PV与PVC的关系类似于接口与接口的实现，开发人员只需使用接口即可，而不用关心接口的具体实现，而接口的实现（即存储对象的具体定义）由运维人员完成。这种解耦，就避免了因为向开发者暴露过多的存储系统细节而带来的隐患。此外，这种职责的分离，往往也意味着出现事故时可以更容易定位问题和明确责任，从而避免“扯皮”现象的出现。
-用户创建的 PVC 要真正被容器使用起来，就必须先和某个符合条件的 PV 进行绑定。这里要检查的条件，包括两部分：
-  第一个条件，当然是 PV 和 PVC 的 spec 字段。比如，PV 的存储（storage）大小，就必须满足 PVC 的要求。
-  而第二个条件，则是 PV 和 PVC 的 storageClassName 字段必须一样。
-  PV与PVC是如何绑定的 在 Kubernetes 中，存在一个专门处理持久化存储的控制器，叫作 Volume Controller。这个 Volume Controller 维护着多个控制循环，其中有一个循环，扮演的就是撮合 PV 和 PVC 的“红娘”的角色。它的名字叫作 PersistentVolumeController。
-PersistentVolumeController 会不断地查看当前每一个 PVC，是不是已经处于 Bound（已绑定）状态。如果不是，那它就会遍历所有的、可用的 PV，并尝试将其与这个“单身”的 PVC 进行绑定。这样，Kubernetes 就可以保证用户提交的每一个 PVC，只要有合适的 PV 出现，它就能够很快进入绑定状态，从而结束“单身”之旅。</description>
-    </item>
-    
+    <lastBuildDate>Sat, 04 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用kubeadm安装单节点Kubernetes</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85%E5%8D%95%E8%8A%82%E7%82%B9kubernetes/</link>
@@ -40,10 +23,10 @@ PersistentVolumeController 会不断地查看当前每一个 PVC，是不是已�
     
     <item>
       <title>k8s中的apiVersion</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/k8s%E4%B8%AD%E7%9A%84apiversion/</link>
       <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/k8s%E4%B8%AD%E7%9A%84apiversion/</guid>
       <description>apiVersion可能的字段值：    Kind apiVersion     CertificateSigningRequest certificates.k8s.io/v1beta1   ClusterRoleBinding rbac.authorization.k8s.io/v1   ClusterRole rbac.authorization.k8s.io/v1   ComponentStatus v1   ConfigMap v1   ControllerRevision apps/v1   CronJob batch/v1beta1   DaemonSet extensions/v1beta1   Deployment extensions/v1beta1   Endpoints v1   Event v1   HorizontalPodAutoscaler autoscaling/v1   Ingress extensions/v1beta1   Job batch/v1   LimitRange v1   Namespace v1   NetworkPolicy extensions/v1beta1   Node v1   PersistentVolumeClaim v1   PersistentVolume v1   PodDisruptionBudget policy/v1beta1   Pod v1   PodSecurityPolicy extensions/v1beta1   PodTemplate v1   ReplicaSet extensions/v1beta1   ReplicationController v1   ResourceQuota v1   RoleBinding rbac.</description>
     </item>
     

@@ -9,7 +9,61 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 21 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>command</title>
+      <link>http://yangchnet.github.io/Dessert/tags/command/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/command/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>container</title>
+      <link>http://yangchnet.github.io/Dessert/tags/container/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/container/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://yangchnet.github.io/Dessert/tags/docker/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>http://yangchnet.github.io/Dessert/tags/golang/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://yangchnet.github.io/Dessert/tags/linux/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mount</title>
+      <link>http://yangchnet.github.io/Dessert/tags/mount/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/mount/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>CR</title>
       <link>http://yangchnet.github.io/Dessert/tags/cr/</link>
@@ -101,15 +155,6 @@
     </item>
     
     <item>
-      <title>kubernetes</title>
-      <link>http://yangchnet.github.io/Dessert/tags/kubernetes/</link>
-      <pubDate>Wed, 05 Jul 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/kubernetes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>生活小妙招</title>
       <link>http://yangchnet.github.io/Dessert/tags/%E7%94%9F%E6%B4%BB%E5%B0%8F%E5%A6%99%E6%8B%9B/</link>
       <pubDate>Wed, 29 Mar 2023 00:00:00 +0000</pubDate>
@@ -124,24 +169,6 @@
       <pubDate>Fri, 24 Mar 2023 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/lb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>docker</title>
-      <link>http://yangchnet.github.io/Dessert/tags/docker/</link>
-      <pubDate>Tue, 21 Feb 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Linux</title>
-      <link>http://yangchnet.github.io/Dessert/tags/linux/</link>
-      <pubDate>Tue, 21 Feb 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/linux/</guid>
       <description></description>
     </item>
     
@@ -200,29 +227,11 @@
     </item>
     
     <item>
-      <title>golang</title>
-      <link>http://yangchnet.github.io/Dessert/tags/golang/</link>
-      <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>runtime</title>
       <link>http://yangchnet.github.io/Dessert/tags/runtime/</link>
       <pubDate>Sun, 14 Aug 2022 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/runtime/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>container</title>
-      <link>http://yangchnet.github.io/Dessert/tags/container/</link>
-      <pubDate>Sun, 07 Aug 2022 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/container/</guid>
       <description></description>
     </item>
     
@@ -569,6 +578,15 @@
     </item>
     
     <item>
+      <title>kubernetes</title>
+      <link>http://yangchnet.github.io/Dessert/tags/kubernetes/</link>
+      <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>vagrant</title>
       <link>http://yangchnet.github.io/Dessert/tags/vagrant/</link>
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
@@ -853,15 +871,6 @@
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/goroutine/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>command</title>
-      <link>http://yangchnet.github.io/Dessert/tags/command/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/command/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Container on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/categories/container/</link>
+    <description>Recent content in Container on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 26 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/container/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>容器网络实验</title>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/</link>
+      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/</guid>
+      <description>安装工具：
+apt install bridge-utils net-tools 创建一个新的网络命名空间
+$ ip netns add net1 # net1为该网络空间的名称 查看命名空间的iptable， 路由表，设备
+$ ip netns exec net1 route # 查看路由表 Kernel IP routing table Destination Gateway Genmask Flags Metric Ref Use Iface $ ip netns exec net1 iptables -L # 查看iptable Chain INPUT (policy ACCEPT) target prot opt source destination Chain FORWARD (policy ACCEPT) target prot opt source destination Chain OUTPUT (policy ACCEPT) target prot opt source destination $ ip netns exec net1 ip link list # 查看设备 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 # 目前只有本地回环设备， 并且状态为DOWN（未启动） 创建一对veth，并将veth的一头添加到net1中</description>
+    </item>
+    
+  </channel>
+</rss>

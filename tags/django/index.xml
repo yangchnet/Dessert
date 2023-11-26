@@ -107,10 +107,10 @@ UserProfile：model</description>
     
     <item>
       <title>在docker中构建django项目</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%9C%A8docker%E4%B8%AD%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE/</guid>
       <description>在docker中构建django项目 （需安装docker-compose, 安装教程）
 1. 定义项目组件 对于此项目，您需要创建Dockerfile，Python依赖项文件和docker-compose.yml文件。（您可以使用此文件的扩展名.yml或.yaml扩展名。）
 1.1. 创建一个空目录 该目录应仅包含构建该映像的资源。

@@ -12,10 +12,10 @@
     <lastBuildDate>Mon, 06 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/vagrant/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>vagrant&#43;ansible安装k8s集群</title>
-      <link>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
+      <link>http://yangchnet.github.io/Dessert/posts/container/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</link>
       <pubDate>Mon, 06 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://yangchnet.github.io/Dessert/posts/cloud/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
+      <guid>http://yangchnet.github.io/Dessert/posts/container/vagrant&#43;ansible%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/</guid>
       <description>已过时，不可用
  部署环境： ubuntu20.04， 8G+4核 kubernete版本： 1.22.1
  1. 安装vagrant和ansible 按官网教程即可
