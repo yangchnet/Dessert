@@ -1,13 +1,3 @@
----
-author: "李昌"
-title: "Kubernetes之存储"
-date: "2023-07-05"
-tags: ["Kubernetes"]
-categories: ["Kubernetes"]
-ShowToc: true
-TocOpen: true
----
-
 ## PV与PVC
 
 PV （Persistent Volume）描述的，是持久化存储数据卷。这个 API 对象主要定义的是一个持久化存储在宿主机上的目录，比如一个 NFS 的挂载目录。
@@ -48,6 +38,17 @@ PersistentVolumeController 会不断地查看当前每一个 PVC，是不是已�
 
 第一阶段称为`Attach`，即“挂载”。这个阶段，Kubernetes 会调用远程存储服务的 API，来为容器准备一个“持久化”目录。这个目录，会被挂载到宿主机上的某个目录上，比如 /var/lib/kubelet/pods/xxxx/volumes/kubernetes.io~nfs/pvc-xxxx。这个目录，就是 Kubernetes 为容器准备的“持久化”目录。
 
+Attach 阶段完成后，为了能够使用这个远程磁盘，kubelet 还要进行第二个操作，即：格式化这个磁盘设备，然后将它挂载到宿主机指定的挂载点上。这个将磁盘设备格式化并挂载到 Volume 宿主机目录的操作，对应的正是“两阶段处理”的第二个阶段，我们一般称为：`Mount`。
+
+## Dynamic Provisioning机制
+
+Dynamic Provisioning机制用来自动创建PV。这个机制工作的核心，在于一个叫做`StorageClass`的API对象。
+
+而 StorageClass 对象的作用，其实就是创建 PV 的模板。具体地说，StorageClass 对象会定义如下两个部分内容：
+- 第一，PV 的属性。比如，存储类型、Volume 的大小等等。
+- 第二，创建这种 PV 需要用到的存储插件。比如，Ceph 等等。
+
+有了这样两个信息之后，Kubernetes 就能够根据用户提交的 PVC，找到一个对应的 StorageClass 了。然后，Kubernetes 就会调用该 StorageClass 声明的存储插件，创建出需要的 PV。
 
 
 
