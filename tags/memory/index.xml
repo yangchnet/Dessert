@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>memory on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/memory/</link>
+    <description>Recent content in memory on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 04 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/memory/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>拥抱大模型（五）：Memory，让大模型拥有记忆</title>
+      <link>http://yangchnet.github.io/Dessert/posts/llm/%E6%8B%A5%E6%8A%B1%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BA%94memory%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8B%A5%E6%9C%89%E8%AE%B0%E5%BF%86/</link>
+      <pubDate>Sun, 04 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/llm/%E6%8B%A5%E6%8A%B1%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BA%94memory%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8B%A5%E6%9C%89%E8%AE%B0%E5%BF%86/</guid>
+      <description>要让大模型有记忆也很简单，你只需要把之前的对话传递给他就行，在ConversationChain中，就使用了这一技巧：
+from langchain import OpenAI from langchain.chains import ConversationChain # 初始化大语言模型 llm = OpenAI( temperature=0.5, model_name=&amp;quot;text-davinci-003&amp;quot; ) # 初始化对话链 conv_chain = ConversationChain(llm=llm) # 打印对话的模板 print(conv_chain.prompt.template) 来看下模板：
+The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know. Current conversation: {history} Human: {input} AI: 可以看到，在模板里又一个history字段，这里存储了之前对话的上下文信息。当有了 {history} 参数，以及 Human 和 AI 这两个前缀，我们就能够把历史对话信息存储在提示模板中，并作为新的提示内容在新一轮的对话过程中传递给模型。—— 这就是记忆机制的原理。 langchain中提供的记忆机制 ConversationBufferMemory 在 LangChain 中，通过 ConversationBufferMemory（缓冲记忆）可以实现最简单的记忆机制。下面，我们就在对话链中引入 ConversationBufferMemory。</description>
+    </item>
+    
+  </channel>
+</rss>

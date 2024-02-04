@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>prompt engine on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/prompt-engine/</link>
+    <description>Recent content in prompt engine on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 04 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/prompt-engine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>拥抱大模型（二）：Prompt，给大模型有用的提示</title>
+      <link>http://yangchnet.github.io/Dessert/posts/llm/%E6%8B%A5%E6%8A%B1%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BA%8Cprompt%E7%BB%99%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9C%89%E7%94%A8%E7%9A%84%E6%8F%90%E7%A4%BA/</link>
+      <pubDate>Sun, 04 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/llm/%E6%8B%A5%E6%8A%B1%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BA%8Cprompt%E7%BB%99%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9C%89%E7%94%A8%E7%9A%84%E6%8F%90%E7%A4%BA/</guid>
+      <description>极客时间《LangChain实战课》学习笔记
+ 构建prompt的原则 原则（吴恩达版）
+ 写出清晰而具体的提示 给模型思考的时间  原则（OpenAI版）
+ 写清晰的指示 给模型提供参考（也就是示例） 将复杂任务拆分成子任务 给 GPT 时间思考 使用外部工具 反复迭代问题   prompt的基本结构 一个prompt主要包含四块内容：
+ instruction（指令）：告诉大模型要做什么，一个常见且有效的例子是，告诉大模型“你是一个XX专家” context（上下文）：充当模型的额外知识来源，这些知识可以从矢量数据库中得来或通过其他方式拉入 prompt input （提示输入）：具体的问题或大模型做的具体事情 output indicator（标记要生成的文本的开始）：用一个明显的提示词让大模型开始回答，这一部分不是必须的  使用langchain构建prompt
+from langchain import PromptTemplate template = &amp;#34;&amp;#34;&amp;#34;\ 你是业务咨询顾问。 你给一个销售{product}的电商公司，起一个好的名字？ &amp;#34;&amp;#34;&amp;#34; prompt = PromptTemplate.from_template(template) print(prompt.format(product=&amp;#34;鲜花&amp;#34;)) prompt = PromptTemplate( input_variables=[&amp;#34;product&amp;#34;, &amp;#34;market&amp;#34;], template=&amp;#34;你是业务咨询顾问。对于一个面向{market}市场的，专注于销售{product}的公司，你会推荐哪个名字？&amp;#34; ) print(prompt.format(product=&amp;#34;鲜花&amp;#34;, market=&amp;#34;高端&amp;#34;)) 二者效果相同构建chat prompt对于像ChatGPT这种聊天模型，langchain提供了ChatPromptTemplate，其中有多种角色类型:
+import openai openai.ChatCompletion.create( model=&amp;#34;gpt-3.5-turbo&amp;#34;, messages=[ {&amp;#34;role&amp;#34;: &amp;#34;system&amp;#34;, &amp;#34;content&amp;#34;: &amp;#34;You are a helpful assistant.</description>
+    </item>
+    
+  </channel>
+</rss>

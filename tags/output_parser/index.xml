@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>output_parser on Linote</title>
+    <link>http://yangchnet.github.io/Dessert/tags/output_parser/</link>
+    <description>Recent content in output_parser on Linote</description>
+    <image>
+      <url>http://yangchnet.github.io/Dessert/papermod-cover.png</url>
+      <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 04 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/output_parser/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>拥抱大模型（三）：OutputParser，格式化输出</title>
+      <link>http://yangchnet.github.io/Dessert/posts/llm/%E6%8B%A5%E6%8A%B1%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%89outputparser%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/</link>
+      <pubDate>Sun, 04 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/llm/%E6%8B%A5%E6%8A%B1%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%89outputparser%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/</guid>
+      <description>大模型可以回答你的任何问题，但有时我们需要将大模型的回复进行格式化解析以便进行后续的处理，此时就需要我们使用一些特殊的技巧提示大模型：你应该如此如此，这般这般返回一个简单的例子（文心一言）：可以看到，我们在prompt中告诉大模型，你应该以如下json格式返回，大模型按照我们的要求，切实返回了我们要求的json格式。这样，我们就可以把大模型的输出进行解析，大模型的输出，不再是无法解析的数据。langchain为我们提供了一系列工具来为prompt添加输出格式指令，解析输出，重试机制等等。 使用LangChain工具 PydanticOutputParser(json输出解析) from pydantic import BaseModel, Field from langchain.output_parsers import PydanticOutputParser, OutputFixingParser class FlowerDescription(BaseModel): title: str = Field(description=&amp;#34;这本书的标题&amp;#34;) author: int = Field(description=&amp;#34;这本书的作者&amp;#34;) words: str = Field(description=&amp;#34;这本书的字数&amp;#34;) description: str = Field(description=&amp;#34;这本书的主要情节&amp;#34;) # 定义输出解析器 output_parser = PydanticOutputParser(pydantic_object=FlowerDescription) # 获取输出格式指示 format_instructions = output_parser.get_format_instructions() print(format_instructions) The output should be formatted as a JSON instance that conforms to the JSON schema below. As an example, for the schema {&amp;#34;properties&amp;#34;: {&amp;#34;foo&amp;#34;: {&amp;#34;title&amp;#34;: &amp;#34;Foo&amp;#34;, &amp;#34;description&amp;#34;: &amp;#34;a list of strings&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;array&amp;#34;, &amp;#34;items&amp;#34;: {&amp;#34;type&amp;#34;: &amp;#34;string&amp;#34;}}}, &amp;#34;required&amp;#34;: [&amp;#34;foo&amp;#34;]}} the object {&amp;#34;foo&amp;#34;: [&amp;#34;bar&amp;#34;, &amp;#34;baz&amp;#34;]} is a well-formatted instance of the schema.</description>
+    </item>
+    
+  </channel>
+</rss>
