@@ -9,7 +9,33 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 26 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/container/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>容器网络篇一：单机网络方案</title>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%AF%87%E4%B8%80%E5%8D%95%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%AF%87%E4%B8%80%E5%8D%95%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%96%B9%E6%A1%88/</guid>
+      <description>安装工具：
+apt install bridge-utils net-tools 容器与宿主机的通信 创建一个新的网络命名空间，这里模拟容器内部的网络
+$ ip netns add net1 # net1为该网络空间（容器内部网络空间）的名称 查看命名空间的iptable， 路由表，设备
+$ ip netns exec net1 route # 查看容器内部路由表 Kernel IP routing table Destination Gateway Genmask Flags Metric Ref Use Iface $ ip netns exec net1 iptables -L # 查看容器内部iptable Chain INPUT (policy ACCEPT) target prot opt source destination Chain FORWARD (policy ACCEPT) target prot opt source destination Chain OUTPUT (policy ACCEPT) target prot opt source destination $ ip netns exec net1 ip link list # 查看容器内部设备 1: lo: &amp;lt;LOOPBACK&amp;gt; mtu 65536 qdisc noop state DOWN mode DEFAULT group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 # 目前只有本地回环设备， 并且状态为DOWN（未启动） 创建一对veth，并将veth的一头添加到net1中</description>
+    </item>
+    
+    <item>
+      <title>容器网络篇二：跨主机通信之Flannel</title>
+      <link>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%AF%87%E4%BA%8C%E8%B7%A8%E4%B8%BB%E6%9C%BA%E9%80%9A%E4%BF%A1%E4%B9%8Bflannel/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E7%AF%87%E4%BA%8C%E8%B7%A8%E4%B8%BB%E6%9C%BA%E9%80%9A%E4%BF%A1%E4%B9%8Bflannel/</guid>
+      <description>flannel项目本身只是一个框架，真正实现容器网络容器功能的，是Flannel的后端实现，目前，Flannel推荐的后端实现有四种，分别是：
+ VXLAN host-gw WireGuard UDP  此外还有一些实验性的后端实现
+UDP模式  UDP 模式，是最直接、也是最容易理解的容器跨主网络实现。
+ 假设有两台宿主机：
+ 宿主机 Node 1 上有一个容器 container-1，它的 IP 地址是 100.96.1.2，对应的 docker0 网桥的地址是：100.96.1.1/24。 宿主机 Node 2 上有一个容器 container-2，它的 IP 地址是 100.96.2.3，对应的 docker0 网桥的地址是：100.96.2.1/24。  现在的任务是：让container-1访问container-2。此时访问container-2的这个IP包的源地址为100.96.1.2，目的地址为100.96.2.1。按照上篇所述，首先这个IP包会通过veth对来到docker0网桥，而此时docker0网桥上并没有插入IP为100.96.1.2的设备，因此会走默认路由规则，出现在宿主机上。此时如果机器上已经安装了flannel，那么flannel会为宿主机创建出一系列路由规则，如：
+# 在Node 1上 $ ip route default via 10.168.0.1 dev eth0 100.96.0.0/16 dev flannel0 proto kernel scope link src 100.96.1.0 100.96.1.0/24 dev docker0 proto kernel scope link src 100.96.1.1 10.168.0.0/24 dev eth0 proto kernel scope link src 10.</description>
+    </item>
+    
     <item>
       <title>容器网络实验</title>
       <link>http://yangchnet.github.io/Dessert/posts/container/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C/</link>

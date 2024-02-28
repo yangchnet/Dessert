@@ -9,7 +9,25 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 04 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Feb 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>container</title>
+      <link>http://yangchnet.github.io/Dessert/tags/container/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/container/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>network</title>
+      <link>http://yangchnet.github.io/Dessert/tags/network/</link>
+      <pubDate>Wed, 28 Feb 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/tags/network/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>langchain</title>
       <link>http://yangchnet.github.io/Dessert/tags/langchain/</link>
@@ -52,15 +70,6 @@
       <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/tags/command/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>container</title>
-      <link>http://yangchnet.github.io/Dessert/tags/container/</link>
-      <pubDate>Sun, 26 Nov 2023 00:00:00 +0000</pubDate>
-      
-      <guid>http://yangchnet.github.io/Dessert/tags/container/</guid>
       <description></description>
     </item>
     
