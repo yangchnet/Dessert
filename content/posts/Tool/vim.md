@@ -130,3 +130,130 @@ vim中的窗口是一个用来显示缓冲区内容的空间，当关闭窗口�
 - `CTRL+f` 在命令行模式下打开命令行历史记录
 - `:history :` 命令行历史记录
 - `:history /` 或 `:history ?`搜索记录
+
+# 搜索与替换
+
+## 单个文件搜索
+- 基本搜索，在normal模式下使用`/`然后键入要搜索的pattern，这将向前搜索，结果将在文件中突出展示；`?`向后搜索
+- `//`使用上次的模式搜索
+- `:set hlsearch` 设置搜索结果高亮
+- `*` 搜索当前光标下的单词
+- `g*`搜索部分单词
+
+## 多个文件搜索
+> :help :vimgrep
+
+- `:vimgrep <pattern> **/*.php` 在*.php文件中搜索<pattern>。这将使用搜索结果填充quickfix列表，使用`:cnext`或`:cn`、`:cprev`或`:cp`来查看结果，也可以通过`:copen`快速打开修复窗口并浏览结果
+- `:vimgrep pattern *` 在工作目录中的每个文件搜索模式
+
+## 使用grep搜索
+
+> 可通过`grepprg`设置要使用的外部搜索程序
+
+> :help :grep
+
+- `:grep <pattern> *` 搜索工作目录中出现的每个pattern
+- `:grep <pattern> a.txt b.txt` 在这两个文件中搜索出现的pattern
+
+## 替换
+
+> :help :substitute
+
+- `s/pattern/replace/g` 在当前行上使用“replace”替换“pattern”， 这里的`s`代表substitute，`g`表示全局
+- `%s/pattern/replace/g` 在当前文件中用“replace”替换“pattern”
+- `:s/pat\/tern/replace/g` 转义以匹配`pat/tern`
+- `:s#pat\tern#replace#g` 也可以使用其他分隔符
+- `:s/pattern/replace/ 10` 将从当前开始的10行中的pattern替换为replace
+- `:1,10s/pattern/replace/` 将文件前10行中的pattern替换为replace
+
+一些标志的含意：`&`使用上一个替换命令中的标志；`c`要求用户确认每个替换；`g`替换每行中出现的内容；`i`不区分大小写；`I`区分大小写；`n`只报告匹配次数
+
+
+### 逐个替换
+- 使用`/`执行常规搜索
+- 使用`cgn`替换当前单词
+- 使用`n`转到下一个结果
+- 使用`.`重复上次的替换或使用`n`跳转到下一个结果
+
+## 在多个文件中查找和替换
+
+> 可通过稳定的arglist来作为可以修改的文件的列表
+
+例如，要替换每个html和twig文件中的匹配项，键入如下命令
+
+- `:arg *.html`使用当前工作目录中的所有html文件填充arglist，然后编辑第一个文件
+- `:argadd *.twig` 将twig文件添加到arglist
+- `:argdo %s/pattern/replace/ge | update` 将arglist中的每个文件中出现的pattern替换为replace
+- `:bufdo %s/pattern/replace/ge | update` 缓冲区中替换
+
+通过快速修复列表替换
+- `:grep pattern **/*.html` 查找子目录中的html文件
+- `:cdo s/blink/div/g | update`替换
+
+# `g`
+
+- `gf`编辑位于光标下文件路径中的文件
+- `gx`打开位于光标下文件路径中的文件
+- `gi`移动到上次插入并切换到INSERT模式
+- `gv`启动VISUAL模式并使用在上次VISUAL模式下所做的选择
+- `gn`选择上次搜索的匹配项
+- `gI`在行首插入文本，无论第一个字符是什么
+- `ga` 以十进制、十六进制或八进制打印光标下字符的 a scii 值
+- `gu` 使用动作的小写（例如， guiw ）
+- `gU` 使用动作的大写（例如， gUiw ）
+
+# Range 范围
+- `.`表示当前行
+- `$`表示当前缓冲区最后一行
+- `%`表示整个文件
+- `*` 表示在上一个VISUAL模式下所做的最后选择
+- `'<`，`'>`分别表示选择的第一行和最后一行 
+
+例如，结合range与`d`
+- `：1,40d` 删除1-40行
+- `:2,$d` 删除从第二行到最后
+- `.,$d` 删除从当前行到最后
+- `%d`删除每一行
+
+# QuickFix 和文件列表
+
+TODO
+
+
+# 全局命令
+
+基本形式： `:g/pattern/command`，其语义为：对全局的pattern执行command命令
+
+例如，删除当前缓冲区中所有包含“useless”单词的行： `:g/useless/d`
+
+> `:norm`命令，可以在命令模式下执行normal模式中的一些指令，例如：`:norm daw`将删除光标下的单词
+:q
+
+将normal模式命令与全局命令结合起来：
+`:g/useless/norm gu$` 这将把每个包含useless的行小写
+
+# marks 书签
+
+- normal模式下，使用`m<a-z>`当前缓冲区，`mA-Z`全局缓冲区来定义一个mark
+- normal模式下，使用`'<a-z>`跳转到刚才的缓冲区
+- `:marks` 显示标记集
+- `:marks <marks>`显示一些特定标记
+- `:delmarks <mark>` or `:delm <mark>`删除标记
+- `:delmarks!`或`delm!` 删除a-z范围内所有标记
+- `:marks <>` 显示两个标记`<`和`>`
+
+# 排序
+
+- `:sort`或`:sor`根据范围对行进行排序
+- `:sort!`或`:sor!`倒序
+
+还可以为sort添加一些选项
+- `i`忽略大小写
+- `n`根据行中的第一个小数排序
+- `f`根据行中的第一个浮点数排序
+- `/pattern/`根据匹配后的情况排序
+- `r`与`/pattern/`结合，根据匹配模式排序
+
+例如：对csv，根据第二列对每一行进行排序：`:sort /[^,]*,/`
+
+
