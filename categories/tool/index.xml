@@ -9,7 +9,30 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 21 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>vim</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/vim/</link>
+      <pubDate>Wed, 03 Jul 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/vim/</guid>
+      <description>基本操作  %跳转到匹配的括号 f&amp;lt;character&amp;gt; 找到当前行中，在光标之后的字符，在找到字符后，使用;跳转到后一个字符，,跳转到前一个字符 F&amp;lt;character&amp;gt; 找到当前行中，在光标之前的字符 &amp;lt;line_number&amp;gt;G 跳转到某行 CTRL-e 向下翻滚页面 CTRL-u 向上翻滚半页 CTRL-d 向下翻滚半页 d$删除至行末，dgg删除从光标到文件开头，ggdG删除整个文件，diw删除当前单词，dip删除当前段，ciw替换当前单词，yiw复制当前单词  vim的抽象层 缓冲区 缓冲区有三种不同状态：
+  active 缓冲区显示在窗口
+  hidden 缓冲区不显示，但存在且文件处于打开状态
+  inactive 缓冲区不显示且为空，没有链接任何文件
+  :buffers 查看所有打开的缓冲区
+  :buffer &amp;lt;ID_or_name&amp;gt; 移动到该缓冲区
+  :bnext或:bn 移动到下一个缓冲区
+  :bprevious或:bp移动到上一个缓冲区
+  :bfirst或:bf移动到第一个
+  :blast或:bl移动到最后一个缓冲区
+  CTRL-^切换到备用缓冲区，在列表中用#显示
+  &amp;lt;ID&amp;gt;CTRL-^切换到ID的特定缓冲区，例如75CTRL-^切换到ID为75的缓冲区
+  :bufdo &amp;lt;command&amp;gt; 将命令应用到所有缓冲区
+  并非所有缓冲区但在列表中，使用:buffers!或:ls!列出所有缓冲区
+  :badd &amp;lt;filename&amp;gt; 将某文件添加到缓冲区</description>
+    </item>
+    
     <item>
       <title>manjaro配置fcitx5输入法</title>
       <link>http://yangchnet.github.io/Dessert/posts/tool/linux%E9%85%8D%E7%BD%AEfcitx5%E8%BE%93%E5%85%A5%E6%B3%95/</link>
