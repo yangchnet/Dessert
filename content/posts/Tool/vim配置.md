@@ -27,10 +27,8 @@ call plug#begin('~/.vim/plugged')
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align Plug 'junegunn/vim-easy-align'
 " Any valid git URL is allowed
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+Plug 'junegunn/vim-github-dashboard'
 
-" Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -65,10 +63,19 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'preservim/tagbar'
 
+Plug 'rust-lang/rust.vim'
+
+Plug 'maxmx03/dracula.nvim', { 'branch': 'vim' }
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+Plug 'junegunn/fzf.vim'
+
+
+Plug 'NLKNguyen/papercolor-theme'
+
 " Initialize plugin system
 call plug#end()
-
-:colorscheme atom-dark
 
 " 设置行号
 set nu
@@ -94,12 +101,39 @@ map <C-n> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 
 " 设置搜索高亮
-set hlsearch
+"set nohlsearch
 
 " 停止搜索高亮的键映
 nnoremap <silent> <BS> <BS>:nohlsearch<CR>
 
 set backspace=2
+
+
+"设置pear_tree自动补全的括号可见
+let g:pear_tree_repeatable_expand=0
+
+" 设置主题
+set background=dark
+colorscheme PaperColor
+
+let g:go_imports_autosave = 1
+let g:go_fmt_autosave = 1
+let g:go_imports_mode = 'gopls'
+let g:go_fmt_command = 'gopls'
+
+let g:ycm_key_list_select_completion = ['<Enter>', '<C-n>']
+
+set shiftwidth=4
+set expandtab
+set tabstop=4
+
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+
+" Alt-right/left to navigate forward/backward in the tags stack
+map <C-Left> <C-T>
+map <C-Right> <C-]>
 ```
 
 然后在命令模式下执行：`PlugInstall`
