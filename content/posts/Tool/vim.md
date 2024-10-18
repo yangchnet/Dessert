@@ -1,9 +1,12 @@
 ---
-author: "李昌"
-title: "vim技巧"
-date: "2024-07-03"
-tags: ["vim", "tools"]
-categories: ["Tool"]
+author: 李昌
+title: vim技巧
+date: 2024-07-03
+tags:
+  - vim
+  - tools
+categories:
+  - Tool
 ShowToc: true
 TocOpen: true
 ---
@@ -33,7 +36,7 @@ TocOpen: true
 - vim还预置了一些特殊的标记：
   - `''`当前文件中，上次跳转之前的位置；
   - `'.`上次修改的地方； `'^` 上次插入的地方
-  - `'<`, `'>` 上次高亮选区的起始和结束位置
+  - `'<`,  `'>` 上次高亮选区的起始和结束位置
 
 ## 1.4 在文件之间移动
 - `<C-o>`, `<C-i>`后退和前进
