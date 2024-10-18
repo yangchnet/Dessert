@@ -9,7 +9,17 @@
       <link>http://yangchnet.github.io/Dessert/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 18 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://yangchnet.github.io/Dessert/categories/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>awk基础</title>
+      <link>http://yangchnet.github.io/Dessert/posts/tool/awk/</link>
+      <pubDate>Fri, 18 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://yangchnet.github.io/Dessert/posts/tool/awk/</guid>
+      <description>https://github.com/wuzhouhui/awk/blob/master/The_AWK_Programming_Language_zh_CN.pdf
+ 0. 实用一行手册  输入行的总行数 END { print NR } 打印第 10 行 NR == 10 打印每一个输入行的最后一个字段 { print $NF } 打印最后一行的最后一个字段  { field = $NF } END { print field } 打印字段数多于 4 个的输入行 NF &amp;gt; 4 打印最后一个字段值大于 4 的输入行 $NF &amp;gt; 4 打印所有输入行的字段数的总和  { nf = nf + NF } END { print nf } 打印包含 Beth 的行的数量  /Beth/ { nlines = nlines + 1 } END { print nlines } 打印具有最大值的第一个字段, 以及包含它的行 (假设 $1 总是 正的) 18  $1 &amp;gt; max { max = $1; maxline = $0 } END { print max, maxline } 打印至少包含一个字段的行 NF &amp;gt; 0 打印长度超过 80 个字符的行 length($0) &amp;gt; 80 在每一行的前面加上它的字段数 { print NF, $0 } 打印每一行的第 1 与第 2 个字段, 但顺序相反 { print $2, $1 } 交换每一行的第 1 与第 2 个字段, 并打印该行 { temp = $1; $1 = $2; $2 = temp; print } 将每一行的第一个字段用行号代替 { $1 = NR; print } 打印删除了第 2 个字段后的行 { $2 = &amp;quot;&amp;quot;; print } 将每一行的字段按逆序打印  printf(&amp;quot;\n&amp;quot;) }``` 18.</description>
+    </item>
+    
     <item>
       <title>zsh的基本配置</title>
       <link>http://yangchnet.github.io/Dessert/posts/env/zsh%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/</link>
