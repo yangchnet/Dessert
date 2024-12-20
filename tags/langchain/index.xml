@@ -16,9 +16,9 @@
       <pubDate>Sun, 04 Feb 2024 00:00:00 +0000</pubDate>
       
       <guid>http://yangchnet.github.io/Dessert/posts/llm/%E6%8B%A5%E6%8A%B1%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9B%9Bchain%E5%83%8F%E4%BA%BA%E7%B1%BB%E4%B8%80%E6%A0%B7%E6%80%9D%E8%80%83/</guid>
-      <description>什么叫Chain，从字面意思理解，Chain是一个链，我们可以通过Chain来链接LangChain的各个组件和功能-模型之间彼此链接，或模型与其他组件链接。这种将多个组件相互链接，组合成一个链的想法简单但很强大。它简化了复杂应用程序的实现，并使之更加模块化，能够创建出单一的、连贯的应用程序，从而使调试、维护和改进应用程序变得容易。
+      <description>什么叫Chain，从字面意思理解，Chain是一个链，我们可以通过Chain来链接LangChain的各个组件和功能-模型之间彼此链接，或模型与其他组件链接。 这种将多个组件相互链接，组合成一个链的想法简单但很强大。它简化了复杂应用程序的实现，并使之更加模块化，能够创建出单一的、连贯的应用程序，从而使调试、维护和改进应用程序变得容易。
 我们可以简单的把Chain理解为通过设计好的一些链路去调用大模型，从而获取我们想要的结果。下面是一个例子：
- 首先我们让大模型扮演产品经理，给出小说推荐网站的产品设计。  有了产品设计后，由架构师进行初步的架构设计  现在架构设计也有了，来个程序员写SQL：  那，上面的这种promot链，我们用langchain怎么实现呢？ 使用langchain实现 Sequential Chain 首先，导入所有需要的库
+  首先我们让大模型扮演产品经理，给出小说推荐网站的产品设计。   有了产品设计后，由架构师进行初步的架构设计   现在架构设计也有了，来个程序员写SQL： 那，上面的这种promot链，我们用langchain怎么实现呢？   使用langchain实现 Sequential Chain 首先，导入所有需要的库
 # 设置OpenAI API密钥 import os os.environ[&amp;#34;OPENAI_API_KEY&amp;#34;] = &amp;#39;你的OpenAI API Key&amp;#39; from langchain.llms import OpenAI from langchain.chains import LLMChain from langchain.prompts import PromptTemplate from langchain.chains import SequentialChain 添加第一个LLMChain，生成小说网站的产品设计。LLMChain可以看作是链条的一个环节
 # 这是第一个LLMChain，用于生成鲜花的介绍，输入为花的名称和种类 llm = OpenAI(temperature=.7) template = &amp;#34;&amp;#34;&amp;#34; 你是一个产品经理，请你对{product}给出一个设计想法。&amp;#34;&amp;#34;&amp;#34; prompt_template = PromptTemplate(input_variables=[&amp;#34;product&amp;#34;], template=template) introduction_chain = LLMChain(llm=llm, prompt=prompt_template, output_key=&amp;#34;introduction&amp;#34;) 添加第二个LLMChain，根据产品设计生成软件架构
 # 这是第二个LLMChain，用于根据鲜花的介绍写出鲜花的评论 llm = OpenAI(temperature=.7) template = &amp;#34;&amp;#34;&amp;#34; 你是一位软件架构师。给定一个{product}的设计，你需要给出产品软件架构说明和技术栈选型。 产品设计: {introduction} 软件架构说明:&amp;#34;&amp;#34;&amp;#34; prompt_template = PromptTemplate(input_variables=[&amp;#34;product&amp;#34;, &amp;#34;introduction&amp;#34;], template=template) review_chain = LLMChain(llm=llm, prompt=prompt_template, output_key=&amp;#34;framwork&amp;#34;) 第三个Chain，根据产品架构生成SQL语句</description>
