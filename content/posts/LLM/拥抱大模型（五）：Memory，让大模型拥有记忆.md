@@ -154,4 +154,7 @@ conversation = ConversationChain(
 ConversationSummaryBufferMemory 的优势是通过总结可以回忆起较早的互动，而且有缓冲区确保我们不会错过最近的互动信息。当然，对于较短的对话，ConversationSummaryBufferMemory 也会增加 Token 数量。<br />总体来说，ConversationSummaryBufferMemory 为我们提供了大量的灵活性。它是我们迄今为止的唯一记忆类型，可以回忆起较早的互动并完整地存储最近的互动。在节省 Token 数量方面，ConversationSummaryBufferMemory 与其他方法相比，也具有竞争力。
 <a name="W3PQP"></a>
 ## 四种记忆机制的总结
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704616489271-6dcabda7-23c0-465b-9e43-c2a83ecb86d8.png#averageHue=%23e0eaf3&clientId=u99794b5d-8792-4&from=paste&height=512&id=u840e0bc5&originHeight=640&originWidth=1660&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=354504&status=done&style=none&taskId=u7a9c20e1-1df7-4e62-8d58-18d4d29d3dd&title=&width=1328)<br />当对话轮次逐渐增加时，各种记忆机制对 Token 的消耗数量：<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704616499375-1dd76f22-f5a7-4cc0-b4bd-56c5dab5b445.png#averageHue=%23fcfbfa&clientId=u99794b5d-8792-4&from=paste&height=1182&id=u221fd1f7&originHeight=1478&originWidth=3676&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=410492&status=done&style=none&taskId=u8c3aa340-cc82-48d6-a8cb-f1600e501f0&title=&width=2940.8)
+![20241220172609](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220172609.png)
+当对话轮次逐渐增加时，各种记忆机制对 Token 的消耗数量：
+![20241220172630](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220172630.png)
+

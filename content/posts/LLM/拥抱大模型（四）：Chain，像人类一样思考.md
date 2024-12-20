@@ -8,21 +8,23 @@ ShowToc: true
 TocOpen: true
 ---
 
-什么叫Chain，从字面意思理解，Chain是一个链，我们可以通过Chain来链接LangChain的各个组件和功能-模型之间彼此链接，或模型与其他组件链接。<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704611472245-4c5c565a-f1f7-4373-a6c1-46768eb4c2b4.png#averageHue=%23fbf3d3&clientId=u0bf8c298-d1a7-4&from=paste&height=1090&id=uc1985b51&originHeight=1363&originWidth=1965&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=629856&status=done&style=none&taskId=u0272b261-b5f9-468a-9d19-484348486ff&title=&width=1572)<br />这种将多个组件相互链接，组合成一个链的想法简单但很强大。它简化了复杂应用程序的实现，并使之更加模块化，能够创建出单一的、连贯的应用程序，从而使调试、维护和改进应用程序变得容易。
+什么叫Chain，从字面意思理解，Chain是一个链，我们可以通过Chain来链接LangChain的各个组件和功能-模型之间彼此链接，或模型与其他组件链接。
+![20241220155943](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220155943.png)
+这种将多个组件相互链接，组合成一个链的想法简单但很强大。它简化了复杂应用程序的实现，并使之更加模块化，能够创建出单一的、连贯的应用程序，从而使调试、维护和改进应用程序变得容易。
 
 我们可以简单的把Chain理解为通过设计好的一些链路去调用大模型，从而获取我们想要的结果。下面是一个例子：
 
 1. 首先我们让大模型扮演产品经理，给出小说推荐网站的产品设计。
-
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704612750853-e05a1576-379a-49cc-8594-7e99951c7086.png#averageHue=%23ececf1&clientId=u0bf8c298-d1a7-4&from=paste&height=314&id=ucb665f3b&originHeight=393&originWidth=903&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=108181&status=done&style=none&taskId=ucfcb1f0b-9525-47ad-990d-19f187f6ffe&title=&width=722.4)
+![20241220160003](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220160003.png)
 
 2. 有了产品设计后，由架构师进行初步的架构设计
-
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704612822887-a1c1ff96-34c0-4269-a9f9-6a4b2f4cd7a0.png#averageHue=%23dfe2ec&clientId=u0bf8c298-d1a7-4&from=paste&height=235&id=u72398f66&originHeight=294&originWidth=903&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=88028&status=done&style=none&taskId=u262c5f67-984a-432c-90b9-1fc99c1d81a&title=&width=722.4)![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704612837903-5f6e188b-e2d7-40f1-9fdd-e6716165a772.png#averageHue=%23ececf1&clientId=u0bf8c298-d1a7-4&from=paste&height=254&id=u06d2397d&originHeight=318&originWidth=851&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=85778&status=done&style=none&taskId=u31de546c-87b1-44cf-a3a2-216271b8266&title=&width=680.8)
+![20241220160018](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220160018.png)
+![20241220160031](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220160031.png)
 
 3. 现在架构设计也有了，来个程序员写SQL：
-
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704612902338-1629e84e-b27f-4065-9c2a-4f30cdebb2a4.png#averageHue=%23dfe0ea&clientId=u0bf8c298-d1a7-4&from=paste&height=173&id=u45f0592d&originHeight=216&originWidth=891&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=75844&status=done&style=none&taskId=uc2b22bbb-267e-430a-90b6-eff4e9a2c5b&title=&width=712.8)<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704612910697-f838df24-e67c-4707-9f88-e1cf2f7c5b8e.png#averageHue=%23eeeff6&clientId=u0bf8c298-d1a7-4&from=paste&height=328&id=u88fb736d&originHeight=410&originWidth=885&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=66011&status=done&style=none&taskId=u2eadcca0-c4cc-47bc-a6cd-48e5bf79654&title=&width=708)<br />那，上面的这种promot链，我们用langchain怎么实现呢？
+![20241220160045](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220160045.png)
+![20241220160058](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220160058.png)
+那，上面的这种promot链，我们用langchain怎么实现呢？
 <a name="mu6Sp"></a>
 # 使用langchain实现
 <a name="x0Miy"></a>

@@ -26,7 +26,7 @@ TocOpen: true
 - 反复迭代问题
 <a name="uFTo8"></a>
 ## prompt的基本结构
-![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704545757354-862507d0-1750-41d9-82a7-5bcf19591c87.png#averageHue=%23ecf200&clientId=u2bd15a47-d986-4&from=paste&height=641&id=u1d151cee&originHeight=801&originWidth=1920&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=268708&status=done&style=none&taskId=ua15490d5-2bba-409b-a956-5ad81151710&title=&width=1536)<br />一个prompt主要包含四块内容：
+![20241220155210](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220155210.png)
 
 1. instruction（指令）：告诉大模型要做什么，一个常见且有效的例子是，告诉大模型“你是一个XX专家”
 2. context（上下文）：充当模型的额外知识来源，这些知识可以从矢量数据库中得来或通过其他方式拉入
@@ -153,7 +153,10 @@ print(result)
 ## Chain Of Thought (COT) 思维链
 > 如果生成一系列的中间推理步骤，就能够显著提高大型语言模型进行复杂推理的能力。
 
-一个Few-Shot的COT示例，在示例中给出了思考过程<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704547891495-05949a10-69be-429a-a6f6-dda2420a1ad5.png#averageHue=%23efefef&clientId=u19b46ae8-7348-4&from=paste&height=378&id=u12086a1a&originHeight=473&originWidth=940&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=241874&status=done&style=none&taskId=ua60b5fbf-414c-4219-97a0-8e011846240&title=&width=752)<br />一个zero-shot的示例，直接告诉大模型：让我们一步步的思考（Let’s think step by step）”<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704548093593-18f66d4b-f0d2-4940-960b-9dd38fa3fdc5.png#averageHue=%23e2ddd1&clientId=u19b46ae8-7348-4&from=paste&height=406&id=u81f2f391&originHeight=508&originWidth=944&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=368855&status=done&style=none&taskId=u5a53696d-df45-4152-9cec-f5b11ffc91e&title=&width=755.2)<br />COT代码示例
+一个Few-Shot的COT示例，在示例中给出了思考过程<br />
+![20241220155243](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220155243.png)
+![20241220155314](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220155314.png)
+
 ```python
 # 设置环境变量和API密钥
 import os
@@ -200,5 +203,7 @@ print(response)
 ```
 <a name="VEMWX"></a>
 ## Tree Of Thought(TOT) 思维树
-ToT 是一种解决复杂问题的框架，它在需要多步骤推理的任务中，引导语言模型搜索一棵由连贯的语言序列（解决问题的中间步骤）组成的思维树，而不是简单地生成一个答案。ToT 框架的核心思想是：让模型生成和评估其思维的能力，并将其与搜索算法（如广度优先搜索和深度优先搜索）结合起来，进行系统性地探索和验证。<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704548344269-01ee189c-310b-415d-94a2-cad8afb4e03a.png#averageHue=%23faf9f9&clientId=u19b46ae8-7348-4&from=paste&height=440&id=u0da2d5dd&originHeight=550&originWidth=1083&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=235919&status=done&style=none&taskId=u77f19853-a802-49fe-a06f-21448b903f6&title=&width=866.4)<br />ToT 框架为每个任务定义具体的思维步骤和每个步骤的候选项数量。例如，要解决一个数学推理任务，先把它分解为 3 个思维步骤，并为每个步骤提出多个方案，并保留最优的 5 个候选方案。然后在多条思维路径中搜寻最优的解决方案。<br />这种方法的优势在于，模型可以通过观察和评估其自身的思维过程，更好地解决问题，而不仅仅是基于输入生成输出。这对于需要深度推理的复杂任务非常有用。此外，通过引入强化学习、集束搜索等技术，可以进一步提高搜索策略的性能，并让模型在解决新问题或面临未知情况时有更好的表现。<br />TOT的参考仓库：[https://github.com/kyegomez/tree-of-thoughts](https://github.com/kyegomez/tree-of-thoughts)
+ToT 是一种解决复杂问题的框架，它在需要多步骤推理的任务中，引导语言模型搜索一棵由连贯的语言序列（解决问题的中间步骤）组成的思维树，而不是简单地生成一个答案。ToT 框架的核心思想是：让模型生成和评估其思维的能力，并将其与搜索算法（如广度优先搜索和深度优先搜索）结合起来，进行系统性地探索和验证。<br />
+![20241220155341](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220155341.png)
+ToT 框架为每个任务定义具体的思维步骤和每个步骤的候选项数量。例如，要解决一个数学推理任务，先把它分解为 3 个思维步骤，并为每个步骤提出多个方案，并保留最优的 5 个候选方案。然后在多条思维路径中搜寻最优的解决方案。<br />这种方法的优势在于，模型可以通过观察和评估其自身的思维过程，更好地解决问题，而不仅仅是基于输入生成输出。这对于需要深度推理的复杂任务非常有用。此外，通过引入强化学习、集束搜索等技术，可以进一步提高搜索策略的性能，并让模型在解决新问题或面临未知情况时有更好的表现。<br />TOT的参考仓库：[https://github.com/kyegomez/tree-of-thoughts](https://github.com/kyegomez/tree-of-thoughts)
 

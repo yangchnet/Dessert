@@ -8,10 +8,12 @@ ShowToc: true
 TocOpen: true
 ---
 
-大模型可以回答你的任何问题，但有时我们需要将大模型的回复进行格式化解析以便进行后续的处理，此时就需要我们使用一些特殊的技巧提示大模型：你应该如此如此，这般这般返回<br />一个简单的例子（文心一言）：<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704605674063-2048cb58-8cc7-4dd8-b1b4-2f478a690500.png#averageHue=%23e7e8ee&clientId=u7cd45215-8282-4&from=paste&height=422&id=u53f89571&originHeight=527&originWidth=863&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=185631&status=done&style=none&taskId=u8483b6b3-70c4-4f28-a040-3b9a30f0506&title=&width=690.4)<br />![image.png](https://cdn.nlark.com/yuque/0/2024/png/12695724/1704605684984-756e14f6-8e9e-4a25-b1f9-396939d67466.png#averageHue=%23eaecf3&clientId=u7cd45215-8282-4&from=paste&height=356&id=uc5e59229&originHeight=445&originWidth=865&originalType=binary&ratio=1.25&rotation=0&showTitle=false&size=78194&status=done&style=none&taskId=uf03217cb-6948-44db-9d99-17d8995c22e&title=&width=692)<br />可以看到，我们在prompt中告诉大模型，你应该以如下json格式返回，大模型按照我们的要求，切实返回了我们要求的json格式。<br />这样，我们就可以把大模型的输出进行解析，大模型的输出，不再是无法解析的数据。<br />langchain为我们提供了一系列工具来为prompt添加输出格式指令，解析输出，重试机制等等。
-<a name="yL3Lt"></a>
+大模型可以回答你的任何问题，但有时我们需要将大模型的回复进行格式化解析以便进行后续的处理，此时就需要我们使用一些特殊的技巧提示大模型：你应该如此如此，这般这般返回<br />一个简单的例子（文心一言）：
+![20241220155824](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220155824.png)
+![20241220155842](https://raw.githubusercontent.com/lich-Img/blogImg/master/img/20241220155842.png)
+可以看到，我们在prompt中告诉大模型，你应该以如下json格式返回，大模型按照我们的要求，切实返回了我们要求的json格式。<br />这样，我们就可以把大模型的输出进行解析，大模型的输出，不再是无法解析的数据。<br />langchain为我们提供了一系列工具来为prompt添加输出格式指令，解析输出，重试机制等等。
+
 # 使用LangChain工具
-<a name="IGrqy"></a>
 ## PydanticOutputParser(json输出解析)
 ```python
 from pydantic import BaseModel, Field
@@ -73,10 +75,8 @@ parsed_output = output_parser.parse(output)
 parsed_output_dict = parsed_output.dict()  # 将Pydantic格式转换为字典
 print(parsed_output_dict)
 ```
-<a name="BmFyR"></a>
 ## 错误回复的修复
 一般情况下，大模型能够给出符合要求的回复，但有时抽风也会出问题，这时候就需要我们采取一定的措施来对大模型的输出进行修复。
-<a name="JBUYK"></a>
 ### OutputFixingParser
 在 OutputFixingParser 内部，调用了原有的 PydanticOutputParser，如果成功，就返回；如果失败，它会将格式错误的输出以及格式化的指令传递给大模型，并要求 LLM 进行相关的修复。	
 ```python
